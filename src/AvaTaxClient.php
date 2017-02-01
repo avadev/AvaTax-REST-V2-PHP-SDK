@@ -18,8 +18,6 @@ namespace Avalara;
  * @link       https://github.com/avadev/AvaTaxClientLibrary
  */
 
-require_once __DIR__."/vendor/autoload.php";
-
 use GuzzleHttp\Client;
 
 /*****************************************************************************
