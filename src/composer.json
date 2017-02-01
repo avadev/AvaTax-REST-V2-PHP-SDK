@@ -1,0 +1,41 @@
+{
+    "name": "Avalara/AvaTaxApi-php",
+    "description": "Client library for Avalara's AvaTax suite of business tax calculation and processing services. Uses the REST v2 API.",
+    "version": "2.17.1-beta1",
+    "keywords": [
+        "tax",
+        "AvaTax",
+        "Avalara",
+        "sales compliance",
+        "taxes",
+        "tax calculation",
+        "ecommerce"
+    ],
+    "homepage": "http://developer.avalara.com/",
+    "authors": [
+        {
+            "name": "Avalara Developer Relations",
+            "homepage": "https://developer.avalara.com",
+        },
+        {
+            "name": "Ted Spence",
+            "email": "ted.spence@avalara.com",
+        },
+        {
+            "name": "Bob Maidens",
+            "email": "bob.maidens@avalara.com"
+        }
+    ],
+    "license": "Apache-2.0",
+    "type": "library",
+    "require": {
+        "php": ">=5.5.9",
+        "guzzlehttp/guzzle": "5.*"
+    },
+    "support": {
+        "docs": "https://developer.avalara.com",
+        "forum": "https://community.avalara.com",
+        "source": "https://github.com/avadev/AvaTaxClientLibrary",
+        "issues": "https://github.com/avadev/AvaTaxClientLibrary/issues",
+    }
+}
