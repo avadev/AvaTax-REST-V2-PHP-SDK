@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 
-// Include the AvaTaxClient library
+// Include the AvaTaxClient library directly so we can test this branch specifically
 include_once __DIR__.'/src/AvaTaxClient.php';
 
 /**
