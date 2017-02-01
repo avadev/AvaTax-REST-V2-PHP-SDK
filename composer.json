@@ -15,11 +15,11 @@
     "authors": [
         {
             "name": "Avalara Developer Relations",
-            "homepage": "https://developer.avalara.com",
+            "homepage": "https://developer.avalara.com"
         },
         {
             "name": "Ted Spence",
-            "email": "ted.spence@avalara.com",
+            "email": "ted.spence@avalara.com"
         },
         {
             "name": "Bob Maidens",
@@ -36,6 +36,6 @@
         "docs": "https://developer.avalara.com",
         "forum": "https://community.avalara.com",
         "source": "https://github.com/avadev/AvaTaxClientLibrary",
-        "issues": "https://github.com/avadev/AvaTaxClientLibrary/issues",
+        "issues": "https://github.com/avadev/AvaTaxClientLibrary/issues"
     }
 }
