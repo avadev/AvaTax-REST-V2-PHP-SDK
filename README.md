@@ -4,8 +4,11 @@ This GitHub repository is the PHP SDK for Avalara's world-class tax service, Ava
 
 # Build Status
 
-* Packagist: [![Packagist](https://img.shields.io/packagist/v/avalara/avataxclient.svg?style=plastic)](https://packagist.org/packages/avalara/avataxclient)
-* Travis-CI: ![](https://api.travis-ci.org/avadev/AvaTax-REST-V2-PHP-SDK.svg?branch=master&style=plastic)
+Packagist
+[![Packagist](https://img.shields.io/packagist/v/avalara/avataxclient.svg?style=plastic)](https://packagist.org/packages/avalara/avataxclient)
+
+Travis-CI
+![](https://api.travis-ci.org/avadev/AvaTax-REST-V2-PHP-SDK.svg?branch=master&style=plastic)
 
 # Installing the PHP SDK
 
@@ -13,14 +16,11 @@ The AvaTax PHP SDK is available as either a single file that you can download or
 
 To download the AvaTax SDK as a single file:
 * Ensure that your project includes Guzzle HTTP
-* Download this file and place it in your `lib` folder:
-** https://raw.githubusercontent.com/avadev/AvaTax-REST-V2-PHP-SDK/master/src/AvaTaxClient.php
-* Add the following statement to your program:
-** `require_once '/lib/AvaTaxClient.php';`
+* Download this file and place it in your `lib` folder: https://raw.githubusercontent.com/avadev/AvaTax-REST-V2-PHP-SDK/master/src/AvaTaxClient.php
+* Add the following statement to your program: `require_once '/lib/AvaTaxClient.php';`
 
 To use the AvaTax PHP SDK from Composer:
-* Add a `composer.json` file to your project
-* Specify the following requirements:
+* Add a `composer.json` file to your project and link to AvaTax:
 
 ```json
     "require": {
@@ -45,7 +45,7 @@ use Avalara\AvaTaxClient;
 $client = new Avalara\AvaTaxClient('phpTestApp', '1.0', 'localhost', 'sandbox');
 $client->withSecurity('myUsername', 'myPassword');
 
-// If I am debugging, I may wish to call 'Ping' to verify whether I am connected to the server; but this is not required
+// If I am debugging, I can call 'Ping' to see if I am connected to the server
 $p = $client->Ping();
 if ($p->authenticated) {
     echo 'Success!'
