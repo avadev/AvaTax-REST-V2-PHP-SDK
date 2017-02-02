@@ -5,9 +5,11 @@ This GitHub repository is the PHP SDK for Avalara's world-class tax service, Ava
 # Build Status
 
 Packagist
+
 [![Packagist](https://img.shields.io/packagist/v/avalara/avataxclient.svg?style=plastic)](https://packagist.org/packages/avalara/avataxclient)
 
 Travis-CI
+
 ![](https://api.travis-ci.org/avadev/AvaTax-REST-V2-PHP-SDK.svg?branch=master&style=plastic)
 
 # Installing the PHP SDK
