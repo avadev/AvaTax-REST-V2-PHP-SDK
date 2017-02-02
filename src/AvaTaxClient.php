@@ -66,11 +66,6 @@ class AvaTaxClient
         $this->client->setDefaultOption('headers', array(
             'Accept' => 'application/json',
             'X-Avalara-Client' => "{$appName}; {$appVersion}; PhpRestClient; ; {$machineName}"));
-            
-        // For some reason, Guzzle/CURL reports that 'https://sandbox-rest.avatax.com' is a self signed certificate, even though Verisign issued it
-        if ($env == 'https://sandbox-rest.avatax.com') {
-            $this->client->setDefaultOption('verify', false);
-        }
     }
 
     /**
