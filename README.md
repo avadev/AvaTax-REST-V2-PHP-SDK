@@ -1,23 +1,34 @@
 # AvaTax-REST-V2-PHP-SDK
 
-AvaTax v2 SDK for languages using PHP.
-
-The AvaTax REST v2 API is a fully REST implementation of Avalara's world-class tax service, AvaTax.  For more information about AvaTax REST v2, please visit [Avalara's Developer Network](http://developer.avalara.com/) or view the [online Swagger documentation](https://sandbox-rest.avatax.com/swagger/ui/index.html).
+This GitHub repository is the PHP SDK for Avalara's world-class tax service, AvaTax.  It uses the AvaTax REST v2 API, which is a fully REST implementation and provides a single client for all AvaTax functionality.  For more information about AvaTax REST v2, please visit [Avalara's Developer Network](http://developer.avalara.com/) or view the [online Swagger documentation](https://sandbox-rest.avatax.com/swagger/ui/index.html).
 
 # Build Status
 
-Automatically built using Travis-CI.org
-
-* ![](https://api.travis-ci.org/avadev/AvaTax-REST-V2-PHP-SDK.svg?branch=master&style=plastic)
+* Packagist: [![Packagist](https://img.shields.io/packagist/v/avalara/avataxclient.svg?style=plastic)](https://packagist.org/packages/avalara/avataxclient)
+* Travis-CI: ![](https://api.travis-ci.org/avadev/AvaTax-REST-V2-PHP-SDK.svg?branch=master&style=plastic)
 
 # Installing the PHP SDK
 
 The AvaTax PHP SDK is available as either a single file that you can download or a Composer package.  It requires [PHP Guzzle](http://docs.guzzlephp.org/en/latest/) and PHP 5.6 or later.
 
-To download the AvaTax SDK as a single file, follow this link:
-* https://raw.githubusercontent.com/avadev/AvaTax-REST-V2-PHP-SDK/master/src/AvaTaxClient.php
+To download the AvaTax SDK as a single file:
+* Ensure that your project includes Guzzle HTTP
+* Download this file and place it in your `lib` folder:
+** https://raw.githubusercontent.com/avadev/AvaTax-REST-V2-PHP-SDK/master/src/AvaTaxClient.php
+* Add the following statement to your program:
+** `require_once '/lib/AvaTaxClient.php';`
 
-To use the AvaTax PHP SDK from Composer, specify `use Avalara\AvaTaxClient` in your program and run `composer install`.
+To use the AvaTax PHP SDK from Composer:
+* Add a `composer.json` file to your project
+* Specify the following requirements:
+
+```json
+    "require": {
+        "Avalara/AvaTaxClient": "*"
+    },
+```
+
+* Run `composer install` to download the latest version.
 
 # Using the PHP SDK
 
