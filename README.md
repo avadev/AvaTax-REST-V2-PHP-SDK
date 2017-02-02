@@ -51,7 +51,13 @@ if ($p->authenticated) {
     echo 'Success!'
 }
 
-// Create a transaction using the fluent transaction builder
+// Create a simple transaction for $100 using the fluent transaction builder
+$tb = new Avalara\TransactionBuilder($client, $testCompany->companyCode, Avalara\DocumentType::C_SALESINVOICE, 'ABC');
+$t = $tb->withAddress('SingleLocation', '123 Main Street', null, null, 'Irvine', 'CA', '92615', 'US')
+    ->withLine(100.0, 1, "P0000000")
+    ->create();
+
+// Now, let's create a more complex transaction!
 $tb = new Avalara\TransactionBuilder($client, $testCompany->companyCode, Avalara\DocumentType::C_SALESINVOICE, 'ABC');
 $t = $tb->withAddress('ShipFrom', '123 Main Street', null, null, 'Irvine', 'CA', '92615', 'US')
     ->withAddress('ShipTo', '100 Ravine Lane', null, null, 'Bainbridge Island', 'WA', '98110', 'US')
