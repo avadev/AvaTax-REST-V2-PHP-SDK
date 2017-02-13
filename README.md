@@ -50,13 +50,15 @@ $client = new Avalara\AvaTaxClient('phpTestApp', '1.0', 'localhost', 'sandbox');
 $client->withSecurity('myUsername', 'myPassword');
 
 // If I am debugging, I can call 'Ping' to see if I am connected to the server
-$p = $client->Ping();
-if ($p->authenticated) {
+$p = $client->ping();
+echo('<h2>Ping</h2>');
+echo('<pre>' . json_encode($p, JSON_PRETTY_PRINT) . '</pre>');
+if ($p->authenticated == true) {
     echo '<p>Authenticated!</p>';
 }
 
 // Create a simple transaction for $100 using the fluent transaction builder
-$tb = new Avalara\TransactionBuilder($client, $testCompany->companyCode, Avalara\DocumentType::C_SALESINVOICE, 'ABC');
+$tb = new Avalara\TransactionBuilder($client, "DEFAULT", Avalara\DocumentType::C_SALESINVOICE, 'ABC');
 $t = $tb->withAddress('SingleLocation', '123 Main Street', null, null, 'Irvine', 'CA', '92615', 'US')
     ->withLine(100.0, 1, "P0000000")
     ->create();
@@ -64,7 +66,7 @@ echo('<h2>Transaction #1</h2>');
 echo('<pre>' . json_encode($t, JSON_PRETTY_PRINT) . '</pre>');
 
 // Now, let's create a more complex transaction!
-$tb = new Avalara\TransactionBuilder($client, $testCompany->companyCode, Avalara\DocumentType::C_SALESINVOICE, 'ABC');
+$tb = new Avalara\TransactionBuilder($client, "DEFAULT", Avalara\DocumentType::C_SALESINVOICE, 'ABC');
 $t = $tb->withAddress('ShipFrom', '123 Main Street', null, null, 'Irvine', 'CA', '92615', 'US')
     ->withAddress('ShipTo', '100 Ravine Lane', null, null, 'Bainbridge Island', 'WA', '98110', 'US')
     ->withLine(100.0, 1, "P0000000")
@@ -78,5 +80,4 @@ $t = $tb->withAddress('ShipFrom', '123 Main Street', null, null, 'Irvine', 'CA',
 echo('<h2>Transaction #2</h2>');
 echo('<pre>' . json_encode($t, JSON_PRETTY_PRINT) . '</pre>');
 
-?>
 ```
