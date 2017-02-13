@@ -18,6 +18,10 @@
             "homepage": "https://developer.avalara.com"
         },
         {
+            "name": "Community Developer Forum",
+            "homepage": "https://community.avalara.com"
+        },
+        {
             "name": "Ted Spence",
             "email": "ted.spence@avalara.com"
         },
@@ -37,5 +41,8 @@
         "forum": "https://community.avalara.com",
         "source": "https://github.com/avadev/AvaTaxClientLibrary",
         "issues": "https://github.com/avadev/AvaTaxClientLibrary/issues"
+    },
+    "autoload": {
+        "psr-4": {"Avalara\\": "src"}
     }
 }
