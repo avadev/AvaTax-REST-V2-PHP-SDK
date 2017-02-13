@@ -25,9 +25,11 @@ To use the AvaTax PHP SDK from Composer:
 * Add a `composer.json` file to your project and link to AvaTax:
 
 ```json
+{
     "require": {
         "avalara/avataxclient": "*"
-    },
+    }
+}
 ```
 
 * Run `composer install` to download the latest version.
@@ -40,7 +42,7 @@ The PHP SDK uses a fluent interface to define a connection to AvaTax and to make
 <?php
 
 // Include the AvaTaxClient library
-require_once '/src/AvaTaxClient.php';
+require __DIR__ . '/vendor/autoload.php';
 use Avalara\AvaTaxClient;
 
 // Create a new client
@@ -50,7 +52,7 @@ $client->withSecurity('myUsername', 'myPassword');
 // If I am debugging, I can call 'Ping' to see if I am connected to the server
 $p = $client->Ping();
 if ($p->authenticated) {
-    echo 'Success!'
+    echo '<p>Authenticated!</p>';
 }
 
 // Create a simple transaction for $100 using the fluent transaction builder
@@ -58,6 +60,8 @@ $tb = new Avalara\TransactionBuilder($client, $testCompany->companyCode, Avalara
 $t = $tb->withAddress('SingleLocation', '123 Main Street', null, null, 'Irvine', 'CA', '92615', 'US')
     ->withLine(100.0, 1, "P0000000")
     ->create();
+echo('<h2>Transaction #1</h2>');
+echo('<pre>' . json_encode($t, JSON_PRETTY_PRINT) . '</pre>');
 
 // Now, let's create a more complex transaction!
 $tb = new Avalara\TransactionBuilder($client, $testCompany->companyCode, Avalara\DocumentType::C_SALESINVOICE, 'ABC');
@@ -71,6 +75,8 @@ $t = $tb->withAddress('ShipFrom', '123 Main Street', null, null, 'Irvine', 'CA',
     ->withLineAddress(Avalara\TransactionAddressType::C_SHIPTO, "1500 Broadway", null, null, "New York", "NY", "10019", "US")
     ->withLine(50.0, 1, "FR010000")
     ->create();
+echo('<h2>Transaction #2</h2>');
+echo('<pre>' . json_encode($t, JSON_PRETTY_PRINT) . '</pre>');
 
 ?>
 ```
