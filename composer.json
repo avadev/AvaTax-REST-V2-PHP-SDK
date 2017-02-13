@@ -44,5 +44,5 @@
     },
     "autoload": {
         "psr-4": {"Avalara\\": "src"}
-    },
+    }
 }
