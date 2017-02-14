@@ -1289,7 +1289,7 @@ class AvaTaxClient
      */
     public function filingsCheckupReport($worksheetId, $companyId)
     {
-        $path = "/api/v2/companies/{$companyId}/filings/{$worksheetid}/checkup";
+        $path = "/api/v2/companies/{$companyId}/filings/{$worksheetId}/checkup";
         $guzzleParams = [
             'query' => [],
             'body' => null
