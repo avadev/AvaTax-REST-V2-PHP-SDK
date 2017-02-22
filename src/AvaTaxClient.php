@@ -1,9 +1,9 @@
 <?php 
 namespace Avalara;
 /*
- * AvaTax API Client Library
+ * AvaTax Software Development Kit for PHP
  *
- * (c) 2004-2016 Avalara, Inc.
+ * (c) 2004-2017 Avalara, Inc.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -12,11 +12,13 @@ namespace Avalara;
  * @package    Avalara.AvaTaxClient
  * @author     Ted Spence <ted.spence@avalara.com>
  * @author     Bob Maidens <bob.maidens@avalara.com>
- * @copyright  2004-2016 Avalara, Inc.
+ * @copyright  2004-2017 Avalara, Inc.
  * @license    https://www.apache.org/licenses/LICENSE-2.0
  * @version    
- * @link       https://github.com/avadev/AvaTaxClientLibrary
+ * @link       https://github.com/avadev/AvaTax-REST-V2-PHP-SDK
  */
+
+require __DIR__ . '/vendor/autoload.php';
 
 use GuzzleHttp\Client;
 
@@ -99,20 +101,25 @@ class AvaTaxClient
     /**
      * Retrieve all accounts
      *
+     * # For Registrar Use Only
      * This API is for use by Avalara Registrar administrative users only.
+     * 
      * Get multiple account objects.
-     * Search for specific objects using the criteria in the '$filter' parameter.
-     * Paginate your results using the '$top', '$skip', and '$orderby' parameters.
-     * You may specify one or more of the following values in the '$include' parameter to fetch additional nested data, using commas to separate multiple values:
-     * <ul><li>Subscriptions</li><li>Users</li></ul>
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     * You may specify one or more of the following values in the `$include` parameter to fetch additional nested data, using commas to separate multiple values:
+     *  
+     * * Subscriptions
+     * * Users
+     *  
      * For more information about filtering in REST, please see the documentation at http://developer.avalara.com/avatax/filtering-in-rest/ .
      *
      * 
      * @param string $include A comma separated list of child objects to return underneath the primary object.
-     * @param string $filter A filter statement to identify specific records to retrieve, as defined by https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md#97-filtering .
-     * @param int $top If nonzero, return no more than this number of results.
-     * @param int $skip A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
-     * @param string $orderBy A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
     public function queryAccounts($include, $filter, $top, $skip, $orderBy)
@@ -128,7 +135,9 @@ class AvaTaxClient
     /**
      * Create a new account
      *
+     * # For Registrar Use Only
      * This API is for use by Avalara Registrar administrative users only.
+     * 
      * Create a single new account object. 
      * When creating an account object you may attach subscriptions and users as part of the 'Create' call.
      *
@@ -152,14 +161,15 @@ class AvaTaxClient
      * List all subscription objects attached to this account.
      * A 'subscription' indicates a licensed subscription to a named Avalara service.
      * To request or remove subscriptions, please contact Avalara sales or your customer account manager.
-     * Search for specific objects using the criteria in the '$filter' parameter; full documentation is available on http://developer.avalara.com/avatax/filtering-in-rest/ .
-     * Paginate your results using the '$top', '$skip', and '$orderby' parameters.
+     * 
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
      *
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve, as defined by https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md#97-filtering .
-     * @param int $top If nonzero, return no more than this number of results.
-     * @param int $skip A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
-     * @param string $orderBy A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
     public function listSubscriptionsByAccount($accountId, $filter, $top, $skip, $orderBy)
@@ -175,7 +185,9 @@ class AvaTaxClient
     /**
      * Create a new subscription
      *
+     * # For Registrar Use Only
      * This API is for use by Avalara Registrar administrative users only.
+     * 
      * Create one or more new subscription objects attached to this account.
      * A 'subscription' indicates a licensed subscription to a named Avalara service.
      * To request or remove subscriptions, please contact Avalara sales or your customer account manager.
@@ -217,7 +229,9 @@ class AvaTaxClient
     /**
      * Update a single subscription
      *
+     * # For Registrar Use Only
      * This API is for use by Avalara Registrar administrative users only.
+     * 
      * Replace the existing subscription object at this URL with an updated object.
      * A 'subscription' indicates a licensed subscription to a named Avalara service.
      * To request or remove subscriptions, please contact Avalara sales or your customer account manager.
@@ -241,11 +255,13 @@ class AvaTaxClient
     /**
      * Delete a single subscription
      *
+     * # For Registrar Use Only
      * This API is for use by Avalara Registrar administrative users only.
+     * 
      * Mark the existing account identified by this URL as deleted.
      *
      * 
-     * @return ErrorResult
+     * @return ErrorDetail[]
      */
     public function deleteSubscription($accountId, $id)
     {
@@ -262,15 +278,16 @@ class AvaTaxClient
      *
      * List all user objects attached to this account.
      * A user represents one person with access privileges to make API calls and work with a specific account.
-     * Search for specific objects using the criteria in the '$filter' parameter; full documentation is available on http://developer.avalara.com/avatax/filtering-in-rest/ .
-     * Paginate your results using the '$top', '$skip', and '$orderby' parameters.
+     * 
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
      *
      * 
      * @param string $include A comma separated list of child objects to return underneath the primary object.
-     * @param string $filter A filter statement to identify specific records to retrieve, as defined by https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md#97-filtering .
-     * @param int $top If nonzero, return no more than this number of results.
-     * @param int $skip A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
-     * @param string $orderBy A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
     public function listUsersByAccount($accountId, $include, $filter, $top, $skip, $orderBy)
@@ -286,7 +303,9 @@ class AvaTaxClient
     /**
      * Create new users
      *
+     * # For Registrar Use Only
      * This API is for use by Avalara Registrar administrative users only.
+     * 
      * Create one or more new user objects attached to this account.
      * A user represents one person with access privileges to make API calls and work with a specific account.
      *
@@ -349,11 +368,13 @@ class AvaTaxClient
     /**
      * Delete a single user
      *
+     * # For Registrar Use Only
      * This API is for use by Avalara Registrar administrative users only.
+     * 
      * Mark the user object identified by this URL as deleted.
      *
      * 
-     * @return ErrorResult
+     * @return ErrorDetail[]
      */
     public function deleteUser($id, $accountId)
     {
@@ -374,9 +395,14 @@ class AvaTaxClient
      * This API call is intended to provide a validation endpoint to determine, before making an API call, whether this call is likely to succeed.
      * For example, if user 567 within account 999 is attempting to create a new child company underneath company 12345, you could preview the user's
      * entitlements and predict whether this call would succeed:
-     * <ul><li>Retrieve entitlements by calling '/api/v2/accounts/999/users/567/entitlements' . If the call fails, you do not have accurate 
-     * credentials for this user.</li><li>If the 'accessLevel' field within entitlements is 'None', the call will fail.</li><li>If the 'accessLevel' field within entitlements is 'SingleCompany' or 'SingleAccount', the call will fail if the companies
-     * table does not contain the ID number 12345.</li><li>If the 'permissions' array within entitlements does not contain 'AccountSvc.CompanySave', the call will fail.</li></ul>
+     *  
+     * * Retrieve entitlements by calling '/api/v2/accounts/999/users/567/entitlements' . If the call fails, you do not have accurate 
+     *  credentials for this user.
+     * * If the 'accessLevel' field within entitlements is 'None', the call will fail.
+     * * If the 'accessLevel' field within entitlements is 'SingleCompany' or 'SingleAccount', the call will fail if the companies
+     *  table does not contain the ID number 12345.
+     * * If the 'permissions' array within entitlements does not contain 'AccountSvc.CompanySave', the call will fail.
+     *  
      * For a full list of defined permissions, please use '/api/v2/definitions/permissions' .
      *
      * 
@@ -397,7 +423,9 @@ class AvaTaxClient
      *
      * Get the account object identified by this URL.
      * You may use the '$include' parameter to fetch additional nested data:
-     * <ul><li>Subscriptions</li><li>Users</li></ul>
+     * 
+     * * Subscriptions
+     * * Users
      *
      * 
      * @param string $include A comma separated list of child objects to return underneath the primary object.
@@ -416,7 +444,9 @@ class AvaTaxClient
     /**
      * Update a single account
      *
+     * # For Registrar Use Only
      * This API is for use by Avalara Registrar administrative users only.
+     * 
      * Replace an existing account object with an updated account object.
      *
      * 
@@ -436,12 +466,14 @@ class AvaTaxClient
     /**
      * Delete a single account
      *
+     * # For Registrar Use Only
      * This API is for use by Avalara Registrar administrative users only.
+     * 
      * Delete an account.
      * Deleting an account will delete all companies and all account level users attached to this account.
      *
      * 
-     * @return ErrorResult
+     * @return ErrorDetail[]
      */
     public function deleteAccount($id)
     {
@@ -475,6 +507,58 @@ class AvaTaxClient
     }
 
     /**
+     * FREE API - Request a free trial of AvaTax
+     *
+     * Call this API to obtain a free AvaTax sandbox account.
+     * 
+     * This API is free to use. No authentication credentials are required to call this API.
+     * The account will grant a full trial version of AvaTax (e.g. AvaTaxPro) for 90 days.
+     * After 90 days, you may continue to use the free TaxRates API.
+     * 
+     * Limitations on free trial accounts:
+     *  
+     * * Only one free trial per company.
+     * * The free trial account does not expire.
+     * * Includes a 90-day free trial of AvaTaxPro; after that date, the free TaxRates API will continue to work.
+     * * Each free trial account must have its own valid email address.
+     *
+     * 
+     * @param FreeTrialRequestModel $model Required information to provision a free trial account.
+     * @return NewAccountModel
+     */
+    public function requestFreeTrial($model)
+    {
+        $path = "/api/v2/accounts/freetrials/request";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Request a new Avalara account
+     *
+     * This API is for use by partner onboarding services customers only.
+     * Calling this API creates an account with the specified product subscriptions, but does not configure billing.
+     * The customer will receive information from Avalara about how to configure billing for their account.
+     * You should call this API when a customer has requested to begin using Avalara services.
+     *
+     * 
+     * @param NewAccountRequestModel $model Information about the account you wish to create and the selected product offerings.
+     * @return NewAccountModel
+     */
+    public function requestNewAccount($model)
+    {
+        $path = "/api/v2/accounts/request";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
      * Retrieve geolocation information for a specified address
      *
      * Resolve an address against Avalara's address-validation system. If the address can be resolved, this API 
@@ -492,15 +576,16 @@ class AvaTaxClient
      * @param string $region State / Province / Region
      * @param string $postalCode Postal Code / Zip Code
      * @param string $country Two character ISO 3166 Country Code (see /api/v2/definitions/countries for a full list)
+     * @param string $textCase selectable text case for address validation (See TextCase::* for a list of allowable values)
      * @param float $latitude Geospatial latitude measurement
      * @param float $longitude Geospatial longitude measurement
      * @return AddressResolutionModel
      */
-    public function resolveAddress($line1, $line2, $line3, $city, $region, $postalCode, $country, $latitude, $longitude)
+    public function resolveAddress($line1, $line2, $line3, $city, $region, $postalCode, $country, $textCase, $latitude, $longitude)
     {
         $path = "/api/v2/addresses/resolve";
         $guzzleParams = [
-            'query' => ['line1' => $line1, 'line2' => $line2, 'line3' => $line3, 'city' => $city, 'region' => $region, 'postalCode' => $postalCode, 'country' => $country, 'latitude' => $latitude, 'longitude' => $longitude],
+            'query' => ['line1' => $line1, 'line2' => $line2, 'line3' => $line3, 'city' => $city, 'region' => $region, 'postalCode' => $postalCode, 'country' => $country, 'textCase' => $textCase, 'latitude' => $latitude, 'longitude' => $longitude],
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
@@ -517,7 +602,7 @@ class AvaTaxClient
      * Both verbs are supported to provide for flexible implementation.
      *
      * 
-     * @param AddressInfo $model The address to resolve
+     * @param AddressValidationInfo $model The address to resolve
      * @return AddressResolutionModel
      */
     public function resolveAddressPost($model)
@@ -537,15 +622,16 @@ class AvaTaxClient
      * A batch object is a large collection of API calls stored in a compact file.
      * When you create a batch, it is added to the AvaTax Batch Queue and will be processed in the order it was received.
      * You may fetch a batch to check on its status and retrieve the results of the batch operation.
-     * Search for specific objects using the criteria in the '$filter' parameter; full documentation is available on http://developer.avalara.com/avatax/filtering-in-rest/ .
-     * Paginate your results using the '$top', '$skip', and '$orderby' parameters.
+     * 
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
      *
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve, as defined by https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md#97-filtering .
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
      * @param string $include A comma separated list of child objects to return underneath the primary object.
-     * @param int $top If nonzero, return no more than this number of results.
-     * @param int $skip A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
-     * @param string $orderBy A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
     public function queryBatches($filter, $include, $top, $skip, $orderBy)
@@ -563,17 +649,25 @@ class AvaTaxClient
      *
      * Get multiple company objects.
      * A 'company' represents a single corporation or individual that is registered to handle transactional taxes.
-     * Search for specific objects using the criteria in the '$filter' parameter; full documentation is available on http://developer.avalara.com/avatax/filtering-in-rest/ .
-     * Paginate your results using the '$top', '$skip', and '$orderby' parameters.
-     * You may specify one or more of the following values in the '$include' parameter to fetch additional nested data, using commas to separate multiple values:
-     * <ul><li>Contacts</li><li>Items</li><li>Locations</li><li>Nexus</li><li>Settings</li><li>TaxCodes</li><li>TaxRules</li><li>UPC</li></ul>
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     * You may specify one or more of the following values in the `$include` parameter to fetch additional nested data, using commas to separate multiple values:
+     *  
+     * * Contacts
+     * * Items
+     * * Locations
+     * * Nexus
+     * * Settings
+     * * TaxCodes
+     * * TaxRules
+     * * UPC
      *
      * 
      * @param string $include A comma separated list of child objects to return underneath the primary object.
-     * @param string $filter A filter statement to identify specific records to retrieve, as defined by https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md#97-filtering .
-     * @param int $top If nonzero, return no more than this number of results.
-     * @param int $skip A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
-     * @param string $orderBy A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
     public function queryCompanies($include, $filter, $top, $skip, $orderBy)
@@ -614,17 +708,22 @@ class AvaTaxClient
      * This endpoint is limited to returning 1,000 transactions at a time maximum.
      * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
      * sales, purchases, inventory transfer, and returns (also called refunds).
-     * Search for specific objects using the criteria in the '$filter' parameter; full documentation is available on http://developer.avalara.com/avatax/filtering-in-rest/ .
-     * Paginate your results using the '$top', '$skip', and '$orderby' parameters.
-     * You may specify one or more of the following values in the '$include' parameter to fetch additional nested data, using commas to separate multiple values:
-     * <ul><li>Lines</li><li>Details (implies lines)</li><li>Summary (implies details)</li><li>Addresses</li></ul>
+     * 
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     * You may specify one or more of the following values in the `$include` parameter to fetch additional nested data, using commas to separate multiple values:
+     *  
+     * * Lines
+     * * Details (implies lines)
+     * * Summary (implies details)
+     * * Addresses
      *
      * 
      * @param string $include A comma separated list of child objects to return underneath the primary object.
-     * @param string $filter A filter statement to identify specific records to retrieve, as defined by https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md#97-filtering .
-     * @param int $top If nonzero, return no more than this number of results.
-     * @param int $skip A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
-     * @param string $orderBy A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
     public function listTransactionsByCompany($companyCode, $include, $filter, $top, $skip, $orderBy)
@@ -644,7 +743,11 @@ class AvaTaxClient
      * If this transaction was adjusted, the return value of this API will be the current transaction with this code, and previous revisions of
      * the transaction will be attached to the 'history' data field.
      * You may specify one or more of the following values in the '$include' parameter to fetch additional nested data, using commas to separate multiple values:
-     * <ul><li>Lines</li><li>Details (implies lines)</li><li>Summary (implies details)</li><li>Addresses</li></ul>
+     *  
+     * * Lines
+     * * Details (implies lines)
+     * * Summary (implies details)
+     * * Addresses
      *
      * 
      * @param string $include A comma separated list of child objects to return underneath the primary object.
@@ -731,6 +834,33 @@ class AvaTaxClient
     }
 
     /**
+     * Lock a single transaction
+     *
+     * Lock a transaction uniquely identified by this URL. 
+     * 
+     * This API is mainly used for connector developer to simulate what happens when Returns product locks a document.
+     * After this API call succeeds, the document will be locked and can't be voided or adjusted.
+     * 
+     * This API is only available to customers in Sandbox. On production servers, this API is available by invitation only.
+     * 
+     * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
+     * sales, purchases, inventory transfer, and returns (also called refunds).
+     *
+     * 
+     * @param LockTransactionModel $model The lock request you wish to execute
+     * @return TransactionModel
+     */
+    public function lockTransaction($companyCode, $transactionCode, $model)
+    {
+        $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/lock";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
      * Perform multiple actions on a transaction
      *
      * Performs the same functions as /verify, /changecode, and /commit. You may specify one or many actions in each call to this endpoint.
@@ -801,15 +931,15 @@ class AvaTaxClient
      * A batch object is a large collection of API calls stored in a compact file.
      * When you create a batch, it is added to the AvaTax Batch Queue and will be processed in the order it was received.
      * You may fetch a batch to check on its status and retrieve the results of the batch operation.
-     * Search for specific objects using the criteria in the '$filter' parameter; full documentation is available on http://developer.avalara.com/avatax/filtering-in-rest/ .
-     * Paginate your results using the '$top', '$skip', and '$orderby' parameters.
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
      *
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve, as defined by https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md#97-filtering .
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
      * @param string $include A comma separated list of child objects to return underneath the primary object.
-     * @param int $top If nonzero, return no more than this number of results.
-     * @param int $skip A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
-     * @param string $orderBy A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
     public function listBatchesByCompany($companyId, $filter, $include, $top, $skip, $orderBy)
@@ -843,6 +973,24 @@ class AvaTaxClient
             'body' => json_encode($model)
         ];
         return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Download a single batch file
+     *
+     * Download a single batch file identified by this URL.
+     *
+     * 
+     * @return string
+     */
+    public function downloadBatch($companyId, $batchId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/batches/{$batchId}/files/{$id}/attachment";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
     }
 
     /**
@@ -896,7 +1044,7 @@ class AvaTaxClient
      * Mark the existing batch object at this URL as deleted.
      *
      * 
-     * @return ErrorResult
+     * @return ErrorDetail[]
      */
     public function deleteBatch($companyId, $id)
     {
@@ -912,15 +1060,16 @@ class AvaTaxClient
      * Retrieve contacts for this company
      *
      * List all contact objects assigned to this company.
-     * Search for specific objects using the criteria in the '$filter' parameter; full documentation is available on http://developer.avalara.com/avatax/filtering-in-rest/ .
-     * Paginate your results using the '$top', '$skip', and '$orderby' parameters.
+     * 
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
      *
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve, as defined by https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md#97-filtering .
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
      * @param string $include A comma separated list of child objects to return underneath the primary object.
-     * @param int $top If nonzero, return no more than this number of results.
-     * @param int $skip A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
-     * @param string $orderBy A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
     public function listContactsByCompany($companyId, $filter, $include, $top, $skip, $orderBy)
@@ -1003,7 +1152,7 @@ class AvaTaxClient
      * Mark the existing contact object at this URL as deleted.
      *
      * 
-     * @return ErrorResult
+     * @return ErrorDetail[]
      */
     public function deleteContact($companyId, $id)
     {
@@ -1021,10 +1170,10 @@ class AvaTaxClient
      * This API is available by invitation only.
      *
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve, as defined by https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md#97-filtering .
-     * @param int $top If nonzero, return no more than this number of results.
-     * @param int $skip A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
-     * @param string $orderBy A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
     public function companiesByCompanyIdFilingcalendarsGet($companyId, $filter, $top, $skip, $orderBy)
@@ -1081,7 +1230,7 @@ class AvaTaxClient
      * are reviewed and validated by Avalara Compliance before being implemented.
      *
      * 
-     * @param FilingRequestModel $model The cancellation request for this filing calendar
+     * @param FilingRequestModel[] $model The cancellation request for this filing calendar
      * @return FilingRequestModel
      */
     public function filingRequestsNewCancel($companyId, $id, $model)
@@ -1121,7 +1270,7 @@ class AvaTaxClient
      * are reviewed and validated by Avalara Compliance before being implemented.
      *
      * 
-     * @param FilingRequestModel $model A list of filing calendar edits to be made
+     * @param FilingRequestModel[] $model A list of filing calendar edits to be made
      * @return FilingRequestModel
      */
     public function filingRequestsNewEdit($companyId, $id, $model)
@@ -1161,7 +1310,7 @@ class AvaTaxClient
      * are reviewed and validated by Avalara Compliance before being implemented.
      *
      * 
-     * @param FilingRequestModel $model Information about the proposed new filing calendar
+     * @param FilingRequestModel[] $model Information about the proposed new filing calendar
      * @return FilingRequestModel
      */
     public function filingRequestsAdd($companyId, $model)
@@ -1182,10 +1331,10 @@ class AvaTaxClient
      * are reviewed and validated by Avalara Compliance before being implemented.
      *
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve, as defined by https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md#97-filtering .
-     * @param int $top If nonzero, return no more than this number of results.
-     * @param int $skip A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
-     * @param string $orderBy A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
     public function companiesByCompanyIdFilingrequestsGet($companyId, $filter, $top, $skip, $orderBy)
@@ -1245,6 +1394,7 @@ class AvaTaxClient
      * This API is available by invitation only.
      * A "filing request" represents a request to change an existing filing calendar. Filing requests
      * are reviewed and validated by Avalara Compliance before being implemented.
+     * The filing request must be in the "ChangeRequest" status to be approved.
      *
      * 
      * @return FilingRequestModel
@@ -1277,6 +1427,24 @@ class AvaTaxClient
             'body' => null
         ];
         return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single attachment for a filing
+     *
+     * This API is available by invitation only.
+     *
+     * 
+     * @return FileContentResult
+     */
+    public function getFilingAttachment($companyId, $worksheetId)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$worksheetId}/attachment";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
     }
 
     /**
@@ -1548,6 +1716,46 @@ class AvaTaxClient
     }
 
     /**
+     * Retrieve a list of filings for the specified company in the year and month of a given filing period.
+     *
+     * This API is available by invitation only.
+     * A "filing period" is the year and month of the date of the latest customer transaction allowed to be reported on a filing, 
+     * based on filing frequency of filing.
+     *
+     * 
+     * @return FileContentResult
+     */
+    public function getFilingAttachments($companyId, $year, $month)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/attachments";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single trace file for a company filing period
+     *
+     * This API is available by invitation only.
+     * A "filing period" is the year and month of the date of the latest customer transaction allowed to be reported on a filing, 
+     * based on filing frequency of filing.
+     *
+     * 
+     * @return FileContentResult
+     */
+    public function getFilingAttachmentsTraceFile($companyId, $year, $month)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/attachments/tracefile";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * Retrieve worksheet checkup report for company and filing period.
      *
      * This API is available by invitation only.
@@ -1624,7 +1832,7 @@ class AvaTaxClient
      * This API can only be used when the filing has been unapproved.
      *
      * 
-     * @return ErrorResult
+     * @return ErrorDetail[]
      */
     public function deleteReturnAdjustment($companyId, $id)
     {
@@ -1669,7 +1877,7 @@ class AvaTaxClient
      * This API can only be used when the filing has been unapproved.
      *
      * 
-     * @return ErrorResult
+     * @return ErrorDetail[]
      */
     public function deleteReturnAugmentation($companyId, $id)
     {
@@ -1685,16 +1893,18 @@ class AvaTaxClient
      * Retrieve items for this company
      *
      * List all items defined for the current company.
+     * 
      * An 'Item' represents a product or service that your company offers for sale.
-     * Search for specific objects using the criteria in the '$filter' parameter; full documentation is available on http://developer.avalara.com/avatax/filtering-in-rest/ .
-     * Paginate your results using the '$top', '$skip', and '$orderby' parameters.
+     * 
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
      *
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve, as defined by https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md#97-filtering .
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
      * @param string $include A comma separated list of child objects to return underneath the primary object.
-     * @param int $top If nonzero, return no more than this number of results.
-     * @param int $skip A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
-     * @param string $orderBy A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
     public function listItemsByCompany($companyId, $filter, $include, $top, $skip, $orderBy)
@@ -1772,7 +1982,7 @@ class AvaTaxClient
      * Marks the item object at this URL as deleted.
      *
      * 
-     * @return ErrorResult
+     * @return ErrorDetail[]
      */
     public function deleteItem($companyId, $id)
     {
@@ -1792,15 +2002,16 @@ class AvaTaxClient
      * Many taxing authorities require that you define a list of all locations where your company does business.
      * These locations may require additional custom configuration or tax registration with these authorities.
      * For more information on metadata requirements, see the '/api/v2/definitions/locationquestions' API.
-     * Search for specific objects using the criteria in the '$filter' parameter; full documentation is available on http://developer.avalara.com/avatax/filtering-in-rest/ .
-     * Paginate your results using the '$top', '$skip', and '$orderby' parameters.
+     * 
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
      *
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve, as defined by https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md#97-filtering .
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
      * @param string $include A comma separated list of child objects to return underneath the primary object.
-     * @param int $top If nonzero, return no more than this number of results.
-     * @param int $skip A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
-     * @param string $orderBy A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
     public function listLocationsByCompany($companyId, $filter, $include, $top, $skip, $orderBy)
@@ -1881,7 +2092,7 @@ class AvaTaxClient
      * Mark the location object at this URL as deleted.
      *
      * 
-     * @return ErrorResult
+     * @return ErrorDetail[]
      */
     public function deleteLocation($companyId, $id)
     {
@@ -1948,15 +2159,16 @@ class AvaTaxClient
      * to collect and remit transaction-based taxes.
      * When defining companies in AvaTax, you must declare nexus for your company in order to correctly calculate tax
      * in all jurisdictions affected by your transactions.
-     * Search for specific objects using the criteria in the '$filter' parameter; full documentation is available on http://developer.avalara.com/avatax/filtering-in-rest/ .
-     * Paginate your results using the '$top', '$skip', and '$orderby' parameters.
+     * 
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
      *
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve, as defined by https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md#97-filtering .
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
      * @param string $include A comma separated list of child objects to return underneath the primary object.
-     * @param int $top If nonzero, return no more than this number of results.
-     * @param int $skip A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
-     * @param string $orderBy A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
     public function listNexusByCompany($companyId, $filter, $include, $top, $skip, $orderBy)
@@ -2051,7 +2263,7 @@ class AvaTaxClient
      * Marks the existing nexus object at this URL as deleted.
      *
      * 
-     * @return ErrorResult
+     * @return ErrorDetail[]
      */
     public function deleteNexus($companyId, $id)
     {
@@ -2070,15 +2282,16 @@ class AvaTaxClient
      * List all tax notice objects assigned to this company.
      * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
      * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
-     * Search for specific objects using the criteria in the '$filter' parameter; full documentation is available on http://developer.avalara.com/avatax/filtering-in-rest/ .
-     * Paginate your results using the '$top', '$skip', and '$orderby' parameters.
+     * 
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
      *
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve, as defined by https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md#97-filtering .
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
      * @param string $include A comma separated list of child objects to return underneath the primary object.
-     * @param int $top If nonzero, return no more than this number of results.
-     * @param int $skip A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
-     * @param string $orderBy A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
     public function listNoticesByCompany($companyId, $filter, $include, $top, $skip, $orderBy)
@@ -2167,7 +2380,7 @@ class AvaTaxClient
      * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
      *
      * 
-     * @return ErrorResult
+     * @return ErrorDetail[]
      */
     public function deleteNotice($companyId, $id)
     {
@@ -2268,6 +2481,111 @@ class AvaTaxClient
     }
 
     /**
+     * Retrieve notice responsibilities for a specific notice.
+     *
+     * This API is available by invitation only.
+     * 'Notice responsibilities' are are those who are responsible for the notice.
+     * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
+     * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
+     *
+     * 
+     * @return FetchResult
+     */
+    public function getNoticeResponsibilities($id, $companyId)
+    {
+        $path = "/api/v2/companies/{$companyId}/notices/{$id}/responsibilities";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Create a new notice responsibility.
+     *
+     * This API is available by invitation only.
+     * 'Notice comments' are updates by the notice team on the work to be done and that has been done so far on a notice.
+     * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
+     * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
+     *
+     * 
+     * @param NoticeResponsibilityDetailModel[] $model The notice responsibilities you wish to create.
+     * @return NoticeResponsibilityDetailModel[]
+     */
+    public function createNoticeResponsibilities($companyId, $id, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/notices/{$id}/responsibilities";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Retrieve notice root causes for a specific notice.
+     *
+     * This API is available by invitation only.
+     * 'Notice root causes' are are those who are responsible for the notice.
+     * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
+     * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
+     *
+     * 
+     * @return FetchResult
+     */
+    public function getNoticeRootCauses($id, $companyId)
+    {
+        $path = "/api/v2/companies/{$companyId}/notices/{$id}/rootcauses";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Create a new notice root cause.
+     *
+     * This API is available by invitation only.
+     * 'Notice root causes' are are those who are responsible for the notice.
+     * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
+     * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
+     *
+     * 
+     * @param NoticeRootCauseDetailModel[] $model The notice root causes you wish to create.
+     * @return NoticeRootCauseDetailModel[]
+     */
+    public function createNoticeRootCauses($companyId, $id, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/notices/{$id}/rootcauses";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single attachment
+     *
+     * This API is available by invitation only.
+     * Get the file attachment identified by this URL.
+     *
+     * 
+     * @return string
+     */
+    public function downloadNoticeAttachment($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/notices/files/{$id}/attachment";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * Retrieve all settings for this company
      *
      * List all setting objects attached to this company.
@@ -2277,15 +2595,16 @@ class AvaTaxClient
      * 'value' data fields.
      * To ensure correct operation of other programs or connectors, please create a new GUID for your application and use that value for
      * the 'set' data field.
-     * Search for specific objects using the criteria in the '$filter' parameter; full documentation is available on http://developer.avalara.com/avatax/filtering-in-rest/ .
-     * Paginate your results using the '$top', '$skip', and '$orderby' parameters.
+     * 
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
      *
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve, as defined by https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md#97-filtering .
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
      * @param string $include A comma separated list of child objects to return underneath the primary object.
-     * @param int $top If nonzero, return no more than this number of results.
-     * @param int $skip A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
-     * @param string $orderBy A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
     public function listSettingsByCompany($companyId, $filter, $include, $top, $skip, $orderBy)
@@ -2380,7 +2699,7 @@ class AvaTaxClient
      * Mark the setting object at this URL as deleted.
      *
      * 
-     * @return ErrorResult
+     * @return ErrorDetail[]
      */
     public function deleteSetting($companyId, $id)
     {
@@ -2400,15 +2719,16 @@ class AvaTaxClient
      * Avalara supports correct tax rates and taxability rules for all TaxCodes in all supported jurisdictions.
      * If you identify your products by tax code in your 'Create Transacion' API calls, Avalara will correctly calculate tax rates and
      * taxability rules for this product in all supported jurisdictions.
-     * Search for specific objects using the criteria in the '$filter' parameter; full documentation is available on http://developer.avalara.com/avatax/filtering-in-rest/ .
-     * Paginate your results using the '$top', '$skip', and '$orderby' parameters.
+     * 
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
      *
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve, as defined by https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md#97-filtering .
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
      * @param string $include A comma separated list of child objects to return underneath the primary object.
-     * @param int $top If nonzero, return no more than this number of results.
-     * @param int $skip A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
-     * @param string $orderBy A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
     public function listTaxCodesByCompany($companyId, $filter, $include, $top, $skip, $orderBy)
@@ -2497,7 +2817,7 @@ class AvaTaxClient
      * Marks the existing TaxCode object at this URL as deleted.
      *
      * 
-     * @return ErrorResult
+     * @return ErrorDetail[]
      */
     public function deleteTaxCode($companyId, $id)
     {
@@ -2517,15 +2837,16 @@ class AvaTaxClient
      * If you have obtained a custom tax ruling from an auditor that changes the behavior of certain goods or services
      * within certain taxing jurisdictions, or you have obtained special tax concessions for certain dates or locations,
      * you may wish to create a TaxRule object to override the AvaTax engine's default behavior in those circumstances.
-     * Search for specific objects using the criteria in the '$filter' parameter; full documentation is available on http://developer.avalara.com/avatax/filtering-in-rest/ .
-     * Paginate your results using the '$top', '$skip', and '$orderby' parameters.
+     * 
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
      *
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve, as defined by https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md#97-filtering .
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
      * @param string $include A comma separated list of child objects to return underneath the primary object.
-     * @param int $top If nonzero, return no more than this number of results.
-     * @param int $skip A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
-     * @param string $orderBy A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
     public function listTaxRules($companyId, $filter, $include, $top, $skip, $orderBy)
@@ -2614,7 +2935,7 @@ class AvaTaxClient
      * Mark the TaxRule identified by this URL as deleted.
      *
      * 
-     * @return ErrorResult
+     * @return ErrorDetail[]
      */
     public function deleteTaxRule($companyId, $id)
     {
@@ -2631,17 +2952,16 @@ class AvaTaxClient
      *
      * List all UPC objects attached to this company.
      * A UPC represents a single UPC code in your catalog and matches this product to the tax code identified by this UPC.
-     * Search for specific objects using the criteria in the '$filter' parameter; full documentation is available on http://developer.avalara.com/avatax/filtering-in-rest/ .
-     * Paginate your results using the '$top', '$skip', and '$orderby' parameters.
-     * By default you will retrieve no more than 1000 records from this query. To include a full list of number of records matching your query,
-     * please specify '$include=count' as an option.
+     * 
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
      *
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve, as defined by https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md#97-filtering .
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
      * @param string $include A comma separated list of child objects to return underneath the primary object.
-     * @param int $top If nonzero, return no more than this number of results.
-     * @param int $skip A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
-     * @param string $orderBy A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
     public function listUPCsByCompany($companyId, $filter, $include, $top, $skip, $orderBy)
@@ -2721,7 +3041,7 @@ class AvaTaxClient
      * Marks the UPC object identified by this URL as deleted.
      *
      * 
-     * @return ErrorResult
+     * @return ErrorDetail[]
      */
     public function deleteUPC($companyId, $id)
     {
@@ -2739,7 +3059,15 @@ class AvaTaxClient
      * Get the company object identified by this URL.
      * A 'company' represents a single corporation or individual that is registered to handle transactional taxes.
      * You may specify one or more of the following values in the '$include' parameter to fetch additional nested data, using commas to separate multiple values:
-     * <ul><li>Contacts</li><li>Items</li><li>Locations</li><li>Nexus</li><li>Settings</li><li>TaxCodes</li><li>TaxRules</li><li>UPC</li></ul>
+     * 
+     *  * Contacts
+     *  * Items
+     *  * Locations
+     *  * Nexus
+     *  * Settings
+     *  * TaxCodes
+     *  * TaxRules
+     *  * UPC
      *
      * 
      * @param string $include A comma separated list of child objects to return underneath the primary object.
@@ -2783,7 +3111,7 @@ class AvaTaxClient
      * Deleting a company will delete all child companies, and all users attached to this company.
      *
      * 
-     * @return ErrorResult
+     * @return ErrorDetail[]
      */
     public function deleteCompanies($id)
     {
@@ -2849,7 +3177,13 @@ class AvaTaxClient
      *
      * Shortcut to quickly setup a single-physical-location company with critical information and activate it.
      * This API provides quick and simple company setup functionality and does the following things:
-     * <ul><li>Create a company object with its own tax profile</li><li>Add a key contact person for the company</li><li>Set up one physical location for the main office</li><li>Declare nexus in all taxing jurisdictions for that main office address</li><li>Activate the company</li></ul>
+     *  
+     * * Create a company object with its own tax profile
+     * * Add a key contact person for the company
+     * * Set up one physical location for the main office
+     * * Declare nexus in all taxing jurisdictions for that main office address
+     * * Activate the company
+     *  
      * This API only provides a limited subset of functionality compared to the 'Create Company' API call. 
      * If you need additional features or options not present in this 'Quick Setup' API call, please use the full 'Create Company' call instead.
      *
@@ -2873,15 +3207,16 @@ class AvaTaxClient
      * Get multiple contact objects across all companies.
      * A 'contact' is a person associated with a company who is designated to handle certain responsibilities of
      * a tax collecting and filing entity.
-     * Search for specific objects using the criteria in the '$filter' parameter; full documentation is available on http://developer.avalara.com/avatax/filtering-in-rest/ .
-     * Paginate your results using the '$top', '$skip', and '$orderby' parameters.
+     * 
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
      *
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve, as defined by https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md#97-filtering .
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
      * @param string $include A comma separated list of child objects to return underneath the primary object.
-     * @param int $top If nonzero, return no more than this number of results.
-     * @param int $skip A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
-     * @param string $orderBy A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
     public function queryContacts($filter, $include, $top, $skip, $orderBy)
@@ -2957,6 +3292,45 @@ class AvaTaxClient
     }
 
     /**
+     * List all forms where logins can be verified automatically
+     *
+     * List all forms where logins can be verified automatically.
+     * This API is intended to be useful to identify whether the user should be allowed
+     * to automatically verify their login and password.
+     *
+     * 
+     * @return FetchResult
+     */
+    public function listLoginVerifiers()
+    {
+        $path = "/api/v2/definitions/filingcalendars/loginverifiers";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Test whether a form supports online login verification
+     *
+     * This API is intended to be useful to identify whether the user should be allowed
+     * to automatically verify their login and password.
+     *
+     * 
+     * @return FetchResult
+     */
+    public function getLoginVerifierByForm($form)
+    {
+        $path = "/api/v2/definitions/filingcalendars/loginverifiers/{$form}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * Retrieve the full list of Avalara-supported filing frequencies.
      *
      * Returns the full list of Avalara-supported filing frequencies.
@@ -2970,6 +3344,37 @@ class AvaTaxClient
         $path = "/api/v2/definitions/filingfrequencies";
         $guzzleParams = [
             'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * List jurisdictions near a specific address
+     *
+     * Returns a list of all Avalara-supported taxing jurisdictions that apply to this address.
+     * 
+     * This API allows you to identify which jurisdictions are nearby a specific address according to the best available geocoding information.
+     * It is intended to allow you to create a "Jurisdiction Override", which allows an address to be configured as belonging to a nearby 
+     * jurisdiction in AvaTax.
+     *  
+     * The results of this API call can be passed to the `CreateJurisdictionOverride` API call.
+     *
+     * 
+     * @param string $line1 The first address line portion of this address.
+     * @param string $line2 The second address line portion of this address.
+     * @param string $line3 The third address line portion of this address.
+     * @param string $city The city portion of this address.
+     * @param string $region The region, state, or province code portion of this address.
+     * @param string $postalCode The postal code or zip code portion of this address.
+     * @param string $country The two-character ISO-3166 code of the country portion of this address.
+     * @return FetchResult
+     */
+    public function listJurisdictionsByAddress($line1, $line2, $line3, $city, $region, $postalCode, $country)
+    {
+        $path = "/api/v2/definitions/jurisdictionsnearaddress";
+        $guzzleParams = [
+            'query' => ['line1' => $line1, 'line2' => $line2, 'line3' => $line3, 'city' => $city, 'region' => $region, 'postalCode' => $postalCode, 'country' => $country],
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
@@ -3181,6 +3586,44 @@ class AvaTaxClient
     public function listNoticeReasons()
     {
         $path = "/api/v2/definitions/noticereasons";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve the full list of Avalara-supported tax notice responsibility ids
+     *
+     * Returns the full list of Avalara-supported tax notice responsibility ids
+     * This API is intended to be useful to identify all the different tax notice responsibilities.
+     *
+     * 
+     * @return FetchResult
+     */
+    public function listNoticeResponsibilities()
+    {
+        $path = "/api/v2/definitions/noticeresponsibilities";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve the full list of Avalara-supported tax notice root causes
+     *
+     * Returns the full list of Avalara-supported tax notice root causes
+     * This API is intended to be useful to identify all the different tax notice root causes.
+     *
+     * 
+     * @return FetchResult
+     */
+    public function listNoticeRootCauses()
+    {
+        $path = "/api/v2/definitions/noticerootcauses";
         $guzzleParams = [
             'query' => [],
             'body' => null
@@ -3433,10 +3876,10 @@ class AvaTaxClient
      * This API is available by invitation only.
      *
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve, as defined by https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md#97-filtering .
-     * @param int $top If nonzero, return no more than this number of results.
-     * @param int $skip A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
-     * @param string $orderBy A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
     public function queryFilingCalendars($filter, $top, $skip, $orderBy)
@@ -3492,14 +3935,15 @@ class AvaTaxClient
      * This API is available by invitation only.
      * A "filing request" represents a request to change an existing filing calendar. Filing requests
      * are reviewed and validated by Avalara Compliance before being implemented.
-     * Search for specific objects using the criteria in the '$filter' parameter; full documentation is available on http://developer.avalara.com/avatax/filtering-in-rest/ .
-     * Paginate your results using the '$top', '$skip', and '$orderby' parameters.
+     * 
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
      *
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve, as defined by https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md#97-filtering .
-     * @param int $top If nonzero, return no more than this number of results.
-     * @param int $skip A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
-     * @param string $orderBy A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
     public function queryFilingRequests($filter, $top, $skip, $orderBy)
@@ -3573,15 +4017,16 @@ class AvaTaxClient
      *
      * Get multiple item objects across all companies.
      * An 'Item' represents a product or service that your company offers for sale.
-     * Search for specific objects using the criteria in the '$filter' parameter; full documentation is available on http://developer.avalara.com/avatax/filtering-in-rest/ .
-     * Paginate your results using the '$top', '$skip', and '$orderby' parameters.
+     * 
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
      *
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve, as defined by https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md#97-filtering .
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
      * @param string $include A comma separated list of child objects to return underneath the primary object.
-     * @param int $top If nonzero, return no more than this number of results.
-     * @param int $skip A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
-     * @param string $orderBy A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
     public function queryItems($filter, $include, $top, $skip, $orderBy)
@@ -3602,15 +4047,16 @@ class AvaTaxClient
      * Many taxing authorities require that you define a list of all locations where your company does business.
      * These locations may require additional custom configuration or tax registration with these authorities.
      * For more information on metadata requirements, see the '/api/v2/definitions/locationquestions' API.
-     * Search for specific objects using the criteria in the '$filter' parameter; full documentation is available on http://developer.avalara.com/avatax/filtering-in-rest/ .
-     * Paginate your results using the '$top', '$skip', and '$orderby' parameters.
+     * 
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
      *
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve, as defined by https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md#97-filtering .
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
      * @param string $include A comma separated list of child objects to return underneath the primary object.
-     * @param int $top If nonzero, return no more than this number of results.
-     * @param int $skip A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
-     * @param string $orderBy A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
     public function queryLocations($filter, $include, $top, $skip, $orderBy)
@@ -3631,15 +4077,16 @@ class AvaTaxClient
      * to collect and remit transaction-based taxes.
      * When defining companies in AvaTax, you must declare nexus for your company in order to correctly calculate tax
      * in all jurisdictions affected by your transactions.
-     * Search for specific objects using the criteria in the '$filter' parameter; full documentation is available on http://developer.avalara.com/avatax/filtering-in-rest/ .
-     * Paginate your results using the '$top', '$skip', and '$orderby' parameters.
+     * 
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
      *
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve, as defined by https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md#97-filtering .
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
      * @param string $include A comma separated list of child objects to return underneath the primary object.
-     * @param int $top If nonzero, return no more than this number of results.
-     * @param int $skip A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
-     * @param string $orderBy A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
     public function queryNexus($filter, $include, $top, $skip, $orderBy)
@@ -3659,15 +4106,16 @@ class AvaTaxClient
      * Get multiple notice objects across all companies.
      * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
      * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
-     * Search for specific objects using the criteria in the '$filter' parameter; full documentation is available on http://developer.avalara.com/avatax/filtering-in-rest/ .
-     * Paginate your results using the '$top', '$skip', and '$orderby' parameters.
+     * 
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
      *
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve, as defined by https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md#97-filtering .
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
      * @param string $include A comma separated list of child objects to return underneath the primary object.
-     * @param int $top If nonzero, return no more than this number of results.
-     * @param int $skip A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
-     * @param string $orderBy A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
     public function queryNotices($filter, $include, $top, $skip, $orderBy)
@@ -3683,7 +4131,9 @@ class AvaTaxClient
     /**
      * Change Password
      *
+     * # For Registrar Use Only
      * This API is for use by Avalara Registrar administrative users only.
+     * 
      * Allows a user to change their password via the API.
      * This API only allows the currently authenticated user to change their password; it cannot be used to apply to a
      * different user than the one authenticating the current API call.
@@ -3705,7 +4155,9 @@ class AvaTaxClient
     /**
      * Reset a user's password programmatically
      *
+     * # For Registrar Use Only
      * This API is for use by Avalara Registrar administrative users only.
+     * 
      * Allows a system admin to reset the password for a specific user via the API.
      * This API is only available for Avalara Registrar Admins, and can be used to reset the password of any
      * user based on internal Avalara business processes.
@@ -3757,15 +4209,16 @@ class AvaTaxClient
      * 'value' data fields.
      * To ensure correct operation of other programs or connectors, please create a new GUID for your application and use that value for
      * the 'set' data field.
-     * Search for specific objects using the criteria in the '$filter' parameter; full documentation is available on http://developer.avalara.com/avatax/filtering-in-rest/ .
-     * Paginate your results using the '$top', '$skip', and '$orderby' parameters.
+     * 
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
      *
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve, as defined by https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md#97-filtering .
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
      * @param string $include A comma separated list of child objects to return underneath the primary object.
-     * @param int $top If nonzero, return no more than this number of results.
-     * @param int $skip A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
-     * @param string $orderBy A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
     public function querySettings($filter, $include, $top, $skip, $orderBy)
@@ -3784,14 +4237,15 @@ class AvaTaxClient
      * Get multiple subscription objects across all accounts.
      * A 'subscription' indicates a licensed subscription to a named Avalara service.
      * To request or remove subscriptions, please contact Avalara sales or your customer account manager.
-     * Search for specific objects using the criteria in the '$filter' parameter; full documentation is available on http://developer.avalara.com/avatax/filtering-in-rest/ .
-     * Paginate your results using the '$top', '$skip', and '$orderby' parameters.
+     * 
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
      *
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve, as defined by https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md#97-filtering .
-     * @param int $top If nonzero, return no more than this number of results.
-     * @param int $skip A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
-     * @param string $orderBy A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
     public function querySubscriptions($filter, $top, $skip, $orderBy)
@@ -3812,15 +4266,16 @@ class AvaTaxClient
      * Avalara supports correct tax rates and taxability rules for all TaxCodes in all supported jurisdictions.
      * If you identify your products by tax code in your 'Create Transacion' API calls, Avalara will correctly calculate tax rates and
      * taxability rules for this product in all supported jurisdictions.
-     * Search for specific objects using the criteria in the '$filter' parameter; full documentation is available on http://developer.avalara.com/avatax/filtering-in-rest/ .
-     * Paginate your results using the '$top', '$skip', and '$orderby' parameters.
+     * 
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
      *
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve, as defined by https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md#97-filtering .
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
      * @param string $include A comma separated list of child objects to return underneath the primary object.
-     * @param int $top If nonzero, return no more than this number of results.
-     * @param int $skip A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
-     * @param string $orderBy A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
     public function queryTaxCodes($filter, $include, $top, $skip, $orderBy)
@@ -3834,12 +4289,28 @@ class AvaTaxClient
     }
 
     /**
-     * Retrieve tax rates for a specified address
+     * FREE API - Sales tax rates for a specified address
      *
-     * Identifies estimated general tangible personal property rates for a specified address.
-     * This API produces only estimated tax rates based on assumptions and is not suitable for precise tax calculations; it should
-     * be used to identify rough guesses for tax during planning or research.
-     * For more information on estimating tax correctly, please see http://developer.avalara.com/blog/2016/11/04/estimating-tax-with-rest-v2/ .
+     * # Free-To-Use
+     * 
+     * The TaxRates API is a free-to-use, no cost option for estimating sales tax rates.
+     * Any customer can request a free AvaTax account and make use of the TaxRates API.
+     * 
+     * Note that the TaxRates API assumes the sale of general tangible personal property when estimating the sales tax
+     * rate for a specified address. Avalara provides the `CreateTransaction` API, which provides extensive tax calculation 
+     * support for scenarios including, but not limited to:
+     * 
+     * * Nexus declarations
+     * * Taxability based on product/service type
+     * * Sourcing rules affecting origin/destination states
+     * * Customers who are exempt from certain taxes
+     * * States that have dollar value thresholds for tax amounts
+     * * Refunds for products purchased on a different date
+     * * Detailed jurisdiction names and state assigned codes
+     * * And more!
+     * 
+     * Please see [Estimating Tax with REST v2](http://developer.avalara.com/blog/2016/11/04/estimating-tax-with-rest-v2/)
+     * for information on how to upgrade to the full AvaTax CreateTransaction API.
      *
      * 
      * @param string $line1 The street address of the location.
@@ -3862,12 +4333,28 @@ class AvaTaxClient
     }
 
     /**
-     * Retrieve tax rates for a specified country and postal code
+     * FREE API - Sales tax rates for a specified country and postal code
      *
-     * Identifies estimated general tangible personal property rates for a specified postal code and country code.
-     * This API produces only estimated tax rates based on assumptions and is not suitable for precise tax calculations; it should
-     * be used to identify rough guesses for tax during planning or research.
-     * For more information on estimating tax correctly, please see http://developer.avalara.com/blog/2016/11/04/estimating-tax-with-rest-v2/ .
+     * # Free-To-Use
+     * 
+     * The TaxRates API is a free-to-use, no cost option for estimating sales tax rates.
+     * Any customer can request a free AvaTax account and make use of the TaxRates API.
+     * 
+     * Note that the TaxRates API assumes the sale of general tangible personal property when estimating the sales tax
+     * rate for a specified address. Avalara provides the `CreateTransaction` API, which provides extensive tax calculation 
+     * support for scenarios including, but not limited to:
+     * 
+     * * Nexus declarations
+     * * Taxability based on product/service type
+     * * Sourcing rules affecting origin/destination states
+     * * Customers who are exempt from certain taxes
+     * * States that have dollar value thresholds for tax amounts
+     * * Refunds for products purchased on a different date
+     * * Detailed jurisdiction names and state assigned codes
+     * * And more!
+     * 
+     * Please see [Estimating Tax with REST v2](http://developer.avalara.com/blog/2016/11/04/estimating-tax-with-rest-v2/)
+     * for information on how to upgrade to the full AvaTax CreateTransaction API.
      *
      * 
      * @param string $country The two letter ISO-3166 country code.
@@ -3892,15 +4379,16 @@ class AvaTaxClient
      * If you have obtained a custom tax ruling from an auditor that changes the behavior of certain goods or services
      * within certain taxing jurisdictions, or you have obtained special tax concessions for certain dates or locations,
      * you may wish to create a TaxRule object to override the AvaTax engine's default behavior in those circumstances.
-     * Search for specific objects using the criteria in the '$filter' parameter; full documentation is available on http://developer.avalara.com/avatax/filtering-in-rest/ .
-     * Paginate your results using the '$top', '$skip', and '$orderby' parameters.
+     * 
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
      *
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve, as defined by https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md#97-filtering .
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
      * @param string $include A comma separated list of child objects to return underneath the primary object.
-     * @param int $top If nonzero, return no more than this number of results.
-     * @param int $skip A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
-     * @param string $orderBy A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
     public function queryTaxRules($filter, $include, $top, $skip, $orderBy)
@@ -3922,7 +4410,11 @@ class AvaTaxClient
      * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
      * sales, purchases, inventory transfer, and returns (also called refunds).
      * You may specify one or more of the following values in the '$include' parameter to fetch additional nested data, using commas to separate multiple values:
-     * <ul><li>Lines</li><li>Details (implies lines)</li><li>Summary (implies details)</li><li>Addresses</li></ul>
+     *  
+     * * Lines
+     * * Details (implies lines)
+     * * Summary (implies details)
+     * * Addresses
      *
      * 
      * @param string $include A comma separated list of child objects to return underneath the primary object.
@@ -3963,19 +4455,45 @@ class AvaTaxClient
     }
 
     /**
+     * Lock a set of documents
+     *
+     * This API is available by invitation only.
+     * 
+     * Lock a set of transactions uniquely identified by DocumentIds provided. This API allows locking multiple documents at once.
+     * After this API call succeeds, documents will be locked and can't be voided.
+     * 
+     * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
+     * sales, purchases, inventory transfer, and returns (also called refunds).
+     *
+     * 
+     * @param BulkLockTransactionModel $model bulk lock request
+     * @return BulkLockTransactionResult
+     */
+    public function bulkLockTransaction($model)
+    {
+        $path = "/api/v2/transactions/lock";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
      * Retrieve all UPCs
      *
      * Get multiple UPC objects across all companies.
      * A UPC represents a single UPC code in your catalog and matches this product to the tax code identified by this UPC.
-     * Search for specific objects using the criteria in the '$filter' parameter; full documentation is available on http://developer.avalara.com/avatax/filtering-in-rest/ .
-     * Paginate your results using the '$top', '$skip', and '$orderby' parameters.
+     * 
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
      *
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve, as defined by https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md#97-filtering .
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
      * @param string $include A comma separated list of child objects to return underneath the primary object.
-     * @param int $top If nonzero, return no more than this number of results.
-     * @param int $skip A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
-     * @param string $orderBy A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
     public function queryUPCs($filter, $include, $top, $skip, $orderBy)
@@ -3993,15 +4511,16 @@ class AvaTaxClient
      *
      * Get multiple user objects across all accounts.
      * A user represents one person with access privileges to make API calls and work with a specific account.
-     * Search for specific objects using the criteria in the '$filter' parameter; full documentation is available on http://developer.avalara.com/avatax/filtering-in-rest/ .
-     * Paginate your results using the '$top', '$skip', and '$orderby' parameters.
+     * 
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
      *
      * 
      * @param string $include A comma separated list of child objects to return underneath the primary object.
-     * @param string $filter A filter statement to identify specific records to retrieve, as defined by https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md#97-filtering .
-     * @param int $top If nonzero, return no more than this number of results.
-     * @param int $skip A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
-     * @param string $orderBy A comma separated list of sort statements in the format '(fieldname) [ASC|DESC]', for example 'id ASC'.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
     public function queryUsers($include, $filter, $top, $skip, $orderBy)
@@ -4313,47 +4832,6 @@ class UserModel
 }
 
 /**
- * Helper function for throwing known error response
- */
-class ErrorResult
-{
-
-    /**
-     * @var ErrorInfo Information about the error(s)
-     */
-    public $error;
-
-}
-
-/**
- * Information about the error that occurred
- */
-class ErrorInfo
-{
-
-    /**
-     * @var string Type of error that occurred (See ErrorCodeId::* for a list of allowable values)
-     */
-    public $code;
-
-    /**
-     * @var string Short one-line message to summaryize what went wrong
-     */
-    public $message;
-
-    /**
-     * @var string What object or service caused the error? (See ErrorTargetCode::* for a list of allowable values)
-     */
-    public $target;
-
-    /**
-     * @var ErrorDetail[] Array of detailed error messages
-     */
-    public $details;
-
-}
-
-/**
  * Message object
  */
 class ErrorDetail
@@ -4402,6 +4880,147 @@ class ErrorDetail
 }
 
 /**
+ * Represents a request for a new account with Avalara for a new subscriber.
+ * Contains information about the account requested and the rate plan selected.
+ */
+class NewAccountRequestModel
+{
+
+    /**
+     * @var string[] The list of products to which this account would like to subscribe.
+     */
+    public $products;
+
+    /**
+     * @var string The name of the connector that will be the primary method of access used to call the account created. For a list of available connectors, please contact your Avalara representative.
+     */
+    public $connectorName;
+
+    /**
+     * @var string An approved partner account can be referenced when provisioning an account, allowing a link between  the partner and the provisioned account.
+     */
+    public $parentAccountNumber;
+
+    /**
+     * @var string Identifies a referring partner for the assessment of referral-based commissions.
+     */
+    public $referrerId;
+
+    /**
+     * @var string Zuora-generated Payment ID to which the new account should be associated. For free trial accounts, an empty string is acceptable.
+     */
+    public $paymentMethodId;
+
+    /**
+     * @var string The date on which the account should take effect. If null, defaults to today.
+     */
+    public $effectiveDate;
+
+    /**
+     * @var string The date on which the account should expire. If null, defaults to a 90-day trial account.
+     */
+    public $endDate;
+
+    /**
+     * @var string Account Name
+     */
+    public $accountName;
+
+    /**
+     * @var string First Name of the primary contact person for this account
+     */
+    public $firstName;
+
+    /**
+     * @var string Last Name of the primary contact person for this account
+     */
+    public $lastName;
+
+    /**
+     * @var string Title of the primary contact person for this account
+     */
+    public $title;
+
+    /**
+     * @var string Phone number of the primary contact person for this account
+     */
+    public $phoneNumber;
+
+    /**
+     * @var string Email of the primary contact person for this account
+     */
+    public $email;
+
+    /**
+     * @var string If no password is supplied, an a tempoarary password is generated by the system and emailed to the user. The user will  be challenged to change this password upon logging in to the Admin Console. If supplied, will be the set password for  the default created user, and the user will not be challenged to change their password upon login to the Admin Console.
+     */
+    public $userPassword;
+
+}
+
+/**
+ * Represents information about a newly created account
+ */
+class NewAccountModel
+{
+
+    /**
+     * @var int This is the ID number of the account that was created
+     */
+    public $accountId;
+
+    /**
+     * @var string This is the email address to which credentials were mailed
+     */
+    public $accountDetailsEmailedTo;
+
+    /**
+     * @var string The date and time when this account was created
+     */
+    public $createdDate;
+
+    /**
+     * @var string The date and time when account information was emailed to the user
+     */
+    public $emailedDate;
+
+}
+
+/**
+ * Represents a request for a free trial account for AvaTax.
+ * Free trial accounts are only available on the Sandbox environment.
+ */
+class FreeTrialRequestModel
+{
+
+    /**
+     * @var string The first or given name of the user requesting a free trial.
+     */
+    public $firstName;
+
+    /**
+     * @var string The last or family name of the user requesting a free trial.
+     */
+    public $lastName;
+
+    /**
+     * @var string The email address of the user requesting a free trial.
+     */
+    public $email;
+
+    /**
+     * @var string The company or organizational name for this free trial. If this account is for personal use, it is acceptable  to use your full name here.
+     */
+    public $company;
+
+    /**
+     * @var string The phone number of the person requesting the free trial.
+     */
+    public $phone;
+
+}
+
+/**
  * Represents a license key reset request.
  */
 class ResetLicenseKeyModel
@@ -4413,7 +5032,7 @@ class ResetLicenseKeyModel
     public $accountId;
 
     /**
-     * @var boolean Set this value to true to reset the license key for this account.  This license key reset function will only work when called using the credentials of the account administrator of this account.
+     * @var boolean Set this value to true to reset the license key for this account. This license key reset function will only work when called using the credentials of the account administrator of this account.
      */
     public $confirmResetLicenseKey;
 
@@ -4431,22 +5050,27 @@ class LicenseKeyModel
     public $accountId;
 
     /**
-     * @var string This is your private license key. You must record this license key for safekeeping.  If you lose this key, you must contact the ResetLicenseKey API in order to request a new one.  Each account can only have one license key at a time.
+     * @var string This is your private license key. You must record this license key for safekeeping. If you lose this key, you must contact the ResetLicenseKey API in order to request a new one. Each account can only have one license key at a time.
      */
     public $privateLicenseKey;
 
     /**
-     * @var string If your software allows you to specify the HTTP Authorization header directly, this is the header string you   should use when contacting Avalara to make API calls with this license key.
+     * @var string If your software allows you to specify the HTTP Authorization header directly, this is the header string you  should use when contacting Avalara to make API calls with this license key.
      */
     public $httpRequestHeader;
 
 }
 
 /**
- * Represents an address to resolve.
+ * TextCase info for input address
  */
-class AddressInfo
+class AddressValidationInfo
 {
+
+    /**
+     * @var string Specify the text case for the validated address result. If not specified, will return uppercase. (See TextCase::* for a list of allowable values)
+     */
+    public $textCase;
 
     /**
      * @var string Line1
@@ -4507,7 +5131,7 @@ class AddressResolutionModel
     public $address;
 
     /**
-     * @var AddressInfo[] The validated address or addresses
+     * @var ValidatedAddressInfo[] The validated address or addresses
      */
     public $validatedAddresses;
 
@@ -4530,6 +5154,117 @@ class AddressResolutionModel
      * @var AvaTaxMessage[] List of informational and warning messages regarding this address
      */
     public $messages;
+
+}
+
+/**
+ * Represents an address to resolve.
+ */
+class AddressInfo
+{
+
+    /**
+     * @var string Line1
+     */
+    public $line1;
+
+    /**
+     * @var string Line2
+     */
+    public $line2;
+
+    /**
+     * @var string Line3
+     */
+    public $line3;
+
+    /**
+     * @var string City
+     */
+    public $city;
+
+    /**
+     * @var string State / Province / Region
+     */
+    public $region;
+
+    /**
+     * @var string Two character ISO 3166 Country Code
+     */
+    public $country;
+
+    /**
+     * @var string Postal Code / Zip Code
+     */
+    public $postalCode;
+
+    /**
+     * @var float Geospatial latitude measurement
+     */
+    public $latitude;
+
+    /**
+     * @var float Geospatial longitude measurement
+     */
+    public $longitude;
+
+}
+
+/**
+ * Represents a validated address
+ */
+class ValidatedAddressInfo
+{
+
+    /**
+     * @var string Address type code. One of:  * F - Firm or company address * G - General Delivery address * H - High-rise or business complex * P - PO Box address * R - Rural route address * S - Street or residential address
+     */
+    public $addressType;
+
+    /**
+     * @var string Line1
+     */
+    public $line1;
+
+    /**
+     * @var string Line2
+     */
+    public $line2;
+
+    /**
+     * @var string Line3
+     */
+    public $line3;
+
+    /**
+     * @var string City
+     */
+    public $city;
+
+    /**
+     * @var string State / Province / Region
+     */
+    public $region;
+
+    /**
+     * @var string Two character ISO 3166 Country Code
+     */
+    public $country;
+
+    /**
+     * @var string Postal Code / Zip Code
+     */
+    public $postalCode;
+
+    /**
+     * @var float Geospatial latitude measurement
+     */
+    public $latitude;
+
+    /**
+     * @var float Geospatial longitude measurement
+     */
+    public $longitude;
 
 }
 
@@ -4805,17 +5540,17 @@ class CompanyModel
     public $isActive;
 
     /**
-     * @var string For United States companies, this field contains your Taxpayer Identification Number.   This is a nine digit number that is usually called an EIN for an Employer Identification Number if this company is a corporation,   or SSN for a Social Security Number if this company is a person.  This value is required if you subscribe to Avalara Managed Returns or the SST Certified Service Provider services,   but it is optional if you do not subscribe to either of those services.
+     * @var string For United States companies, this field contains your Taxpayer Identification Number.  This is a nine digit number that is usually called an EIN for an Employer Identification Number if this company is a corporation,  or SSN for a Social Security Number if this company is a person. This value is required if you subscribe to Avalara Managed Returns or the SST Certified Service Provider services,  but it is optional if you do not subscribe to either of those services.
      */
     public $taxpayerIdNumber;
 
     /**
-     * @var boolean Set this flag to true to give this company its own unique tax profile.  If this flag is true, this company will have its own Nexus, TaxRule, TaxCode, and Item definitions.  If this flag is false, this company will inherit all profile values from its parent.
+     * @var boolean Set this flag to true to give this company its own unique tax profile. If this flag is true, this company will have its own Nexus, TaxRule, TaxCode, and Item definitions. If this flag is false, this company will inherit all profile values from its parent.
      */
     public $hasProfile;
 
     /**
-     * @var boolean Set this flag to true if this company must file its own tax returns.  For users who have Returns enabled, this flag turns on monthly Worksheet generation for the company.
+     * @var boolean Set this flag to true if this company must file its own tax returns. For users who have Returns enabled, this flag turns on monthly Worksheet generation for the company.
      */
     public $isReportingEntity;
 
@@ -4845,7 +5580,7 @@ class CompanyModel
     public $warningsEnabled;
 
     /**
-     * @var boolean Set this flag to true to indicate that this company is a test company.  If you have Returns enabled, Test companies will not file tax returns and can be used for validation purposes.
+     * @var boolean Set this flag to true to indicate that this company is a test company. If you have Returns enabled, Test companies will not file tax returns and can be used for validation purposes.
      */
     public $isTest;
 
@@ -4855,7 +5590,7 @@ class CompanyModel
     public $taxDependencyLevelId;
 
     /**
-     * @var boolean Set this value to true to indicate that you are still working to finish configuring this company.  While this value is true, no tax reporting will occur and the company will not be usable for transactions.
+     * @var boolean Set this value to true to indicate that you are still working to finish configuring this company. While this value is true, no tax reporting will occur and the company will not be usable for transactions.
      */
     public $inProgress;
 
@@ -5066,12 +5801,12 @@ class ItemModel
     public $itemCode;
 
     /**
-     * @var int The unique ID number of the tax code that is applied when selling this item.  When creating or updating an item, you can either specify the Tax Code ID number or the Tax Code string; you do not need to specify both values.
+     * @var int The unique ID number of the tax code that is applied when selling this item. When creating or updating an item, you can either specify the Tax Code ID number or the Tax Code string; you do not need to specify both values.
      */
     public $taxCodeId;
 
     /**
-     * @var string The unique code string of the Tax Code that is applied when selling this item.  When creating or updating an item, you can either specify the Tax Code ID number or the Tax Code string; you do not need to specify both values.
+     * @var string The unique code string of the Tax Code that is applied when selling this item. When creating or updating an item, you can either specify the Tax Code ID number or the Tax Code string; you do not need to specify both values.
      */
     public $taxCode;
 
@@ -5240,7 +5975,7 @@ class LocationModel
     public $modifiedUserId;
 
     /**
-     * @var LocationSettingModel[] Extra information required by certain jurisdictions for filing.  For a list of settings recognized by Avalara, query the endpoint "/api/v2/definitions/locationquestions".   To determine the list of settings required for this location, query the endpoint "/api/v2/companies/(id)/locations/(id)/validate".
+     * @var LocationSettingModel[] Extra information required by certain jurisdictions for filing. For a list of settings recognized by Avalara, query the endpoint "/api/v2/definitions/locationquestions".  To determine the list of settings required for this location, query the endpoint "/api/v2/companies/(id)/locations/(id)/validate".
      */
     public $settings;
 
@@ -5323,12 +6058,12 @@ class NexusModel
     public $sourcing;
 
     /**
-     * @var boolean True if you are also declaring local nexus within this jurisdiction.  Many U.S. states have options for declaring nexus in local jurisdictions as well as within the state.
+     * @var boolean True if you are also declaring local nexus within this jurisdiction. Many U.S. states have options for declaring nexus in local jurisdictions as well as within the state.
      */
     public $hasLocalNexus;
 
     /**
-     * @var string If you are declaring local nexus within this jurisdiction, this indicates whether you are declaring only   a specified list of local jurisdictions, all state-administered local jurisdictions, or all local jurisdictions. (See LocalNexusTypeId::* for a list of allowable values)
+     * @var string If you are declaring local nexus within this jurisdiction, this indicates whether you are declaring only  a specified list of local jurisdictions, all state-administered local jurisdictions, or all local jurisdictions. (See LocalNexusTypeId::* for a list of allowable values)
      */
     public $localNexusTypeId;
 
@@ -5458,7 +6193,7 @@ class TaxCodeModel
     public $isActive;
 
     /**
-     * @var boolean True if this tax code has been certified by the Streamlined Sales Tax governing board.  By default, you should leave this value empty.
+     * @var boolean True if this tax code has been certified by the Streamlined Sales Tax governing board. By default, you should leave this value empty.
      */
     public $isSSTCertified;
 
@@ -5501,12 +6236,12 @@ class TaxRuleModel
     public $companyId;
 
     /**
-     * @var int The unique ID number of the tax code for this rule.  When creating or updating a tax rule, you may specify either the taxCodeId value or the taxCode value.
+     * @var int The unique ID number of the tax code for this rule. When creating or updating a tax rule, you may specify either the taxCodeId value or the taxCode value.
      */
     public $taxCodeId;
 
     /**
-     * @var string The code string of the tax code for this rule.  When creating or updating a tax rule, you may specify either the taxCodeId value or the taxCode value.
+     * @var string The code string of the tax code for this rule. When creating or updating a tax rule, you may specify either the taxCodeId value or the taxCode value.
      */
     public $taxCode;
 
@@ -5546,7 +6281,7 @@ class TaxRuleModel
     public $rateTypeId;
 
     /**
-     * @var string This type value determines the behavior of the tax rule.  You can specify that this rule controls the product's taxability or exempt / nontaxable status, the product's rate   (for example, if you have been granted an official ruling for your product's rate that differs from the official rate),   or other types of behavior. (See TaxRuleTypeId::* for a list of allowable values)
+     * @var string This type value determines the behavior of the tax rule. You can specify that this rule controls the product's taxability or exempt / nontaxable status, the product's rate  (for example, if you have been granted an official ruling for your product's rate that differs from the official rate),  or other types of behavior. (See TaxRuleTypeId::* for a list of allowable values)
      */
     public $taxRuleTypeId;
 
@@ -5750,7 +6485,7 @@ class CompanyInitializationModel
     public $vatRegistrationId;
 
     /**
-     * @var string United States Taxpayer ID number, usually your Employer Identification Number if you are a business or your   Social Security Number if you are an individual.  This value is required if you subscribe to Avalara Managed Returns or the SST Certified Service Provider services,   but it is optional if you do not subscribe to either of those services.
+     * @var string United States Taxpayer ID number, usually your Employer Identification Number if you are a business or your  Social Security Number if you are an individual. This value is required if you subscribe to Avalara Managed Returns or the SST Certified Service Provider services,  but it is optional if you do not subscribe to either of those services.
      */
     public $taxpayerIdNumber;
 
@@ -5949,12 +6684,12 @@ class FundingInitiateModel
     public $requestEmail;
 
     /**
-     * @var string If you have requested an email for funding setup, this is the recipient who will receive an   email inviting them to setup funding configuration for Avalara Managed Returns. The recipient can  then click on a link in the email and setup funding configuration for this company.
+     * @var string If you have requested an email for funding setup, this is the recipient who will receive an  email inviting them to setup funding configuration for Avalara Managed Returns. The recipient can then click on a link in the email and setup funding configuration for this company.
      */
     public $fundingEmailRecipient;
 
     /**
-     * @var boolean Set this value to true to request an HTML-based funding widget that can be embedded within an   existing user interface. A user can then interact with the HTML-based funding widget to set up  funding information for the company.
+     * @var boolean Set this value to true to request an HTML-based funding widget that can be embedded within an  existing user interface. A user can then interact with the HTML-based funding widget to set up funding information for the company.
      */
     public $requestWidget;
 
@@ -6106,7 +6841,7 @@ class LocationQuestionModel
     public $question;
 
     /**
-     * @var string If additional information is available about the location setting, this contains descriptive text to help  you identify the correct value to provide in this setting.
+     * @var string If additional information is available about the location setting, this contains descriptive text to help you identify the correct value to provide in this setting.
      */
     public $description;
 
@@ -6459,6 +7194,259 @@ class NoticePriorityModel
 }
 
 /**
+ * NoticeResponsibility Model
+ */
+class NoticeResponsibilityDetailModel
+{
+
+    /**
+     * @var int The unique ID number of this filing frequency.
+     */
+    public $id;
+
+    /**
+     * @var int TaxNoticeId
+     */
+    public $noticeId;
+
+    /**
+     * @var int TaxNoticeResponsibilityId
+     */
+    public $taxNoticeResponsibilityId;
+
+    /**
+     * @var string The description name of this filing frequency
+     */
+    public $description;
+
+}
+
+/**
+ * NoticeRootCause Model
+ */
+class NoticeRootCauseDetailModel
+{
+
+    /**
+     * @var int The unique ID number of this filing frequency.
+     */
+    public $id;
+
+    /**
+     * @var int TaxNoticeId
+     */
+    public $noticeId;
+
+    /**
+     * @var int TaxNoticeRootCauseId
+     */
+    public $taxNoticeRootCauseId;
+
+    /**
+     * @var string The description name of this root cause
+     */
+    public $description;
+
+}
+
+/**
+ * Represents a list of statuses of returns available in skyscraper
+ */
+class SkyscraperStatusModel
+{
+
+    /**
+     * @var string The specific name of the returns available in skyscraper
+     */
+    public $name;
+
+    /**
+     * @var string[] The tax form codes available to file through skyscrper
+     */
+    public $taxFormCodes;
+
+    /**
+     * @var string The country of the returns
+     */
+    public $country;
+
+    /**
+     * @var string They Scraper type (See ScraperType::* for a list of allowable values)
+     */
+    public $scraperType;
+
+    /**
+     * @var boolean Indicates if the return is currently available
+     */
+    public $isAvailable;
+
+    /**
+     * @var string The expected response time of the call
+     */
+    public $expectedResponseTime;
+
+    /**
+     * @var string Message on the returns
+     */
+    public $message;
+
+    /**
+     * @var requiredFilingCalendarDataFieldModel[] A list of required fields to file
+     */
+    public $requiredFilingCalendarDataFields;
+
+}
+
+/**
+ * Represents a verification request using Skyscraper for a company
+ */
+class requiredFilingCalendarDataFieldModel
+{
+
+    /**
+     * @var string Region of the verification request
+     */
+    public $name;
+
+    /**
+     * @var string Username that we are using for verification
+     */
+    public $description;
+
+}
+
+/**
+ * Represents a declaration of JurisdictionOverride within a particular taxing jurisdiction.
+ */
+class JurisdictionOverrideModel
+{
+
+    /**
+     * @var int The unique ID number of this declaration of jurisdictionoverride.
+     */
+    public $id;
+
+    /**
+     * @var int The unique ID number assigned to this account.
+     */
+    public $accountId;
+
+    /**
+     * @var string The summerization of why this jurisdictionoverride is created.
+     */
+    public $description;
+
+    /**
+     * @var string The street address of the JurisdictionOverride intends be created upon
+     */
+    public $address;
+
+    /**
+     * @var string The city of the passed in address which the jurisdictionOverride intends to be created upon
+     */
+    public $city;
+
+    /**
+     * @var string The two or three character ISO region code of the region, state, or province in which this company declared nexus.
+     */
+    public $region;
+
+    /**
+     * @var string The two character ISO-3166 country code of the country in which this company declared nexus.
+     */
+    public $country;
+
+    /**
+     * @var string The postal code of the passed in address
+     */
+    public $postalCode;
+
+    /**
+     * @var string The date when this nexus began. If not known, set to null.
+     */
+    public $effectiveDate;
+
+    /**
+     * @var string If this nexus will end or has ended on a specific date, set this to the date when this nexus ends.
+     */
+    public $endDate;
+
+    /**
+     * @var string The date when this record was created.
+     */
+    public $createdDate;
+
+    /**
+     * @var int The User ID of the user who created this record.
+     */
+    public $createdUserId;
+
+    /**
+     * @var string The date/time when this record was last modified.
+     */
+    public $modifiedDate;
+
+    /**
+     * @var int The user ID of the user who last modified this record.
+     */
+    public $modifiedUserId;
+
+    /**
+     * @var JurisdictionModel[] A list of tax authorities contributing to the taxing of this location
+     */
+    public $jurisdictions;
+
+}
+
+/**
+ * Represents information about a single legal taxing jurisdiction
+ */
+class JurisdictionModel
+{
+
+    /**
+     * @var string The code that is used to identify this jurisdiction
+     */
+    public $code;
+
+    /**
+     * @var string The name of this jurisdiction
+     */
+    public $name;
+
+    /**
+     * @var string The type of the jurisdiction, indicating whether it is a country, state/region, city, for example. (See JurisdictionType::* for a list of allowable values)
+     */
+    public $type;
+
+    /**
+     * @var float The base rate of tax specific to this jurisdiction.
+     */
+    public $rate;
+
+    /**
+     * @var float The "Sales" tax rate specific to this jurisdiction.
+     */
+    public $salesRate;
+
+    /**
+     * @var string The Avalara-supplied signature code for this jurisdiction.
+     */
+    public $signatureCode;
+
+    /**
+     * @var string The state assigned code for this jurisdiction, if any.
+     */
+    public $stateCode;
+
+    /**
+     * @var float The "Seller's Use" tax rate specific to this jurisdiction.
+     */
+    public $useRate;
+
+}
+
+/**
  * Represents a commitment to file a tax return on a recurring basis.
  * Only used if you subscribe to Avalara Returns.
  */
@@ -6526,7 +7514,7 @@ class FilingCalendarModel
     public $line1;
 
     /**
-     * @var string The second line of the physical address to be used when filing this tax return.  Please note that some tax forms do not support multiple address lines.
+     * @var string The second line of the physical address to be used when filing this tax return. Please note that some tax forms do not support multiple address lines.
      */
     public $line2;
 
@@ -6556,7 +7544,7 @@ class FilingCalendarModel
     public $phone;
 
     /**
-     * @var string Special filing instructions to be used when filing this return.  Please note that requesting special filing instructions may incur additional costs.
+     * @var string Special filing instructions to be used when filing this return. Please note that requesting special filing instructions may incur additional costs.
      */
     public $customerFilingInstructions;
 
@@ -6566,12 +7554,12 @@ class FilingCalendarModel
     public $legalEntityName;
 
     /**
-     * @var string The earliest date for the tax period when this return should be filed.  This date specifies the earliest date for tax transactions that should be reported on this filing calendar.  Please note that tax is usually filed one month in arrears: for example, tax for January transactions is typically filed during the month of February.
+     * @var string The earliest date for the tax period when this return should be filed. This date specifies the earliest date for tax transactions that should be reported on this filing calendar. Please note that tax is usually filed one month in arrears: for example, tax for January transactions is typically filed during the month of February.
      */
     public $effectiveDate;
 
     /**
-     * @var string The last date for the tax period when this return should be filed.  This date specifies the last date for tax transactions that should be reported on this filing calendar.  Please note that tax is usually filed one month in arrears: for example, tax for January transactions is typically filed during the month of February.
+     * @var string The last date for the tax period when this return should be filed. This date specifies the last date for tax transactions that should be reported on this filing calendar. Please note that tax is usually filed one month in arrears: for example, tax for January transactions is typically filed during the month of February.
      */
     public $endDate;
 
@@ -6591,7 +7579,7 @@ class FilingCalendarModel
     public $eFilePassword;
 
     /**
-     * @var int If you are required to prepay a percentage of taxes for future periods, please specify the percentage in whole numbers;   for example, the value 90 would indicate 90%.
+     * @var int If you are required to prepay a percentage of taxes for future periods, please specify the percentage in whole numbers;  for example, the value 90 would indicate 90%.
      */
     public $prepayPercentage;
 
@@ -6757,7 +7745,7 @@ class CycleExpireModel
 {
 
     /**
-     * @var boolean Whether or not the filing calendar can be expired.  e.g. if user makes end date of a calendar earlier than latest filing, this would be set to false.
+     * @var boolean Whether or not the filing calendar can be expired. e.g. if user makes end date of a calendar earlier than latest filing, this would be set to false.
      */
     public $success;
 
@@ -6846,7 +7834,7 @@ class CycleEditOptionModel
     public $message;
 
     /**
-     * @var boolean Whether or not the user should be warned of a change, because some changes are risky and may be being done not in accordance with jurisdiction rules.  For example, user would be warned if user changes filing frequency to new frequency with a start date during an accrual month of the existing frequency.
+     * @var boolean Whether or not the user should be warned of a change, because some changes are risky and may be being done not in accordance with jurisdiction rules. For example, user would be warned if user changes filing frequency to new frequency with a start date during an accrual month of the existing frequency.
      */
     public $customerMustApprove;
 
@@ -6885,12 +7873,12 @@ class FilingRequestModel
     public $companyId;
 
     /**
-     * @var string  (See FilingRequestStatus::* for a list of allowable values)
+     * @var string The current status of this request (See FilingRequestStatus::* for a list of allowable values)
      */
     public $filingRequestStatusId;
 
     /**
-     * @var FilingRequestDataModel 
+     * @var FilingRequestDataModel The data model object of the request
      */
     public $data;
 
@@ -6924,52 +7912,72 @@ class FilingRequestDataModel
 {
 
     /**
-     * @var int 
+     * @var int The company return ID if requesting an update.
      */
     public $companyReturnId;
 
     /**
-     * @var string 
+     * @var string The return name of the requested calendar
      */
     public $returnName;
 
     /**
-     * @var string  (See FilingFrequencyId::* for a list of allowable values)
+     * @var string The filing frequency of the request (See FilingFrequencyId::* for a list of allowable values)
      */
     public $filingFrequencyId;
 
     /**
-     * @var string 
+     * @var string State registration ID of the company requesting the filing calendar.
      */
     public $registrationId;
 
     /**
-     * @var int 
+     * @var int The months of the request
      */
     public $months;
 
     /**
-     * @var string 
+     * @var string The type of tax to report on this return. (See MatchingTaxType::* for a list of allowable values)
      */
     public $taxTypeId;
 
     /**
-     * @var string 
+     * @var string Location code of the request
      */
     public $locationCode;
 
     /**
-     * @var string 
+     * @var string Filing cycle effective date of the request
      */
     public $effDate;
 
     /**
-     * @var string 
+     * @var string Filing cycle end date of the request
      */
     public $endDate;
 
     /**
-     * @var FilingAnswer[] 
+     * @var boolean Flag if the request is a clone of a current filing calendar
+     */
+    public $isClone;
+
+    /**
+     * @var string The region this request is for
+     */
+    public $region;
+
+    /**
+     * @var int The tax authority id of the return
+     */
+    public $taxAuthorityId;
+
+    /**
+     * @var string The tax authority name on the return
+     */
+    public $taxAuthorityName;
+
+    /**
+     * @var FilingAnswerModel[] Filing question answers
      */
     public $answers;
 
@@ -6978,16 +7986,16 @@ class FilingRequestDataModel
 /**
  * 
  */
-class FilingAnswer
+class FilingAnswerModel
 {
 
     /**
-     * @var int 
+     * @var int The ID number for a filing question
      */
     public $filingQuestionId;
 
     /**
-     * @var object 
+     * @var object The value of the answer for the filing question identified by filingQuestionId
      */
     public $answer;
 
@@ -7086,12 +8094,12 @@ class FilingModel
     public $companyId;
 
     /**
-     * @var int The month of the filing period for this tax filing.   The filing period represents the year and month of the last day of taxes being reported on this filing.   For example, an annual tax filing for Jan-Dec 2015 would have a filing period of Dec 2015.
+     * @var int The month of the filing period for this tax filing.  The filing period represents the year and month of the last day of taxes being reported on this filing.  For example, an annual tax filing for Jan-Dec 2015 would have a filing period of Dec 2015.
      */
     public $month;
 
     /**
-     * @var int The year of the filing period for this tax filing.  The filing period represents the year and month of the last day of taxes being reported on this filing.   For example, an annual tax filing for Jan-Dec 2015 would have a filing period of Dec 2015.
+     * @var int The year of the filing period for this tax filing. The filing period represents the year and month of the last day of taxes being reported on this filing.  For example, an annual tax filing for Jan-Dec 2015 would have a filing period of Dec 2015.
      */
     public $year;
 
@@ -7189,7 +8197,7 @@ class FilingRegionModel
     public $hasNexus;
 
     /**
-     * @var string The current status of the filing region. (See WorksheetStatusId::* for a list of allowable values)
+     * @var string The current status of the filing region. (See FilingStatusId::* for a list of allowable values)
      */
     public $status;
 
@@ -7197,6 +8205,11 @@ class FilingRegionModel
      * @var FilingReturnModel[] A list of tax returns in this region.
      */
     public $returns;
+
+    /**
+     * @var FilingsCheckupSuggestedFormModel[] A list of tax returns in this region.
+     */
+    public $suggestReturns;
 
 }
 
@@ -7217,7 +8230,12 @@ class FilingReturnModel
     public $filingCalendarId;
 
     /**
-     * @var string The current status of the filing return. (See WorksheetStatusId::* for a list of allowable values)
+     * @var int Tax Authority ID of this return
+     */
+    public $taxAuthorityId;
+
+    /**
+     * @var string The current status of the filing return. (See FilingStatusId::* for a list of allowable values)
      */
     public $status;
 
@@ -7310,6 +8328,44 @@ class FilingReturnModel
      * @var FilingAugmentationModel[] The Augmentations for this return.
      */
     public $augmentations;
+
+    /**
+     * @var string Accrual type of the return (See AccrualType::* for a list of allowable values)
+     */
+    public $accrualType;
+
+}
+
+/**
+ * Worksheet Checkup Report Suggested Form Model
+ */
+class FilingsCheckupSuggestedFormModel
+{
+
+    /**
+     * @var int Tax Authority ID of the suggested form returned
+     */
+    public $taxAuthorityId;
+
+    /**
+     * @var string Country of the suggested form returned
+     */
+    public $country;
+
+    /**
+     * @var string Region of the suggested form returned
+     */
+    public $region;
+
+    /**
+     * @var string 
+     */
+    public $returnName;
+
+    /**
+     * @var string Name of the suggested form returned
+     */
+    public $taxFormCode;
 
 }
 
@@ -7467,30 +8523,25 @@ class FilingsCheckupAuthorityModel
 }
 
 /**
- * Worksheet Checkup Report Suggested Form Model
+ * 
  */
-class FilingsCheckupSuggestedFormModel
+class FileContentResult
 {
 
     /**
-     * @var int Tax Authority ID of the suggested form returned
+     * @var string  (This value is encoded as a Base64 string)
      */
-    public $taxAuthorityId;
+    public $fileContents;
 
     /**
-     * @var string Country of the suggested form returned
+     * @var string 
      */
-    public $country;
+    public $contentType;
 
     /**
-     * @var string Region of the suggested form returned
+     * @var string 
      */
-    public $region;
-
-    /**
-     * @var string Name of the suggested form returned
-     */
-    public $returnName;
+    public $fileDownloadName;
 
 }
 
@@ -7501,7 +8552,7 @@ class LocationValidationModel
 {
 
     /**
-     * @var boolean True if the location has a value for each jurisdiction-required setting.  The user is required to ensure that the values are correct according to the jurisdiction; this flag  does not indicate whether the taxing jurisdiction has accepted the data you have provided.
+     * @var boolean True if the location has a value for each jurisdiction-required setting. The user is required to ensure that the values are correct according to the jurisdiction; this flag does not indicate whether the taxing jurisdiction has accepted the data you have provided.
      */
     public $settingsValidated;
 
@@ -7531,147 +8582,127 @@ class NoticeModel
     public $companyId;
 
     /**
-     * @var int taxNoticeStatusId
+     * @var int The status id of the notice
      */
     public $statusId;
 
     /**
-     * @var string taxNoticeStatus
+     * @var string The status of the notice
      */
     public $status;
 
     /**
-     * @var string receivedDate
+     * @var string The received date of the notice
      */
     public $receivedDate;
 
     /**
-     * @var string closedDate
+     * @var string The closed date of the notice
      */
     public $closedDate;
 
     /**
-     * @var int TaxNoticeCustomerTypeId
+     * @var string NoticeCustomerTypeID can be retrieved from the definitions API (See NoticeCustomerType::* for a list of allowable values)
      */
     public $customerTypeId;
 
     /**
-     * @var string TaxNoticeCustomerTypeId
-     */
-    public $customerType;
-
-    /**
-     * @var string taxNoticeCountry
+     * @var string The country the notice is in
      */
     public $country;
 
     /**
-     * @var string taxNoticeState
+     * @var string The region the notice is for
      */
     public $region;
 
     /**
-     * @var int taxNoticeTaxAuthorityId
+     * @var int The tax authority id of the notice
      */
     public $taxAuthorityId;
 
     /**
-     * @var string taxNoticeFilingFrequencyId (See FilingFrequencyId::* for a list of allowable values)
+     * @var string The filing frequency of the notice (See FilingFrequencyId::* for a list of allowable values)
      */
     public $filingFrequency;
 
     /**
-     * @var int taxNoticeFilingTypeId
+     * @var string The filing type of the notice (See FilingTypeId::* for a list of allowable values)
      */
     public $filingTypeId;
 
     /**
-     * @var string taxNoticeFilingTypeId
-     */
-    public $filingType;
-
-    /**
-     * @var string ticketReferenceNo
+     * @var string The ticket reference number of the notice
      */
     public $ticketReferenceNo;
 
     /**
-     * @var string ticketReferenceUrl
+     * @var string The ticket reference url of the notice
      */
     public $ticketReferenceUrl;
 
     /**
-     * @var string salesForceCaseNo
+     * @var string The sales force case of the notice
      */
     public $salesForceCase;
 
     /**
-     * @var string SalesForceCaseUrl
+     * @var string The URL to the sales force case
      */
     public $salesForceCaseUrl;
 
     /**
-     * @var string TaxPeriod
+     * @var string The tax period of the notice
      */
     public $taxPeriod;
 
     /**
-     * @var int taxNoticeReasonId
+     * @var int The notice reason id
      */
     public $reasonId;
 
     /**
-     * @var string taxNoticeReason
+     * @var string The notice reason
      */
     public $reason;
 
     /**
-     * @var int taxNoticeTypeId
+     * @var int The tax notice type id
      */
     public $typeId;
 
     /**
-     * @var string taxNoticeTypeId
+     * @var string The tax notice type description
      */
     public $type;
 
     /**
-     * @var int taxNoticeCustomerFundingOptionId
+     * @var string The notice customer funding options (See FundingOption::* for a list of allowable values)
      */
     public $customerFundingOptionId;
 
     /**
-     * @var string taxNoticeCustomerFundingOptionId
-     */
-    public $customerFundingOption;
-
-    /**
-     * @var int taxNoticePriorityId
+     * @var string The priority of the notice (See NoticePriorityId::* for a list of allowable values)
      */
     public $priorityId;
 
     /**
-     * @var string taxNoticePriorityId
-     */
-    public $priority;
-
-    /**
-     * @var string CustomerComment
+     * @var string Comments from the customer on this notice
      */
     public $customerComment;
 
     /**
-     * @var boolean hideFromCustomer
+     * @var boolean Indicator to hide from customer
      */
     public $hideFromCustomer;
 
     /**
-     * @var string expectedResolutionDate
+     * @var string Expected resolution date of the notice
      */
     public $expectedResolutionDate;
 
     /**
-     * @var boolean showResolutionDateToCustomer
+     * @var boolean Indicator to show customer this resolution date
      */
     public $showResolutionDateToCustomer;
 
@@ -7681,7 +8712,7 @@ class NoticeModel
     public $closedByUserId;
 
     /**
-     * @var string createdByUser
+     * @var string The user who created the notice
      */
     public $createdByUserName;
 
@@ -7691,59 +8722,59 @@ class NoticeModel
     public $ownedByUserId;
 
     /**
-     * @var string description
+     * @var string The description of the notice
      */
     public $description;
 
     /**
-     * @var int avaFileFormId
+     * @var int The ava file form id of the notice
      */
     public $avaFileFormId;
 
     /**
-     * @var int revenueContactId
+     * @var int The id of the revenue contact
      */
     public $revenueContactId;
 
     /**
-     * @var int complianceContactId
+     * @var int The id of the compliance contact
      */
     public $complianceContactId;
 
     /**
-     * @var int taxNoticeMailCheckToId
-     */
-    public $taxNoticeMailCheckToId;
-
-    /**
-     * @var string documentReference
+     * @var string The document reference of the notice
      */
     public $documentReference;
 
     /**
-     * @var string jurisdictionName
+     * @var string The jurisdiction name of the notice
      */
     public $jurisdictionName;
 
     /**
-     * @var string jurisdictionType
+     * @var string The jurisdiction type of the notice
      */
     public $jurisdictionType;
 
     /**
-     * @var NoticeCommentModel[] taxNoticeComments
+     * @var NoticeCommentModel[] Additional comments on the notice
      */
     public $comments;
 
     /**
-     * @var NoticeFinanceModel[] taxNoticeFinanceDetails
+     * @var NoticeFinanceModel[] Finance details of the notice
      */
     public $finances;
 
     /**
-     * @var string salesForceCaseNo
+     * @var NoticeResponsibilityDetailModel[] Notice Responsibility Details
      */
-    public $downloadAttachmentsUrl;
+    public $responsibility;
+
+    /**
+     * @var NoticeRootCauseDetailModel[] Notice Root Cause Details
+     */
+    public $rootCause;
 
     /**
      * @var string The date when this record was created.
@@ -8085,11 +9116,6 @@ class TransactionModel
     public $date;
 
     /**
-     * @var string The date that was used when calculating tax for this transaction.  By default, this should be the same as the transaction date; however, when a consumer returns a product purchased in a previous month,  it may be necessary to specify the date of the original transaction in order to correctly return the exact amount of sales tax that was  charged of the consumer on the original date they purchased the product.
-     */
-    public $taxDate;
-
-    /**
      * @var string The date when payment was made on this transaction. By default, this should be the same as the date of the transaction.
      */
     public $paymentDate;
@@ -8100,7 +9126,7 @@ class TransactionModel
     public $status;
 
     /**
-     * @var string The type of the transaction. For Returns customers, a transaction type of "Invoice" will be reported to the tax authorities.  A sales transaction represents a sale from the company to a customer. A purchase transaction represents a purchase made by the company.  A return transaction represents a customer who decided to request a refund after purchasing a product from the company. An inventory   transfer transaction represents goods that were moved from one location of the company to another location without changing ownership. (See DocumentType::* for a list of allowable values)
+     * @var string The type of the transaction. For Returns customers, a transaction type of "Invoice" will be reported to the tax authorities. A sales transaction represents a sale from the company to a customer. A purchase transaction represents a purchase made by the company. A return transaction represents a customer who decided to request a refund after purchasing a product from the company. An inventory  transfer transaction represents goods that were moved from one location of the company to another location without changing ownership. (See DocumentType::* for a list of allowable values)
      */
     public $type;
 
@@ -8135,7 +9161,7 @@ class TransactionModel
     public $reconciled;
 
     /**
-     * @var string If this transaction was made from a specific reporting location, this is the code string of the location.  For customers using Returns, this indicates how tax will be reported according to different locations on the tax forms.
+     * @var string If this transaction was made from a specific reporting location, this is the code string of the location. For customers using Returns, this indicates how tax will be reported according to different locations on the tax forms.
      */
     public $locationCode;
 
@@ -8220,7 +9246,7 @@ class TransactionModel
     public $country;
 
     /**
-     * @var int If this transaction was adjusted, this indicates the version number of this transaction. Incremented each time the transaction  is adjusted.
+     * @var int If this transaction was adjusted, this indicates the version number of this transaction. Incremented each time the transaction is adjusted.
      */
     public $version;
 
@@ -8343,17 +9369,17 @@ class TransactionLineModel
     public $description;
 
     /**
-     * @var int The unique ID number of the destination address where this line was delivered or sold.  In the case of a point-of-sale transaction, the destination address and origin address will be the same.  In the case of a shipped transaction, they will be different.
+     * @var int The unique ID number of the destination address where this line was delivered or sold. In the case of a point-of-sale transaction, the destination address and origin address will be the same. In the case of a shipped transaction, they will be different.
      */
     public $destinationAddressId;
 
     /**
-     * @var int The unique ID number of the origin address where this line was delivered or sold.  In the case of a point-of-sale transaction, the origin address and destination address will be the same.  In the case of a shipped transaction, they will be different.
+     * @var int The unique ID number of the origin address where this line was delivered or sold. In the case of a point-of-sale transaction, the origin address and destination address will be the same. In the case of a shipped transaction, they will be different.
      */
     public $originAddressId;
 
     /**
-     * @var float The amount of discount that was applied to this line item. This represents the difference between list price and sale price of the item.  In general, a discount represents money that did not change hands; tax is calculated on only the amount of money that changed hands.
+     * @var float The amount of discount that was applied to this line item. This represents the difference between list price and sale price of the item. In general, a discount represents money that did not change hands; tax is calculated on only the amount of money that changed hands.
      */
     public $discountAmount;
 
@@ -8393,7 +9419,7 @@ class TransactionLineModel
     public $itemCode;
 
     /**
-     * @var float The total amount of the transaction, including both taxable and exempt. This is the total price for all items.  To determine the individual item price, divide this by quantity.
+     * @var float The total amount of the transaction, including both taxable and exempt. This is the total price for all items. To determine the individual item price, divide this by quantity.
      */
     public $lineAmount;
 
@@ -8413,7 +9439,7 @@ class TransactionLineModel
     public $ref2;
 
     /**
-     * @var string The date when this transaction should be reported. By default, all transactions are reported on the date when the actual transaction took place.  In some cases, line items may be reported later due to delayed shipments or other business reasons.
+     * @var string The date when this transaction should be reported. By default, all transactions are reported on the date when the actual transaction took place. In some cases, line items may be reported later due to delayed shipments or other business reasons.
      */
     public $reportingDate;
 
@@ -8453,7 +9479,7 @@ class TransactionLineModel
     public $taxCodeId;
 
     /**
-     * @var string The date that was used for calculating tax amounts for this line item. By default, this date should be the same as the document date.  In some cases, for example when a consumer returns a product purchased previously, line items may be calculated using a tax date in the past  so that the consumer can receive a refund for the correct tax amount that was charged when the item was originally purchased.
+     * @var string The date that was used for calculating tax amounts for this line item. By default, this date should be the same as the document date. In some cases, for example when a consumer returns a product purchased previously, line items may be calculated using a tax date in the past so that the consumer can receive a refund for the correct tax amount that was charged when the item was originally purchased.
      */
     public $taxDate;
 
@@ -8554,6 +9580,16 @@ class TransactionAddressModel
      * @var int The unique ID number of the tax region for this address.
      */
     public $taxRegionId;
+
+    /**
+     * @var string Latitude for this address (CALC - 13394)
+     */
+    public $latitude;
+
+    /**
+     * @var string Longitude for this address (CALC - 13394)
+     */
+    public $longitude;
 
 }
 
@@ -8812,7 +9848,7 @@ class TransactionLineDetailModel
     public $taxRegionId;
 
     /**
-     * @var float The amount of tax that was calculated. This amount may be different if a tax override was used.  If the customer specified a tax override, this calculated tax value represents the amount of tax that would  have been charged if Avalara had calculated the tax for the rule.
+     * @var float The amount of tax that was calculated. This amount may be different if a tax override was used. If the customer specified a tax override, this calculated tax value represents the amount of tax that would have been charged if Avalara had calculated the tax for the rule.
      */
     public $taxCalculated;
 
@@ -8883,12 +9919,12 @@ class CreateTransactionModel
     public $type;
 
     /**
-     * @var string Transaction Code - the internal reference code used by the client application. This is used for operations such as  Get, Adjust, Settle, and Void. If you leave the transaction code blank, a GUID will be assigned to each transaction.
+     * @var string Transaction Code - the internal reference code used by the client application. This is used for operations such as Get, Adjust, Settle, and Void. If you leave the transaction code blank, a GUID will be assigned to each transaction.
      */
     public $code;
 
     /**
-     * @var string Company Code - Specify the code of the company creating this transaction here. If you leave this value null,  your account's default company will be used instead.
+     * @var string Company Code - Specify the code of the company creating this transaction here. If you leave this value null, your account's default company will be used instead.
      */
     public $companyCode;
 
@@ -8928,7 +9964,7 @@ class CreateTransactionModel
     public $exemptionNo;
 
     /**
-     * @var object Default addresses for all lines in this document
+     * @var AddressesModel Default addresses for all lines in this document
      */
     public $addresses;
 
@@ -8938,7 +9974,7 @@ class CreateTransactionModel
     public $lines;
 
     /**
-     * @var object Special parameters for this transaction.  To get a full list of available parameters, please use the /api/v2/definitions/parameters endpoint.
+     * @var object Special parameters for this transaction. To get a full list of available parameters, please use the /api/v2/definitions/parameters endpoint.
      */
     public $parameters;
 
@@ -8966,11 +10002,6 @@ class CreateTransactionModel
      * @var TaxOverrideModel Specifies a tax override for the entire document
      */
     public $taxOverride;
-
-    /**
-     * @var string Indicates the tax effectivity override date for the entire document.
-     */
-    public $taxDate;
 
     /**
      * @var string 3 character ISO 4217 currency code.
@@ -9025,60 +10056,35 @@ class CreateTransactionModel
 }
 
 /**
- * Represents an address to resolve.
+ * A series of addresses information in a GetTax call
  */
-class AddressLocationInfo
+class AddressesModel
 {
 
     /**
-     * @var string If you wish to use the address of an existing location for this company, specify the address here.  Otherwise, leave this value empty.
+     * @var AddressLocationInfo If this transaction occurred at a retail point-of-sale location, use this
      */
-    public $locationCode;
+    public $singleLocation;
 
     /**
-     * @var string Line1
+     * @var AddressLocationInfo If this transaction was shipped from a warehouse location to a customer location, specify both "ShipFrom" and "ShipTo".
      */
-    public $line1;
+    public $shipFrom;
 
     /**
-     * @var string Line2
+     * @var AddressLocationInfo If this transaction was shipped from a warehouse location to a customer location, specify both "ShipFrom" and "ShipTo".
      */
-    public $line2;
+    public $shipTo;
 
     /**
-     * @var string Line3
+     * @var AddressLocationInfo Location from which the order was placed. Customer's home or business location.
      */
-    public $line3;
+    public $pointOfOrderOrigin;
 
     /**
-     * @var string City
+     * @var AddressLocationInfo Location from which the order was accepted. Call center, business office where purchase orders are accepted; or, server locations where orders are processed and accepted.
      */
-    public $city;
-
-    /**
-     * @var string State / Province / Region
-     */
-    public $region;
-
-    /**
-     * @var string Two character ISO 3166 Country Code
-     */
-    public $country;
-
-    /**
-     * @var string Postal Code / Zip Code
-     */
-    public $postalCode;
-
-    /**
-     * @var float Geospatial latitude measurement
-     */
-    public $latitude;
-
-    /**
-     * @var float Geospatial longitude measurement
-     */
-    public $longitude;
+    public $pointOfOrderAcceptance;
 
 }
 
@@ -9104,7 +10110,7 @@ class LineItemModel
     public $amount;
 
     /**
-     * @var object Specify any differences for addresses between this line and the rest of the document
+     * @var AddressesModel Specify any differences for addresses between this line and the rest of the document
      */
     public $addresses;
 
@@ -9169,7 +10175,7 @@ class LineItemModel
     public $taxOverride;
 
     /**
-     * @var object Special parameters that apply to this line within this transaction.  To get a full list of available parameters, please use the /api/v2/definitions/parameters endpoint.
+     * @var object Special parameters that apply to this line within this transaction. To get a full list of available parameters, please use the /api/v2/definitions/parameters endpoint.
      */
     public $parameters;
 
@@ -9187,7 +10193,7 @@ class TaxOverrideModel
     public $type;
 
     /**
-     * @var float Indicates a total override of the calculated tax on the document. AvaTax will distribute  the override across all the lines.
+     * @var float Indicates a total override of the calculated tax on the document. AvaTax will distribute the override across all the lines.
      */
     public $taxAmount;
 
@@ -9200,6 +10206,64 @@ class TaxOverrideModel
      * @var string This provides the reason for a tax override for audit purposes. It is required for types 2-4.
      */
     public $reason;
+
+}
+
+/**
+ * Represents an address to resolve.
+ */
+class AddressLocationInfo
+{
+
+    /**
+     * @var string If you wish to use the address of an existing location for this company, specify the address here. Otherwise, leave this value empty.
+     */
+    public $locationCode;
+
+    /**
+     * @var string Line1
+     */
+    public $line1;
+
+    /**
+     * @var string Line2
+     */
+    public $line2;
+
+    /**
+     * @var string Line3
+     */
+    public $line3;
+
+    /**
+     * @var string City
+     */
+    public $city;
+
+    /**
+     * @var string State / Province / Region
+     */
+    public $region;
+
+    /**
+     * @var string Two character ISO 3166 Country Code
+     */
+    public $country;
+
+    /**
+     * @var string Postal Code / Zip Code
+     */
+    public $postalCode;
+
+    /**
+     * @var float Geospatial latitude measurement
+     */
+    public $latitude;
+
+    /**
+     * @var float Geospatial longitude measurement
+     */
+    public $longitude;
 
 }
 
@@ -9235,7 +10299,7 @@ class SettleTransactionModel
     public $changeCode;
 
     /**
-     * @var CommitTransactionModel To use the "Settle" endpoint to commit a transaction for reporting purposes, fill out this value.  If you use Avalara Returns, committing a transaction will cause that transaction to be filed.
+     * @var CommitTransactionModel To use the "Settle" endpoint to commit a transaction for reporting purposes, fill out this value. If you use Avalara Returns, committing a transaction will cause that transaction to be filed.
      */
     public $commit;
 
@@ -9286,9 +10350,53 @@ class CommitTransactionModel
 {
 
     /**
-     * @var boolean Set this value to be true to commit this transaction.  Committing a transaction allows it to be reported on a tax return. Uncommitted transactions will not be reported.
+     * @var boolean Set this value to be true to commit this transaction. Committing a transaction allows it to be reported on a tax return. Uncommitted transactions will not be reported.
      */
     public $commit;
+
+}
+
+/**
+ * Commit this transaction as permanent
+ */
+class LockTransactionModel
+{
+
+    /**
+     * @var boolean Set this value to be true to commit this transaction. Committing a transaction allows it to be reported on a tax return. Uncommitted transactions will not be reported.
+     */
+    public $isLocked;
+
+}
+
+/**
+ * Bulk lock documents model
+ */
+class BulkLockTransactionModel
+{
+
+    /**
+     * @var int[] List of documents to lock
+     */
+    public $documentIds;
+
+    /**
+     * @var boolean The lock status to set for the documents designated in this API
+     */
+    public $isLocked;
+
+}
+
+/**
+ * Returns information about transactions that were locked
+ */
+class BulkLockTransactionResult
+{
+
+    /**
+     * @var int Number of records that have been modified
+     */
+    public $numberOfRecords;
 
 }
 
@@ -9347,6 +10455,17 @@ class PingResultModel
 /*****************************************************************************
  *                              Enumerated constants                         *
  *****************************************************************************/
+
+
+/**
+ * Lists of acceptable values for the enumerated data type TextCase
+ */
+class TextCase
+{
+    const C_UPPER = "Upper";
+    const C_MIXED = "Mixed";
+
+}
 
 
 /**
@@ -9545,27 +10664,15 @@ class ErrorCodeId
     const C_ADDRESSINCOMPLETE = "AddressIncomplete";
     const C_ADDRESSLOCATIONNOTFOUND = "AddressLocationNotFound";
     const C_MISSINGLINE = "MissingLine";
+    const C_INVALIDADDRESSTEXTCASE = "InvalidAddressTextCase";
+    const C_DOCUMENTNOTCOMMITTED = "DocumentNotCommitted";
     const C_BADDOCUMENTFETCH = "BadDocumentFetch";
     const C_SERVERUNREACHABLE = "ServerUnreachable";
     const C_SUBSCRIPTIONREQUIRED = "SubscriptionRequired";
     const C_ACCOUNTEXISTS = "AccountExists";
     const C_INVITATIONONLY = "InvitationOnly";
-
-}
-
-
-/**
- * Lists of acceptable values for the enumerated data type ErrorTargetCode
- */
-class ErrorTargetCode
-{
-    const C_UNKNOWN = "Unknown";
-    const C_HTTPREQUEST = "HttpRequest";
-    const C_HTTPREQUESTHEADERS = "HttpRequestHeaders";
-    const C_INCORRECTDATA = "IncorrectData";
-    const C_AVATAXAPISERVER = "AvaTaxApiServer";
-    const C_AVALARAIDENTITYSERVER = "AvalaraIdentityServer";
-    const C_CUSTOMERACCOUNTSETUP = "CustomerAccountSetup";
+    const C_ZTBLISTCONNECTORFAIL = "ZTBListConnectorFail";
+    const C_ZTBCREATESUBSCRIPTIONSFAIL = "ZTBCreateSubscriptionsFail";
 
 }
 
@@ -9768,7 +10875,8 @@ class MatchingTaxType
     const C_ALL = "All";
     const C_BOTHSALESANDUSETAX = "BothSalesAndUseTax";
     const C_CONSUMERUSETAX = "ConsumerUseTax";
-    const C_MEDICALEXCISE = "MedicalExcise";
+    const C_CONSUMERSUSEANDSELLERSUSETAX = "ConsumersUseAndSellersUseTax";
+    const C_CONSUMERUSEANDSALESTAX = "ConsumerUseAndSalesTax";
     const C_FEE = "Fee";
     const C_VATINPUTTAX = "VATInputTax";
     const C_VATNONRECOVERABLEINPUTTAX = "VATNonrecoverableInputTax";
@@ -9824,6 +10932,17 @@ class ParameterBagDataType
     const C_STRING = "String";
     const C_BOOLEAN = "Boolean";
     const C_NUMERIC = "Numeric";
+
+}
+
+
+/**
+ * Lists of acceptable values for the enumerated data type ScraperType
+ */
+class ScraperType
+{
+    const C_LOGIN = "Login";
+    const C_CUSTOMERDORDATA = "CustomerDorData";
 
 }
 
@@ -9903,9 +11022,9 @@ class WorksheetTypeId
 
 
 /**
- * Lists of acceptable values for the enumerated data type WorksheetStatusId
+ * Lists of acceptable values for the enumerated data type FilingStatusId
  */
-class WorksheetStatusId
+class FilingStatusId
 {
     const C_PENDINGAPPROVAL = "PendingApproval";
     const C_DIRTY = "Dirty";
@@ -9924,6 +11043,17 @@ class WorksheetStatusId
     const C_RETURNREJECTED = "ReturnRejected";
     const C_RETURNREJECTEDONBEHALF = "ReturnRejectedOnBehalf";
     const C_APPROVEDTOFILEONBEHALF = "ApprovedToFileOnBehalf";
+
+}
+
+
+/**
+ * Lists of acceptable values for the enumerated data type AccrualType
+ */
+class AccrualType
+{
+    const C_FILING = "Filing";
+    const C_ACCRUAL = "Accrual";
 
 }
 
@@ -9970,6 +11100,44 @@ class PaymentAccountTypeId
     const C_ACCOUNTSRECEIVABLEACCOUNTSPAYABLE = "AccountsReceivableAccountsPayable";
     const C_ACCOUNTSRECEIVABLE = "AccountsReceivable";
     const C_ACCOUNTSPAYABLE = "AccountsPayable";
+
+}
+
+
+/**
+ * Lists of acceptable values for the enumerated data type NoticeCustomerType
+ */
+class NoticeCustomerType
+{
+    const C_AVATAXRETURNS = "AvaTaxReturns";
+    const C_STANDALONE = "StandAlone";
+    const C_STRATEGIC = "Strategic";
+    const C_SST = "SST";
+    const C_TRUSTFILE = "TrustFile";
+
+}
+
+
+/**
+ * Lists of acceptable values for the enumerated data type FundingOption
+ */
+class FundingOption
+{
+    const C_PULL = "Pull";
+    const C_WIRE = "Wire";
+
+}
+
+
+/**
+ * Lists of acceptable values for the enumerated data type NoticePriorityId
+ */
+class NoticePriorityId
+{
+    const C_IMMEDIATEATTENTIONREQUIRED = "ImmediateAttentionRequired";
+    const C_HIGH = "High";
+    const C_NORMAL = "Normal";
+    const C_LOW = "Low";
 
 }
 
@@ -10076,20 +11244,6 @@ class TaxType
 
 
 /**
- * Lists of acceptable values for the enumerated data type TransactionAddressType
- */
-class TransactionAddressType
-{
-    const C_SHIPFROM = "ShipFrom";
-    const C_SHIPTO = "ShipTo";
-    const C_POINTOFORDERACCEPTANCE = "PointOfOrderAcceptance";
-    const C_POINTOFORDERORIGIN = "PointOfOrderOrigin";
-    const C_SINGLELOCATION = "SingleLocation";
-
-}
-
-
-/**
  * Lists of acceptable values for the enumerated data type ServiceMode
  */
 class ServiceMode
@@ -10163,6 +11317,20 @@ class AuthenticationTypeId
     const C_USERNAMEPASSWORD = "UsernamePassword";
     const C_ACCOUNTIDLICENSEKEY = "AccountIdLicenseKey";
     const C_OPENIDBEARERTOKEN = "OpenIdBearerToken";
+
+}
+
+
+/**
+ * Lists of acceptable values for the enumerated data type TransactionAddressType
+ */
+class TransactionAddressType
+{
+    const C_SHIPFROM = "ShipFrom";
+    const C_SHIPTO = "ShipTo";
+    const C_POINTOFORDERACCEPTANCE = "PointOfOrderAcceptance";
+    const C_POINTOFORDERORIGIN = "PointOfOrderOrigin";
+    const C_SINGLELOCATION = "SingleLocation";
 
 }
 
