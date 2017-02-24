@@ -156,6 +156,102 @@ class AvaTaxClient
     }
 
     /**
+     * Retrieve overrides for this account
+     *
+     * List all jurisdiction override objects defined for this account.
+     * 
+     * A Jurisdiction Override is a configuration setting that allows you to select the taxing
+     * jurisdiction for a specific address. If you encounter an address that is on the boundary
+     * between two different jurisdictions, you can choose to set up a jurisdiction override
+     * to switch this address to use different taxing jurisdictions.
+     * 
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listJurisdictionOverridesByAccount($accountId, $filter, $include, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/accounts/{$accountId}/jurisdictionoverrides";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Create one or more overrides
+     *
+     * Creates one or more jurisdiction override objects for this account.
+     * 
+     * A Jurisdiction Override is a configuration setting that allows you to select the taxing
+     * jurisdiction for a specific address. If you encounter an address that is on the boundary
+     * between two different jurisdictions, you can choose to set up a jurisdiction override
+     * to switch this address to use different taxing jurisdictions.
+     *
+     * 
+     * @param JurisdictionOverrideModel[] $model The jurisdiction override objects to create
+     * @return JurisdictionOverrideModel[]
+     */
+    public function createJurisdictionOverrides($accountId, $model)
+    {
+        $path = "/api/v2/accounts/{$accountId}/jurisdictionoverrides";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single override
+     *
+     * Get the item object identified by this URL.
+     * 
+     * A Jurisdiction Override is a configuration setting that allows you to select the taxing
+     * jurisdiction for a specific address. If you encounter an address that is on the boundary
+     * between two different jurisdictions, you can choose to set up a jurisdiction override
+     * to switch this address to use different taxing jurisdictions.
+     *
+     * 
+     * @return JurisdictionOverrideModel
+     */
+    public function getJurisdictionOverride($accountId, $id)
+    {
+        $path = "/api/v2/accounts/{$accountId}/jurisdictionoverrides/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Delete a single override
+     *
+     * Marks the item object at this URL as deleted.
+     *
+     * 
+     * @return ErrorDetail[]
+     */
+    public function deleteJurisdictionOverride($accountId, $id)
+    {
+        $path = "/api/v2/accounts/{$accountId}/jurisdictionoverrides/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
      * Retrieve subscriptions for this account
      *
      * List all subscription objects attached to this account.
@@ -981,7 +1077,7 @@ class AvaTaxClient
      * Download a single batch file identified by this URL.
      *
      * 
-     * @return string
+     * @return FileResult
      */
     public function downloadBatch($companyId, $batchId, $id)
     {
@@ -2119,7 +2215,7 @@ class AvaTaxClient
      * @param string $format The format of the file (JSON by default) (See PointOfSaleFileType::* for a list of allowable values)
      * @param int $partnerId If specified, requests a custom partner-formatted version of the file.
      * @param boolean $includeJurisCodes When true, the file will include jurisdiction codes in the result.
-     * @return string
+     * @return FileResult
      */
     public function buildPointOfSaleDataForLocation($companyId, $id, $date, $format, $partnerId, $includeJurisCodes)
     {
@@ -2573,7 +2669,7 @@ class AvaTaxClient
      * Get the file attachment identified by this URL.
      *
      * 
-     * @return string
+     * @return FileResult
      */
     public function downloadNoticeAttachment($companyId, $id)
     {
@@ -3113,7 +3209,7 @@ class AvaTaxClient
      * 
      * @return ErrorDetail[]
      */
-    public function deleteCompanies($id)
+    public function deleteCompany($id)
     {
         $path = "/api/v2/companies/{$id}";
         $guzzleParams = [
@@ -4040,6 +4136,37 @@ class AvaTaxClient
     }
 
     /**
+     * Retrieve all overrides
+     *
+     * Get multiple jurisdiction override objects across all companies.
+     * 
+     * A Jurisdiction Override is a configuration setting that allows you to select the taxing
+     * jurisdiction for a specific address. If you encounter an address that is on the boundary
+     * between two different jurisdictions, you can choose to set up a jurisdiction override
+     * to switch this address to use different taxing jurisdictions.
+     * 
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function queryJurisdictionOverrides($filter, $include, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/jurisdictionoverrides";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * Retrieve all locations
      *
      * Get multiple location objects across all companies.
@@ -4187,7 +4314,7 @@ class AvaTaxClient
      *
      * 
      * @param PointOfSaleDataRequestModel $model Parameters about the desired file format and report format, specifying which company, locations and TaxCodes to include.
-     * @return string
+     * @return FileResult
      */
     public function buildPointOfSaleDataFile($model)
     {
@@ -7316,13 +7443,16 @@ class requiredFilingCalendarDataFieldModel
 }
 
 /**
- * Represents a declaration of JurisdictionOverride within a particular taxing jurisdiction.
+ * Represents an override of tax jurisdictions for a specific address.
+ * 
+ * During the time period represented by EffDate through EndDate, all tax decisions for addresses matching
+ * this override object will be assigned to the list of jurisdictions designated in this object.
  */
 class JurisdictionOverrideModel
 {
 
     /**
-     * @var int The unique ID number of this declaration of jurisdictionoverride.
+     * @var int The unique ID number of this override.
      */
     public $id;
 
@@ -7332,42 +7462,42 @@ class JurisdictionOverrideModel
     public $accountId;
 
     /**
-     * @var string The summerization of why this jurisdictionoverride is created.
+     * @var string A description of why this jurisdiction override was created.
      */
     public $description;
 
     /**
-     * @var string The street address of the JurisdictionOverride intends be created upon
+     * @var string The street address of the physical location affected by this override.
      */
-    public $address;
+    public $line1;
 
     /**
-     * @var string The city of the passed in address which the jurisdictionOverride intends to be created upon
+     * @var string The city address of the physical location affected by this override.
      */
     public $city;
 
     /**
-     * @var string The two or three character ISO region code of the region, state, or province in which this company declared nexus.
+     * @var string The two or three character ISO region code of the region, state, or province affected by this override.
      */
     public $region;
 
     /**
-     * @var string The two character ISO-3166 country code of the country in which this company declared nexus.
+     * @var string The two character ISO-3166 country code of the country affected by this override. Note that only United States addresses are affected by the jurisdiction override system.
      */
     public $country;
 
     /**
-     * @var string The postal code of the passed in address
+     * @var string The postal code of the physical location affected by this override.
      */
     public $postalCode;
 
     /**
-     * @var string The date when this nexus began. If not known, set to null.
+     * @var string The date when this override first takes effect. Set this value to null to affect all dates up to the end date.
      */
     public $effectiveDate;
 
     /**
-     * @var string If this nexus will end or has ended on a specific date, set this to the date when this nexus ends.
+     * @var string The date when this override will cease to take effect. Set this value to null to never expire.
      */
     public $endDate;
 
@@ -7392,9 +7522,24 @@ class JurisdictionOverrideModel
     public $modifiedUserId;
 
     /**
-     * @var JurisdictionModel[] A list of tax authorities contributing to the taxing of this location
+     * @var JurisdictionModel[] A list of the tax jurisdictions that will be assigned to this overridden address.
      */
     public $jurisdictions;
+
+    /**
+     * @var int The TaxRegionId of the new location affected by this jurisdiction override.
+     */
+    public $taxRegionId;
+
+    /**
+     * @var string The boundary level of this override (See BoundaryLevelForJO::* for a list of allowable values)
+     */
+    public $boundaryLevel;
+
+    /**
+     * @var boolean True if this is a default boundary
+     */
+    public $isDefault;
 
 }
 
@@ -7437,7 +7582,7 @@ class JurisdictionModel
     /**
      * @var string The state assigned code for this jurisdiction, if any.
      */
-    public $stateCode;
+    public $region;
 
     /**
      * @var float The "Seller's Use" tax rate specific to this jurisdiction.
@@ -10648,6 +10793,8 @@ class ErrorCodeId
     const C_REPORTINGENTITYERROR = "ReportingEntityError";
     const C_INVALIDRETURNOPERATIONERROR = "InvalidReturnOperationError";
     const C_CANNOTDELETECOMPANY = "CannotDeleteCompany";
+    const C_COUNTRYOVERRIDESNOTAVAILABLE = "CountryOverridesNotAvailable";
+    const C_JURISDICTIONOVERRIDEMISMATCH = "JurisdictionOverrideMismatch";
     const C_BATCHSALESAUDITMUSTBEZIPPEDERROR = "BatchSalesAuditMustBeZippedError";
     const C_BATCHZIPMUSTCONTAINONEFILEERROR = "BatchZipMustContainOneFileError";
     const C_BATCHINVALIDFILETYPEERROR = "BatchInvalidFileTypeError";
@@ -10943,6 +11090,18 @@ class ScraperType
 {
     const C_LOGIN = "Login";
     const C_CUSTOMERDORDATA = "CustomerDorData";
+
+}
+
+
+/**
+ * Lists of acceptable values for the enumerated data type BoundaryLevelForJO
+ */
+class BoundaryLevelForJO
+{
+    const C_VERYPRECISEFULLADDRESS = "VeryPreciseFullAddress";
+    const C_PRECISEZIP9 = "PreciseZIP9";
+    const C_ZIP5ONLY = "ZIP5Only";
 
 }
 
