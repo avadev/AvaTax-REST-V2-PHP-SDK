@@ -14,7 +14,7 @@ namespace Avalara;
  * @author     Bob Maidens <bob.maidens@avalara.com>
  * @copyright  2004-2017 Avalara, Inc.
  * @license    https://www.apache.org/licenses/LICENSE-2.0
- * @version    
+ * @version    2.17.2-43
  * @link       https://github.com/avadev/AvaTax-REST-V2-PHP-SDK
  */
 
@@ -67,7 +67,7 @@ class AvaTaxClient
         // Set client options
         $this->client->setDefaultOption('headers', array(
             'Accept' => 'application/json',
-            'X-Avalara-Client' => "{$appName}; {$appVersion}; PhpRestClient; ; {$machineName}"));
+            'X-Avalara-Client' => "{$appName}; {$appVersion}; PhpRestClient; 2.17.2-43; {$machineName}"));
     }
 
     /**
