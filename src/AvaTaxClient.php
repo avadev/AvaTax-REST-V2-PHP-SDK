@@ -14,7 +14,7 @@ namespace Avalara;
  * @author     Bob Maidens <bob.maidens@avalara.com>
  * @copyright  2004-2017 Avalara, Inc.
  * @license    https://www.apache.org/licenses/LICENSE-2.0
- * @version    2.17.2-43
+ * @version    2.17.3-48
  * @link       https://github.com/avadev/AvaTax-REST-V2-PHP-SDK
  */
 
@@ -67,7 +67,7 @@ class AvaTaxClient
         // Set client options
         $this->client->setDefaultOption('headers', array(
             'Accept' => 'application/json',
-            'X-Avalara-Client' => "{$appName}; {$appVersion}; PhpRestClient; 2.17.2-43; {$machineName}"));
+            'X-Avalara-Client' => "{$appName}; {$appVersion}; PhpRestClient; 2.17.3-48; {$machineName}"));
     }
 
     /**
@@ -231,6 +231,25 @@ class AvaTaxClient
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Update a single jurisdictionoverride
+     *
+     * Replace the existing jurisdictionoverride object at this URL with an updated object.
+     *
+     * 
+     * @param JurisdictionOverrideModel $model The jurisdictionoverride object you wish to update.
+     * @return JurisdictionOverrideModel
+     */
+    public function updateJurisdictionOverride($accountId, $id, $model)
+    {
+        $path = "/api/v2/accounts/{$accountId}/jurisdictionoverrides/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
     }
 
     /**
@@ -608,14 +627,14 @@ class AvaTaxClient
      * Call this API to obtain a free AvaTax sandbox account.
      * 
      * This API is free to use. No authentication credentials are required to call this API.
-     * The account will grant a full trial version of AvaTax (e.g. AvaTaxPro) for 90 days.
-     * After 90 days, you may continue to use the free TaxRates API.
+     * The account will grant a full trial version of AvaTax (e.g. AvaTaxPro) for a limited period of time.
+     * After this introductory period, you may continue to use the free TaxRates API.
      * 
      * Limitations on free trial accounts:
      *  
      * * Only one free trial per company.
      * * The free trial account does not expire.
-     * * Includes a 90-day free trial of AvaTaxPro; after that date, the free TaxRates API will continue to work.
+     * * Includes a limited time free trial of AvaTaxPro; after that date, the free TaxRates API will continue to work.
      * * Each free trial account must have its own valid email address.
      *
      * 
@@ -885,6 +904,38 @@ class AvaTaxClient
     }
 
     /**
+     * Get audit information about a transaction
+     *
+     * Retrieve audit information about a transaction stored in AvaTax.
+     *  
+     * The 'AuditTransaction' endpoint retrieves audit information related to a specific transaction. This audit 
+     * information includes the following:
+     * 
+     * * The `CompanyId` of the company that created the transaction
+     * * The server timestamp representing the exact server time when the transaction was created
+     * * The server duration - how long it took to process this transaction
+     * * Whether exact API call details were logged
+     * * A reconstructed API call showing what the original CreateTransaction call looked like
+     * 
+     * This API can be used to examine information about a previously created transaction.
+     * 
+     * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
+     * sales, purchases, inventory transfer, and returns (also called refunds).
+     *
+     * 
+     * @return AuditTransactionModel
+     */
+    public function auditTransaction($companyCode, $transactionCode)
+    {
+        $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/audit";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * Change a transaction's code
      *
      * Renames a transaction uniquely identified by this URL by changing its code to a new code.
@@ -937,7 +988,7 @@ class AvaTaxClient
      * This API is mainly used for connector developer to simulate what happens when Returns product locks a document.
      * After this API call succeeds, the document will be locked and can't be voided or adjusted.
      * 
-     * This API is only available to customers in Sandbox. On production servers, this API is available by invitation only.
+     * This API is only available to customers in Sandbox with AvaTaxPro subscription. On production servers, this API is available by invitation only.
      * 
      * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
      * sales, purchases, inventory transfer, and returns (also called refunds).
@@ -949,6 +1000,32 @@ class AvaTaxClient
     public function lockTransaction($companyCode, $transactionCode, $model)
     {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/lock";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Create a refund for a transaction
+     *
+     * Create a refund for a transaction.
+     * 
+     * The `RefundTransaction` API allows you to quickly and easily create a `ReturnInvoice` representing a refund
+     * for a previously created `SalesInvoice` transaction. You can choose to create a full or partial refund, and
+     * specify individual line items from the original sale for refund.
+     * 
+     * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
+     * sales, purchases, inventory transfer, and returns (also called refunds).
+     *
+     * 
+     * @param RefundTransactionModel $model Information about the refund to create
+     * @return TransactionModel
+     */
+    public function refundTransaction($companyCode, $transactionCode, $model)
+    {
+        $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/refund";
         $guzzleParams = [
             'query' => [],
             'body' => json_encode($model)
@@ -973,6 +1050,65 @@ class AvaTaxClient
             'body' => json_encode($model)
         ];
         return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single transaction by code
+     *
+     * Get the current transaction identified by this URL.
+     * If this transaction was adjusted, the return value of this API will be the current transaction with this code, and previous revisions of
+     * the transaction will be attached to the 'history' data field.
+     * You may specify one or more of the following values in the '$include' parameter to fetch additional nested data, using commas to separate multiple values:
+     *  
+     * * Lines
+     * * Details (implies lines)
+     * * Summary (implies details)
+     * * Addresses
+     *
+     * 
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @return TransactionModel
+     */
+    public function getTransactionByCodeAndType($companyCode, $transactionCode, $documentType, $include)
+    {
+        $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/types/{$documentType}";
+        $guzzleParams = [
+            'query' => ['$include' => $include],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Get audit information about a transaction
+     *
+     * Retrieve audit information about a transaction stored in AvaTax.
+     *  
+     * The 'AuditTransaction' endpoint retrieves audit information related to a specific transaction. This audit 
+     * information includes the following:
+     * 
+     * * The `CompanyId` of the company that created the transaction
+     * * The server timestamp representing the exact server time when the transaction was created
+     * * The server duration - how long it took to process this transaction
+     * * Whether exact API call details were logged
+     * * A reconstructed API call showing what the original CreateTransaction call looked like
+     * 
+     * This API can be used to examine information about a previously created transaction.
+     * 
+     * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
+     * sales, purchases, inventory transfer, and returns (also called refunds).
+     *
+     * 
+     * @return AuditTransactionModel
+     */
+    public function auditTransactionWithType($companyCode, $transactionCode, $documentType)
+    {
+        $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/types/{$documentType}/audit";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
     }
 
     /**
@@ -1108,30 +1244,6 @@ class AvaTaxClient
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
-    }
-
-    /**
-     * Update a single batch
-     *
-     * Replace the existing batch object at this URL with an updated object.
-     * A batch object is a large collection of API calls stored in a compact file.
-     * When you create a batch, it is added to the AvaTax Batch Queue and will be processed in the order it was received.
-     * You may fetch a batch to check on its status and retrieve the results of the batch operation.
-     * All data from the existing object will be replaced with data in the object you PUT. 
-     * To set a field's value to null, you may either set its value to null or omit that field from the object you post.
-     *
-     * 
-     * @param BatchModel $model The batch you wish to update.
-     * @return BatchModel
-     */
-    public function updateBatch($companyId, $id, $model)
-    {
-        $path = "/api/v2/companies/{$companyId}/batches/{$id}";
-        $guzzleParams = [
-            'query' => [],
-            'body' => json_encode($model)
-        ];
-        return $this->restCall($path, 'PUT', $guzzleParams);
     }
 
     /**
@@ -1531,7 +1643,7 @@ class AvaTaxClient
      * This API is available by invitation only.
      *
      * 
-     * @return FileContentResult
+     * @return FileResult
      */
     public function getFilingAttachment($companyId, $worksheetId)
     {
@@ -1569,7 +1681,7 @@ class AvaTaxClient
      * based on filing frequency of filing.
      *
      * 
-     * @return FilingModel[]
+     * @return FetchResult
      */
     public function getFilings($companyId, $year, $month)
     {
@@ -1589,7 +1701,7 @@ class AvaTaxClient
      * based on filing frequency of filing.
      *
      * 
-     * @return FilingModel[]
+     * @return FetchResult
      */
     public function getFilingsByCountry($companyId, $year, $month, $country)
     {
@@ -1609,7 +1721,7 @@ class AvaTaxClient
      * based on filing frequency of filing.
      *
      * 
-     * @return FilingModel[]
+     * @return FetchResult
      */
     public function getFilingsByCountryRegion($companyId, $year, $month, $country, $region)
     {
@@ -1629,7 +1741,7 @@ class AvaTaxClient
      * based on filing frequency of filing.
      *
      * 
-     * @return FilingModel[]
+     * @return FetchResult
      */
     public function getFilingsByReturnName($companyId, $year, $month, $country, $region, $formCode)
     {
@@ -1725,7 +1837,7 @@ class AvaTaxClient
      *
      * 
      * @param RebuildFilingsModel $model The rebuild request you wish to execute.
-     * @return FilingModel[]
+     * @return FetchResult
      */
     public function rebuildFilingsByCountryRegion($companyId, $year, $month, $country, $region, $model)
     {
@@ -1774,7 +1886,7 @@ class AvaTaxClient
      *
      * 
      * @param RebuildFilingsModel $model The rebuild request you wish to execute.
-     * @return FilingModel[]
+     * @return FetchResult
      */
     public function rebuildFilingsByCountry($companyId, $year, $month, $country, $model)
     {
@@ -1819,7 +1931,7 @@ class AvaTaxClient
      * based on filing frequency of filing.
      *
      * 
-     * @return FileContentResult
+     * @return FileResult
      */
     public function getFilingAttachments($companyId, $year, $month)
     {
@@ -1839,7 +1951,7 @@ class AvaTaxClient
      * based on filing frequency of filing.
      *
      * 
-     * @return FileContentResult
+     * @return FileResult
      */
     public function getFilingAttachmentsTraceFile($companyId, $year, $month)
     {
@@ -1881,7 +1993,7 @@ class AvaTaxClient
      *
      * 
      * @param RebuildFilingsModel $model The rebuild request you wish to execute.
-     * @return FilingModel[]
+     * @return FetchResult
      */
     public function rebuildFilings($companyId, $year, $month, $model)
     {
@@ -2213,7 +2325,7 @@ class AvaTaxClient
      * 
      * @param string $date The date for which point-of-sale data would be calculated (today by default)
      * @param string $format The format of the file (JSON by default) (See PointOfSaleFileType::* for a list of allowable values)
-     * @param int $partnerId If specified, requests a custom partner-formatted version of the file.
+     * @param string $partnerId If specified, requests a custom partner-formatted version of the file. (See PointOfSalePartnerId::* for a list of allowable values)
      * @param boolean $includeJurisCodes When true, the file will include jurisdiction codes in the result.
      * @return FileResult
      */
@@ -2369,6 +2481,34 @@ class AvaTaxClient
             'body' => null
         ];
         return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * List company nexus related to a tax form
+     *
+     * Retrieves a list of nexus related to a tax form.
+     * 
+     * The concept of `Nexus` indicates a place where your company has sufficient physical presence and is obligated
+     * to collect and remit transaction-based taxes.
+     * 
+     * When defining companies in AvaTax, you must declare nexus for your company in order to correctly calculate tax
+     * in all jurisdictions affected by your transactions.
+     * 
+     * This API is intended to provide useful information when examining a tax form. If you are about to begin filing
+     * a tax form, you may want to know whether you have declared nexus in all the jurisdictions related to that tax 
+     * form in order to better understand how the form will be filled out.
+     *
+     * 
+     * @return NexusByTaxFormModel
+     */
+    public function getNexusByFormCode($companyId, $formCode)
+    {
+        $path = "/api/v2/companies/{$companyId}/nexus/byform/{$formCode}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
     }
 
     /**
@@ -2679,6 +2819,26 @@ class AvaTaxClient
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single attachment
+     *
+     * This API is available by invitation only.
+     * Get the file attachment identified by this URL.
+     *
+     * 
+     * @param ResourceFileUploadRequestModel $model The ResourceFileId of the attachment to download.
+     * @return FileResult
+     */
+    public function uploadAttachment($companyId, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/notices/files/attachment";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
     }
 
     /**
@@ -3595,6 +3755,34 @@ class AvaTaxClient
     }
 
     /**
+     * List nexus related to a tax form
+     *
+     * Retrieves a list of nexus related to a tax form.
+     * 
+     * The concept of `Nexus` indicates a place where your company has sufficient physical presence and is obligated
+     * to collect and remit transaction-based taxes.
+     * 
+     * When defining companies in AvaTax, you must declare nexus for your company in order to correctly calculate tax
+     * in all jurisdictions affected by your transactions.
+     * 
+     * This API is intended to provide useful information when examining a tax form. If you are about to begin filing
+     * a tax form, you may want to know whether you have declared nexus in all the jurisdictions related to that tax 
+     * form in order to better understand how the form will be filled out.
+     *
+     * 
+     * @return NexusByTaxFormModel
+     */
+    public function listNexusByFormCode($formCode)
+    {
+        $path = "/api/v2/definitions/nexus/byform/{$formCode}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * Retrieve the full list of Avalara-supported tax notice customer funding options.
      *
      * Returns the full list of Avalara-supported tax notice customer funding options.
@@ -3817,6 +4005,25 @@ class AvaTaxClient
     public function listRegions()
     {
         $path = "/api/v2/definitions/regions";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve the full list of Avalara-supported resource file types
+     *
+     * Returns the full list of Avalara-supported resource file types
+     * This API is intended to be useful to identify all the different resource file types.
+     *
+     * 
+     * @return FetchResult
+     */
+    public function listResourceFileTypes()
+    {
+        $path = "/api/v2/definitions/resourcefiletypes";
         $guzzleParams = [
             'query' => [],
             'body' => null
@@ -4422,6 +4629,7 @@ class AvaTaxClient
      * 
      * The TaxRates API is a free-to-use, no cost option for estimating sales tax rates.
      * Any customer can request a free AvaTax account and make use of the TaxRates API.
+     * However, this API is currently limited for US only
      * 
      * Note that the TaxRates API assumes the sale of general tangible personal property when estimating the sales tax
      * rate for a specified address. Avalara provides the `CreateTransaction` API, which provides extensive tax calculation 
@@ -4466,6 +4674,7 @@ class AvaTaxClient
      * 
      * The TaxRates API is a free-to-use, no cost option for estimating sales tax rates.
      * Any customer can request a free AvaTax account and make use of the TaxRates API.
+     * However, this API is currently limited for US only
      * 
      * Note that the TaxRates API assumes the sale of general tangible personal property when estimating the sales tax
      * rate for a specified address. Avalara provides the `CreateTransaction` API, which provides extensive tax calculation 
@@ -4561,9 +4770,11 @@ class AvaTaxClient
      * Create a new transaction
      *
      * Records a new transaction in AvaTax.
-     * The 'Create Transaction' endpoint uses the configuration values specified by your company to identify the correct tax rules
+     * 
+     * The `CreateTransaction` endpoint uses the configuration values specified by your company to identify the correct tax rules
      * and rates to apply to all line items in this transaction, and reports the total tax calculated by AvaTax based on your
      * company's configuration and the data provided in this API call.
+     * 
      * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
      * sales, purchases, inventory transfer, and returns (also called refunds).
      *
@@ -5110,6 +5321,11 @@ class NewAccountModel
      * @var string The date and time when account information was emailed to the user
      */
     public $emailedDate;
+
+    /**
+     * @var string If this account includes any limitations, specify them here
+     */
+    public $limitations;
 
 }
 
@@ -6205,6 +6421,11 @@ class NexusModel
     public $taxId;
 
     /**
+     * @var boolean For the United States, this flag indicates whether this particular nexus falls within a U.S. State that participates  in the Streamlined Sales Tax program. For countries other than the US, this flag is null.
+     */
+    public $streamlinedSalesTax;
+
+    /**
      * @var string The date when this record was created.
      */
     public $createdDate;
@@ -6823,6 +7044,34 @@ class FundingInitiateModel
 }
 
 /**
+ * Identifies all nexus that match a particular tax form
+ */
+class NexusByTaxFormModel
+{
+
+    /**
+     * @var string The code of the tax form that was requested
+     */
+    public $formCode;
+
+    /**
+     * @var int The company ID of the company that was used to load the companyNexus array. If this value is null, no company data was loaded.
+     */
+    public $companyId;
+
+    /**
+     * @var NexusModel[] A list of all Avalara-defined nexus that are relevant to this tax form
+     */
+    public $nexusDefinitions;
+
+    /**
+     * @var NexusModel[] A list of all currently-defined company nexus that are related to this tax form
+     */
+    public $companyNexus;
+
+}
+
+/**
  * Information about Avalara-defined tax code types.
  * This list is used when creating tax codes and tax rules.
  */
@@ -7052,6 +7301,11 @@ class IsoRegionModel
      * @var string The word in the local language that classifies what type of a region this represents
      */
     public $classification;
+
+    /**
+     * @var boolean For the United States, this flag indicates whether a U.S. State participates in the Streamlined Sales Tax program. For countries other than the US, this flag is null.
+     */
+    public $streamlinedSalesTax;
 
 }
 
@@ -7323,56 +7577,56 @@ class NoticePriorityModel
 /**
  * NoticeResponsibility Model
  */
-class NoticeResponsibilityDetailModel
+class NoticeResponsibilityModel
 {
 
     /**
-     * @var int The unique ID number of this filing frequency.
+     * @var int The unique ID number of this notice responsibility.
      */
     public $id;
 
     /**
-     * @var int TaxNoticeId
-     */
-    public $noticeId;
-
-    /**
-     * @var int TaxNoticeResponsibilityId
-     */
-    public $taxNoticeResponsibilityId;
-
-    /**
-     * @var string The description name of this filing frequency
+     * @var string The description name of this notice responsibility
      */
     public $description;
+
+    /**
+     * @var boolean Defines if the responsibility is active
+     */
+    public $isActive;
+
+    /**
+     * @var int The sort order of this responsibility
+     */
+    public $sortOrder;
 
 }
 
 /**
  * NoticeRootCause Model
  */
-class NoticeRootCauseDetailModel
+class NoticeRootCauseModel
 {
 
     /**
-     * @var int The unique ID number of this filing frequency.
+     * @var int The unique ID number of this notice RootCause.
      */
     public $id;
 
     /**
-     * @var int TaxNoticeId
-     */
-    public $noticeId;
-
-    /**
-     * @var int TaxNoticeRootCauseId
-     */
-    public $taxNoticeRootCauseId;
-
-    /**
-     * @var string The description name of this root cause
+     * @var string The description name of this notice RootCause
      */
     public $description;
+
+    /**
+     * @var boolean Defines if the RootCause is active
+     */
+    public $isActive;
+
+    /**
+     * @var int The sort order of this RootCause
+     */
+    public $sortOrder;
 
 }
 
@@ -7588,6 +7842,24 @@ class JurisdictionModel
      * @var float The "Seller's Use" tax rate specific to this jurisdiction.
      */
     public $useRate;
+
+}
+
+/**
+ * Resource File Type Model
+ */
+class ResourceFileTypeModel
+{
+
+    /**
+     * @var int The resource file type id
+     */
+    public $resourceFileTypeId;
+
+    /**
+     * @var string The name of the file type
+     */
+    public $name;
 
 }
 
@@ -8668,29 +8940,6 @@ class FilingsCheckupAuthorityModel
 }
 
 /**
- * 
- */
-class FileContentResult
-{
-
-    /**
-     * @var string  (This value is encoded as a Base64 string)
-     */
-    public $fileContents;
-
-    /**
-     * @var string 
-     */
-    public $contentType;
-
-    /**
-     * @var string 
-     */
-    public $fileDownloadName;
-
-}
-
-/**
  * Tells you whether this location object has been correctly set up to the local jurisdiction's standards
  */
 class LocationValidationModel
@@ -9014,6 +9263,11 @@ class NoticeCommentModel
      */
     public $modifiedUserId;
 
+    /**
+     * @var ResourceFileUploadRequestModel An attachment to the detail
+     */
+    public $attachmentUploadRequest;
+
 }
 
 /**
@@ -9117,6 +9371,110 @@ class NoticeFinanceModel
      */
     public $modifiedUserId;
 
+    /**
+     * @var ResourceFileUploadRequestModel An attachment to the finance detail
+     */
+    public $attachmentUploadRequest;
+
+}
+
+/**
+ * NoticeResponsibility Model
+ */
+class NoticeResponsibilityDetailModel
+{
+
+    /**
+     * @var int The unique ID number of this filing frequency.
+     */
+    public $id;
+
+    /**
+     * @var int TaxNoticeId
+     */
+    public $noticeId;
+
+    /**
+     * @var int TaxNoticeResponsibilityId
+     */
+    public $taxNoticeResponsibilityId;
+
+    /**
+     * @var string The description name of this filing frequency
+     */
+    public $description;
+
+}
+
+/**
+ * NoticeRootCause Model
+ */
+class NoticeRootCauseDetailModel
+{
+
+    /**
+     * @var int The unique ID number of this filing frequency.
+     */
+    public $id;
+
+    /**
+     * @var int TaxNoticeId
+     */
+    public $noticeId;
+
+    /**
+     * @var int TaxNoticeRootCauseId
+     */
+    public $taxNoticeRootCauseId;
+
+    /**
+     * @var string The description name of this root cause
+     */
+    public $description;
+
+}
+
+/**
+ * A request to upload a file to Resource Files
+ */
+class ResourceFileUploadRequestModel
+{
+
+    /**
+     * @var string This stream contains the bytes of the file being uploaded. (This value is encoded as a Base64 string)
+     */
+    public $content;
+
+    /**
+     * @var string The username adding the file
+     */
+    public $username;
+
+    /**
+     * @var int The account ID to which this file will be attached.
+     */
+    public $accountId;
+
+    /**
+     * @var int The company ID to which this file will be attached.
+     */
+    public $companyId;
+
+    /**
+     * @var string The original name of this file.
+     */
+    public $name;
+
+    /**
+     * @var int The resource type ID of this file.
+     */
+    public $resourceFileTypeId;
+
+    /**
+     * @var int Length of the file in bytes.
+     */
+    public $length;
+
 }
 
 /**
@@ -9187,7 +9545,7 @@ class PointOfSaleDataRequestModel
     public $includeJurisCodes;
 
     /**
-     * @var int A unique code assoicated with the Partner you may be working with. If you are not working with a Partner or your Partner has not provided you an ID, leave null.
+     * @var string A unique code assoicated with the Partner you may be working with. If you are not working with a Partner or your Partner has not provided you an ID, leave null. (See PointOfSalePartnerId::* for a list of allowable values)
      */
     public $partnerId;
 
@@ -9446,6 +9804,11 @@ class TransactionModel
     public $modifiedUserId;
 
     /**
+     * @var string Tax date for this transaction
+     */
+    public $taxDate;
+
+    /**
      * @var TransactionLineModel[] Optional: A list of line items in this transaction. To fetch this list, add the query string "?$include=Lines" or "?$include=Details" to your URL.
      */
     public $lines;
@@ -9454,6 +9817,11 @@ class TransactionModel
      * @var TransactionAddressModel[] Optional: A list of line items in this transaction. To fetch this list, add the query string "?$include=Addresses" to your URL.
      */
     public $addresses;
+
+    /**
+     * @var TransactionLocationTypeModel[] Optional: A list of location types in this transaction. To fetch this list, add the query string "?$include=Addresses" to your URL.
+     */
+    public $locationTypes;
 
     /**
      * @var TransactionModel[] If this transaction has been adjusted, this list contains all the previous versions of the document.
@@ -9659,6 +10027,11 @@ class TransactionLineModel
     public $details;
 
     /**
+     * @var TransactionLineLocationTypeModel[] Optional: A list of location types for this line item. To fetch this list, add the query string "?$include=LineLocationTypes" to your URL.
+     */
+    public $lineLocationTypes;
+
+    /**
      * @var object Contains a list of extra parameters that were set when the transaction was created.
      */
     public $parameters;
@@ -9735,6 +10108,34 @@ class TransactionAddressModel
      * @var string Longitude for this address (CALC - 13394)
      */
     public $longitude;
+
+}
+
+/**
+ * Information about a location type
+ */
+class TransactionLocationTypeModel
+{
+
+    /**
+     * @var int Location type ID for this location type in transaction
+     */
+    public $documentLocationTypeId;
+
+    /**
+     * @var int Transaction ID
+     */
+    public $documentId;
+
+    /**
+     * @var int Address ID for the transaction
+     */
+    public $documentAddressId;
+
+    /**
+     * @var string Location type code
+     */
+    public $locationTypeCode;
 
 }
 
@@ -10026,6 +10427,34 @@ class TransactionLineDetailModel
      * @var string When calculating units, what basis of measurement did we use for calculating the units?
      */
     public $unitOfBasis;
+
+}
+
+/**
+ * Represents information about location types stored in a line
+ */
+class TransactionLineLocationTypeModel
+{
+
+    /**
+     * @var int The unique ID number of this line location address model
+     */
+    public $documentLineLocationTypeId;
+
+    /**
+     * @var int The unique ID number of the document line associated with this line location address model
+     */
+    public $documentLineId;
+
+    /**
+     * @var int The address ID corresponding to this model
+     */
+    public $documentAddressId;
+
+    /**
+     * @var string The location type code corresponding to this model
+     */
+    public $locationTypeCode;
 
 }
 
@@ -10546,6 +10975,112 @@ class BulkLockTransactionResult
 }
 
 /**
+ * Information about a previously created transaction
+ */
+class AuditTransactionModel
+{
+
+    /**
+     * @var int Unique ID number of the company that created this transaction
+     */
+    public $companyId;
+
+    /**
+     * @var string Server timestamp, in UTC, of the date/time when the original transaction was created
+     */
+    public $serverTimestamp;
+
+    /**
+     * @var string Length of time the original API call took
+     */
+    public $serverDuration;
+
+    /**
+     * @var string api call status (See ApiCallStatus::* for a list of allowable values)
+     */
+    public $apiCallStatus;
+
+    /**
+     * @var OriginalApiRequestResponseModel Original API request/response
+     */
+    public $original;
+
+    /**
+     * @var ReconstructedApiRequestResponseModel Reconstructed API request/response
+     */
+    public $reconstructed;
+
+}
+
+/**
+ * Represents the exact API request and response from the original transaction API call, if available
+ */
+class OriginalApiRequestResponseModel
+{
+
+    /**
+     * @var string API request
+     */
+    public $request;
+
+    /**
+     * @var string API response
+     */
+    public $response;
+
+}
+
+/**
+ * This model contains a reconstructed CreateTransaction request object that could potentially be used
+ * to recreate this transaction.
+ * 
+ * Note that the API changes over time, and this reconstructed model is likely different from the exact request
+ * that was originally used to create this transaction.
+ */
+class ReconstructedApiRequestResponseModel
+{
+
+    /**
+     * @var CreateTransactionModel API request
+     */
+    public $request;
+
+}
+
+/**
+ * Refund a committed transaction
+ */
+class RefundTransactionModel
+{
+
+    /**
+     * @var string the committed transaction code to be refunded
+     */
+    public $refundTransactionCode;
+
+    /**
+     * @var string The date when the refund happens
+     */
+    public $refundDate;
+
+    /**
+     * @var string Type of this refund (See RefundType::* for a list of allowable values)
+     */
+    public $refundType;
+
+    /**
+     * @var float Percentage for refund
+     */
+    public $refundPercentage;
+
+    /**
+     * @var string[] Process refund for these lines
+     */
+    public $refundLines;
+
+}
+
+/**
  * User Entitlement Model
  */
 class UserEntitlementModel
@@ -10594,6 +11129,16 @@ class PingResultModel
      */
     public $authenticatedUserName;
 
+    /**
+     * @var int The ID number of the currently authenticated user, if any.
+     */
+    public $authenticatedUserId;
+
+    /**
+     * @var int The ID number of the currently authenticated user's account, if any.
+     */
+    public $authenticatedAccountId;
+
 }
 
 
@@ -10614,6 +11159,26 @@ class TextCase
 
 
 /**
+ * Lists of acceptable values for the enumerated data type DocumentType
+ */
+class DocumentType
+{
+    const C_SALESORDER = "SalesOrder";
+    const C_SALESINVOICE = "SalesInvoice";
+    const C_PURCHASEORDER = "PurchaseOrder";
+    const C_PURCHASEINVOICE = "PurchaseInvoice";
+    const C_RETURNORDER = "ReturnOrder";
+    const C_RETURNINVOICE = "ReturnInvoice";
+    const C_INVENTORYTRANSFERORDER = "InventoryTransferOrder";
+    const C_INVENTORYTRANSFERINVOICE = "InventoryTransferInvoice";
+    const C_REVERSECHARGEORDER = "ReverseChargeOrder";
+    const C_REVERSECHARGEINVOICE = "ReverseChargeInvoice";
+    const C_ANY = "Any";
+
+}
+
+
+/**
  * Lists of acceptable values for the enumerated data type PointOfSaleFileType
  */
 class PointOfSaleFileType
@@ -10621,6 +11186,17 @@ class PointOfSaleFileType
     const C_JSON = "Json";
     const C_CSV = "Csv";
     const C_XML = "Xml";
+
+}
+
+
+/**
+ * Lists of acceptable values for the enumerated data type PointOfSalePartnerId
+ */
+class PointOfSalePartnerId
+{
+    const C_DMA = "DMA";
+    const C_AX7 = "AX7";
 
 }
 
@@ -10795,6 +11371,11 @@ class ErrorCodeId
     const C_CANNOTDELETECOMPANY = "CannotDeleteCompany";
     const C_COUNTRYOVERRIDESNOTAVAILABLE = "CountryOverridesNotAvailable";
     const C_JURISDICTIONOVERRIDEMISMATCH = "JurisdictionOverrideMismatch";
+    const C_DUPLICATESYSTEMTAXCODE = "DuplicateSystemTaxCode";
+    const C_SSTOVERRIDESNOTAVAILABLE = "SSTOverridesNotAvailable";
+    const C_NEXUSDATEMISMATCH = "NexusDateMismatch";
+    const C_TECHSUPPORTAUDITREQUIRED = "TechSupportAuditRequired";
+    const C_NEXUSPARENTDATEMISMATCH = "NexusParentDateMismatch";
     const C_BATCHSALESAUDITMUSTBEZIPPEDERROR = "BatchSalesAuditMustBeZippedError";
     const C_BATCHZIPMUSTCONTAINONEFILEERROR = "BatchZipMustContainOneFileError";
     const C_BATCHINVALIDFILETYPEERROR = "BatchInvalidFileTypeError";
@@ -10813,6 +11394,8 @@ class ErrorCodeId
     const C_MISSINGLINE = "MissingLine";
     const C_INVALIDADDRESSTEXTCASE = "InvalidAddressTextCase";
     const C_DOCUMENTNOTCOMMITTED = "DocumentNotCommitted";
+    const C_MULTIDOCUMENTTYPESERROR = "MultiDocumentTypesError";
+    const C_INVALIDDOCUMENTTYPESTOFETCH = "InvalidDocumentTypesToFetch";
     const C_BADDOCUMENTFETCH = "BadDocumentFetch";
     const C_SERVERUNREACHABLE = "ServerUnreachable";
     const C_SUBSCRIPTIONREQUIRED = "SubscriptionRequired";
@@ -10820,6 +11403,17 @@ class ErrorCodeId
     const C_INVITATIONONLY = "InvitationOnly";
     const C_ZTBLISTCONNECTORFAIL = "ZTBListConnectorFail";
     const C_ZTBCREATESUBSCRIPTIONSFAIL = "ZTBCreateSubscriptionsFail";
+    const C_FREETRIALNOTAVAILABLE = "FreeTrialNotAvailable";
+    const C_INVALIDDOCUMENTSTATUSFORREFUND = "InvalidDocumentStatusForRefund";
+    const C_REFUNDTYPEANDPERCENTAGEMISMATCH = "RefundTypeAndPercentageMismatch";
+    const C_INVALIDDOCUMENTTYPEFORREFUND = "InvalidDocumentTypeForRefund";
+    const C_REFUNDTYPEANDLINEMISMATCH = "RefundTypeAndLineMismatch";
+    const C_NULLREFUNDPERCENTAGEANDLINES = "NullRefundPercentageAndLines";
+    const C_INVALIDREFUNDTYPE = "InvalidRefundType";
+    const C_REFUNDPERCENTAGEFORTAXONLY = "RefundPercentageForTaxOnly";
+    const C_LINENOOUTOFRANGE = "LineNoOutOfRange";
+    const C_REFUNDPERCENTAGEOUTOFRANGE = "RefundPercentageOutOfRange";
+    const C_TAXRATENOTAVAILABLEFORFREEINTHISCOUNTRY = "TaxRateNotAvailableForFreeInThisCountry";
 
 }
 
@@ -11320,26 +11914,6 @@ class DocumentStatus
 
 
 /**
- * Lists of acceptable values for the enumerated data type DocumentType
- */
-class DocumentType
-{
-    const C_SALESORDER = "SalesOrder";
-    const C_SALESINVOICE = "SalesInvoice";
-    const C_PURCHASEORDER = "PurchaseOrder";
-    const C_PURCHASEINVOICE = "PurchaseInvoice";
-    const C_RETURNORDER = "ReturnOrder";
-    const C_RETURNINVOICE = "ReturnInvoice";
-    const C_INVENTORYTRANSFERORDER = "InventoryTransferOrder";
-    const C_INVENTORYTRANSFERINVOICE = "InventoryTransferInvoice";
-    const C_REVERSECHARGEORDER = "ReverseChargeOrder";
-    const C_REVERSECHARGEINVOICE = "ReverseChargeInvoice";
-    const C_ANY = "Any";
-
-}
-
-
-/**
  * Lists of acceptable values for the enumerated data type TaxOverrideTypeId
  */
 class TaxOverrideTypeId
@@ -11450,6 +12024,31 @@ class VoidReasonCode
     const C_DOCDELETED = "DocDeleted";
     const C_DOCVOIDED = "DocVoided";
     const C_ADJUSTMENTCANCELLED = "AdjustmentCancelled";
+
+}
+
+
+/**
+ * Lists of acceptable values for the enumerated data type ApiCallStatus
+ */
+class ApiCallStatus
+{
+    const C_ORIGINALAPICALLAVAILABLE = "OriginalApiCallAvailable";
+    const C_RECONSTRUCTEDAPICALLAVAILABLE = "ReconstructedApiCallAvailable";
+    const C_ANY = "Any";
+
+}
+
+
+/**
+ * Lists of acceptable values for the enumerated data type RefundType
+ */
+class RefundType
+{
+    const C_FULL = "Full";
+    const C_PARTIAL = "Partial";
+    const C_TAXONLY = "TaxOnly";
+    const C_PERCENTAGE = "Percentage";
 
 }
 
