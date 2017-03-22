@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 use PHPUnit\Framework\TestCase;
 
 // Include the AvaTaxClient library directly so we can test this branch specifically
@@ -15,7 +13,7 @@ final class AvaTaxClientTest extends TestCase
     /**
      * @covers AvaTaxClient
      */
-    public function testBasicWorkflow(): void
+    public function testBasicWorkflow()
     {
         // Create a new client
         $client = new Avalara\AvaTaxClient('phpTestApp', '1.0', 'travis-ci', 'sandbox');
