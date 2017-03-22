@@ -14,11 +14,9 @@ namespace Avalara;
  * @author     Bob Maidens <bob.maidens@avalara.com>
  * @copyright  2004-2017 Avalara, Inc.
  * @license    https://www.apache.org/licenses/LICENSE-2.0
- * @version    2.17.3-48
+ * @version    2.17.3-52
  * @link       https://github.com/avadev/AvaTax-REST-V2-PHP-SDK
  */
-
-require __DIR__ . '/vendor/autoload.php';
 
 use GuzzleHttp\Client;
 
@@ -67,7 +65,7 @@ class AvaTaxClient
         // Set client options
         $this->client->setDefaultOption('headers', array(
             'Accept' => 'application/json',
-            'X-Avalara-Client' => "{$appName}; {$appVersion}; PhpRestClient; 2.17.3-48; {$machineName}"));
+            'X-Avalara-Client' => "{$appName}; {$appVersion}; PhpRestClient; 2.17.3-52; {$machineName}"));
     }
 
     /**
@@ -1000,32 +998,6 @@ class AvaTaxClient
     public function lockTransaction($companyCode, $transactionCode, $model)
     {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/lock";
-        $guzzleParams = [
-            'query' => [],
-            'body' => json_encode($model)
-        ];
-        return $this->restCall($path, 'POST', $guzzleParams);
-    }
-
-    /**
-     * Create a refund for a transaction
-     *
-     * Create a refund for a transaction.
-     * 
-     * The `RefundTransaction` API allows you to quickly and easily create a `ReturnInvoice` representing a refund
-     * for a previously created `SalesInvoice` transaction. You can choose to create a full or partial refund, and
-     * specify individual line items from the original sale for refund.
-     * 
-     * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
-     * sales, purchases, inventory transfer, and returns (also called refunds).
-     *
-     * 
-     * @param RefundTransactionModel $model Information about the refund to create
-     * @return TransactionModel
-     */
-    public function refundTransaction($companyCode, $transactionCode, $model)
-    {
-        $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/refund";
         $guzzleParams = [
             'query' => [],
             'body' => json_encode($model)
@@ -11048,39 +11020,6 @@ class ReconstructedApiRequestResponseModel
 }
 
 /**
- * Refund a committed transaction
- */
-class RefundTransactionModel
-{
-
-    /**
-     * @var string the committed transaction code to be refunded
-     */
-    public $refundTransactionCode;
-
-    /**
-     * @var string The date when the refund happens
-     */
-    public $refundDate;
-
-    /**
-     * @var string Type of this refund (See RefundType::* for a list of allowable values)
-     */
-    public $refundType;
-
-    /**
-     * @var float Percentage for refund
-     */
-    public $refundPercentage;
-
-    /**
-     * @var string[] Process refund for these lines
-     */
-    public $refundLines;
-
-}
-
-/**
  * User Entitlement Model
  */
 class UserEntitlementModel
@@ -12036,19 +11975,6 @@ class ApiCallStatus
     const C_ORIGINALAPICALLAVAILABLE = "OriginalApiCallAvailable";
     const C_RECONSTRUCTEDAPICALLAVAILABLE = "ReconstructedApiCallAvailable";
     const C_ANY = "Any";
-
-}
-
-
-/**
- * Lists of acceptable values for the enumerated data type RefundType
- */
-class RefundType
-{
-    const C_FULL = "Full";
-    const C_PARTIAL = "Partial";
-    const C_TAXONLY = "TaxOnly";
-    const C_PERCENTAGE = "Percentage";
 
 }
 
