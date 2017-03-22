@@ -2,17 +2,11 @@
 
 use PHPUnit\Framework\TestCase;
 
-// Include the AvaTaxClient library directly so we can test this branch specifically
-include_once __DIR__.'/../src/AvaTaxClient.php';
-
 /**
  * @covers AvaTaxClient
  */
 final class AvaTaxClientTest extends TestCase
 {
-    /**
-     * @covers AvaTaxClient
-     */
     public function testBasicWorkflow()
     {
         // Create a new client

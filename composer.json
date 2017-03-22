@@ -34,7 +34,8 @@
     "type": "library",
     "require": {
         "php": ">=5.5.9",
-        "guzzlehttp/guzzle": "5.*"
+        "guzzlehttp/guzzle": "5.*",
+        "phpunit/phpunit": "*"
     },
     "support": {
         "docs": "https://developer.avalara.com",

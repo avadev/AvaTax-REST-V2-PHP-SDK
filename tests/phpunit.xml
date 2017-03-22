@@ -1,6 +1,5 @@
 <phpunit backupGlobals="true" bootstrap="./bootstrap.php">
     <testsuite name="AvaTaxClient">
-        <directory>/tests</directory>
-        <file>test.php</file>
+        <directory>./</directory>
     </testsuite>
 </phpunit>
