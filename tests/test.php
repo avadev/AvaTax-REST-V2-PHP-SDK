@@ -3,7 +3,7 @@
 use PHPUnit\Framework\TestCase;
 
 // Include the AvaTaxClient library directly so we can test this branch specifically
-include_once __DIR__.'/src/AvaTaxClient.php';
+include_once __DIR__.'/../src/AvaTaxClient.php';
 
 /**
  * @covers AvaTaxClient
