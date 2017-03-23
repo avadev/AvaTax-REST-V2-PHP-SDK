@@ -19,7 +19,7 @@ final class AvaTaxClientTest extends TestCase
     {
         // Create a new client
         $client = new Avalara\AvaTaxClient('phpTestApp', '1.0', 'travis-ci', 'sandbox');
-        $client->withSecurity(getenv('SANDBOX_USERNAME'), getenv('SANDBOX_PASSWORD');
+        $client->withSecurity(getenv('SANDBOX_USERNAME'), getenv('SANDBOX_PASSWORD'));
 
         // Call 'Ping' to verify that we are connected
         $p = $client->Ping();
@@ -28,7 +28,7 @@ final class AvaTaxClientTest extends TestCase
 
         // Create a basic company with nexus in the state of Washington
         $model = new Avalara\CompanyInitializationModel();
-        $model->city = "Bainbridge Island",
+        $model->city = "Bainbridge Island";
         $model->companyCode = substr(uniqid(), 0, 25);
         $model->country = "US";
         $model->email = "bob@example.org";
