@@ -14,7 +14,7 @@ namespace Avalara;
  * @author     Bob Maidens <bob.maidens@avalara.com>
  * @copyright  2004-2017 Avalara, Inc.
  * @license    https://www.apache.org/licenses/LICENSE-2.0
- * @version    2.17.3-52
+ * @version    2.17.4-58
  * @link       https://github.com/avadev/AvaTax-REST-V2-PHP-SDK
  */
 
@@ -65,7 +65,7 @@ class AvaTaxClient
         // Set client options
         $this->client->setDefaultOption('headers', array(
             'Accept' => 'application/json',
-            'X-Avalara-Client' => "{$appName}; {$appVersion}; PhpRestClient; 2.17.3-52; {$machineName}"));
+            'X-Avalara-Client' => "{$appName}; {$appVersion}; PhpRestClient; 2.17.4-58; {$machineName}"));
     }
 
     /**
@@ -1006,6 +1006,41 @@ class AvaTaxClient
     }
 
     /**
+     * Create a refund for a transaction
+     *
+     * Create a refund for a transaction.
+     * 
+     * The `RefundTransaction` API allows you to quickly and easily create a `ReturnInvoice` representing a refund
+     * for a previously created `SalesInvoice` transaction. You can choose to create a full or partial refund, and
+     * specify individual line items from the original sale for refund.
+     * 
+     * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
+     * sales, purchases, inventory transfer, and returns (also called refunds).
+     * You may specify one or more of the following values in the '$include' parameter to fetch additional nested data, using commas to separate multiple values:
+     *  
+     * * Lines
+     * * Details (implies lines)
+     * * Summary (implies details)
+     * * Addresses
+     *  
+     * If you don't specify '$include' parameter, it will include both details and addresses.
+     *
+     * 
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param RefundTransactionModel $model Information about the refund to create
+     * @return TransactionModel
+     */
+    public function refundTransaction($companyCode, $transactionCode, $include, $model)
+    {
+        $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/refund";
+        $guzzleParams = [
+            'query' => ['$include' => $include],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
      * Perform multiple actions on a transaction
      *
      * Performs the same functions as /verify, /changecode, and /commit. You may specify one or many actions in each call to this endpoint.
@@ -1617,9 +1652,9 @@ class AvaTaxClient
      * 
      * @return FileResult
      */
-    public function getFilingAttachment($companyId, $worksheetId)
+    public function getFilingAttachment($companyId, $filingId)
     {
-        $path = "/api/v2/companies/{$companyId}/filings/{$worksheetId}/attachment";
+        $path = "/api/v2/companies/{$companyId}/filings/{$filingId}/attachment";
         $guzzleParams = [
             'query' => [],
             'body' => null
@@ -2035,7 +2070,7 @@ class AvaTaxClient
      *
      * 
      * @param FilingAugmentationModel $model The updated Augmentation.
-     * @return FilingAugmentationModel
+     * @return FilingModel
      */
     public function updateReturnAugmentation($companyId, $id, $model)
     {
@@ -3478,6 +3513,25 @@ class AvaTaxClient
     }
 
     /**
+     * Retrieve the full list of rate types for each country
+     *
+     * Returns the full list of Avalara-supported rate type file types
+     * This API is intended to be useful to identify all the different rate types.
+     *
+     * 
+     * @return FetchResult
+     */
+    public function listRateTypesByCountry($country)
+    {
+        $path = "/api/v2/definitions/countries/{$country}/ratetypes";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * List all ISO 3166 regions for a country
      *
      * Returns a list of all ISO 3166 region codes for a specific country code, and their US English friendly names.
@@ -4749,16 +4803,25 @@ class AvaTaxClient
      * 
      * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
      * sales, purchases, inventory transfer, and returns (also called refunds).
+     * You may specify one or more of the following values in the '$include' parameter to fetch additional nested data, using commas to separate multiple values:
+     *  
+     * * Lines
+     * * Details (implies lines)
+     * * Summary (implies details)
+     * * Addresses
+     *  
+     * If you don't specify '$include' parameter, it will include both details and addresses.
      *
      * 
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
      * @param CreateTransactionModel $model The transaction you wish to create
      * @return TransactionModel
      */
-    public function createTransaction($model)
+    public function createTransaction($include, $model)
     {
         $path = "/api/v2/transactions/create";
         $guzzleParams = [
-            'query' => [],
+            'query' => ['$include' => $include],
             'body' => json_encode($model)
         ];
         return $this->restCall($path, 'POST', $guzzleParams);
@@ -4873,7 +4936,7 @@ class AvaTaxClient
      * within AvaTax.
      *
      * 
-     * @return SubscriptionModel
+     * @return FetchResult
      */
     public function listMySubscriptions()
     {
@@ -5148,12 +5211,12 @@ class ErrorDetail
 {
 
     /**
-     * @var string Name of the error. (See ErrorCodeId::* for a list of allowable values)
+     * @var string Name of the error or message. (See ErrorCodeId::* for a list of allowable values)
      */
     public $code;
 
     /**
-     * @var int Error message identifier
+     * @var int Unique ID number referring to this error or message.
      */
     public $number;
 
@@ -5168,7 +5231,7 @@ class ErrorDetail
     public $description;
 
     /**
-     * @var string Indicates the SoapFault code
+     * @var string Indicates the SOAP Fault code, if this was related to an error that corresponded to AvaTax SOAP v1 behavior.
      */
     public $faultCode;
 
@@ -6596,7 +6659,7 @@ class TaxRuleModel
     public $taxTypeId;
 
     /**
-     * @var string Indicates the rate type to which this rule applies. (See RateType::* for a list of allowable values)
+     * @var string Indicates the rate type to which this rule applies.
      */
     public $rateTypeId;
 
@@ -7758,7 +7821,7 @@ class JurisdictionOverrideModel
     public $taxRegionId;
 
     /**
-     * @var string The boundary level of this override (See BoundaryLevelForJO::* for a list of allowable values)
+     * @var string The boundary level of this override (See BoundaryLevel::* for a list of allowable values)
      */
     public $boundaryLevel;
 
@@ -7832,6 +7895,29 @@ class ResourceFileTypeModel
      * @var string The name of the file type
      */
     public $name;
+
+}
+
+/**
+ * Rate type Model
+ */
+class RateTypeModel
+{
+
+    /**
+     * @var string The unique ID number of this tax authority.
+     */
+    public $id;
+
+    /**
+     * @var string Description of this rate type.
+     */
+    public $description;
+
+    /**
+     * @var string Country code for this rate type
+     */
+    public $country;
 
 }
 
@@ -8114,6 +8200,11 @@ class CycleAddOptionModel
      * @var string A code assigned to the filing frequency
      */
     public $filingFrequencyCode;
+
+    /**
+     * @var string The filing frequency of the request (See FilingFrequencyId::* for a list of allowable values)
+     */
+    public $filingFrequencyId;
 
     /**
      * @var string An explanation for why this form cannot be added for the current cycle
@@ -8543,7 +8634,12 @@ class FilingRegionModel
     /**
      * @var float The tax amount due.
      */
-    public $taxAmountDue;
+    public $taxDueAmount;
+
+    /**
+     * @var float Total remittance amount of all returns in region
+     */
+    public $totalRemittanceAmount;
 
     /**
      * @var float The non-taxable amount.
@@ -8709,9 +8805,19 @@ class FilingReturnModel
     public $consumerUseTaxableAmount;
 
     /**
+     * @var float Total amount of adjustments on this return
+     */
+    public $totalAdjustments;
+
+    /**
      * @var FilingAdjustmentModel[] The Adjustments for this return.
      */
     public $adjustments;
+
+    /**
+     * @var float Total amount of augmentations on this return
+     */
+    public $totalAugmentations;
 
     /**
      * @var FilingAugmentationModel[] The Augmentations for this return.
@@ -10168,7 +10274,7 @@ class TransactionSummary
     public $taxGroup;
 
     /**
-     * @var string Indicates the tax rate type. (See RateType::* for a list of allowable values)
+     * @var string Indicates the tax rate type.
      */
     public $rateType;
 
@@ -10376,7 +10482,7 @@ class TransactionLineDetailModel
     public $taxOverride;
 
     /**
-     * @var string The rate type for this tax detail. (See RateType::* for a list of allowable values)
+     * @var string The rate type for this tax detail.
      */
     public $rateType;
 
@@ -10623,12 +10729,12 @@ class AddressesModel
     public $shipTo;
 
     /**
-     * @var AddressLocationInfo Location from which the order was placed. Customer's home or business location.
+     * @var AddressLocationInfo The place of business where you receive the customer's order.
      */
     public $pointOfOrderOrigin;
 
     /**
-     * @var AddressLocationInfo Location from which the order was accepted. Call center, business office where purchase orders are accepted; or, server locations where orders are processed and accepted.
+     * @var AddressLocationInfo The place of business where you accept/approve the customerâ€™s order, thereby becoming contractually obligated to make the sale.
      */
     public $pointOfOrderAcceptance;
 
@@ -11020,6 +11126,39 @@ class ReconstructedApiRequestResponseModel
 }
 
 /**
+ * Refund a committed transaction
+ */
+class RefundTransactionModel
+{
+
+    /**
+     * @var string the committed transaction code to be refunded
+     */
+    public $refundTransactionCode;
+
+    /**
+     * @var string The date when the refund happens
+     */
+    public $refundDate;
+
+    /**
+     * @var string Type of this refund (See RefundType::* for a list of allowable values)
+     */
+    public $refundType;
+
+    /**
+     * @var float Percentage for refund
+     */
+    public $refundPercentage;
+
+    /**
+     * @var string[] Process refund for these lines
+     */
+    public $refundLines;
+
+}
+
+/**
  * User Entitlement Model
  */
 class UserEntitlementModel
@@ -11162,6 +11301,7 @@ class ServiceTypeId
     const C_AVACUT = "AvaCUT";
     const C_AVALANDEDCOST = "AvaLandedCost";
     const C_AVALODGING = "AvaLodging";
+    const C_AVABOTTLE = "AvaBottle";
 
 }
 
@@ -11251,6 +11391,8 @@ class ErrorCodeId
     const C_OLDPASSWORDINVALID = "OldPasswordInvalid";
     const C_CANNOTCHANGEPASSWORD = "CannotChangePassword";
     const C_CANNOTCHANGECOMPANYCODE = "CannotChangeCompanyCode";
+    const C_DATEFORMATERROR = "DateFormatError";
+    const C_NODEFAULTCOMPANY = "NoDefaultCompany";
     const C_AUTHENTICATIONEXCEPTION = "AuthenticationException";
     const C_AUTHORIZATIONEXCEPTION = "AuthorizationException";
     const C_VALIDATIONEXCEPTION = "ValidationException";
@@ -11315,6 +11457,8 @@ class ErrorCodeId
     const C_NEXUSDATEMISMATCH = "NexusDateMismatch";
     const C_TECHSUPPORTAUDITREQUIRED = "TechSupportAuditRequired";
     const C_NEXUSPARENTDATEMISMATCH = "NexusParentDateMismatch";
+    const C_BEARERTOKENPARSEUSERIDERROR = "BearerTokenParseUserIdError";
+    const C_RETRIEVEUSERERROR = "RetrieveUserError";
     const C_BATCHSALESAUDITMUSTBEZIPPEDERROR = "BatchSalesAuditMustBeZippedError";
     const C_BATCHZIPMUSTCONTAINONEFILEERROR = "BatchZipMustContainOneFileError";
     const C_BATCHINVALIDFILETYPEERROR = "BatchInvalidFileTypeError";
@@ -11353,6 +11497,7 @@ class ErrorCodeId
     const C_LINENOOUTOFRANGE = "LineNoOutOfRange";
     const C_REFUNDPERCENTAGEOUTOFRANGE = "RefundPercentageOutOfRange";
     const C_TAXRATENOTAVAILABLEFORFREEINTHISCOUNTRY = "TaxRateNotAvailableForFreeInThisCountry";
+    const C_FILINGCALENDARCHANGENOTALLOWED = "FilingCalendarChangeNotAllowed";
 
 }
 
@@ -11569,27 +11714,6 @@ class MatchingTaxType
 
 
 /**
- * Lists of acceptable values for the enumerated data type RateType
- */
-class RateType
-{
-    const C_REDUCEDA = "ReducedA";
-    const C_REDUCEDB = "ReducedB";
-    const C_FOOD = "Food";
-    const C_GENERAL = "General";
-    const C_INCREASEDSTANDARD = "IncreasedStandard";
-    const C_LINENRENTAL = "LinenRental";
-    const C_MEDICAL = "Medical";
-    const C_PARKING = "Parking";
-    const C_SUPERREDUCED = "SuperReduced";
-    const C_REDUCEDR = "ReducedR";
-    const C_STANDARD = "Standard";
-    const C_ZERO = "Zero";
-
-}
-
-
-/**
  * Lists of acceptable values for the enumerated data type TaxRuleTypeId
  */
 class TaxRuleTypeId
@@ -11628,13 +11752,13 @@ class ScraperType
 
 
 /**
- * Lists of acceptable values for the enumerated data type BoundaryLevelForJO
+ * Lists of acceptable values for the enumerated data type BoundaryLevel
  */
-class BoundaryLevelForJO
+class BoundaryLevel
 {
-    const C_VERYPRECISEFULLADDRESS = "VeryPreciseFullAddress";
-    const C_PRECISEZIP9 = "PreciseZIP9";
-    const C_ZIP5ONLY = "ZIP5Only";
+    const C_ADDRESS = "Address";
+    const C_ZIP9 = "Zip9";
+    const C_ZIP5 = "Zip5";
 
 }
 
@@ -11886,18 +12010,6 @@ class AdjustmentReason
 
 
 /**
- * Lists of acceptable values for the enumerated data type BoundaryLevel
- */
-class BoundaryLevel
-{
-    const C_ADDRESS = "Address";
-    const C_ZIP9 = "Zip9";
-    const C_ZIP5 = "Zip5";
-
-}
-
-
-/**
  * Lists of acceptable values for the enumerated data type TaxType
  */
 class TaxType
@@ -11975,6 +12087,19 @@ class ApiCallStatus
     const C_ORIGINALAPICALLAVAILABLE = "OriginalApiCallAvailable";
     const C_RECONSTRUCTEDAPICALLAVAILABLE = "ReconstructedApiCallAvailable";
     const C_ANY = "Any";
+
+}
+
+
+/**
+ * Lists of acceptable values for the enumerated data type RefundType
+ */
+class RefundType
+{
+    const C_FULL = "Full";
+    const C_PARTIAL = "Partial";
+    const C_TAXONLY = "TaxOnly";
+    const C_PERCENTAGE = "Percentage";
 
 }
 
