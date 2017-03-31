@@ -12525,7 +12525,7 @@ class TransactionBuilder
      */
     public function create()
     {
-        return $this->_client->createTransaction($this->_model);
+        return $this->_client->createTransaction(null, $this->_model);
     }
 
     /**
