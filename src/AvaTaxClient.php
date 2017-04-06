@@ -14,7 +14,7 @@ namespace Avalara;
  * @author     Bob Maidens <bob.maidens@avalara.com>
  * @copyright  2004-2017 Avalara, Inc.
  * @license    https://www.apache.org/licenses/LICENSE-2.0
- * @version    2.17.4-58
+ * @version    2.17.4-60
  * @link       https://github.com/avadev/AvaTax-REST-V2-PHP-SDK
  */
 
@@ -65,7 +65,7 @@ class AvaTaxClient
         // Set client options
         $this->client->setDefaultOption('headers', array(
             'Accept' => 'application/json',
-            'X-Avalara-Client' => "{$appName}; {$appVersion}; PhpRestClient; 2.17.4-58; {$machineName}"));
+            'X-Avalara-Client' => "{$appName}; {$appVersion}; PhpRestClient; 2.17.4-60; {$machineName}"));
     }
 
     /**
@@ -6659,9 +6659,14 @@ class TaxRuleModel
     public $taxTypeId;
 
     /**
-     * @var string Indicates the rate type to which this rule applies.
+     * @var string (DEPRECATED) Enumerated rate type to which this rule applies. Please use rateTypeCode instead. (See RateType::* for a list of allowable values)
      */
     public $rateTypeId;
+
+    /**
+     * @var string Indicates the code of the rate type that applies to this rule. Use `/api/v2/definitions/ratetypes` for a full list of rate type codes.
+     */
+    public $rateTypeCode;
 
     /**
      * @var string This type value determines the behavior of the tax rule. You can specify that this rule controls the product's taxability or exempt / nontaxable status, the product's rate  (for example, if you have been granted an official ruling for your product's rate that differs from the official rate),  or other types of behavior. (See TaxRuleTypeId::* for a list of allowable values)
@@ -10274,9 +10279,14 @@ class TransactionSummary
     public $taxGroup;
 
     /**
-     * @var string Indicates the tax rate type.
+     * @var string (DEPRECATED) Indicates the tax rate type. Please use rateTypeCode instead. (See RateType::* for a list of allowable values)
      */
     public $rateType;
+
+    /**
+     * @var string Indicates the code of the rate type. Use `/api/v2/definitions/ratetypes` for a full list of rate type codes.
+     */
+    public $rateTypeCode;
 
     /**
      * @var float Tax Base - The adjusted taxable amount.
@@ -10482,9 +10492,14 @@ class TransactionLineDetailModel
     public $taxOverride;
 
     /**
-     * @var string The rate type for this tax detail.
+     * @var string (DEPRECATED) The rate type for this tax detail. Please use rateTypeCode instead. (See RateType::* for a list of allowable values)
      */
     public $rateType;
+
+    /**
+     * @var string Indicates the code of the rate type that was used to calculate this tax detail. Use `/api/v2/definitions/ratetypes` for a full list of rate type codes.
+     */
+    public $rateTypeCode;
 
     /**
      * @var float Number of units in this line item that were calculated to be taxable according to this rate detail.
@@ -11137,7 +11152,7 @@ class RefundTransactionModel
     public $refundTransactionCode;
 
     /**
-     * @var string The date when the refund happens
+     * @var string The date of the refund. If null, today's date will be used
      */
     public $refundDate;
 
@@ -11432,6 +11447,7 @@ class ErrorCodeId
     const C_MEDICALEXCISEERROR = "MedicalExciseError";
     const C_RATEDEPENDSTAXABILITYERROR = "RateDependsTaxabilityError";
     const C_RATEDEPENDSEUROPEERROR = "RateDependsEuropeError";
+    const C_INVALIDRATETYPECODE = "InvalidRateTypeCode";
     const C_RATETYPENOTSUPPORTED = "RateTypeNotSupported";
     const C_CANNOTUPDATENESTEDOBJECTS = "CannotUpdateNestedObjects";
     const C_UPCCODEINVALIDCHARS = "UPCCodeInvalidChars";
@@ -11497,7 +11513,6 @@ class ErrorCodeId
     const C_LINENOOUTOFRANGE = "LineNoOutOfRange";
     const C_REFUNDPERCENTAGEOUTOFRANGE = "RefundPercentageOutOfRange";
     const C_TAXRATENOTAVAILABLEFORFREEINTHISCOUNTRY = "TaxRateNotAvailableForFreeInThisCountry";
-    const C_FILINGCALENDARCHANGENOTALLOWED = "FilingCalendarChangeNotAllowed";
 
 }
 
@@ -11709,6 +11724,27 @@ class MatchingTaxType
     const C_RENTAL = "Rental";
     const C_SALESTAX = "SalesTax";
     const C_USETAX = "UseTax";
+
+}
+
+
+/**
+ * Lists of acceptable values for the enumerated data type RateType
+ */
+class RateType
+{
+    const C_REDUCEDA = "ReducedA";
+    const C_REDUCEDB = "ReducedB";
+    const C_FOOD = "Food";
+    const C_GENERAL = "General";
+    const C_INCREASEDSTANDARD = "IncreasedStandard";
+    const C_LINENRENTAL = "LinenRental";
+    const C_MEDICAL = "Medical";
+    const C_PARKING = "Parking";
+    const C_SUPERREDUCED = "SuperReduced";
+    const C_REDUCEDR = "ReducedR";
+    const C_STANDARD = "Standard";
+    const C_ZERO = "Zero";
 
 }
 
