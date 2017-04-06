@@ -1,10 +1,5 @@
 <phpunit backupGlobals="true" bootstrap="./bootstrap.php">
-    <filter>
-        <whitelist>
-            <directory>/src</directory>
-        </whitelist>
-    </filter>
-    <testsuite>
+    <testsuite name="AvaTaxClient">
         <directory>./</directory>
     </testsuite>
 </phpunit>
