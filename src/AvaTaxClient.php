@@ -14,7 +14,7 @@ namespace Avalara;
  * @author     Bob Maidens <bob.maidens@avalara.com>
  * @copyright  2004-2017 Avalara, Inc.
  * @license    https://www.apache.org/licenses/LICENSE-2.0
- * @version    17.5.0-509
+ * @version    17.5.0-511
  * @link       https://github.com/avadev/AvaTax-REST-V2-PHP-SDK
  */
 
@@ -65,7 +65,7 @@ class AvaTaxClient
         // Set client options
         $this->client->setDefaultOption('headers', array(
             'Accept' => 'application/json',
-            'X-Avalara-Client' => "{$appName}; {$appVersion}; PhpRestClient; 17.5.0-509; {$machineName}"));
+            'X-Avalara-Client' => "{$appName}; {$appVersion}; PhpRestClient; 17.5.0-511; {$machineName}"));
     }
 
     /**
@@ -95,6 +95,5452 @@ class AvaTaxClient
     }
 
 
+
+    /**
+     * Reset this account's license key
+     *
+     * Resets the existing license key for this account to a new key.
+    * To reset your account, you must specify the ID of the account you wish to reset and confirm the action.
+    * Resetting a license key cannot be undone. Any previous license keys will immediately cease to work when a new key is created.
+     *
+     * 
+     * @param int $id The ID of the account you wish to update.
+     * @param ResetLicenseKeyModel $model A request confirming that you wish to reset the license key of this account.
+     * @return LicenseKeyModel
+     */
+    public function accountResetLicenseKey($id, $model)
+    {
+        $path = "/api/v2/accounts/{$id}/resetlicensekey";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single account
+     *
+     * Get the account object identified by this URL.
+    * You may use the '$include' parameter to fetch additional nested data:
+    * 
+    * * Subscriptions
+    * * Users
+     *
+     * 
+     * @param int $id The ID of the account to retrieve
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @return AccountModel
+     */
+    public function getAccount($id, $include)
+    {
+        $path = "/api/v2/accounts/{$id}";
+        $guzzleParams = [
+            'query' => ['$include' => $include],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Get configuration settings for this account
+     *
+     * Retrieve a list of all configuration settings tied to this account.
+    * 
+    * Configuration settings provide you with the ability to control features of your account and of your
+    * tax software. The category names `TaxServiceConfig` and `AddressServiceConfig` are reserved for
+    * Avalara internal software configuration values; to store your own account-level settings, please
+    * create a new category name that begins with `X-`, for example, `X-MyCustomCategory`.
+    * 
+    * Account settings are permanent settings that cannot be deleted. You can set the value of an
+    * account setting to null if desired.
+    * 
+    * Avalara-based account settings for `TaxServiceConfig` and `AddressServiceConfig` affect your account's
+    * tax calculation and address resolution, and should only be changed with care.
+     *
+     * 
+     * @param int $id 
+     * @return AccountConfigurationModel[]
+     */
+    public function getAccountConfiguration($id)
+    {
+        $path = "/api/v2/accounts/{$id}/configuration";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Change configuration settings for this account
+     *
+     * Update configuration settings tied to this account.
+    * 
+    * Configuration settings provide you with the ability to control features of your account and of your
+    * tax software. The category names `TaxServiceConfig` and `AddressServiceConfig` are reserved for
+    * Avalara internal software configuration values; to store your own account-level settings, please
+    * create a new category name that begins with `X-`, for example, `X-MyCustomCategory`.
+    * 
+    * Account settings are permanent settings that cannot be deleted. You can set the value of an
+    * account setting to null if desired.
+    * 
+    * Avalara-based account settings for `TaxServiceConfig` and `AddressServiceConfig` affect your account's
+    * tax calculation and address resolution, and should only be changed with care.
+     *
+     * 
+     * @param int $id 
+     * @param AccountConfigurationModel[] $model 
+     * @return AccountConfigurationModel[]
+     */
+    public function setAccountConfiguration($id, $model)
+    {
+        $path = "/api/v2/accounts/{$id}/configuration";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Retrieve geolocation information for a specified address
+     *
+     * Resolve an address against Avalara's address-validation system. If the address can be resolved, this API 
+    * provides the latitude and longitude of the resolved location. The value 'resolutionQuality' can be used 
+    * to identify how closely this address can be located. If the address cannot be clearly located, use the 
+    * 'messages' structure to learn more about problems with this address.
+    * This is the same API as the POST /api/v2/addresses/resolve endpoint.
+    * Both verbs are supported to provide for flexible implementation.
+     *
+     * 
+     * @param string $line1 Line 1
+     * @param string $line2 Line 2
+     * @param string $line3 Line 3
+     * @param string $city City
+     * @param string $region State / Province / Region
+     * @param string $postalCode Postal Code / Zip Code
+     * @param string $country Two character ISO 3166 Country Code (see /api/v2/definitions/countries for a full list)
+     * @param string $textCase selectable text case for address validation (See TextCase::* for a list of allowable values)
+     * @param float $latitude Geospatial latitude measurement
+     * @param float $longitude Geospatial longitude measurement
+     * @return AddressResolutionModel
+     */
+    public function resolveAddress($line1, $line2, $line3, $city, $region, $postalCode, $country, $textCase, $latitude, $longitude)
+    {
+        $path = "/api/v2/addresses/resolve";
+        $guzzleParams = [
+            'query' => ['line1' => $line1, 'line2' => $line2, 'line3' => $line3, 'city' => $city, 'region' => $region, 'postalCode' => $postalCode, 'country' => $country, 'textCase' => $textCase, 'latitude' => $latitude, 'longitude' => $longitude],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve geolocation information for a specified address
+     *
+     * Resolve an address against Avalara's address-validation system. If the address can be resolved, this API 
+    * provides the latitude and longitude of the resolved location. The value 'resolutionQuality' can be used 
+    * to identify how closely this address can be located. If the address cannot be clearly located, use the 
+    * 'messages' structure to learn more about problems with this address.
+    * This is the same API as the GET /api/v2/addresses/resolve endpoint.
+    * Both verbs are supported to provide for flexible implementation.
+     *
+     * 
+     * @param AddressValidationInfo $model The address to resolve
+     * @return AddressResolutionModel
+     */
+    public function resolveAddressPost($model)
+    {
+        $path = "/api/v2/addresses/resolve";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Create a new batch
+     *
+     * Create one or more new batch objects attached to this company.
+    * A batch object is a large collection of API calls stored in a compact file.
+    * When you create a batch, it is added to the AvaTax Batch Queue and will be processed in the order it was received.
+    * You may fetch a batch to check on its status and retrieve the results of the batch operation.
+    * Each batch object may have one or more file objects attached.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this batch.
+     * @param BatchModel[] $model The batch you wish to create.
+     * @return BatchModel[]
+     */
+    public function createBatches($companyId, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/batches";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Delete a single batch
+     *
+     * Mark the existing batch object at this URL as deleted.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this batch.
+     * @param int $id The ID of the batch you wish to delete.
+     * @return ErrorDetail[]
+     */
+    public function deleteBatch($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/batches/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Download a single batch file
+     *
+     * Download a single batch file identified by this URL.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this batch
+     * @param int $batchId The ID of the batch object
+     * @param int $id The primary key of this batch file object
+     * @return FileResult
+     */
+    public function downloadBatch($companyId, $batchId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/batches/{$batchId}/files/{$id}/attachment";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single batch
+     *
+     * Get the batch object identified by this URL.
+    * A batch object is a large collection of API calls stored in a compact file.
+    * When you create a batch, it is added to the AvaTax Batch Queue and will be processed in the order it was received.
+    * You may fetch a batch to check on its status and retrieve the results of the batch operation.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this batch
+     * @param int $id The primary key of this batch
+     * @return BatchModel
+     */
+    public function getBatch($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/batches/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all batches for this company
+     *
+     * List all batch objects attached to the specified company.
+    * A batch object is a large collection of API calls stored in a compact file.
+    * When you create a batch, it is added to the AvaTax Batch Queue and will be processed in the order it was received.
+    * You may fetch a batch to check on its status and retrieve the results of the batch operation.
+    * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+    * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns these batches
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listBatchesByCompany($companyId, $filter, $include, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/companies/{$companyId}/batches";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all batches
+     *
+     * Get multiple batch objects across all companies.
+    * A batch object is a large collection of API calls stored in a compact file.
+    * When you create a batch, it is added to the AvaTax Batch Queue and will be processed in the order it was received.
+    * You may fetch a batch to check on its status and retrieve the results of the batch operation.
+    * 
+    * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+    * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function queryBatches($filter, $include, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/batches";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Quick setup for a company with a single physical address
+     *
+     * Shortcut to quickly setup a single-physical-location company with critical information and activate it.
+    * This API provides quick and simple company setup functionality and does the following things:
+    *  
+    * * Create a company object with its own tax profile
+    * * Add a key contact person for the company
+    * * Set up one physical location for the main office
+    * * Declare nexus in all taxing jurisdictions for that main office address
+    * * Activate the company
+    *  
+    * This API only provides a limited subset of functionality compared to the 'Create Company' API call. 
+    * If you need additional features or options not present in this 'Quick Setup' API call, please use the full 'Create Company' call instead.
+     *
+     * 
+     * @param CompanyInitializationModel $model Information about the company you wish to create.
+     * @return CompanyModel
+     */
+    public function companyInitialize($model)
+    {
+        $path = "/api/v2/companies/initialize";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Create new companies
+     *
+     * Create one or more new company objects.
+    * A 'company' represents a single corporation or individual that is registered to handle transactional taxes.
+    * You may attach nested data objects such as contacts, locations, and nexus with this CREATE call, and those objects will be created with the company.
+     *
+     * 
+     * @param CompanyModel[] $model Either a single company object or an array of companies to create
+     * @return CompanyModel[]
+     */
+    public function createCompanies($model)
+    {
+        $path = "/api/v2/companies";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Request managed returns funding setup for a company
+     *
+     * This API is available by invitation only.
+    * Companies that use the Avalara Managed Returns or the SST Certified Service Provider services are 
+    * required to setup their funding configuration before Avalara can begin filing tax returns on their 
+    * behalf.
+    * Funding configuration for each company is set up by submitting a funding setup request, which can
+    * be sent either via email or via an embedded HTML widget.
+    * When the funding configuration is submitted to Avalara, it will be reviewed by treasury team members
+    * before approval.
+    * This API records that an ambedded HTML funding setup widget was activated.
+    * This API requires a subscription to Avalara Managed Returns or SST Certified Service Provider.
+     *
+     * 
+     * @param int $id The unique identifier of the company
+     * @param FundingInitiateModel $model The funding initialization request
+     * @return FundingStatusModel
+     */
+    public function createFundingRequest($id, $model)
+    {
+        $path = "/api/v2/companies/{$id}/funding/setup";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Delete a single company
+     *
+     * Deleting a company will delete all child companies, and all users attached to this company.
+     *
+     * 
+     * @param int $id The ID of the company you wish to delete.
+     * @return ErrorDetail[]
+     */
+    public function deleteCompany($id)
+    {
+        $path = "/api/v2/companies/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single company
+     *
+     * Get the company object identified by this URL.
+    * A 'company' represents a single corporation or individual that is registered to handle transactional taxes.
+    * You may specify one or more of the following values in the '$include' parameter to fetch additional nested data, using commas to separate multiple values:
+    * 
+    *  * Contacts
+    *  * Items
+    *  * Locations
+    *  * Nexus
+    *  * Settings
+    *  * TaxCodes
+    *  * TaxRules
+    *  * UPC
+     *
+     * 
+     * @param int $id The ID of the company to retrieve.
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @return CompanyModel
+     */
+    public function getCompany($id, $include)
+    {
+        $path = "/api/v2/companies/{$id}";
+        $guzzleParams = [
+            'query' => ['$include' => $include],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Get configuration settings for this company
+     *
+     * Retrieve a list of all configuration settings tied to this company.
+    * 
+    * Configuration settings provide you with the ability to control features of your account and of your
+    * tax software. The category names `AvaCertServiceConfig` is reserved for
+    * Avalara internal software configuration values; to store your own account-level settings, please
+    * create a new category name that begins with `X-`, for example, `X-MyCustomCategory`.
+    * 
+    * Company settings are permanent settings that cannot be deleted. You can set the value of a
+    * company setting to null if desired.
+    * 
+    * Avalara-based account settings for `AvaCertServiceConfig` affect your account's exemption certificate
+    * processing, and should only be changed with care.
+     *
+     * 
+     * @param int $id 
+     * @return CompanyConfigurationModel[]
+     */
+    public function getCompanyConfiguration($id)
+    {
+        $path = "/api/v2/companies/{$id}/configuration";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Check managed returns funding configuration for a company
+     *
+     * This API is available by invitation only.
+    * Requires a subscription to Avalara Managed Returns or SST Certified Service Provider.
+    * Returns a list of funding setup requests and their current status.
+    * Each object in the result is a request that was made to setup or adjust funding configuration for this company.
+     *
+     * 
+     * @param int $id The unique identifier of the company
+     * @return FundingStatusModel[]
+     */
+    public function listFundingRequestsByCompany($id)
+    {
+        $path = "/api/v2/companies/{$id}/funding";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all companies
+     *
+     * Get multiple company objects.
+    * A 'company' represents a single corporation or individual that is registered to handle transactional taxes.
+    * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+    * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+    * You may specify one or more of the following values in the `$include` parameter to fetch additional nested data, using commas to separate multiple values:
+    *  
+    * * Contacts
+    * * Items
+    * * Locations
+    * * Nexus
+    * * Settings
+    * * TaxCodes
+    * * TaxRules
+    * * UPC
+     *
+     * 
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function queryCompanies($include, $filter, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/companies";
+        $guzzleParams = [
+            'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Change configuration settings for this account
+     *
+     * Update configuration settings tied to this account.
+    * 
+    * Configuration settings provide you with the ability to control features of your account and of your
+    * tax software. The category names `AvaCertServiceConfig` is reserved for
+    * Avalara internal software configuration values; to store your own account-level settings, please
+    * create a new category name that begins with `X-`, for example, `X-MyCustomCategory`.
+    * 
+    * Company settings are permanent settings that cannot be deleted. You can set the value of a
+    * company setting to null if desired.
+    * 
+    * Avalara-based account settings for `AvaCertServiceConfig` affect your account's exemption certificate
+    * processing, and should only be changed with care.
+     *
+     * 
+     * @param int $id 
+     * @param CompanyConfigurationModel[] $model 
+     * @return CompanyConfigurationModel[]
+     */
+    public function setCompanyConfiguration($id, $model)
+    {
+        $path = "/api/v2/companies/{$id}/configuration";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Update a single company
+     *
+     * Replace the existing company object at this URL with an updated object.
+    * A 'company' represents a single corporation or individual that is registered to handle transactional taxes.
+    * All data from the existing object will be replaced with data in the object you PUT. 
+    * To set a field's value to null, you may either set its value to null or omit that field from the object you post.
+     *
+     * 
+     * @param int $id The ID of the company you wish to update.
+     * @param CompanyModel $model The company object you wish to update.
+     * @return CompanyModel
+     */
+    public function updateCompany($id, $model)
+    {
+        $path = "/api/v2/companies/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Create a new contact
+     *
+     * Create one or more new contact objects.
+    * A 'contact' is a person associated with a company who is designated to handle certain responsibilities of
+    * a tax collecting and filing entity.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this contact.
+     * @param ContactModel[] $model The contacts you wish to create.
+     * @return ContactModel[]
+     */
+    public function createContacts($companyId, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/contacts";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Delete a single contact
+     *
+     * Mark the existing contact object at this URL as deleted.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this contact.
+     * @param int $id The ID of the contact you wish to delete.
+     * @return ErrorDetail[]
+     */
+    public function deleteContact($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/contacts/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single contact
+     *
+     * Get the contact object identified by this URL.
+    * A 'contact' is a person associated with a company who is designated to handle certain responsibilities of
+    * a tax collecting and filing entity.
+     *
+     * 
+     * @param int $companyId The ID of the company for this contact
+     * @param int $id The primary key of this contact
+     * @return ContactModel
+     */
+    public function getContact($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/contacts/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve contacts for this company
+     *
+     * List all contact objects assigned to this company.
+    * 
+    * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+    * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns these contacts
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listContactsByCompany($companyId, $filter, $include, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/companies/{$companyId}/contacts";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all contacts
+     *
+     * Get multiple contact objects across all companies.
+    * A 'contact' is a person associated with a company who is designated to handle certain responsibilities of
+    * a tax collecting and filing entity.
+    * 
+    * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+    * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function queryContacts($filter, $include, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/contacts";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Update a single contact
+     *
+     * Replace the existing contact object at this URL with an updated object.
+    * A 'contact' is a person associated with a company who is designated to handle certain responsibilities of
+    * a tax collecting and filing entity.
+    * All data from the existing object will be replaced with data in the object you PUT. 
+    * To set a field's value to null, you may either set its value to null or omit that field from the object you post.
+     *
+     * 
+     * @param int $companyId The ID of the company that this contact belongs to.
+     * @param int $id The ID of the contact you wish to update
+     * @param ContactModel $model The contact you wish to update.
+     * @return ContactModel
+     */
+    public function updateContact($companyId, $id, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/contacts/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Retrieve the full list of Avalara-supported nexus for a country and region.
+     *
+     * Returns all Avalara-supported nexus for the specified country and region.
+    * This API is intended to be useful if your user interface needs to display a selectable list of nexus filtered by country and region.
+     *
+     * 
+     * @param string $country The two-character ISO-3166 code for the country.
+     * @param string $region The two or three character region code for the region.
+     * @return FetchResult
+     */
+    public function apiV2DefinitionsNexusByCountryByRegionGet($country, $region)
+    {
+        $path = "/api/v2/definitions/nexus/{$country}/{$region}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve the full list of Avalara-supported nexus for a country.
+     *
+     * Returns all Avalara-supported nexus for the specified country.
+    * This API is intended to be useful if your user interface needs to display a selectable list of nexus filtered by country.
+     *
+     * 
+     * @param string $country 
+     * @return FetchResult
+     */
+    public function apiV2DefinitionsNexusByCountryGet($country)
+    {
+        $path = "/api/v2/definitions/nexus/{$country}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve the full list of Avalara-supported nexus for all countries and regions.
+     *
+     * Returns the full list of all Avalara-supported nexus for all countries and regions. 
+    * This API is intended to be useful if your user interface needs to display a selectable list of nexus.
+     *
+     * 
+     * @return FetchResult
+     */
+    public function apiV2DefinitionsNexusGet()
+    {
+        $path = "/api/v2/definitions/nexus";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Test whether a form supports online login verification
+     *
+     * This API is intended to be useful to identify whether the user should be allowed
+    * to automatically verify their login and password.
+     *
+     * 
+     * @param string $form The name of the form you would like to verify. This can be the tax form code or the legacy return name
+     * @return FetchResult
+     */
+    public function getLoginVerifierByForm($form)
+    {
+        $path = "/api/v2/definitions/filingcalendars/loginverifiers/{$form}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve the full list of the AvaFile Forms available
+     *
+     * Returns the full list of Avalara-supported AvaFile Forms
+    * This API is intended to be useful to identify all the different AvaFile Forms
+     *
+     * 
+     * @return FetchResult
+     */
+    public function listAvaFileForms()
+    {
+        $path = "/api/v2/definitions/avafileforms";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * List all ISO 3166 countries
+     *
+     * Returns a list of all ISO 3166 country codes, and their US English friendly names.
+    * This API is intended to be useful when presenting a dropdown box in your website to allow customers to select a country for 
+    * a shipping address.
+     *
+     * 
+     * @return FetchResult
+     */
+    public function listCountries()
+    {
+        $path = "/api/v2/definitions/countries";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve the full list of Avalara-supported entity use codes
+     *
+     * Returns the full list of Avalara-supported entity use codes.
+    * Entity/Use Codes are definitions of the entity who is purchasing something, or the purpose for which the transaction
+    * is occurring. This information is generally used to determine taxability of the product.
+    * In order to facilitate correct reporting of your taxes, you are encouraged to select the proper entity use codes for
+    * all transactions that are exempt.
+     *
+     * 
+     * @return FetchResult
+     */
+    public function listEntityUseCodes()
+    {
+        $path = "/api/v2/definitions/entityusecodes";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve the full list of Avalara-supported filing frequencies.
+     *
+     * Returns the full list of Avalara-supported filing frequencies.
+    * This API is intended to be useful to identify all the different filing frequencies that can be used in notices.
+     *
+     * 
+     * @return FetchResult
+     */
+    public function listFilingFrequencies()
+    {
+        $path = "/api/v2/definitions/filingfrequencies";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * List jurisdictions near a specific address
+     *
+     * Returns a list of all Avalara-supported taxing jurisdictions that apply to this address.
+    * 
+    * This API allows you to identify which jurisdictions are nearby a specific address according to the best available geocoding information.
+    * It is intended to allow you to create a "Jurisdiction Override", which allows an address to be configured as belonging to a nearby 
+    * jurisdiction in AvaTax.
+    *  
+    * The results of this API call can be passed to the `CreateJurisdictionOverride` API call.
+     *
+     * 
+     * @param string $line1 The first address line portion of this address.
+     * @param string $line2 The second address line portion of this address.
+     * @param string $line3 The third address line portion of this address.
+     * @param string $city The city portion of this address.
+     * @param string $region The region, state, or province code portion of this address.
+     * @param string $postalCode The postal code or zip code portion of this address.
+     * @param string $country The two-character ISO-3166 code of the country portion of this address.
+     * @return FetchResult
+     */
+    public function listJurisdictionsByAddress($line1, $line2, $line3, $city, $region, $postalCode, $country)
+    {
+        $path = "/api/v2/definitions/jurisdictionsnearaddress";
+        $guzzleParams = [
+            'query' => ['line1' => $line1, 'line2' => $line2, 'line3' => $line3, 'city' => $city, 'region' => $region, 'postalCode' => $postalCode, 'country' => $country],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve the list of questions that are required for a tax location
+     *
+     * Returns the list of additional questions you must answer when declaring a location in certain taxing jurisdictions.
+    * Some tax jurisdictions require that you register or provide additional information to configure each physical place where
+    * your company does business.
+    * This information is not usually required in order to calculate tax correctly, but is almost always required to file your tax correctly.
+    * You can call this API call for any address and obtain information about what questions must be answered in order to properly
+    * file tax in that location.
+     *
+     * 
+     * @param string $line1 The first line of this location's address.
+     * @param string $line2 The second line of this location's address.
+     * @param string $line3 The third line of this location's address.
+     * @param string $city The city part of this location's address.
+     * @param string $region The region, state, or province part of this location's address.
+     * @param string $postalCode The postal code of this location's address.
+     * @param string $country The country part of this location's address.
+     * @param float $latitude Optionally identify the location via latitude/longitude instead of via address.
+     * @param float $longitude Optionally identify the location via latitude/longitude instead of via address.
+     * @return FetchResult
+     */
+    public function listLocationQuestionsByAddress($line1, $line2, $line3, $city, $region, $postalCode, $country, $latitude, $longitude)
+    {
+        $path = "/api/v2/definitions/locationquestions";
+        $guzzleParams = [
+            'query' => ['line1' => $line1, 'line2' => $line2, 'line3' => $line3, 'city' => $city, 'region' => $region, 'postalCode' => $postalCode, 'country' => $country, 'latitude' => $latitude, 'longitude' => $longitude],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * List all forms where logins can be verified automatically
+     *
+     * List all forms where logins can be verified automatically.
+    * This API is intended to be useful to identify whether the user should be allowed
+    * to automatically verify their login and password.
+     *
+     * 
+     * @return FetchResult
+     */
+    public function listLoginVerifiers()
+    {
+        $path = "/api/v2/definitions/filingcalendars/loginverifiers";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * List all nexus that apply to a specific address.
+     *
+     * Returns a list of all Avalara-supported taxing jurisdictions that apply to this address.
+    * This API allows you to identify which tax authorities apply to a physical location, salesperson address, or point of sale.
+    * In general, it is usually expected that a company will declare nexus in all the jurisdictions that apply to each physical address
+    * where the company does business.
+    * The results of this API call can be passed to the 'Create Nexus' API call to declare nexus for this address.
+     *
+     * 
+     * @param string $line1 The first address line portion of this address.
+     * @param string $line2 The first address line portion of this address.
+     * @param string $line3 The first address line portion of this address.
+     * @param string $city The city portion of this address.
+     * @param string $region The region, state, or province code portion of this address.
+     * @param string $postalCode The postal code or zip code portion of this address.
+     * @param string $country The two-character ISO-3166 code of the country portion of this address.
+     * @return FetchResult
+     */
+    public function listNexusByAddress($line1, $line2, $line3, $city, $region, $postalCode, $country)
+    {
+        $path = "/api/v2/definitions/nexus/byaddress";
+        $guzzleParams = [
+            'query' => ['line1' => $line1, 'line2' => $line2, 'line3' => $line3, 'city' => $city, 'region' => $region, 'postalCode' => $postalCode, 'country' => $country],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * List nexus related to a tax form
+     *
+     * Retrieves a list of nexus related to a tax form.
+    * 
+    * The concept of `Nexus` indicates a place where your company has sufficient physical presence and is obligated
+    * to collect and remit transaction-based taxes.
+    * 
+    * When defining companies in AvaTax, you must declare nexus for your company in order to correctly calculate tax
+    * in all jurisdictions affected by your transactions.
+    * 
+    * This API is intended to provide useful information when examining a tax form. If you are about to begin filing
+    * a tax form, you may want to know whether you have declared nexus in all the jurisdictions related to that tax 
+    * form in order to better understand how the form will be filled out.
+     *
+     * 
+     * @param string $formCode The form code that we are looking up the nexus for
+     * @return NexusByTaxFormModel
+     */
+    public function listNexusByFormCode($formCode)
+    {
+        $path = "/api/v2/definitions/nexus/byform/{$formCode}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve the full list of nexus tax type groups
+     *
+     * Returns the full list of Avalara-supported nexus tax type groups
+    * This API is intended to be useful to identify all the different tax sub-types.
+     *
+     * 
+     * @return FetchResult
+     */
+    public function listNexusTaxTypeGroups()
+    {
+        $path = "/api/v2/definitions/nexustaxtypegroups";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve the full list of Avalara-supported tax notice customer funding options.
+     *
+     * Returns the full list of Avalara-supported tax notice customer funding options.
+    * This API is intended to be useful to identify all the different notice customer funding options that can be used in notices.
+     *
+     * 
+     * @return FetchResult
+     */
+    public function listNoticeCustomerFundingOptions()
+    {
+        $path = "/api/v2/definitions/noticecustomerfundingoptions";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve the full list of Avalara-supported tax notice customer types.
+     *
+     * Returns the full list of Avalara-supported tax notice customer types.
+    * This API is intended to be useful to identify all the different notice customer types.
+     *
+     * 
+     * @return FetchResult
+     */
+    public function listNoticeCustomerTypes()
+    {
+        $path = "/api/v2/definitions/noticecustomertypes";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve the full list of Avalara-supported tax notice filing types.
+     *
+     * Returns the full list of Avalara-supported tax notice filing types.
+    * This API is intended to be useful to identify all the different notice filing types that can be used in notices.
+     *
+     * 
+     * @return FetchResult
+     */
+    public function listNoticeFilingtypes()
+    {
+        $path = "/api/v2/definitions/noticefilingtypes";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve the full list of Avalara-supported tax notice priorities.
+     *
+     * Returns the full list of Avalara-supported tax notice priorities.
+    * This API is intended to be useful to identify all the different notice priorities that can be used in notices.
+     *
+     * 
+     * @return FetchResult
+     */
+    public function listNoticePriorities()
+    {
+        $path = "/api/v2/definitions/noticepriorities";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve the full list of Avalara-supported tax notice reasons.
+     *
+     * Returns the full list of Avalara-supported tax notice reasons.
+    * This API is intended to be useful to identify all the different tax notice reasons.
+     *
+     * 
+     * @return FetchResult
+     */
+    public function listNoticeReasons()
+    {
+        $path = "/api/v2/definitions/noticereasons";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve the full list of Avalara-supported tax notice responsibility ids
+     *
+     * Returns the full list of Avalara-supported tax notice responsibility ids
+    * This API is intended to be useful to identify all the different tax notice responsibilities.
+     *
+     * 
+     * @return FetchResult
+     */
+    public function listNoticeResponsibilities()
+    {
+        $path = "/api/v2/definitions/noticeresponsibilities";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve the full list of Avalara-supported tax notice root causes
+     *
+     * Returns the full list of Avalara-supported tax notice root causes
+    * This API is intended to be useful to identify all the different tax notice root causes.
+     *
+     * 
+     * @return FetchResult
+     */
+    public function listNoticeRootCauses()
+    {
+        $path = "/api/v2/definitions/noticerootcauses";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve the full list of Avalara-supported tax notice statuses.
+     *
+     * Returns the full list of Avalara-supported tax notice statuses.
+    * This API is intended to be useful to identify all the different tax notice statuses.
+     *
+     * 
+     * @return FetchResult
+     */
+    public function listNoticeStatuses()
+    {
+        $path = "/api/v2/definitions/noticestatuses";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve the full list of Avalara-supported tax notice types.
+     *
+     * Returns the full list of Avalara-supported tax notice types.
+    * This API is intended to be useful to identify all the different notice types that can be used in notices.
+     *
+     * 
+     * @return FetchResult
+     */
+    public function listNoticeTypes()
+    {
+        $path = "/api/v2/definitions/noticetypes";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve the full list of Avalara-supported extra parameters for creating transactions.
+     *
+     * Returns the full list of Avalara-supported extra parameters for the 'Create Transaction' API call.
+    * This list of parameters is available for use when configuring your transaction.
+    * Some parameters are only available for use if you have subscribed to certain features of AvaTax.
+     *
+     * 
+     * @return FetchResult
+     */
+    public function listParameters()
+    {
+        $path = "/api/v2/definitions/parameters";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve the full list of Avalara-supported permissions
+     *
+     * Returns the full list of Avalara-supported permission types.
+    * This API is intended to be useful to identify the capabilities of a particular user logon.
+     *
+     * 
+     * @return FetchResult
+     */
+    public function listPermissions()
+    {
+        $path = "/api/v2/definitions/permissions";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve the full list of rate types for each country
+     *
+     * Returns the full list of Avalara-supported rate type file types
+    * This API is intended to be useful to identify all the different rate types.
+     *
+     * 
+     * @param string $country 
+     * @return FetchResult
+     */
+    public function listRateTypesByCountry($country)
+    {
+        $path = "/api/v2/definitions/countries/{$country}/ratetypes";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * List all ISO 3166 regions
+     *
+     * Returns a list of all ISO 3166 region codes and their US English friendly names.
+    * This API is intended to be useful when presenting a dropdown box in your website to allow customers to select a region 
+    * within the country for a shipping addresses.
+     *
+     * 
+     * @return FetchResult
+     */
+    public function listRegions()
+    {
+        $path = "/api/v2/definitions/regions";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * List all ISO 3166 regions for a country
+     *
+     * Returns a list of all ISO 3166 region codes for a specific country code, and their US English friendly names.
+    * This API is intended to be useful when presenting a dropdown box in your website to allow customers to select a region 
+    * within the country for a shipping addresses.
+     *
+     * 
+     * @param string $country 
+     * @return FetchResult
+     */
+    public function listRegionsByCountry($country)
+    {
+        $path = "/api/v2/definitions/countries/{$country}/regions";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve the full list of Avalara-supported resource file types
+     *
+     * Returns the full list of Avalara-supported resource file types
+    * This API is intended to be useful to identify all the different resource file types.
+     *
+     * 
+     * @return FetchResult
+     */
+    public function listResourceFileTypes()
+    {
+        $path = "/api/v2/definitions/resourcefiletypes";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve the full list of Avalara-supported permissions
+     *
+     * Returns the full list of Avalara-supported permission types.
+    * This API is intended to be useful when designing a user interface for selecting the security role of a user account.
+    * Some security roles are restricted for Avalara internal use.
+     *
+     * 
+     * @return FetchResult
+     */
+    public function listSecurityRoles()
+    {
+        $path = "/api/v2/definitions/securityroles";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve the full list of Avalara-supported subscription types
+     *
+     * Returns the full list of Avalara-supported subscription types.
+    * This API is intended to be useful for identifying which features you have added to your account.
+    * You may always contact Avalara's sales department for information on available products or services.
+    * You cannot change your subscriptions directly through the API.
+     *
+     * 
+     * @return FetchResult
+     */
+    public function listSubscriptionTypes()
+    {
+        $path = "/api/v2/definitions/subscriptiontypes";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve the full list of Avalara-supported tax authorities.
+     *
+     * Returns the full list of Avalara-supported tax authorities.
+    * This API is intended to be useful to identify all the different authorities that receive tax.
+     *
+     * 
+     * @return FetchResult
+     */
+    public function listTaxAuthorities()
+    {
+        $path = "/api/v2/definitions/taxauthorities";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve the full list of Avalara-supported forms for each tax authority.
+     *
+     * Returns the full list of Avalara-supported forms for each tax authority.
+    * This list represents tax forms that Avalara recognizes.
+    * Customers who subscribe to Avalara Managed Returns Service can request these forms to be filed automatically 
+    * based on the customer's AvaTax data.
+     *
+     * 
+     * @return FetchResult
+     */
+    public function listTaxAuthorityForms()
+    {
+        $path = "/api/v2/definitions/taxauthorityforms";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve the full list of Avalara-supported tax authority types.
+     *
+     * Returns the full list of Avalara-supported tax authority types.
+    * This API is intended to be useful to identify all the different authority types.
+     *
+     * 
+     * @return FetchResult
+     */
+    public function listTaxAuthorityTypes()
+    {
+        $path = "/api/v2/definitions/taxauthoritytypes";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve the full list of Avalara-supported tax codes.
+     *
+     * Retrieves the list of Avalara-supported system tax codes.
+    * A 'TaxCode' represents a uniquely identified type of product, good, or service.
+    * Avalara supports correct tax rates and taxability rules for all TaxCodes in all supported jurisdictions.
+    * If you identify your products by tax code in your 'Create Transacion' API calls, Avalara will correctly calculate tax rates and
+    * taxability rules for this product in all supported jurisdictions.
+     *
+     * 
+     * @return FetchResult
+     */
+    public function listTaxCodes()
+    {
+        $path = "/api/v2/definitions/taxcodes";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve the full list of Avalara-supported tax code types.
+     *
+     * Returns the full list of recognized tax code types.
+    * A 'Tax Code Type' represents a broad category of tax codes, and is less detailed than a single TaxCode.
+    * This API is intended to be useful for broadly searching for tax codes by tax code type.
+     *
+     * 
+     * @return TaxCodeTypesModel
+     */
+    public function listTaxCodeTypes()
+    {
+        $path = "/api/v2/definitions/taxcodetypes";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve the full list of tax sub types
+     *
+     * Returns the full list of Avalara-supported tax sub-types
+    * This API is intended to be useful to identify all the different tax sub-types.
+     *
+     * 
+     * @return FetchResult
+     */
+    public function listTaxSubTypes()
+    {
+        $path = "/api/v2/definitions/taxsubtypes";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve the full list of tax type groups
+     *
+     * Returns the full list of Avalara-supported tax type groups
+    * This API is intended to be useful to identify all the different tax type groups.
+     *
+     * 
+     * @return FetchResult
+     */
+    public function listTaxTypeGroups()
+    {
+        $path = "/api/v2/definitions/taxtypegroups";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single filing calendar
+     *
+     * This API is available by invitation only.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this filing calendar
+     * @param int $id The primary key of this filing calendar
+     * @return FilingCalendarModel
+     */
+    public function apiV2CompaniesByCompanyIdFilingcalendarsByIdGet($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/filingcalendars/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all filing calendars for this company
+     *
+     * This API is available by invitation only.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns these batches
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function apiV2CompaniesByCompanyIdFilingcalendarsGet($companyId, $filter, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/companies/{$companyId}/filingcalendars";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all filing requests for this company
+     *
+     * This API is available by invitation only.
+    * A "filing request" represents a request to change an existing filing calendar. Filing requests
+    * are reviewed and validated by Avalara Compliance before being implemented.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns these batches
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function apiV2CompaniesByCompanyIdFilingrequestsGet($companyId, $filter, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/companies/{$companyId}/filingrequests";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Returns a list of options for adding the specified form.
+     *
+     * This API is available by invitation only.
+     *
+     * 
+     * @param int $companyId The unique ID of the company that owns the filing calendar object
+     * @param string $formCode The unique code of the form
+     * @return CycleAddOptionModel[]
+     */
+    public function cycleSafeAdd($companyId, $formCode)
+    {
+        $path = "/api/v2/companies/{$companyId}/filingcalendars/add/options";
+        $guzzleParams = [
+            'query' => ['formCode' => $formCode],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Indicates when changes are allowed to be made to a filing calendar.
+     *
+     * This API is available by invitation only.
+     *
+     * 
+     * @param int $companyId The unique ID of the company that owns the filing calendar object
+     * @param int $id The unique ID of the filing calendar object
+     * @param FilingCalendarEditModel[] $model A list of filing calendar edits to be made
+     * @return CycleEditOptionModel
+     */
+    public function cycleSafeEdit($companyId, $id, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/filingcalendars/{$id}/edit/options";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Returns a list of options for expiring a filing calendar
+     *
+     * This API is available by invitation only.
+     *
+     * 
+     * @param int $companyId The unique ID of the company that owns the filing calendar object
+     * @param int $id The unique ID of the filing calendar object
+     * @return CycleExpireModel
+     */
+    public function cycleSafeExpiration($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/filingcalendars/{$id}/cancel/options";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Delete a single filing calendar.
+     *
+     * This API is available by invitation only.
+    * Mark the existing notice object at this URL as deleted.
+    * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
+    * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this filing calendar.
+     * @param int $id The ID of the filing calendar you wish to delete.
+     * @return ErrorDetail[]
+     */
+    public function deleteFilingCalendar($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/filingcalendars/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Edit existing Filing Calendar's Notes
+     *
+     * This API is available by invitation only.
+    * This API only allows updating of internal notes and company filing instructions.
+    * All other updates must go through a filing request at this time.
+     *
+     * 
+     * @param int $companyId The unique ID of the company that owns the filing request object
+     * @param int $id The unique ID of the filing calendar object
+     * @param FilingCalendarModel $model The filing calendar model you are wishing to update with.
+     * @return FilingCalendarModel
+     */
+    public function filingCalendarUpdate($companyId, $id, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/filingcalendars/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single filing request
+     *
+     * This API is available by invitation only.
+    * A "filing request" represents a request to change an existing filing calendar. Filing requests
+    * are reviewed and validated by Avalara Compliance before being implemented.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this filing calendar
+     * @param int $id The primary key of this filing calendar
+     * @return FilingRequestModel
+     */
+    public function filingRequests($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/filingrequests/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Create a new filing request to create a filing calendar
+     *
+     * This API is available by invitation only.
+    * A "filing request" represents a request to change an existing filing calendar. Filing requests
+    * are reviewed and validated by Avalara Compliance before being implemented.
+     *
+     * 
+     * @param int $companyId The unique ID of the company that will add the new filing calendar
+     * @param FilingRequestModel[] $model Information about the proposed new filing calendar
+     * @return FilingRequestModel
+     */
+    public function filingRequestsAdd($companyId, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/filingcalendars/add/request";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Approve existing Filing Request
+     *
+     * This API is available by invitation only.
+    * A "filing request" represents a request to change an existing filing calendar. Filing requests
+    * are reviewed and validated by Avalara Compliance before being implemented.
+    * The filing request must be in the "ChangeRequest" status to be approved.
+     *
+     * 
+     * @param int $companyId The unique ID of the company that owns the filing request object
+     * @param int $id The unique ID of the filing request object
+     * @return FilingRequestModel
+     */
+    public function filingRequestsApprove($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/filingrequests/{$id}/approve";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Cancel existing Filing Request
+     *
+     * This API is available by invitation only.
+    * A "filing request" represents a request to change an existing filing calendar. Filing requests
+    * are reviewed and validated by Avalara Compliance before being implemented.
+     *
+     * 
+     * @param int $companyId The unique ID of the company that owns the filing request object
+     * @param int $id The unique ID of the filing request object
+     * @return FilingRequestModel
+     */
+    public function filingRequestsCancel($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/filingrequests/{$id}/cancel";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Create a new filing request to cancel a filing calendar
+     *
+     * This API is available by invitation only.
+    * A "filing request" represents a request to change an existing filing calendar. Filing requests
+    * are reviewed and validated by Avalara Compliance before being implemented.
+     *
+     * 
+     * @param int $companyId The unique ID of the company that owns the filing calendar object
+     * @param int $id The unique ID number of the filing calendar to cancel
+     * @param FilingRequestModel[] $model The cancellation request for this filing calendar
+     * @return FilingRequestModel
+     */
+    public function filingRequestsNewCancel($companyId, $id, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/filingcalendars/{$id}/cancel/request";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Create a new filing request to edit a filing calendar
+     *
+     * This API is available by invitation only.
+    * A "filing request" represents a request to change an existing filing calendar. Filing requests
+    * are reviewed and validated by Avalara Compliance before being implemented.
+     *
+     * 
+     * @param int $companyId The unique ID of the company that owns the filing calendar object
+     * @param int $id The unique ID number of the filing calendar to edit
+     * @param FilingRequestModel[] $model A list of filing calendar edits to be made
+     * @return FilingRequestModel
+     */
+    public function filingRequestsNewEdit($companyId, $id, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/filingcalendars/{$id}/edit/request";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Edit existing Filing Request
+     *
+     * This API is available by invitation only.
+    * A "filing request" represents a request to change an existing filing calendar. Filing requests
+    * are reviewed and validated by Avalara Compliance before being implemented.
+     *
+     * 
+     * @param int $companyId The unique ID of the company that owns the filing request object
+     * @param int $id The unique ID of the filing request object
+     * @param FilingRequestModel $model A list of filing calendar edits to be made
+     * @return FilingRequestModel
+     */
+    public function filingRequestsUpdate($companyId, $id, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/filingrequests/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Gets the request status and Login Result
+     *
+     * This API is available by invitation only.
+     *
+     * 
+     * @param int $jobId The unique ID number of this login request
+     * @return LoginVerificationOutputModel
+     */
+    public function loginVerificationGet($jobId)
+    {
+        $path = "/api/v2/filingcalendars/credentials/{$jobId}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * New request for getting for validating customer's login credentials
+     *
+     * This API is available by invitation only.
+     *
+     * 
+     * @param LoginVerificationInputModel $model The model of the login information we are verifying
+     * @return LoginVerificationOutputModel
+     */
+    public function loginVerificationPost($model)
+    {
+        $path = "/api/v2/filingcalendars/credentials/verify";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all filing calendars
+     *
+     * This API is available by invitation only.
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function queryFilingCalendars($filter, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/filingcalendars";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all filing requests
+     *
+     * This API is available by invitation only.
+    * A "filing request" represents a request to change an existing filing calendar. Filing requests
+    * are reviewed and validated by Avalara Compliance before being implemented.
+    * 
+    * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+    * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function queryFilingRequests($filter, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/filingrequests";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Approve all filings for the specified company in the given filing period.
+     *
+     * This API is available by invitation only.
+    * Approving a return means the customer is ready to let Avalara file that return.
+    * Customer either approves themselves from admin console, 
+    * else system auto-approves the night before the filing cycle.
+    * Sometimes Compliance has to manually unapprove and reapprove to modify liability or filing for the customer.
+    * A "filing period" is the year and month of the date of the latest customer transaction allowed to be reported on a filing, 
+    * based on filing frequency of filing.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $year The year of the filing period to approve.
+     * @param int $month The month of the filing period to approve.
+     * @param ApproveFilingsModel $model The approve request you wish to execute.
+     * @return FilingModel[]
+     */
+    public function approveFilings($companyId, $year, $month, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/approve";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Approve all filings for the specified company in the given filing period and country.
+     *
+     * This API is available by invitation only.
+    * Approving a return means the customer is ready to let Avalara file that return.
+    * Customer either approves themselves from admin console, 
+    * else system auto-approves the night before the filing cycle.
+    * Sometimes Compliance has to manually unapprove and reapprove to modify liability or filing for the customer.
+    * A "filing period" is the year and month of the date of the latest customer transaction allowed to be reported on a filing, 
+    * based on filing frequency of filing.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $year The year of the filing period to approve.
+     * @param int $month The month of the filing period to approve.
+     * @param string $country The two-character ISO-3166 code for the country.
+     * @param ApproveFilingsModel $model The approve request you wish to execute.
+     * @return FilingModel[]
+     */
+    public function approveFilingsCountry($companyId, $year, $month, $country, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/{$country}/approve";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Approve all filings for the specified company in the given filing period, country and region.
+     *
+     * This API is available by invitation only.
+    * Approving a return means the customer is ready to let Avalara file that return.
+    * Customer either approves themselves from admin console, 
+    * else system auto-approves the night before the filing cycle
+    * Sometimes Compliance has to manually unapprove and reapprove to modify liability or filing for the customer.
+    * A "filing period" is the year and month of the date of the latest customer transaction allowed to be reported on a filing, 
+    * based on filing frequency of filing.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $year The year of the filing period to approve.
+     * @param int $month The month of the filing period to approve.
+     * @param string $country The two-character ISO-3166 code for the country.
+     * @param string $region The two or three character region code for the region.
+     * @param ApproveFilingsModel $model The approve request you wish to execute.
+     * @return FilingModel[]
+     */
+    public function approveFilingsCountryRegion($companyId, $year, $month, $country, $region, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/{$country}/{$region}/approve";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Add an adjustment to a given filing.
+     *
+     * This API is available by invitation only.
+    * An "Adjustment" is usually an increase or decrease to customer funding to Avalara,
+    * such as early filer discount amounts that are refunded to the customer, or efile fees from websites. 
+    * Sometimes may be a manual change in tax liability similar to an augmentation.
+    * This API creates a new adjustment for an existing tax filing.
+    * This API can only be used when the filing has not yet been approved.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filing being adjusted.
+     * @param int $year The year of the filing's filing period being adjusted.
+     * @param int $month The month of the filing's filing period being adjusted.
+     * @param string $country The two-character ISO-3166 code for the country of the filing being adjusted.
+     * @param string $region The two or three character region code for the region.
+     * @param string $formCode The unique code of the form being adjusted.
+     * @param FilingAdjustmentModel[] $model A list of Adjustments to be created for the specified filing.
+     * @return FilingAdjustmentModel[]
+     */
+    public function createReturnAdjustment($companyId, $year, $month, $country, $region, $formCode, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/{$country}/{$region}/{$formCode}/adjust";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Add an augmentation for a given filing.
+     *
+     * This API is available by invitation only.
+    * An "Augmentation" is a manually added increase or decrease in tax liability, by either customer or Avalara 
+    * usually due to customer wanting to report tax Avatax does not support, e.g. bad debts, rental tax.
+    * This API creates a new augmentation for an existing tax filing.
+    * This API can only be used when the filing has not been approved.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filing being changed.
+     * @param int $year The month of the filing's filing period being changed.
+     * @param int $month The month of the filing's filing period being changed.
+     * @param string $country The two-character ISO-3166 code for the country of the filing being changed.
+     * @param string $region The two or three character region code for the region of the filing being changed.
+     * @param string $formCode The unique code of the form being changed.
+     * @param FilingAugmentationModel[] $model A list of augmentations to be created for the specified filing.
+     * @return FilingAugmentationModel[]
+     */
+    public function createReturnAugmentation($companyId, $year, $month, $country, $region, $formCode, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/{$country}/{$region}/{$formCode}/augment";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Delete an adjustment for a given filing.
+     *
+     * This API is available by invitation only.
+    * An "Adjustment" is usually an increase or decrease to customer funding to Avalara,
+    * such as early filer discount amounts that are refunded to the customer, or efile fees from websites. 
+    * Sometimes may be a manual change in tax liability similar to an augmentation.
+    * This API deletes an adjustment for an existing tax filing.
+    * This API can only be used when the filing has been unapproved.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filing being adjusted.
+     * @param int $id The ID of the adjustment being deleted.
+     * @return ErrorDetail[]
+     */
+    public function deleteReturnAdjustment($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/adjust/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Delete an augmentation for a given filing.
+     *
+     * This API is available by invitation only.
+    * An "Augmentation" is a manually added increase or decrease in tax liability, by either customer or Avalara 
+    * usually due to customer wanting to report tax Avatax does not support, e.g. bad debts, rental tax.
+    * This API deletes an augmentation for an existing tax filing.
+    * This API can only be used when the filing has been unapproved.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filing being changed.
+     * @param int $id The ID of the augmentation being added.
+     * @return ErrorDetail[]
+     */
+    public function deleteReturnAugmentation($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/augment/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Retrieve worksheet checkup report for company and filing period.
+     *
+     * This API is available by invitation only.
+     *
+     * 
+     * @param int $worksheetId The unique id of the worksheet.
+     * @param int $companyId The unique ID of the company that owns the worksheet.
+     * @return FilingsCheckupModel
+     */
+    public function filingsCheckupReport($worksheetId, $companyId)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$worksheetId}/checkup";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve worksheet checkup report for company and filing period.
+     *
+     * This API is available by invitation only.
+     *
+     * 
+     * @param int $companyId The unique ID of the company that owns the worksheets object.
+     * @param int $year The year of the filing period.
+     * @param int $month The month of the filing period.
+     * @return FilingsCheckupModel
+     */
+    public function filingsCheckupReports($companyId, $year, $month)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/checkup";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single attachment for a filing
+     *
+     * This API is available by invitation only.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $filingId The unique id of the worksheet return.
+     * @param int $fileId The unique id of the document you are downloading
+     * @return FileResult
+     */
+    public function getFilingAttachment($companyId, $filingId, $fileId)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$filingId}/attachment";
+        $guzzleParams = [
+            'query' => ['fileId' => $fileId],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a list of filings for the specified company in the year and month of a given filing period.
+     *
+     * This API is available by invitation only.
+    * A "filing period" is the year and month of the date of the latest customer transaction allowed to be reported on a filing, 
+    * based on filing frequency of filing.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $year The year of the filing period.
+     * @param int $month The two digit month of the filing period.
+     * @return FileResult
+     */
+    public function getFilingAttachments($companyId, $year, $month)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/attachments";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single trace file for a company filing period
+     *
+     * This API is available by invitation only.
+    * A "filing period" is the year and month of the date of the latest customer transaction allowed to be reported on a filing, 
+    * based on filing frequency of filing.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $year The year of the filing period.
+     * @param int $month The two digit month of the filing period.
+     * @return FileResult
+     */
+    public function getFilingAttachmentsTraceFile($companyId, $year, $month)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/attachments/tracefile";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a list of filings for the specified company in the year and month of a given filing period.
+     *
+     * This API is available by invitation only.
+    * A "filing period" is the year and month of the date of the latest customer transaction allowed to be reported on a filing, 
+    * based on filing frequency of filing.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $year The year of the filing period.
+     * @param int $month The two digit month of the filing period.
+     * @return FetchResult
+     */
+    public function getFilings($companyId, $year, $month)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a list of filings for the specified company in the given filing period and country.
+     *
+     * This API is available by invitation only.
+    * A "filing period" is the year and month of the date of the latest customer transaction allowed to be reported on a filing, 
+    * based on filing frequency of filing.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $year The year of the filing period.
+     * @param int $month The two digit month of the filing period.
+     * @param string $country The two-character ISO-3166 code for the country.
+     * @return FetchResult
+     */
+    public function getFilingsByCountry($companyId, $year, $month, $country)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/{$country}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a list of filings for the specified company in the filing period, country and region.
+     *
+     * This API is available by invitation only.
+    * A "filing period" is the year and month of the date of the latest customer transaction allowed to be reported on a filing, 
+    * based on filing frequency of filing.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $year The year of the filing period.
+     * @param int $month The two digit month of the filing period.
+     * @param string $country The two-character ISO-3166 code for the country.
+     * @param string $region The two or three character region code for the region.
+     * @return FetchResult
+     */
+    public function getFilingsByCountryRegion($companyId, $year, $month, $country, $region)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/{$country}/{$region}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a list of filings for the specified company in the given filing period, country, region and form.
+     *
+     * This API is available by invitation only.
+    * A "filing period" is the year and month of the date of the latest customer transaction allowed to be reported on a filing, 
+    * based on filing frequency of filing.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $year The year of the filing period.
+     * @param int $month The two digit month of the filing period.
+     * @param string $country The two-character ISO-3166 code for the country.
+     * @param string $region The two or three character region code for the region.
+     * @param string $formCode The unique code of the form.
+     * @return FetchResult
+     */
+    public function getFilingsByReturnName($companyId, $year, $month, $country, $region, $formCode)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/{$country}/{$region}/{$formCode}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Rebuild a set of filings for the specified company in the given filing period.
+     *
+     * This API is available by invitation only.
+    * Rebuilding a return means re-creating or updating the amounts to be filed (worksheet) for a filing.
+    * Rebuilding has to be done whenever a customer adds transactions to a filing.
+    * A "filing period" is the year and month of the date of the latest customer transaction allowed to be reported on a filing, 
+    * based on filing frequency of filing.
+    * This API requires filing to be unapproved.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $year The year of the filing period to be rebuilt.
+     * @param int $month The month of the filing period to be rebuilt.
+     * @param RebuildFilingsModel $model The rebuild request you wish to execute.
+     * @return FetchResult
+     */
+    public function rebuildFilings($companyId, $year, $month, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/rebuild";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Rebuild a set of filings for the specified company in the given filing period and country.
+     *
+     * This API is available by invitation only.
+    * Rebuilding a return means re-creating or updating the amounts to be filed (worksheet) for a filing.
+    * Rebuilding has to be done whenever a customer adds transactions to a filing.
+    * A "filing period" is the year and month of the date of the latest customer transaction allowed to be reported on a filing, 
+    * based on filing frequency of filing.
+    * This API requires filing to be unapproved.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $year The year of the filing period to be rebuilt.
+     * @param int $month The month of the filing period to be rebuilt.
+     * @param string $country The two-character ISO-3166 code for the country.
+     * @param RebuildFilingsModel $model The rebuild request you wish to execute.
+     * @return FetchResult
+     */
+    public function rebuildFilingsByCountry($companyId, $year, $month, $country, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/{$country}/rebuild";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Rebuild a set of filings for the specified company in the given filing period, country and region.
+     *
+     * This API is available by invitation only.
+    * Rebuilding a return means re-creating or updating the amounts to be filed for a filing.
+    * Rebuilding has to be done whenever a customer adds transactions to a filing. 
+    * A "filing period" is the year and month of the date of the latest customer transaction allowed to be reported on a filing, 
+    * based on filing frequency of filing.
+    * This API requires filing to be unapproved.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $year The year of the filing period to be rebuilt.
+     * @param int $month The month of the filing period to be rebuilt.
+     * @param string $country The two-character ISO-3166 code for the country.
+     * @param string $region The two or three character region code for the region.
+     * @param RebuildFilingsModel $model The rebuild request you wish to execute.
+     * @return FetchResult
+     */
+    public function rebuildFilingsByCountryRegion($companyId, $year, $month, $country, $region, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/{$country}/{$region}/rebuild";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Edit an adjustment for a given filing.
+     *
+     * This API is available by invitation only.
+    * An "Adjustment" is usually an increase or decrease to customer funding to Avalara,
+    * such as early filer discount amounts that are refunded to the customer, or efile fees from websites. 
+    * Sometimes may be a manual change in tax liability similar to an augmentation.
+    * This API modifies an adjustment for an existing tax filing.
+    * This API can only be used when the filing has not yet been approved.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filing being adjusted.
+     * @param int $id The ID of the adjustment being edited.
+     * @param FilingAdjustmentModel $model The updated Adjustment.
+     * @return FilingAdjustmentModel
+     */
+    public function updateReturnAdjustment($companyId, $id, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/adjust/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Edit an augmentation for a given filing.
+     *
+     * This API is available by invitation only.
+    * An "Augmentation" is a manually added increase or decrease in tax liability, by either customer or Avalara 
+    * usually due to customer wanting to report tax Avatax does not support, e.g. bad debts, rental tax.
+    * This API modifies an augmentation for an existing tax filing.
+    * This API can only be used when the filing has not been approved.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filing being changed.
+     * @param int $id The ID of the augmentation being edited.
+     * @param FilingAugmentationModel $model The updated Augmentation.
+     * @return FilingModel
+     */
+    public function updateReturnAugmentation($companyId, $id, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/augment/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * FREE API - Request a free trial of AvaTax
+     *
+     * Call this API to obtain a free AvaTax sandbox account.
+    * 
+    * This API is free to use. No authentication credentials are required to call this API.
+    * The account will grant a full trial version of AvaTax (e.g. AvaTaxPro) for a limited period of time.
+    * After this introductory period, you may continue to use the free TaxRates API.
+    * 
+    * Limitations on free trial accounts:
+    *  
+    * * Only one free trial per company.
+    * * The free trial account does not expire.
+    * * Includes a limited time free trial of AvaTaxPro; after that date, the free TaxRates API will continue to work.
+    * * Each free trial account must have its own valid email address.
+     *
+     * 
+     * @param FreeTrialRequestModel $model Required information to provision a free trial account.
+     * @return NewAccountModel
+     */
+    public function requestFreeTrial($model)
+    {
+        $path = "/api/v2/accounts/freetrials/request";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * FREE API - Sales tax rates for a specified address
+     *
+     * # Free-To-Use
+    * 
+    * The TaxRates API is a free-to-use, no cost option for estimating sales tax rates.
+    * Any customer can request a free AvaTax account and make use of the TaxRates API.
+    * However, this API is currently limited for US only
+    * 
+    * Note that the TaxRates API assumes the sale of general tangible personal property when estimating the sales tax
+    * rate for a specified address. Avalara provides the `CreateTransaction` API, which provides extensive tax calculation 
+    * support for scenarios including, but not limited to:
+    * 
+    * * Nexus declarations
+    * * Taxability based on product/service type
+    * * Sourcing rules affecting origin/destination states
+    * * Customers who are exempt from certain taxes
+    * * States that have dollar value thresholds for tax amounts
+    * * Refunds for products purchased on a different date
+    * * Detailed jurisdiction names and state assigned codes
+    * * And more!
+    * 
+    * Please see [Estimating Tax with REST v2](http://developer.avalara.com/blog/2016/11/04/estimating-tax-with-rest-v2/)
+    * for information on how to upgrade to the full AvaTax CreateTransaction API.
+     *
+     * 
+     * @param string $line1 The street address of the location.
+     * @param string $line2 The street address of the location.
+     * @param string $line3 The street address of the location.
+     * @param string $city The city name of the location.
+     * @param string $region The state or region of the location
+     * @param string $postalCode The postal code of the location.
+     * @param string $country The two letter ISO-3166 country code.
+     * @return TaxRateModel
+     */
+    public function taxRatesByAddress($line1, $line2, $line3, $city, $region, $postalCode, $country)
+    {
+        $path = "/api/v2/taxrates/byaddress";
+        $guzzleParams = [
+            'query' => ['line1' => $line1, 'line2' => $line2, 'line3' => $line3, 'city' => $city, 'region' => $region, 'postalCode' => $postalCode, 'country' => $country],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * FREE API - Sales tax rates for a specified country and postal code
+     *
+     * # Free-To-Use
+    * 
+    * The TaxRates API is a free-to-use, no cost option for estimating sales tax rates.
+    * Any customer can request a free AvaTax account and make use of the TaxRates API.
+    * However, this API is currently limited for US only
+    * 
+    * Note that the TaxRates API assumes the sale of general tangible personal property when estimating the sales tax
+    * rate for a specified address. Avalara provides the `CreateTransaction` API, which provides extensive tax calculation 
+    * support for scenarios including, but not limited to:
+    * 
+    * * Nexus declarations
+    * * Taxability based on product/service type
+    * * Sourcing rules affecting origin/destination states
+    * * Customers who are exempt from certain taxes
+    * * States that have dollar value thresholds for tax amounts
+    * * Refunds for products purchased on a different date
+    * * Detailed jurisdiction names and state assigned codes
+    * * And more!
+    * 
+    * Please see [Estimating Tax with REST v2](http://developer.avalara.com/blog/2016/11/04/estimating-tax-with-rest-v2/)
+    * for information on how to upgrade to the full AvaTax CreateTransaction API.
+     *
+     * 
+     * @param string $country The two letter ISO-3166 country code.
+     * @param string $postalCode The postal code of the location.
+     * @return TaxRateModel
+     */
+    public function taxRatesByPostalCode($country, $postalCode)
+    {
+        $path = "/api/v2/taxrates/bypostalcode";
+        $guzzleParams = [
+            'query' => ['country' => $country, 'postalCode' => $postalCode],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Request the javascript for a funding setup widget
+     *
+     * This API is available by invitation only.
+    * Companies that use the Avalara Managed Returns or the SST Certified Service Provider services are 
+    * required to setup their funding configuration before Avalara can begin filing tax returns on their 
+    * behalf.
+    * Funding configuration for each company is set up by submitting a funding setup request, which can
+    * be sent either via email or via an embedded HTML widget.
+    * When the funding configuration is submitted to Avalara, it will be reviewed by treasury team members
+    * before approval.
+    * This API returns back the actual javascript code to insert into your application to render the 
+    * JavaScript funding setup widget inline.
+    * Use the 'methodReturn.javaScript' return value to insert this widget into your HTML page.
+    * This API requires a subscription to Avalara Managed Returns or SST Certified Service Provider.
+     *
+     * 
+     * @param int $id The unique ID number of this funding request
+     * @return FundingStatusModel
+     */
+    public function activateFundingRequest($id)
+    {
+        $path = "/api/v2/fundingrequests/{$id}/widget";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve status about a funding setup request
+     *
+     * This API is available by invitation only.
+    * Companies that use the Avalara Managed Returns or the SST Certified Service Provider services are 
+    * required to setup their funding configuration before Avalara can begin filing tax returns on their 
+    * behalf.
+    * Funding configuration for each company is set up by submitting a funding setup request, which can
+    * be sent either via email or via an embedded HTML widget.
+    * When the funding configuration is submitted to Avalara, it will be reviewed by treasury team members
+    * before approval.
+    * This API checks the status on an existing funding request.
+    * This API requires a subscription to Avalara Managed Returns or SST Certified Service Provider.
+     *
+     * 
+     * @param int $id The unique ID number of this funding request
+     * @return FundingStatusModel
+     */
+    public function fundingRequestStatus($id)
+    {
+        $path = "/api/v2/fundingrequests/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Create a new item
+     *
+     * Creates one or more new item objects attached to this company.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this item.
+     * @param ItemModel[] $model The item you wish to create.
+     * @return ItemModel[]
+     */
+    public function createItems($companyId, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/items";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Delete a single item
+     *
+     * Marks the item object at this URL as deleted.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this item.
+     * @param int $id The ID of the item you wish to delete.
+     * @return ErrorDetail[]
+     */
+    public function deleteItem($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/items/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single item
+     *
+     * Get the item object identified by this URL.
+    * An 'Item' represents a product or service that your company offers for sale.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this item object
+     * @param int $id The primary key of this item
+     * @return ItemModel
+     */
+    public function getItem($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/items/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve items for this company
+     *
+     * List all items defined for the current company.
+    * 
+    * An 'Item' represents a product or service that your company offers for sale.
+    * 
+    * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+    * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     *
+     * 
+     * @param int $companyId The ID of the company that defined these items
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listItemsByCompany($companyId, $filter, $include, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/companies/{$companyId}/items";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all items
+     *
+     * Get multiple item objects across all companies.
+    * An 'Item' represents a product or service that your company offers for sale.
+    * 
+    * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+    * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function queryItems($filter, $include, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/items";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Update a single item
+     *
+     * Replace the existing item object at this URL with an updated object.
+    * All data from the existing object will be replaced with data in the object you PUT. 
+    * To set a field's value to null, you may either set its value to null or omit that field from the object you post.
+     *
+     * 
+     * @param int $companyId The ID of the company that this item belongs to.
+     * @param int $id The ID of the item you wish to update
+     * @param ItemModel $model The item object you wish to update.
+     * @return ItemModel
+     */
+    public function updateItem($companyId, $id, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/items/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Create one or more overrides
+     *
+     * Creates one or more jurisdiction override objects for this account.
+    * 
+    * A Jurisdiction Override is a configuration setting that allows you to select the taxing
+    * jurisdiction for a specific address. If you encounter an address that is on the boundary
+    * between two different jurisdictions, you can choose to set up a jurisdiction override
+    * to switch this address to use different taxing jurisdictions.
+     *
+     * 
+     * @param int $accountId The ID of the account that owns this override
+     * @param JurisdictionOverrideModel[] $model The jurisdiction override objects to create
+     * @return JurisdictionOverrideModel[]
+     */
+    public function createJurisdictionOverrides($accountId, $model)
+    {
+        $path = "/api/v2/accounts/{$accountId}/jurisdictionoverrides";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Delete a single override
+     *
+     * Marks the item object at this URL as deleted.
+     *
+     * 
+     * @param int $accountId The ID of the account that owns this override
+     * @param int $id The ID of the override you wish to delete
+     * @return ErrorDetail[]
+     */
+    public function deleteJurisdictionOverride($accountId, $id)
+    {
+        $path = "/api/v2/accounts/{$accountId}/jurisdictionoverrides/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single override
+     *
+     * Get the item object identified by this URL.
+    * 
+    * A Jurisdiction Override is a configuration setting that allows you to select the taxing
+    * jurisdiction for a specific address. If you encounter an address that is on the boundary
+    * between two different jurisdictions, you can choose to set up a jurisdiction override
+    * to switch this address to use different taxing jurisdictions.
+     *
+     * 
+     * @param int $accountId The ID of the account that owns this override
+     * @param int $id The primary key of this override
+     * @return JurisdictionOverrideModel
+     */
+    public function getJurisdictionOverride($accountId, $id)
+    {
+        $path = "/api/v2/accounts/{$accountId}/jurisdictionoverrides/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve overrides for this account
+     *
+     * List all jurisdiction override objects defined for this account.
+    * 
+    * A Jurisdiction Override is a configuration setting that allows you to select the taxing
+    * jurisdiction for a specific address. If you encounter an address that is on the boundary
+    * between two different jurisdictions, you can choose to set up a jurisdiction override
+    * to switch this address to use different taxing jurisdictions.
+    * 
+    * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+    * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     *
+     * 
+     * @param int $accountId The ID of the account that owns this override
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listJurisdictionOverridesByAccount($accountId, $filter, $include, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/accounts/{$accountId}/jurisdictionoverrides";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all overrides
+     *
+     * Get multiple jurisdiction override objects across all companies.
+    * 
+    * A Jurisdiction Override is a configuration setting that allows you to select the taxing
+    * jurisdiction for a specific address. If you encounter an address that is on the boundary
+    * between two different jurisdictions, you can choose to set up a jurisdiction override
+    * to switch this address to use different taxing jurisdictions.
+    * 
+    * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+    * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function queryJurisdictionOverrides($filter, $include, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/jurisdictionoverrides";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Update a single jurisdictionoverride
+     *
+     * Replace the existing jurisdictionoverride object at this URL with an updated object.
+     *
+     * 
+     * @param int $accountId The ID of the account that this jurisdictionoverride belongs to.
+     * @param int $id The ID of the jurisdictionoverride you wish to update
+     * @param JurisdictionOverrideModel $model The jurisdictionoverride object you wish to update.
+     * @return JurisdictionOverrideModel
+     */
+    public function updateJurisdictionOverride($accountId, $id, $model)
+    {
+        $path = "/api/v2/accounts/{$accountId}/jurisdictionoverrides/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Point of sale data file generation
+     *
+     * Builds a point-of-sale data file containing tax rates and rules for this location, containing tax rates for all
+    * items defined for this company. This data file can be used to correctly calculate tax in the event a 
+    * point-of-sale device is not able to reach AvaTax.
+    * This data file can be customized for specific partner devices and usage conditions.
+    * The result of this API is the file you requested in the format you requested using the 'responseType' field.
+    * This API builds the file on demand, and is limited to a maximum of 7500 items.
+     *
+     * 
+     * @param int $companyId The ID number of the company that owns this location.
+     * @param int $id The ID number of the location to retrieve point-of-sale data.
+     * @param string $date The date for which point-of-sale data would be calculated (today by default)
+     * @param string $format The format of the file (JSON by default) (See PointOfSaleFileType::* for a list of allowable values)
+     * @param string $partnerId If specified, requests a custom partner-formatted version of the file. (See PointOfSalePartnerId::* for a list of allowable values)
+     * @param boolean $includeJurisCodes When true, the file will include jurisdiction codes in the result.
+     * @return FileResult
+     */
+    public function buildPointOfSaleDataForLocation($companyId, $id, $date, $format, $partnerId, $includeJurisCodes)
+    {
+        $path = "/api/v2/companies/{$companyId}/locations/{$id}/pointofsaledata";
+        $guzzleParams = [
+            'query' => ['date' => $date, 'format' => $format, 'partnerId' => $partnerId, 'includeJurisCodes' => $includeJurisCodes],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Create a new location
+     *
+     * Create one or more new location objects attached to this company.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this location.
+     * @param LocationModel[] $model The location you wish to create.
+     * @return LocationModel[]
+     */
+    public function createLocations($companyId, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/locations";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Delete a single location
+     *
+     * Mark the location object at this URL as deleted.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this location.
+     * @param int $id The ID of the location you wish to delete.
+     * @return ErrorDetail[]
+     */
+    public function deleteLocation($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/locations/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single location
+     *
+     * Get the location object identified by this URL.
+    * An 'Location' represents a physical address where a company does business.
+    * Many taxing authorities require that you define a list of all locations where your company does business.
+    * These locations may require additional custom configuration or tax registration with these authorities.
+    * For more information on metadata requirements, see the '/api/v2/definitions/locationquestions' API.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this location
+     * @param int $id The primary key of this location
+     * @return LocationModel
+     */
+    public function getLocation($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/locations/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve locations for this company
+     *
+     * List all location objects defined for this company.
+    * An 'Location' represents a physical address where a company does business.
+    * Many taxing authorities require that you define a list of all locations where your company does business.
+    * These locations may require additional custom configuration or tax registration with these authorities.
+    * For more information on metadata requirements, see the '/api/v2/definitions/locationquestions' API.
+    * 
+    * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+    * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns these locations
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listLocationsByCompany($companyId, $filter, $include, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/companies/{$companyId}/locations";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all locations
+     *
+     * Get multiple location objects across all companies.
+    * An 'Location' represents a physical address where a company does business.
+    * Many taxing authorities require that you define a list of all locations where your company does business.
+    * These locations may require additional custom configuration or tax registration with these authorities.
+    * For more information on metadata requirements, see the '/api/v2/definitions/locationquestions' API.
+    * 
+    * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+    * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function queryLocations($filter, $include, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/locations";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Update a single location
+     *
+     * Replace the existing location object at this URL with an updated object.
+    * All data from the existing object will be replaced with data in the object you PUT. 
+    * To set a field's value to null, you may either set its value to null or omit that field from the object you post.
+     *
+     * 
+     * @param int $companyId The ID of the company that this location belongs to.
+     * @param int $id The ID of the location you wish to update
+     * @param LocationModel $model The location you wish to update.
+     * @return LocationModel
+     */
+    public function updateLocation($companyId, $id, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/locations/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Validate the location against local requirements
+     *
+     * Returns validation information for this location.
+    * This API call is intended to compare this location against the currently known taxing authority rules and regulations,
+    * and provide information about what additional work is required to completely setup this location.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this location
+     * @param int $id The primary key of this location
+     * @return LocationValidationModel
+     */
+    public function validateLocation($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/locations/{$id}/validate";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Create a new nexus
+     *
+     * Creates one or more new nexus objects attached to this company.
+    * The concept of 'Nexus' indicates a place where your company has sufficient physical presence and is obligated
+    * to collect and remit transaction-based taxes.
+    * When defining companies in AvaTax, you must declare nexus for your company in order to correctly calculate tax
+    * in all jurisdictions affected by your transactions.
+    * Note that not all fields within a nexus can be updated; Avalara publishes a list of all defined nexus at the
+    * '/api/v2/definitions/nexus' endpoint.
+    * You may only define nexus matching the official list of declared nexus.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this nexus.
+     * @param NexusModel[] $model The nexus you wish to create.
+     * @return NexusModel[]
+     */
+    public function createNexus($companyId, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/nexus";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Delete a single nexus
+     *
+     * Marks the existing nexus object at this URL as deleted.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this nexus.
+     * @param int $id The ID of the nexus you wish to delete.
+     * @return ErrorDetail[]
+     */
+    public function deleteNexus($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/nexus/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single nexus
+     *
+     * Get the nexus object identified by this URL.
+    * The concept of 'Nexus' indicates a place where your company has sufficient physical presence and is obligated
+    * to collect and remit transaction-based taxes.
+    * When defining companies in AvaTax, you must declare nexus for your company in order to correctly calculate tax
+    * in all jurisdictions affected by your transactions.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this nexus object
+     * @param int $id The primary key of this nexus
+     * @return NexusModel
+     */
+    public function getNexus($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/nexus/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * List company nexus related to a tax form
+     *
+     * Retrieves a list of nexus related to a tax form.
+    * 
+    * The concept of `Nexus` indicates a place where your company has sufficient physical presence and is obligated
+    * to collect and remit transaction-based taxes.
+    * 
+    * When defining companies in AvaTax, you must declare nexus for your company in order to correctly calculate tax
+    * in all jurisdictions affected by your transactions.
+    * 
+    * This API is intended to provide useful information when examining a tax form. If you are about to begin filing
+    * a tax form, you may want to know whether you have declared nexus in all the jurisdictions related to that tax 
+    * form in order to better understand how the form will be filled out.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this nexus object
+     * @param string $formCode The form code that we are looking up the nexus for
+     * @return NexusByTaxFormModel
+     */
+    public function getNexusByFormCode($companyId, $formCode)
+    {
+        $path = "/api/v2/companies/{$companyId}/nexus/byform/{$formCode}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve nexus for this company
+     *
+     * List all nexus objects defined for this company.
+    * The concept of 'Nexus' indicates a place where your company has sufficient physical presence and is obligated
+    * to collect and remit transaction-based taxes.
+    * When defining companies in AvaTax, you must declare nexus for your company in order to correctly calculate tax
+    * in all jurisdictions affected by your transactions.
+    * 
+    * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+    * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns these nexus objects
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listNexusByCompany($companyId, $filter, $include, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/companies/{$companyId}/nexus";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all nexus
+     *
+     * Get multiple nexus objects across all companies.
+    * The concept of 'Nexus' indicates a place where your company has sufficient physical presence and is obligated
+    * to collect and remit transaction-based taxes.
+    * When defining companies in AvaTax, you must declare nexus for your company in order to correctly calculate tax
+    * in all jurisdictions affected by your transactions.
+    * 
+    * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+    * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function queryNexus($filter, $include, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/nexus";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Update a single nexus
+     *
+     * Replace the existing nexus object at this URL with an updated object.
+    * The concept of 'Nexus' indicates a place where your company has sufficient physical presence and is obligated
+    * to collect and remit transaction-based taxes.
+    * When defining companies in AvaTax, you must declare nexus for your company in order to correctly calculate tax
+    * in all jurisdictions affected by your transactions.
+    * Note that not all fields within a nexus can be updated; Avalara publishes a list of all defined nexus at the
+    * '/api/v2/definitions/nexus' endpoint.
+    * You may only define nexus matching the official list of declared nexus.
+    * All data from the existing object will be replaced with data in the object you PUT. 
+    * To set a field's value to null, you may either set its value to null or omit that field from the object you post.
+     *
+     * 
+     * @param int $companyId The ID of the company that this nexus belongs to.
+     * @param int $id The ID of the nexus you wish to update
+     * @param NexusModel $model The nexus object you wish to update.
+     * @return NexusModel
+     */
+    public function updateNexus($companyId, $id, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/nexus/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Create a new notice comment.
+     *
+     * This API is available by invitation only.
+    * 'Notice comments' are updates by the notice team on the work to be done and that has been done so far on a notice.
+    * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
+    * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this notice.
+     * @param int $id The ID of the tax notice we are adding the comment for.
+     * @param NoticeCommentModel[] $model The notice comments you wish to create.
+     * @return NoticeCommentModel[]
+     */
+    public function createNoticeComment($companyId, $id, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/notices/{$id}/comments";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Create a new notice finance details.
+     *
+     * This API is available by invitation only.
+    * 'Notice finance details' is the categorical breakdown of the total charge levied by the tax authority on our customer,
+    * as broken down in our "notice log" found in Workflow. Main examples of the categories are 'Tax Due', 'Interest', 'Penalty', 'Total Abated'.
+    * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
+    * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this notice.
+     * @param int $id The ID of the notice added to the finance details.
+     * @param NoticeFinanceModel[] $model The notice finance details you wish to create.
+     * @return NoticeFinanceModel[]
+     */
+    public function createNoticeFinanceDetails($companyId, $id, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/notices/{$id}/financedetails";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Create a new notice responsibility.
+     *
+     * This API is available by invitation only.
+    * 'Notice comments' are updates by the notice team on the work to be done and that has been done so far on a notice.
+    * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
+    * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this notice.
+     * @param int $id The ID of the tax notice we are adding the responsibility for.
+     * @param NoticeResponsibilityDetailModel[] $model The notice responsibilities you wish to create.
+     * @return NoticeResponsibilityDetailModel[]
+     */
+    public function createNoticeResponsibilities($companyId, $id, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/notices/{$id}/responsibilities";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Create a new notice root cause.
+     *
+     * This API is available by invitation only.
+    * 'Notice root causes' are are those who are responsible for the notice.
+    * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
+    * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this notice.
+     * @param int $id The ID of the tax notice we are adding the responsibility for.
+     * @param NoticeRootCauseDetailModel[] $model The notice root causes you wish to create.
+     * @return NoticeRootCauseDetailModel[]
+     */
+    public function createNoticeRootCauses($companyId, $id, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/notices/{$id}/rootcauses";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Create a new notice.
+     *
+     * This API is available by invitation only.
+    * Create one or more new notice objects.
+    * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
+    * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this notice.
+     * @param NoticeModel[] $model The notice object you wish to create.
+     * @return NoticeModel[]
+     */
+    public function createNotices($companyId, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/notices";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Delete a single notice.
+     *
+     * This API is available by invitation only.
+    * Mark the existing notice object at this URL as deleted.
+    * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
+    * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this notice.
+     * @param int $id The ID of the notice you wish to delete.
+     * @return ErrorDetail[]
+     */
+    public function deleteNotice($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/notices/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single attachment
+     *
+     * This API is available by invitation only.
+    * Get the file attachment identified by this URL.
+     *
+     * 
+     * @param int $companyId The ID of the company for this attachment.
+     * @param int $id The ResourceFileId of the attachment to download.
+     * @return FileResult
+     */
+    public function downloadNoticeAttachment($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/notices/files/{$id}/attachment";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single notice.
+     *
+     * This API is available by invitation only.
+    * Get the tax notice object identified by this URL.
+    * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
+    * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
+     *
+     * 
+     * @param int $companyId The ID of the company for this notice.
+     * @param int $id The ID of this notice.
+     * @return NoticeModel
+     */
+    public function getNotice($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/notices/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve notice comments for a specific notice.
+     *
+     * This API is available by invitation only.
+    * 'Notice comments' are updates by the notice team on the work to be done and that has been done so far on a notice.
+    * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
+    * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
+     *
+     * 
+     * @param int $id The ID of the notice.
+     * @param int $companyId The ID of the company that owns these notices.
+     * @return FetchResult
+     */
+    public function getNoticeComments($id, $companyId)
+    {
+        $path = "/api/v2/companies/{$companyId}/notices/{$id}/comments";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve notice finance details for a specific notice.
+     *
+     * This API is available by invitation only.
+    * 'Notice finance details' is the categorical breakdown of the total charge levied by the tax authority on our customer,
+    * as broken down in our "notice log" found in Workflow. Main examples of the categories are 'Tax Due', 'Interest', 'Penalty', 'Total Abated'.
+    * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
+    * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
+     *
+     * 
+     * @param int $id The ID of the company that owns these notices.
+     * @param int $companyId The ID of the company that owns these notices.
+     * @return FetchResult
+     */
+    public function getNoticeFinanceDetails($id, $companyId)
+    {
+        $path = "/api/v2/companies/{$companyId}/notices/{$id}/financedetails";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve notice responsibilities for a specific notice.
+     *
+     * This API is available by invitation only.
+    * 'Notice responsibilities' are are those who are responsible for the notice.
+    * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
+    * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
+     *
+     * 
+     * @param int $id The ID of the notice.
+     * @param int $companyId The ID of the company that owns these notices.
+     * @return FetchResult
+     */
+    public function getNoticeResponsibilities($id, $companyId)
+    {
+        $path = "/api/v2/companies/{$companyId}/notices/{$id}/responsibilities";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve notice root causes for a specific notice.
+     *
+     * This API is available by invitation only.
+    * 'Notice root causes' are are those who are responsible for the notice.
+    * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
+    * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
+     *
+     * 
+     * @param int $id The ID of the notice.
+     * @param int $companyId The ID of the company that owns these notices.
+     * @return FetchResult
+     */
+    public function getNoticeRootCauses($id, $companyId)
+    {
+        $path = "/api/v2/companies/{$companyId}/notices/{$id}/rootcauses";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve notices for a company.
+     *
+     * This API is available by invitation only.
+    * List all tax notice objects assigned to this company.
+    * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
+    * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
+    * 
+    * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+    * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns these notices.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listNoticesByCompany($companyId, $filter, $include, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/companies/{$companyId}/notices";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all notices.
+     *
+     * This API is available by invitation only.
+    * Get multiple notice objects across all companies.
+    * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
+    * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
+    * 
+    * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+    * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function queryNotices($filter, $include, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/notices";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Update a single notice.
+     *
+     * This API is available by invitation only.
+    * Replace the existing notice object at this URL with an updated object.
+    * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
+    * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
+    * All data from the existing object will be replaced with data in the object you PUT. 
+    * To set a field's value to null, you may either set its value to null or omit that field from the object you post.
+     *
+     * 
+     * @param int $companyId The ID of the company that this notice belongs to.
+     * @param int $id The ID of the notice you wish to update.
+     * @param NoticeModel $model The notice object you wish to update.
+     * @return NoticeModel
+     */
+    public function updateNotice($companyId, $id, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/notices/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single attachment
+     *
+     * This API is available by invitation only.
+    * Get the file attachment identified by this URL.
+     *
+     * 
+     * @param int $companyId The ID of the company for this attachment.
+     * @param ResourceFileUploadRequestModel $model The ResourceFileId of the attachment to download.
+     * @return FileResult
+     */
+    public function uploadAttachment($companyId, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/notices/files/attachment";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Request a new Avalara account
+     *
+     * This API is for use by partner onboarding services customers only.
+    * Calling this API creates an account with the specified product subscriptions, but does not configure billing.
+    * The customer will receive information from Avalara about how to configure billing for their account.
+    * You should call this API when a customer has requested to begin using Avalara services.
+     *
+     * 
+     * @param NewAccountRequestModel $model Information about the account you wish to create and the selected product offerings.
+     * @return NewAccountModel
+     */
+    public function requestNewAccount($model)
+    {
+        $path = "/api/v2/accounts/request";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Point of sale data file generation
+     *
+     * Builds a point-of-sale data file containing tax rates and rules for items and locations that can be used
+    * to correctly calculate tax in the event a point-of-sale device is not able to reach AvaTax.
+    * This data file can be customized for specific partner devices and usage conditions.
+    * The result of this API is the file you requested in the format you requested using the 'responseType' field.
+    * This API builds the file on demand, and is limited to files with no more than 7500 scenarios.
+     *
+     * 
+     * @param PointOfSaleDataRequestModel $model Parameters about the desired file format and report format, specifying which company, locations and TaxCodes to include.
+     * @return FileResult
+     */
+    public function buildPointOfSaleDataFile($model)
+    {
+        $path = "/api/v2/pointofsaledata/build";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Change Password
+     *
+     * # For Registrar Use Only
+    * This API is for use by Avalara Registrar administrative users only.
+    * 
+    * Allows a user to change their password via the API.
+    * This API only allows the currently authenticated user to change their password; it cannot be used to apply to a
+    * different user than the one authenticating the current API call.
+     *
+     * 
+     * @param PasswordChangeModel $model An object containing your current password and the new password.
+     * @return string
+     */
+    public function changePassword($model)
+    {
+        $path = "/api/v2/passwords";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Create a new account
+     *
+     * # For Registrar Use Only
+    * This API is for use by Avalara Registrar administrative users only.
+    * 
+    * Create a single new account object. 
+    * When creating an account object you may attach subscriptions and users as part of the 'Create' call.
+     *
+     * 
+     * @param AccountModel $model The account you wish to create.
+     * @return AccountModel
+     */
+    public function createAccount($model)
+    {
+        $path = "/api/v2/accounts";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Create a new subscription
+     *
+     * # For Registrar Use Only
+    * This API is for use by Avalara Registrar administrative users only.
+    * 
+    * Create one or more new subscription objects attached to this account.
+    * A 'subscription' indicates a licensed subscription to a named Avalara service.
+    * To request or remove subscriptions, please contact Avalara sales or your customer account manager.
+     *
+     * 
+     * @param int $accountId The ID of the account that owns this subscription.
+     * @param SubscriptionModel[] $model The subscription you wish to create.
+     * @return SubscriptionModel[]
+     */
+    public function createSubscriptions($accountId, $model)
+    {
+        $path = "/api/v2/accounts/{$accountId}/subscriptions";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Create new users
+     *
+     * # For Registrar Use Only
+    * This API is for use by Avalara Registrar administrative users only.
+    * 
+    * Create one or more new user objects attached to this account.
+    * A user represents one person with access privileges to make API calls and work with a specific account.
+     *
+     * 
+     * @param int $accountId The unique ID number of the account where these users will be created.
+     * @param UserModel[] $model The user or array of users you wish to create.
+     * @return UserModel[]
+     */
+    public function createUsers($accountId, $model)
+    {
+        $path = "/api/v2/accounts/{$accountId}/users";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Delete a single account
+     *
+     * # For Registrar Use Only
+    * This API is for use by Avalara Registrar administrative users only.
+    * 
+    * Delete an account.
+    * Deleting an account will delete all companies and all account level users attached to this account.
+     *
+     * 
+     * @param int $id The ID of the account you wish to delete.
+     * @return ErrorDetail[]
+     */
+    public function deleteAccount($id)
+    {
+        $path = "/api/v2/accounts/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Delete a single subscription
+     *
+     * # For Registrar Use Only
+    * This API is for use by Avalara Registrar administrative users only.
+    * 
+    * Mark the existing account identified by this URL as deleted.
+     *
+     * 
+     * @param int $accountId The ID of the account that owns this subscription.
+     * @param int $id The ID of the subscription you wish to delete.
+     * @return ErrorDetail[]
+     */
+    public function deleteSubscription($accountId, $id)
+    {
+        $path = "/api/v2/accounts/{$accountId}/subscriptions/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Delete a single user
+     *
+     * # For Registrar Use Only
+    * This API is for use by Avalara Registrar administrative users only.
+    * 
+    * Mark the user object identified by this URL as deleted.
+     *
+     * 
+     * @param int $id The ID of the user you wish to delete.
+     * @param int $accountId The accountID of the user you wish to delete.
+     * @return ErrorDetail[]
+     */
+    public function deleteUser($id, $accountId)
+    {
+        $path = "/api/v2/accounts/{$accountId}/users/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all accounts
+     *
+     * # For Registrar Use Only
+    * This API is for use by Avalara Registrar administrative users only.
+    * 
+    * Get multiple account objects.
+    * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+    * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+    * You may specify one or more of the following values in the `$include` parameter to fetch additional nested data, using commas to separate multiple values:
+    *  
+    * * Subscriptions
+    * * Users
+    *  
+    * For more information about filtering in REST, please see the documentation at http://developer.avalara.com/avatax/filtering-in-rest/ .
+     *
+     * 
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function queryAccounts($include, $filter, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/accounts";
+        $guzzleParams = [
+            'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Reset a user's password programmatically
+     *
+     * # For Registrar Use Only
+    * This API is for use by Avalara Registrar administrative users only.
+    * 
+    * Allows a system admin to reset the password for a specific user via the API.
+    * This API is only available for Avalara Registrar Admins, and can be used to reset the password of any
+    * user based on internal Avalara business processes.
+     *
+     * 
+     * @param int $userId The unique ID of the user whose password will be changed
+     * @param SetPasswordModel $model The new password for this user
+     * @return string
+     */
+    public function resetPassword($userId, $model)
+    {
+        $path = "/api/v2/passwords/{$userId}/reset";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Update a single account
+     *
+     * # For Registrar Use Only
+    * This API is for use by Avalara Registrar administrative users only.
+    * 
+    * Replace an existing account object with an updated account object.
+     *
+     * 
+     * @param int $id The ID of the account you wish to update.
+     * @param AccountModel $model The account object you wish to update.
+     * @return AccountModel
+     */
+    public function updateAccount($id, $model)
+    {
+        $path = "/api/v2/accounts/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Update a single subscription
+     *
+     * # For Registrar Use Only
+    * This API is for use by Avalara Registrar administrative users only.
+    * 
+    * Replace the existing subscription object at this URL with an updated object.
+    * A 'subscription' indicates a licensed subscription to a named Avalara service.
+    * To request or remove subscriptions, please contact Avalara sales or your customer account manager.
+    * All data from the existing object will be replaced with data in the object you PUT. 
+    * To set a field's value to null, you may either set its value to null or omit that field from the object you post.
+     *
+     * 
+     * @param int $accountId The ID of the account that this subscription belongs to.
+     * @param int $id The ID of the subscription you wish to update
+     * @param SubscriptionModel $model The subscription you wish to update.
+     * @return SubscriptionModel
+     */
+    public function updateSubscription($accountId, $id, $model)
+    {
+        $path = "/api/v2/accounts/{$accountId}/subscriptions/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Create a new setting
+     *
+     * Create one or more new setting objects attached to this company.
+    * A 'setting' is a piece of user-defined data that can be attached to a company, and it provides you the ability to store information
+    * not defined or managed by Avalara.
+    * You may create, update, and delete your own settings objects as required, and there is no mandatory data format for the 'name' and 
+    * 'value' data fields.
+    * To ensure correct operation of other programs or connectors, please create a new GUID for your application and use that value for
+    * the 'set' data field.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this setting.
+     * @param SettingModel[] $model The setting you wish to create.
+     * @return SettingModel[]
+     */
+    public function createSettings($companyId, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/settings";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Delete a single setting
+     *
+     * Mark the setting object at this URL as deleted.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this setting.
+     * @param int $id The ID of the setting you wish to delete.
+     * @return ErrorDetail[]
+     */
+    public function deleteSetting($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/settings/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single setting
+     *
+     * Get a single setting object by its unique ID.
+    * A 'setting' is a piece of user-defined data that can be attached to a company, and it provides you the ability to store information
+    * not defined or managed by Avalara.
+    * You may create, update, and delete your own settings objects as required, and there is no mandatory data format for the 'name' and 
+    * 'value' data fields.
+    * To ensure correct operation of other programs or connectors, please create a new GUID for your application and use that value for
+    * the 'set' data field.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this setting
+     * @param int $id The primary key of this setting
+     * @return SettingModel
+     */
+    public function getSetting($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/settings/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all settings for this company
+     *
+     * List all setting objects attached to this company.
+    * A 'setting' is a piece of user-defined data that can be attached to a company, and it provides you the ability to store information
+    * not defined or managed by Avalara.
+    * You may create, update, and delete your own settings objects as required, and there is no mandatory data format for the 'name' and 
+    * 'value' data fields.
+    * To ensure correct operation of other programs or connectors, please create a new GUID for your application and use that value for
+    * the 'set' data field.
+    * 
+    * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+    * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns these settings
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listSettingsByCompany($companyId, $filter, $include, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/companies/{$companyId}/settings";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all settings
+     *
+     * Get multiple setting objects across all companies.
+    * A 'setting' is a piece of user-defined data that can be attached to a company, and it provides you the ability to store information
+    * not defined or managed by Avalara.
+    * You may create, update, and delete your own settings objects as required, and there is no mandatory data format for the 'name' and 
+    * 'value' data fields.
+    * To ensure correct operation of other programs or connectors, please create a new GUID for your application and use that value for
+    * the 'set' data field.
+    * 
+    * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+    * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function querySettings($filter, $include, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/settings";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Update a single setting
+     *
+     * Replace the existing setting object at this URL with an updated object.
+    * A 'setting' is a piece of user-defined data that can be attached to a company, and it provides you the ability to store information
+    * not defined or managed by Avalara.
+    * You may create, update, and delete your own settings objects as required, and there is no mandatory data format for the 'name' and 
+    * 'value' data fields.
+    * To ensure correct operation of other programs or connectors, please create a new GUID for your application and use that value for
+    * the 'set' data field.
+    * All data from the existing object will be replaced with data in the object you PUT. 
+    * To set a field's value to null, you may either set its value to null or omit that field from the object you post.
+     *
+     * 
+     * @param int $companyId The ID of the company that this setting belongs to.
+     * @param int $id The ID of the setting you wish to update
+     * @param SettingModel $model The setting you wish to update.
+     * @return SettingModel
+     */
+    public function updateSetting($companyId, $id, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/settings/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single subscription
+     *
+     * Get the subscription object identified by this URL.
+    * A 'subscription' indicates a licensed subscription to a named Avalara service.
+    * To request or remove subscriptions, please contact Avalara sales or your customer account manager.
+     *
+     * 
+     * @param int $accountId The ID of the account that owns this subscription
+     * @param int $id The primary key of this subscription
+     * @return SubscriptionModel
+     */
+    public function getSubscription($accountId, $id)
+    {
+        $path = "/api/v2/accounts/{$accountId}/subscriptions/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve subscriptions for this account
+     *
+     * List all subscription objects attached to this account.
+    * A 'subscription' indicates a licensed subscription to a named Avalara service.
+    * To request or remove subscriptions, please contact Avalara sales or your customer account manager.
+    * 
+    * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+    * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     *
+     * 
+     * @param int $accountId The ID of the account that owns these subscriptions
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listSubscriptionsByAccount($accountId, $filter, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/accounts/{$accountId}/subscriptions";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all subscriptions
+     *
+     * Get multiple subscription objects across all accounts.
+    * A 'subscription' indicates a licensed subscription to a named Avalara service.
+    * To request or remove subscriptions, please contact Avalara sales or your customer account manager.
+    * 
+    * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+    * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function querySubscriptions($filter, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/subscriptions";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Create a new tax code
+     *
+     * Create one or more new taxcode objects attached to this company.
+    * A 'TaxCode' represents a uniquely identified type of product, good, or service.
+    * Avalara supports correct tax rates and taxability rules for all TaxCodes in all supported jurisdictions.
+    * If you identify your products by tax code in your 'Create Transacion' API calls, Avalara will correctly calculate tax rates and
+    * taxability rules for this product in all supported jurisdictions.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this tax code.
+     * @param TaxCodeModel[] $model The tax code you wish to create.
+     * @return TaxCodeModel[]
+     */
+    public function createTaxCodes($companyId, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/taxcodes";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Delete a single tax code
+     *
+     * Marks the existing TaxCode object at this URL as deleted.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this tax code.
+     * @param int $id The ID of the tax code you wish to delete.
+     * @return ErrorDetail[]
+     */
+    public function deleteTaxCode($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/taxcodes/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single tax code
+     *
+     * Get the taxcode object identified by this URL.
+    * A 'TaxCode' represents a uniquely identified type of product, good, or service.
+    * Avalara supports correct tax rates and taxability rules for all TaxCodes in all supported jurisdictions.
+    * If you identify your products by tax code in your 'Create Transacion' API calls, Avalara will correctly calculate tax rates and
+    * taxability rules for this product in all supported jurisdictions.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this tax code
+     * @param int $id The primary key of this tax code
+     * @return TaxCodeModel
+     */
+    public function getTaxCode($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/taxcodes/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve tax codes for this company
+     *
+     * List all taxcode objects attached to this company.
+    * A 'TaxCode' represents a uniquely identified type of product, good, or service.
+    * Avalara supports correct tax rates and taxability rules for all TaxCodes in all supported jurisdictions.
+    * If you identify your products by tax code in your 'Create Transacion' API calls, Avalara will correctly calculate tax rates and
+    * taxability rules for this product in all supported jurisdictions.
+    * 
+    * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+    * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns these tax codes
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listTaxCodesByCompany($companyId, $filter, $include, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/companies/{$companyId}/taxcodes";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all tax codes
+     *
+     * Get multiple taxcode objects across all companies.
+    * A 'TaxCode' represents a uniquely identified type of product, good, or service.
+    * Avalara supports correct tax rates and taxability rules for all TaxCodes in all supported jurisdictions.
+    * If you identify your products by tax code in your 'Create Transacion' API calls, Avalara will correctly calculate tax rates and
+    * taxability rules for this product in all supported jurisdictions.
+    * 
+    * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+    * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function queryTaxCodes($filter, $include, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/taxcodes";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Update a single tax code
+     *
+     * Replace the existing taxcode object at this URL with an updated object.
+    * A 'TaxCode' represents a uniquely identified type of product, good, or service.
+    * Avalara supports correct tax rates and taxability rules for all TaxCodes in all supported jurisdictions.
+    * If you identify your products by tax code in your 'Create Transacion' API calls, Avalara will correctly calculate tax rates and
+    * taxability rules for this product in all supported jurisdictions.
+    * All data from the existing object will be replaced with data in the object you PUT. 
+    * To set a field's value to null, you may either set its value to null or omit that field from the object you post.
+     *
+     * 
+     * @param int $companyId The ID of the company that this tax code belongs to.
+     * @param int $id The ID of the tax code you wish to update
+     * @param TaxCodeModel $model The tax code you wish to update.
+     * @return TaxCodeModel
+     */
+    public function updateTaxCode($companyId, $id, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/taxcodes/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Create a new tax rule
+     *
+     * Create one or more new taxrule objects attached to this company.
+    * A tax rule represents a custom taxability rule for a product or service sold by your company.
+    * If you have obtained a custom tax ruling from an auditor that changes the behavior of certain goods or services
+    * within certain taxing jurisdictions, or you have obtained special tax concessions for certain dates or locations,
+    * you may wish to create a TaxRule object to override the AvaTax engine's default behavior in those circumstances.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this tax rule.
+     * @param TaxRuleModel[] $model The tax rule you wish to create.
+     * @return TaxRuleModel[]
+     */
+    public function createTaxRules($companyId, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/taxrules";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Delete a single tax rule
+     *
+     * Mark the TaxRule identified by this URL as deleted.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this tax rule.
+     * @param int $id The ID of the tax rule you wish to delete.
+     * @return ErrorDetail[]
+     */
+    public function deleteTaxRule($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/taxrules/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single tax rule
+     *
+     * Get the taxrule object identified by this URL.
+    * A tax rule represents a custom taxability rule for a product or service sold by your company.
+    * If you have obtained a custom tax ruling from an auditor that changes the behavior of certain goods or services
+    * within certain taxing jurisdictions, or you have obtained special tax concessions for certain dates or locations,
+    * you may wish to create a TaxRule object to override the AvaTax engine's default behavior in those circumstances.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this tax rule
+     * @param int $id The primary key of this tax rule
+     * @return TaxRuleModel
+     */
+    public function getTaxRule($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/taxrules/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve tax rules for this company
+     *
+     * List all taxrule objects attached to this company.
+    * A tax rule represents a custom taxability rule for a product or service sold by your company.
+    * If you have obtained a custom tax ruling from an auditor that changes the behavior of certain goods or services
+    * within certain taxing jurisdictions, or you have obtained special tax concessions for certain dates or locations,
+    * you may wish to create a TaxRule object to override the AvaTax engine's default behavior in those circumstances.
+    * 
+    * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+    * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns these tax rules
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listTaxRules($companyId, $filter, $include, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/companies/{$companyId}/taxrules";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all tax rules
+     *
+     * Get multiple taxrule objects across all companies.
+    * A tax rule represents a custom taxability rule for a product or service sold by your company.
+    * If you have obtained a custom tax ruling from an auditor that changes the behavior of certain goods or services
+    * within certain taxing jurisdictions, or you have obtained special tax concessions for certain dates or locations,
+    * you may wish to create a TaxRule object to override the AvaTax engine's default behavior in those circumstances.
+    * 
+    * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+    * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function queryTaxRules($filter, $include, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/taxrules";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Update a single tax rule
+     *
+     * Replace the existing taxrule object at this URL with an updated object.
+    * A tax rule represents a custom taxability rule for a product or service sold by your company.
+    * If you have obtained a custom tax ruling from an auditor that changes the behavior of certain goods or services
+    * within certain taxing jurisdictions, or you have obtained special tax concessions for certain dates or locations,
+    * you may wish to create a TaxRule object to override the AvaTax engine's default behavior in those circumstances.
+    * All data from the existing object will be replaced with data in the object you PUT. 
+    * To set a field's value to null, you may either set its value to null or omit that field from the object you post.
+     *
+     * 
+     * @param int $companyId The ID of the company that this tax rule belongs to.
+     * @param int $id The ID of the tax rule you wish to update
+     * @param TaxRuleModel $model The tax rule you wish to update.
+     * @return TaxRuleModel
+     */
+    public function updateTaxRule($companyId, $id, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/taxrules/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Add lines to an existing unlocked transaction
+     *
+     * Add lines to an existing unlocked transaction.
+    * 
+    * The `AddLines` API allows you to add additional transaction lines to existing transaction, so that customer will
+    * be able to append multiple calls together and form an extremely large transaction. If customer does not specify line number
+    * in the lines to be added, a new random Guid string will be generated for line number. If customer are not satisfied with
+    * the line number for the transaction lines, they can turn on the renumber switch to have REST v2 automatically renumber all 
+    * transaction lines for them, in this case, the line number becomes: "1", "2", "3", ...
+    * 
+    * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
+    * sales, purchases, inventory transfer, and returns (also called refunds).
+    * You may specify one or more of the following values in the '$include' parameter to fetch additional nested data, using commas to separate multiple values:
+    *  
+    * * Lines
+    * * Details (implies lines)
+    * * Summary (implies details)
+    * * Addresses
+    *  
+    * If you don't specify '$include' parameter, it will include both details and addresses.
+     *
+     * 
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param AddTransactionLineModel $model information about the transaction and lines to be added
+     * @return TransactionModel
+     */
+    public function addLines($include, $model)
+    {
+        $path = "/api/v2/companies/transactions/lines/add";
+        $guzzleParams = [
+            'query' => ['$include' => $include],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Correct a previously created transaction
+     *
+     * Replaces the current transaction uniquely identified by this URL with a new transaction.
+    * 
+    * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
+    * sales, purchases, inventory transfer, and returns (also called refunds).
+    * 
+    * When you adjust a committed transaction, the original transaction will be updated with the status code `Adjusted`, and
+    * both revisions will be available for retrieval based on their code and ID numbers.
+    * Only transactions in `Committed` status are reported by Avalara Managed Returns.
+    * 
+    * Transactions that have been previously reported to a tax authority by Avalara Managed Returns are considered `locked` and are 
+    * no longer available for adjustments.
+     *
+     * 
+     * @param string $companyCode The company code of the company that recorded this transaction
+     * @param string $transactionCode The transaction code to adjust
+     * @param AdjustTransactionModel $model The adjustment you wish to make
+     * @return TransactionModel
+     */
+    public function adjustTransaction($companyCode, $transactionCode, $model)
+    {
+        $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/adjust";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Get audit information about a transaction
+     *
+     * Retrieve audit information about a transaction stored in AvaTax.
+    *  
+    * The 'AuditTransaction' endpoint retrieves audit information related to a specific transaction. This audit 
+    * information includes the following:
+    * 
+    * * The `CompanyId` of the company that created the transaction
+    * * The server timestamp representing the exact server time when the transaction was created
+    * * The server duration - how long it took to process this transaction
+    * * Whether exact API call details were logged
+    * * A reconstructed API call showing what the original CreateTransaction call looked like
+    * 
+    * This API can be used to examine information about a previously created transaction.
+    * 
+    * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
+    * sales, purchases, inventory transfer, and returns (also called refunds).
+     *
+     * 
+     * @param string $companyCode The code identifying the company that owns this transaction
+     * @param string $transactionCode The code identifying the transaction
+     * @return AuditTransactionModel
+     */
+    public function auditTransaction($companyCode, $transactionCode)
+    {
+        $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/audit";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Get audit information about a transaction
+     *
+     * Retrieve audit information about a transaction stored in AvaTax.
+    *  
+    * The 'AuditTransaction' endpoint retrieves audit information related to a specific transaction. This audit 
+    * information includes the following:
+    * 
+    * * The `CompanyId` of the company that created the transaction
+    * * The server timestamp representing the exact server time when the transaction was created
+    * * The server duration - how long it took to process this transaction
+    * * Whether exact API call details were logged
+    * * A reconstructed API call showing what the original CreateTransaction call looked like
+    * 
+    * This API can be used to examine information about a previously created transaction.
+    * 
+    * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
+    * sales, purchases, inventory transfer, and returns (also called refunds).
+     *
+     * 
+     * @param string $companyCode The code identifying the company that owns this transaction
+     * @param string $transactionCode The code identifying the transaction
+     * @param string $documentType The document type of the original transaction (See DocumentType::* for a list of allowable values)
+     * @return AuditTransactionModel
+     */
+    public function auditTransactionWithType($companyCode, $transactionCode, $documentType)
+    {
+        $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/types/{$documentType}/audit";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Lock a set of documents
+     *
+     * This API is available by invitation only.
+    * 
+    * Lock a set of transactions uniquely identified by DocumentIds provided. This API allows locking multiple documents at once.
+    * After this API call succeeds, documents will be locked and can't be voided.
+    * 
+    * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
+    * sales, purchases, inventory transfer, and returns (also called refunds).
+     *
+     * 
+     * @param BulkLockTransactionModel $model bulk lock request
+     * @return BulkLockTransactionResult
+     */
+    public function bulkLockTransaction($model)
+    {
+        $path = "/api/v2/transactions/lock";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Change a transaction's code
+     *
+     * Renames a transaction uniquely identified by this URL by changing its code to a new code.
+    * After this API call succeeds, the transaction will have a new URL matching its new code.
+    * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
+    * sales, purchases, inventory transfer, and returns (also called refunds).
+     *
+     * 
+     * @param string $companyCode The company code of the company that recorded this transaction
+     * @param string $transactionCode The transaction code to change
+     * @param ChangeTransactionCodeModel $model The code change request you wish to execute
+     * @return TransactionModel
+     */
+    public function changeTransactionCode($companyCode, $transactionCode, $model)
+    {
+        $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/changecode";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Commit a transaction for reporting
+     *
+     * Marks a transaction by changing its status to 'Committed'.
+    * Transactions that are committed are available to be reported to a tax authority by Avalara Managed Returns.
+    * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
+    * sales, purchases, inventory transfer, and returns (also called refunds).
+    * Any changes made to a committed transaction will generate a transaction history.
+     *
+     * 
+     * @param string $companyCode The company code of the company that recorded this transaction
+     * @param string $transactionCode The transaction code to commit
+     * @param CommitTransactionModel $model The commit request you wish to execute
+     * @return TransactionModel
+     */
+    public function commitTransaction($companyCode, $transactionCode, $model)
+    {
+        $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/commit";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Create a new transaction
+     *
+     * Records a new transaction or adjust an existing in AvaTax.
+    * 
+    * The `CreateOrAdjustTransaction` endpoint is used to create a new transaction if the input transaction does not exist
+    * or if there exists a transaction identified by code, the original transaction will be adjusted by using the meta data 
+    * in the input transaction
+    * 
+    * If you don't specify type in the provided data, a new transaction with type of SalesOrder will be recorded by default.
+    * 
+    * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
+    * sales, purchases, inventory transfer, and returns (also called refunds).
+    * You may specify one or more of the following values in the '$include' parameter to fetch additional nested data, using commas to separate multiple values:
+    *  
+    * * Lines
+    * * Details (implies lines)
+    * * Summary (implies details)
+    * * Addresses
+    *  
+    * If you don't specify '$include' parameter, it will include both details and addresses.
+     *
+     * 
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param CreateOrAdjustTransactionModel $model The transaction you wish to create
+     * @return TransactionModel
+     */
+    public function createOrAdjustTransaction($include, $model)
+    {
+        $path = "/api/v2/transactions/createoradjust";
+        $guzzleParams = [
+            'query' => ['$include' => $include],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Create a new transaction
+     *
+     * Records a new transaction in AvaTax.
+    * 
+    * The `CreateTransaction` endpoint uses the configuration values specified by your company to identify the correct tax rules
+    * and rates to apply to all line items in this transaction, and reports the total tax calculated by AvaTax based on your
+    * company's configuration and the data provided in this API call.
+    * 
+    * If you don't specify type in the provided data, a new transaction with type of SalesOrder will be recorded by default.
+    * 
+    * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
+    * sales, purchases, inventory transfer, and returns (also called refunds).
+    * You may specify one or more of the following values in the '$include' parameter to fetch additional nested data, using commas to separate multiple values:
+    *  
+    * * Lines
+    * * Details (implies lines)
+    * * Summary (implies details)
+    * * Addresses
+    *  
+    * If you don't specify '$include' parameter, it will include both details and addresses.
+     *
+     * 
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param CreateTransactionModel $model The transaction you wish to create
+     * @return TransactionModel
+     */
+    public function createTransaction($include, $model)
+    {
+        $path = "/api/v2/transactions/create";
+        $guzzleParams = [
+            'query' => ['$include' => $include],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Remove lines from an existing unlocked transaction
+     *
+     * Remove lines to an existing unlocked transaction.
+    * 
+    * The `DeleteLines` API allows you to remove transaction lines from existing unlocked transaction, so that customer will
+    * be able to delete transaction lines and adjust original transaction the way they like
+    * 
+    * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
+    * sales, purchases, inventory transfer, and returns (also called refunds).
+    * You may specify one or more of the following values in the '$include' parameter to fetch additional nested data, using commas to separate multiple values:
+    *  
+    * * Lines
+    * * Details (implies lines)
+    * * Summary (implies details)
+    * * Addresses
+    *  
+    * If you don't specify '$include' parameter, it will include both details and addresses.
+     *
+     * 
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param RemoveTransactionLineModel $model information about the transaction and lines to be removed
+     * @return TransactionModel
+     */
+    public function deleteLines($include, $model)
+    {
+        $path = "/api/v2/companies/transactions/lines/delete";
+        $guzzleParams = [
+            'query' => ['$include' => $include],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single transaction by code
+     *
+     * Get the current transaction identified by this URL.
+    * If this transaction was adjusted, the return value of this API will be the current transaction with this code, and previous revisions of
+    * the transaction will be attached to the 'history' data field.
+    * You may specify one or more of the following values in the '$include' parameter to fetch additional nested data, using commas to separate multiple values:
+    *  
+    * * Lines
+    * * Details (implies lines)
+    * * Summary (implies details)
+    * * Addresses
+     *
+     * 
+     * @param string $companyCode The company code of the company that recorded this transaction
+     * @param string $transactionCode The transaction code to retrieve
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @return TransactionModel
+     */
+    public function getTransactionByCode($companyCode, $transactionCode, $include)
+    {
+        $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}";
+        $guzzleParams = [
+            'query' => ['$include' => $include],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single transaction by code
+     *
+     * Get the current transaction identified by this URL.
+    * If this transaction was adjusted, the return value of this API will be the current transaction with this code, and previous revisions of
+    * the transaction will be attached to the 'history' data field.
+    * You may specify one or more of the following values in the '$include' parameter to fetch additional nested data, using commas to separate multiple values:
+    *  
+    * * Lines
+    * * Details (implies lines)
+    * * Summary (implies details)
+    * * Addresses
+     *
+     * 
+     * @param string $companyCode The company code of the company that recorded this transaction
+     * @param string $transactionCode The transaction code to retrieve
+     * @param string $documentType The transaction type to retrieve (See DocumentType::* for a list of allowable values)
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @return TransactionModel
+     */
+    public function getTransactionByCodeAndType($companyCode, $transactionCode, $documentType, $include)
+    {
+        $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/types/{$documentType}";
+        $guzzleParams = [
+            'query' => ['$include' => $include],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single transaction by ID
+     *
+     * Get the unique transaction identified by this URL.
+    * This endpoint retrieves the exact transaction identified by this ID number even if that transaction was later adjusted
+    * by using the 'Adjust Transaction' endpoint.
+    * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
+    * sales, purchases, inventory transfer, and returns (also called refunds).
+    * You may specify one or more of the following values in the '$include' parameter to fetch additional nested data, using commas to separate multiple values:
+    *  
+    * * Lines
+    * * Details (implies lines)
+    * * Summary (implies details)
+    * * Addresses
+     *
+     * 
+     * @param int $id The unique ID number of the transaction to retrieve
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @return TransactionModel
+     */
+    public function getTransactionById($id, $include)
+    {
+        $path = "/api/v2/transactions/{$id}";
+        $guzzleParams = [
+            'query' => ['$include' => $include],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all transactions
+     *
+     * List all transactions attached to this company.
+    * This endpoint is limited to returning 1,000 transactions at a time maximum.
+    * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
+    * sales, purchases, inventory transfer, and returns (also called refunds).
+    * 
+    * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+    * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+    * You may specify one or more of the following values in the `$include` parameter to fetch additional nested data, using commas to separate multiple values:
+    *  
+    * * Lines
+    * * Details (implies lines)
+    * * Summary (implies details)
+    * * Addresses
+     *
+     * 
+     * @param string $companyCode The company code of the company that recorded this transaction
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listTransactionsByCompany($companyCode, $include, $filter, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/companies/{$companyCode}/transactions";
+        $guzzleParams = [
+            'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Lock a single transaction
+     *
+     * Lock a transaction uniquely identified by this URL. 
+    * 
+    * This API is mainly used for connector developer to simulate what happens when Returns product locks a document.
+    * After this API call succeeds, the document will be locked and can't be voided or adjusted.
+    * 
+    * This API is only available to customers in Sandbox with AvaTaxPro subscription. On production servers, this API is available by invitation only.
+    * 
+    * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
+    * sales, purchases, inventory transfer, and returns (also called refunds).
+     *
+     * 
+     * @param string $companyCode The company code of the company that recorded this transaction
+     * @param string $transactionCode The transaction code to lock
+     * @param LockTransactionModel $model The lock request you wish to execute
+     * @return TransactionModel
+     */
+    public function lockTransaction($companyCode, $transactionCode, $model)
+    {
+        $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/lock";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Create a refund for a transaction
+     *
+     * Create a refund for a transaction.
+    * 
+    * The `RefundTransaction` API allows you to quickly and easily create a `ReturnInvoice` representing a refund
+    * for a previously created `SalesInvoice` transaction. You can choose to create a full or partial refund, and
+    * specify individual line items from the original sale for refund.
+    * 
+    * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
+    * sales, purchases, inventory transfer, and returns (also called refunds).
+    * You may specify one or more of the following values in the '$include' parameter to fetch additional nested data, using commas to separate multiple values:
+    *  
+    * * Lines
+    * * Details (implies lines)
+    * * Summary (implies details)
+    * * Addresses
+    *  
+    * If you don't specify '$include' parameter, it will include both details and addresses.
+     *
+     * 
+     * @param string $companyCode The code of the company that made the original sale
+     * @param string $transactionCode The transaction code of the original sale
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param RefundTransactionModel $model Information about the refund to create
+     * @return TransactionModel
+     */
+    public function refundTransaction($companyCode, $transactionCode, $include, $model)
+    {
+        $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/refund";
+        $guzzleParams = [
+            'query' => ['$include' => $include],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Perform multiple actions on a transaction
+     *
+     * Performs the same functions as /verify, /changecode, and /commit. You may specify one or many actions in each call to this endpoint.
+     *
+     * 
+     * @param string $companyCode The company code of the company that recorded this transaction
+     * @param string $transactionCode The transaction code to settle
+     * @param SettleTransactionModel $model The settle request containing the actions you wish to execute
+     * @return TransactionModel
+     */
+    public function settleTransaction($companyCode, $transactionCode, $model)
+    {
+        $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/settle";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Verify a transaction
+     *
+     * Verifies that the transaction uniquely identified by this URL matches certain expected values.
+    * If the transaction does not match these expected values, this API will return an error code indicating which value did not match.
+    * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
+    * sales, purchases, inventory transfer, and returns (also called refunds).
+     *
+     * 
+     * @param string $companyCode The company code of the company that recorded this transaction
+     * @param string $transactionCode The transaction code to settle
+     * @param VerifyTransactionModel $model The settle request you wish to execute
+     * @return TransactionModel
+     */
+    public function verifyTransaction($companyCode, $transactionCode, $model)
+    {
+        $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/verify";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Void a transaction
+     *
+     * Voids the current transaction uniquely identified by this URL.
+    * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
+    * sales, purchases, inventory transfer, and returns (also called refunds).
+    * When you void a transaction, that transaction's status is recorded as 'DocVoided'.
+    * Transactions that have been previously reported to a tax authority by Avalara Managed Returns are no longer available to be voided.
+     *
+     * 
+     * @param string $companyCode The company code of the company that recorded this transaction
+     * @param string $transactionCode The transaction code to void
+     * @param VoidTransactionModel $model The void request you wish to execute
+     * @return TransactionModel
+     */
+    public function voidTransaction($companyCode, $transactionCode, $model)
+    {
+        $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/void";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Create a new UPC
+     *
+     * Create one or more new UPC objects attached to this company.
+    * A UPC represents a single UPC code in your catalog and matches this product to the tax code identified by this UPC.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this UPC.
+     * @param UPCModel[] $model The UPC you wish to create.
+     * @return UPCModel[]
+     */
+    public function createUPCs($companyId, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/upcs";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Delete a single UPC
+     *
+     * Marks the UPC object identified by this URL as deleted.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this UPC.
+     * @param int $id The ID of the UPC you wish to delete.
+     * @return ErrorDetail[]
+     */
+    public function deleteUPC($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/upcs/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single UPC
+     *
+     * Get the UPC object identified by this URL.
+    * A UPC represents a single UPC code in your catalog and matches this product to the tax code identified by this UPC.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this UPC
+     * @param int $id The primary key of this UPC
+     * @return UPCModel
+     */
+    public function getUPC($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/upcs/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve UPCs for this company
+     *
+     * List all UPC objects attached to this company.
+    * A UPC represents a single UPC code in your catalog and matches this product to the tax code identified by this UPC.
+    * 
+    * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+    * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns these UPCs
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listUPCsByCompany($companyId, $filter, $include, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/companies/{$companyId}/upcs";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all UPCs
+     *
+     * Get multiple UPC objects across all companies.
+    * A UPC represents a single UPC code in your catalog and matches this product to the tax code identified by this UPC.
+    * 
+    * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+    * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function queryUPCs($filter, $include, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/upcs";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Update a single UPC
+     *
+     * Replace the existing UPC object at this URL with an updated object.
+    * A UPC represents a single UPC code in your catalog and matches this product to the tax code identified by this UPC.
+    * All data from the existing object will be replaced with data in the object you PUT. 
+    * To set a field's value to null, you may either set its value to null or omit that field from the object you post.
+     *
+     * 
+     * @param int $companyId The ID of the company that this UPC belongs to.
+     * @param int $id The ID of the UPC you wish to update
+     * @param UPCModel $model The UPC you wish to update.
+     * @return UPCModel
+     */
+    public function updateUPC($companyId, $id, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/upcs/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single user
+     *
+     * Get the user object identified by this URL.
+    * A user represents one person with access privileges to make API calls and work with a specific account.
+     *
+     * 
+     * @param int $id The ID of the user to retrieve.
+     * @param int $accountId The accountID of the user you wish to get.
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @return UserModel
+     */
+    public function getUser($id, $accountId, $include)
+    {
+        $path = "/api/v2/accounts/{$accountId}/users/{$id}";
+        $guzzleParams = [
+            'query' => ['$include' => $include],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all entitlements for a single user
+     *
+     * Return a list of all entitlements to which this user has rights to access.
+    * Entitlements are a list of specified API calls the user is permitted to make, a list of identifier numbers for companies the user is 
+    * allowed to use, and an access level identifier that indicates what types of access roles the user is allowed to use.
+    * This API call is intended to provide a validation endpoint to determine, before making an API call, whether this call is likely to succeed.
+    * For example, if user 567 within account 999 is attempting to create a new child company underneath company 12345, you could preview the user's
+    * entitlements and predict whether this call would succeed:
+    *  
+    * * Retrieve entitlements by calling '/api/v2/accounts/999/users/567/entitlements' . If the call fails, you do not have accurate 
+    *  credentials for this user.
+    * * If the 'accessLevel' field within entitlements is 'None', the call will fail.
+    * * If the 'accessLevel' field within entitlements is 'SingleCompany' or 'SingleAccount', the call will fail if the companies
+    *  table does not contain the ID number 12345.
+    * * If the 'permissions' array within entitlements does not contain 'AccountSvc.CompanySave', the call will fail.
+    *  
+    * For a full list of defined permissions, please use '/api/v2/definitions/permissions' .
+     *
+     * 
+     * @param int $id The ID of the user to retrieve.
+     * @param int $accountId The accountID of the user you wish to get.
+     * @return UserEntitlementModel
+     */
+    public function getUserEntitlements($id, $accountId)
+    {
+        $path = "/api/v2/accounts/{$accountId}/users/{$id}/entitlements";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve users for this account
+     *
+     * List all user objects attached to this account.
+    * A user represents one person with access privileges to make API calls and work with a specific account.
+    * 
+    * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+    * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     *
+     * 
+     * @param int $accountId The accountID of the user you wish to list.
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listUsersByAccount($accountId, $include, $filter, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/accounts/{$accountId}/users";
+        $guzzleParams = [
+            'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all users
+     *
+     * Get multiple user objects across all accounts.
+    * A user represents one person with access privileges to make API calls and work with a specific account.
+    * 
+    * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+    * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     *
+     * 
+     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function queryUsers($include, $filter, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/users";
+        $guzzleParams = [
+            'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Update a single user
+     *
+     * Replace the existing user object at this URL with an updated object.
+    * A user represents one person with access privileges to make API calls and work with a specific account.
+    * All data from the existing object will be replaced with data in the object you PUT. 
+    * To set a field's value to null, you may either set its value to null or omit that field from the object you post.
+     *
+     * 
+     * @param int $id The ID of the user you wish to update.
+     * @param int $accountId The accountID of the user you wish to update.
+     * @param UserModel $model The user object you wish to update.
+     * @return UserModel
+     */
+    public function updateUser($id, $accountId, $model)
+    {
+        $path = "/api/v2/accounts/{$accountId}/users/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
 
     /**
      * Checks if the current user is subscribed to a specific service
@@ -7311,6 +12757,7 @@ class ErrorCodeId
     const C_INVALIDCONFIGURATIONSETTING = "InvalidConfigurationSetting";
     const C_INVALIDCONFIGURATIONVALUE = "InvalidConfigurationValue";
     const C_INVALIDENUMVALUE = "InvalidEnumValue";
+    const C_TAXCODEASSOCIATEDTAXRULE = "TaxCodeAssociatedTaxRule";
     const C_BATCHSALESAUDITMUSTBEZIPPEDERROR = "BatchSalesAuditMustBeZippedError";
     const C_BATCHZIPMUSTCONTAINONEFILEERROR = "BatchZipMustContainOneFileError";
     const C_BATCHINVALIDFILETYPEERROR = "BatchInvalidFileTypeError";
