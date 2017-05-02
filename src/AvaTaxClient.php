@@ -94,7 +94,14 @@ class AvaTaxClient
         return $this;
     }
 
-
+    /**
+     * 
+     * @return \GuzzleHttp\ClientInterface
+     */
+    public function getHttpClient()
+    {
+        return $this->client;
+    }
 
     /**
      * Retrieve all accounts
