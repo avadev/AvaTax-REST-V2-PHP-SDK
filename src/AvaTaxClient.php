@@ -12274,7 +12274,7 @@ class TransactionBuilder
      */
     public function withItemDiscount($discounted)
     {
-        $l = GetMostRecentLine("WithItemDiscount");
+        $l = $this->GetMostRecentLine("WithItemDiscount");
         $l['discounted'] = $discounted;
         return $this;
     }
@@ -12326,7 +12326,7 @@ class TransactionBuilder
      */
     public function withLineParameter($name, $value)
     {
-        $l = GetMostRecentLine("WithLineParameter");
+        $l = $this->GetMostRecentLine("WithLineParameter");
         if (empty($l['parameters'])) $l['parameters'] = [];
         $l[$name] = $value;
         return $this;
