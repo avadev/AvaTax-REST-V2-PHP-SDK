@@ -12466,15 +12466,17 @@ class TransactionBuilder
      * @param   float               $amount      Value of the item.
      * @param   float               $quantity    Quantity of the item.
      * @param   string              $taxCode     Tax Code of the item. If left blank, the default item (P0000000) is assumed.
+     * @param   string              $itemCode    Item code/id in your application.
      * @return  TransactionBuilder
      */
-    public function withLine($amount, $quantity, $taxCode)
+    public function withLine($amount, $quantity, $taxCode, $itemCode = '')
     {
         $l = [
             'number' => $this->_line_number,
             'quantity' => $quantity,
             'amount' => $amount,
-            'taxCode' => $taxCode
+            'taxCode' => $taxCode,
+            'itemCode' => $itemCode
         ];
         array_push($this->_model['lines'], $l);
         $this->_line_number++;
