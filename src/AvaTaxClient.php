@@ -12274,7 +12274,7 @@ class TransactionBuilder
      */
     public function withItemDiscount($discounted)
     {
-        $l = $this->GetMostRecentLine("WithItemDiscount");
+        $l = $this->getMostRecentLine("WithItemDiscount");
         $l['discounted'] = $discounted;
         return $this;
     }
@@ -12326,7 +12326,7 @@ class TransactionBuilder
      */
     public function withLineParameter($name, $value)
     {
-        $l = $this->GetMostRecentLine("WithLineParameter");
+        $l = $this->getMostRecentLine("WithLineParameter");
         if (empty($l['parameters'])) $l['parameters'] = [];
         $l[$name] = $value;
         return $this;
@@ -12393,7 +12393,7 @@ class TransactionBuilder
      */
     public function withLineAddress($type, $line1, $line2, $line3, $city, $region, $postalCode, $country)
     {
-        $line = $this->GetMostRecentLine("WithLineAddress");
+        $line = $this->getMostRecentLine("WithLineAddress");
         $line['addresses'][$type] = [
             'line1' => $line1,
             'line2' => $line2,
@@ -12448,7 +12448,7 @@ class TransactionBuilder
             throw new Exception("A valid date is required for a Tax Date Tax Override.");
         }
 
-        $line = $this->GetMostRecentLine("WithLineTaxOverride");
+        $line = $this->getMostRecentLine("WithLineTaxOverride");
         $line['taxOverride'] = [
             'type' => $type,
             'reason' => $reason,
