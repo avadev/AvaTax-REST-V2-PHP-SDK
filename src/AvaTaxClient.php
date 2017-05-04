@@ -12316,6 +12316,18 @@ class TransactionBuilder
     }
 
     /**
+     * Set the exemptionNo
+     *
+     * @param   string              Exemption Number for this document
+     * @return  TransactionBuilder
+     */
+    public function withExemptionNo($exemptionNo)
+    {
+        $this->_model['exemptionNo'] = $exemptionNo;
+        return $this;
+    }
+
+    /**
      * Add a parameter at the document level
      *
      * @param   string              name
