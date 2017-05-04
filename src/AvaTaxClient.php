@@ -12304,6 +12304,18 @@ class TransactionBuilder
     }
 
     /**
+     * Set the currencyCode
+     *
+     * @param   string              3 character ISO 4217 currency code.
+     * @return  TransactionBuilder
+     */
+    public function withCurrencyCode($currencyCode)
+    {
+        $this->_model['currencyCode'] = $currencyCode;
+        return $this;
+    }
+
+    /**
      * Add a parameter at the document level
      *
      * @param   string              name
