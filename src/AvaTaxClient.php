@@ -94,7 +94,14 @@ class AvaTaxClient
         return $this;
     }
 
-
+    /**
+     * 
+     * @return \GuzzleHttp\ClientInterface
+     */
+    public function getHttpClient()
+    {
+        return $this->client;
+    }
 
     /**
      * Retrieve all accounts
@@ -12267,7 +12274,7 @@ class TransactionBuilder
      */
     public function withItemDiscount($discounted)
     {
-        $l = GetMostRecentLine("WithItemDiscount");
+        $l = $this->getMostRecentLine("WithItemDiscount");
         $l['discounted'] = $discounted;
         return $this;
     }
@@ -12297,6 +12304,30 @@ class TransactionBuilder
     }
 
     /**
+     * Set the currencyCode
+     *
+     * @param   string              3 character ISO 4217 currency code.
+     * @return  TransactionBuilder
+     */
+    public function withCurrencyCode($currencyCode)
+    {
+        $this->_model['currencyCode'] = $currencyCode;
+        return $this;
+    }
+
+    /**
+     * Set the exemptionNo
+     *
+     * @param   string              Exemption Number for this document
+     * @return  TransactionBuilder
+     */
+    public function withExemptionNo($exemptionNo)
+    {
+        $this->_model['exemptionNo'] = $exemptionNo;
+        return $this;
+    }
+
+    /**
      * Add a parameter at the document level
      *
      * @param   string              name
@@ -12319,7 +12350,7 @@ class TransactionBuilder
      */
     public function withLineParameter($name, $value)
     {
-        $l = GetMostRecentLine("WithLineParameter");
+        $l = $this->getMostRecentLine("WithLineParameter");
         if (empty($l['parameters'])) $l['parameters'] = [];
         $l[$name] = $value;
         return $this;
@@ -12386,7 +12417,7 @@ class TransactionBuilder
      */
     public function withLineAddress($type, $line1, $line2, $line3, $city, $region, $postalCode, $country)
     {
-        $line = $this->GetMostRecentLine("WithLineAddress");
+        $line = $this->getMostRecentLine("WithLineAddress");
         $line['addresses'][$type] = [
             'line1' => $line1,
             'line2' => $line2,
@@ -12441,7 +12472,7 @@ class TransactionBuilder
             throw new Exception("A valid date is required for a Tax Date Tax Override.");
         }
 
-        $line = $this->GetMostRecentLine("WithLineTaxOverride");
+        $line = $this->getMostRecentLine("WithLineTaxOverride");
         $line['taxOverride'] = [
             'type' => $type,
             'reason' => $reason,
@@ -12459,15 +12490,17 @@ class TransactionBuilder
      * @param   float               $amount      Value of the item.
      * @param   float               $quantity    Quantity of the item.
      * @param   string              $taxCode     Tax Code of the item. If left blank, the default item (P0000000) is assumed.
+     * @param   string              $itemCode    Item code/id in your application.
      * @return  TransactionBuilder
      */
-    public function withLine($amount, $quantity, $taxCode)
+    public function withLine($amount, $quantity, $taxCode, $itemCode = '')
     {
         $l = [
             'number' => $this->_line_number,
             'quantity' => $quantity,
             'amount' => $amount,
-            'taxCode' => $taxCode
+            'taxCode' => $taxCode,
+            'itemCode' => $itemCode
         ];
         array_push($this->_model['lines'], $l);
         $this->_line_number++;
