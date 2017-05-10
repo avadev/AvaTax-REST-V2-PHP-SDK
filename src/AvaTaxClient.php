@@ -14,7 +14,7 @@ namespace Avalara;
  * @author     Bob Maidens <bob.maidens@avalara.com>
  * @copyright  2004-2017 Avalara, Inc.
  * @license    https://www.apache.org/licenses/LICENSE-2.0
- * @version    17.5.0-511
+ * @version    17.5.0-67
  * @link       https://github.com/avadev/AvaTax-REST-V2-PHP-SDK
  */
 
@@ -65,7 +65,7 @@ class AvaTaxClient
         // Set client options
         $this->client->setDefaultOption('headers', array(
             'Accept' => 'application/json',
-            'X-Avalara-Client' => "{$appName}; {$appVersion}; PhpRestClient; 17.5.0-511; {$machineName}"));
+            'X-Avalara-Client' => "{$appName}; {$appVersion}; PhpRestClient; 17.5.0-67; {$machineName}"));
     }
 
     /**
@@ -94,14 +94,7 @@ class AvaTaxClient
         return $this;
     }
 
-    /**
-     * 
-     * @return \GuzzleHttp\ClientInterface
-     */
-    public function getHttpClient()
-    {
-        return $this->client;
-    }
+
 
     /**
      * Reset this account's license key
@@ -118,6 +111,32 @@ class AvaTaxClient
     public function accountResetLicenseKey($id, $model)
     {
         $path = "/api/v2/accounts/{$id}/resetlicensekey";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Activate an account by accepting terms and conditions
+     *
+     * Activate the account specified by the unique accountId number.
+     * 
+     * This activation request can only be called by account administrators. You must indicate 
+     * that you have read and accepted Avalara's terms and conditions to call this API.
+     * 
+     * If you have not read or accepted the terms and conditions, this API call will return the
+     * unchanged account model.
+     *
+     * 
+     * @param int $id The ID of the account to activate
+     * @param ActivateAccountModel $model The activation request
+     * @return AccountModel
+     */
+    public function activateAccount($id, $model)
+    {
+        $path = "/api/v2/accounts/{$id}/activate";
         $guzzleParams = [
             'query' => [],
             'body' => json_encode($model)
@@ -6089,6 +6108,24 @@ Each account can only have one license key at a time.
 should use when contacting Avalara to make API calls with this license key.
      */
     public $httpRequestHeader;
+
+}
+
+/**
+ * Represents a request to activate an account by reading and accepting its terms and conditions.
+ */
+class ActivateAccountModel
+{
+
+    /**
+     * @var boolean Set this to true if and only if you accept Avalara's terms and conditions for your account.
+     */
+    public $acceptAvalaraTermsAndConditions;
+
+    /**
+     * @var boolean Set this to true if and only if you have fully read Avalara's terms and conditions for your account.
+     */
+    public $haveReadAvalaraTermsAndConditions;
 
 }
 
@@ -13045,6 +13082,7 @@ class ErrorCodeId
     const C_INVALIDCONFIGURATIONVALUE = "InvalidConfigurationValue";
     const C_INVALIDENUMVALUE = "InvalidEnumValue";
     const C_TAXCODEASSOCIATEDTAXRULE = "TaxCodeAssociatedTaxRule";
+    const C_CANNOTSWITCHACCOUNTID = "CannotSwitchAccountId";
 
     /**
      * Batch errors
@@ -14715,7 +14753,7 @@ class TransactionBuilder
      */
     public function withItemDiscount($discounted)
     {
-        $l = $this->getMostRecentLine("WithItemDiscount");
+        $l = GetMostRecentLine("WithItemDiscount");
         $l['discounted'] = $discounted;
         return $this;
     }
@@ -14745,30 +14783,6 @@ class TransactionBuilder
     }
 
     /**
-     * Set the currencyCode
-     *
-     * @param   string              3 character ISO 4217 currency code.
-     * @return  TransactionBuilder
-     */
-    public function withCurrencyCode($currencyCode)
-    {
-        $this->_model['currencyCode'] = $currencyCode;
-        return $this;
-    }
-
-    /**
-     * Set the exemptionNo
-     *
-     * @param   string              Exemption Number for this document
-     * @return  TransactionBuilder
-     */
-    public function withExemptionNo($exemptionNo)
-    {
-        $this->_model['exemptionNo'] = $exemptionNo;
-        return $this;
-    }
-
-    /**
      * Add a parameter at the document level
      *
      * @param   string              name
@@ -14791,7 +14805,7 @@ class TransactionBuilder
      */
     public function withLineParameter($name, $value)
     {
-        $l = $this->getMostRecentLine("WithLineParameter");
+        $l = GetMostRecentLine("WithLineParameter");
         if (empty($l['parameters'])) $l['parameters'] = [];
         $l[$name] = $value;
         return $this;
@@ -14858,7 +14872,7 @@ class TransactionBuilder
      */
     public function withLineAddress($type, $line1, $line2, $line3, $city, $region, $postalCode, $country)
     {
-        $line = $this->getMostRecentLine("WithLineAddress");
+        $line = $this->GetMostRecentLine("WithLineAddress");
         $line['addresses'][$type] = [
             'line1' => $line1,
             'line2' => $line2,
@@ -14913,7 +14927,7 @@ class TransactionBuilder
             throw new Exception("A valid date is required for a Tax Date Tax Override.");
         }
 
-        $line = $this->getMostRecentLine("WithLineTaxOverride");
+        $line = $this->GetMostRecentLine("WithLineTaxOverride");
         $line['taxOverride'] = [
             'type' => $type,
             'reason' => $reason,
@@ -14931,17 +14945,15 @@ class TransactionBuilder
      * @param   float               $amount      Value of the item.
      * @param   float               $quantity    Quantity of the item.
      * @param   string              $taxCode     Tax Code of the item. If left blank, the default item (P0000000) is assumed.
-     * @param   string              $itemCode    Item code/id in your application.
      * @return  TransactionBuilder
      */
-    public function withLine($amount, $quantity, $taxCode, $itemCode = '')
+    public function withLine($amount, $quantity, $taxCode)
     {
         $l = [
             'number' => $this->_line_number,
             'quantity' => $quantity,
             'amount' => $amount,
-            'taxCode' => $taxCode,
-            'itemCode' => $itemCode
+            'taxCode' => $taxCode
         ];
         array_push($this->_model['lines'], $l);
         $this->_line_number++;
