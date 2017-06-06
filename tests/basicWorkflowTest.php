@@ -12,7 +12,6 @@ final class AvaTaxClientTest extends TestCase
         // Create a new client
         $client = new Avalara\AvaTaxClient('phpTestApp', '1.0', 'travis-ci', 'sandbox');
         $client->withSecurity(getenv('SANDBOX_USERNAME'), getenv('SANDBOX_PASSWORD'));
-
         // Call 'Ping' to verify that we are connected
         $p = $client->Ping();
         $this->assertNotNull($p, "Should be able to call Ping");

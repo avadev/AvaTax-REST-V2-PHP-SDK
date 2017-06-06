@@ -39,6 +39,16 @@ class AvaTaxClient
      */
     private $auth;
 
+
+    private $appName;
+
+
+    private $appVersion;
+
+    private $machineName;
+
+    private $environment;
+
     /**
      * Construct a new AvaTaxClient 
      *
@@ -49,6 +59,12 @@ class AvaTaxClient
      */
     public function __construct($appName, $appVersion, $machineName, $environment)
     {
+
+        $this->appName = $appName;
+        $this->appVersion = $appVersion;
+        $this->machineName = $machineName;
+        $this->environment = $environment;
+
         // Determine startup environment
         $env = 'https://rest.avatax.com';
         if ($environment == "sandbox") {
@@ -59,13 +75,8 @@ class AvaTaxClient
 
         // Configure the HTTP client
         $this->client = new Client([
-            'base_url' => $env
+            'base_uri' => $env
         ]);
-        
-        // Set client options
-        $this->client->setDefaultOption('headers', array(
-            'Accept' => 'application/json',
-            'X-Avalara-Client' => "{$appName}; {$appVersion}; PhpRestClient; 17.5.0-67; {$machineName}"));
     }
 
     /**
@@ -5644,11 +5655,14 @@ class AvaTaxClient
         if (!isset($guzzleParams['auth'])){
             $guzzleParams['auth'] = $this->auth;
         }
-    
+        $guzzleParams['headers'] = [
+            'Accept' => 'application/json',
+            'X-Avalara-Client' => "{$this->appName}; {$this->appVersion}; PhpRestClient; 17.5.0-67; {$this->machineName}"
+        ];
+
         // Contact the server
         try {
-            $request = $this->client->createRequest($verb, $apiUrl, $guzzleParams);
-            $response = $this->client->send($request);
+            $response = $this->client->request($verb, $apiUrl, $guzzleParams);
             $body = $response->getBody();
             return json_decode($body);
 
