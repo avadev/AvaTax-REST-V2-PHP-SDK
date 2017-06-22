@@ -14,7 +14,7 @@ namespace Avalara;
  * @author     Bob Maidens <bob.maidens@avalara.com>
  * @copyright  2004-2017 Avalara, Inc.
  * @license    https://www.apache.org/licenses/LICENSE-2.0
- * @version    17.6.0-85
+ * @version    17.6.0-89
  * @link       https://github.com/avadev/AvaTax-REST-V2-PHP-SDK
  */
 
@@ -65,7 +65,7 @@ class AvaTaxClient
         // Set client options
         $this->client->setDefaultOption('headers', array(
             'Accept' => 'application/json',
-            'X-Avalara-Client' => "{$appName}; {$appVersion}; PhpRestClient; 17.6.0-85; {$machineName}"));
+            'X-Avalara-Client' => "{$appName}; {$appVersion}; PhpRestClient; 17.6.0-89; {$machineName}"));
     }
 
     /**
@@ -6415,47 +6415,47 @@ class AddressValidationInfo
     public $textCase;
 
     /**
-     * @var string Line1
+     * @var string First line of the street address
      */
     public $line1;
 
     /**
-     * @var string Line2
+     * @var string Second line of the street address
      */
     public $line2;
 
     /**
-     * @var string Line3
+     * @var string Third line of the street address
      */
     public $line3;
 
     /**
-     * @var string City
+     * @var string City component of the address
      */
     public $city;
 
     /**
-     * @var string State / Province / Region
+     * @var string State / Province / Region component of the address.
      */
     public $region;
 
     /**
-     * @var string Two character ISO 3166 Country Code
+     * @var string Two character ISO 3166 Country Code. Call `ListCountries` for a list of ISO 3166 country codes.
      */
     public $country;
 
     /**
-     * @var string Postal Code / Zip Code
+     * @var string Postal Code / Zip Code component of the address.
      */
     public $postalCode;
 
     /**
-     * @var float Geospatial latitude measurement
+     * @var float Geospatial latitude measurement, in Decimal Degrees floating point format.
      */
     public $latitude;
 
     /**
-     * @var float Geospatial longitude measurement
+     * @var float Geospatial longitude measurement, in Decimal Degrees floating point format.
      */
     public $longitude;
 
@@ -6500,53 +6500,53 @@ class AddressResolutionModel
 }
 
 /**
- * Represents an address to resolve.
+ * Represents a base address element.
  */
 class AddressInfo
 {
 
     /**
-     * @var string Line1
+     * @var string First line of the street address
      */
     public $line1;
 
     /**
-     * @var string Line2
+     * @var string Second line of the street address
      */
     public $line2;
 
     /**
-     * @var string Line3
+     * @var string Third line of the street address
      */
     public $line3;
 
     /**
-     * @var string City
+     * @var string City component of the address
      */
     public $city;
 
     /**
-     * @var string State / Province / Region
+     * @var string State / Province / Region component of the address.
      */
     public $region;
 
     /**
-     * @var string Two character ISO 3166 Country Code
+     * @var string Two character ISO 3166 Country Code. Call `ListCountries` for a list of ISO 3166 country codes.
      */
     public $country;
 
     /**
-     * @var string Postal Code / Zip Code
+     * @var string Postal Code / Zip Code component of the address.
      */
     public $postalCode;
 
     /**
-     * @var float Geospatial latitude measurement
+     * @var float Geospatial latitude measurement, in Decimal Degrees floating point format.
      */
     public $latitude;
 
     /**
-     * @var float Geospatial longitude measurement
+     * @var float Geospatial longitude measurement, in Decimal Degrees floating point format.
      */
     public $longitude;
 
@@ -6570,47 +6570,47 @@ class ValidatedAddressInfo
     public $addressType;
 
     /**
-     * @var string Line1
+     * @var string First line of the street address
      */
     public $line1;
 
     /**
-     * @var string Line2
+     * @var string Second line of the street address
      */
     public $line2;
 
     /**
-     * @var string Line3
+     * @var string Third line of the street address
      */
     public $line3;
 
     /**
-     * @var string City
+     * @var string City component of the address
      */
     public $city;
 
     /**
-     * @var string State / Province / Region
+     * @var string State / Province / Region component of the address.
      */
     public $region;
 
     /**
-     * @var string Two character ISO 3166 Country Code
+     * @var string Two character ISO 3166 Country Code. Call `ListCountries` for a list of ISO 3166 country codes.
      */
     public $country;
 
     /**
-     * @var string Postal Code / Zip Code
+     * @var string Postal Code / Zip Code component of the address.
      */
     public $postalCode;
 
     /**
-     * @var float Geospatial latitude measurement
+     * @var float Geospatial latitude measurement, in Decimal Degrees floating point format.
      */
     public $latitude;
 
     /**
-     * @var float Geospatial longitude measurement
+     * @var float Geospatial longitude measurement, in Decimal Degrees floating point format.
      */
     public $longitude;
 
@@ -11583,23 +11583,23 @@ point of presence in this jurisdiction on this date.
 }
 
 /**
- * Rate Model
+ * Indicates one element of a sales tax rate.
  */
 class RateModel
 {
 
     /**
-     * @var float Rate
+     * @var float The sales tax rate for general tangible personal property in this jurisdiction.
      */
     public $rate;
 
     /**
-     * @var string Name
+     * @var string A readable name of the tax or taxing jurisdiction related to this tax rate.
      */
     public $name;
 
     /**
-     * @var string Type (See JurisdictionType::* for a list of allowable values)
+     * @var string The type of jurisdiction associated with this tax rate. (See JurisdictionType::* for a list of allowable values)
      */
     public $type;
 
@@ -12835,34 +12835,46 @@ To get a full list of available parameters, please use the /api/v2/definitions/p
 }
 
 /**
- * A series of addresses information in a GetTax call
+ * Information about all the addresses involved in this transaction.
+ * 
+ * For a physical in-person transaction at a retail point-of-sale location, please specify only one address using
+ * the `singleLocation` field.
+ * 
+ * For a transaction that was shipped, delivered, or provided from an origin location such as a warehouse to
+ * a destination location such as a customer, please specify the `shipFrom` and `shipTo` addresses.
+ * 
+ * In the United States, some jurisdictions recognize the address types `pointOfOrderOrigin` and `pointOfOrderAcceptance`.
+ * These address types affect the sourcing models of some transactions.
  */
 class AddressesModel
 {
 
     /**
-     * @var object If this transaction occurred at a retail point-of-sale location, use this
+     * @var object If this transaction occurred at a retail point-of-sale location, provide that single address here and leave
+all other address types null.
      */
     public $singleLocation;
 
     /**
-     * @var object If this transaction was shipped from a warehouse location to a customer location, specify both "ShipFrom" and "ShipTo".
+     * @var object The origination address where the products were shipped from, or from where the services originated.
      */
     public $shipFrom;
 
     /**
-     * @var object If this transaction was shipped from a warehouse location to a customer location, specify both "ShipFrom" and "ShipTo".
+     * @var object The destination address where the products were shipped to, or where the services were delivered.
      */
     public $shipTo;
 
     /**
-     * @var object The place of business where you receive the customer's order.
+     * @var object The place of business where you receive the customer's order. This address type is valid in the United States only
+and only applies to tangible personal property.
      */
     public $pointOfOrderOrigin;
 
     /**
      * @var object The place of business where you accept/approve the customer’s order,
-thereby becoming contractually obligated to make the sale.
+thereby becoming contractually obligated to make the sale. This address type is valid in the United States only
+and only applies to tangible personal property.
      */
     public $pointOfOrderAcceptance;
 
@@ -12921,47 +12933,47 @@ Otherwise, leave this value empty.
     public $locationCode;
 
     /**
-     * @var string Line1
+     * @var string First line of the street address
      */
     public $line1;
 
     /**
-     * @var string Line2
+     * @var string Second line of the street address
      */
     public $line2;
 
     /**
-     * @var string Line3
+     * @var string Third line of the street address
      */
     public $line3;
 
     /**
-     * @var string City
+     * @var string City component of the address
      */
     public $city;
 
     /**
-     * @var string State / Province / Region
+     * @var string State / Province / Region component of the address.
      */
     public $region;
 
     /**
-     * @var string Two character ISO 3166 Country Code
+     * @var string Two character ISO 3166 Country Code. Call `ListCountries` for a list of ISO 3166 country codes.
      */
     public $country;
 
     /**
-     * @var string Postal Code / Zip Code
+     * @var string Postal Code / Zip Code component of the address.
      */
     public $postalCode;
 
     /**
-     * @var float Geospatial latitude measurement
+     * @var float Geospatial latitude measurement, in Decimal Degrees floating point format.
      */
     public $latitude;
 
     /**
-     * @var float Geospatial longitude measurement
+     * @var float Geospatial longitude measurement, in Decimal Degrees floating point format.
      */
     public $longitude;
 
