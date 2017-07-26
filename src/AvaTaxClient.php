@@ -10188,12 +10188,12 @@ class CommunicationsTSPairModel
     /**
      * @var string The name of the transaction type.
      */
-    public $AvaTax.Communications.TransactionType;
+    public $AvaTax_Communications_TransactionType;
 
     /**
      * @var string The name of the service type.
      */
-    public $AvaTax.Communications.ServiceType;
+    public $AvaTax_Communications_ServiceType;
 
     /**
      * @var string The description of the transaction/service type pair.
@@ -10221,7 +10221,7 @@ class CommunicationsTransactionTypeModel
     /**
      * @var string The name of the transaction type.
      */
-    public $AvaTax.Communications.TransactionType;
+    public $AvaTax_Communications_TransactionType;
 
 }
 
