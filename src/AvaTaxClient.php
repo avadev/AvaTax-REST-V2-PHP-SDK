@@ -105,8 +105,8 @@ class AvaTaxClient
      *
      * 
      * @param int $id The ID of the account you wish to update.
-     * @param object $model A request confirming that you wish to reset the license key of this account.
-     * @return object
+     * @param ResetLicenseKeyModel $model A request confirming that you wish to reset the license key of this account.
+     * @return LicenseKeyModel
      */
     public function accountResetLicenseKey($id, $model)
     {
@@ -132,8 +132,8 @@ class AvaTaxClient
      * 
      * @param int $id The ID of the account to activate
      * @param string $include A comma separated list of child objects to return underneath the primary object.
-     * @param object $model The activation request
-     * @return object
+     * @param ActivateAccountModel $model The activation request
+     * @return AccountModel
      */
     public function activateAccount($id, $include, $model)
     {
@@ -157,7 +157,7 @@ class AvaTaxClient
      * 
      * @param int $id The ID of the account to retrieve
      * @param string $include A comma separated list of child objects to return underneath the primary object.
-     * @return object
+     * @return AccountModel
      */
     public function getAccount($id, $include)
     {
@@ -187,7 +187,7 @@ class AvaTaxClient
      *
      * 
      * @param int $id 
-     * @return object[]
+     * @return AccountConfigurationModel[]
      */
     public function getAccountConfiguration($id)
     {
@@ -217,8 +217,8 @@ class AvaTaxClient
      *
      * 
      * @param int $id 
-     * @param object[] $model 
-     * @return object[]
+     * @param AccountConfigurationModel[] $model 
+     * @return AccountConfigurationModel[]
      */
     public function setAccountConfiguration($id, $model)
     {
@@ -251,7 +251,7 @@ class AvaTaxClient
      * @param string $textCase selectable text case for address validation (See TextCase::* for a list of allowable values)
      * @param float $latitude Geospatial latitude measurement
      * @param float $longitude Geospatial longitude measurement
-     * @return object
+     * @return AddressResolutionModel
      */
     public function resolveAddress($line1, $line2, $line3, $city, $region, $postalCode, $country, $textCase, $latitude, $longitude)
     {
@@ -274,8 +274,8 @@ class AvaTaxClient
      * Both verbs are supported to provide for flexible implementation.
      *
      * 
-     * @param object $model The address to resolve
-     * @return object
+     * @param AddressValidationInfo $model The address to resolve
+     * @return AddressResolutionModel
      */
     public function resolveAddressPost($model)
     {
@@ -297,8 +297,8 @@ class AvaTaxClient
      *
      * 
      * @param int $companyId The ID of the company that owns this batch.
-     * @param object[] $model The batch you wish to create.
-     * @return object[]
+     * @param BatchModel[] $model The batch you wish to create.
+     * @return BatchModel[]
      */
     public function createBatches($companyId, $model)
     {
@@ -318,7 +318,7 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this batch.
      * @param int $id The ID of the batch you wish to delete.
-     * @return object[]
+     * @return ErrorDetail[]
      */
     public function deleteBatch($companyId, $id)
     {
@@ -362,7 +362,7 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this batch
      * @param int $id The primary key of this batch
-     * @return object
+     * @return BatchModel
      */
     public function getBatch($companyId, $id)
     {
@@ -451,7 +451,7 @@ class AvaTaxClient
      *
      * 
      * @param int $id 
-     * @param object $model 
+     * @param FilingStatusChangeModel $model 
      * @return string
      */
     public function changeFilingStatus($id, $model)
@@ -480,8 +480,8 @@ class AvaTaxClient
      * If you need additional features or options not present in this 'Quick Setup' API call, please use the full 'Create Company' call instead.
      *
      * 
-     * @param object $model Information about the company you wish to create.
-     * @return object
+     * @param CompanyInitializationModel $model Information about the company you wish to create.
+     * @return CompanyModel
      */
     public function companyInitialize($model)
     {
@@ -501,8 +501,8 @@ class AvaTaxClient
      * You may attach nested data objects such as contacts, locations, and nexus with this CREATE call, and those objects will be created with the company.
      *
      * 
-     * @param object[] $model Either a single company object or an array of companies to create
-     * @return object[]
+     * @param CompanyModel[] $model Either a single company object or an array of companies to create
+     * @return CompanyModel[]
      */
     public function createCompanies($model)
     {
@@ -530,8 +530,8 @@ class AvaTaxClient
      *
      * 
      * @param int $id The unique identifier of the company
-     * @param object $model The funding initialization request
-     * @return object
+     * @param FundingInitiateModel $model The funding initialization request
+     * @return FundingStatusModel
      */
     public function createFundingRequest($id, $model)
     {
@@ -550,7 +550,7 @@ class AvaTaxClient
      *
      * 
      * @param int $id The ID of the company you wish to delete.
-     * @return object[]
+     * @return ErrorDetail[]
      */
     public function deleteCompany($id)
     {
@@ -582,7 +582,7 @@ class AvaTaxClient
      * 
      * @param int $id The ID of the company to retrieve.
      * @param string $include A comma separated list of child objects to return underneath the primary object.
-     * @return object
+     * @return CompanyModel
      */
     public function getCompany($id, $include)
     {
@@ -630,7 +630,7 @@ class AvaTaxClient
      *
      * 
      * @param int $id 
-     * @return object[]
+     * @return CompanyConfigurationModel[]
      */
     public function getCompanyConfiguration($id)
     {
@@ -683,7 +683,7 @@ class AvaTaxClient
      *
      * 
      * @param int $id The unique identifier of the company
-     * @return object[]
+     * @return FundingStatusModel[]
      */
     public function listFundingRequestsByCompany($id)
     {
@@ -750,8 +750,8 @@ class AvaTaxClient
      *
      * 
      * @param int $id 
-     * @param object[] $model 
-     * @return object[]
+     * @param CompanyConfigurationModel[] $model 
+     * @return CompanyConfigurationModel[]
      */
     public function setCompanyConfiguration($id, $model)
     {
@@ -773,8 +773,8 @@ class AvaTaxClient
      *
      * 
      * @param int $id The ID of the company you wish to update.
-     * @param object $model The company object you wish to update.
-     * @return object
+     * @param CompanyModel $model The company object you wish to update.
+     * @return CompanyModel
      */
     public function updateCompany($id, $model)
     {
@@ -795,8 +795,8 @@ class AvaTaxClient
      *
      * 
      * @param int $companyId The ID of the company that owns this contact.
-     * @param object[] $model The contacts you wish to create.
-     * @return object[]
+     * @param ContactModel[] $model The contacts you wish to create.
+     * @return ContactModel[]
      */
     public function createContacts($companyId, $model)
     {
@@ -816,7 +816,7 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this contact.
      * @param int $id The ID of the contact you wish to delete.
-     * @return object[]
+     * @return ErrorDetail[]
      */
     public function deleteContact($companyId, $id)
     {
@@ -838,7 +838,7 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company for this contact
      * @param int $id The primary key of this contact
-     * @return object
+     * @return ContactModel
      */
     public function getContact($companyId, $id)
     {
@@ -917,8 +917,8 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company that this contact belongs to.
      * @param int $id The ID of the contact you wish to update
-     * @param object $model The contact you wish to update.
-     * @return object
+     * @param ContactModel $model The contact you wish to update.
+     * @return ContactModel
      */
     public function updateContact($companyId, $id, $model)
     {
@@ -1366,7 +1366,7 @@ class AvaTaxClient
      * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return object
+     * @return NexusByTaxFormModel
      */
     public function listNexusByFormCode($formCode, $filter, $top, $skip, $orderBy)
     {
@@ -1909,7 +1909,7 @@ class AvaTaxClient
      * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return object
+     * @return TaxCodeTypesModel
      */
     public function listTaxCodeTypes($filter, $top, $skip, $orderBy)
     {
@@ -1978,7 +1978,7 @@ class AvaTaxClient
      * 
      * @param int $companyId The unique ID of the company that owns the filing request object
      * @param int $id The unique ID of the filing request object
-     * @return object
+     * @return FilingRequestModel
      */
     public function approveFilingRequest($companyId, $id)
     {
@@ -2000,7 +2000,7 @@ class AvaTaxClient
      * 
      * @param int $companyId The unique ID of the company that owns the filing request object
      * @param int $id The unique ID of the filing request object
-     * @return object
+     * @return FilingRequestModel
      */
     public function cancelFilingRequest($companyId, $id)
     {
@@ -2023,8 +2023,8 @@ class AvaTaxClient
      * 
      * @param int $companyId The unique ID of the company that owns the filing calendar object
      * @param int $id The unique ID number of the filing calendar to cancel
-     * @param object[] $model The cancellation request for this filing calendar
-     * @return object
+     * @param FilingRequestModel[] $model The cancellation request for this filing calendar
+     * @return FilingRequestModel
      */
     public function cancelFilingRequests($companyId, $id, $model)
     {
@@ -2045,8 +2045,8 @@ class AvaTaxClient
      *
      * 
      * @param int $companyId The unique ID of the company that will add the new filing calendar
-     * @param object[] $model Information about the proposed new filing calendar
-     * @return object
+     * @param FilingRequestModel[] $model Information about the proposed new filing calendar
+     * @return FilingRequestModel
      */
     public function createFilingRequests($companyId, $model)
     {
@@ -2066,7 +2066,7 @@ class AvaTaxClient
      * 
      * @param int $companyId The unique ID of the company that owns the filing calendar object
      * @param string $formCode The unique code of the form
-     * @return object[]
+     * @return CycleAddOptionModel[]
      */
     public function cycleSafeAdd($companyId, $formCode)
     {
@@ -2086,8 +2086,8 @@ class AvaTaxClient
      * 
      * @param int $companyId The unique ID of the company that owns the filing calendar object
      * @param int $id The unique ID of the filing calendar object
-     * @param object[] $model A list of filing calendar edits to be made
-     * @return object
+     * @param FilingCalendarEditModel[] $model A list of filing calendar edits to be made
+     * @return CycleEditOptionModel
      */
     public function cycleSafeEdit($companyId, $id, $model)
     {
@@ -2107,7 +2107,7 @@ class AvaTaxClient
      * 
      * @param int $companyId The unique ID of the company that owns the filing calendar object
      * @param int $id The unique ID of the filing calendar object
-     * @return object
+     * @return CycleExpireModel
      */
     public function cycleSafeExpiration($companyId, $id)
     {
@@ -2130,7 +2130,7 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this filing calendar.
      * @param int $id The ID of the filing calendar you wish to delete.
-     * @return object[]
+     * @return ErrorDetail[]
      */
     public function deleteFilingCalendar($companyId, $id)
     {
@@ -2150,7 +2150,7 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this filing calendar
      * @param int $id The primary key of this filing calendar
-     * @return object
+     * @return FilingCalendarModel
      */
     public function getFilingCalendar($companyId, $id)
     {
@@ -2172,7 +2172,7 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this filing calendar
      * @param int $id The primary key of this filing calendar
-     * @return object
+     * @return FilingRequestModel
      */
     public function getFilingRequest($companyId, $id)
     {
@@ -2242,8 +2242,8 @@ class AvaTaxClient
      * This API verifies that a customer has submitted correct login credentials for a tax authority's online filing system.
      *
      * 
-     * @param object $model The model of the login information we are verifying
-     * @return object
+     * @param LoginVerificationInputModel $model The model of the login information we are verifying
+     * @return LoginVerificationOutputModel
      */
     public function loginVerificationRequest($model)
     {
@@ -2265,7 +2265,7 @@ class AvaTaxClient
      *
      * 
      * @param int $jobId The unique ID number of this login request
-     * @return object
+     * @return LoginVerificationOutputModel
      */
     public function loginVerificationStatus($jobId)
     {
@@ -2342,8 +2342,8 @@ class AvaTaxClient
      * 
      * @param int $companyId The unique ID of the company that owns the filing calendar object
      * @param int $id The unique ID number of the filing calendar to edit
-     * @param object[] $model A list of filing calendar edits to be made
-     * @return object
+     * @param FilingRequestModel[] $model A list of filing calendar edits to be made
+     * @return FilingRequestModel
      */
     public function requestFilingCalendarUpdate($companyId, $id, $model)
     {
@@ -2365,8 +2365,8 @@ class AvaTaxClient
      * 
      * @param int $companyId The unique ID of the company that owns the filing request object
      * @param int $id The unique ID of the filing calendar object
-     * @param object $model The filing calendar model you are wishing to update with.
-     * @return object
+     * @param FilingCalendarModel $model The filing calendar model you are wishing to update with.
+     * @return FilingCalendarModel
      */
     public function updateFilingCalendar($companyId, $id, $model)
     {
@@ -2388,8 +2388,8 @@ class AvaTaxClient
      * 
      * @param int $companyId The unique ID of the company that owns the filing request object
      * @param int $id The unique ID of the filing request object
-     * @param object $model A list of filing calendar edits to be made
-     * @return object
+     * @param FilingRequestModel $model A list of filing calendar edits to be made
+     * @return FilingRequestModel
      */
     public function updateFilingRequest($companyId, $id, $model)
     {
@@ -2416,8 +2416,8 @@ class AvaTaxClient
      * @param int $companyId The ID of the company that owns the filings.
      * @param int $year The year of the filing period to approve.
      * @param int $month The month of the filing period to approve.
-     * @param object $model The approve request you wish to execute.
-     * @return object[]
+     * @param ApproveFilingsModel $model The approve request you wish to execute.
+     * @return FilingModel[]
      */
     public function approveFilings($companyId, $year, $month, $model)
     {
@@ -2445,8 +2445,8 @@ class AvaTaxClient
      * @param int $year The year of the filing period to approve.
      * @param int $month The month of the filing period to approve.
      * @param string $country The two-character ISO-3166 code for the country.
-     * @param object $model The approve request you wish to execute.
-     * @return object[]
+     * @param ApproveFilingsModel $model The approve request you wish to execute.
+     * @return FilingModel[]
      */
     public function approveFilingsCountry($companyId, $year, $month, $country, $model)
     {
@@ -2475,8 +2475,8 @@ class AvaTaxClient
      * @param int $month The month of the filing period to approve.
      * @param string $country The two-character ISO-3166 code for the country.
      * @param string $region The two or three character region code for the region.
-     * @param object $model The approve request you wish to execute.
-     * @return object[]
+     * @param ApproveFilingsModel $model The approve request you wish to execute.
+     * @return FilingModel[]
      */
     public function approveFilingsCountryRegion($companyId, $year, $month, $country, $region, $model)
     {
@@ -2505,8 +2505,8 @@ class AvaTaxClient
      * @param string $country The two-character ISO-3166 code for the country of the filing being adjusted.
      * @param string $region The two or three character region code for the region.
      * @param string $formCode The unique code of the form being adjusted.
-     * @param object[] $model A list of Adjustments to be created for the specified filing.
-     * @return object[]
+     * @param FilingAdjustmentModel[] $model A list of Adjustments to be created for the specified filing.
+     * @return FilingAdjustmentModel[]
      */
     public function createReturnAdjustment($companyId, $year, $month, $country, $region, $formCode, $model)
     {
@@ -2534,8 +2534,8 @@ class AvaTaxClient
      * @param string $country The two-character ISO-3166 code for the country of the filing being changed.
      * @param string $region The two or three character region code for the region of the filing being changed.
      * @param string $formCode The unique code of the form being changed.
-     * @param object[] $model A list of augmentations to be created for the specified filing.
-     * @return object[]
+     * @param FilingAugmentationModel[] $model A list of augmentations to be created for the specified filing.
+     * @return FilingAugmentationModel[]
      */
     public function createReturnAugmentation($companyId, $year, $month, $country, $region, $formCode, $model)
     {
@@ -2564,8 +2564,8 @@ class AvaTaxClient
      * @param string $country The two-character ISO-3166 code for the country of the filing being adjusted.
      * @param string $region The two or three character region code for the region.
      * @param string $formCode The unique code of the form being adjusted.
-     * @param object[] $model A list of Payments to be created for the specified filing.
-     * @return object[]
+     * @param FilingPaymentModel[] $model A list of Payments to be created for the specified filing.
+     * @return FilingPaymentModel[]
      */
     public function createReturnPayment($companyId, $year, $month, $country, $region, $formCode, $model)
     {
@@ -2590,7 +2590,7 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns the filing being adjusted.
      * @param int $id The ID of the adjustment being deleted.
-     * @return object[]
+     * @return ErrorDetail[]
      */
     public function deleteReturnAdjustment($companyId, $id)
     {
@@ -2614,7 +2614,7 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns the filing being changed.
      * @param int $id The ID of the augmentation being added.
-     * @return object[]
+     * @return ErrorDetail[]
      */
     public function deleteReturnAugmentation($companyId, $id)
     {
@@ -2639,7 +2639,7 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns the filing being adjusted.
      * @param int $id The ID of the payment being deleted.
-     * @return object[]
+     * @return ErrorDetail[]
      */
     public function deleteReturnPayment($companyId, $id)
     {
@@ -2659,7 +2659,7 @@ class AvaTaxClient
      * 
      * @param int $filingsId The unique id of the worksheet.
      * @param int $companyId The unique ID of the company that owns the worksheet.
-     * @return object
+     * @return FilingsCheckupModel
      */
     public function filingsCheckupReport($filingsId, $companyId)
     {
@@ -2680,7 +2680,7 @@ class AvaTaxClient
      * @param int $companyId The unique ID of the company that owns the worksheets object.
      * @param int $year The year of the filing period.
      * @param int $month The month of the filing period.
-     * @return object
+     * @return FilingsCheckupModel
      */
     public function filingsCheckupReports($companyId, $year, $month)
     {
@@ -2919,7 +2919,7 @@ class AvaTaxClient
      * @param int $companyId The ID of the company that owns the filings.
      * @param int $year The year of the filing period to be rebuilt.
      * @param int $month The month of the filing period to be rebuilt.
-     * @param object $model The rebuild request you wish to execute.
+     * @param RebuildFilingsModel $model The rebuild request you wish to execute.
      * @return FetchResult
      */
     public function rebuildFilings($companyId, $year, $month, $model)
@@ -2947,7 +2947,7 @@ class AvaTaxClient
      * @param int $year The year of the filing period to be rebuilt.
      * @param int $month The month of the filing period to be rebuilt.
      * @param string $country The two-character ISO-3166 code for the country.
-     * @param object $model The rebuild request you wish to execute.
+     * @param RebuildFilingsModel $model The rebuild request you wish to execute.
      * @return FetchResult
      */
     public function rebuildFilingsByCountry($companyId, $year, $month, $country, $model)
@@ -2976,7 +2976,7 @@ class AvaTaxClient
      * @param int $month The month of the filing period to be rebuilt.
      * @param string $country The two-character ISO-3166 code for the country.
      * @param string $region The two or three character region code for the region.
-     * @param object $model The rebuild request you wish to execute.
+     * @param RebuildFilingsModel $model The rebuild request you wish to execute.
      * @return FetchResult
      */
     public function rebuildFilingsByCountryRegion($companyId, $year, $month, $country, $region, $model)
@@ -3002,8 +3002,8 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns the filing being adjusted.
      * @param int $id The ID of the adjustment being edited.
-     * @param object $model The updated Adjustment.
-     * @return object
+     * @param FilingAdjustmentModel $model The updated Adjustment.
+     * @return FilingAdjustmentModel
      */
     public function updateReturnAdjustment($companyId, $id, $model)
     {
@@ -3027,8 +3027,8 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns the filing being changed.
      * @param int $id The ID of the augmentation being edited.
-     * @param object $model The updated Augmentation.
-     * @return object
+     * @param FilingAugmentationModel $model The updated Augmentation.
+     * @return FilingModel
      */
     public function updateReturnAugmentation($companyId, $id, $model)
     {
@@ -3053,8 +3053,8 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns the filing being adjusted.
      * @param int $id The ID of the payment being edited.
-     * @param object $model The updated Payment.
-     * @return object
+     * @param FilingPaymentModel $model The updated Payment.
+     * @return FilingPaymentModel
      */
     public function updateReturnPayment($companyId, $id, $model)
     {
@@ -3083,8 +3083,8 @@ class AvaTaxClient
      * * Each free trial account must have its own valid email address.
      *
      * 
-     * @param object $model Required information to provision a free trial account.
-     * @return object
+     * @param FreeTrialRequestModel $model Required information to provision a free trial account.
+     * @return NewAccountModel
      */
     public function requestFreeTrial($model)
     {
@@ -3133,7 +3133,7 @@ class AvaTaxClient
      * @param string $region The state or region of the location
      * @param string $postalCode The postal code of the location.
      * @param string $country The two letter ISO-3166 country code.
-     * @return object
+     * @return TaxRateModel
      */
     public function taxRatesByAddress($line1, $line2, $line3, $city, $region, $postalCode, $country)
     {
@@ -3177,7 +3177,7 @@ class AvaTaxClient
      * 
      * @param string $country The two letter ISO-3166 country code.
      * @param string $postalCode The postal code of the location.
-     * @return object
+     * @return TaxRateModel
      */
     public function taxRatesByPostalCode($country, $postalCode)
     {
@@ -3207,7 +3207,7 @@ class AvaTaxClient
      *
      * 
      * @param int $id The unique ID number of this funding request
-     * @return object
+     * @return FundingStatusModel
      */
     public function activateFundingRequest($id)
     {
@@ -3235,7 +3235,7 @@ class AvaTaxClient
      *
      * 
      * @param int $id The unique ID number of this funding request
-     * @return object
+     * @return FundingStatusModel
      */
     public function fundingRequestStatus($id)
     {
@@ -3254,8 +3254,8 @@ class AvaTaxClient
      *
      * 
      * @param int $companyId The ID of the company that owns this item.
-     * @param object[] $model The item you wish to create.
-     * @return object[]
+     * @param ItemModel[] $model The item you wish to create.
+     * @return ItemModel[]
      */
     public function createItems($companyId, $model)
     {
@@ -3275,7 +3275,7 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this item.
      * @param int $id The ID of the item you wish to delete.
-     * @return object[]
+     * @return ErrorDetail[]
      */
     public function deleteItem($companyId, $id)
     {
@@ -3296,7 +3296,7 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this item object
      * @param int $id The primary key of this item
-     * @return object
+     * @return ItemModel
      */
     public function getItem($companyId, $id)
     {
@@ -3374,8 +3374,8 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company that this item belongs to.
      * @param int $id The ID of the item you wish to update
-     * @param object $model The item object you wish to update.
-     * @return object
+     * @param ItemModel $model The item object you wish to update.
+     * @return ItemModel
      */
     public function updateItem($companyId, $id, $model)
     {
@@ -3399,8 +3399,8 @@ class AvaTaxClient
      *
      * 
      * @param int $accountId The ID of the account that owns this override
-     * @param object[] $model The jurisdiction override objects to create
-     * @return object[]
+     * @param JurisdictionOverrideModel[] $model The jurisdiction override objects to create
+     * @return JurisdictionOverrideModel[]
      */
     public function createJurisdictionOverrides($accountId, $model)
     {
@@ -3420,7 +3420,7 @@ class AvaTaxClient
      * 
      * @param int $accountId The ID of the account that owns this override
      * @param int $id The ID of the override you wish to delete
-     * @return object[]
+     * @return ErrorDetail[]
      */
     public function deleteJurisdictionOverride($accountId, $id)
     {
@@ -3445,7 +3445,7 @@ class AvaTaxClient
      * 
      * @param int $accountId The ID of the account that owns this override
      * @param int $id The primary key of this override
-     * @return object
+     * @return JurisdictionOverrideModel
      */
     public function getJurisdictionOverride($accountId, $id)
     {
@@ -3528,8 +3528,8 @@ class AvaTaxClient
      * 
      * @param int $accountId The ID of the account that this jurisdictionoverride belongs to.
      * @param int $id The ID of the jurisdictionoverride you wish to update
-     * @param object $model The jurisdictionoverride object you wish to update.
-     * @return object
+     * @param JurisdictionOverrideModel $model The jurisdictionoverride object you wish to update.
+     * @return JurisdictionOverrideModel
      */
     public function updateJurisdictionOverride($accountId, $id, $model)
     {
@@ -3548,8 +3548,8 @@ class AvaTaxClient
      *
      * 
      * @param int $companyId The ID of the company that owns this location.
-     * @param object[] $model The location you wish to create.
-     * @return object[]
+     * @param LocationModel[] $model The location you wish to create.
+     * @return LocationModel[]
      */
     public function createLocations($companyId, $model)
     {
@@ -3569,7 +3569,7 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this location.
      * @param int $id The ID of the location you wish to delete.
-     * @return object[]
+     * @return ErrorDetail[]
      */
     public function deleteLocation($companyId, $id)
     {
@@ -3598,7 +3598,7 @@ class AvaTaxClient
      * @param int $companyId The ID of the company that owns this location
      * @param int $id The primary key of this location
      * @param string $include A comma separated list of child objects to return underneath the primary object.
-     * @return object
+     * @return LocationModel
      */
     public function getLocation($companyId, $id, $include)
     {
@@ -3688,8 +3688,8 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company that this location belongs to.
      * @param int $id The ID of the location you wish to update
-     * @param object $model The location you wish to update.
-     * @return object
+     * @param LocationModel $model The location you wish to update.
+     * @return LocationModel
      */
     public function updateLocation($companyId, $id, $model)
     {
@@ -3711,7 +3711,7 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this location
      * @param int $id The primary key of this location
-     * @return object
+     * @return LocationValidationModel
      */
     public function validateLocation($companyId, $id)
     {
@@ -3737,8 +3737,8 @@ class AvaTaxClient
      *
      * 
      * @param int $companyId The ID of the company that owns this nexus.
-     * @param object[] $model The nexus you wish to create.
-     * @return object[]
+     * @param NexusModel[] $model The nexus you wish to create.
+     * @return NexusModel[]
      */
     public function createNexus($companyId, $model)
     {
@@ -3758,7 +3758,7 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this nexus.
      * @param int $id The ID of the nexus you wish to delete.
-     * @return object[]
+     * @return ErrorDetail[]
      */
     public function deleteNexus($companyId, $id)
     {
@@ -3782,7 +3782,7 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this nexus object
      * @param int $id The primary key of this nexus
-     * @return object
+     * @return NexusModel
      */
     public function getNexus($companyId, $id)
     {
@@ -3812,7 +3812,7 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this nexus object
      * @param string $formCode The form code that we are looking up the nexus for
-     * @return object
+     * @return NexusByTaxFormModel
      */
     public function getNexusByFormCode($companyId, $formCode)
     {
@@ -3902,8 +3902,8 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company that this nexus belongs to.
      * @param int $id The ID of the nexus you wish to update
-     * @param object $model The nexus object you wish to update.
-     * @return object
+     * @param NexusModel $model The nexus object you wish to update.
+     * @return NexusModel
      */
     public function updateNexus($companyId, $id, $model)
     {
@@ -3926,8 +3926,8 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this notice.
      * @param int $id The ID of the tax notice we are adding the comment for.
-     * @param object[] $model The notice comments you wish to create.
-     * @return object[]
+     * @param NoticeCommentModel[] $model The notice comments you wish to create.
+     * @return NoticeCommentModel[]
      */
     public function createNoticeComment($companyId, $id, $model)
     {
@@ -3951,8 +3951,8 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this notice.
      * @param int $id The ID of the notice added to the finance details.
-     * @param object[] $model The notice finance details you wish to create.
-     * @return object[]
+     * @param NoticeFinanceModel[] $model The notice finance details you wish to create.
+     * @return NoticeFinanceModel[]
      */
     public function createNoticeFinanceDetails($companyId, $id, $model)
     {
@@ -3975,8 +3975,8 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this notice.
      * @param int $id The ID of the tax notice we are adding the responsibility for.
-     * @param object[] $model The notice responsibilities you wish to create.
-     * @return object[]
+     * @param NoticeResponsibilityDetailModel[] $model The notice responsibilities you wish to create.
+     * @return NoticeResponsibilityDetailModel[]
      */
     public function createNoticeResponsibilities($companyId, $id, $model)
     {
@@ -3999,8 +3999,8 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this notice.
      * @param int $id The ID of the tax notice we are adding the responsibility for.
-     * @param object[] $model The notice root causes you wish to create.
-     * @return object[]
+     * @param NoticeRootCauseDetailModel[] $model The notice root causes you wish to create.
+     * @return NoticeRootCauseDetailModel[]
      */
     public function createNoticeRootCauses($companyId, $id, $model)
     {
@@ -4022,8 +4022,8 @@ class AvaTaxClient
      *
      * 
      * @param int $companyId The ID of the company that owns this notice.
-     * @param object[] $model The notice object you wish to create.
-     * @return object[]
+     * @param NoticeModel[] $model The notice object you wish to create.
+     * @return NoticeModel[]
      */
     public function createNotices($companyId, $model)
     {
@@ -4046,7 +4046,7 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this notice.
      * @param int $id The ID of the notice you wish to delete.
-     * @return object[]
+     * @return ErrorDetail[]
      */
     public function deleteNotice($companyId, $id)
     {
@@ -4070,7 +4070,7 @@ class AvaTaxClient
      * @param int $companyId The ID of the company that owns this notice.
      * @param int $noticeId The ID of the notice you wish to delete.
      * @param int $id The ID of the responsibility you wish to delete.
-     * @return object[]
+     * @return ErrorDetail[]
      */
     public function deleteResponsibilities($companyId, $noticeId, $id)
     {
@@ -4094,7 +4094,7 @@ class AvaTaxClient
      * @param int $companyId The ID of the company that owns this notice.
      * @param int $noticeId The ID of the notice you wish to delete.
      * @param int $id The ID of the root cause you wish to delete.
-     * @return object[]
+     * @return ErrorDetail[]
      */
     public function deleteRootCauses($companyId, $noticeId, $id)
     {
@@ -4138,7 +4138,7 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company for this notice.
      * @param int $id The ID of this notice.
-     * @return object
+     * @return NoticeModel
      */
     public function getNotice($companyId, $id)
     {
@@ -4315,8 +4315,8 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company that this notice belongs to.
      * @param int $id The ID of the notice you wish to update.
-     * @param object $model The notice object you wish to update.
-     * @return object
+     * @param NoticeModel $model The notice object you wish to update.
+     * @return NoticeModel
      */
     public function updateNotice($companyId, $id, $model)
     {
@@ -4336,7 +4336,7 @@ class AvaTaxClient
      *
      * 
      * @param int $companyId The ID of the company for this attachment.
-     * @param object $model The ResourceFileId of the attachment to download.
+     * @param ResourceFileUploadRequestModel $model The ResourceFileId of the attachment to download.
      * @return object
      */
     public function uploadAttachment($companyId, $model)
@@ -4358,8 +4358,8 @@ class AvaTaxClient
      * You should call this API when a customer has requested to begin using Avalara services.
      *
      * 
-     * @param object $model Information about the account you wish to create and the selected product offerings.
-     * @return object
+     * @param NewAccountRequestModel $model Information about the account you wish to create and the selected product offerings.
+     * @return NewAccountModel
      */
     public function requestNewAccount($model)
     {
@@ -4382,7 +4382,7 @@ class AvaTaxClient
      * different user than the one authenticating the current API call.
      *
      * 
-     * @param object $model An object containing your current password and the new password.
+     * @param PasswordChangeModel $model An object containing your current password and the new password.
      * @return string
      */
     public function changePassword($model)
@@ -4405,8 +4405,8 @@ class AvaTaxClient
      * When creating an account object you may attach subscriptions and users as part of the 'Create' call.
      *
      * 
-     * @param object $model The account you wish to create.
-     * @return object
+     * @param AccountModel $model The account you wish to create.
+     * @return AccountModel
      */
     public function createAccount($model)
     {
@@ -4430,8 +4430,8 @@ class AvaTaxClient
      *
      * 
      * @param int $accountId The ID of the account that owns this subscription.
-     * @param object[] $model The subscription you wish to create.
-     * @return object[]
+     * @param SubscriptionModel[] $model The subscription you wish to create.
+     * @return SubscriptionModel[]
      */
     public function createSubscriptions($accountId, $model)
     {
@@ -4454,8 +4454,8 @@ class AvaTaxClient
      *
      * 
      * @param int $accountId The unique ID number of the account where these users will be created.
-     * @param object[] $model The user or array of users you wish to create.
-     * @return object[]
+     * @param UserModel[] $model The user or array of users you wish to create.
+     * @return UserModel[]
      */
     public function createUsers($accountId, $model)
     {
@@ -4478,7 +4478,7 @@ class AvaTaxClient
      *
      * 
      * @param int $id The ID of the account you wish to delete.
-     * @return object[]
+     * @return ErrorDetail[]
      */
     public function deleteAccount($id)
     {
@@ -4501,7 +4501,7 @@ class AvaTaxClient
      * 
      * @param int $accountId The ID of the account that owns this subscription.
      * @param int $id The ID of the subscription you wish to delete.
-     * @return object[]
+     * @return ErrorDetail[]
      */
     public function deleteSubscription($accountId, $id)
     {
@@ -4524,7 +4524,7 @@ class AvaTaxClient
      * 
      * @param int $id The ID of the user you wish to delete.
      * @param int $accountId The accountID of the user you wish to delete.
-     * @return object[]
+     * @return ErrorDetail[]
      */
     public function deleteUser($id, $accountId)
     {
@@ -4582,7 +4582,7 @@ class AvaTaxClient
      *
      * 
      * @param int $userId The unique ID of the user whose password will be changed
-     * @param object $model The new password for this user
+     * @param SetPasswordModel $model The new password for this user
      * @return string
      */
     public function resetPassword($userId, $model)
@@ -4605,8 +4605,8 @@ class AvaTaxClient
      *
      * 
      * @param int $id The ID of the account you wish to update.
-     * @param object $model The account object you wish to update.
-     * @return object
+     * @param AccountModel $model The account object you wish to update.
+     * @return AccountModel
      */
     public function updateAccount($id, $model)
     {
@@ -4633,8 +4633,8 @@ class AvaTaxClient
      * 
      * @param int $accountId The ID of the account that this subscription belongs to.
      * @param int $id The ID of the subscription you wish to update
-     * @param object $model The subscription you wish to update.
-     * @return object
+     * @param SubscriptionModel $model The subscription you wish to update.
+     * @return SubscriptionModel
      */
     public function updateSubscription($accountId, $id, $model)
     {
@@ -4659,8 +4659,8 @@ class AvaTaxClient
      *
      * 
      * @param int $companyId The ID of the company that owns this setting.
-     * @param object[] $model The setting you wish to create.
-     * @return object[]
+     * @param SettingModel[] $model The setting you wish to create.
+     * @return SettingModel[]
      */
     public function createSettings($companyId, $model)
     {
@@ -4680,7 +4680,7 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this setting.
      * @param int $id The ID of the setting you wish to delete.
-     * @return object[]
+     * @return ErrorDetail[]
      */
     public function deleteSetting($companyId, $id)
     {
@@ -4706,7 +4706,7 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this setting
      * @param int $id The primary key of this setting
-     * @return object
+     * @return SettingModel
      */
     public function getSetting($companyId, $id)
     {
@@ -4799,8 +4799,8 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company that this setting belongs to.
      * @param int $id The ID of the setting you wish to update
-     * @param object $model The setting you wish to update.
-     * @return object
+     * @param SettingModel $model The setting you wish to update.
+     * @return SettingModel
      */
     public function updateSetting($companyId, $id, $model)
     {
@@ -4822,7 +4822,7 @@ class AvaTaxClient
      * 
      * @param int $accountId The ID of the account that owns this subscription
      * @param int $id The primary key of this subscription
-     * @return object
+     * @return SubscriptionModel
      */
     public function getSubscription($accountId, $id)
     {
@@ -4900,8 +4900,8 @@ class AvaTaxClient
      *
      * 
      * @param int $companyId The ID of the company that owns this tax code.
-     * @param object[] $model The tax code you wish to create.
-     * @return object[]
+     * @param TaxCodeModel[] $model The tax code you wish to create.
+     * @return TaxCodeModel[]
      */
     public function createTaxCodes($companyId, $model)
     {
@@ -4921,7 +4921,7 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this tax code.
      * @param int $id The ID of the tax code you wish to delete.
-     * @return object[]
+     * @return ErrorDetail[]
      */
     public function deleteTaxCode($companyId, $id)
     {
@@ -4945,7 +4945,7 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this tax code
      * @param int $id The primary key of this tax code
-     * @return object
+     * @return TaxCodeModel
      */
     public function getTaxCode($companyId, $id)
     {
@@ -5032,8 +5032,8 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company that this tax code belongs to.
      * @param int $id The ID of the tax code you wish to update
-     * @param object $model The tax code you wish to update.
-     * @return object
+     * @param TaxCodeModel $model The tax code you wish to update.
+     * @return TaxCodeModel
      */
     public function updateTaxCode($companyId, $id, $model)
     {
@@ -5061,7 +5061,7 @@ class AvaTaxClient
      * file for a single location at a time, please use `BuildTaxContentFileForLocation`.
      *
      * 
-     * @param object $model Parameters about the desired file format and report format, specifying which company, locations and TaxCodes to include.
+     * @param PointOfSaleDataRequestModel $model Parameters about the desired file format and report format, specifying which company, locations and TaxCodes to include.
      * @return object
      */
     public function buildTaxContentFile($model)
@@ -5119,8 +5119,8 @@ class AvaTaxClient
      *
      * 
      * @param int $companyId The ID of the company that owns this tax rule.
-     * @param object[] $model The tax rule you wish to create.
-     * @return object[]
+     * @param TaxRuleModel[] $model The tax rule you wish to create.
+     * @return TaxRuleModel[]
      */
     public function createTaxRules($companyId, $model)
     {
@@ -5140,7 +5140,7 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this tax rule.
      * @param int $id The ID of the tax rule you wish to delete.
-     * @return object[]
+     * @return ErrorDetail[]
      */
     public function deleteTaxRule($companyId, $id)
     {
@@ -5164,7 +5164,7 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this tax rule
      * @param int $id The primary key of this tax rule
-     * @return object
+     * @return TaxRuleModel
      */
     public function getTaxRule($companyId, $id)
     {
@@ -5251,8 +5251,8 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company that this tax rule belongs to.
      * @param int $id The ID of the tax rule you wish to update
-     * @param object $model The tax rule you wish to update.
-     * @return object
+     * @param TaxRuleModel $model The tax rule you wish to update.
+     * @return TaxRuleModel
      */
     public function updateTaxRule($companyId, $id, $model)
     {
@@ -5288,8 +5288,8 @@ class AvaTaxClient
      *
      * 
      * @param string $include A comma separated list of child objects to return underneath the primary object.
-     * @param object $model information about the transaction and lines to be added
-     * @return object
+     * @param AddTransactionLineModel $model information about the transaction and lines to be added
+     * @return TransactionModel
      */
     public function addLines($include, $model)
     {
@@ -5319,8 +5319,8 @@ class AvaTaxClient
      * 
      * @param string $companyCode The company code of the company that recorded this transaction
      * @param string $transactionCode The transaction code to adjust
-     * @param object $model The adjustment you wish to make
-     * @return object
+     * @param AdjustTransactionModel $model The adjustment you wish to make
+     * @return TransactionModel
      */
     public function adjustTransaction($companyCode, $transactionCode, $model)
     {
@@ -5354,7 +5354,7 @@ class AvaTaxClient
      * 
      * @param string $companyCode The code identifying the company that owns this transaction
      * @param string $transactionCode The code identifying the transaction
-     * @return object
+     * @return AuditTransactionModel
      */
     public function auditTransaction($companyCode, $transactionCode)
     {
@@ -5389,7 +5389,7 @@ class AvaTaxClient
      * @param string $companyCode The code identifying the company that owns this transaction
      * @param string $transactionCode The code identifying the transaction
      * @param string $documentType The document type of the original transaction (See DocumentType::* for a list of allowable values)
-     * @return object
+     * @return AuditTransactionModel
      */
     public function auditTransactionWithType($companyCode, $transactionCode, $documentType)
     {
@@ -5413,8 +5413,8 @@ class AvaTaxClient
      * sales, purchases, inventory transfer, and returns (also called refunds).
      *
      * 
-     * @param object $model bulk lock request
-     * @return object
+     * @param BulkLockTransactionModel $model bulk lock request
+     * @return BulkLockTransactionResult
      */
     public function bulkLockTransaction($model)
     {
@@ -5437,8 +5437,8 @@ class AvaTaxClient
      * 
      * @param string $companyCode The company code of the company that recorded this transaction
      * @param string $transactionCode The transaction code to change
-     * @param object $model The code change request you wish to execute
-     * @return object
+     * @param ChangeTransactionCodeModel $model The code change request you wish to execute
+     * @return TransactionModel
      */
     public function changeTransactionCode($companyCode, $transactionCode, $model)
     {
@@ -5462,8 +5462,8 @@ class AvaTaxClient
      * 
      * @param string $companyCode The company code of the company that recorded this transaction
      * @param string $transactionCode The transaction code to commit
-     * @param object $model The commit request you wish to execute
-     * @return object
+     * @param CommitTransactionModel $model The commit request you wish to execute
+     * @return TransactionModel
      */
     public function commitTransaction($companyCode, $transactionCode, $model)
     {
@@ -5499,8 +5499,8 @@ class AvaTaxClient
      *
      * 
      * @param string $include A comma separated list of child objects to return underneath the primary object.
-     * @param object $model The transaction you wish to create
-     * @return object
+     * @param CreateOrAdjustTransactionModel $model The transaction you wish to create
+     * @return TransactionModel
      */
     public function createOrAdjustTransaction($include, $model)
     {
@@ -5536,8 +5536,8 @@ class AvaTaxClient
      *
      * 
      * @param string $include A comma separated list of child objects to return underneath the primary object.
-     * @param object $model The transaction you wish to create
-     * @return object
+     * @param CreateTransactionModel $model The transaction you wish to create
+     * @return TransactionModel
      */
     public function createTransaction($include, $model)
     {
@@ -5570,8 +5570,8 @@ class AvaTaxClient
      *
      * 
      * @param string $include A comma separated list of child objects to return underneath the primary object.
-     * @param object $model information about the transaction and lines to be removed
-     * @return object
+     * @param RemoveTransactionLineModel $model information about the transaction and lines to be removed
+     * @return TransactionModel
      */
     public function deleteLines($include, $model)
     {
@@ -5600,7 +5600,7 @@ class AvaTaxClient
      * @param string $companyCode The company code of the company that recorded this transaction
      * @param string $transactionCode The transaction code to retrieve
      * @param string $include A comma separated list of child objects to return underneath the primary object.
-     * @return object
+     * @return TransactionModel
      */
     public function getTransactionByCode($companyCode, $transactionCode, $include)
     {
@@ -5630,7 +5630,7 @@ class AvaTaxClient
      * @param string $transactionCode The transaction code to retrieve
      * @param string $documentType The transaction type to retrieve (See DocumentType::* for a list of allowable values)
      * @param string $include A comma separated list of child objects to return underneath the primary object.
-     * @return object
+     * @return TransactionModel
      */
     public function getTransactionByCodeAndType($companyCode, $transactionCode, $documentType, $include)
     {
@@ -5660,7 +5660,7 @@ class AvaTaxClient
      * 
      * @param int $id The unique ID number of the transaction to retrieve
      * @param string $include A comma separated list of child objects to return underneath the primary object.
-     * @return object
+     * @return TransactionModel
      */
     public function getTransactionById($id, $include)
     {
@@ -5724,8 +5724,8 @@ class AvaTaxClient
      * 
      * @param string $companyCode The company code of the company that recorded this transaction
      * @param string $transactionCode The transaction code to lock
-     * @param object $model The lock request you wish to execute
-     * @return object
+     * @param LockTransactionModel $model The lock request you wish to execute
+     * @return TransactionModel
      */
     public function lockTransaction($companyCode, $transactionCode, $model)
     {
@@ -5761,8 +5761,8 @@ class AvaTaxClient
      * @param string $companyCode The code of the company that made the original sale
      * @param string $transactionCode The transaction code of the original sale
      * @param string $include A comma separated list of child objects to return underneath the primary object.
-     * @param object $model Information about the refund to create
-     * @return object
+     * @param RefundTransactionModel $model Information about the refund to create
+     * @return TransactionModel
      */
     public function refundTransaction($companyCode, $transactionCode, $include, $model)
     {
@@ -5782,8 +5782,8 @@ class AvaTaxClient
      * 
      * @param string $companyCode The company code of the company that recorded this transaction
      * @param string $transactionCode The transaction code to settle
-     * @param object $model The settle request containing the actions you wish to execute
-     * @return object
+     * @param SettleTransactionModel $model The settle request containing the actions you wish to execute
+     * @return TransactionModel
      */
     public function settleTransaction($companyCode, $transactionCode, $model)
     {
@@ -5806,8 +5806,8 @@ class AvaTaxClient
      * 
      * @param string $companyCode The company code of the company that recorded this transaction
      * @param string $transactionCode The transaction code to settle
-     * @param object $model The settle request you wish to execute
-     * @return object
+     * @param VerifyTransactionModel $model The settle request you wish to execute
+     * @return TransactionModel
      */
     public function verifyTransaction($companyCode, $transactionCode, $model)
     {
@@ -5831,8 +5831,8 @@ class AvaTaxClient
      * 
      * @param string $companyCode The company code of the company that recorded this transaction
      * @param string $transactionCode The transaction code to void
-     * @param object $model The void request you wish to execute
-     * @return object
+     * @param VoidTransactionModel $model The void request you wish to execute
+     * @return TransactionModel
      */
     public function voidTransaction($companyCode, $transactionCode, $model)
     {
@@ -5852,8 +5852,8 @@ class AvaTaxClient
      *
      * 
      * @param int $companyId The ID of the company that owns this UPC.
-     * @param object[] $model The UPC you wish to create.
-     * @return object[]
+     * @param UPCModel[] $model The UPC you wish to create.
+     * @return UPCModel[]
      */
     public function createUPCs($companyId, $model)
     {
@@ -5873,7 +5873,7 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this UPC.
      * @param int $id The ID of the UPC you wish to delete.
-     * @return object[]
+     * @return ErrorDetail[]
      */
     public function deleteUPC($companyId, $id)
     {
@@ -5894,7 +5894,7 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this UPC
      * @param int $id The primary key of this UPC
-     * @return object
+     * @return UPCModel
      */
     public function getUPC($companyId, $id)
     {
@@ -5972,8 +5972,8 @@ class AvaTaxClient
      * 
      * @param int $companyId The ID of the company that this UPC belongs to.
      * @param int $id The ID of the UPC you wish to update
-     * @param object $model The UPC you wish to update.
-     * @return object
+     * @param UPCModel $model The UPC you wish to update.
+     * @return UPCModel
      */
     public function updateUPC($companyId, $id, $model)
     {
@@ -5995,7 +5995,7 @@ class AvaTaxClient
      * @param int $id The ID of the user to retrieve.
      * @param int $accountId The accountID of the user you wish to get.
      * @param string $include A comma separated list of child objects to return underneath the primary object.
-     * @return object
+     * @return UserModel
      */
     public function getUser($id, $accountId, $include)
     {
@@ -6029,7 +6029,7 @@ class AvaTaxClient
      * 
      * @param int $id The ID of the user to retrieve.
      * @param int $accountId The accountID of the user you wish to get.
-     * @return object
+     * @return UserEntitlementModel
      */
     public function getUserEntitlements($id, $accountId)
     {
@@ -6107,8 +6107,8 @@ class AvaTaxClient
      * 
      * @param int $id The ID of the user you wish to update.
      * @param int $accountId The accountID of the user you wish to update.
-     * @param object $model The user object you wish to update.
-     * @return object
+     * @param UserModel $model The user object you wish to update.
+     * @return UserModel
      */
     public function updateUser($id, $accountId, $model)
     {
@@ -6129,7 +6129,7 @@ class AvaTaxClient
      *
      * 
      * @param string $serviceTypeId The service to check (See ServiceTypeId::* for a list of allowable values)
-     * @return object
+     * @return SubscriptionModel
      */
     public function getMySubscription($serviceTypeId)
     {
@@ -6171,7 +6171,7 @@ class AvaTaxClient
      * AvaTax.
      *
      * 
-     * @return object
+     * @return PingResultModel
      */
     public function ping()
     {
@@ -6267,12 +6267,12 @@ class AccountModel
     public $modifiedUserId;
 
     /**
-     * @var object[] Optional: A list of subscriptions granted to this account. To fetch this list, add the query string "?$include=Subscriptions" to your URL.
+     * @var SubscriptionModel[] Optional: A list of subscriptions granted to this account. To fetch this list, add the query string "?$include=Subscriptions" to your URL.
      */
     public $subscriptions;
 
     /**
-     * @var object[] Optional: A list of all the users belonging to this account. To fetch this list, add the query string "?$include=Users" to your URL.
+     * @var UserModel[] Optional: A list of all the users belonging to this account. To fetch this list, add the query string "?$include=Users" to your URL.
      */
     public $users;
 
@@ -6790,17 +6790,17 @@ class AddressResolutionModel
 {
 
     /**
-     * @var object The original address
+     * @var AddressInfo The original address
      */
     public $address;
 
     /**
-     * @var object[] The validated address or addresses
+     * @var ValidatedAddressInfo[] The validated address or addresses
      */
     public $validatedAddresses;
 
     /**
-     * @var object The geospatial coordinates of this address
+     * @var CoordinateInfo The geospatial coordinates of this address
      */
     public $coordinates;
 
@@ -6810,12 +6810,12 @@ class AddressResolutionModel
     public $resolutionQuality;
 
     /**
-     * @var object[] List of informational and warning messages regarding this address
+     * @var TaxAuthorityInfo[] List of informational and warning messages regarding this address
      */
     public $taxAuthorities;
 
     /**
-     * @var object[] List of informational and warning messages regarding this address
+     * @var AvaTaxMessage[] List of informational and warning messages regarding this address
      */
     public $messages;
 
@@ -7098,7 +7098,7 @@ class BatchModel
     public $modifiedUserId;
 
     /**
-     * @var object[] The list of files contained in this batch.
+     * @var BatchFileModel[] The list of files contained in this batch.
      */
     public $files;
 
@@ -7249,12 +7249,12 @@ class CertificateModel
     public $calcId;
 
     /**
-     * @var object TODO
+     * @var CertificateTaxCodeModel TODO
      */
     public $expectedTaxCode;
 
     /**
-     * @var object TODO
+     * @var CertificateTaxCodeModel TODO
      */
     public $actualTaxCode;
 
@@ -7269,7 +7269,7 @@ class CertificateModel
     public $modifiedDate;
 
     /**
-     * @var object TODO
+     * @var ExposureZoneModel TODO
      */
     public $exposureZone;
 
@@ -7334,12 +7334,12 @@ class CertificateModel
     public $documentTypeId;
 
     /**
-     * @var object[] A list of customers to which this certificate applies.
+     * @var CustomerModel[] A list of customers to which this certificate applies.
      */
     public $customers;
 
     /**
-     * @var object[] TODO
+     * @var PoNumberModel[] TODO
      */
     public $poNumber;
 
@@ -7513,7 +7513,7 @@ class CustomerModel
     public $taxpayerIdNumber;
 
     /**
-     * @var object[] A list of exemption certficates that apply to this customer.
+     * @var CertificateModel[] A list of exemption certficates that apply to this customer.
      */
     public $certificates;
 
@@ -7669,47 +7669,47 @@ class CompanyModel
     public $modifiedUserId;
 
     /**
-     * @var object[] Optional: A list of contacts defined for this company. To fetch this list, add the query string "?$include=Contacts" to your URL.
+     * @var ContactModel[] Optional: A list of contacts defined for this company. To fetch this list, add the query string "?$include=Contacts" to your URL.
      */
     public $contacts;
 
     /**
-     * @var object[] Optional: A list of items defined for this company. To fetch this list, add the query string "?$include=Items" to your URL.
+     * @var ItemModel[] Optional: A list of items defined for this company. To fetch this list, add the query string "?$include=Items" to your URL.
      */
     public $items;
 
     /**
-     * @var object[] Optional: A list of locations defined for this company. To fetch this list, add the query string "?$include=Locations" to your URL.
+     * @var LocationModel[] Optional: A list of locations defined for this company. To fetch this list, add the query string "?$include=Locations" to your URL.
      */
     public $locations;
 
     /**
-     * @var object[] Optional: A list of nexus defined for this company. To fetch this list, add the query string "?$include=Nexus" to your URL.
+     * @var NexusModel[] Optional: A list of nexus defined for this company. To fetch this list, add the query string "?$include=Nexus" to your URL.
      */
     public $nexus;
 
     /**
-     * @var object[] Optional: A list of settings defined for this company. To fetch this list, add the query string "?$include=Settings" to your URL.
+     * @var SettingModel[] Optional: A list of settings defined for this company. To fetch this list, add the query string "?$include=Settings" to your URL.
      */
     public $settings;
 
     /**
-     * @var object[] Optional: A list of tax codes defined for this company. To fetch this list, add the query string "?$include=TaxCodes" to your URL.
+     * @var TaxCodeModel[] Optional: A list of tax codes defined for this company. To fetch this list, add the query string "?$include=TaxCodes" to your URL.
      */
     public $taxCodes;
 
     /**
-     * @var object[] Optional: A list of tax rules defined for this company. To fetch this list, add the query string "?$include=TaxRules" to your URL.
+     * @var TaxRuleModel[] Optional: A list of tax rules defined for this company. To fetch this list, add the query string "?$include=TaxRules" to your URL.
      */
     public $taxRules;
 
     /**
-     * @var object[] Optional: A list of UPCs defined for this company. To fetch this list, add the query string "?$include=UPCs" to your URL.
+     * @var UPCModel[] Optional: A list of UPCs defined for this company. To fetch this list, add the query string "?$include=UPCs" to your URL.
      */
     public $upcs;
 
     /**
-     * @var object[] Optional: A list of exempt certificates defined for this company. To fetch this list, add the query string "?$include=UPCs" to your URL.
+     * @var EcmsModel[] Optional: A list of exempt certificates defined for this company. To fetch this list, add the query string "?$include=UPCs" to your URL.
      */
     public $exemptCerts;
 
@@ -8029,7 +8029,7 @@ class LocationModel
     public $modifiedUserId;
 
     /**
-     * @var object[] Extra information required by certain jurisdictions for filing.  For a list of settings recognized by Avalara, query the endpoint "/api/v2/definitions/locationquestions".   To determine the list of settings required for this location, query the endpoint "/api/v2/companies/(id)/locations/(id)/validate".
+     * @var LocationSettingModel[] Extra information required by certain jurisdictions for filing.  For a list of settings recognized by Avalara, query the endpoint "/api/v2/definitions/locationquestions".   To determine the list of settings required for this location, query the endpoint "/api/v2/companies/(id)/locations/(id)/validate".
      */
     public $settings;
 
@@ -8691,7 +8691,7 @@ class EcmsModel
     public $exemptCertReviewStatusId;
 
     /**
-     * @var object[] Exempt Cert details
+     * @var EcmsDetailModel[] Exempt Cert details
      */
     public $details;
 
@@ -8767,7 +8767,7 @@ class EcmsDetailModel
     public $isTaxCodeListExclusionList;
 
     /**
-     * @var object[] optional: list of tax code associated with this exempt certificate detail
+     * @var EcmsDetailTaxCodeModel[] optional: list of tax code associated with this exempt certificate detail
      */
     public $taxCodes;
 
@@ -8951,7 +8951,7 @@ class FundingStatusModel
     public $documentName;
 
     /**
-     * @var object MethodReturn
+     * @var FundingESignMethodReturn MethodReturn
      */
     public $methodReturn;
 
@@ -9111,12 +9111,12 @@ class NexusByTaxFormModel
     public $companyId;
 
     /**
-     * @var object[] A list of all Avalara-defined nexus that are relevant to this tax form
+     * @var NexusModel[] A list of all Avalara-defined nexus that are relevant to this tax form
      */
     public $nexusDefinitions;
 
     /**
-     * @var object[] A list of all currently-defined company nexus that are related to this tax form
+     * @var NexusModel[] A list of all currently-defined company nexus that are related to this tax form
      */
     public $companyNexus;
 
@@ -9738,7 +9738,7 @@ class SkyscraperStatusModel
     public $message;
 
     /**
-     * @var object[] A list of required fields to file
+     * @var requiredFilingCalendarDataFieldModel[] A list of required fields to file
      */
     public $requiredFilingCalendarDataFields;
 
@@ -9842,7 +9842,7 @@ class JurisdictionOverrideModel
     public $modifiedUserId;
 
     /**
-     * @var object[] A list of the tax jurisdictions that will be assigned to this overridden address.
+     * @var JurisdictionModel[] A list of the tax jurisdictions that will be assigned to this overridden address.
      */
     public $jurisdictions;
 
@@ -10584,7 +10584,7 @@ class CycleExpireModel
     public $message;
 
     /**
-     * @var object[] A list of options for expiring the filing calendar.
+     * @var CycleExpireOptionModel[] A list of options for expiring the filing calendar.
      */
     public $cycleExpirationOptions;
 
@@ -10707,7 +10707,7 @@ class FilingRequestModel
     public $filingRequestStatusId;
 
     /**
-     * @var object The data model object of the request
+     * @var FilingRequestDataModel The data model object of the request
      */
     public $data;
 
@@ -10816,7 +10816,7 @@ class FilingRequestDataModel
     public $taxAuthorityName;
 
     /**
-     * @var object[] Filing question answers
+     * @var FilingAnswerModel[] Filing question answers
      */
     public $answers;
 
@@ -11131,7 +11131,7 @@ class FilingModel
     public $modifiedUserId;
 
     /**
-     * @var object[] A listing of regional tax filings within this time period.
+     * @var FilingRegionModel[] A listing of regional tax filings within this time period.
      */
     public $filingRegions;
 
@@ -11239,12 +11239,12 @@ class FilingRegionModel
     public $status;
 
     /**
-     * @var object[] A list of tax returns in this region.
+     * @var FilingReturnModel[] A list of tax returns in this region.
      */
     public $returns;
 
     /**
-     * @var object[] A list of tax returns in this region.
+     * @var FilingsCheckupSuggestedFormModel[] A list of tax returns in this region.
      */
     public $suggestReturns;
 
@@ -11407,7 +11407,7 @@ class FilingReturnModel
     public $totalAdjustments;
 
     /**
-     * @var object[] The Adjustments for this return.
+     * @var FilingAdjustmentModel[] The Adjustments for this return.
      */
     public $adjustments;
 
@@ -11417,7 +11417,7 @@ class FilingReturnModel
     public $totalAugmentations;
 
     /**
-     * @var object[] The Augmentations for this return.
+     * @var FilingAugmentationModel[] The Augmentations for this return.
      */
     public $augmentations;
 
@@ -11427,7 +11427,7 @@ class FilingReturnModel
     public $totalPayments;
 
     /**
-     * @var object[] The payments for this return.
+     * @var FilingPaymentModel[] The payments for this return.
      */
     public $payments;
 
@@ -11698,7 +11698,7 @@ class FilingsCheckupModel
 {
 
     /**
-     * @var object[] A collection of authorities in the report
+     * @var FilingsCheckupAuthorityModel[] A collection of authorities in the report
      */
     public $authorities;
 
@@ -11746,7 +11746,7 @@ class FilingsCheckupAuthorityModel
     public $taxTypeId;
 
     /**
-     * @var object[] Suggested forms to file due to tax collected
+     * @var FilingsCheckupSuggestedFormModel[] Suggested forms to file due to tax collected
      */
     public $suggestedForms;
 
@@ -11764,7 +11764,7 @@ class LocationValidationModel
     public $settingsValidated;
 
     /**
-     * @var object[] A list of settings that must be defined for this location
+     * @var LocationQuestionModel[] A list of settings that must be defined for this location
      */
     public $requiredSettings;
 
@@ -11969,22 +11969,22 @@ class NoticeModel
     public $jurisdictionType;
 
     /**
-     * @var object[] Additional comments on the notice
+     * @var NoticeCommentModel[] Additional comments on the notice
      */
     public $comments;
 
     /**
-     * @var object[] Finance details of the notice
+     * @var NoticeFinanceModel[] Finance details of the notice
      */
     public $finances;
 
     /**
-     * @var object[] Notice Responsibility Details
+     * @var NoticeResponsibilityDetailModel[] Notice Responsibility Details
      */
     public $responsibility;
 
     /**
-     * @var object[] Notice Root Cause Details
+     * @var NoticeRootCauseDetailModel[] Notice Root Cause Details
      */
     public $rootCause;
 
@@ -12082,7 +12082,7 @@ class NoticeCommentModel
     public $modifiedUserId;
 
     /**
-     * @var object An attachment to the detail
+     * @var ResourceFileUploadRequestModel An attachment to the detail
      */
     public $attachmentUploadRequest;
 
@@ -12190,7 +12190,7 @@ class NoticeFinanceModel
     public $modifiedUserId;
 
     /**
-     * @var object An attachment to the finance detail
+     * @var ResourceFileUploadRequestModel An attachment to the finance detail
      */
     public $attachmentUploadRequest;
 
@@ -12392,7 +12392,7 @@ class TaxRateModel
     public $totalRate;
 
     /**
-     * @var object[] The list of individual rate elements for general tangible personal property sold at a retail  point of presence in this jurisdiction on this date.
+     * @var RateModel[] The list of individual rate elements for general tangible personal property sold at a retail  point of presence in this jurisdiction on this date.
      */
     public $rates;
 
@@ -12648,27 +12648,27 @@ class TransactionModel
     public $taxDate;
 
     /**
-     * @var object[] Optional: A list of line items in this transaction. To fetch this list, add the query string "?$include=Lines" or "?$include=Details" to your URL.
+     * @var TransactionLineModel[] Optional: A list of line items in this transaction. To fetch this list, add the query string "?$include=Lines" or "?$include=Details" to your URL.
      */
     public $lines;
 
     /**
-     * @var object[] Optional: A list of line items in this transaction. To fetch this list, add the query string "?$include=Addresses" to your URL.
+     * @var TransactionAddressModel[] Optional: A list of line items in this transaction. To fetch this list, add the query string "?$include=Addresses" to your URL.
      */
     public $addresses;
 
     /**
-     * @var object[] Optional: A list of location types in this transaction. To fetch this list, add the query string "?$include=Addresses" to your URL.
+     * @var TransactionLocationTypeModel[] Optional: A list of location types in this transaction. To fetch this list, add the query string "?$include=Addresses" to your URL.
      */
     public $locationTypes;
 
     /**
-     * @var object[] If this transaction has been adjusted, this list contains all the previous versions of the document.
+     * @var TransactionModel[] If this transaction has been adjusted, this list contains all the previous versions of the document.
      */
     public $history;
 
     /**
-     * @var object[] Contains a summary of tax on this transaction.
+     * @var TransactionSummary[] Contains a summary of tax on this transaction.
      */
     public $summary;
 
@@ -12678,7 +12678,7 @@ class TransactionModel
     public $parameters;
 
     /**
-     * @var object[] List of informational and warning messages regarding this API call. These messages are only relevant to the current API call.
+     * @var AvaTaxMessage[] List of informational and warning messages regarding this API call. These messages are only relevant to the current API call.
      */
     public $messages;
 
@@ -12871,12 +12871,12 @@ class TransactionLineModel
     public $taxIncluded;
 
     /**
-     * @var object[] Optional: A list of tax details for this line item. To fetch this list, add the query string "?$include=Details" to your URL.
+     * @var TransactionLineDetailModel[] Optional: A list of tax details for this line item. To fetch this list, add the query string "?$include=Details" to your URL.
      */
     public $details;
 
     /**
-     * @var object[] Optional: A list of location types for this line item. To fetch this list, add the query string "?$include=LineLocationTypes" to your URL.
+     * @var TransactionLineLocationTypeModel[] Optional: A list of location types for this line item. To fetch this list, add the query string "?$include=LineLocationTypes" to your URL.
      */
     public $lineLocationTypes;
 
@@ -13334,7 +13334,7 @@ class AdjustTransactionModel
     public $adjustmentDescription;
 
     /**
-     * @var object Replace the current transaction with tax data calculated for this new transaction
+     * @var CreateTransactionModel Replace the current transaction with tax data calculated for this new transaction
      */
     public $newTransaction;
 
@@ -13352,7 +13352,7 @@ class CreateTransactionModel
     public $code;
 
     /**
-     * @var object[] Document line items list
+     * @var LineItemModel[] Document line items list
      */
     public $lines;
 
@@ -13402,7 +13402,7 @@ class CreateTransactionModel
     public $exemptionNo;
 
     /**
-     * @var object Default addresses for all lines in this document.     These addresses are the default values that will be used for any lines that do not have their own  address information. If you specify addresses for a line, then no default addresses will be loaded  for that line.
+     * @var AddressesModel Default addresses for all lines in this document.     These addresses are the default values that will be used for any lines that do not have their own  address information. If you specify addresses for a line, then no default addresses will be loaded  for that line.
      */
     public $addresses;
 
@@ -13432,7 +13432,7 @@ class CreateTransactionModel
     public $batchCode;
 
     /**
-     * @var object Specifies a tax override for the entire document
+     * @var TaxOverrideModel Specifies a tax override for the entire document
      */
     public $taxOverride;
 
@@ -13510,7 +13510,7 @@ class LineItemModel
     public $amount;
 
     /**
-     * @var object The addresses to use for this transaction line.    If you set this value to `null`, or if you omit this element from your API call, then instead the transaction  will use the `addresses` from the document level.    If you specify any other value besides `null`, only addresses specified for this line will be used for this line.
+     * @var AddressesModel The addresses to use for this transaction line.    If you set this value to `null`, or if you omit this element from your API call, then instead the transaction  will use the `addresses` from the document level.    If you specify any other value besides `null`, only addresses specified for this line will be used for this line.
      */
     public $addresses;
 
@@ -13570,7 +13570,7 @@ class LineItemModel
     public $businessIdentificationNo;
 
     /**
-     * @var object Specifies a tax override for this line
+     * @var TaxOverrideModel Specifies a tax override for this line
      */
     public $taxOverride;
 
@@ -13597,27 +13597,27 @@ class AddressesModel
 {
 
     /**
-     * @var object If this transaction occurred at a retail point-of-sale location, provide that single address here and leave  all other address types null.
+     * @var AddressLocationInfo If this transaction occurred at a retail point-of-sale location, provide that single address here and leave  all other address types null.
      */
     public $singleLocation;
 
     /**
-     * @var object The origination address where the products were shipped from, or from where the services originated.
+     * @var AddressLocationInfo The origination address where the products were shipped from, or from where the services originated.
      */
     public $shipFrom;
 
     /**
-     * @var object The destination address where the products were shipped to, or where the services were delivered.
+     * @var AddressLocationInfo The destination address where the products were shipped to, or where the services were delivered.
      */
     public $shipTo;
 
     /**
-     * @var object The place of business where you receive the customer's order. This address type is valid in the United States only  and only applies to tangible personal property.
+     * @var AddressLocationInfo The place of business where you receive the customer's order. This address type is valid in the United States only  and only applies to tangible personal property.
      */
     public $pointOfOrderOrigin;
 
     /**
-     * @var object The place of business where you accept/approve the customer’s order,  thereby becoming contractually obligated to make the sale. This address type is valid in the United States only  and only applies to tangible personal property.
+     * @var AddressLocationInfo The place of business where you accept/approve the customer’s order,  thereby becoming contractually obligated to make the sale. This address type is valid in the United States only  and only applies to tangible personal property.
      */
     public $pointOfOrderAcceptance;
 
@@ -13731,17 +13731,17 @@ class SettleTransactionModel
 {
 
     /**
-     * @var object To use the "Settle" endpoint to verify a transaction, fill out this value.
+     * @var VerifyTransactionModel To use the "Settle" endpoint to verify a transaction, fill out this value.
      */
     public $verify;
 
     /**
-     * @var object To use the "Settle" endpoint to change a transaction's code, fill out this value.
+     * @var ChangeTransactionCodeModel To use the "Settle" endpoint to change a transaction's code, fill out this value.
      */
     public $changeCode;
 
     /**
-     * @var object To use the "Settle" endpoint to commit a transaction for reporting purposes, fill out this value.  If you use Avalara Returns, committing a transaction will cause that transaction to be filed.
+     * @var CommitTransactionModel To use the "Settle" endpoint to commit a transaction for reporting purposes, fill out this value.  If you use Avalara Returns, committing a transaction will cause that transaction to be filed.
      */
     public $commit;
 
@@ -13849,7 +13849,7 @@ class CreateOrAdjustTransactionModel
 {
 
     /**
-     * @var object The create transaction model to be created or updated.      If the transaction does not exist, create transaction.  If the transaction exists, adjust the existing transaction.
+     * @var CreateTransactionModel The create transaction model to be created or updated.      If the transaction does not exist, create transaction.  If the transaction exists, adjust the existing transaction.
      */
     public $createTransactionModel;
 
@@ -13882,12 +13882,12 @@ class AuditTransactionModel
     public $apiCallStatus;
 
     /**
-     * @var object Original API request/response
+     * @var OriginalApiRequestResponseModel Original API request/response
      */
     public $original;
 
     /**
-     * @var object Reconstructed API request/response
+     * @var ReconstructedApiRequestResponseModel Reconstructed API request/response
      */
     public $reconstructed;
 
@@ -13922,7 +13922,7 @@ class ReconstructedApiRequestResponseModel
 {
 
     /**
-     * @var object API request
+     * @var CreateTransactionModel API request
      */
     public $request;
 
@@ -13988,7 +13988,7 @@ class AddTransactionLineModel
     public $documentType;
 
     /**
-     * @var object[] List of lines to be added
+     * @var LineItemModel[] List of lines to be added
      */
     public $lines;
 
@@ -14044,7 +14044,7 @@ class CreateMultiCompanyTransactionModel
     public $code;
 
     /**
-     * @var object[] Multi company transaction line item list
+     * @var MultiCompanyLineItemModel[] Multi company transaction line item list
      */
     public $lines;
 
@@ -14094,7 +14094,7 @@ class CreateMultiCompanyTransactionModel
     public $exemptionNo;
 
     /**
-     * @var object Default addresses for all lines in this document.     These addresses are the default values that will be used for any lines that do not have their own  address information. If you specify addresses for a line, then no default addresses will be loaded  for that line.
+     * @var AddressesModel Default addresses for all lines in this document.     These addresses are the default values that will be used for any lines that do not have their own  address information. If you specify addresses for a line, then no default addresses will be loaded  for that line.
      */
     public $addresses;
 
@@ -14124,7 +14124,7 @@ class CreateMultiCompanyTransactionModel
     public $batchCode;
 
     /**
-     * @var object Specifies a tax override for the entire document
+     * @var TaxOverrideModel Specifies a tax override for the entire document
      */
     public $taxOverride;
 
@@ -14212,7 +14212,7 @@ class MultiCompanyLineItemModel
     public $amount;
 
     /**
-     * @var object The addresses to use for this transaction line.    If you set this value to `null`, or if you omit this element from your API call, then instead the transaction  will use the `addresses` from the document level.    If you specify any other value besides `null`, only addresses specified for this line will be used for this line.
+     * @var AddressesModel The addresses to use for this transaction line.    If you set this value to `null`, or if you omit this element from your API call, then instead the transaction  will use the `addresses` from the document level.    If you specify any other value besides `null`, only addresses specified for this line will be used for this line.
      */
     public $addresses;
 
@@ -14272,7 +14272,7 @@ class MultiCompanyLineItemModel
     public $businessIdentificationNo;
 
     /**
-     * @var object Specifies a tax override for this line
+     * @var TaxOverrideModel Specifies a tax override for this line
      */
     public $taxOverride;
 
