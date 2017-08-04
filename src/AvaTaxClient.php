@@ -29,15 +29,35 @@ use GuzzleHttp\Client;
  */
 class AvaTaxClient 
 {
-    /**
-     * @var Client     The Guzzle client to use to connect to AvaTax.
+  /**
+     * @var Client     The Guzzle client to use to connect to AvaTax
      */
     private $client;
 
     /**
-     * @var array      The authentication credentials to use to connect to AvaTax.
+     * @var array      The authentication credentials to use to connect to AvaTax
      */
     private $auth;
+
+    /**
+     * @var string      The application name as reported to AvaTax
+     */
+    private $appName;
+
+    /**
+     * @var string      The application version as reported to AvaTax
+     */
+    private $appVersion;
+
+    /**
+     * @var string      The machine name as reported to AvaTax
+     */
+    private $machineName;
+
+    /**
+     * @var string      The root URL of the AvaTax environment to contact
+     */
+    private $environment;
 
     /**
      * Construct a new AvaTaxClient 
@@ -49,6 +69,12 @@ class AvaTaxClient
      */
     public function __construct($appName, $appVersion, $machineName, $environment)
     {
+
+        $this->appName = $appName;
+        $this->appVersion = $appVersion;
+        $this->machineName = $machineName;
+        $this->environment = $environment;
+
         // Determine startup environment
         $env = 'https://rest.avatax.com';
         if ($environment == "sandbox") {
@@ -59,13 +85,8 @@ class AvaTaxClient
 
         // Configure the HTTP client
         $this->client = new Client([
-            'base_url' => $env
+            'base_uri' => $env
         ]);
-        
-        // Set client options
-        $this->client->setDefaultOption('headers', array(
-            'Accept' => 'application/json',
-            'X-Avalara-Client' => "{$appName}; {$appVersion}; PhpRestClient; 17.7.0-96; {$machineName}"));
     }
 
     /**
@@ -93,7 +114,39 @@ class AvaTaxClient
         $this->auth = [$accountId, $licenseKey];
         return $this;
     }
+    
+    /**
+     * Make a single REST call to the AvaTax v2 API server
+     *
+     * @param string $apiUrl           The relative path of the API on the server
+     * @param string $verb             The HTTP verb being used in this request
+     * @param string $guzzleParams     The Guzzle parameters for this request, including query string and body parameters
+     */
+    private function restCall($apiUrl, $verb, $guzzleParams)
+    {
+        // Set authentication on the parameters
+        if (!isset($guzzleParams['auth'])){
+            $guzzleParams['auth'] = $this->auth;
+        }
+        $guzzleParams['headers'] = [
+            'Accept' => 'application/json',
+            'X-Avalara-Client' => "{$this->appName}; {$this->appVersion}; PhpRestClient; 17.5.0-67; {$this->machineName}"
+        ];
 
+        // Contact the server
+        try {
+            $response = $this->client->request($verb, $apiUrl, $guzzleParams);
+            $body = $response->getBody();
+            return json_decode($body);
+
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+    
+/*****************************************************************************
+ *                              API Methods                                  *
+ *****************************************************************************/
 
 
     /**
@@ -589,24 +642,6 @@ class AvaTaxClient
         $path = "/api/v2/companies/{$id}";
         $guzzleParams = [
             'query' => ['$include' => $include],
-            'body' => null
-        ];
-        return $this->restCall($path, 'GET', $guzzleParams);
-    }
-
-    /**
-     * 
-     *
-     * 
-     *
-     * 
-     * @return FetchResult
-     */
-    public function getCompany()
-    {
-        $path = "/api/v2/companies/mrs";
-        $guzzleParams = [
-            'query' => [],
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
@@ -6182,32 +6217,6 @@ class AvaTaxClient
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
     }
-
-    /**
-     * Make a single REST call to the AvaTax v2 API server
-     *
-     * @param string $apiUrl           The relative path of the API on the server
-     * @param string $verb             The HTTP verb being used in this request
-     * @param string $guzzleParams     The Guzzle parameters for this request, including query string and body parameters
-     */
-    private function restCall($apiUrl, $verb, $guzzleParams)
-    {
-        // Set authentication on the parameters
-        if (!isset($guzzleParams['auth'])){
-            $guzzleParams['auth'] = $this->auth;
-        }
-    
-        // Contact the server
-        try {
-            $request = $this->client->createRequest($verb, $apiUrl, $guzzleParams);
-            $response = $this->client->send($request);
-            $body = $response->getBody();
-            return json_decode($body);
-
-        } catch (\Exception $e) {
-            return $e->getMessage();
-        }
-    }
 }
 
 /*****************************************************************************
@@ -7154,386 +7163,6 @@ class BatchFileModel
      * @var int Number of errors that occurred when processing this file.
      */
     public $errorCount;
-
-}
-
-/**
- * Certificate model in CertCapture
- */
-class CertificateModel
-{
-
-    /**
-     * @var int Cerificate ID
-     */
-    public $id;
-
-    /**
-     * @var int The unique ID number of the AvaTax company that received this certificate.
-     */
-    public $companyId;
-
-    /**
-     * @var string When the certifcate was signed
-     */
-    public $signedDate;
-
-    /**
-     * @var string When the certificate will be/was expired
-     */
-    public $expirationDate;
-
-    /**
-     * @var string File name for the certificate
-     */
-    public $filename;
-
-    /**
-     * @var boolean Is the certificate valid?
-     */
-    public $valid;
-
-    /**
-     * @var boolean Is the certificate verified?
-     */
-    public $verified;
-
-    /**
-     * @var boolean The certificate is never renewed
-     */
-    public $neverRenew;
-
-    /**
-     * @var boolean Is this certificate renewable?
-     */
-    public $renewable;
-
-    /**
-     * @var boolean TODO
-     */
-    public $unusedMultiCert;
-
-    /**
-     * @var float What is the exempt percentage from this certificate
-     */
-    public $exemptPercentage;
-
-    /**
-     * @var int TODO
-     */
-    public $verificationNumber;
-
-    /**
-     * @var int TODO
-     */
-    public $taxNumber;
-
-    /**
-     * @var boolean TODO
-     */
-    public $barcodeRead;
-
-    /**
-     * @var boolean TODO
-     */
-    public $isSingle;
-
-    /**
-     * @var int TODO
-     */
-    public $legacyCertificateId;
-
-    /**
-     * @var int TODO
-     */
-    public $calcId;
-
-    /**
-     * @var CertificateTaxCodeModel TODO
-     */
-    public $expectedTaxCode;
-
-    /**
-     * @var CertificateTaxCodeModel TODO
-     */
-    public $actualTaxCode;
-
-    /**
-     * @var string TODO
-     */
-    public $createdDate;
-
-    /**
-     * @var string TODO
-     */
-    public $modifiedDate;
-
-    /**
-     * @var ExposureZoneModel TODO
-     */
-    public $exposureZone;
-
-    /**
-     * @var int TODO
-     */
-    public $replacement;
-
-    /**
-     * @var string TODO
-     */
-    public $certificateNumber;
-
-    /**
-     * @var boolean TODO
-     */
-    public $jsSingle;
-
-    /**
-     * @var string TODO
-     */
-    public $taxNumberType;
-
-    /**
-     * @var int TODO
-     */
-    public $businessNumber;
-
-    /**
-     * @var string TODO
-     */
-    public $businessNumberType;
-
-    /**
-     * @var string TODO
-     */
-    public $exemptReasonDescription;
-
-    /**
-     * @var string TODO
-     */
-    public $sstMetadata;
-
-    /**
-     * @var int TODO
-     */
-    public $pageCount;
-
-    /**
-     * @var int TODO
-     */
-    public $communicationId;
-
-    /**
-     * @var int TODO
-     */
-    public $locationId;
-
-    /**
-     * @var int TODO
-     */
-    public $documentTypeId;
-
-    /**
-     * @var CustomerModel[] A list of customers to which this certificate applies.
-     */
-    public $customers;
-
-    /**
-     * @var PoNumberModel[] TODO
-     */
-    public $poNumber;
-
-}
-
-/**
- * Represents a tax code used by the CertCapture process
- */
-class CertificateTaxCodeModel
-{
-
-    /**
-     * @var int ID number of the tax code
-     */
-    public $id;
-
-    /**
-     * @var string Name of the tax code
-     */
-    public $name;
-
-    /**
-     * @var string Tag of the tax code
-     */
-    public $tag;
-
-}
-
-/**
- * Information about a zone in which this certificate is valid
- */
-class ExposureZoneModel
-{
-
-    /**
-     * @var int 
-     */
-    public $id;
-
-    /**
-     * @var string 
-     */
-    public $name;
-
-    /**
-     * @var string 
-     */
-    public $tag;
-
-}
-
-/**
- * Represents a customer to whom you sell products and/or services.
- */
-class CustomerModel
-{
-
-    /**
-     * @var int Unique ID number assigned to each company by Avalara.
-     */
-    public $id;
-
-    /**
-     * @var int The unique ID number of the AvaTax company that maintains this customer record.
-     */
-    public $companyId;
-
-    /**
-     * @var int TODO
-     */
-    public $clientId;
-
-    /**
-     * @var string A number by which this customer is known by your system. Must be unique within your company.
-     */
-    public $customerNumber;
-
-    /**
-     * @var string Alternate Id
-     */
-    public $alternateId;
-
-    /**
-     * @var string Customer name
-     */
-    public $name;
-
-    /**
-     * @var string Indicates the "Attn:" component of the address for this customer, if this customer requires mailings to be shipped   to the attention of a specific person or department name.
-     */
-    public $attnName;
-
-    /**
-     * @var string First line of the street address
-     */
-    public $line1;
-
-    /**
-     * @var string Second line of the street address
-     */
-    public $line2;
-
-    /**
-     * @var string City component of the address
-     */
-    public $city;
-
-    /**
-     * @var string Postal Code / Zip Code component of the address.
-     */
-    public $postalCode;
-
-    /**
-     * @var string Customer phone number
-     */
-    public $phoneNumber;
-
-    /**
-     * @var string Customer fax number
-     */
-    public $faxNumber;
-
-    /**
-     * @var string Customer email
-     */
-    public $emailAddress;
-
-    /**
-     * @var string Customer contact name
-     */
-    public $contactName;
-
-    /**
-     * @var string When last transaction was happened,
-     */
-    public $lastTransaction;
-
-    /**
-     * @var string The date when this record was created.
-     */
-    public $createdDate;
-
-    /**
-     * @var string The date/time when this record was last modified.
-     */
-    public $modifiedDate;
-
-    /**
-     * @var string Two character ISO 3166 county code for this country
-     */
-    public $country;
-
-    /**
-     * @var string Two or three character ISO 3166 region, province, or state name
-     */
-    public $region;
-
-    /**
-     * @var boolean TODO
-     */
-    public $isBill;
-
-    /**
-     * @var boolean TODO
-     */
-    public $isShip;
-
-    /**
-     * @var string For customers in the United States, this field is the federal taxpayer ID number. For businesses, this is   a Federal Employer Identification Number. For individuals, this will be a Social Security Number.
-     */
-    public $taxpayerIdNumber;
-
-    /**
-     * @var CertificateModel[] A list of exemption certficates that apply to this customer.
-     */
-    public $certificates;
-
-}
-
-/**
- * Represents a purchase order number for a transaction
- */
-class PoNumberModel
-{
-
-    /**
-     * @var int Unique ID number
-     */
-    public $id;
-
-    /**
-     * @var string Purchase order number.
-     */
-    public $poNumber;
 
 }
 
