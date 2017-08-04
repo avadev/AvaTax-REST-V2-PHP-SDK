@@ -1,4 +1,13 @@
 <?php
+namespace Avalara;
+use GuzzleHttp\Client;
+
+/**
+ * Base AvaTaxClient object that handles connectivity to the AvaTax v2 API server.
+ * This class is overridden by the descendant AvaTaxClient which implements all the API methods.
+ */
+class AvaTaxClientBase
+{
   /**
      * @var Client     The Guzzle client to use to connect to AvaTax
      */
@@ -92,7 +101,7 @@
      * @param string $verb             The HTTP verb being used in this request
      * @param string $guzzleParams     The Guzzle parameters for this request, including query string and body parameters
      */
-    private function restCall($apiUrl, $verb, $guzzleParams)
+    protected function restCall($apiUrl, $verb, $guzzleParams)
     {
         // Set authentication on the parameters
         if (!isset($guzzleParams['auth'])){
@@ -113,4 +122,5 @@
             return $e->getMessage();
         }
     }
+}
 ?>

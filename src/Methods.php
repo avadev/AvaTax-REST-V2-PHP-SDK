@@ -1,4 +1,6 @@
 <?php
+namespace Avalara;
+use GuzzleHttp\Client;
 
 /*****************************************************************************
  *                                                                           *
@@ -7,6 +9,11 @@
  *                                                                           *
  *****************************************************************************/
 
+ /**
+ * Descendant AvaTaxClient that implements all API methods.
+ */
+class AvaTaxClient extends AvaTaxClientBase
+{
     /**
      * Reset this account's license key
      *
@@ -6075,5 +6082,5 @@
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
     }
-    
+}
 ?>

@@ -1,5 +1,7 @@
 <?php 
 namespace Avalara;
+use GuzzleHttp\Client;
+
 /*
  * AvaTax Software Development Kit for PHP
  *
@@ -18,8 +20,6 @@ namespace Avalara;
  * @link       https://github.com/avadev/AvaTax-REST-V2-PHP-SDK
  */
 
-use GuzzleHttp\Client;
-
 /*****************************************************************************
  *                              API Section                                  *
  *                                                                           *
@@ -28,18 +28,14 @@ use GuzzleHttp\Client;
  *                                                                           *
  *****************************************************************************/
 
-/**
- * An AvaTaxClient object that handles connectivity to the AvaTax v2 API server.
- */
-class AvaTaxClient 
-{
-    include 'Client.php';
+require_once 'Client.php';
     
-    include 'Methods.php';
-}
+require_once 'Methods.php';
 
-include 'Models.php';
+require_once 'Models.php';
 
-include 'Constants.php';
+require_once 'Constants.php';
 
-include 'TransactionBuilder.php';
+require_once 'TransactionBuilder.php';
+
+?>

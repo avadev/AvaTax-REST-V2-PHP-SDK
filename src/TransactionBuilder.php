@@ -1,4 +1,7 @@
 <?php
+namespace Avalara;
+use GuzzleHttp\Client;
+
 /*****************************************************************************
  *                  Transaction Builder Convenience Object                   *
  *                                                                           *
