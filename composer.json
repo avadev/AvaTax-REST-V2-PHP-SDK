@@ -1,7 +1,7 @@
 {
     "name": "avalara/avataxclient",
     "description": "Client library for Avalara's AvaTax suite of business tax calculation and processing services. Uses the REST v2 API.",
-    "version": "17.7.0.96",
+    "version": "17.8.1.722",
     "keywords": [
         "tax",
         "AvaTax",
