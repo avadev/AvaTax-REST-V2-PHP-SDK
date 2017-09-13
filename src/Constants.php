@@ -1980,6 +1980,55 @@ class ReportFormat
 
 
 /**
+ * The date filter type for report
+ *  "RD" for Reporting Date, "DD" for Document Date, "TD" for Tax Date, "PD" for Payment Date
+ */
+class ReportDateFilter
+{
+
+    /**
+     * The date when the transaction is posted
+     */
+    const C_DOCUMENTDATE = "DocumentDate";
+
+    /**
+     * The date when the transaction is paid for
+     */
+    const C_PAYMENTDATE = "PaymentDate";
+
+    /**
+     * The date when the transaction is added to report
+     */
+    const C_REPORTINGDATE = "ReportingDate";
+
+    /**
+     * The date when the transaction is being taxed
+     */
+    const C_TAXDATE = "TaxDate";
+
+}
+
+
+/**
+ * The output DocumentType for a report
+ */
+class ReportDocType
+{
+
+    /**
+     * Output all ConsumerUse tax transactions in the report
+     */
+    const C_CONSUMERUSE = "ConsumerUse";
+
+    /**
+     * Output all Sales tax transactions in the report
+     */
+    const C_SALES = "Sales";
+
+}
+
+
+/**
  * Document Status
  */
 class DocumentStatus

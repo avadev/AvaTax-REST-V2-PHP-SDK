@@ -6403,17 +6403,17 @@ class ExportDocumentLineModel
 {
 
     /**
-     * @var string The output format: CSV, XML, etc. (See ReportFormat::* for a list of allowable values)
+     * @var string The output format: CSV, XML, etc. If no preference, report will be in CSV format. (See ReportFormat::* for a list of allowable values)
      */
     public $format;
 
     /**
-     * @var string The start date filter for report execution
+     * @var string The start date filter for report execution. If no date provided, same date of last month will be used as the startDate.
      */
     public $startDate;
 
     /**
-     * @var string The end date filter for report execution
+     * @var string The end date filter for report execution. If no date provided, today's date will be used as the endDate.
      */
     public $endDate;
 
@@ -6423,17 +6423,17 @@ class ExportDocumentLineModel
     public $country;
 
     /**
-     * @var string The transactions in which state you wish to run a report:  use "ALL" for all states
+     * @var string The state associated with the transactions you wish to run a report on: use "ALL" for all states.
      */
     public $state;
 
     /**
-     * @var string The way your date filter operates on: "RD" for Reporting Date, "DD" for Document Date, "TD" for Tax Date, "PD" for Payment Date
+     * @var string The type of date to filter your transactions (See ReportDateFilter::* for a list of allowable values)
      */
     public $dateFilter;
 
     /**
-     * @var string The transaction type you want to run a report: "S" for Sales, "C" for Consumer Use
+     * @var string The transaction type you want to run a report on (See ReportDocType::* for a list of allowable values)
      */
     public $docType;
 
