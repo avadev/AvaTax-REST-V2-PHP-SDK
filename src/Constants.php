@@ -9,7 +9,11 @@ use GuzzleHttp\Client;
  *                                                                           *
  *****************************************************************************/
  
-/**
+/*****************************************************************************
+ *                              Enumerated constants                         *
+ *****************************************************************************/
+
+ /**
  * Lists of acceptable values for the enumerated data type TransactionAddressType
  */
 class TransactionAddressType
@@ -101,6 +105,25 @@ class DocumentType
      * No particular type
      */
     const C_ANY = "Any";
+
+}
+
+
+/**
+ * Type of certificate preview to download
+ */
+class CertificatePreviewType
+{
+
+    /**
+     * Download a full printable PDF
+     */
+    const C_PDF = "Pdf";
+
+    /**
+     * Download a single page of the certificate in JPG format
+     */
+    const C_JPEG = "Jpeg";
 
 }
 
@@ -607,6 +630,10 @@ class ErrorCodeId
     const C_PASSWORDLENGTHINVALID = "PasswordLengthInvalid";
     const C_LOCALNEXUSCONFLICT = "LocalNexusConflict";
     const C_INVALIDECMSOVERRIDECODE = "InvalidEcmsOverrideCode";
+    const C_ACCOUNTDOESNOTEXIST = "AccountDoesNotExist";
+    const C_INVALIDTAXTYPE = "InvalidTaxType";
+    const C_INCORRECTFIELDVALUE = "IncorrectFieldValue";
+    const C_LEADINGORTRAILINGEXCEPTION = "LeadingOrTrailingException";
 
     /**
      * Batch errors
@@ -623,6 +650,8 @@ class ErrorCodeId
      */
     const C_POINTOFSALEFILESIZE = "PointOfSaleFileSize";
     const C_POINTOFSALESETUP = "PointOfSaleSetup";
+    const C_INVALIDINPUTDATE = "InvalidInputDate";
+    const C_REQUESTEDFILENOTEXIST = "RequestedFileNotExist";
 
     /**
      * Errors in Soap V1 Passthrough / GetTax calls
@@ -660,8 +689,6 @@ class ErrorCodeId
     const C_SUBSCRIPTIONREQUIRED = "SubscriptionRequired";
     const C_ACCOUNTEXISTS = "AccountExists";
     const C_INVITATIONONLY = "InvitationOnly";
-    const C_ZTBLISTCONNECTORFAIL = "ZTBListConnectorFail";
-    const C_ZTBCREATESUBSCRIPTIONSFAIL = "ZTBCreateSubscriptionsFail";
     const C_FREETRIALNOTAVAILABLE = "FreeTrialNotAvailable";
     const C_ACCOUNTEXISTSDIFFERENTEMAIL = "AccountExistsDifferentEmail";
     const C_AVALARAIDENTITYAPIERROR = "AvalaraIdentityApiError";
@@ -705,14 +732,26 @@ class ErrorCodeId
     const C_LINEALREADYEXISTS = "LineAlreadyExists";
     const C_LINEDOESNOTEXIST = "LineDoesNotExist";
     const C_LINESNOTSPECIFIED = "LinesNotSpecified";
+
+    /**
+     * Exempt cert error codes
+     */
     const C_INVALIDBUSINESSTYPE = "InvalidBusinessType";
     const C_CANNOTMODIFYEXEMPTCERT = "CannotModifyExemptCert";
     const C_CERTCAPTUREFIELDVALIDATIONERROR = "CertCaptureFieldValidationError";
     const C_CERTCAPTUREERROR = "CertCaptureError";
     const C_MISSINGREQUIREDFIELDS = "MissingRequiredFields";
     const C_CERTCAPTURENOTCONFIGUREDERROR = "CertCaptureNotConfiguredError";
-    const C_ADDCUSTOMERSFORCERTIFICATEERROR = "AddCustomersForCertificateError";
-    const C_ADDCERTIFICATESFORCUSTOMERERROR = "AddCertificatesForCustomerError";
+    const C_ADDRELATIONSHIPSERROR = "AddRelationshipsError";
+    const C_MISSINGEXPOSUREZONE = "MissingExposureZone";
+    const C_CONFLICTINGEXPOSUREZONE = "ConflictingExposureZone";
+    const C_MISSINGFIELDTOCREATEEXPOSUREZONE = "MissingFieldToCreateExposureZone";
+    const C_MISSINGEXEMPTREASON = "MissingExemptReason";
+    const C_INVALIDEXEMPTREASON = "InvalidExemptReason";
+    const C_INVALIDCERTCAPTUREOPERATION = "InvalidCertCaptureOperation";
+    const C_CONFLICTINGFIELDS = "ConflictingFields";
+    const C_INVALIDPDFORIMAGEFILE = "InvalidPdfOrImageFile";
+    const C_INVALIDCOVERLETTERTITLE = "InvalidCoverLetterTitle";
 
     /**
      * Multi company error codes
@@ -726,6 +765,12 @@ class ErrorCodeId
      */
     const C_COMMSCONFIGCLIENTIDMISSING = "CommsConfigClientIdMissing";
     const C_COMMSCONFIGCLIENTIDBADVALUE = "CommsConfigClientIdBadValue";
+
+    /**
+     * BizTech API error codes
+     */
+    const C_BIZTECHCUSTOMERACCOUNTFAILURE = "BizTechCustomerAccountFailure";
+    const C_BIZTECHOPPORTUNITYCREATIONFAILURE = "BizTechOpportunityCreationFailure";
 
 }
 
@@ -755,6 +800,30 @@ class SeverityLevel
      * Unexpected exceptions occurred, operation failed
      */
     const C_EXCEPTION = "Exception";
+
+}
+
+
+/**
+ * Represents the type of welcome email for the users
+ */
+class WelcomeEmail
+{
+
+    /**
+     * Normal
+     */
+    const C_NORMAL = "Normal";
+
+    /**
+     * Suppressed
+     */
+    const C_SUPPRESSED = "Suppressed";
+
+    /**
+     * Custom
+     */
+    const C_CUSTOM = "Custom";
 
 }
 
@@ -944,6 +1013,50 @@ class BatchStatus
      * Batch is currently being processed.
      */
     const C_PROCESSING = "Processing";
+
+}
+
+
+/**
+ * The way of delivering request
+ */
+class CertificateRequestDeliveryMethod
+{
+
+    /**
+     * Emailing the request to recipients
+     */
+    const C_EMAIL = "Email";
+
+    /**
+     * Faxing the request to recipients
+     */
+    const C_FAX = "Fax";
+
+    /**
+     * Downloading the request
+     */
+    const C_DOWNLOAD = "Download";
+
+}
+
+
+/**
+ * Indicates the status of a CertExpress invitation link.
+ */
+class CertExpressInvitationStatus
+{
+
+    /**
+     * The CertExpress website is currently building a landing page for the customer. Please
+     *  wait about 10 seconds and fetch this request again to see when it will be ready.
+     */
+    const C_INPROGRESS = "InProgress";
+
+    /**
+     * Indicates that the CertExpress invitation has been completed and is ready to use.
+     */
+    const C_READY = "Ready";
 
 }
 
@@ -1848,6 +1961,74 @@ class CommentType
 
 
 /**
+ * Different types of formats allowed for exporting a report
+ */
+class ReportFormat
+{
+
+    /**
+     * The Comma Separated Values file format
+     */
+    const C_CSV = "CSV";
+
+    /**
+     * The Extensible Markup Language file format
+     */
+    const C_XML = "XML";
+
+}
+
+
+/**
+ * The date filter type for report
+ *  "RD" for Reporting Date, "DD" for Document Date, "TD" for Tax Date, "PD" for Payment Date
+ */
+class ReportDateFilter
+{
+
+    /**
+     * The date when the transaction is posted
+     */
+    const C_DOCUMENTDATE = "DocumentDate";
+
+    /**
+     * The date when the transaction is paid for
+     */
+    const C_PAYMENTDATE = "PaymentDate";
+
+    /**
+     * The date when the transaction is added to report
+     */
+    const C_REPORTINGDATE = "ReportingDate";
+
+    /**
+     * The date when the transaction is being taxed
+     */
+    const C_TAXDATE = "TaxDate";
+
+}
+
+
+/**
+ * The output DocumentType for a report
+ */
+class ReportDocType
+{
+
+    /**
+     * Output all ConsumerUse tax transactions in the report
+     */
+    const C_CONSUMERUSE = "ConsumerUse";
+
+    /**
+     * Output all Sales tax transactions in the report
+     */
+    const C_SALES = "Sales";
+
+}
+
+
+/**
  * Document Status
  */
 class DocumentStatus
@@ -2014,6 +2195,11 @@ class TaxType
      * Match bottle tax type
      */
     const C_BOTTLE = "Bottle";
+
+    /**
+     * EWaste tax type
+     */
+    const C_EWASTE = "EWaste";
 
     /**
      * Consumer Use Tax

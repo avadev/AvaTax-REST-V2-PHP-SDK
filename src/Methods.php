@@ -8,12 +8,18 @@ use GuzzleHttp\Client;
  *                  Edits to this file will be overwritten.                  *
  *                                                                           *
  *****************************************************************************/
+ 
+/*****************************************************************************
+ *                              API Methods                                  *
+ *****************************************************************************/
 
  /**
  * Descendant AvaTaxClient that implements all API methods.
  */
 class AvaTaxClient extends AvaTaxClientBase
 {
+
+
     /**
      * Reset this account's license key
      *
@@ -49,7 +55,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * 
      * @param int $id The ID of the account to activate
-     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $include Elements to include when fetching the account
      * @param ActivateAccountModel $model The activation request
      * @return AccountModel
      */
@@ -74,7 +80,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * 
      * @param int $id The ID of the account to retrieve
-     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $include A comma separated list of special fetch options
      * @return AccountModel
      */
     public function getAccount($id, $include)
@@ -305,7 +311,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns these batches
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
-     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $include A comma separated list of additional data to retrieve.
      * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -334,7 +340,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
-     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $include A comma separated list of additional data to retrieve.
      * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -348,6 +354,488 @@ class AvaTaxClient extends AvaTaxClientBase
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Create a CertExpress invitation
+     *
+     * Creates an invitation for a customer to self-report certificates using the CertExpress website.
+     * 
+     * This invitation is delivered by your choice of method, or you can present a hyperlink to the user
+     * directly in your connector. Your customer will be redirected to https://app.certexpress.com/ where
+     * they can follow a step-by-step guide to enter information about their exemption certificates. The
+     * certificates entered will be recorded and automatically linked to their customer record.
+     * 
+     * The [CertExpress website](https://app.certexpress.com/home) is available for customers to use at any time.
+     * Using CertExpress with this API will ensure that your certificates are automatically linked correctly into
+     * your company so that they can be used for tax exemptions.
+     *
+     * 
+     * @param int $companyId The unique ID number of the company that will record certificates
+     * @param string $customerCode The number of the customer where the request is sent to
+     * @param CreateCertExpressInvitationModel[] $model the requests to send out to customers
+     * @return CertExpressInvitationStatusModel[]
+     */
+    public function createCertExpressInvitation($companyId, $customerCode, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/certexpressinvites";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single CertExpress invitation
+     *
+     * Retrieve an existing CertExpress invitation sent to a customer.
+     * 
+     * A CertExpression invitation allows a customer to follow a helpful step-by-step guide to provide information
+     * about their certificates. This step by step guide allows the customer to complete and upload the full 
+     * certificate in a convenient, friendly web browser experience. When the customer completes their certificates,
+     * they will automatically be recorded to your company and linked to the customer record.
+     * 
+     * The [CertExpress website](https://app.certexpress.com/home) is available for customers to use at any time.
+     * Using CertExpress with this API will ensure that your certificates are automatically linked correctly into
+     * your company so that they can be used for tax exemptions.
+     *
+     * 
+     * @param int $companyId The unique ID number of the company that issued this invitation
+     * @param string $customerCode The number of the customer where the request is sent to
+     * @param int $id The unique ID number of this CertExpress invitation
+     * @param string $include OPTIONAL: A comma separated list of special fetch options. No options are defined at this time.
+     * @return CertExpressInvitationModel
+     */
+    public function getCertExpressInvitation($companyId, $customerCode, $id, $include)
+    {
+        $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/certexpressinvites/{$id}";
+        $guzzleParams = [
+            'query' => ['$include' => $include],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * List CertExpress invitations
+     *
+     * Retrieve CertExpress invitations sent by this company.
+     * 
+     * A CertExpression invitation allows a customer to follow a helpful step-by-step guide to provide information
+     * about their certificates. This step by step guide allows the customer to complete and upload the full 
+     * certificate in a convenient, friendly web browser experience. When the customer completes their certificates,
+     * they will automatically be recorded to your company and linked to the customer record.
+     * 
+     * The [CertExpress website](https://app.certexpress.com/home) is available for customers to use at any time.
+     * Using CertExpress with this API will ensure that your certificates are automatically linked correctly into
+     * your company so that they can be used for tax exemptions.
+     *
+     * 
+     * @param int $companyId The unique ID number of the company that issued this invitation
+     * @param string $include OPTIONAL: A comma separated list of special fetch options.       No options are defined at this time.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listCertExpressInvitations($companyId, $include, $filter, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/companies/{$companyId}/certexpressinvites";
+        $guzzleParams = [
+            'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Create certificates for this company
+     *
+     * Record one or more certificates document for this company.
+     * 
+     * A certificate is a document stored in either AvaTax Exemptions or CertCapture. The certificate document
+     * can contain information about a customer's eligibility for exemption from sales or use taxes based on
+     * criteria you specify when you store the certificate. To view or manage your certificates directly, please 
+     * log onto the administrative website for the product you purchased.
+     * 
+     * When you create a certificate, it will be processed by Avalara and will become available for use in
+     * calculating tax exemptions when processing is complete. For a certificate to be used in calculating exemptions,
+     * it must have the following:
+     * 
+     * * A list of exposure zones indicating where the certificate is valid
+     * * A link to the customer that is allowed to use this certificate
+     * * Your tax transaction must contain the correct customer code
+     *
+     * 
+     * @param int $companyId The ID number of the company recording this certificate
+     * @param CertificateModel[] $model Certificates to be created
+     * @return CertificateModel[]
+     */
+    public function createCertificates($companyId, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/certificates";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Revoke and delete a certificate
+     *
+     * Revoke the certificate identified by this URL, then delete it.
+     * 
+     * A certificate is a document stored in either AvaTax Exemptions or CertCapture. The certificate document
+     * can contain information about a customer's eligibility for exemption from sales or use taxes based on
+     * criteria you specify when you store the certificate. To view or manage your certificates directly, please 
+     * log onto the administrative website for the product you purchased.
+     * 
+     * Revoked certificates can no longer be used.
+     *
+     * 
+     * @param int $companyId The unique ID number of the company that recorded this certificate
+     * @param int $id The unique ID number of this certificate
+     * @return CertificateModel
+     */
+    public function deleteCertificate($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/certificates/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Download an image for this certificate
+     *
+     * Download an image or PDF file for this certificate.
+     * 
+     * This API can be used to download either a single-page preview of the certificate or a full PDF document.
+     * To retrieve a preview image, set the `$type` parameter to `Jpeg` and the `$page` parameter to `1`.
+     * 
+     * A certificate is a document stored in either AvaTax Exemptions or CertCapture. The certificate document
+     * can contain information about a customer's eligibility for exemption from sales or use taxes based on
+     * criteria you specify when you store the certificate. To view or manage your certificates directly, please 
+     * log onto the administrative website for the product you purchased.
+     *
+     * 
+     * @param int $companyId The unique ID number of the company that recorded this certificate
+     * @param int $id The unique ID number of this certificate
+     * @param int $page If you choose `$type`=`Jpeg`, you must specify which page number to retrieve.
+     * @param string $type The data format in which to retrieve the certificate image (See CertificatePreviewType::* for a list of allowable values)
+     * @return object
+     */
+    public function downloadCertificateImage($companyId, $id, $page, $type)
+    {
+        $path = "/api/v2/companies/{$companyId}/certificates/{$id}/attachment";
+        $guzzleParams = [
+            'query' => ['$page' => $page, '$type' => $type],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single certificate
+     *
+     * Get the current certificate identified by this URL.
+     * 
+     * A certificate is a document stored in either AvaTax Exemptions or CertCapture. The certificate document
+     * can contain information about a customer's eligibility for exemption from sales or use taxes based on
+     * criteria you specify when you store the certificate. To view or manage your certificates directly, please 
+     * log onto the administrative website for the product you purchased.
+     * 
+     * You can use the `$include` parameter to fetch the following additional objects for expansion:
+     * 
+     * * Customers - Retrieves the list of customers linked to the certificate.
+     * * PoNumbers - Retrieves all PO numbers tied to the certificate.
+     * * Attributes - Retrieves all attributes applied to the certificate.
+     *
+     * 
+     * @param int $companyId The ID number of the company that recorded this certificate
+     * @param int $id The unique ID number of this certificate
+     * @param string $include OPTIONAL: A comma separated list of special fetch options. You can specify one or more of the following:      * Customers - Retrieves the list of customers linked to the certificate.   * PoNumbers - Retrieves all PO numbers tied to the certificate.   * Attributes - Retrieves all attributes applied to the certificate.
+     * @return CertificateModel
+     */
+    public function getCertificate($companyId, $id, $include)
+    {
+        $path = "/api/v2/companies/{$companyId}/certificates/{$id}";
+        $guzzleParams = [
+            'query' => ['$include' => $include],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Link attributes to a certificate
+     *
+     * Link one or many attributes to a certificate.
+     * 
+     * A certificate may have multiple attributes that control its behavior. You may link or unlink attributes to a
+     * certificate at any time. The full list of defined attributes may be found using `ListCertificateAttributes`.
+     * 
+     * A certificate is a document stored in either AvaTax Exemptions or CertCapture. The certificate document
+     * can contain information about a customer's eligibility for exemption from sales or use taxes based on
+     * criteria you specify when you store the certificate. To view or manage your certificates directly, please 
+     * log onto the administrative website for the product you purchased.
+     *
+     * 
+     * @param int $companyId The unique ID number of the company that recorded this certificate
+     * @param int $id The unique ID number of this certificate
+     * @param CertificateAttributeModel[] $model The list of attributes to link to this certificate.
+     * @return FetchResult
+     */
+    public function linkAttributesToCertificate($companyId, $id, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/certificates/{$id}/attributes/link";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Link customers to a certificate
+     *
+     * Link one or more customers to an existing certificate.
+     * 
+     * Customers and certificates must be linked before a customer can make use of a certificate to obtain
+     * a tax exemption in AvaTax. Since some certificates may cover more than one business entity, a certificate
+     * can be connected to multiple customer records using the `LinkCustomersToCertificate` API.
+     * 
+     * A certificate is a document stored in either AvaTax Exemptions or CertCapture. The certificate document
+     * can contain information about a customer's eligibility for exemption from sales or use taxes based on
+     * criteria you specify when you store the certificate. To view or manage your certificates directly, please 
+     * log onto the administrative website for the product you purchased.
+     *
+     * 
+     * @param int $companyId The unique ID number of the company that recorded this certificate
+     * @param int $id The unique ID number of this certificate
+     * @param LinkCustomersModel $model The list of customers needed be added to the Certificate for exemption
+     * @return FetchResult
+     */
+    public function linkCustomersToCertificate($companyId, $id, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/certificates/{$id}/customers/link";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * List all attributes applied to this certificate
+     *
+     * Retrieve the list of attributes that are linked to this certificate.
+     * 
+     * A certificate may have multiple attributes that control its behavior. You may link or unlink attributes to a
+     * certificate at any time. The full list of defined attributes may be found using `/api/v2/definitions/certificateattributes`.
+     * 
+     * A certificate is a document stored in either AvaTax Exemptions or CertCapture. The certificate document
+     * can contain information about a customer's eligibility for exemption from sales or use taxes based on
+     * criteria you specify when you store the certificate. To view or manage your certificates directly, please 
+     * log onto the administrative website for the product you purchased.
+     *
+     * 
+     * @param int $companyId The unique ID number of the company that recorded this certificate
+     * @param int $id The unique ID number of this certificate
+     * @return FetchResult
+     */
+    public function listAttributesForCertificate($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/certificates/{$id}/attributes";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * List customers linked to this certificate
+     *
+     * List all customers linked to this certificate.
+     * 
+     * Customers must be linked to a certificate in order to make use of its tax exemption features. You
+     * can link or unlink customers to a certificate at any time.
+     * 
+     * A certificate is a document stored in either AvaTax Exemptions or CertCapture. The certificate document
+     * can contain information about a customer's eligibility for exemption from sales or use taxes based on
+     * criteria you specify when you store the certificate. To view or manage your certificates directly, please 
+     * log onto the administrative website for the product you purchased.
+     *
+     * 
+     * @param int $companyId The unique ID number of the company that recorded this certificate
+     * @param int $id The unique ID number of this certificate
+     * @param string $include OPTIONAL: A comma separated list of special fetch options.    No options are currently available when fetching customers.
+     * @return FetchResult
+     */
+    public function listCustomersForCertificate($companyId, $id, $include)
+    {
+        $path = "/api/v2/companies/{$companyId}/certificates/{$id}/customers";
+        $guzzleParams = [
+            'query' => ['$include' => $include],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * List all certificates for a company
+     *
+     * List all certificates recorded by a company
+     * 
+     * A certificate is a document stored in either AvaTax Exemptions or CertCapture. The certificate document
+     * can contain information about a customer's eligibility for exemption from sales or use taxes based on
+     * criteria you specify when you store the certificate. To view or manage your certificates directly, please 
+     * log onto the administrative website for the product you purchased.
+     * 
+     * You can use the `$include` parameter to fetch the following additional objects for expansion:
+     * 
+     * * Customers - Retrieves the list of customers linked to the certificate.
+     * * PoNumbers - Retrieves all PO numbers tied to the certificate.
+     * * Attributes - Retrieves all attributes applied to the certificate.
+     *
+     * 
+     * @param int $companyId The ID number of the company to search
+     * @param string $include OPTIONAL: A comma separated list of special fetch options. You can specify one or more of the following:      * Customers - Retrieves the list of customers linked to the certificate.   * PoNumbers - Retrieves all PO numbers tied to the certificate.   * Attributes - Retrieves all attributes applied to the certificate.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function queryCertificates($companyId, $include, $filter, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/companies/{$companyId}/certificates";
+        $guzzleParams = [
+            'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Unlink attributes from a certificate
+     *
+     * Unlink one or many attributes from a certificate.
+     * 
+     * A certificate may have multiple attributes that control its behavior. You may link or unlink attributes to a
+     * certificate at any time. The full list of defined attributes may be found using `ListCertificateAttributes`.
+     * 
+     * A certificate is a document stored in either AvaTax Exemptions or CertCapture. The certificate document
+     * can contain information about a customer's eligibility for exemption from sales or use taxes based on
+     * criteria you specify when you store the certificate. To view or manage your certificates directly, please 
+     * log onto the administrative website for the product you purchased.
+     *
+     * 
+     * @param int $companyId The unique ID number of the company that recorded this certificate
+     * @param int $id The unique ID number of this certificate
+     * @param CertificateAttributeModel[] $model The list of attributes to unlink from this certificate.
+     * @return FetchResult
+     */
+    public function unlinkAttributesFromCertificate($companyId, $id, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/certificates/{$id}/attributes/unlink";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Unlink customers from a certificate
+     *
+     * Unlinks one or more customers from a certificate.
+     * 
+     * Unlinking a certificate from a customer will prevent the certificate from being used to generate
+     * tax exemptions for the customer in the future. If any previous transactions for this customer had
+     * used this linked certificate, those transactions will be unchanged and will still have a link to the
+     * exemption certificate in question.
+     * 
+     * A certificate is a document stored in either AvaTax Exemptions or CertCapture. The certificate document
+     * can contain information about a customer's eligibility for exemption from sales or use taxes based on
+     * criteria you specify when you store the certificate. To view or manage your certificates directly, please 
+     * log onto the administrative website for the product you purchased.
+     *
+     * 
+     * @param int $companyId The unique ID number of the company that recorded this certificate
+     * @param int $id The unique ID number of this certificate
+     * @param LinkCustomersModel $model The list of customers to unlink from this certificate
+     * @return FetchResult
+     */
+    public function unlinkCustomersFromCertificate($companyId, $id, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/certificates/{$id}/customers/unlink";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Update a single certificate
+     *
+     * Replace the certificate identified by this URL with a new one.
+     * 
+     * A certificate is a document stored in either AvaTax Exemptions or CertCapture. The certificate document
+     * can contain information about a customer's eligibility for exemption from sales or use taxes based on
+     * criteria you specify when you store the certificate. To view or manage your certificates directly, please 
+     * log onto the administrative website for the product you purchased.
+     *
+     * 
+     * @param int $companyId The ID number of the company that recorded this certificate
+     * @param int $id The unique ID number of this certificate
+     * @param CertificateModel $model The new certificate object that will replace the existing one
+     * @return CertificateModel
+     */
+    public function updateCertificate($companyId, $id, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/certificates/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Upload an image or PDF attachment for this certificate
+     *
+     * Upload an image or PDF attachment for this certificate.
+     * 
+     * Image attachments can be of the format `PDF`, `JPEG`, `TIFF`, or `PNG`. To upload a multi-page image, please
+     * use the `PDF` data type.
+     * 
+     * A certificate is a document stored in either AvaTax Exemptions or CertCapture. The certificate document
+     * can contain information about a customer's eligibility for exemption from sales or use taxes based on
+     * criteria you specify when you store the certificate. To view or manage your certificates directly, please 
+     * log onto the administrative website for the product you purchased.
+     *
+     * 
+     * @param int $companyId The unique ID number of the company that recorded this certificate
+     * @param int $id The unique ID number of this certificate
+     * @param object $file The exemption certificate file you wanted to upload. Accepted formats are: PDF, JPEG, TIFF, PNG.
+     * @return string
+     */
+    public function uploadCertificateImage($companyId, $id, $file)
+    {
+        $path = "/api/v2/companies/{$companyId}/certificates/{$id}/attachment";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
     }
 
     /**
@@ -495,11 +983,10 @@ class AvaTaxClient extends AvaTaxClientBase
      *  * TaxCodes
      *  * TaxRules
      *  * UPC
-     *  * ECMS
      *
      * 
      * @param int $id The ID of the company to retrieve.
-     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $include OPTIONAL: A comma separated list of special fetch options.       * Child objects - Specify one or more of the following to retrieve objects related to each company: "Contacts", "FilingCalendars", "Items", "Locations", "Nexus", "TaxCodes", or "TaxRules".   * Deleted objects - Specify "FetchDeleted" to retrieve information about previously deleted objects.
      * @return CompanyModel
      */
     public function getCompany($id, $include)
@@ -596,6 +1083,26 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Retrieve a list of MRS Companies with account
+     *
+     * This API is available by invitation only.
+     * 
+     * Get a list of companies with an active MRS service.
+     *
+     * 
+     * @return FetchResult
+     */
+    public function listMrsCompanies()
+    {
+        $path = "/api/v2/companies/mrs";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * Retrieve all companies
      *
      * Get multiple company objects.
@@ -612,10 +1119,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * * TaxCodes
      * * TaxRules
      * * UPC
-     * * ECMS
      *
      * 
-     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $include A comma separated list of objects to fetch underneath this company. Any object with a URL path underneath this company can be fetched by specifying its name.
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
      * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
@@ -761,7 +1267,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns these contacts
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
-     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $include A comma separated list of additional data to retrieve.
      * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -789,7 +1295,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
-     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $include A comma separated list of additional data to retrieve.
      * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -823,6 +1329,266 @@ class AvaTaxClient extends AvaTaxClientBase
     public function updateContact($companyId, $id, $model)
     {
         $path = "/api/v2/companies/{$companyId}/contacts/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Create customers for this company
+     *
+     * Create one or more customers for this company.
+     * 
+     * A customer object defines information about a person or business that purchases products from your
+     * company. When you create a tax transaction in AvaTax, you can use the `customerCode` from this
+     * record in your `CreateTransaction` API call. AvaTax will search for this `customerCode` value and
+     * identify any certificates linked to this `customer` object. If any certificate applies to the transaction,
+     * AvaTax will record the appropriate elements of the transaction as exempt and link it to the `certificate`.
+     *
+     * 
+     * @param int $companyId The unique ID number of the company that recorded this customer
+     * @param CustomerModel[] $model The list of customer objects to be created
+     * @return CustomerModel[]
+     */
+    public function createCustomers($companyId, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/customers";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Delete a customer record
+     *
+     * Deletes the customer object referenced by this URL.
+     * 
+     * A customer object defines information about a person or business that purchases products from your
+     * company. When you create a tax transaction in AvaTax, you can use the `customerCode` from this
+     * record in your `CreateTransaction` API call. AvaTax will search for this `customerCode` value and
+     * identify any certificates linked to this `customer` object. If any certificate applies to the transaction,
+     * AvaTax will record the appropriate elements of the transaction as exempt and link it to the `certificate`.
+     *
+     * 
+     * @param int $companyId The unique ID number of the company that recorded this customer
+     * @param string $customerCode The unique code representing this customer
+     * @return CustomerModel
+     */
+    public function deleteCustomer($companyId, $customerCode)
+    {
+        $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single customer
+     *
+     * Retrieve the customer identified by this URL.
+     * 
+     * A customer object defines information about a person or business that purchases products from your
+     * company. When you create a tax transaction in AvaTax, you can use the `customerCode` from this
+     * record in your `CreateTransaction` API call. AvaTax will search for this `customerCode` value and
+     * identify any certificates linked to this customer object. If any certificate applies to the transaction,
+     * AvaTax will record the appropriate elements of the transaction as exempt and link it to the `certificate`.
+     * 
+     * You can use the `$include` parameter to fetch the following additional objects for expansion:
+     * 
+     * * Certificates - Fetch a list of certificates linked to this customer.
+     *
+     * 
+     * @param int $companyId The unique ID number of the company that recorded this customer
+     * @param string $customerCode The unique code representing this customer
+     * @param string $include Specify optional additional objects to include in this fetch request
+     * @return CustomerModel
+     */
+    public function getCustomer($companyId, $customerCode, $include)
+    {
+        $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}";
+        $guzzleParams = [
+            'query' => ['$include' => $include],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Link certificates to a customer
+     *
+     * Link one or more certificates to a customer.
+     * 
+     * A customer object defines information about a person or business that purchases products from your
+     * company. When you create a tax transaction in AvaTax, you can use the `customerCode` from this
+     * record in your `CreateTransaction` API call. AvaTax will search for this `customerCode` value and
+     * identify any certificates linked to this `customer` object. If any certificate applies to the transaction,
+     * AvaTax will record the appropriate elements of the transaction as exempt and link it to the `certificate`.
+     *
+     * 
+     * @param int $companyId The unique ID number of the company that recorded this customer
+     * @param string $customerCode The unique code representing this customer
+     * @param LinkCertificatesModel $model The list of certificates to link to this customer
+     * @return FetchResult
+     */
+    public function linkCertificatesToCustomer($companyId, $customerCode, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/certificates/link";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * List certificates linked to a customer
+     *
+     * List all certificates linked to a customer.
+     * 
+     * A customer object defines information about a person or business that purchases products from your
+     * company. When you create a tax transaction in AvaTax, you can use the `customerCode` from this
+     * record in your `CreateTransaction` API call. AvaTax will search for this `customerCode` value and
+     * identify any certificates linked to this `customer` object. If any certificate applies to the transaction,
+     * AvaTax will record the appropriate elements of the transaction as exempt and link it to the `certificate`.
+     *
+     * 
+     * @param int $companyId The unique ID number of the company that recorded this customer
+     * @param string $customerCode The unique code representing this customer
+     * @param string $include OPTIONAL: A comma separated list of special fetch options. You can specify one or more of the following:      * Customers - Retrieves the list of customers linked to the certificate.   * PoNumbers - Retrieves all PO numbers tied to the certificate.   * Attributes - Retrieves all attributes applied to the certificate.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listCertificatesForCustomer($companyId, $customerCode, $include, $filter, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/certificates";
+        $guzzleParams = [
+            'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * List active certificates for a location
+     *
+     * List valid certificates linked to a customer in a particular country and region.
+     * 
+     * This API is intended to help identify whether a customer has already provided a certificate that
+     * applies to a particular country and region. This API is intended to help you remind a customer
+     * when they have or have not provided copies of their exemption certificates to you during the sales
+     * order process. 
+     * 
+     * If a customer does not have a certificate on file and they wish to provide one, you should send the customer
+     * a CertExpress invitation link so that the customer can upload proof of their exemption certificate. Please
+     * see the `CreateCertExpressInvitation` API to create an invitation link for this customer.
+     *
+     * 
+     * @param int $companyId The unique ID number of the company that recorded this customer
+     * @param string $customerCode The unique code representing this customer
+     * @param string $country Search for certificates matching this country. Uses the ISO 3166 two character country code.
+     * @param string $region Search for certificates matching this region. Uses the ISO 3166 two or three character state, region, or province code.
+     * @return ExemptionStatusModel
+     */
+    public function listValidCertificatesForCustomer($companyId, $customerCode, $country, $region)
+    {
+        $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/certificates/{$country}/{$region}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * List all customers for this company
+     *
+     * List all customers recorded by this company matching the specified criteria.
+     * 
+     * A customer object defines information about a person or business that purchases products from your
+     * company. When you create a tax transaction in AvaTax, you can use the `customerCode` from this
+     * record in your `CreateTransaction` API call. AvaTax will search for this `customerCode` value and
+     * identify any certificates linked to this `customer` object. If any certificate applies to the transaction,
+     * AvaTax will record the appropriate elements of the transaction as exempt and link it to the `certificate`.
+     * 
+     * You can use the `$include` parameter to fetch the following additional objects for expansion:
+     * 
+     * * Certificates - Fetch a list of certificates linked to this customer.
+     *
+     * 
+     * @param int $companyId The unique ID number of the company that recorded this customer
+     * @param string $include OPTIONAL - You can specify the value `certificates` to fetch information about certificates linked to the customer.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function queryCustomers($companyId, $include, $filter, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/companies/{$companyId}/customers";
+        $guzzleParams = [
+            'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Unlink certificates from a customer
+     *
+     * Remove one or more certificates to a customer.
+     * 
+     * A customer object defines information about a person or business that purchases products from your
+     * company. When you create a tax transaction in AvaTax, you can use the `customerCode` from this
+     * record in your `CreateTransaction` API call. AvaTax will search for this `customerCode` value and
+     * identify any certificates linked to this `customer` object. If any certificate applies to the transaction,
+     * AvaTax will record the appropriate elements of the transaction as exempt and link it to the `certificate`.
+     *
+     * 
+     * @param int $companyId The unique ID number of the company that recorded this customer
+     * @param string $customerCode The unique code representing this customer
+     * @param LinkCertificatesModel $model The list of certificates to link to this customer
+     * @return FetchResult
+     */
+    public function unlinkCertificatesFromCustomer($companyId, $customerCode, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/certificates/unlink";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Update a single customer
+     *
+     * Replace the customer object at this URL with a new record.
+     * 
+     * A customer object defines information about a person or business that purchases products from your
+     * company. When you create a tax transaction in AvaTax, you can use the `customerCode` from this
+     * record in your `CreateTransaction` API call. AvaTax will search for this `customerCode` value and
+     * identify any certificates linked to this `customer` object. If any certificate applies to the transaction,
+     * AvaTax will record the appropriate elements of the transaction as exempt and link it to the `certificate`.
+     *
+     * 
+     * @param int $companyId The unique ID number of the company that recorded this customer
+     * @param string $customerCode The unique code representing this customer
+     * @param CustomerModel $model The new customer model that will replace the existing record at this URL
+     * @return CustomerModel
+     */
+    public function updateCustomer($companyId, $customerCode, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}";
         $guzzleParams = [
             'query' => [],
             'body' => json_encode($model)
@@ -878,13 +1644,88 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * List certificate attributes used by a company
+     *
+     * List the certificate attributes defined by a company.
+     * 
+     * A certificate may have multiple attributes that control its behavior. You may apply or remove attributes to a
+     * certificate at any time.
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listCertificateAttributes($filter, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/definitions/certificateattributes";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * List certificate attributes used by a company
+     *
+     * List the certificate exempt reasons defined by a company.
+     * 
+     * An exemption reason defines why a certificate allows a customer to be exempt
+     * for purposes of tax calculation.
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listCertificateExemptReasons($filter, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/definitions/certificateexemptreasons";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * List certificate exposure zones used by a company
+     *
+     * List the certificate exposure zones defined by a company.
+     * 
+     * An exposure zone is a location where a certificate can be valid. Exposure zones may indicate a taxing
+     * authority or other legal entity to which a certificate may apply.
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listCertificateExposureZones($filter, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/definitions/certificateexposurezones";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * Retrieve the full list of communications transactiontypes
      *
      * Returns full list of communications transaction types which
      * are accepted in communication tax calculation requests.
      *
      * 
-     * @param int $id 
+     * @param int $id The transaction type ID to examine
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
      * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
@@ -964,6 +1805,32 @@ class AvaTaxClient extends AvaTaxClientBase
     public function listCountries($filter, $top, $skip, $orderBy)
     {
         $path = "/api/v2/definitions/countries";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * List certificate exposure zones used by a company
+     *
+     * List available cover letters that can be used when sending invitation to use CertExpress to upload certificates.
+     * 
+     * The CoverLetter model represents a message sent along with an invitation to use CertExpress to
+     * upload certificates. An invitation allows customers to use CertExpress to upload their exemption 
+     * certificates directly; this cover letter explains why the invitation was sent.
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listCoverLetters($filter, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/definitions/coverletters";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
@@ -1562,7 +2429,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * This API is intended to be useful to identify all the different rate types.
      *
      * 
-     * @param string $country 
+     * @param string $country The country to examine for rate types
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
      * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
@@ -2187,8 +3054,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @param string $returnCountry 
-     * @param string $returnRegion 
+     * @param string $returnCountry If specified, fetches only filing calendars that apply to tax filings in this specific country. Uses ISO 3166 country codes.
+     * @param string $returnRegion If specified, fetches only filing calendars that apply to tax filings in this specific region. Uses ISO 3166 region codes.
      * @return FetchResult
      */
     public function queryFilingCalendars($filter, $top, $skip, $orderBy, $returnCountry, $returnRegion)
@@ -3221,7 +4088,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that defined these items
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
-     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $include A comma separated list of additional data to retrieve.
      * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -3248,7 +4115,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
-     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $include A comma separated list of additional data to retrieve.
      * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -3373,7 +4240,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $accountId The ID of the account that owns this override
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
-     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $include A comma separated list of additional data to retrieve.
      * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -3404,7 +4271,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
-     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $include A comma separated list of additional data to retrieve.
      * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -3497,7 +4364,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns this location
      * @param int $id The primary key of this location
-     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $include A comma separated list of additional data to retrieve. You may specify `LocationSettings` to retrieve location settings.
      * @return LocationModel
      */
     public function getLocation($companyId, $id, $include)
@@ -3528,7 +4395,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns these locations
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
-     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $include A comma separated list of additional data to retrieve. You may specify `LocationSettings` to retrieve location settings.
      * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -3562,7 +4429,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
-     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $include A comma separated list of additional data to retrieve. You may specify `LocationSettings` to retrieve location settings.
      * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -3739,7 +4606,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns these nexus objects
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
-     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $include A comma separated list of additional data to retrieve.
      * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -3769,7 +4636,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
-     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $include A comma separated list of additional data to retrieve.
      * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -4157,7 +5024,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns these notices.
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
-     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $include A comma separated list of additional data to retrieve.
      * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -4186,7 +5053,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
-     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $include A comma separated list of additional data to retrieve.
      * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -4253,9 +5120,19 @@ class AvaTaxClient extends AvaTaxClientBase
      * Request a new Avalara account
      *
      * This API is for use by partner onboarding services customers only.
+     * 
+     * Avalara invites select partners to refer new customers to the AvaTax service using the onboarding features
+     * of AvaTax. These partners can create accounts for new customers using this API.
+     * 
      * Calling this API creates an account with the specified product subscriptions, but does not configure billing.
      * The customer will receive information from Avalara about how to configure billing for their account.
      * You should call this API when a customer has requested to begin using Avalara services.
+     * 
+     * If the newly created account owner wishes, they can confirm that they have read and agree to the Avalara
+     * terms and conditions. If they do so, they can receive a license key as part of this API and their
+     * API will be created in `Active` status. If the customer has not yet read and accepted these terms and
+     * conditions, the account will be created in `New` status and they can receive a license key by logging
+     * onto AvaTax and reviewing terms and conditions online.
      *
      * 
      * @param NewAccountRequestModel $model Information about the account you wish to create and the selected product offerings.
@@ -4453,7 +5330,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * For more information about filtering in REST, please see the documentation at http://developer.avalara.com/avatax/filtering-in-rest/ .
      *
      * 
-     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $include A comma separated list of objects to fetch underneath this account. Any object with a URL path underneath this account can be fetched by specifying its name.
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
      * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
@@ -4547,6 +5424,26 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Export a report accurate to the line level
+     *
+     * 
+     *
+     * 
+     * @param int $companyId 
+     * @param ExportDocumentLineModel $model 
+     * @return object
+     */
+    public function exportDocumentLine($companyId, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/reports/exportdocumentline";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
      * Create a new setting
      *
      * Create one or more new setting objects attached to this company.
@@ -4635,7 +5532,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns these settings
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
-     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $include A comma separated list of additional data to retrieve.
      * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -4667,7 +5564,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
-     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $include A comma separated list of additional data to retrieve.
      * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -4872,7 +5769,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns these tax codes
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
-     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $include A comma separated list of additional data to retrieve.
      * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -4902,7 +5799,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
-     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $include A comma separated list of additional data to retrieve.
      * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -5091,7 +5988,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns these tax rules
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
-     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $include A comma separated list of additional data to retrieve.
      * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -5121,7 +6018,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
-     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $include A comma separated list of additional data to retrieve.
      * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -5168,26 +6065,28 @@ class AvaTaxClient extends AvaTaxClientBase
      * Add lines to an existing unlocked transaction
      *
      * Add lines to an existing unlocked transaction.
-     * 
-     * The `AddLines` API allows you to add additional transaction lines to existing transaction, so that customer will
-     * be able to append multiple calls together and form an extremely large transaction. If customer does not specify line number
-     * in the lines to be added, a new random Guid string will be generated for line number. If customer are not satisfied with
-     * the line number for the transaction lines, they can turn on the renumber switch to have REST v2 automatically renumber all 
-     * transaction lines for them, in this case, the line number becomes: "1", "2", "3", ...
-     * 
-     * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
-     * sales, purchases, inventory transfer, and returns (also called refunds).
-     * You may specify one or more of the following values in the '$include' parameter to fetch additional nested data, using commas to separate multiple values:
      *  
-     * * Lines
-     * * Details (implies lines)
-     * * Summary (implies details)
-     * * Addresses
+     *  The `AddLines` API allows you to add additional transaction lines to existing transaction, so that customer will
+     *  be able to append multiple calls together and form an extremely large transaction. If customer does not specify line number
+     *  in the lines to be added, a new random Guid string will be generated for line number. If customer are not satisfied with
+     *  the line number for the transaction lines, they can turn on the renumber switch to have REST v2 automatically renumber all 
+     *  transaction lines for them, in this case, the line number becomes: "1", "2", "3", ...
      *  
-     * If you don't specify '$include' parameter, it will include both details and addresses.
+     *  A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
+     *  sales, purchases, inventory transfer, and returns (also called refunds).
+     *  You may specify one or more of the following values in the '$include' parameter to fetch additional nested data, using commas to separate multiple values:
+     * 
+     *  * Lines
+     *  * Details (implies lines)
+     *  * Summary (implies details)
+     *  * Addresses
+     * * SummaryOnly (omit lines and details - reduces API response size)
+     * * LinesOnly (omit details - reduces API response size)
+     * 
+     *  If you omit the `$include` parameter, the API will assume you want `Summary,Addresses`.
      *
      * 
-     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $include Specifies objects to include in the response after transaction is created
      * @param AddTransactionLineModel $model information about the transaction and lines to be added
      * @return TransactionModel
      */
@@ -5394,11 +6293,13 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Details (implies lines)
      * * Summary (implies details)
      * * Addresses
+     * * SummaryOnly (omit lines and details - reduces API response size)
+     * * LinesOnly (omit details - reduces API response size)
      *  
-     * If you don't specify '$include' parameter, it will include both details and addresses.
+     * If you omit the `$include` parameter, the API will assume you want `Summary,Addresses`.
      *
      * 
-     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $include Specifies objects to include in the response after transaction is created
      * @param CreateOrAdjustTransactionModel $model The transaction you wish to create
      * @return TransactionModel
      */
@@ -5431,11 +6332,13 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Details (implies lines)
      * * Summary (implies details)
      * * Addresses
+     * * SummaryOnly (omit lines and details - reduces API response size)
+     * * LinesOnly (omit details - reduces API response size)
      *  
-     * If you don't specify '$include' parameter, it will include both details and addresses.
+     * If you omit the `$include` parameter, the API will assume you want `Summary,Addresses`.
      *
      * 
-     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $include Specifies objects to include in the response after transaction is created
      * @param CreateTransactionModel $model The transaction you wish to create
      * @return TransactionModel
      */
@@ -5453,23 +6356,25 @@ class AvaTaxClient extends AvaTaxClientBase
      * Remove lines from an existing unlocked transaction
      *
      * Remove lines to an existing unlocked transaction.
-     * 
-     * The `DeleteLines` API allows you to remove transaction lines from existing unlocked transaction, so that customer will
-     * be able to delete transaction lines and adjust original transaction the way they like
-     * 
-     * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
-     * sales, purchases, inventory transfer, and returns (also called refunds).
-     * You may specify one or more of the following values in the '$include' parameter to fetch additional nested data, using commas to separate multiple values:
      *  
-     * * Lines
-     * * Details (implies lines)
-     * * Summary (implies details)
-     * * Addresses
+     *  The `DeleteLines` API allows you to remove transaction lines from existing unlocked transaction, so that customer will
+     *  be able to delete transaction lines and adjust original transaction the way they like
      *  
-     * If you don't specify '$include' parameter, it will include both details and addresses.
+     *  A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
+     *  sales, purchases, inventory transfer, and returns (also called refunds).
+     *  You may specify one or more of the following values in the '$include' parameter to fetch additional nested data, using commas to separate multiple values:
+     * 
+     *  * Lines
+     *  * Details (implies lines)
+     *  * Summary (implies details)
+     *  * Addresses
+     * * SummaryOnly (omit lines and details - reduces API response size)
+     * * LinesOnly (omit details - reduces API response size)
+     * 
+     *  If you omit the `$include` parameter, the API will assume you want `Summary,Addresses`.
      *
      * 
-     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $include Specifies objects to include in the response after transaction is created
      * @param RemoveTransactionLineModel $model information about the transaction and lines to be removed
      * @return TransactionModel
      */
@@ -5495,11 +6400,13 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Details (implies lines)
      * * Summary (implies details)
      * * Addresses
+     * * SummaryOnly (omit lines and details - reduces API response size)
+     * * LinesOnly (omit details - reduces API response size)
      *
      * 
      * @param string $companyCode The company code of the company that recorded this transaction
      * @param string $transactionCode The transaction code to retrieve
-     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $include Specifies objects to include in this fetch call
      * @return TransactionModel
      */
     public function getTransactionByCode($companyCode, $transactionCode, $include)
@@ -5524,12 +6431,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Details (implies lines)
      * * Summary (implies details)
      * * Addresses
+     * * SummaryOnly (omit lines and details - reduces API response size)
+     * * LinesOnly (omit details - reduces API response size)
      *
      * 
      * @param string $companyCode The company code of the company that recorded this transaction
      * @param string $transactionCode The transaction code to retrieve
      * @param string $documentType The transaction type to retrieve (See DocumentType::* for a list of allowable values)
-     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $include Specifies objects to include in this fetch call
      * @return TransactionModel
      */
     public function getTransactionByCodeAndType($companyCode, $transactionCode, $documentType, $include)
@@ -5556,10 +6465,12 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Details (implies lines)
      * * Summary (implies details)
      * * Addresses
+     * * SummaryOnly (omit lines and details - reduces API response size)
+     * * LinesOnly (omit details - reduces API response size)
      *
      * 
      * @param int $id The unique ID number of the transaction to retrieve
-     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $include Specifies objects to include in this fetch call
      * @return TransactionModel
      */
     public function getTransactionById($id, $include)
@@ -5588,10 +6499,12 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Details (implies lines)
      * * Summary (implies details)
      * * Addresses
+     * * SummaryOnly (omit lines and details - reduces API response size)
+     * * LinesOnly (omit details - reduces API response size)
      *
      * 
      * @param string $companyCode The company code of the company that recorded this transaction
-     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $include Specifies objects to include in this fetch call
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
      * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
@@ -5654,13 +6567,15 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Details (implies lines)
      * * Summary (implies details)
      * * Addresses
+     * * SummaryOnly (omit lines and details - reduces API response size)
+     * * LinesOnly (omit details - reduces API response size)
      *  
-     * If you don't specify '$include' parameter, it will include both details and addresses.
+     * If you omit the `$include` parameter, the API will assume you want `Summary,Addresses`.
      *
      * 
      * @param string $companyCode The code of the company that made the original sale
      * @param string $transactionCode The transaction code of the original sale
-     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $include Specifies objects to include in the response after transaction is created
      * @param RefundTransactionModel $model Information about the refund to create
      * @return TransactionModel
      */
@@ -5818,7 +6733,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns these UPCs
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
-     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $include A comma separated list of additional data to retrieve.
      * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -5845,7 +6760,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
-     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $include A comma separated list of additional data to retrieve.
      * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -5894,7 +6809,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $id The ID of the user to retrieve.
      * @param int $accountId The accountID of the user you wish to get.
-     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $include Optional fetch commands.
      * @return UserModel
      */
     public function getUser($id, $accountId, $include)
@@ -5952,7 +6867,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * 
      * @param int $accountId The accountID of the user you wish to list.
-     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $include Optional fetch commands.
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
      * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
@@ -5979,7 +6894,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
      *
      * 
-     * @param string $include A comma separated list of child objects to return underneath the primary object.
+     * @param string $include Optional fetch commands.
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
      * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
@@ -6082,5 +6997,6 @@ class AvaTaxClient extends AvaTaxClientBase
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
     }
+
 }
 ?>
