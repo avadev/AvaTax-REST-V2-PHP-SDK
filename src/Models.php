@@ -80,11 +80,6 @@ class AccountModel
      */
     public $users;
 
-    /**
-     * @var string The account license
-     */
-    public $licenseKey;
-
 }
 
 /**
@@ -347,6 +342,11 @@ class NewAccountRequestModel
      * @var CompanyAddress Address information of the account being created.
      */
     public $companyAddress;
+
+    /**
+     * @var string Company code to be assigned to the company created for this account.
+     */
+    public $companyCode;
 
     /**
      * @var string[] Properties of the primary contact person for this account
@@ -1748,7 +1748,7 @@ class CompanyModel
     public $upcs;
 
     /**
-     * @var EcmsModel[] Optional: A list of exempt certificates defined for this company. To fetch this list, add the query string "?$include=UPCs" to your URL.
+     * @var EcmsModel[] DEPRECATED - Please use the `ListCertificates` API.
      */
     public $exemptCerts;
 
@@ -5457,9 +5457,14 @@ class FilingReturnModel
     public $nonTaxableDueAmount;
 
     /**
-     * @var float Consumer use tax liability.
+     * @var float Consumer use tax liability during the period.
      */
     public $consumerUseTaxAmount;
+
+    /**
+     * @var float Consumer use tax liability accrued during the period.
+     */
+    public $consumerUseTaxDueAmount;
 
     /**
      * @var float Consumer use non-taxable amount.
@@ -6449,6 +6454,132 @@ class ExportDocumentLineModel
 
     /**
      * @var string The currency your report is displayed in. Example: "USD"
+     */
+    public $currencyCode;
+
+}
+
+/**
+ * A model for displaying report task metadata
+ */
+class ReportModel
+{
+
+    /**
+     * @var int The unique identifier of the report task
+     */
+    public $id;
+
+    /**
+     * @var int The ID of the account the reported transactions are from
+     */
+    public $accountId;
+
+    /**
+     * @var int The ID of the company the reported transactions are from
+     */
+    public $companyId;
+
+    /**
+     * @var string The type of the report: ExportDocumentLine, etc.
+     */
+    public $reportType;
+
+    /**
+     * @var ReportParametersModel The parametes used to build the report
+     */
+    public $parameters;
+
+    /**
+     * @var string The current status of the report building task
+     */
+    public $status;
+
+    /**
+     * @var int The size of the report file, if available
+     */
+    public $size;
+
+    /**
+     * @var string The format of the report file
+     */
+    public $format;
+
+    /**
+     * @var string The name of the report file, if available
+     */
+    public $file;
+
+    /**
+     * @var string The time when the report task was initiated
+     */
+    public $createdDate;
+
+    /**
+     * @var int The Id of the user who initiated this task
+     */
+    public $createdUserId;
+
+    /**
+     * @var string The userName of the user who initiated the report task
+     */
+    public $createdUser;
+
+    /**
+     * @var string The time when the report was finished building, if completed
+     */
+    public $completedDate;
+
+}
+
+/**
+ * The output model for report parameter definitions
+ */
+class ReportParametersModel
+{
+
+    /**
+     * @var string The start date filter used for your report
+     */
+    public $startDate;
+
+    /**
+     * @var string The end date filter used for your report
+     */
+    public $endDate;
+
+    /**
+     * @var string The country filter used for your report
+     */
+    public $country;
+
+    /**
+     * @var string The state filter used for your report
+     */
+    public $state;
+
+    /**
+     * @var string The date type filter used for your report
+     */
+    public $dateFilter;
+
+    /**
+     * @var string The doc type filter used for your report
+     */
+    public $docType;
+
+    /**
+     * @var string The date format used for your report
+     */
+    public $dateFormat;
+
+    /**
+     * @var string The culture used your report
+     */
+    public $culture;
+
+    /**
+     * @var string The currency code used for your report
      */
     public $currencyCode;
 
