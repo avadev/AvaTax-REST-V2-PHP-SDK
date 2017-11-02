@@ -634,6 +634,12 @@ class ErrorCodeId
     const C_INVALIDTAXTYPE = "InvalidTaxType";
     const C_INCORRECTFIELDVALUE = "IncorrectFieldValue";
     const C_LEADINGORTRAILINGEXCEPTION = "LeadingOrTrailingException";
+    const C_NOTENOUGHADDRESSESINFO = "NotEnoughAddressesInfo";
+    const C_REPORTNOTINITIATED = "ReportNotInitiated";
+    const C_FAILEDTOBUILDREPORT = "FailedToBuildReport";
+    const C_REPORTNOTFINISHED = "ReportNotFinished";
+    const C_FAILEDTOUPLOADREPORT = "FailedToUploadReport";
+    const C_FAILEDTODOWNLOADREPORT = "FailedToDownloadReport";
 
     /**
      * Batch errors
@@ -671,6 +677,8 @@ class ErrorCodeId
     const C_DOCUMENTNOTCOMMITTED = "DocumentNotCommitted";
     const C_MULTIDOCUMENTTYPESERROR = "MultiDocumentTypesError";
     const C_INVALIDDOCUMENTTYPESTOFETCH = "InvalidDocumentTypesToFetch";
+    const C_TIMEOUTREQUESTED = "TimeoutRequested";
+    const C_INVALIDADDRESS = "InvalidAddress";
 
     /**
      * Represents a malformed document fetch command
@@ -692,6 +700,7 @@ class ErrorCodeId
     const C_FREETRIALNOTAVAILABLE = "FreeTrialNotAvailable";
     const C_ACCOUNTEXISTSDIFFERENTEMAIL = "AccountExistsDifferentEmail";
     const C_AVALARAIDENTITYAPIERROR = "AvalaraIdentityApiError";
+    const C_INVALIDIPADDRESS = "InvalidIPAddress";
 
     /**
      * Refund API error codes
@@ -771,6 +780,11 @@ class ErrorCodeId
      */
     const C_BIZTECHCUSTOMERACCOUNTFAILURE = "BizTechCustomerAccountFailure";
     const C_BIZTECHOPPORTUNITYCREATIONFAILURE = "BizTechOpportunityCreationFailure";
+
+    /**
+     * Account Activate error codes
+     */
+    const C_ACCOUNTINNEWSTATUSEXCEPTION = "AccountInNewStatusException";
 
 }
 
@@ -1540,6 +1554,11 @@ class CompanyFilingStatus
      * Avalara currently files tax returns for this company.
      */
     const C_ACTIVE = "Active";
+
+    /**
+     * This company has not been configured for compliance
+     */
+    const C_NOTCONFIGUREDFORCOMPLIANCE = "NotConfiguredForCompliance";
 
 }
 
