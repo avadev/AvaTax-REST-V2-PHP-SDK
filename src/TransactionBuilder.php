@@ -384,11 +384,12 @@ class TransactionBuilder
     /**
      * Create this transaction
      *
+     * @param string $include Specifies objects to include in the response after transaction is created
      * @return  TransactionModel
      */
-    public function create()
+    public function create($include = null)
     {
-        return $this->_client->createTransaction(null, $this->_model);
+        return $this->_client->createTransaction($include, $this->_model);
     }
 
     /**
