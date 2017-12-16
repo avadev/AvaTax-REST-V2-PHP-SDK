@@ -46,63 +46,140 @@ class TextCase
 
 
 /**
- * Document Types
+ * Represents the different types of transactions that AvaTax can process.
  */
 class DocumentType
 {
 
     /**
-     * Sales Order, estimate or quote (default). This is a temporary document type and is not saved in tax history.
+     * Represents an estimate, or a sales order, or a quote. 
+     *  
+     *  This document type is used before a sale has occurred to estimate the final amount of tax to be paid when the
+     *  sale is completed.
+     *  
+     *  For a sales order, the `companyCode` of the transaction refers to the seller and the `customerVendorCode` refers to the buyer.
+     *  
+     *  This is a temporary document type and is not saved in tax history.
      */
     const C_SALESORDER = "SalesOrder";
 
     /**
-     * Sales Invoice
+     * Represents a sale that has been finalized.
+     *  
+     *  This document type is used to record a final transaction and calculate the final tax amount with all necessary information.
+     *  
+     *  For a sales invoice, the `companyCode` of the transaction refers to the seller and the `customerVendorCode` refers to the buyer.
+     *  
+     *  This is a permanent document and is recorded in AvaTax.
      */
     const C_SALESINVOICE = "SalesInvoice";
 
     /**
-     * Purchase order, estimate, or quote. This is a temporary document type and is not saved in tax history.
+     * Represents an estimate, or a purchase order, or a quote.
+     *  
+     *  This document type is used before a sale has occurred to estimate the final amount of tax to be paid when the
+     *  sale is completed.
+     *  
+     *  For a purchase order, the `companyCode` of the transaction refers to the buyer and the `customerVendorCode` refers to the seller.
+     *  
+     *  This is a temporary document type and is not saved in tax history.
      */
     const C_PURCHASEORDER = "PurchaseOrder";
 
     /**
-     * Purchase Invoice
+     * Represents a sale that has been finalized.
+     *  
+     *  This document type is used to record a final transaction and calculate the final tax amount with all necessary information.
+     *  
+     *  For a purchase invoice, the `companyCode` of the transaction refers to the buyer and the `customerVendorCode` refers to the seller.
+     *  
+     *  This is a permanent document and is recorded in AvaTax.
      */
     const C_PURCHASEINVOICE = "PurchaseInvoice";
 
     /**
-     * Sales Return Order. This is a temporary document type and is not saved in tax history.
+     * Represents an estimate of tax to be refunded if a refund or return is processed.
+     *  
+     *  This document type is used before a customer chooses to request a refund for a previous sale, and it
+     *  estimates the final amount of tax to be refunded when the refund is completed.
+     *  
+     *  For a return order, the `companyCode` of the transaction refers to the seller who is giving the refund 
+     *  and the `customerVendorCode` refers to the buyer who is requesting the refund.
+     *  
+     *  This is a temporary document type and is not saved in tax history.
      */
     const C_RETURNORDER = "ReturnOrder";
 
     /**
-     * Sales Return Invoice
+     * Represents an refund that has been finalized.
+     *  
+     *  This document type is used when a customer chooses to request a refund for a previous sale, and it
+     *  records the final amount of tax that has been refunded when the refund is completed.
+     *  
+     *  For a return invoice, the `companyCode` of the transaction refers to the seller who is giving the refund 
+     *  and the `customerVendorCode` refers to the buyer who is requesting the refund.
+     *  
+     *  This is a permanent document and is recorded in AvaTax.
+     *  
+     *  Please note that many jurisdictions around the United States have special rules about how to report refunds
+     *  on a sales tax filing, and some refund transactions may be unable to file immediately due to credit netting
+     *  rules.
      */
     const C_RETURNINVOICE = "ReturnInvoice";
 
     /**
-     * InventoryTransferOrder
+     * Represents a proposed movement of inventory from one jurisdiction to another.
+     *  
+     *  This document type is used when physical goods are shipped from one jurisdiction to another, and it
+     *  may cause updates in the tax liability for various jurisdictions.
+     *  
+     *  For an inventory transfer invoice, the `companyCode` of the transaction refers to the owner of the inventory
+     *  that will be moved from one location to another.
+     *  
+     *  This is a temporary document type and is not saved in tax history.
      */
     const C_INVENTORYTRANSFERORDER = "InventoryTransferOrder";
 
     /**
-     * InventoryTransferInvoice
+     * Represents a movement of inventory from one jurisdiction to another that has been finalized.
+     *  
+     *  This document type is used when physical goods are shipped from one jurisdiction to another, and it
+     *  may cause updates in the tax liability for various jurisdictions.
+     *  
+     *  For an inventory transfer invoice, the `companyCode` of the transaction refers to the owner of the inventory
+     *  that will be moved from one location to another.
+     *  
+     *  This is a permanent document and is recorded in AvaTax.
      */
     const C_INVENTORYTRANSFERINVOICE = "InventoryTransferInvoice";
 
     /**
-     * ReverseChargeOrder
+     * Represents a VAT "Reverse Charge" mechanism transaction as defined in the European Union.
+     *  
+     *  A Reverse Charge transaction moves the responsibility for VAT reporting from the seller to the buyer, and
+     *  is intended to allow simplification of commerce and reduce the reporting requirements for sellers that deliver
+     *  goods and services into the single market.
+     *  
+     *  This is a temporary document type and is not saved in tax history.
      */
     const C_REVERSECHARGEORDER = "ReverseChargeOrder";
 
     /**
-     * ReverseChargeInvoice
+     * Represents a VAT "Reverse Charge" mechanism transaction as defined in the European Union.
+     *  
+     *  A Reverse Charge transaction moves the responsibility for VAT reporting from the seller to the buyer, and
+     *  is intended to allow simplification of commerce and reduce the reporting requirements for sellers that deliver
+     *  goods and services into the single market.
+     *  
+     *  This is a permanent document and is recorded in AvaTax.
      */
     const C_REVERSECHARGEINVOICE = "ReverseChargeInvoice";
 
     /**
-     * No particular type
+     * Not a real document type.
+     *  
+     *  This value is used when querying for documents. You can specify the type `Any` in some cases to permit the
+     *  system to find any document matching other criteria.
      */
     const C_ANY = "Any";
 
@@ -538,6 +615,7 @@ class ErrorCodeId
     const C_COMMONPASSWORD = "CommonPassword";
     const C_WEAKPASSWORD = "WeakPassword";
     const C_STRINGLENGTHERROR = "StringLengthError";
+    const C_MAXSTRINGLENGTHERROR = "MaxStringLengthError";
     const C_EMAILVALIDATIONERROR = "EmailValidationError";
     const C_EMAILMISSINGERROR = "EmailMissingError";
     const C_PARSERFIELDNAMEERROR = "ParserFieldNameError";
@@ -640,6 +718,10 @@ class ErrorCodeId
     const C_REPORTNOTFINISHED = "ReportNotFinished";
     const C_FAILEDTOUPLOADREPORT = "FailedToUploadReport";
     const C_FAILEDTODOWNLOADREPORT = "FailedToDownloadReport";
+    const C_MALFORMEDFILTEREXCEPTION = "MalformedFilterException";
+    const C_EXPECTEDCONJUNCTIONERROR = "ExpectedConjunctionError";
+    const C_CRITERIANOTSUPPORTEDERROR = "CriteriaNotSupportedError";
+    const C_COMPANYACCOUNTANDPARENTACCOUNTMISMATCH = "CompanyAccountAndParentAccountMismatch";
 
     /**
      * Batch errors
@@ -650,6 +732,8 @@ class ErrorCodeId
     const C_BATCHCANNOTSAVEBATCHFILE = "BatchCannotSaveBatchFile";
     const C_BATCHCANNOTGETBATCHFILE = "BatchCannotGetBatchFile";
     const C_BATCHCANNOTDELETEBATCHFILE = "BatchCannotDeleteBatchFile";
+    const C_BATCHMUSTCONTAINONEFILE = "BatchMustContainOneFile";
+    const C_MISSINGBATCHFILECONTENT = "MissingBatchFileContent";
 
     /**
      * Point Of Sale API exceptions
@@ -679,6 +763,7 @@ class ErrorCodeId
     const C_INVALIDDOCUMENTTYPESTOFETCH = "InvalidDocumentTypesToFetch";
     const C_TIMEOUTREQUESTED = "TimeoutRequested";
     const C_INVALIDADDRESS = "InvalidAddress";
+    const C_INVALIDPOSTALCODE = "InvalidPostalCode";
 
     /**
      * Represents a malformed document fetch command
@@ -714,6 +799,7 @@ class ErrorCodeId
     const C_REFUNDPERCENTAGEFORTAXONLY = "RefundPercentageForTaxOnly";
     const C_LINENOOUTOFRANGE = "LineNoOutOfRange";
     const C_REFUNDPERCENTAGEOUTOFRANGE = "RefundPercentageOutOfRange";
+    const C_REFUNDPERCENTAGEMISSING = "RefundPercentageMissing";
 
     /**
      * Free API error codes
@@ -763,11 +849,20 @@ class ErrorCodeId
     const C_INVALIDCOVERLETTERTITLE = "InvalidCoverLetterTitle";
 
     /**
-     * Multi company error codes
+     * Multi document error codes
      */
     const C_TRANSACTIONNOTCANCELLED = "TransactionNotCancelled";
-    const C_TOOMANYTRANSACTIONLINES = "TooManyTransactionLines";
+    const C_TOOMANYTRANSACTIONS = "TooManyTransactions";
     const C_ONLYTAXDATEOVERRIDEISALLOWED = "OnlyTaxDateOverrideIsAllowed";
+    const C_TRANSACTIONALREADYEXISTS = "TransactionAlreadyExists";
+    const C_DATEMISMATCH = "DateMismatch";
+    const C_INVALIDDOCUMENTSTATUSFORVERIFY = "InvalidDocumentStatusForVerify";
+    const C_TOTALAMOUNTMISMATCH = "TotalAmountMismatch";
+    const C_TOTALTAXMISMATCH = "TotalTaxMismatch";
+    const C_INVALIDDOCUMENTSTATUSFORCOMMIT = "InvalidDocumentStatusForCommit";
+    const C_INVALIDDOCUMENTTYPE = "InvalidDocumentType";
+    const C_MULTIDOCUMENTPARTIALLYLOCKED = "MultiDocumentPartiallyLocked";
+    const C_TRANSACTIONISCOMMITTED = "TransactionIsCommitted";
 
     /**
      * Communications Tax error codes
@@ -785,6 +880,11 @@ class ErrorCodeId
      * Account Activate error codes
      */
     const C_ACCOUNTINNEWSTATUSEXCEPTION = "AccountInNewStatusException";
+
+    /**
+     * Worksheet Exception
+     */
+    const C_WORKSHEETEXCEPTION = "WorksheetException";
 
 }
 
@@ -1879,175 +1979,6 @@ class PaymentType
 
 
 /**
- * Filing Frequency types
- */
-class NoticeCustomerType
-{
-
-    /**
-     * AvaTax Returns
-     */
-    const C_AVATAXRETURNS = "AvaTaxReturns";
-
-    /**
-     * Stand Alone
-     */
-    const C_STANDALONE = "StandAlone";
-
-    /**
-     * Strategic
-     */
-    const C_STRATEGIC = "Strategic";
-
-    /**
-     * SST
-     */
-    const C_SST = "SST";
-
-    /**
-     * TrustFile
-     */
-    const C_TRUSTFILE = "TrustFile";
-
-}
-
-
-/**
- * Filing Frequency types
- */
-class FundingOption
-{
-
-    /**
-     * Pull
-     */
-    const C_PULL = "Pull";
-
-    /**
-     * Wire
-     */
-    const C_WIRE = "Wire";
-
-}
-
-
-/**
- * Filing Frequency types
- */
-class NoticePriorityId
-{
-
-    /**
-     * Immediate Attention Required
-     */
-    const C_IMMEDIATEATTENTIONREQUIRED = "ImmediateAttentionRequired";
-
-    /**
-     * High
-     */
-    const C_HIGH = "High";
-
-    /**
-     * Normal
-     */
-    const C_NORMAL = "Normal";
-
-    /**
-     * Low
-     */
-    const C_LOW = "Low";
-
-}
-
-
-/**
- * Comment Types
- */
-class CommentType
-{
-
-    /**
-     * Internal comments are those comments only intended to be for compliance users
-     */
-    const C_INTERNAL = "Internal";
-
-    /**
-     * Customer comments are those comments that both compliance and the customer can read
-     */
-    const C_CUSTOMER = "Customer";
-
-}
-
-
-/**
- * Different types of formats allowed for exporting a report
- */
-class ReportFormat
-{
-
-    /**
-     * The Comma Separated Values file format
-     */
-    const C_CSV = "CSV";
-
-    /**
-     * The Extensible Markup Language file format
-     */
-    const C_XML = "XML";
-
-}
-
-
-/**
- * The date filter type for report
- *  "RD" for Reporting Date, "DD" for Document Date, "TD" for Tax Date, "PD" for Payment Date
- */
-class ReportDateFilter
-{
-
-    /**
-     * The date when the transaction is posted
-     */
-    const C_DOCUMENTDATE = "DocumentDate";
-
-    /**
-     * The date when the transaction is paid for
-     */
-    const C_PAYMENTDATE = "PaymentDate";
-
-    /**
-     * The date when the transaction is added to report
-     */
-    const C_REPORTINGDATE = "ReportingDate";
-
-    /**
-     * The date when the transaction is being taxed
-     */
-    const C_TAXDATE = "TaxDate";
-
-}
-
-
-/**
- * The output DocumentType for a report
- */
-class ReportDocType
-{
-
-    /**
-     * Output all ConsumerUse tax transactions in the report
-     */
-    const C_CONSUMERUSE = "ConsumerUse";
-
-    /**
-     * Output all Sales tax transactions in the report
-     */
-    const C_SALES = "Sales";
-
-}
-
-
-/**
  * Document Status
  */
 class DocumentStatus
@@ -2269,6 +2200,35 @@ class TaxType
 
 
 /**
+ * Refund types
+ */
+class RefundType
+{
+
+    /**
+     * Refund the whole transaction.
+     */
+    const C_FULL = "Full";
+
+    /**
+     * Refund only specific lines from the original a transaction.
+     */
+    const C_PARTIAL = "Partial";
+
+    /**
+     * Only refund the tax part of the transaction.
+     */
+    const C_TAXONLY = "TaxOnly";
+
+    /**
+     * Refund a percentage of the value of this transaction.
+     */
+    const C_PERCENTAGE = "Percentage";
+
+}
+
+
+/**
  * Service modes for tax calculation when using an AvaLocal server.
  */
 class ServiceMode
@@ -2410,30 +2370,170 @@ class ApiCallStatus
 
 
 /**
- * Refund types
+ * Filing Frequency types
  */
-class RefundType
+class NoticeCustomerType
 {
 
     /**
-     * Refund the whole transaction.
+     * AvaTax Returns
      */
-    const C_FULL = "Full";
+    const C_AVATAXRETURNS = "AvaTaxReturns";
 
     /**
-     * Refund only specific lines from the original a transaction.
+     * Stand Alone
      */
-    const C_PARTIAL = "Partial";
+    const C_STANDALONE = "StandAlone";
 
     /**
-     * Only refund the tax part of the transaction.
+     * Strategic
      */
-    const C_TAXONLY = "TaxOnly";
+    const C_STRATEGIC = "Strategic";
 
     /**
-     * Refund a percentage of the value of this transaction.
+     * SST
      */
-    const C_PERCENTAGE = "Percentage";
+    const C_SST = "SST";
+
+    /**
+     * TrustFile
+     */
+    const C_TRUSTFILE = "TrustFile";
+
+}
+
+
+/**
+ * Filing Frequency types
+ */
+class FundingOption
+{
+
+    /**
+     * Pull
+     */
+    const C_PULL = "Pull";
+
+    /**
+     * Wire
+     */
+    const C_WIRE = "Wire";
+
+}
+
+
+/**
+ * Filing Frequency types
+ */
+class NoticePriorityId
+{
+
+    /**
+     * Immediate Attention Required
+     */
+    const C_IMMEDIATEATTENTIONREQUIRED = "ImmediateAttentionRequired";
+
+    /**
+     * High
+     */
+    const C_HIGH = "High";
+
+    /**
+     * Normal
+     */
+    const C_NORMAL = "Normal";
+
+    /**
+     * Low
+     */
+    const C_LOW = "Low";
+
+}
+
+
+/**
+ * Comment Types
+ */
+class CommentType
+{
+
+    /**
+     * Internal comments are those comments only intended to be for compliance users
+     */
+    const C_INTERNAL = "Internal";
+
+    /**
+     * Customer comments are those comments that both compliance and the customer can read
+     */
+    const C_CUSTOMER = "Customer";
+
+}
+
+
+/**
+ * Different types of formats allowed for exporting a report
+ */
+class ReportFormat
+{
+
+    /**
+     * The Comma Separated Values file format
+     */
+    const C_CSV = "CSV";
+
+    /**
+     * The Extensible Markup Language file format
+     */
+    const C_XML = "XML";
+
+}
+
+
+/**
+ * The date filter type for report
+ *  "RD" for Reporting Date, "DD" for Document Date, "TD" for Tax Date, "PD" for Payment Date
+ */
+class ReportDateFilter
+{
+
+    /**
+     * The date when the transaction is posted
+     */
+    const C_DOCUMENTDATE = "DocumentDate";
+
+    /**
+     * The date when the transaction is paid for
+     */
+    const C_PAYMENTDATE = "PaymentDate";
+
+    /**
+     * The date when the transaction is added to report
+     */
+    const C_REPORTINGDATE = "ReportingDate";
+
+    /**
+     * The date when the transaction is being taxed
+     */
+    const C_TAXDATE = "TaxDate";
+
+}
+
+
+/**
+ * The output DocumentType for a report
+ */
+class ReportDocType
+{
+
+    /**
+     * Output all ConsumerUse tax transactions in the report
+     */
+    const C_CONSUMERUSE = "ConsumerUse";
+
+    /**
+     * Output all Sales tax transactions in the report
+     */
+    const C_SALES = "Sales";
 
 }
 
