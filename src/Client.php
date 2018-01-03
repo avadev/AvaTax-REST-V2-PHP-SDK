@@ -45,10 +45,10 @@ class AvaTaxClientBase
      * @param string $appVersion   Specify the version number of your application here.  Should not contain any semicolons.
      * @param string $machineName  Specify the machine name of the machine on which this code is executing here.  Should not contain any semicolons.
      * @param string $environment  Indicates which server to use; acceptable values are "sandbox" or "production", or the full URL of your AvaTax instance.
+     * @param array $guzzleParams  Extra parameters to pass to the guzzle HTTP client (http://docs.guzzlephp.org/en/latest/request-options.html)
      */
-    public function __construct($appName, $appVersion, $machineName, $environment)
+    public function __construct($appName, $appVersion, $machineName, $environment, $guzzleParams = [])
     {
-
         $this->appName = $appName;
         $this->appVersion = $appVersion;
         $this->machineName = $machineName;
@@ -62,10 +62,11 @@ class AvaTaxClientBase
             $env = $environment;
         }
 
+        // Prevent overriding the base_uri 
+        $guzzleParams['base_uri'] = $env;
+      
         // Configure the HTTP client
-        $this->client = new Client([
-            'base_uri' => $env
-        ]);
+        $this->client = new Client($guzzleParams);
     }
 
     /**
