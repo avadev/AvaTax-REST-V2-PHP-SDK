@@ -982,6 +982,28 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Check the funding configuration of a company
+     *
+     * This API is available by invitation only.
+     * Requires a subscription to Avalara Managed Returns or SST Certified Service Provider.
+     * Returns the funding configuration of the requested company.
+     * .
+     *
+     * 
+     * @param int $companyId The unique identifier of the company
+     * @return FundingConfigurationModel
+     */
+    public function fundingConfigurationByCompany($companyId)
+    {
+        $path = "/api/v2/companies/{$companyId}/funding/configuration";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * Retrieve a single company
      *
      * Get the company object identified by this URL.
@@ -1074,12 +1096,12 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
-     * Check managed returns funding configuration for a company
+     * Check managed returns funding status for a company
      *
      * This API is available by invitation only.
      * Requires a subscription to Avalara Managed Returns or SST Certified Service Provider.
      * Returns a list of funding setup requests and their current status.
-     * Each object in the result is a request that was made to setup or adjust funding configuration for this company.
+     * Each object in the result is a request that was made to setup or adjust funding status for this company.
      *
      * 
      * @param int $id The unique identifier of the company
@@ -2024,6 +2046,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Retrieve the full list of Avalara-supported nexus for all countries and regions.
      *
      * Returns the full list of all Avalara-supported nexus for all countries and regions. 
+     * 
      * This API is intended to be useful if your user interface needs to display a selectable list of nexus.
      *
      * 
@@ -2057,9 +2080,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $line2 The first address line portion of this address.
      * @param string $line3 The first address line portion of this address.
      * @param string $city The city portion of this address.
-     * @param string $region The region, state, or province code portion of this address.
+     * @param string $region Name or ISO 3166 code identifying the region portion of the address.      This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions      For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
      * @param string $postalCode The postal code or zip code portion of this address.
-     * @param string $country The two-character ISO-3166 code of the country portion of this address.
+     * @param string $country Name or ISO 3166 code identifying the country portion of this address.      This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries      For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
      * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
@@ -2080,6 +2103,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Retrieve the full list of Avalara-supported nexus for a country.
      *
      * Returns all Avalara-supported nexus for the specified country.
+     * 
      * This API is intended to be useful if your user interface needs to display a selectable list of nexus filtered by country.
      *
      * 
@@ -2104,6 +2128,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Retrieve the full list of Avalara-supported nexus for a country and region.
      *
      * Returns all Avalara-supported nexus for the specified country and region.
+     * 
      * This API is intended to be useful if your user interface needs to display a selectable list of nexus filtered by country and region.
      *
      * 
@@ -3498,13 +3523,13 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * 
      * @param int $companyId The ID of the company that owns the filings.
-     * @param int $filingId The unique id of the worksheet return.
+     * @param int $filingReturnId The unique id of the worksheet return.
      * @param int $fileId The unique id of the document you are downloading
      * @return object
      */
-    public function getFilingAttachment($companyId, $filingId, $fileId)
+    public function getFilingAttachment($companyId, $filingReturnId, $fileId)
     {
-        $path = "/api/v2/companies/{$companyId}/filings/{$filingId}/attachment";
+        $path = "/api/v2/companies/{$companyId}/filings/{$filingReturnId}/attachment";
         $guzzleParams = [
             'query' => ['fileId' => $fileId],
             'body' => null
@@ -3692,13 +3717,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $status The status of the return(s) you are trying to retrieve (See FilingStatusId::* for a list of allowable values)
      * @param string $country The country of the return(s) you are trying to retrieve
      * @param string $region The region of the return(s) you are trying to retrieve
+     * @param int $filingCalendarId The filing calendar id of the return you are trying to retrieve
      * @return FetchResult
      */
-    public function getFilingsReturns($companyId, $endPeriodMonth, $endPeriodYear, $frequency, $status, $country, $region)
+    public function getFilingsReturns($companyId, $endPeriodMonth, $endPeriodYear, $frequency, $status, $country, $region, $filingCalendarId)
     {
         $path = "/api/v2/companies/{$companyId}/filings/returns";
         $guzzleParams = [
-            'query' => ['endPeriodMonth' => $endPeriodMonth, 'endPeriodYear' => $endPeriodYear, 'frequency' => $frequency, 'status' => $status, 'country' => $country, 'region' => $region],
+            'query' => ['endPeriodMonth' => $endPeriodMonth, 'endPeriodYear' => $endPeriodYear, 'frequency' => $frequency, 'status' => $status, 'country' => $country, 'region' => $region, 'filingCalendarId' => $filingCalendarId],
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
@@ -3929,9 +3955,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $line2 The street address of the location.
      * @param string $line3 The street address of the location.
      * @param string $city The city name of the location.
-     * @param string $region The state or region of the location
+     * @param string $region Name or ISO 3166 code identifying the region within the country.    This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions    For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
      * @param string $postalCode The postal code of the location.
-     * @param string $country The two letter ISO-3166 country code.
+     * @param string $country Name or ISO 3166 code identifying the country.    This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries    For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
      * @return TaxRateModel
      */
     public function taxRatesByAddress($line1, $line2, $line3, $city, $region, $postalCode, $country)
@@ -3945,9 +3971,11 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
-     * FREE API - Sales tax rates for a specified country and postal code
+     * FREE API - Sales tax rates for a specified country and postal code. This API is only available for US postal codes.
      *
      * # Free-To-Use
+     * 
+     * This API is only available for a US postal codes.
      * 
      * The TaxRates API is a free-to-use, no cost option for estimating sales tax rates.
      * Any customer can request a free AvaTax account and make use of the TaxRates API.
@@ -3974,7 +4002,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * for information on how to upgrade to the full AvaTax CreateTransaction API.
      *
      * 
-     * @param string $country The two letter ISO-3166 country code.
+     * @param string $country Name or ISO 3166 code identifying the country.    This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries    For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
      * @param string $postalCode The postal code of the location.
      * @return TaxRateModel
      */
@@ -4520,6 +4548,370 @@ class AvaTaxClient extends AvaTaxClientBase
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Adjust a MultiDocument transaction
+     *
+     * Adjusts the current MultiDocument transaction uniquely identified by this URL.
+     * 
+     * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
+     * sales, purchases, inventory transfer, and returns (also called refunds).
+     * 
+     * When you adjust a transaction, that transaction's status is recorded as `Adjusted`. 
+     * 
+     * Both the revisions will be available for retrieval based on their code and ID numbers. Only transactions in Committed status can be reported on a tax filing by Avalara's Managed Returns Service.
+     * 
+     * Transactions that have been previously reported to a tax authority by Avalara Managed Returns are considered locked and are no longer available for adjustments.
+     *
+     * 
+     * @param string $code The transaction code for this MultiDocument transaction
+     * @param string $type The transaction type for this MultiDocument transaction (See DocumentType::* for a list of allowable values)
+     * @param string $include Specifies objects to include in this fetch call
+     * @param AdjustMultiDocumentModel $model The adjust request you wish to execute
+     * @return MultiDocumentModel
+     */
+    public function adjustMultiDocumentTransaction($code, $type, $include, $model)
+    {
+        $path = "/api/v2/transactions/multidocument/{$code}/type/{$type}/adjust";
+        $guzzleParams = [
+            'query' => ['include' => $include],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Get audit information about a MultiDocument transaction
+     *
+     * Retrieve audit information about a MultiDocument transaction stored in AvaTax.
+     *  
+     * The audit API retrieves audit information related to a specific MultiDocument transaction. This audit 
+     * information includes the following:
+     * 
+     * * The `code` of the MultiDocument transaction
+     * * The `type` of the MultiDocument transaction
+     * * The server timestamp representing the exact server time when the transaction was created
+     * * The server duration - how long it took to process this transaction
+     * * Whether exact API call details were logged
+     * * A reconstructed API call showing what the original create call looked like
+     * 
+     * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
+     * sales, purchases, inventory transfer, and returns (also called refunds).
+     *
+     * 
+     * @param string $code The transaction code for this MultiDocument transaction
+     * @param string $type The transaction type for this MultiDocument transaction (See DocumentType::* for a list of allowable values)
+     * @return AuditMultiDocumentModel
+     */
+    public function auditMultiDocumentTransaction($code, $type)
+    {
+        $path = "/api/v2/transactions/multidocument/{$code}/type/{$type}/audit";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Commit a MultiDocument transaction
+     *
+     * Marks a list of transactions by changing its status to `Committed`.
+     * 
+     * Transactions that are committed are available to be reported to a tax authority by Avalara Managed Returns.
+     * 
+     * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
+     * sales, purchases, inventory transfer, and returns (also called refunds).
+     * 
+     * Any changes made to a committed transaction will generate a transaction history.
+     *
+     * 
+     * @param CommitMultiDocumentModel $model The commit request you wish to execute
+     * @return MultiDocumentModel
+     */
+    public function commitMultiDocumentTransaction($model)
+    {
+        $path = "/api/v2/transactions/multidocument/commit";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Create a new MultiDocument transaction
+     *
+     * Records a new MultiDocument transaction in AvaTax.
+     * 
+     * A traditional transaction requires exactly two parties: a seller and a buyer. MultiDocument transactions can
+     * involve a marketplace of vendors, each of which contributes some portion of the final transaction. Within
+     * a MultiDocument transaction, each individual buyer and seller pair are matched up and converted to a separate
+     * document. This separation of documents allows each seller to file their taxes separately.
+     * 
+     * This API will report an error if you attempt to create a transaction when one already exists with the specified `code`.
+     * If you would like the API to automatically update the transaction when it already exists, please set the `allowAdjust`
+     * value to `true`.
+     * 
+     * To generate a refund for a transaction, use the `RefundTransaction` API.
+     * 
+     * The field `type` identifies the kind of transaction - for example, a sale, purchase, or refund. If you do not specify
+     * a `type` value, you will receive an estimate of type `SalesOrder`, which will not be recorded.
+     * 
+     * The origin and destination locations for a transaction must be identified by either address or geocode. For address-based transactions, please
+     * provide addresses in the fields `line`, `city`, `region`, `country` and `postalCode`. For geocode-based transactions, please provide the geocode
+     * information in the fields `latitude` and `longitude`. If either `latitude` or `longitude` or both are null, the transaction will be calculated
+     * using the best available address location information.
+     * 
+     * You may specify one or more of the following values in the `$include` parameter to fetch additional nested data, using commas to separate multiple values:
+     *  
+     * * Lines
+     * * Details (implies lines)
+     * * Summary (implies details)
+     * * Addresses
+     * * SummaryOnly (omit lines and details - reduces API response size)
+     * * LinesOnly (omit details - reduces API response size)
+     * * ForceTimeout - Simulates a timeout. This adds a 30 second delay and error to your API call. This can be used to test your code to ensure it can respond correctly in the case of a dropped connection.
+     *  
+     * If you omit the `$include` parameter, the API will assume you want `Summary,Addresses`.
+     *
+     * 
+     * @param string $include Specifies objects to include in the response after transaction is created
+     * @param CreateMultiDocumentModel $model the multi document transaction model
+     * @return MultiDocumentModel
+     */
+    public function createMultiDocumentTransaction($include, $model)
+    {
+        $path = "/api/v2/transactions/multidocument";
+        $guzzleParams = [
+            'query' => ['$include' => $include],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a MultiDocument transaction
+     *
+     * Get the current MultiDocument transaction identified by this URL.
+     * 
+     * If this transaction was adjusted, the return value of this API will be the current transaction with this code.
+     * 
+     * You may specify one or more of the following values in the `$include` parameter to fetch additional nested data, using commas to separate multiple values:
+     *  
+     * * Lines
+     * * Details (implies lines)
+     * * Summary (implies details)
+     * * Addresses
+     * * SummaryOnly (omit lines and details - reduces API response size)
+     * * LinesOnly (omit details - reduces API response size)
+     *
+     * 
+     * @param string $code 
+     * @param string $type  (See DocumentType::* for a list of allowable values)
+     * @param string $include Specifies objects to include in the response after transaction is created
+     * @return MultiDocumentModel
+     */
+    public function getMultiDocumentTransactionByCodeAndType($code, $type, $include)
+    {
+        $path = "/api/v2/transactions/multidocument/{$code}/type/{$type}";
+        $guzzleParams = [
+            'query' => ['$include' => $include],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a MultiDocument transaction by ID
+     *
+     * Get the unique MultiDocument transaction identified by this URL.
+     * 
+     * A traditional transaction requires exactly two parties: a seller and a buyer. MultiDocument transactions can
+     * involve a marketplace of vendors, each of which contributes some portion of the final transaction. Within
+     * a MultiDocument transaction, each individual buyer and seller pair are matched up and converted to a separate
+     * document. This separation of documents allows each seller to file their taxes separately.
+     * 
+     * This endpoint retrieves the exact transaction identified by this ID number even if that transaction was later adjusted
+     * by using the `AdjustTransaction` endpoint.
+     * 
+     * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
+     * sales, purchases, inventory transfer, and returns (also called refunds).
+     * 
+     * You may specify one or more of the following values in the `$include` parameter to fetch additional nested data, using commas to separate multiple values:
+     *  
+     * * Lines
+     * * Details (implies lines)
+     * * Summary (implies details)
+     * * Addresses
+     * * SummaryOnly (omit lines and details - reduces API response size)
+     * * LinesOnly (omit details - reduces API response size)
+     *
+     * 
+     * @param int $id The unique ID number of the MultiDocument transaction to retrieve
+     * @param string $include Specifies objects to include in the response after transaction is created
+     * @return MultiDocumentModel
+     */
+    public function getMultiDocumentTransactionById($id, $include)
+    {
+        $path = "/api/v2/transactions/multidocument/{$id}";
+        $guzzleParams = [
+            'query' => ['$include' => $include],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all MultiDocument transactions
+     *
+     * List all MultiDocument transactions within this account.
+     * 
+     * This endpoint is limited to returning 1,000 MultiDocument transactions at a time. To retrieve more than 1,000 MultiDocument
+     * transactions, please use the pagination features of the API.
+     * 
+     * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
+     * sales, purchases, inventory transfer, and returns (also called refunds).
+     * 
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     * 
+     * You may specify one or more of the following values in the `$include` parameter to fetch additional nested data, using commas to separate multiple values:
+     *  
+     * * Lines
+     * * Details (implies lines)
+     * * Summary (implies details)
+     * * Addresses
+     * * SummaryOnly (omit lines and details - reduces API response size)
+     * * LinesOnly (omit details - reduces API response size)
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param string $include Specifies objects to include in the response after transaction is created
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listMultiDocumentTransactions($filter, $include, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/transactions/multidocument";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Create a refund for a MultiDocument transaction
+     *
+     * Create a refund for a MultiDocument transaction.
+     * 
+     * A traditional transaction requires exactly two parties: a seller and a buyer. MultiDocument transactions can
+     * involve a marketplace of vendors, each of which contributes some portion of the final transaction. Within
+     * a MultiDocument transaction, each individual buyer and seller pair are matched up and converted to a separate
+     * document. This separation of documents allows each seller to file their taxes separately.
+     * 
+     * The `RefundTransaction` API allows you to quickly and easily create a `ReturnInvoice` representing a refund
+     * for a previously created `SalesInvoice` transaction. You can choose to create a full or partial refund, and
+     * specify individual line items from the original sale for refund.
+     * 
+     * The `RefundTransaction` API ensures that the tax amount you refund to the customer exactly matches the tax that
+     * was calculated during the original transaction, regardless of any changes to your company's configuration, rules,
+     * nexus, or any other setting.
+     * 
+     * This API is intended to be a shortcut to allow you to quickly and accurately generate a refund for the following 
+     * common refund scenarios:
+     * 
+     * * A full refund of a previous sale
+     * * Refunding the tax that was charged on a previous sale, when the customer provides an exemption certificate after the purchase
+     * * Refunding one or more items (lines) from a previous sale
+     * * Granting a customer a percentage refund of a previous sale
+     * 
+     * For more complex scenarios than the ones above, please use `CreateTransaction` with document type `ReturnInvoice` to
+     * create a custom refund transaction.
+     * 
+     * You may specify one or more of the following values in the `$include` parameter to fetch additional nested data, using commas to separate multiple values:
+     *  
+     * * Lines
+     * * Details (implies lines)
+     * * Summary (implies details)
+     * * Addresses
+     * * SummaryOnly (omit lines and details - reduces API response size)
+     * * LinesOnly (omit details - reduces API response size)
+     *  
+     * If you omit the `$include` parameter, the API will assume you want `Summary,Addresses`.
+     *
+     * 
+     * @param string $code The code of this MultiDocument transaction
+     * @param string $type The type of this MultiDocument transaction (See DocumentType::* for a list of allowable values)
+     * @param string $include Specifies objects to include in the response after transaction is created
+     * @param RefundTransactionModel $model Information about the refund to create
+     * @return MultiDocumentModel
+     */
+    public function refundMultiDocumentTransaction($code, $type, $include, $model)
+    {
+        $path = "/api/v2/transactions/multidocument/{$code}/type/{$type}/refund";
+        $guzzleParams = [
+            'query' => ['$include' => $include],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Verify a MultiDocument transaction
+     *
+     * Verifies that the MultiDocument transaction uniquely identified by this URL matches certain expected values.
+     * 
+     * If the transaction does not match these expected values, this API will return an error code indicating which value did not match.
+     * 
+     * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
+     * sales, purchases, inventory transfer, and returns (also called refunds).
+     *
+     * 
+     * @param VerifyMultiDocumentModel $model Information from your accounting system to verify against this MultiDocument transaction as it is stored in AvaTax
+     * @return MultiDocumentModel
+     */
+    public function verifyMultiDocumentTransaction($model)
+    {
+        $path = "/api/v2/transactions/multidocument/verify";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Void a MultiDocument transaction
+     *
+     * Voids the current transaction uniquely identified by this URL.
+     * 
+     * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
+     * sales, purchases, inventory transfer, and returns (also called refunds).
+     * 
+     * When you void a transaction, that transaction's status is recorded as `DocVoided`.
+     * 
+     * Transactions that have been previously reported to a tax authority by Avalara Managed Returns Service are considered `locked`,
+     * and they are no longer available to be voided.
+     *
+     * 
+     * @param string $code The transaction code for this MultiDocument transaction
+     * @param string $type The transaction type for this MultiDocument transaction (See DocumentType::* for a list of allowable values)
+     * @param VoidTransactionModel $model The void request you wish to execute
+     * @return MultiDocumentModel
+     */
+    public function voidMultiDocumentTransaction($code, $type, $model)
+    {
+        $path = "/api/v2/transactions/multidocument/{$code}/type/{$type}/void";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
     }
 
     /**
@@ -5248,30 +5640,6 @@ class AvaTaxClient extends AvaTaxClientBase
     public function createSubscriptions($accountId, $model)
     {
         $path = "/api/v2/accounts/{$accountId}/subscriptions";
-        $guzzleParams = [
-            'query' => [],
-            'body' => json_encode($model)
-        ];
-        return $this->restCall($path, 'POST', $guzzleParams);
-    }
-
-    /**
-     * Create new users
-     *
-     * # For Registrar Use Only
-     * This API is for use by Avalara Registrar administrative users only.
-     * 
-     * Create one or more new user objects attached to this account.
-     * A user represents one person with access privileges to make API calls and work with a specific account.
-     *
-     * 
-     * @param int $accountId The unique ID number of the account where these users will be created.
-     * @param UserModel[] $model The user or array of users you wish to create.
-     * @return UserModel[]
-     */
-    public function createUsers($accountId, $model)
-    {
-        $path = "/api/v2/accounts/{$accountId}/users";
         $guzzleParams = [
             'query' => [],
             'body' => json_encode($model)
@@ -6071,6 +6439,39 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Download a file listing tax rates by postal code
+     *
+     * Download a CSV file containing all five digit postal codes in the United States and their sales
+     * and use tax rates for tangible personal property.
+     * 
+     * This rates file is intended to be used as a default for tax calculation when your software cannot
+     * call the `CreateTransaction` API call. When using this file, your software will be unable to
+     * handle complex tax rules such as:
+     * 
+     * * Zip+9 - This tax file does not contain 
+     * * Different product types - This tax file contains tangible personal property tax rates only.
+     * * Mixed sourcing - This tax file cannot be used to resolve origin-based taxes.
+     * * Threshold-based taxes - This tax file does not contain information about thresholds.
+     * 
+     * If you use this file to provide default tax rates, please ensure that your software calls `CreateTransaction`
+     * to reconcile the actual transaction and determine the difference between the estimated general tax
+     * rate and the final transaction tax.
+     *
+     * 
+     * @param string $date The date for which point-of-sale data would be calculated (today by default). Example input: 2016-12-31
+     * @return object
+     */
+    public function downloadTaxRatesByZipCode($date)
+    {
+        $path = "/api/v2/taxratesbyzipcode/download/{$date}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * Create a new tax rule
      *
      * Create one or more new taxrule objects attached to this company.
@@ -6239,7 +6640,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *  
      *  A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
      *  sales, purchases, inventory transfer, and returns (also called refunds).
-     *  You may specify one or more of the following values in the '$include' parameter to fetch additional nested data, using commas to separate multiple values:
+     *  You may specify one or more of the following values in the `$include` parameter to fetch additional nested data, using commas to separate multiple values:
      * 
      *  * Lines
      *  * Details (implies lines)
@@ -6393,8 +6794,13 @@ class AvaTaxClient extends AvaTaxClientBase
     /**
      * Change a transaction's code
      *
-     * Renames a transaction uniquely identified by this URL by changing its code to a new code.
-     * After this API call succeeds, the transaction will have a new URL matching its new code.
+     * Renames a transaction uniquely identified by this URL by changing its `code` value.
+     * 
+     * This API is available as long as the transaction is in `saved` or `posted` status. When a transaction
+     * is `committed`, it can be modified by using the [AdjustTransaction](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Transactions/AdjustTransaction/) method.
+     * 
+     * After this API call succeeds, the transaction will have a new URL matching its new `code`.
+     * 
      * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
      * sales, purchases, inventory transfer, and returns (also called refunds).
      *
@@ -6459,7 +6865,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
      * sales, purchases, inventory transfer, and returns (also called refunds).
-     * You may specify one or more of the following values in the '$include' parameter to fetch additional nested data, using commas to separate multiple values:
+     * You may specify one or more of the following values in the `$include` parameter to fetch additional nested data, using commas to separate multiple values:
      *  
      * * Lines
      * * Details (implies lines)
@@ -6491,8 +6897,11 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * Records a new transaction in AvaTax.
      * 
-     * The `CreateTransaction` endpoint uses the configuration values specified by your company to identify the correct tax rules
-     * and rates to apply to all line items in this transaction, and reports the total tax calculated by AvaTax based on your
+     * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
+     * sales, purchases, inventory transfer, and returns (also called refunds).
+     * 
+     * The `CreateTransaction` endpoint uses the tax profile of your company to identify the correct tax rules
+     * and rates to apply to all line items in this transaction. The end result will be the total tax calculated by AvaTax based on your
      * company's configuration and the data provided in this API call.
      * 
      * The `CreateTransaction` API will report an error if a committed transaction already exists with the same `code`. To
@@ -6501,11 +6910,15 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * To generate a refund for a transaction, use the `RefundTransaction` API.
      * 
-     * If you don't specify the field `type` in your request, you will get an estimate of type `SalesOrder`, which will not be recorded in the database.
+     * The field `type` identifies the kind of transaction - for example, a sale, purchase, or refund. If you do not specify
+     * a `type` value, you will receive an estimate of type `SalesOrder`, which will not be recorded.
      * 
-     * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
-     * sales, purchases, inventory transfer, and returns (also called refunds).
-     * You may specify one or more of the following values in the '$include' parameter to fetch additional nested data, using commas to separate multiple values:
+     * The origin and destination locations for a transaction must be identified by either address or geocode. For address-based transactions, please
+     * provide addresses in the fields `line`, `city`, `region`, `country` and `postalCode`. For geocode-based transactions, please provide the geocode
+     * information in the fields `latitude` and `longitude`. If either `latitude` or `longitude` or both are null, the transaction will be calculated
+     * using the best available address location information.
+     * 
+     * You may specify one or more of the following values in the `$include` parameter to fetch additional nested data, using commas to separate multiple values:
      *  
      * * Lines
      * * Details (implies lines)
@@ -6542,7 +6955,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *  
      *  A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
      *  sales, purchases, inventory transfer, and returns (also called refunds).
-     *  You may specify one or more of the following values in the '$include' parameter to fetch additional nested data, using commas to separate multiple values:
+     *  You may specify one or more of the following values in the `$include` parameter to fetch additional nested data, using commas to separate multiple values:
      * 
      *  * Lines
      *  * Details (implies lines)
@@ -6575,8 +6988,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * To fetch other kinds of transactions, use `GetTransactionByCodeAndType`.
      * 
-     * If this transaction was adjusted, the return value of this API will be the current transaction with this code, and previous revisions of
-     * the transaction will be attached to the `history` data field.
+     * If this transaction was adjusted, the return value of this API will be the current transaction with this code.
      * 
      * You may specify one or more of the following values in the `$include` parameter to fetch additional nested data, using commas to separate multiple values:
      *  
@@ -6608,8 +7020,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * Get the current transaction identified by this URL.
      * 
-     * If this transaction was adjusted, the return value of this API will be the current transaction with this code, and previous revisions of
-     * the transaction will be attached to the `history` data field.
+     * If this transaction was adjusted, the return value of this API will be the current transaction with this code.
      * 
      * You may specify one or more of the following values in the `$include` parameter to fetch additional nested data, using commas to separate multiple values:
      *  
@@ -6641,11 +7052,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * Retrieve a single transaction by ID
      *
      * Get the unique transaction identified by this URL.
+     * 
      * This endpoint retrieves the exact transaction identified by this ID number even if that transaction was later adjusted
-     * by using the 'Adjust Transaction' endpoint.
+     * by using the `AdjustTransaction` endpoint.
+     * 
      * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
      * sales, purchases, inventory transfer, and returns (also called refunds).
-     * You may specify one or more of the following values in the '$include' parameter to fetch additional nested data, using commas to separate multiple values:
+     * 
+     * You may specify one or more of the following values in the `$include` parameter to fetch additional nested data, using commas to separate multiple values:
      *  
      * * Lines
      * * Details (implies lines)
@@ -6673,12 +7087,18 @@ class AvaTaxClient extends AvaTaxClientBase
      * Retrieve all transactions
      *
      * List all transactions attached to this company.
+     * 
      * This endpoint is limited to returning 1,000 transactions at a time maximum.
+     * 
+     * When listing transactions, you must specify a `date` range filter. If you do not specify a `$filter` that includes a `date` field
+     * criteria, the query will default to looking at only those transactions with `date` in the past 30 days.
+     * 
      * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
      * sales, purchases, inventory transfer, and returns (also called refunds).
      * 
      * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
      * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     * 
      * You may specify one or more of the following values in the `$include` parameter to fetch additional nested data, using commas to separate multiple values:
      *  
      * * Lines
@@ -6760,7 +7180,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * For more complex scenarios than the ones above, please use `CreateTransaction` with document type `ReturnInvoice` to
      * create a custom refund transaction.
      * 
-     * You may specify one or more of the following values in the '$include' parameter to fetch additional nested data, using commas to separate multiple values:
+     * You may specify one or more of the following values in the `$include` parameter to fetch additional nested data, using commas to separate multiple values:
      *  
      * * Lines
      * * Details (implies lines)
@@ -6997,6 +7417,34 @@ class AvaTaxClient extends AvaTaxClientBase
             'body' => json_encode($model)
         ];
         return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Create new users
+     *
+     * Create one or more new user objects attached to this account.
+     * 
+     * A user represents one person with access privileges to make API calls and work with a specific account.
+     * 
+     * Users who are account administrators or company users are permitted to create user records to invite
+     * additional team members to work with AvaTax.
+     * 
+     * A newly created user will receive an email inviting them to create their password. This means that you
+     * must provide a valid email address for all user accounts created.
+     *
+     * 
+     * @param int $accountId The unique ID number of the account where these users will be created.
+     * @param UserModel[] $model The user or array of users you wish to create.
+     * @return UserModel[]
+     */
+    public function createUsers($accountId, $model)
+    {
+        $path = "/api/v2/accounts/{$accountId}/users";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
     }
 
     /**
