@@ -314,6 +314,11 @@ class NewAccountRequestModel
     public $website;
 
     /**
+     * @var string Payment Method to be associated with the account.    This is strictly to be used internally unless your Avalara business development manager specifically asks you to provide this value  while attempting to create an account.
+     */
+    public $paymentMethodId;
+
+    /**
      * @var string First name of the primary contact person for this account
      */
     public $firstName;
@@ -1782,6 +1787,16 @@ class CompanyModel
      */
     public $exemptCerts;
 
+    /**
+     * @var string The unique identifier of the mini-one-stop-shop used for Value Added Tax (VAT) processing.
+     */
+    public $mossId;
+
+    /**
+     * @var string The country code of the mini-one-stop-shop used for Value Added Tax (VAT) processing.
+     */
+    public $mossCountry;
+
 }
 
 /**
@@ -2235,6 +2250,11 @@ class NexusModel
      */
     public $taxAuthorityId;
 
+    /**
+     * @var boolean For nexus declarations at the country level, specifies whether this company is considered the importer of record in this nexus region.    Some taxes only apply if the seller is the importer of record for a product. In cases where companies are working together to  ship products, there may be mutual agreement as to which company is the entity designated as importer of record. The importer  of record will then be the company designated to pay taxes marked as being obligated to the importer of record.    Set this value to `true` to consider your company as the importer of record and collect these taxes. Leave this value as false  or null and taxes will be calculated as if your company is not the importer of record.    This value may also be set during each transaction API call. See `CreateTransaction()` for more information.
+     */
+    public $isSellerImporterOfRecord;
+
 }
 
 /**
@@ -2489,7 +2509,7 @@ class TaxRuleModel
     public $country;
 
     /**
-     * @var string Name or ISO 3166 code identifying the region where this rule will apply.    This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions    For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
+     * @var string Name or ISO 3166 code identifying the region where this rule will apply.    This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions    For a full list of all supported codes and names, please see the Definitions API `ListRegions`.  NOTE: Region is not required for non-US countries because the user may be either creating a Country-level or Region-level rule.
      */
     public $region;
 
@@ -2537,6 +2557,26 @@ class TaxRuleModel
      * @var int Id for RateTypeTaxTypeMapping object
      */
     public $rateTypeTaxTypeMappingId;
+
+    /**
+     * @var string Indicates the expression to use to determine whether this tax rule generates a non-passthrough tax.    Non-passthrough taxes are taxes that cannot be charged to the customer.
+     */
+    public $nonPassthroughExpression;
+
+    /**
+     * @var string The currency code to use for this rule.
+     */
+    public $currencyCode;
+
+    /**
+     * @var int For rules that only apply to one tax code program, this value indicates what program should be used for implementing this rule.
+     */
+    public $preferredProgramId;
+
+    /**
+     * @var int For tax rules that are calculated using units of measurement, this indicates the unit of measurement type  used to calculate the amounts for this rule.    For a list of units of measurement, please call `ListUnitsOfMeasurement()`.
+     */
+    public $uomId;
 
 }
 
@@ -2900,6 +2940,11 @@ class MrsCompanyModel
      * @var string The taxpayer identification number for the company
      */
     public $tin;
+
+    /**
+     * @var string The company code for the company
+     */
+    public $companyCode;
 
 }
 
@@ -4311,6 +4356,524 @@ class AvaFileFormModel
 }
 
 /**
+ * Represents information about a tax form known to Avalara
+ */
+class FormMasterModel
+{
+
+    /**
+     * @var int Unique ID number of this form master object
+     */
+    public $id;
+
+    /**
+     * @var int The type of the form being submitted
+     */
+    public $formTypeId;
+
+    /**
+     * @var string Unique tax form code representing this tax form
+     */
+    public $taxFormCode;
+
+    /**
+     * @var string Legacy return name as known in the AvaFileForm table
+     */
+    public $legacyReturnName;
+
+    /**
+     * @var string Human readable form summary name
+     */
+    public $taxFormName;
+
+    /**
+     * @var string Description of this tax form
+     */
+    public $description;
+
+    /**
+     * @var boolean True if this form is available for use
+     */
+    public $isEffective;
+
+    /**
+     * @var string ISO 3166 code of the country that issued this tax form
+     */
+    public $country;
+
+    /**
+     * @var string The region within which this form was issued
+     */
+    public $region;
+
+    /**
+     * @var string Tax authority that issued the form
+     */
+    public $authorityName;
+
+    /**
+     * @var string DEPRECATED
+     */
+    public $shortCode;
+
+    /**
+     * @var int Day of the month when the form is due
+     */
+    public $dueDay;
+
+    /**
+     * @var int Day of the month on which the form is considered delinquent. Almost always the same as DueDay
+     */
+    public $delinquentDay;
+
+    /**
+     * @var int Month of the year the state considers as the first fiscal month
+     */
+    public $fiscalYearStartMonth;
+
+    /**
+     * @var boolean Can form support multi frequencies
+     */
+    public $hasMultiFrequencies;
+
+    /**
+     * @var boolean Does this tax authority require a power of attorney in order to speak to Avalara
+     */
+    public $isPOARequired;
+
+    /**
+     * @var boolean True if this form requires that the customer register with the authority
+     */
+    public $isRegistrationRequired;
+
+    /**
+     * @var boolean Unused
+     */
+    public $hasMultiRegistrationMethods;
+
+    /**
+     * @var boolean Unused
+     */
+    public $hasSchedules;
+
+    /**
+     * @var boolean Unused
+     */
+    public $hasMultiFilingMethods;
+
+    /**
+     * @var boolean Unused
+     */
+    public $hasMultiPayMethods;
+
+    /**
+     * @var boolean Unused
+     */
+    public $isEFTRequired;
+
+    /**
+     * @var boolean Unused
+     */
+    public $isFilePayMethodLinked;
+
+    /**
+     * @var int Unused
+     */
+    public $mailingReceivedRuleId;
+
+    /**
+     * @var int Unused
+     */
+    public $proofOfMailingId;
+
+    /**
+     * @var boolean True if you can report a negative amount in a single jurisdiction on the form
+     */
+    public $isNegAmountAllowed;
+
+    /**
+     * @var boolean True if the form overall can go negative
+     */
+    public $allowNegativeOverallTax;
+
+    /**
+     * @var boolean Unused
+     */
+    public $isNettingRequired;
+
+    /**
+     * @var int Unused
+     */
+    public $roundingMethodId;
+
+    /**
+     * @var float Total amount of discounts that can be received by a vendor each year
+     */
+    public $vendorDiscountAnnualMax;
+
+    /**
+     * @var boolean Unused
+     */
+    public $versionsRequireAuthorityApproval;
+
+    /**
+     * @var int Type of outlet reporting for this form
+     */
+    public $outletReportingMethodId;
+
+    /**
+     * @var boolean Unused
+     */
+    public $hasReportingCodes;
+
+    /**
+     * @var boolean Not sure if used
+     */
+    public $hasPrepayments;
+
+    /**
+     * @var boolean Unused
+     */
+    public $grossIncludesInterstateSales;
+
+    /**
+     * @var string Unused
+     */
+    public $grossIncludesTax;
+
+    /**
+     * @var boolean Unused
+     */
+    public $hasEfileFee;
+
+    /**
+     * @var boolean Unused
+     */
+    public $hasEpayFee;
+
+    /**
+     * @var boolean Unused
+     */
+    public $hasDependencies;
+
+    /**
+     * @var string Unused
+     */
+    public $requiredEfileTrigger;
+
+    /**
+     * @var string Unused
+     */
+    public $requiredEftTrigger;
+
+    /**
+     * @var boolean Unused
+     */
+    public $vendorDiscountEfile;
+
+    /**
+     * @var boolean Unused
+     */
+    public $vendorDiscountPaper;
+
+    /**
+     * @var string Unused
+     */
+    public $peerReviewed;
+
+    /**
+     * @var string Unused
+     */
+    public $peerReviewedId;
+
+    /**
+     * @var string Unused
+     */
+    public $peerReviewedDate;
+
+    /**
+     * @var int ID of the Avalara user who created the form
+     */
+    public $createdUserId;
+
+    /**
+     * @var string Date when form was created
+     */
+    public $createdDate;
+
+    /**
+     * @var int ID of the Avalara user who modified the form
+     */
+    public $modifiedUserId;
+
+    /**
+     * @var string Date when form was modified
+     */
+    public $modifiedDate;
+
+    /**
+     * @var string Mailing address of the department of revenue
+     */
+    public $dorAddressMailTo;
+
+    /**
+     * @var string Mailing address of the department of revenue
+     */
+    public $dorAddress1;
+
+    /**
+     * @var string Mailing address of the department of revenue
+     */
+    public $dorAddress2;
+
+    /**
+     * @var string Mailing address of the department of revenue
+     */
+    public $dorAddressCity;
+
+    /**
+     * @var string Mailing address of the department of revenue
+     */
+    public $dorAddressRegion;
+
+    /**
+     * @var string Mailing address of the department of revenue
+     */
+    public $dorAddressPostalCode;
+
+    /**
+     * @var string Mailing address of the department of revenue
+     */
+    public $dorAddressCountry;
+
+    /**
+     * @var string Mailing address to use when a zero dollar form is filed
+     */
+    public $zeroAddressMailTo;
+
+    /**
+     * @var string Mailing address to use when a zero dollar form is filed
+     */
+    public $zeroAddress1;
+
+    /**
+     * @var string Mailing address to use when a zero dollar form is filed
+     */
+    public $zeroAddress2;
+
+    /**
+     * @var string Mailing address to use when a zero dollar form is filed
+     */
+    public $zeroAddressCity;
+
+    /**
+     * @var string Mailing address to use when a zero dollar form is filed
+     */
+    public $zeroAddressRegion;
+
+    /**
+     * @var string Mailing address to use when a zero dollar form is filed
+     */
+    public $zeroAddressPostalCode;
+
+    /**
+     * @var string Mailing address to use when a zero dollar form is filed
+     */
+    public $zeroAddressCountry;
+
+    /**
+     * @var string Mailing address to use when filing an amended return
+     */
+    public $amendedAddressMailTo;
+
+    /**
+     * @var string Mailing address to use when filing an amended return
+     */
+    public $amendedAddress1;
+
+    /**
+     * @var string Mailing address to use when filing an amended return
+     */
+    public $amendedAddress2;
+
+    /**
+     * @var string Mailing address to use when filing an amended return
+     */
+    public $amendedAddressCity;
+
+    /**
+     * @var string Mailing address to use when filing an amended return
+     */
+    public $amendedAddressRegion;
+
+    /**
+     * @var string Mailing address to use when filing an amended return
+     */
+    public $amendedAddressPostalCode;
+
+    /**
+     * @var string Mailing address to use when filing an amended return
+     */
+    public $amendedAddressCountry;
+
+    /**
+     * @var boolean Unused
+     */
+    public $onlineBackFiling;
+
+    /**
+     * @var boolean Unused
+     */
+    public $onlineAmendedReturns;
+
+    /**
+     * @var string --Need Further Clarification
+     */
+    public $prepaymentFrequency;
+
+    /**
+     * @var boolean Unused
+     */
+    public $outletLocationIdentifiersRequired;
+
+    /**
+     * @var string --Need Further Clarification
+     */
+    public $listingSortOrder;
+
+    /**
+     * @var string Link to the state department of revenue website, if available
+     */
+    public $dorWebsite;
+
+    /**
+     * @var boolean --Need Further Clarification
+     */
+    public $fileForAllOutlets;
+
+    /**
+     * @var boolean --Need Further Clarification
+     */
+    public $paperFormsDoNotHaveDiscounts;
+
+    /**
+     * @var boolean Internal behavior
+     */
+    public $stackAggregation;
+
+    /**
+     * @var string --Need Further Clarification
+     */
+    public $roundingPrecision;
+
+    /**
+     * @var string --Need Further Clarification
+     */
+    public $inconsistencyTolerance;
+
+    /**
+     * @var string Date when this form became effective
+     */
+    public $effDate;
+
+    /**
+     * @var string Date when this form expired
+     */
+    public $endDate;
+
+    /**
+     * @var boolean True if this form can be shown to customers
+     */
+    public $visibleToCustomers;
+
+    /**
+     * @var boolean True if this form requires that you set up outlets in the state
+     */
+    public $requiresOutletSetup;
+
+    /**
+     * @var boolean True if this state permits payment by ACH Credit
+     */
+    public $achCreditAllowed;
+
+    /**
+     * @var string Jurisdiction level of the state
+     */
+    public $reportLevel;
+
+    /**
+     * @var boolean True if this form is verified filed via email
+     */
+    public $postOfficeValidated;
+
+    /**
+     * @var string Internal Avalara flag
+     */
+    public $stackAggregationOption;
+
+    /**
+     * @var string Internal Avalara flag
+     */
+    public $sstBehavior;
+
+    /**
+     * @var string Internal Avalara flag
+     */
+    public $nonSstBehavior;
+
+    /**
+     * @var string Phone number of the department of revenue
+     */
+    public $dorPhoneNumber;
+
+    /**
+     * @var string Unused
+     */
+    public $averageCheckClearDays;
+
+    /**
+     * @var boolean Unused
+     */
+    public $filterZeroRatedLineDetails;
+
+    /**
+     * @var boolean Unused
+     */
+    public $allowsBulkFilingAccounts;
+
+    /**
+     * @var string Unused
+     */
+    public $bulkAccountInstructionLink;
+
+    /**
+     * @var string Unused
+     */
+    public $registrationIdFormat;
+
+    /**
+     * @var string Unused
+     */
+    public $thresholdTrigger;
+
+    /**
+     * @var string Unused
+     */
+    public $transactionSortingOption;
+
+    /**
+     * @var int Unused
+     */
+    public $contentReviewFrequencyId;
+
+    /**
+     * @var string Unused
+     */
+    public $aliasForFormMasterId;
+
+}
+
+/**
  * Represents a tax type group
  */
 class TaxTypeGroupModel
@@ -4437,6 +5000,221 @@ class CommunicationsTransactionTypeModel
      * @var string The name of the transaction type.
      */
     public $AvaTax_Communications_TransactionType;
+
+}
+
+/**
+ * The "Unit of Measurement" model captures information about a type of measurement. Types of measurement refer to 
+ * different scales for the same dimension. For example, measurements of type "Distance" may include units of measurement
+ * such as meters, feet, inches, and miles.
+ */
+class UomModel
+{
+
+    /**
+     * @var int The unique ID number of this unit of measurement.
+     */
+    public $id;
+
+    /**
+     * @var string The code that refers to this unit of measurement.
+     */
+    public $code;
+
+    /**
+     * @var string A short description of this unit of measurement.
+     */
+    public $shortDesc;
+
+    /**
+     * @var string A longer description of this unit of measurement.
+     */
+    public $description;
+
+    /**
+     * @var int The ID number of the measurement type, such as "Distance" or "Mass".
+     */
+    public $measurementTypeId;
+
+    /**
+     * @var string The code describing the measurement type.
+     */
+    public $measurementTypeCode;
+
+    /**
+     * @var string For a particular measurement type, this is the ID number of the unit of measurement object corresponding to the   International System of Units (abbreviated SI) unit of measurement standard. This pointer allows you to select  the SI unit of measurement for a particular measurement type.
+     */
+    public $siUOM;
+
+    /**
+     * @var string A description of the measurement type system.
+     */
+    public $measurementTypeDescription;
+
+    /**
+     * @var boolean True if this measurement is an International System of Units (abbreviated SI) defined standard.
+     */
+    public $isSiUom;
+
+}
+
+/**
+ * Describes an element in the harmonized tariff system.
+ * 
+ * According to the [United States International Trade Commission](https://www.usitc.gov), the harmonized tariff schedule is defined as follows:
+ * 
+ * The HTS is a U.S. nomenclature system used to classify traded goods based on their material composition, product name, and/or intended 
+ * function. The HTS is designed so that each article falls into only one category. It is divided into chapters, each of which has a 2-digit 
+ * number. Each product category within the various chapters is designated by 4, 6, 8, or 10 digits. The 4-digit categories are called 
+ * "headings." The 6-, 8- and 10-digit classifications are called "subheadings."
+ * 
+ * Within AvaTax, the `HsCodeModel` object can refer to sections, chapters, headings, subheadings, or articles. Each object represents one
+ * classification. Many of these objects have child objects underneath them; these child objects are more specific than their parent objects.
+ */
+class HsCodeModel
+{
+
+    /**
+     * @var string The harmonized tariff system code for this section and chapter.     A full HS code contains more than six characters. Partial HS codes with two, four, or six characters may have child codes underneath them.  A child code is one that contains greater specificity than a parent code. It is recommended that when you identify a product you use  the most detailed code available to identify it.    Top level sections do not have HS Codes.
+     */
+    public $hsCode;
+
+    /**
+     * @var int A unique identifier for this harmonized tariff system code.    To search for a list of child codes underneath a specific HS code, search for codes where the child's `parentHsCodeId` value matches the parent's `id` value.
+     */
+    public $id;
+
+    /**
+     * @var int The unique ID number of the parent HS code or HS code prefix.    To search for a list of child codes underneath a specific HS code, search for codes where the child's `parentHsCodeId` value matches the parent's `id` value.
+     */
+    public $parentHsCodeId;
+
+    /**
+     * @var string A human readable description that identifies Code descriptive text for this Section, Chapter, Heading, or Subheading.
+     */
+    public $description;
+
+    /**
+     * @var string The system to which this HS code belongs.
+     */
+    public $system;
+
+    /**
+     * @var string The destination country identified with this HS Code. This value applies when certain products are classified in specific ways by  bilateral trade agreements.
+     */
+    public $destinationCountry;
+
+    /**
+     * @var string For codes that have been expired or defined on specific dates, this value indicates the earliest  date for which this code is considered valid.    If this value is null, this code can be used for any valid date earlier than its end date.
+     */
+    public $effDate;
+
+    /**
+     * @var string For codes that have been expired or defined on specific dates, this value indicates the latest  date for which this code is considered valid.    If this value is null, this code can be used for any valid date later than its effective date.
+     */
+    public $endDate;
+
+}
+
+/**
+ * Represents a PostalCode and its associated data like: country, region, effective dates, etc.
+ */
+class PostalCodeModel
+{
+
+    /**
+     * @var string Country this PostalCode locates in
+     */
+    public $country;
+
+    /**
+     * @var string The Region/State/Province this PostalCode locates in
+     */
+    public $region;
+
+    /**
+     * @var int An Avalara assigned TaxRegion Id associated to the PostalCode
+     */
+    public $taxRegionId;
+
+    /**
+     * @var string The date when the PostalCode becomes effective
+     */
+    public $effDate;
+
+    /**
+     * @var string The date when the PostalCode becomes expired
+     */
+    public $endDate;
+
+    /**
+     * @var string The postalCode
+     */
+    public $postalCode;
+
+}
+
+/**
+ * A company-distance-threshold model indicates the distance between a company
+ * and the taxing borders of various countries. Distance thresholds are necessary
+ * to correctly calculate some value-added taxes.
+ * 
+ * Distance thresholds only apply to sales of goods in certain countries. A distance threshold
+ * is applied for each ship-from/ship-to combination of countries. The threshold amount is defined by
+ * the ship-to country.
+ * 
+ * Generally, if you have exceeded a distance threshold for taxes between a pair of countries, your tax calculation
+ * will be determined to be the rate in the destination country. If you have not exceeded the threshold,
+ * your tax calculation will be determined to be the rate in the origin country.
+ * 
+ * The amount of a threshold is not tracked or managed in AvaTax, but the decision of your tax compliance department
+ * as to whether you have exceeded this threshold is maintained in this object. 
+ * 
+ * By default, you are considered to have exceeded tax thresholds. If you wish to change this default, you can create 
+ * a company-distance-threshold object to select the correct behavior for this origin/destination tax calculation process.
+ */
+class CompanyDistanceThresholdModel
+{
+
+    /**
+     * @var int A unique ID number representing this distance threshold object.
+     */
+    public $id;
+
+    /**
+     * @var int The ID number of the company that defined this distance threshold.
+     */
+    public $companyId;
+
+    /**
+     * @var string The origin country for this threshold.    This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries    For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
+     */
+    public $originCountry;
+
+    /**
+     * @var string The destination country for this threshold.    This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries    For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
+     */
+    public $destinationCountry;
+
+    /**
+     * @var string For distance threshold values that change over time, this is the earliest date for which this distance  threshold is valid. If null, this distance threshold is valid for all dates earlier than the `endDate` field.
+     */
+    public $effDate;
+
+    /**
+     * @var string For distance threshold values that change over time, this is the latest date for which this distance  threshold is valid. If null, this distance threshold is valid for all dates later than the `effDate` field.
+     */
+    public $endDate;
+
+    /**
+     * @var boolean True if your tax professional has determined that the value-added tax distance threshold is exceeded for this pair of countries.    If you set this value to `false`, your value added taxes will be calculated using the origin country. Otherwise, value  added taxes will be calculated on the destination country.
+     */
+    public $thresholdExceeded;
+
+    /**
+     * @var string Indicates the distance threshold type.    This value can be either `Sale` or `Purchase`.
+     */
+    public $type;
 
 }
 
@@ -5278,6 +6056,21 @@ class FilingReturnModelBasic
     public $consumerUseTaxableAmount;
 
     /**
+     * @var float The amount of sales excluded from the liability calculation
+     */
+    public $excludedSalesAmount;
+
+    /**
+     * @var float The amount of non-taxable sales excluded from the liability calculation
+     */
+    public $excludedNonTaxableAmount;
+
+    /**
+     * @var float The amount of tax excluded from the liability calculation
+     */
+    public $excludedTaxAmount;
+
+    /**
      * @var string Accrual type of the return (See AccrualType::* for a list of allowable values)
      */
     public $accrualType;
@@ -5630,6 +6423,21 @@ class FilingReturnModel
      * @var float Total amount of adjustments on this return
      */
     public $totalAdjustments;
+
+    /**
+     * @var float The amount of sales excluded from the liability calculation
+     */
+    public $excludedSalesAmount;
+
+    /**
+     * @var float The amount of non-taxable sales excluded from the liability calculation
+     */
+    public $excludedNonTaxableAmount;
+
+    /**
+     * @var float The amount of tax excluded from the liability calculation
+     */
+    public $excludedTaxAmount;
 
     /**
      * @var FilingAdjustmentModel[] The Adjustments for this return.
@@ -6278,7 +7086,7 @@ class TransactionModel
     public $exchangeRate;
 
     /**
-     * @var boolean If true, this seller was considered the importer of record of a product shipped internationally.    If this transaction is not an international transaction, this field may be left blank.    The "importer of record" is liable to pay customs and import duties for products shipped internationally. If   you specify that the seller is the importer of record, then estimates of customs and import duties will be added  as tax details to the transaction. Otherwise, the buyer is considered the importer of record, and customs  and import duties will not be added to the tax details for this transaction.
+     * @var boolean By default, the value is null, when the value is null, the value can be set at nexus level and used.  If the value is not null, it will override the value at nexus level.    If true, this seller was considered the importer of record of a product shipped internationally.    If this transaction is not an international transaction, this field may be left blank.    The "importer of record" is liable to pay customs and import duties for products shipped internationally. If   you specify that the seller is the importer of record, then estimates of customs and import duties will be added  as tax details to the transaction. Otherwise, the buyer is considered the importer of record, and customs  and import duties will not be added to the tax details for this transaction.
      */
     public $isSellerImporterOfRecord;
 
@@ -6536,9 +7344,14 @@ class TransactionLineModel
     public $taxIncluded;
 
     /**
-     * @var TransactionLineDetailModel[] Optional: A list of tax details for this line item. To fetch this list, add the query string "?$include=Details" to your URL.
+     * @var TransactionLineDetailModel[] Optional: A list of tax details for this line item.     Tax details represent taxes being charged by various tax authorities. Taxes that appear in the `details` collection are intended to be   displayed to the customer and charged as a 'tax' on the invoice.    To fetch this list, add the query string `?$include=Details` to your URL.
      */
     public $details;
+
+    /**
+     * @var TransactionLineDetailModel[] Optional: A list of non-passthrough tax details for this line item.    Tax details represent taxes being charged by various tax authorities. Taxes that appear in the `nonPassthroughDetails` collection are   taxes that must be paid directly by the company and not shown to the customer.
+     */
+    public $nonPassthroughDetails;
 
     /**
      * @var TransactionLineLocationTypeModel[] Optional: A list of location types for this line item. To fetch this list, add the query string "?$include=LineLocationTypes" to your URL.
@@ -6549,6 +7362,16 @@ class TransactionLineModel
      * @var object Contains a list of extra parameters that were set when the transaction was created.
      */
     public $parameters;
+
+    /**
+     * @var string The cross-border harmonized system code (HSCode) used to calculate tariffs and duties for this line item.   For a full list of HS codes, see `ListCrossBorderCodes()`.
+     */
+    public $hsCode;
+
+    /**
+     * @var float Indicates the cost of insurance and freight for this line.
+     */
+    public $costInsuranceFreight;
 
 }
 
@@ -6594,7 +7417,7 @@ class TransactionAddressModel
     public $city;
 
     /**
-     * @var string The region, state, or province for the address.
+     * @var string The ISO 3166 region code. E.g., the second part of ISO 3166-2.
      */
     public $region;
 
@@ -6604,7 +7427,7 @@ class TransactionAddressModel
     public $postalCode;
 
     /**
-     * @var string The country for the address.
+     * @var string The ISO 3166 country code
      */
     public $country;
 
@@ -6614,12 +7437,12 @@ class TransactionAddressModel
     public $taxRegionId;
 
     /**
-     * @var string Latitude for this address (CALC - 13394)
+     * @var string Latitude for this address
      */
     public $latitude;
 
     /**
-     * @var string Longitude for this address (CALC - 13394)
+     * @var string Longitude for this address
      */
     public $longitude;
 
@@ -6952,6 +7775,11 @@ class TransactionLineDetailModel
      */
     public $unitOfBasis;
 
+    /**
+     * @var boolean True if this value is a non-passthrough tax.    A non-passthrough tax is a tax that may not be charged to a customer; it must be paid directly by the company.
+     */
+    public $isNonPassThru;
+
 }
 
 /**
@@ -7162,7 +7990,7 @@ class CreateMultiDocumentModel
     public $businessIdentificationNo;
 
     /**
-     * @var boolean Specifies if the Transaction has the seller as IsSellerImporterOfRecord.
+     * @var boolean Specifies if the transaction should have value-added and cross-border taxes calculated with the seller as the importer of record.    Some taxes only apply if the seller is the importer of record for a product. In cases where companies are working together to  ship products, there may be mutual agreement as to which company is the entity designated as importer of record. The importer  of record will then be the company designated to pay taxes marked as being obligated to the importer of record.    Set this value to `true` to consider your company as the importer of record and collect these taxes.    This value may also be set at the Nexus level. See `NexusModel` for more information.
      */
     public $isSellerImporterOfRecord;
 
@@ -7200,17 +8028,17 @@ class MultiDocumentLineItemModel
     public $reportingLocationCode;
 
     /**
-     * @var string Line number within this document
+     * @var string The line number of this line within the document. This can be any text that is useful to you, such as numeric line numbers, alphabetic line numbers, or other text.
      */
     public $number;
 
     /**
-     * @var float Quantity of items in this line
+     * @var float Quantity of items in this line. This quantity value should always be a positive value representing the quantity of product that changed hands, even when handling returns or refunds.    If not provided, or if set to zero, the quantity value is assumed to be one (1).
      */
     public $quantity;
 
     /**
-     * @var float Total amount for this line
+     * @var float Total amount for this line. The amount represents the net currency value that changed hands from the customer (represented by the `customerCode` field) to the company (represented by the `companyCode`) field.    For sale transactions, this value must be positive. It indicates the amount of money paid by the customer to the company.    For refund or return transactions, this value must be negative.
      */
     public $amount;
 
@@ -7225,27 +8053,27 @@ class MultiDocumentLineItemModel
     public $taxCode;
 
     /**
-     * @var string DEPERECATED - Customer Usage Type - The client application customer or usage type.  Please use entityUseCode instead.
+     * @var string DEPRECATED - Please use `entityUseCode` instead.
      */
     public $customerUsageType;
 
     /**
-     * @var string Entity Use Code - The client application customer or usage type.
+     * @var string Entity Use Code - The client application customer or usage type. This field allows you to designate a type of usage that   may make this transaction considered exempt by reason of exempt usage.    For a list of entity use codes, see the Definitions API `ListEntityUseCodes`.
      */
     public $entityUseCode;
 
     /**
-     * @var string Item Code (SKU)
+     * @var string Item Code (SKU). If you provide an `itemCode` field, the AvaTax API will look up the item you created with the `CreateItems` API call  and use all the information available about that item for this transaction.
      */
     public $itemCode;
 
     /**
-     * @var string Exemption number for this line
+     * @var string Exemption certificate number for this line.
      */
     public $exemptionCode;
 
     /**
-     * @var boolean True if the document discount should be applied to this line
+     * @var boolean True if the document discount should be applied to this line. If this value is false, or not provided, discounts will not be   applied to this line even if they are specified on the root `discount` element.
      */
     public $discounted;
 
@@ -7255,22 +8083,22 @@ class MultiDocumentLineItemModel
     public $taxIncluded;
 
     /**
-     * @var string Revenue Account
+     * @var string Revenue Account (Customer Defined Field).    This field is available for you to use to provide whatever information your implementation requires. It does not affect tax calculation.
      */
     public $revenueAccount;
 
     /**
-     * @var string Reference 1 - Client specific reference field
+     * @var string Ref1 (Customer Defined Field)    This field is available for you to use to provide whatever information your implementation requires. It does not affect tax calculation.
      */
     public $ref1;
 
     /**
-     * @var string Reference 2 - Client specific reference field
+     * @var string Ref2 (Customer Defined Field)    This field is available for you to use to provide whatever information your implementation requires. It does not affect tax calculation.
      */
     public $ref2;
 
     /**
-     * @var string Item description. This is required for SST transactions if an unmapped ItemCode is used.
+     * @var string Item description.    For Streamlined Sales Tax (SST) customers, this field is required if an unmapped `itemCode` is used.
      */
     public $description;
 
@@ -7280,14 +8108,19 @@ class MultiDocumentLineItemModel
     public $businessIdentificationNo;
 
     /**
-     * @var TaxOverrideModel Specifies a tax override for this line
+     * @var TaxOverrideModel Specifies a tax override for this line.
      */
     public $taxOverride;
 
     /**
-     * @var object Special parameters that apply to this line within this transaction.  To get a full list of available parameters, please use the /api/v2/definitions/parameters endpoint.
+     * @var object Special parameters that apply to this line within this transaction.    To get a full list of available parameters, please use the `ListParameters` API.
      */
     public $parameters;
+
+    /**
+     * @var string The Item code for Custom Duty / Global Import tax determination  Harmonized Tariff System code for this transaction.    For a list of harmonized tariff codes, see the Definitions API for harmonized tariff codes.
+     */
+    public $hsCode;
 
 }
 
@@ -8563,7 +9396,7 @@ class CreateTransactionModel
     public $businessIdentificationNo;
 
     /**
-     * @var boolean Specifies if the Transaction has the seller as IsSellerImporterOfRecord.
+     * @var boolean Specifies if the transaction should have value-added and cross-border taxes calculated with the seller as the importer of record.    Some taxes only apply if the seller is the importer of record for a product. In cases where companies are working together to  ship products, there may be mutual agreement as to which company is the entity designated as importer of record. The importer  of record will then be the company designated to pay taxes marked as being obligated to the importer of record.    Set this value to `true` to consider your company as the importer of record and collect these taxes.    This value may also be set at the Nexus level. See `NexusModel` for more information.
      */
     public $isSellerImporterOfRecord;
 
@@ -8591,17 +9424,17 @@ class LineItemModel
 {
 
     /**
-     * @var string Line number within this document
+     * @var string The line number of this line within the document. This can be any text that is useful to you, such as numeric line numbers, alphabetic line numbers, or other text.
      */
     public $number;
 
     /**
-     * @var float Quantity of items in this line
+     * @var float Quantity of items in this line. This quantity value should always be a positive value representing the quantity of product that changed hands, even when handling returns or refunds.    If not provided, or if set to zero, the quantity value is assumed to be one (1).
      */
     public $quantity;
 
     /**
-     * @var float Total amount for this line
+     * @var float Total amount for this line. The amount represents the net currency value that changed hands from the customer (represented by the `customerCode` field) to the company (represented by the `companyCode`) field.    For sale transactions, this value must be positive. It indicates the amount of money paid by the customer to the company.    For refund or return transactions, this value must be negative.
      */
     public $amount;
 
@@ -8616,27 +9449,27 @@ class LineItemModel
     public $taxCode;
 
     /**
-     * @var string DEPERECATED - Customer Usage Type - The client application customer or usage type.  Please use entityUseCode instead.
+     * @var string DEPRECATED - Please use `entityUseCode` instead.
      */
     public $customerUsageType;
 
     /**
-     * @var string Entity Use Code - The client application customer or usage type.
+     * @var string Entity Use Code - The client application customer or usage type. This field allows you to designate a type of usage that   may make this transaction considered exempt by reason of exempt usage.    For a list of entity use codes, see the Definitions API `ListEntityUseCodes`.
      */
     public $entityUseCode;
 
     /**
-     * @var string Item Code (SKU)
+     * @var string Item Code (SKU). If you provide an `itemCode` field, the AvaTax API will look up the item you created with the `CreateItems` API call  and use all the information available about that item for this transaction.
      */
     public $itemCode;
 
     /**
-     * @var string Exemption number for this line
+     * @var string Exemption certificate number for this line.
      */
     public $exemptionCode;
 
     /**
-     * @var boolean True if the document discount should be applied to this line
+     * @var boolean True if the document discount should be applied to this line. If this value is false, or not provided, discounts will not be   applied to this line even if they are specified on the root `discount` element.
      */
     public $discounted;
 
@@ -8646,22 +9479,22 @@ class LineItemModel
     public $taxIncluded;
 
     /**
-     * @var string Revenue Account
+     * @var string Revenue Account (Customer Defined Field).    This field is available for you to use to provide whatever information your implementation requires. It does not affect tax calculation.
      */
     public $revenueAccount;
 
     /**
-     * @var string Reference 1 - Client specific reference field
+     * @var string Ref1 (Customer Defined Field)    This field is available for you to use to provide whatever information your implementation requires. It does not affect tax calculation.
      */
     public $ref1;
 
     /**
-     * @var string Reference 2 - Client specific reference field
+     * @var string Ref2 (Customer Defined Field)    This field is available for you to use to provide whatever information your implementation requires. It does not affect tax calculation.
      */
     public $ref2;
 
     /**
-     * @var string Item description. This is required for SST transactions if an unmapped ItemCode is used.
+     * @var string Item description.    For Streamlined Sales Tax (SST) customers, this field is required if an unmapped `itemCode` is used.
      */
     public $description;
 
@@ -8671,14 +9504,19 @@ class LineItemModel
     public $businessIdentificationNo;
 
     /**
-     * @var TaxOverrideModel Specifies a tax override for this line
+     * @var TaxOverrideModel Specifies a tax override for this line.
      */
     public $taxOverride;
 
     /**
-     * @var object Special parameters that apply to this line within this transaction.  To get a full list of available parameters, please use the /api/v2/definitions/parameters endpoint.
+     * @var object Special parameters that apply to this line within this transaction.    To get a full list of available parameters, please use the `ListParameters` API.
      */
     public $parameters;
+
+    /**
+     * @var string The Item code for Custom Duty / Global Import tax determination  Harmonized Tariff System code for this transaction.    For a list of harmonized tariff codes, see the Definitions API for harmonized tariff codes.
+     */
+    public $hsCode;
 
 }
 
@@ -8999,6 +9837,11 @@ class PingResultModel
      * @var int The ID number of the currently authenticated user's account, if any.
      */
     public $authenticatedAccountId;
+
+    /**
+     * @var string The connected Salesforce account.
+     */
+    public $crmid;
 
 }
 ?>

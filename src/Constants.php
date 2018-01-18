@@ -406,6 +406,11 @@ class ServiceTypeId
      */
     const C_AVABOTTLE = "AvaBottle";
 
+    /**
+     * MRSComplianceManager
+     */
+    const C_MRSCOMPLIANCEMANAGER = "MRSComplianceManager";
+
 }
 
 
@@ -722,6 +727,12 @@ class ErrorCodeId
     const C_EXPECTEDCONJUNCTIONERROR = "ExpectedConjunctionError";
     const C_CRITERIANOTSUPPORTEDERROR = "CriteriaNotSupportedError";
     const C_COMPANYACCOUNTANDPARENTACCOUNTMISMATCH = "CompanyAccountAndParentAccountMismatch";
+    const C_INVALIDFILECONTENTTYPE = "InvalidFileContentType";
+    const C_INVALIDITEMATTRIBUTENAME = "InvalidItemAttributeName";
+    const C_ECMSDISABLED = "EcmsDisabled";
+    const C_UNKNOWNCONJUNCTIONERROR = "UnknownConjunctionError";
+    const C_NOLINESDISCOUNTED = "NoLinesDiscounted";
+    const C_FAILEDTODELETE = "FailedToDelete";
 
     /**
      * Batch errors
@@ -794,7 +805,7 @@ class ErrorCodeId
     const C_REFUNDTYPEANDPERCENTAGEMISMATCH = "RefundTypeAndPercentageMismatch";
     const C_INVALIDDOCUMENTTYPEFORREFUND = "InvalidDocumentTypeForRefund";
     const C_REFUNDTYPEANDLINEMISMATCH = "RefundTypeAndLineMismatch";
-    const C_NULLREFUNDPERCENTAGEANDLINES = "NullRefundPercentageAndLines";
+    const C_REFUNDLINESREQUIRED = "RefundLinesRequired";
     const C_INVALIDREFUNDTYPE = "InvalidRefundType";
     const C_REFUNDPERCENTAGEFORTAXONLY = "RefundPercentageForTaxOnly";
     const C_LINENOOUTOFRANGE = "LineNoOutOfRange";
@@ -847,6 +858,7 @@ class ErrorCodeId
     const C_CONFLICTINGFIELDS = "ConflictingFields";
     const C_INVALIDPDFORIMAGEFILE = "InvalidPdfOrImageFile";
     const C_INVALIDCOVERLETTERTITLE = "InvalidCoverLetterTitle";
+    const C_ACCOUNTNOTPROVISIONED = "AccountNotProvisioned";
 
     /**
      * Multi document error codes
@@ -885,6 +897,11 @@ class ErrorCodeId
      * Worksheet Exception
      */
     const C_WORKSHEETEXCEPTION = "WorksheetException";
+
+    /**
+     * LandedCost Exception
+     */
+    const C_MISSINGSYSTEMID = "MissingSystemId";
 
 }
 
@@ -2150,6 +2167,11 @@ class TaxType
      * EWaste tax type
      */
     const C_EWASTE = "EWaste";
+
+    /**
+     * LandedCost tax type
+     */
+    const C_LANDEDCOST = "LandedCost";
 
     /**
      * Consumer Use Tax
