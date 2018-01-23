@@ -23,12 +23,12 @@ class TransactionBuilder
      * Keeps track of the line number when adding multiple lines
      */
     private $_line_number;
-    
+
     /**
      * The client that will be used to create the transaction
      */
     private $_client;
-        
+
     /**
      * TransactionBuilder helps you construct a new transaction using a literate interface
      *
@@ -92,8 +92,8 @@ class TransactionBuilder
      */
     public function withItemDiscount($discounted)
     {
-        $l = GetMostRecentLine("WithItemDiscount");
-        $l['discounted'] = $discounted;
+        $li = $this->GetMostRecentLineIndex();
+        $this->_model['lines'][$li]['discounted'] = $discounted;
         return $this;
     }
 
@@ -144,9 +144,11 @@ class TransactionBuilder
      */
     public function withLineParameter($name, $value)
     {
-        $l = $this->getMostRecentLine("WithLineParameter");
-        if (empty($l['parameters'])) $l['parameters'] = [];
-        $l[$name] = $value;
+        $li = $this->getMostRecentLineIndex();
+        if (empty($this->_model['lines'][$li]['parameters'])) {
+            $this->_model['lines'][$li]['parameters'] = [];
+        }
+        $this->_model['lines'][$li]['parameters'][$name] = $value;
         return $this;
     }
 
@@ -211,8 +213,8 @@ class TransactionBuilder
      */
     public function withLineAddress($type, $line1, $line2, $line3, $city, $region, $postalCode, $country)
     {
-        $line = $this->getMostRecentLine("WithLineAddress");
-        $line['addresses'][$type] = [
+        $li = $this->getMostRecentLineIndex();
+        $this->_model['lines'][$li]['addresses'][$type] = [
             'line1' => $line1,
             'line2' => $line2,
             'line3' => $line3,
@@ -266,8 +268,8 @@ class TransactionBuilder
             throw new Exception("A valid date is required for a Tax Date Tax Override.");
         }
 
-        $line = $this->getMostRecentLine("WithLineTaxOverride");
-        $line['taxOverride'] = [
+        $li = $this->getMostRecentLineIndex();
+        $this->_model['lines'][$li]['taxOverride'] = [
             'type' => $type,
             'reason' => $reason,
             'taxAmount' => $taxAmount,
@@ -369,16 +371,16 @@ class TransactionBuilder
     /**
      * Checks to see if the current model has a line.
      *
-     * @return  TransactionBuilder
+     * @return  int
      */
-    private function getMostRecentLine($memberName)
+    private function getMostRecentLineIndex()
     {
         $c = count($this->_model['lines']);
         if ($c <= 0) {
-            throw new Exception("No lines have been added. The $memberName method applies to the most recent line.  To use this function, first add a line.");
+            throw new \Exception("No lines have been added. The $memberName method applies to the most recent line.  To use this function, first add a line.");
         }
 
-        return $this->_model['lines'][$c-1];
+        return $c-1;
     }
 
     /**
