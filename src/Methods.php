@@ -381,6 +381,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * The [CertExpress website](https://app.certexpress.com/home) is available for customers to use at any time.
      * Using CertExpress with this API will ensure that your certificates are automatically linked correctly into
      * your company so that they can be used for tax exemptions.
+     * 
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that will record certificates
@@ -411,6 +414,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * The [CertExpress website](https://app.certexpress.com/home) is available for customers to use at any time.
      * Using CertExpress with this API will ensure that your certificates are automatically linked correctly into
      * your company so that they can be used for tax exemptions.
+     * 
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that issued this invitation
@@ -442,6 +448,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * The [CertExpress website](https://app.certexpress.com/home) is available for customers to use at any time.
      * Using CertExpress with this API will ensure that your certificates are automatically linked correctly into
      * your company so that they can be used for tax exemptions.
+     * 
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that issued this invitation
@@ -479,6 +488,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * * A list of exposure zones indicating where the certificate is valid
      * * A link to the customer that is allowed to use this certificate
      * * Your tax transaction must contain the correct customer code
+     * 
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The ID number of the company recording this certificate
@@ -506,6 +518,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * log onto the administrative website for the product you purchased.
      * 
      * Revoked certificates can no longer be used.
+     * 
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that recorded this certificate
@@ -534,6 +549,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * can contain information about a customer's eligibility for exemption from sales or use taxes based on
      * criteria you specify when you store the certificate. To view or manage your certificates directly, please 
      * log onto the administrative website for the product you purchased.
+     * 
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that recorded this certificate
@@ -567,6 +585,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Customers - Retrieves the list of customers linked to the certificate.
      * * PoNumbers - Retrieves all PO numbers tied to the certificate.
      * * Attributes - Retrieves all attributes applied to the certificate.
+     * 
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The ID number of the company that recorded this certificate
@@ -596,6 +617,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * can contain information about a customer's eligibility for exemption from sales or use taxes based on
      * criteria you specify when you store the certificate. To view or manage your certificates directly, please 
      * log onto the administrative website for the product you purchased.
+     * 
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that recorded this certificate
@@ -626,6 +650,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * can contain information about a customer's eligibility for exemption from sales or use taxes based on
      * criteria you specify when you store the certificate. To view or manage your certificates directly, please 
      * log onto the administrative website for the product you purchased.
+     * 
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that recorded this certificate
@@ -655,6 +682,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * can contain information about a customer's eligibility for exemption from sales or use taxes based on
      * criteria you specify when you store the certificate. To view or manage your certificates directly, please 
      * log onto the administrative website for the product you purchased.
+     * 
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that recorded this certificate
@@ -683,6 +713,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * can contain information about a customer's eligibility for exemption from sales or use taxes based on
      * criteria you specify when you store the certificate. To view or manage your certificates directly, please 
      * log onto the administrative website for the product you purchased.
+     * 
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that recorded this certificate
@@ -715,6 +748,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Customers - Retrieves the list of customers linked to the certificate.
      * * PoNumbers - Retrieves all PO numbers tied to the certificate.
      * * Attributes - Retrieves all attributes applied to the certificate.
+     * 
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The ID number of the company to search
@@ -747,6 +783,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * can contain information about a customer's eligibility for exemption from sales or use taxes based on
      * criteria you specify when you store the certificate. To view or manage your certificates directly, please 
      * log onto the administrative website for the product you purchased.
+     * 
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that recorded this certificate
@@ -778,6 +817,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * can contain information about a customer's eligibility for exemption from sales or use taxes based on
      * criteria you specify when you store the certificate. To view or manage your certificates directly, please 
      * log onto the administrative website for the product you purchased.
+     * 
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that recorded this certificate
@@ -804,6 +846,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * can contain information about a customer's eligibility for exemption from sales or use taxes based on
      * criteria you specify when you store the certificate. To view or manage your certificates directly, please 
      * log onto the administrative website for the product you purchased.
+     * 
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The ID number of the company that recorded this certificate
@@ -833,6 +878,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * can contain information about a customer's eligibility for exemption from sales or use taxes based on
      * criteria you specify when you store the certificate. To view or manage your certificates directly, please 
      * log onto the administrative website for the product you purchased.
+     * 
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that recorded this certificate
@@ -998,6 +1046,29 @@ class AvaTaxClient extends AvaTaxClientBase
         $path = "/api/v2/companies/{$companyId}/funding/configuration";
         $guzzleParams = [
             'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Check the funding configuration of a company
+     *
+     * This API is available by invitation only.
+     * Requires a subscription to Avalara Managed Returns or SST Certified Service Provider.
+     * Returns the funding configuration of the requested company.
+     * .
+     *
+     * 
+     * @param int $companyId The unique identifier of the company
+     * @param string $currency The currency of the funding. USD and CAD are the only valid currencies
+     * @return FundingConfigurationModel[]
+     */
+    public function fundingConfigurationsByCompanyAndCurrency($companyId, $currency)
+    {
+        $path = "/api/v2/companies/{$companyId}/funding/configurations";
+        $guzzleParams = [
+            'query' => ['currency' => $currency],
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
@@ -1381,6 +1452,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * record in your `CreateTransaction` API call. AvaTax will search for this `customerCode` value and
      * identify any certificates linked to this `customer` object. If any certificate applies to the transaction,
      * AvaTax will record the appropriate elements of the transaction as exempt and link it to the `certificate`.
+     * 
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
@@ -1407,6 +1481,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * record in your `CreateTransaction` API call. AvaTax will search for this `customerCode` value and
      * identify any certificates linked to this `customer` object. If any certificate applies to the transaction,
      * AvaTax will record the appropriate elements of the transaction as exempt and link it to the `certificate`.
+     * 
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
@@ -1437,6 +1514,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * You can use the `$include` parameter to fetch the following additional objects for expansion:
      * 
      * * Certificates - Fetch a list of certificates linked to this customer.
+     * 
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
@@ -1464,6 +1544,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * record in your `CreateTransaction` API call. AvaTax will search for this `customerCode` value and
      * identify any certificates linked to this `customer` object. If any certificate applies to the transaction,
      * AvaTax will record the appropriate elements of the transaction as exempt and link it to the `certificate`.
+     * 
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
@@ -1491,6 +1574,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * record in your `CreateTransaction` API call. AvaTax will search for this `customerCode` value and
      * identify any certificates linked to this `customer` object. If any certificate applies to the transaction,
      * AvaTax will record the appropriate elements of the transaction as exempt and link it to the `certificate`.
+     * 
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
@@ -1525,6 +1611,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * If a customer does not have a certificate on file and they wish to provide one, you should send the customer
      * a CertExpress invitation link so that the customer can upload proof of their exemption certificate. Please
      * see the `CreateCertExpressInvitation` API to create an invitation link for this customer.
+     * 
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
@@ -1557,6 +1646,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * You can use the `$include` parameter to fetch the following additional objects for expansion:
      * 
      * * Certificates - Fetch a list of certificates linked to this customer.
+     * 
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
@@ -1587,6 +1679,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * record in your `CreateTransaction` API call. AvaTax will search for this `customerCode` value and
      * identify any certificates linked to this `customer` object. If any certificate applies to the transaction,
      * AvaTax will record the appropriate elements of the transaction as exempt and link it to the `certificate`.
+     * 
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
@@ -1614,6 +1709,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * record in your `CreateTransaction` API call. AvaTax will search for this `customerCode` value and
      * identify any certificates linked to this `customer` object. If any certificate applies to the transaction,
      * AvaTax will record the appropriate elements of the transaction as exempt and link it to the `certificate`.
+     * 
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
@@ -1629,6 +1727,35 @@ class AvaTaxClient extends AvaTaxClientBase
             'body' => json_encode($model)
         ];
         return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Lists all parents of an HS Code.
+     *
+     * Retrieves the specified HS code and all of its parents, reflecting all sections, chapters, headings, and subheadings
+     * 
+     * a list of HS Codes that are the parents and information branches of the HS Code for the given 
+     * destination country, if lower detail is available. 
+     * 
+     * This API will include information branches if applicable. These do not have HS Codes and cannot be referenced,
+     * but can contain information relevant to deciding the correct HS Code. 
+     * 
+     * This API is intended to be useful to review the descriptive hierarchy of an HS Code, which can be particularly helpful
+     * when HS Codes can have multiple levels of generic descriptions.
+     *
+     * 
+     * @param string $country The name or code of the destination country.
+     * @param string $hsCode The partial or full HS Code for which you would like to view all of the parents.
+     * @return FetchResult
+     */
+    public function getCrossBorderCode($country, $hsCode)
+    {
+        $path = "/api/v2/definitions/crossborder/{$country}/{$hsCode}/hierarchy";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
     }
 
     /**
@@ -1658,6 +1785,10 @@ class AvaTaxClient extends AvaTaxClientBase
     /**
      * Retrieve the full list of the AvaFile Forms available
      *
+     * This API is deprecated. 
+     * 
+     * Please use the ListTaxForms API.
+     * 
      * Returns the full list of Avalara-supported AvaFile Forms
      * This API is intended to be useful to identify all the different AvaFile Forms
      *
@@ -1685,6 +1816,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * A certificate may have multiple attributes that control its behavior. You may apply or remove attributes to a
      * certificate at any time.
+     * 
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
@@ -1710,6 +1844,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * An exemption reason defines why a certificate allows a customer to be exempt
      * for purposes of tax calculation.
+     * 
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
@@ -1735,6 +1872,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * An exposure zone is a location where a certificate can be valid. Exposure zones may indicate a taxing
      * authority or other legal entity to which a certificate may apply.
+     * 
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
@@ -1855,6 +1995,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * The CoverLetter model represents a message sent along with an invitation to use CertExpress to
      * upload certificates. An invitation allows customers to use CertExpress to upload their exemption 
      * certificates directly; this cover letter explains why the invitation was sent.
+     * 
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
@@ -1868,6 +2011,56 @@ class AvaTaxClient extends AvaTaxClientBase
         $path = "/api/v2/definitions/coverletters";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Lists the next level of HS Codes given a destination country and HS Code prefix.
+     *
+     * Retrieves a list of HS Codes that are the children of the prefix for the given destination country, if 
+     * additional children are available. 
+     * 
+     * HS Code is interchangeable with "tariff code" and definitions are generally unique to a destination country.
+     * An HS Code describes an item and its eligibility/rate for tariffs. HS Codes are organized by 
+     * Section/Chapter/Heading/Subheading/Classification.
+     * 
+     * This API is intended to be useful to identify the correct HS Code to use for your item.
+     *
+     * 
+     * @param string $country The name or code of the destination country.
+     * @param string $hsCode The Section or partial HS Code for which you would like to view the next level of HS Code detail, if more detail is available.
+     * @return FetchResult
+     */
+    public function listCrossBorderCodes($country, $hsCode)
+    {
+        $path = "/api/v2/definitions/crossborder/{$country}/{$hsCode}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * List top level HS Code Sections.
+     *
+     * Returns the full list of top level HS Code Sections. Sections are the broadest level of detail for 
+     * classifying tariff codes and the items to which they apply. HS Codes are organized 
+     * by Section/Chapter/Heading/Subheading/Classification.
+     * 
+     * This API is intended to be useful to identify the top level Sections for 
+     * further LandedCost HS Code lookups.
+     *
+     * 
+     * @return FetchResult
+     */
+    public function listCrossBorderSections()
+    {
+        $path = "/api/v2/definitions/crossborder/sections";
+        $guzzleParams = [
+            'query' => [],
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
@@ -2461,6 +2654,28 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Retrieve the full list of Avalara-supported postal codes.
+     *
+     * Retrieves the list of Avalara-supported postal codes.
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listPostalCodes($filter, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/definitions/postalcodes";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * Retrieve the full list of rate types for each country
      *
      * Returns the full list of Avalara-supported rate type file types
@@ -2727,6 +2942,29 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Retrieve the full list of the Tax Forms available
+     *
+     * Returns the full list of Avalara-supported Tax Forms
+     * This API is intended to be useful to identify all the different Tax Forms
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listTaxForms($filter, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/definitions/taxforms";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * Retrieve the full list of tax sub types
      *
      * Returns the full list of Avalara-supported tax sub-types
@@ -2770,6 +3008,188 @@ class AvaTaxClient extends AvaTaxClientBase
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * List all defined units of measurement
+     *
+     * List all units of measurement systems defined by Avalara.
+     * 
+     * A unit of measurement system is a method of measuring a quantity, such as distance, mass, or others.
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listUnitOfMeasurement($filter, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/definitions/unitofmeasurements";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Create one or more DistanceThreshold objects
+     *
+     * Create one or more DistanceThreshold objects for this company.
+     * 
+     * A company-distance-threshold model indicates the distance between a company
+     * and the taxing borders of various countries. Distance thresholds are necessary
+     * to correctly calculate some value-added taxes.
+     *
+     * 
+     * @param int $companyId The unique ID number of the company that owns this DistanceThreshold
+     * @param CompanyDistanceThresholdModel[] $model The DistanceThreshold object or objects you wish to create.
+     * @return CompanyDistanceThresholdModel[]
+     */
+    public function createDistanceThreshold($companyId, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/distancethresholds";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Delete a single DistanceThreshold object
+     *
+     * Marks the DistanceThreshold object identified by this URL as deleted.
+     * 
+     * A company-distance-threshold model indicates the distance between a company
+     * and the taxing borders of various countries. Distance thresholds are necessary
+     * to correctly calculate some value-added taxes.
+     *
+     * 
+     * @param int $companyId The unique ID number of the company that owns this DistanceThreshold
+     * @param int $id The unique ID number of the DistanceThreshold object you wish to delete.
+     * @return ErrorDetail[]
+     */
+    public function deleteDistanceThreshold($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/distancethresholds/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single DistanceThreshold
+     *
+     * Retrieves a single DistanceThreshold object defined by this URL.
+     * 
+     * A company-distance-threshold model indicates the distance between a company
+     * and the taxing borders of various countries. Distance thresholds are necessary
+     * to correctly calculate some value-added taxes.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this DistanceThreshold object
+     * @param int $id The unique ID number referring to this DistanceThreshold object
+     * @return CompanyDistanceThresholdModel
+     */
+    public function getDistanceThreshold($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/distancethresholds/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all DistanceThresholds for this company.
+     *
+     * Lists all DistanceThreshold objects that belong to this company.
+     * 
+     * A company-distance-threshold model indicates the distance between a company
+     * and the taxing borders of various countries. Distance thresholds are necessary
+     * to correctly calculate some value-added taxes.
+     *
+     * 
+     * @param int $companyId The ID of the company whose DistanceThreshold objects you wish to list.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param string $include A comma separated list of additional data to retrieve.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listDistanceThresholds($companyId, $filter, $include, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/companies/{$companyId}/distancethresholds";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all DistanceThreshold objects
+     *
+     * Lists all DistanceThreshold objects that belong to this company.
+     * 
+     * A company-distance-threshold model indicates the distance between a company
+     * and the taxing borders of various countries. Distance thresholds are necessary
+     * to correctly calculate some value-added taxes.
+     * 
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param string $include A comma separated list of additional data to retrieve.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function queryDistanceThresholds($filter, $include, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/distancethresholds";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Update a DistanceThreshold object
+     *
+     * Replace the existing DistanceThreshold object at this URL with an updated object.
+     * 
+     * A company-distance-threshold model indicates the distance between a company
+     * and the taxing borders of various countries. Distance thresholds are necessary
+     * to correctly calculate some value-added taxes.
+     *  
+     * All data from the existing object will be replaced with data in the object you PUT. 
+     * To set a field's value to null, you may either set its value to null or omit that field from the object you post.
+     *
+     * 
+     * @param int $companyId The unique ID number of the company that owns this DistanceThreshold object.
+     * @param int $id The unique ID number of the DistanceThreshold object to replace.
+     * @param CompanyDistanceThresholdModel $model The new DistanceThreshold object to store.
+     * @return CompanyDistanceThresholdModel
+     */
+    public function updateDistanceThreshold($companyId, $id, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/distancethresholds/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
     }
 
     /**
@@ -4078,6 +4498,12 @@ class AvaTaxClient extends AvaTaxClientBase
      * Create a new item
      *
      * Creates one or more new item objects attached to this company.
+     * 
+     * Items are a way of separating your tax calculation process from your tax configuration details. If you choose, you
+     * can provide `itemCode` values for each `CreateTransaction()` API call rather than specifying tax codes, parameters, descriptions,
+     * and other data fields. AvaTax will automatically look up each `itemCode` and apply the correct tax codes and parameters
+     * from the item table instead. This allows your CreateTransaction call to be as simple as possible, and your tax compliance
+     * team can manage your item catalog and adjust the tax behavior of items without having to modify your software.
      *
      * 
      * @param int $companyId The ID of the company that owns this item.
@@ -4098,6 +4524,12 @@ class AvaTaxClient extends AvaTaxClientBase
      * Delete a single item
      *
      * Marks the item object at this URL as deleted.
+     * 
+     * Items are a way of separating your tax calculation process from your tax configuration details. If you choose, you
+     * can provide `itemCode` values for each `CreateTransaction()` API call rather than specifying tax codes, parameters, descriptions,
+     * and other data fields. AvaTax will automatically look up each `itemCode` and apply the correct tax codes and parameters
+     * from the item table instead. This allows your CreateTransaction call to be as simple as possible, and your tax compliance
+     * team can manage your item catalog and adjust the tax behavior of items without having to modify your software.
      *
      * 
      * @param int $companyId The ID of the company that owns this item.
@@ -4118,7 +4550,12 @@ class AvaTaxClient extends AvaTaxClientBase
      * Retrieve a single item
      *
      * Get the item object identified by this URL.
-     * An 'Item' represents a product or service that your company offers for sale.
+     * 
+     * Items are a way of separating your tax calculation process from your tax configuration details. If you choose, you
+     * can provide `itemCode` values for each `CreateTransaction()` API call rather than specifying tax codes, parameters, descriptions,
+     * and other data fields. AvaTax will automatically look up each `itemCode` and apply the correct tax codes and parameters
+     * from the item table instead. This allows your CreateTransaction call to be as simple as possible, and your tax compliance
+     * team can manage your item catalog and adjust the tax behavior of items without having to modify your software.
      *
      * 
      * @param int $companyId The ID of the company that owns this item object
@@ -4140,10 +4577,18 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * List all items defined for the current company.
      * 
-     * An 'Item' represents a product or service that your company offers for sale.
+     * Items are a way of separating your tax calculation process from your tax configuration details. If you choose, you
+     * can provide `itemCode` values for each `CreateTransaction()` API call rather than specifying tax codes, parameters, descriptions,
+     * and other data fields. AvaTax will automatically look up each `itemCode` and apply the correct tax codes and parameters
+     * from the item table instead. This allows your CreateTransaction call to be as simple as possible, and your tax compliance
+     * team can manage your item catalog and adjust the tax behavior of items without having to modify your software.
      * 
      * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
      * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     * 
+     * You may specify one or more of the following values in the `$include` parameter to fetch additional nested data, using commas to separate multiple values:
+     *  
+     * * Attributes
      *
      * 
      * @param int $companyId The ID of the company that defined these items
@@ -4168,10 +4613,19 @@ class AvaTaxClient extends AvaTaxClientBase
      * Retrieve all items
      *
      * Get multiple item objects across all companies.
-     * An 'Item' represents a product or service that your company offers for sale.
+     * 
+     * Items are a way of separating your tax calculation process from your tax configuration details. If you choose, you
+     * can provide `itemCode` values for each `CreateTransaction()` API call rather than specifying tax codes, parameters, descriptions,
+     * and other data fields. AvaTax will automatically look up each `itemCode` and apply the correct tax codes and parameters
+     * from the item table instead. This allows your CreateTransaction call to be as simple as possible, and your tax compliance
+     * team can manage your item catalog and adjust the tax behavior of items without having to modify your software.
      * 
      * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
      * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     * 
+     * You may specify one or more of the following values in the `$include` parameter to fetch additional nested data, using commas to separate multiple values:
+     *  
+     * * Attributes
      *
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
@@ -4194,7 +4648,14 @@ class AvaTaxClient extends AvaTaxClientBase
     /**
      * Update a single item
      *
-     * Replace the existing item object at this URL with an updated object.
+     * Replace the existing `Item` object at this URL with an updated object.
+     * 
+     * Items are a way of separating your tax calculation process from your tax configuration details. If you choose, you
+     * can provide `itemCode` values for each `CreateTransaction()` API call rather than specifying tax codes, parameters, descriptions,
+     * and other data fields. AvaTax will automatically look up each `itemCode` and apply the correct tax codes and parameters
+     * from the item table instead. This allows your CreateTransaction call to be as simple as possible, and your tax compliance
+     * team can manage your item catalog and adjust the tax behavior of items without having to modify your software.
+     * 
      * All data from the existing object will be replaced with data in the object you PUT. 
      * To set a field's value to null, you may either set its value to null or omit that field from the object you post.
      *
@@ -6807,14 +7268,15 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param string $companyCode The company code of the company that recorded this transaction
      * @param string $transactionCode The transaction code to change
+     * @param string $documentType (Optional): The document type of the transaction to change document code. If not provided, the default is SalesInvoice. (See DocumentType::* for a list of allowable values)
      * @param ChangeTransactionCodeModel $model The code change request you wish to execute
      * @return TransactionModel
      */
-    public function changeTransactionCode($companyCode, $transactionCode, $model)
+    public function changeTransactionCode($companyCode, $transactionCode, $documentType, $model)
     {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/changecode";
         $guzzleParams = [
-            'query' => [],
+            'query' => ['documentType' => $documentType],
             'body' => json_encode($model)
         ];
         return $this->restCall($path, 'POST', $guzzleParams);
@@ -6832,14 +7294,15 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param string $companyCode The company code of the company that recorded this transaction
      * @param string $transactionCode The transaction code to commit
+     * @param string $documentType (Optional): The document type of the transaction to commit. If not provided, the default is SalesInvoice. (See DocumentType::* for a list of allowable values)
      * @param CommitTransactionModel $model The commit request you wish to execute
      * @return TransactionModel
      */
-    public function commitTransaction($companyCode, $transactionCode, $model)
+    public function commitTransaction($companyCode, $transactionCode, $documentType, $model)
     {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/commit";
         $guzzleParams = [
-            'query' => [],
+            'query' => ['documentType' => $documentType],
             'body' => json_encode($model)
         ];
         return $this->restCall($path, 'POST', $guzzleParams);
@@ -7143,14 +7606,15 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param string $companyCode The company code of the company that recorded this transaction
      * @param string $transactionCode The transaction code to lock
+     * @param string $documentType (Optional): The document type of the transaction to lock. If not provided, the default is SalesInvoice. (See DocumentType::* for a list of allowable values)
      * @param LockTransactionModel $model The lock request you wish to execute
      * @return TransactionModel
      */
-    public function lockTransaction($companyCode, $transactionCode, $model)
+    public function lockTransaction($companyCode, $transactionCode, $documentType, $model)
     {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/lock";
         $guzzleParams = [
-            'query' => [],
+            'query' => ['documentType' => $documentType],
             'body' => json_encode($model)
         ];
         return $this->restCall($path, 'POST', $guzzleParams);
@@ -7195,14 +7659,15 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $companyCode The code of the company that made the original sale
      * @param string $transactionCode The transaction code of the original sale
      * @param string $include Specifies objects to include in the response after transaction is created
+     * @param string $documentType (Optional): The document type of the transaction to refund. If not provided, the default is SalesInvoice. (See DocumentType::* for a list of allowable values)
      * @param RefundTransactionModel $model Information about the refund to create
      * @return TransactionModel
      */
-    public function refundTransaction($companyCode, $transactionCode, $include, $model)
+    public function refundTransaction($companyCode, $transactionCode, $include, $documentType, $model)
     {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/refund";
         $guzzleParams = [
-            'query' => ['$include' => $include],
+            'query' => ['$include' => $include, 'documentType' => $documentType],
             'body' => json_encode($model)
         ];
         return $this->restCall($path, 'POST', $guzzleParams);
@@ -7211,19 +7676,27 @@ class AvaTaxClient extends AvaTaxClientBase
     /**
      * Perform multiple actions on a transaction
      *
-     * Performs the same functions as /verify, /changecode, and /commit. You may specify one or many actions in each call to this endpoint.
+     * Performs one or more actions against the current transaction uniquely identified by this URL.
+     * 
+     * The `SettleTransaction` API call can perform the work of `ChangeCode`, `VerifyTransaction`, and `CommitTransaction`.
+     * 
+     * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
+     * sales, purchases, inventory transfer, and returns (also called refunds).
+     * 
+     * This API is available for users who want to execute more than one action at a time.
      *
      * 
      * @param string $companyCode The company code of the company that recorded this transaction
      * @param string $transactionCode The transaction code to settle
-     * @param SettleTransactionModel $model The settle request containing the actions you wish to execute
+     * @param string $documentType (Optional): The document type of the transaction to settle. If not provided, the default is SalesInvoice. (See DocumentType::* for a list of allowable values)
+     * @param SettleTransactionModel $model The data from an external system to reconcile against AvaTax
      * @return TransactionModel
      */
-    public function settleTransaction($companyCode, $transactionCode, $model)
+    public function settleTransaction($companyCode, $transactionCode, $documentType, $model)
     {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/settle";
         $guzzleParams = [
-            'query' => [],
+            'query' => ['documentType' => $documentType],
             'body' => json_encode($model)
         ];
         return $this->restCall($path, 'POST', $guzzleParams);
@@ -7233,21 +7706,24 @@ class AvaTaxClient extends AvaTaxClientBase
      * Verify a transaction
      *
      * Verifies that the transaction uniquely identified by this URL matches certain expected values.
+     * 
      * If the transaction does not match these expected values, this API will return an error code indicating which value did not match.
+     * 
      * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
      * sales, purchases, inventory transfer, and returns (also called refunds).
      *
      * 
      * @param string $companyCode The company code of the company that recorded this transaction
      * @param string $transactionCode The transaction code to settle
-     * @param VerifyTransactionModel $model The settle request you wish to execute
+     * @param string $documentType (Optional): The document type of the transaction to verify. If not provided, the default is SalesInvoice. (See DocumentType::* for a list of allowable values)
+     * @param VerifyTransactionModel $model The data from an external system to reconcile against AvaTax
      * @return TransactionModel
      */
-    public function verifyTransaction($companyCode, $transactionCode, $model)
+    public function verifyTransaction($companyCode, $transactionCode, $documentType, $model)
     {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/verify";
         $guzzleParams = [
-            'query' => [],
+            'query' => ['documentType' => $documentType],
             'body' => json_encode($model)
         ];
         return $this->restCall($path, 'POST', $guzzleParams);
@@ -7265,14 +7741,15 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param string $companyCode The company code of the company that recorded this transaction
      * @param string $transactionCode The transaction code to void
+     * @param string $documentType (Optional): The document type of the transaction to void. If not provided, the default is SalesInvoice. (See DocumentType::* for a list of allowable values)
      * @param VoidTransactionModel $model The void request you wish to execute
      * @return TransactionModel
      */
-    public function voidTransaction($companyCode, $transactionCode, $model)
+    public function voidTransaction($companyCode, $transactionCode, $documentType, $model)
     {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/void";
         $guzzleParams = [
-            'query' => [],
+            'query' => ['documentType' => $documentType],
             'body' => json_encode($model)
         ];
         return $this->restCall($path, 'POST', $guzzleParams);
