@@ -382,8 +382,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * Using CertExpress with this API will ensure that your certificates are automatically linked correctly into
      * your company so that they can be used for tax exemptions.
      * 
-     * Please note that if this is your first call to CertCapture endpoints, you may experience upto 3 minute delay because your
-     * account needs to be provisioned at CertCapture side. Sorry for the inconvenience and thanks for your patience.
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that will record certificates
@@ -415,8 +415,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * Using CertExpress with this API will ensure that your certificates are automatically linked correctly into
      * your company so that they can be used for tax exemptions.
      * 
-     * Please note that if this is your first call to CertCapture endpoints, you may experience upto 3 minute delay because your
-     * account needs to be provisioned at CertCapture side. Sorry for the inconvenience and thanks for your patience.
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that issued this invitation
@@ -449,8 +449,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * Using CertExpress with this API will ensure that your certificates are automatically linked correctly into
      * your company so that they can be used for tax exemptions.
      * 
-     * Please note that if this is your first call to CertCapture endpoints, you may experience upto 3 minute delay because your
-     * account needs to be provisioned at CertCapture side. Sorry for the inconvenience and thanks for your patience.
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that issued this invitation
@@ -489,8 +489,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * * A link to the customer that is allowed to use this certificate
      * * Your tax transaction must contain the correct customer code
      * 
-     * Please note that if this is your first call to CertCapture endpoints, you may experience upto 3 minute delay because your
-     * account needs to be provisioned at CertCapture side. Sorry for the inconvenience and thanks for your patience.
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The ID number of the company recording this certificate
@@ -519,8 +519,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * Revoked certificates can no longer be used.
      * 
-     * Please note that if this is your first call to CertCapture endpoints, you may experience upto 3 minute delay because your
-     * account needs to be provisioned at CertCapture side. Sorry for the inconvenience and thanks for your patience.
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that recorded this certificate
@@ -550,8 +550,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * criteria you specify when you store the certificate. To view or manage your certificates directly, please 
      * log onto the administrative website for the product you purchased.
      * 
-     * Please note that if this is your first call to CertCapture endpoints, you may experience upto 3 minute delay because your
-     * account needs to be provisioned at CertCapture side. Sorry for the inconvenience and thanks for your patience.
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that recorded this certificate
@@ -586,8 +586,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * * PoNumbers - Retrieves all PO numbers tied to the certificate.
      * * Attributes - Retrieves all attributes applied to the certificate.
      * 
-     * Please note that if this is your first call to CertCapture endpoints, you may experience upto 3 minute delay because your
-     * account needs to be provisioned at CertCapture side. Sorry for the inconvenience and thanks for your patience.
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The ID number of the company that recorded this certificate
@@ -618,8 +618,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * criteria you specify when you store the certificate. To view or manage your certificates directly, please 
      * log onto the administrative website for the product you purchased.
      * 
-     * Please note that if this is your first call to CertCapture endpoints, you may experience upto 3 minute delay because your
-     * account needs to be provisioned at CertCapture side. Sorry for the inconvenience and thanks for your patience.
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that recorded this certificate
@@ -651,8 +651,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * criteria you specify when you store the certificate. To view or manage your certificates directly, please 
      * log onto the administrative website for the product you purchased.
      * 
-     * Please note that if this is your first call to CertCapture endpoints, you may experience upto 3 minute delay because your
-     * account needs to be provisioned at CertCapture side. Sorry for the inconvenience and thanks for your patience.
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that recorded this certificate
@@ -683,8 +683,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * criteria you specify when you store the certificate. To view or manage your certificates directly, please 
      * log onto the administrative website for the product you purchased.
      * 
-     * Please note that if this is your first call to CertCapture endpoints, you may experience upto 3 minute delay because your
-     * account needs to be provisioned at CertCapture side. Sorry for the inconvenience and thanks for your patience.
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that recorded this certificate
@@ -714,8 +714,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * criteria you specify when you store the certificate. To view or manage your certificates directly, please 
      * log onto the administrative website for the product you purchased.
      * 
-     * Please note that if this is your first call to CertCapture endpoints, you may experience upto 3 minute delay because your
-     * account needs to be provisioned at CertCapture side. Sorry for the inconvenience and thanks for your patience.
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that recorded this certificate
@@ -749,8 +749,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * * PoNumbers - Retrieves all PO numbers tied to the certificate.
      * * Attributes - Retrieves all attributes applied to the certificate.
      * 
-     * Please note that if this is your first call to CertCapture endpoints, you may experience upto 3 minute delay because your
-     * account needs to be provisioned at CertCapture side. Sorry for the inconvenience and thanks for your patience.
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The ID number of the company to search
@@ -784,8 +784,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * criteria you specify when you store the certificate. To view or manage your certificates directly, please 
      * log onto the administrative website for the product you purchased.
      * 
-     * Please note that if this is your first call to CertCapture endpoints, you may experience upto 3 minute delay because your
-     * account needs to be provisioned at CertCapture side. Sorry for the inconvenience and thanks for your patience.
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that recorded this certificate
@@ -818,8 +818,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * criteria you specify when you store the certificate. To view or manage your certificates directly, please 
      * log onto the administrative website for the product you purchased.
      * 
-     * Please note that if this is your first call to CertCapture endpoints, you may experience upto 3 minute delay because your
-     * account needs to be provisioned at CertCapture side. Sorry for the inconvenience and thanks for your patience.
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that recorded this certificate
@@ -847,8 +847,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * criteria you specify when you store the certificate. To view or manage your certificates directly, please 
      * log onto the administrative website for the product you purchased.
      * 
-     * Please note that if this is your first call to CertCapture endpoints, you may experience upto 3 minute delay because your
-     * account needs to be provisioned at CertCapture side. Sorry for the inconvenience and thanks for your patience.
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The ID number of the company that recorded this certificate
@@ -879,8 +879,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * criteria you specify when you store the certificate. To view or manage your certificates directly, please 
      * log onto the administrative website for the product you purchased.
      * 
-     * Please note that if this is your first call to CertCapture endpoints, you may experience upto 3 minute delay because your
-     * account needs to be provisioned at CertCapture side. Sorry for the inconvenience and thanks for your patience.
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that recorded this certificate
@@ -1453,8 +1453,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * identify any certificates linked to this `customer` object. If any certificate applies to the transaction,
      * AvaTax will record the appropriate elements of the transaction as exempt and link it to the `certificate`.
      * 
-     * Please note that if this is your first call to the CertCapture endpoints, you may experience upto 3 minute delay because your
-     * account needs to be provisioned at CertCapture side. Sorry for the inconvenience and thanks for your patience.
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
@@ -1482,8 +1482,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * identify any certificates linked to this `customer` object. If any certificate applies to the transaction,
      * AvaTax will record the appropriate elements of the transaction as exempt and link it to the `certificate`.
      * 
-     * Please note that if this is your first call to CertCapture endpoints, you may experience upto 3 minute delay because your
-     * account needs to be provisioned at CertCapture side. Sorry for the inconvenience and thanks for your patience.
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
@@ -1515,8 +1515,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * Certificates - Fetch a list of certificates linked to this customer.
      * 
-     * Please note that if this is your first call to CertCapture endpoints, you may experience upto 3 minute delay because your
-     * account needs to be provisioned at CertCapture side. Sorry for the inconvenience and thanks for your patience.
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
@@ -1545,8 +1545,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * identify any certificates linked to this `customer` object. If any certificate applies to the transaction,
      * AvaTax will record the appropriate elements of the transaction as exempt and link it to the `certificate`.
      * 
-     * Please note that if this is your first call to CertCapture endpoints, you may experience upto 3 minute delay because your
-     * account needs to be provisioned at CertCapture side. Sorry for the inconvenience and thanks for your patience.
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
@@ -1575,8 +1575,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * identify any certificates linked to this `customer` object. If any certificate applies to the transaction,
      * AvaTax will record the appropriate elements of the transaction as exempt and link it to the `certificate`.
      * 
-     * Please note that if this is your first call to CertCapture endpoints, you may experience upto 3 minute delay because your
-     * account needs to be provisioned at CertCapture side. Sorry for the inconvenience and thanks for your patience.
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
@@ -1612,8 +1612,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * a CertExpress invitation link so that the customer can upload proof of their exemption certificate. Please
      * see the `CreateCertExpressInvitation` API to create an invitation link for this customer.
      * 
-     * Please note that if this is your first call to CertCapture endpoints, you may experience upto 3 minute delay because your
-     * account needs to be provisioned at CertCapture side. Sorry for the inconvenience and thanks for your patience.
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
@@ -1647,8 +1647,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * Certificates - Fetch a list of certificates linked to this customer.
      * 
-     * Please note that if this is your first call to CertCapture endpoints, you may experience upto 3 minute delay because your
-     * account needs to be provisioned at CertCapture side. Sorry for the inconvenience and thanks for your patience.
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
@@ -1680,8 +1680,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * identify any certificates linked to this `customer` object. If any certificate applies to the transaction,
      * AvaTax will record the appropriate elements of the transaction as exempt and link it to the `certificate`.
      * 
-     * Please note that if this is your first call to CertCapture endpoints, you may experience upto 3 minute delay because your
-     * account needs to be provisioned at CertCapture side. Sorry for the inconvenience and thanks for your patience.
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
@@ -1710,8 +1710,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * identify any certificates linked to this `customer` object. If any certificate applies to the transaction,
      * AvaTax will record the appropriate elements of the transaction as exempt and link it to the `certificate`.
      * 
-     * Please note that if this is your first call to CertCapture endpoints, you may experience upto 3 minute delay because your
-     * account needs to be provisioned at CertCapture side. Sorry for the inconvenience and thanks for your patience.
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
@@ -1817,8 +1817,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * A certificate may have multiple attributes that control its behavior. You may apply or remove attributes to a
      * certificate at any time.
      * 
-     * Please note that if this is your first call to CertCapture endpoints, you may experience upto 3 minute delay because your
-     * account needs to be provisioned at CertCapture side. Sorry for the inconvenience and thanks for your patience.
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
@@ -1845,8 +1845,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * An exemption reason defines why a certificate allows a customer to be exempt
      * for purposes of tax calculation.
      * 
-     * Please note that if this is your first call to CertCapture endpoints, you may experience upto 3 minute delay because your
-     * account needs to be provisioned at CertCapture side. Sorry for the inconvenience and thanks for your patience.
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
@@ -1873,8 +1873,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * An exposure zone is a location where a certificate can be valid. Exposure zones may indicate a taxing
      * authority or other legal entity to which a certificate may apply.
      * 
-     * Please note that if this is your first call to CertCapture endpoints, you may experience upto 3 minute delay because your
-     * account needs to be provisioned at CertCapture side. Sorry for the inconvenience and thanks for your patience.
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
@@ -1996,8 +1996,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * upload certificates. An invitation allows customers to use CertExpress to upload their exemption 
      * certificates directly; this cover letter explains why the invitation was sent.
      * 
-     * Please note that if this is your first call to CertCapture endpoints, you may experience upto 3 minute delay because your
-     * account needs to be provisioned at CertCapture side. Sorry for the inconvenience and thanks for your patience.
+     * You may experience up to a three minute delay on your very first call to the exemption related endpoints 
+     * (as your account gets provisioned). Thank you for your patience.
      *
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
