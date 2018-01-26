@@ -7262,6 +7262,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * After this API call succeeds, the transaction will have a new URL matching its new `code`.
      * 
+     * If you have more than one document with the same `code`, specify the `documentType` parameter to choose between them.
+     * 
      * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
      * sales, purchases, inventory transfer, and returns (also called refunds).
      *
@@ -7285,10 +7287,15 @@ class AvaTaxClient extends AvaTaxClientBase
     /**
      * Commit a transaction for reporting
      *
-     * Marks a transaction by changing its status to 'Committed'.
+     * Marks a transaction by changing its status to `Committed`.
+     * 
      * Transactions that are committed are available to be reported to a tax authority by Avalara Managed Returns.
+     * 
      * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
      * sales, purchases, inventory transfer, and returns (also called refunds).
+     * 
+     * If you have more than one document with the same `code`, specify the `documentType` parameter to choose between them.
+     * 
      * Any changes made to a committed transaction will generate a transaction history.
      *
      * 
@@ -7600,6 +7607,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * This API is only available to customers in Sandbox with AvaTaxPro subscription. On production servers, this API is available by invitation only.
      * 
+     * If you have more than one document with the same `code`, specify the `documentType` parameter to choose between them.
+     * 
      * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
      * sales, purchases, inventory transfer, and returns (also called refunds).
      *
@@ -7683,6 +7692,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
      * sales, purchases, inventory transfer, and returns (also called refunds).
      * 
+     * If you have more than one document with the same `code`, specify the `documentType` parameter to choose between them.
+     * 
      * This API is available for users who want to execute more than one action at a time.
      *
      * 
@@ -7709,6 +7720,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * If the transaction does not match these expected values, this API will return an error code indicating which value did not match.
      * 
+     * If you have more than one document with the same `code`, specify the `documentType` parameter to choose between them.
+     * 
      * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
      * sales, purchases, inventory transfer, and returns (also called refunds).
      *
@@ -7733,9 +7746,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * Void a transaction
      *
      * Voids the current transaction uniquely identified by this URL.
+     * 
      * A transaction represents a unique potentially taxable action that your company has recorded, and transactions include actions like
      * sales, purchases, inventory transfer, and returns (also called refunds).
-     * When you void a transaction, that transaction's status is recorded as 'DocVoided'.
+     * 
+     * When you void a transaction, that transaction's status is recorded as `DocVoided`.
+     * 
+     * If you have more than one document with the same `code`, specify the `documentType` parameter to choose between them.
+     * 
      * Transactions that have been previously reported to a tax authority by Avalara Managed Returns are no longer available to be voided.
      *
      * 
