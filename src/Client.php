@@ -125,13 +125,13 @@ class AvaTaxClientBase
 			'Accept' => 'application/json',
 			'X-Avalara-Client' => "{$this->appName}; {$this->appVersion}; PhpRestClient; 17.5.0-67; {$this->machineName}"
 		];
-	} else {
+	 } else {
 		$guzzleParams['headers'] = [
 			'Accept' => 'application/json',
 			'Authorization' => 'Bearer '.$this->auth[0],
 			'X-Avalara-Client' => "{$this->appName}; {$this->appVersion}; PhpRestClient; 17.5.0-67; {$this->machineName}"
 		];
-	}
+	 }
 
         // Contact the server
         try {
