@@ -96,6 +96,18 @@ class AvaTaxClientBase
     }
 
     /**
+     * Configure this client to use bearer token
+     *
+     * @param  string          $bearerToken     The private bearer token for your AvaTax account
+     * @return AvaTaxClient
+     */
+    public function withBearerToken($bearerToken)
+    {
+        $this->auth = [$bearerToken];
+        return $this;
+    }
+	
+    /**
      * Make a single REST call to the AvaTax v2 API server
      *
      * @param string $apiUrl           The relative path of the API on the server
@@ -105,20 +117,27 @@ class AvaTaxClientBase
     protected function restCall($apiUrl, $verb, $guzzleParams)
     {
         // Set authentication on the parameters
-        if (!isset($guzzleParams['auth'])){
-            $guzzleParams['auth'] = $this->auth;
-        }
-        $guzzleParams['headers'] = [
-            'Accept' => 'application/json',
-            'X-Avalara-Client' => "{$this->appName}; {$this->appVersion}; PhpRestClient; 17.5.0-67; {$this->machineName}"
-        ];
+        if(count($this->auth) == 2){
+			if (!isset($guzzleParams['auth'])){
+				$guzzleParams['auth'] = $this->auth;
+			}
+			$guzzleParams['headers'] = [
+				'Accept' => 'application/json',
+				'X-Avalara-Client' => "{$this->appName}; {$this->appVersion}; PhpRestClient; 17.5.0-67; {$this->machineName}"
+			];
+		} else {
+			$guzzleParams['headers'] = [
+				'Accept' => 'application/json',
+				'Authorization' => 'Bearer '.$this->auth[0],
+				'X-Avalara-Client' => "{$this->appName}; {$this->appVersion}; PhpRestClient; 17.5.0-67; {$this->machineName}"
+			];
+		}
 
         // Contact the server
         try {
             $response = $this->client->request($verb, $apiUrl, $guzzleParams);
             $body = $response->getBody();
             return json_decode($body);
-
         } catch (\Exception $e) {
             return $e->getMessage();
         }
