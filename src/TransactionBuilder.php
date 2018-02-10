@@ -92,7 +92,7 @@ class TransactionBuilder
      */
     public function withItemDiscount($discounted)
     {
-        $li = $this->GetMostRecentLineIndex();
+        $li = $this->getMostRecentLineIndex();
         $this->_model['lines'][$li]['discounted'] = $discounted;
         return $this;
     }
