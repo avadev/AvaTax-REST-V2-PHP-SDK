@@ -189,7 +189,7 @@ class TransactionBuilder
      * @param   float               $longitude  The longitude of the geolocation for this transaction
      * @return  TransactionBuilder
      */
-     public function withLatLong($type, $latitude, $longitude)
+    public function withLatLong($type, $latitude, $longitude)
     {
         $this->_model['addresses'][$type] = [
             'latitude' => $latitude,
@@ -413,8 +413,8 @@ class TransactionBuilder
      *
      * @return  TransactionBuilder
      */
-    public function withLineItem($thing) {
-
+    public function withLineItem($thing)
+    {
         $mode = is_array($thing) ? 'multi' : 'single';
 
         if ($mode === 'single') {
