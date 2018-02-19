@@ -34,7 +34,7 @@ class TransactionBuilder
      *
      * @param AvaTaxClient  $client        The AvaTaxClient object to use to create this transaction
      * @param string        $companyCode   The code of the company for this transaction
-     * @param DocumentType  $type          The type of transaction to create (See DocumentType::* for a list of allowable values)
+     * @param string        $type          The type of transaction to create (See DocumentType::* for a list of allowable values)
      * @param string        $customerCode  The customer code for this transaction
      */
     public function __construct($client, $companyCode, $type, $customerCode)
