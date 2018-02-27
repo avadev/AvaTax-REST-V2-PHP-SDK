@@ -728,11 +728,15 @@ class ErrorCodeId
     const C_CRITERIANOTSUPPORTEDERROR = "CriteriaNotSupportedError";
     const C_COMPANYACCOUNTANDPARENTACCOUNTMISMATCH = "CompanyAccountAndParentAccountMismatch";
     const C_INVALIDFILECONTENTTYPE = "InvalidFileContentType";
-    const C_INVALIDITEMATTRIBUTENAME = "InvalidItemAttributeName";
     const C_ECMSDISABLED = "EcmsDisabled";
     const C_UNKNOWNCONJUNCTIONERROR = "UnknownConjunctionError";
     const C_NOLINESDISCOUNTED = "NoLinesDiscounted";
     const C_FAILEDTODELETE = "FailedToDelete";
+    const C_CIRCULARCOMPANYHIERARCHIES = "CircularCompanyHierarchies";
+    const C_DUPLICATEENTRY = "DuplicateEntry";
+    const C_DUPLICATEFIELDNAMEINORDERBY = "DuplicateFieldNameInOrderBy";
+    const C_CANNOTADJUSTDOCUMENTTYPE = "CannotAdjustDocumentType";
+    const C_USERNOACCESS = "UserNoAccess";
 
     /**
      * Batch errors
@@ -815,7 +819,7 @@ class ErrorCodeId
     /**
      * Free API error codes
      */
-    const C_TAXRATENOTAVAILABLEFORFREEINTHISCOUNTRY = "TaxRateNotAvailableForFreeInThisCountry";
+    const C_MUSTUSECREATETRANSACTION = "MustUseCreateTransaction";
 
     /**
      * Filing Calendar Error Codes
@@ -897,11 +901,6 @@ class ErrorCodeId
      * Worksheet Exception
      */
     const C_WORKSHEETEXCEPTION = "WorksheetException";
-
-    /**
-     * LandedCost Exception
-     */
-    const C_MISSINGSYSTEMID = "MissingSystemId";
 
 }
 
@@ -1155,17 +1154,20 @@ class CertificateRequestDeliveryMethod
 {
 
     /**
-     * Emailing the request to recipients
+     * The invitation will be sent via email to the recipient's email address.
      */
     const C_EMAIL = "Email";
 
     /**
-     * Faxing the request to recipients
+     * The invitation will be sent via facsimile to the recipient's facsimile phone number.
+     *  
+     *  Facsimile transmission make take time to process and deliver via phone lines.
      */
     const C_FAX = "Fax";
 
     /**
-     * Downloading the request
+     * The request will be processed and turned into a web link (URL) which the user can click on to visit the CertExpress site and immediately
+     *  begin entering data about their certificates.
      */
     const C_DOWNLOAD = "Download";
 
@@ -1188,6 +1190,37 @@ class CertExpressInvitationStatus
      * Indicates that the CertExpress invitation has been completed and is ready to use.
      */
     const C_READY = "Ready";
+
+}
+
+
+/**
+ * 
+ */
+class CertCaptureProvisionStatus
+{
+
+    /**
+     * Account and company are provisioned
+     */
+    const C_FINISHED = "Finished";
+
+    /**
+     * Account are not provisioned
+     */
+    const C_NOTSTARTED = "NotStarted";
+
+    /**
+     * Provision job is being queued
+     *  This could also be an indication that some companies under an account has been provisioned, while others
+     *  under the same account has not.
+     */
+    const C_INPROGRESS = "InProgress";
+
+    /**
+     * The account is put into provisioned queue.
+     */
+    const C_QUEUED = "Queued";
 
 }
 

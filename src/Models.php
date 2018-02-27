@@ -1065,17 +1065,17 @@ class CreateCertExpressInvitationModel
     public $coverLetterTitle;
 
     /**
-     * @var int[] You may optionally specify a list of exposure zones to request in this CertExpress invitation. If you list   more than one exposure zone, the customer will be prompted to provide an exemption certificate for each one.   If you do not provide a list of exposure zones, the customer will be prompted to select an exposure zone.  For a list of available exposure zones, please call `ListExposureZones`.
+     * @var int[] You may optionally specify a list of exposure zones to request in this CertExpress invitation. If you list   more than one exposure zone, the customer will be prompted to provide an exemption certificate for each one.   If you do not provide a list of exposure zones, the customer will be prompted to select an exposure zone.    For a list of available exposure zones, please call `ListCertificateExposureZones`.
      */
     public $exposureZones;
 
     /**
-     * @var int[] You may optionally specify a list of exemption reasons to pre-populate in this CertExpress invitation.  If you list exemption reasons, the customer will have part of their form already filled in when they visit  the CertExpress website. For a list of available exemption reasons, please call `ListCertificateExemptReasons`.
+     * @var int[] You may optionally specify a list of exemption reasons to pre-populate in this CertExpress invitation.  If you list exemption reasons, the customer will have part of their form already filled in when they visit  the CertExpress website.     For a list of available exemption reasons, please call `ListCertificateExemptReasons`.
      */
     public $exemptReasons;
 
     /**
-     * @var string Specify the type of invitation. CertExpress invitations can be delivered via email, PDF download, or  facsimile. If you specify facsimile, the invitation will be sent via fax to the customer's fax number  on file. (See CertificateRequestDeliveryMethod::* for a list of allowable values)
+     * @var string Specify the type of invitation. CertExpress invitations can be delivered via email, web link, or  facsimile.     * If you specify `Email`, the invitation will be delivered via email. Please ask the customer to ensure that   * If you specify `Fax`, the invitation will be sent via fax to the customer's fax number on file.  * If you specify `Download`, the invitation will be prepared as a web link that you can display to the customer. (See CertificateRequestDeliveryMethod::* for a list of allowable values)
      */
     public $deliveryMethod;
 
@@ -1125,7 +1125,7 @@ class CertExpressInvitationModel
     public $recipient;
 
     /**
-     * @var string The unique code of the customer that received this invitation.
+     * @var string The unique code of the customer that received this invitation.  Note: This field is case sensitive. To have exemption certificates apply, this value should  be the same as the one passed to create a customer.
      */
     public $customerCode;
 
@@ -1150,12 +1150,12 @@ class CertExpressInvitationModel
     public $coverLettersOnly;
 
     /**
-     * @var int[] When an invitation is sent, it contains a list of exposure zones for which the customer is invited to upload  their exemption certificates. This list contains the ID numbers of the exposure zones identified.
+     * @var int[] When an invitation is sent, it contains a list of exposure zones for which the customer is invited to upload  their exemption certificates. This list contains the ID numbers of the exposure zones identified.    For a list of exposure zones, please call `ListCertificateExposureZones`.
      */
     public $exposureZones;
 
     /**
-     * @var int[] The list of exemption reasons identified by this CertExpress invitation.
+     * @var int[] The list of exemption reasons identified by this CertExpress invitation.    For a list of reason codes, please call `ListCertificateExemptReasons`.
      */
     public $exemptReasons;
 
@@ -1175,7 +1175,7 @@ class CertExpressInvitationModel
     public $date;
 
     /**
-     * @var string The web link for this CertExpress invitation. This value is only usable if the status of this invitation is `Ready`.  If this invitation was sent via email, this value will be null.
+     * @var string The web link (URL) that a customer can click on or visit to begin using this CertExpress invitation.     This value is only usable if the status of this invitation is `Ready` and the request was created with type `Download`.
      */
     public $requestLink;
 
@@ -1198,7 +1198,7 @@ class CustomerModel
     public $companyId;
 
     /**
-     * @var string The unique code identifying this customer. Must be unique within your company.    This code should be used in the `customerCode` field of any call that creates or adjusts a transaction  in order to ensure that all exemptions that apply to this customer are correctly considered.
+     * @var string The unique code identifying this customer. Must be unique within your company.    This code should be used in the `customerCode` field of any call that creates or adjusts a transaction  in order to ensure that all exemptions that apply to this customer are correctly considered.    Note: This field is case sensitive.
      */
     public $customerCode;
 
@@ -1595,6 +1595,27 @@ class CertificateAttributeModel
      * @var boolean This value is true if this is a system-defined certificate attribute. System-defined attributes  cannot be modified or deleted on the CertCapture website.
      */
     public $isSystemCode;
+
+}
+
+/**
+ * Contains information about a company's exemption certificate status.
+ * 
+ * This model can be used to determine if your company is able to use the Customers, Certificates, and
+ * CertExpressInvites APIs within AvaTax.
+ */
+class ProvisionStatusModel
+{
+
+    /**
+     * @var string The status of exemption certificate setup for this company.    If this value is `Finished`, this company will then be able to use the Customers, Certificates, and  CertExpressInvites APIs within AvaTax. (See CertCaptureProvisionStatus::* for a list of allowable values)
+     */
+    public $status;
+
+    /**
+     * @var int The accountId of the company represented by this status
+     */
+    public $accountId;
 
 }
 
@@ -2509,7 +2530,7 @@ class TaxRuleModel
     public $country;
 
     /**
-     * @var string Name or ISO 3166 code identifying the region where this rule will apply.    This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions    For a full list of all supported codes and names, please see the Definitions API `ListRegions`.  NOTE: Region is not required for non-US countries because the user may be either creating a Country-level or Region-level rule.
+     * @var string Name or ISO 3166 code identifying the region where this rule will apply.    This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions    For a full list of all supported codes and names, please see the Definitions API `ListRegions`.  NOTE: Region is required for US and not required for non-US countries because the user may be either creating a Country-level or Region-level rule.
      */
     public $region;
 
@@ -3660,6 +3681,71 @@ class EntityUseCodeModel
      * @var string[] A list of countries where this use code is valid
      */
     public $validCountries;
+
+}
+
+/**
+ * A preferred program is a customs and/or duty program that can be used to handle cross-border transactions.
+ * Customers who sign up for a preferred program may obtain better terms for their customs and duty payments.
+ * 
+ * To indicate that your company has signed up for a preferred program, specify the `code` value from this
+ * object as the value for the `AvaTax.LC.PreferredProgram` parameter in your transaction.
+ */
+class PreferredProgramModel
+{
+
+    /**
+     * @var int The unique ID number representing this preferred program.
+     */
+    public $id;
+
+    /**
+     * @var string A code that identifies this preferred program. To select this program, specify this code  value in the `AvaTax.LC.PreferredProgram` parameter.
+     */
+    public $code;
+
+    /**
+     * @var string The ISO 3166 country code for the origin permitted by this program
+     */
+    public $originCountry;
+
+    /**
+     * @var string The ISO 3166 country code for the destination permitted by this program
+     */
+    public $destinationCountry;
+
+    /**
+     * @var string The earliest date for which this preferred program can be used in AvaTax. If `null`, this preferred program  is valid for all dates earlier than `endDate`.
+     */
+    public $effectiveDate;
+
+    /**
+     * @var string The latest date for which this preferred program can be used in AvaTax. If `null`, this preferred program  is valid for all dates later than `effectiveDate`.
+     */
+    public $endDate;
+
+}
+
+/**
+ * Represents an ISO 4217 currency code used for designating the currency of a transaction.
+ */
+class CurrencyModel
+{
+
+    /**
+     * @var string The ISO 4217 currency code for this currency.
+     */
+    public $code;
+
+    /**
+     * @var string A friendly human-readable name representing this currency.
+     */
+    public $description;
+
+    /**
+     * @var int The number of decimal digits to use when formatting a currency value for display.
+     */
+    public $decimalDigits;
 
 }
 
@@ -6440,6 +6526,66 @@ class FilingReturnModel
     public $excludedTaxAmount;
 
     /**
+     * @var float The amount of carry over sales applied to the liability calculation
+     */
+    public $carryOverSalesAmount;
+
+    /**
+     * @var float The amount of carry over non taxable sales applied to the liability calculation
+     */
+    public $carryOverNonTaxableAmount;
+
+    /**
+     * @var float The amount of carry over sales tax applied to the liability calculation
+     */
+    public $carryOverTaxAmount;
+
+    /**
+     * @var float The amount of carry over consumer use tax applied to the liability calculation
+     */
+    public $carryOverConsumerUseTaxAmount;
+
+    /**
+     * @var float The total amount of total tax accrued in the current active period
+     */
+    public $taxAccrualAmount;
+
+    /**
+     * @var float The total amount of sales accrued in the current active period
+     */
+    public $salesAccrualAmount;
+
+    /**
+     * @var float The total amount of nontaxable sales accrued in the current active period
+     */
+    public $nonTaxableAccrualAmount;
+
+    /**
+     * @var float The total amount of sales tax accrued in the current active period
+     */
+    public $salesTaxAccrualAmount;
+
+    /**
+     * @var float The total amount of sellers use tax accrued in the current active period
+     */
+    public $sellersUseTaxAccrualAmount;
+
+    /**
+     * @var float The total amount of consumer use tax accrued in the current active period
+     */
+    public $consumerUseTaxAccrualAmount;
+
+    /**
+     * @var float The total amount of consumer use taxable sales accrued in the current active period
+     */
+    public $consumerUseTaxableAccrualAmount;
+
+    /**
+     * @var float The total amount of consumer use non taxable sales accrued in the current active period
+     */
+    public $consumerUseNonTaxableAccrualAmount;
+
+    /**
      * @var FilingAdjustmentModel[] The Adjustments for this return.
      */
     public $adjustments;
@@ -7373,6 +7519,16 @@ class TransactionLineModel
      */
     public $costInsuranceFreight;
 
+    /**
+     * @var string Indicates the VAT code for this line item.
+     */
+    public $vatCode;
+
+    /**
+     * @var int Indicates the VAT number type for this line item.
+     */
+    public $vatNumberTypeId;
+
 }
 
 /**
@@ -7895,7 +8051,7 @@ class CreateMultiDocumentModel
     public $salespersonCode;
 
     /**
-     * @var string Customer Code - The client application customer reference code.
+     * @var string Customer Code - The client application customer reference code.  Note: This field is case sensitive. To have exemption certificates apply, this value should  be the same as the one passed to create a customer.
      */
     public $customerCode;
 
@@ -9301,7 +9457,7 @@ class CreateTransactionModel
     public $salespersonCode;
 
     /**
-     * @var string Customer Code - The client application customer reference code.
+     * @var string Customer Code - The client application customer reference code.  Note: This field is case sensitive. To have exemption certificates apply, this value should  be the same as the one passed to create a customer.
      */
     public $customerCode;
 
