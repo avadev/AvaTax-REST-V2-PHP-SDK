@@ -224,12 +224,125 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Create a new AvaFileForm
+     *
+     * Create one or more AvaFileForms
+     * A 'AvaFileForm' represents a form supported by our returns team
+     *
+     * 
+     * @param AvaFileFormModel[] $model The AvaFileForm you wish to create.
+     * @return AvaFileFormModel[]
+     */
+    public function createAvaFileForms($model)
+    {
+        $path = "/api/v2/avafileforms";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Delete a single AvaFileForm
+     *
+     * Marks the existing AvaFileForm object at this URL as deleted.
+     *
+     * 
+     * @param int $id The ID of the AvaFileForm you wish to delete.
+     * @return ErrorDetail[]
+     */
+    public function deleteAvaFileForm($id)
+    {
+        $path = "/api/v2/avafileforms/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single AvaFileForm
+     *
+     * Get the AvaFileForm object identified by this URL.
+     *
+     * 
+     * @param string $id The primary key of this AvaFileForm
+     * @return AvaFileFormModel
+     */
+    public function getAvaFileForm($id)
+    {
+        $path = "/api/v2/avafileforms/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all AvaFileForms
+     *
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param string $include A comma separated list of additional data to retrieve.
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function queryAvaFileForms($filter, $include, $top, $skip, $orderBy)
+    {
+        $path = "/api/v2/avafileforms";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Update a AvaFileForm
+     *
+     * All data from the existing object will be replaced with data in the object you PUT. 
+     * To set a field's value to null, you may either set its value to null or omit that field from the object you post.
+     *
+     * 
+     * @param int $id The ID of the AvaFileForm you wish to update
+     * @param AvaFileFormModel $model The AvaFileForm model you wish to update.
+     * @return AvaFileFormModel
+     */
+    public function updateAvaFileForm($id, $model)
+    {
+        $path = "/api/v2/avafileforms/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
      * Create a new batch
      *
      * Create one or more new batch objects attached to this company.
-     * When you create a batch, it is added to the AvaTaxBatch.Batch table and will be processed in the order it was received.
-     * You may fetch a batch to check on its status and retrieve the results of the batch operation.
+     * 
      * Each batch object may have one or more file objects (currently only one file is supported).
+     * 
+     * When a batch is created, it is added to the AvaTax Batch Queue and will be 
+     * processed as quickly as possible in the order it was received. To check the 
+     * status of a batch, fetch the batch and retrieve the results of the batch 
+     * operation.
+     * 
+     * Because the batch system processes with a degree of concurrency, and
+     * because of batch sizes in the queue vary, AvaTax API is unable to accurately 
+     * predict when a batch will complete. If high performance processing is 
+     * required, please use the 
+     * [CreateTransaction API](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Transactions/CreateTransaction/).
      *
      * 
      * @param int $companyId The ID of the company that owns this batch.
@@ -253,7 +366,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * 
      * @param int $companyId The ID of the company that owns this batch.
-     * @param int $id The ID of the batch you wish to delete.
+     * @param int $id The ID of the batch to delete.
      * @return ErrorDetail[]
      */
     public function deleteBatch($companyId, $id)
@@ -290,10 +403,21 @@ class AvaTaxClient extends AvaTaxClientBase
     /**
      * Retrieve a single batch
      *
-     * Get the batch object identified by this URL.
-     * A batch object is a large collection of API calls stored in a compact file.
-     * When you create a batch, it is added to the AvaTax Batch Queue and will be processed in the order it was received.
-     * You may fetch a batch to check on its status and retrieve the results of the batch operation.
+     * Get the batch object identified by this URL. A batch object is a large 
+     * collection of API calls stored in a compact file.
+     * 
+     * Use this endpoint to retrieve the results or check the status of a batch.
+     * 
+     * When a batch is created, it is added to the AvaTax Batch Queue and will be 
+     * processed as quickly as possible in the order it was received. To check the 
+     * status of a batch, fetch the batch and retrieve the results of the batch 
+     * operation.
+     * 
+     * Because the batch system processes with a degree of concurrency, and
+     * because of batch sizes in the queue vary, AvaTax API is unable to accurately 
+     * predict when a batch will complete. If high performance processing is 
+     * required, please use the 
+     * [CreateTransaction API](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Transactions/CreateTransaction/).
      *
      * 
      * @param int $companyId The ID of the company that owns this batch
@@ -314,11 +438,26 @@ class AvaTaxClient extends AvaTaxClientBase
      * Retrieve all batches for this company
      *
      * List all batch objects attached to the specified company.
+     * 
      * A batch object is a large collection of API calls stored in a compact file.
-     * When you create a batch, it is added to the AvaTax Batch Queue and will be processed in the order it was received.
-     * You may fetch a batch to check on its status and retrieve the results of the batch operation.
-     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
-     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     * 
+     * Search for specific objects using the criteria in the `$filter` parameter; 
+     * full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate results using the `$top`, `$skip`, and `$orderby` parameters.
+     * 
+     * Use [GetBatch](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Batches/GetBatch/) 
+     * to retrieve the results, or check the status, of an individual batch.
+     * 
+     * When a batch is created, it is added to the AvaTax Batch Queue and will be 
+     * processed as quickly as possible in the order it was received. To check the 
+     * status of a batch, fetch the batch and retrieve the results of the batch 
+     * operation.
+     * 
+     * Because the batch system processes with a degree of concurrency, and
+     * because of batch sizes in the queue vary, AvaTax API is unable to accurately 
+     * predict when a batch will complete. If high performance processing is 
+     * required, please use the
+     * [CreateTransaction API](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Transactions/CreateTransaction/).
      *
      * 
      * @param int $companyId The ID of the company that owns these batches
@@ -343,12 +482,23 @@ class AvaTaxClient extends AvaTaxClientBase
      * Retrieve all batches
      *
      * Get multiple batch objects across all companies.
-     * A batch object is a large collection of API calls stored in a compact file.
-     * When you create a batch, it is added to the AvaTax Batch Queue and will be processed in the order it was received.
-     * You may fetch a batch to check on its status and retrieve the results of the batch operation.
      * 
-     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
-     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     * A batch object is a large collection of API calls stored in a compact file.
+     * 
+     * Search for specific objects using the criteria in the `$filter` parameter; 
+     * full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate results using the `$top`, `$skip`, and `$orderby` parameters.
+     * 
+     * When a batch is created, it is added to the AvaTax Batch Queue and will be 
+     * processed as quickly as possible in the order it was received. To check the 
+     * status of a batch, fetch the batch and retrieve the results of the batch 
+     * operation.
+     * 
+     * Because the batch system processes with a degree of concurrency, and
+     * because of batch sizes in the queue vary, AvaTax API is unable to accurately 
+     * predict when a batch will complete. If high performance processing is 
+     * required, please use the
+     * [CreateTransaction API](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Transactions/CreateTransaction/).
      *
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
@@ -1602,6 +1752,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * You can use the `$include` parameter to fetch the following additional objects for expansion:
      * 
      * * Certificates - Fetch a list of certificates linked to this customer.
+     * * CustomFields - Fetch a list of custom fields associated to this customer.
      * 
      * Using exemption certificates endpoints requires setup of an auditable document storage for each company that will use certificates.
      * Companies that do not have this storage system set up will receive the error `CertCaptureNotConfiguredError` when they call exemption
@@ -2133,13 +2284,17 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param string $country The name or code of the destination country.
      * @param string $hsCode The Section or partial HS Code for which you would like to view the next level of HS Code detail, if more detail is available.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param int $top If nonzero, return no more than this number of results. Used with $skip to provide pagination for large datasets.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with $top to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listCrossBorderCodes($country, $hsCode)
+    public function listCrossBorderCodes($country, $hsCode, $filter, $top, $skip, $orderBy)
     {
         $path = "/api/v2/definitions/crossborder/{$country}/{$hsCode}";
         $guzzleParams = [
-            'query' => [],
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
@@ -7614,9 +7769,13 @@ class AvaTaxClient extends AvaTaxClientBase
     /**
      * Retrieve a single transaction by code
      *
-     * Get the current `SalesInvoice` transaction identified by this URL.
+     * Get the current transaction identified by this company code, transaction code, and document type.
      * 
-     * To fetch other kinds of transactions, use `GetTransactionByCodeAndType`.
+     * A transaction is uniquely identified by `companyCode`, `code` (often called Transaction Code), and `documentType`. 
+     * 
+     * For compatibility purposes, when this API finds multiple transactions with the same transaction code, and if you have not specified
+     * the `type` parameter to this API, it will default to selecting the `SalesInvoices` transaction. To change this behavior, use the 
+     * optional `documentType` parameter to specify the specific document type you wish to find.
      * 
      * If this transaction was adjusted, the return value of this API will be the current transaction with this code.
      * 
@@ -7632,14 +7791,15 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param string $companyCode The company code of the company that recorded this transaction
      * @param string $transactionCode The transaction code to retrieve
+     * @param string $documentType (Optional): The document type of the transaction to retrieve (See DocumentType::* for a list of allowable values)
      * @param string $include Specifies objects to include in this fetch call
      * @return TransactionModel
      */
-    public function getTransactionByCode($companyCode, $transactionCode, $include)
+    public function getTransactionByCode($companyCode, $transactionCode, $documentType, $include)
     {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}";
         $guzzleParams = [
-            'query' => ['$include' => $include],
+            'query' => ['documentType' => $documentType, '$include' => $include],
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
@@ -7648,18 +7808,7 @@ class AvaTaxClient extends AvaTaxClientBase
     /**
      * Retrieve a single transaction by code
      *
-     * Get the current transaction identified by this URL.
-     * 
-     * If this transaction was adjusted, the return value of this API will be the current transaction with this code.
-     * 
-     * You may specify one or more of the following values in the `$include` parameter to fetch additional nested data, using commas to separate multiple values:
-     *  
-     * * Lines
-     * * Details (implies lines)
-     * * Summary (implies details)
-     * * Addresses
-     * * SummaryOnly (omit lines and details - reduces API response size)
-     * * LinesOnly (omit details - reduces API response size)
+     * DEPRECATED: Please use the `GetTransactionByCode` API instead.
      *
      * 
      * @param string $companyCode The company code of the company that recorded this transaction
@@ -7829,14 +7978,15 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $transactionCode The transaction code of the original sale
      * @param string $include Specifies objects to include in the response after transaction is created
      * @param string $documentType (Optional): The document type of the transaction to refund. If not provided, the default is SalesInvoice. (See DocumentType::* for a list of allowable values)
+     * @param boolean $useTaxDateOverride (Optional): If set to true, processes refund using taxDateOverride rather than taxAmountOverride (Note: taxAmountOverride is not allowed for SST states).
      * @param RefundTransactionModel $model Information about the refund to create
      * @return TransactionModel
      */
-    public function refundTransaction($companyCode, $transactionCode, $include, $documentType, $model)
+    public function refundTransaction($companyCode, $transactionCode, $include, $documentType, $useTaxDateOverride, $model)
     {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/refund";
         $guzzleParams = [
-            'query' => ['$include' => $include, 'documentType' => $documentType],
+            'query' => ['$include' => $include, 'documentType' => $documentType, 'useTaxDateOverride' => $useTaxDateOverride],
             'body' => json_encode($model)
         ];
         return $this->restCall($path, 'POST', $guzzleParams);
@@ -8159,10 +8309,35 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Get information about a username.
+     *
+     * You may call this API prior to creating a user, to check if a particular username is available for use. Using this API, you can 
+     * present a friendly experience prior to attempting to create a new user object.
+     * 
+     * Please ensure that the query string is url encoded if you wish to check information for a user that contains url-sensitive characters.
+     *
+     * 
+     * @param string $username The username to search.
+     * @return UsernameModel
+     */
+    public function getUsername($username)
+    {
+        $path = "/api/v2/usernames";
+        $guzzleParams = [
+            'query' => ['username' => $username],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * Retrieve users for this account
      *
      * List all user objects attached to this account.
      * A user represents one person with access privileges to make API calls and work with a specific account.
+     * 
+     * When an API is called using a legacy AvaTax License Key, the API log entry is recorded as being performed by a special user attached to that license key.
+     * By default, this API will not return a listing of license key users. Users with registrar-level security may call this API to list license key users.
      * 
      * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
      * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
@@ -8190,7 +8365,12 @@ class AvaTaxClient extends AvaTaxClientBase
      * Retrieve all users
      *
      * Get multiple user objects across all accounts.
-     * A user represents one person with access privileges to make API calls and work with a specific account.
+     * 
+     * A user represents one person or set of credentials with access privileges to make API calls and work with a specific account. A user can be authenticated
+     * via either username / password authentication, an OpenID / OAuth Bearer Token, or a legacy AvaTax License Key.
+     * 
+     * When an API is called using a legacy AvaTax License Key, the API log entry is recorded as being performed by a special user attached to that license key.
+     * By default, this API will not return a listing of license key users. Users with registrar-level security may call this API to list license key users.
      * 
      * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
      * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.

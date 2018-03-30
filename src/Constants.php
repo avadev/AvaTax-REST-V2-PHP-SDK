@@ -737,6 +737,8 @@ class ErrorCodeId
     const C_DUPLICATEFIELDNAMEINORDERBY = "DuplicateFieldNameInOrderBy";
     const C_CANNOTADJUSTDOCUMENTTYPE = "CannotAdjustDocumentType";
     const C_USERNOACCESS = "UserNoAccess";
+    const C_INVALIDENTRY = "InvalidEntry";
+    const C_TRANSACTIONALREADYCANCELLED = "TransactionAlreadyCancelled";
 
     /**
      * Batch errors
@@ -848,17 +850,17 @@ class ErrorCodeId
      */
     const C_INVALIDBUSINESSTYPE = "InvalidBusinessType";
     const C_CANNOTMODIFYEXEMPTCERT = "CannotModifyExemptCert";
-    const C_CERTCAPTUREFIELDVALIDATIONERROR = "CertCaptureFieldValidationError";
-    const C_CERTCAPTUREERROR = "CertCaptureError";
+    const C_CERTIFICATESFIELDINVALID = "CertificatesFieldInvalid";
+    const C_CERTIFICATESERROR = "CertificatesError";
     const C_MISSINGREQUIREDFIELDS = "MissingRequiredFields";
-    const C_CERTCAPTURENOTCONFIGUREDERROR = "CertCaptureNotConfiguredError";
+    const C_CERTIFICATESNOTSETUP = "CertificatesNotSetup";
     const C_ADDRELATIONSHIPSERROR = "AddRelationshipsError";
     const C_MISSINGEXPOSUREZONE = "MissingExposureZone";
     const C_CONFLICTINGEXPOSUREZONE = "ConflictingExposureZone";
     const C_MISSINGFIELDTOCREATEEXPOSUREZONE = "MissingFieldToCreateExposureZone";
     const C_MISSINGEXEMPTREASON = "MissingExemptReason";
     const C_INVALIDEXEMPTREASON = "InvalidExemptReason";
-    const C_INVALIDCERTCAPTUREOPERATION = "InvalidCertCaptureOperation";
+    const C_INVALIDEXEMPTIONOPERATION = "InvalidExemptionOperation";
     const C_CONFLICTINGFIELDS = "ConflictingFields";
     const C_INVALIDPDFORIMAGEFILE = "InvalidPdfOrImageFile";
     const C_INVALIDCOVERLETTERTITLE = "InvalidCoverLetterTitle";
@@ -901,6 +903,17 @@ class ErrorCodeId
      * Worksheet Exception
      */
     const C_WORKSHEETEXCEPTION = "WorksheetException";
+    const C_INVALIDACCOUNTOVERRIDE = "InvalidAccountOverride";
+    const C_ACCOUNTOVERRIDENOTAUTHORIZED = "AccountOverrideNotAuthorized";
+    const C_PARSERFIELDNOTQUERYABLEERROR = "ParserFieldNotQueryableError";
+    const C_USERNAMEREQUIRED = "UsernameRequired";
+    const C_INVALIDAUDITMESSAGE = "InvalidAuditMessage";
+
+    /**
+     * Nexus validation error codes
+     */
+    const C_CANNOTDELETEPARENTBEFORECHILDNEXUS = "CannotDeleteParentBeforeChildNexus";
+    const C_NEXUSCHILDDATEMISMATCH = "NexusChildDateMismatch";
 
 }
 
@@ -1039,11 +1052,6 @@ class JurisdictionType
     const C_COUNTRY = "Country";
 
     /**
-     * Deprecated
-     */
-    const C_COMPOSITE = "Composite";
-
-    /**
      * State
      */
     const C_STATE = "State";
@@ -1062,6 +1070,168 @@ class JurisdictionType
      * Special Tax Jurisdiction
      */
     const C_SPECIAL = "Special";
+
+}
+
+
+/**
+ * A list of possible AvaFile Form Types.
+ */
+class FormTypeId
+{
+
+    /**
+     * Denotes the form type is Sales and Use Tax
+     */
+    const C_SALESANDUSE = "SalesAndUse";
+
+    /**
+     * Denotes the form type is Sales Tax only
+     */
+    const C_SALES = "Sales";
+
+    /**
+     * Denotes the form type is Sellers Use Tax only
+     */
+    const C_SELLERSUSE = "SellersUse";
+
+    /**
+     * Denotes the form type is Lodging Tax only
+     */
+    const C_LODGING = "Lodging";
+
+    /**
+     * Denotes the form type is Sales and Lodging Tax
+     */
+    const C_SALESANDLODGING = "SalesAndLodging";
+
+    /**
+     * Denotes the form type is Consumer Use Tax only
+     */
+    const C_CONSUMERUSE = "ConsumerUse";
+
+    /**
+     * Denotes the form type is Resort and Rental Tax
+     */
+    const C_RESORTANDRENTAL = "ResortAndRental";
+
+    /**
+     * Denotes the form type is Tourist and Rental Tax
+     */
+    const C_TOURISTANDRENTAL = "TouristAndRental";
+
+    /**
+     * Denotes the form type is Prepayment
+     */
+    const C_PREPAYMENT = "Prepayment";
+
+}
+
+
+/**
+ * A list of possible AvaFile filing option types.
+ */
+class FilingOptionTypeId
+{
+
+    /**
+     * Denotes the tax return is being filed on paper.
+     */
+    const C_PAPER = "Paper";
+
+    /**
+     * Denotes the form can be efiled optionally.
+     */
+    const C_OPTIONALEFILE = "OptionalEfile";
+
+    /**
+     * Denotes the form is being filed via efile.
+     */
+    const C_MANDATORYEFILE = "MandatoryEfile";
+
+}
+
+
+/**
+ * A list of possible Due Date Types
+ */
+class DueDateTypeId
+{
+
+    /**
+     * Denotes form is due on the due day
+     */
+    const C_BYDAY = "ByDay";
+
+    /**
+     * Denotes form is due by last day of the month
+     */
+    const C_BYLASTDAY = "ByLastDay";
+
+    /**
+     * Denotes form is due by second to last day of the month
+     */
+    const C_BYSECONDLASTDAY = "BySecondLastDay";
+
+}
+
+
+/**
+ * Indicates the rounding behavior of a form
+ */
+class RoundingTypeId
+{
+
+    /**
+     * There is no rounding on the return
+     */
+    const C_NONE = "None";
+
+    /**
+     * Round to the nearest whole number
+     */
+    const C_NEAREST = "Nearest";
+
+    /**
+     * Always round up
+     */
+    const C_UP = "Up";
+
+    /**
+     * Always round down
+     */
+    const C_DOWN = "Down";
+
+}
+
+
+/**
+ * Indicates the behavior of a tax form for a company with multiple places of business.
+ *  
+ *  Some tax authorities require that a separate form must be filed for each place of business.
+ */
+class OutletTypeId
+{
+
+    /**
+     * File a single return per cycle for your entire business.
+     */
+    const C_NONE = "None";
+
+    /**
+     * You may file separate forms for each outlet; contact the tax authority for more details about location based reporting requirements.
+     */
+    const C_SCHEDULE = "Schedule";
+
+    /**
+     * You may file separate forms for each outlet; contact the tax authority for more details about location based reporting requirements.
+     */
+    const C_DUPLICATE = "Duplicate";
+
+    /**
+     * File a single return, but you must have a line item for each place of business.
+     */
+    const C_CONSOLIDATED = "Consolidated";
 
 }
 
@@ -1203,12 +1373,7 @@ class CertCaptureProvisionStatus
     /**
      * Account and company are provisioned
      */
-    const C_FINISHED = "Finished";
-
-    /**
-     * Account are not provisioned
-     */
-    const C_NOTSTARTED = "NotStarted";
+    const C_PROVISIONED = "Provisioned";
 
     /**
      * Provision job is being queued
@@ -1216,11 +1381,7 @@ class CertCaptureProvisionStatus
      *  under the same account has not.
      */
     const C_INPROGRESS = "InProgress";
-
-    /**
-     * The account is put into provisioned queue.
-     */
-    const C_QUEUED = "Queued";
+    const C_NOTPROVISIONED = "NotProvisioned";
 
 }
 
@@ -1777,37 +1938,6 @@ class BoundaryLevel
      * 5-digit zip precision
      */
     const C_ZIP5 = "Zip5";
-
-}
-
-
-/**
- * Indicates the behavior of a tax form for a company with multiple places of business.
- *  
- *  Some tax authorities require that a separate form must be filed for each place of business.
- */
-class OutletTypeId
-{
-
-    /**
-     * File a single return per cycle for your entire business.
-     */
-    const C_NONE = "None";
-
-    /**
-     * You may file separate forms for each outlet; contact the tax authority for more details about location based reporting requirements.
-     */
-    const C_SCHEDULE = "Schedule";
-
-    /**
-     * You may file separate forms for each outlet; contact the tax authority for more details about location based reporting requirements.
-     */
-    const C_DUPLICATE = "Duplicate";
-
-    /**
-     * File a single return, but you must have a line item for each place of business.
-     */
-    const C_CONSOLIDATED = "Consolidated";
 
 }
 
@@ -2454,6 +2584,65 @@ class NoticeCustomerType
      * TrustFile
      */
     const C_TRUSTFILE = "TrustFile";
+
+}
+
+
+/**
+ * A list of possible AvaFile filing types for tax notices.
+ */
+class TaxNoticeFilingTypeId
+{
+
+    /**
+     * Denotes the tax return is being filed via electronic means; excludes SST electronic filing.
+     */
+    const C_ELECTRONICRETURN = "ElectronicReturn";
+
+    /**
+     * Denotes the tax return is being filed on paper.
+     */
+    const C_PAPERRETURN = "PaperReturn";
+
+    /**
+     * Denotes the tax return that was not filed.
+     */
+    const C_RETURNNOTFILED = "ReturnNotFiled";
+
+    /**
+     * Denotes a return is paid via EFT and filed on paper without payment.
+     */
+    const C_EFTPAPER = "EFTPaper";
+
+    /**
+     * Denotes the tax return is an SST filing.
+     */
+    const C_SER = "SER";
+
+    /**
+     * Denotes the tax return is a Trudsfile-EDI filing.
+     */
+    const C_TRUSTFILEEDI = "TrustfileEdi";
+
+    /**
+     * Denotes the tax return is an uploaded file.
+     */
+    const C_UPLOADFILE = "UploadFile";
+
+    /**
+     * Denotes the tax return was manually filed via paper
+     */
+    const C_PAPERMANUAL = "PaperManual";
+
+    /**
+     * Denotes a cert capture return
+     */
+    const C_CERTCAPTURE = "CertCapture";
+
+    /**
+     * Denotes a signature ready return
+     */
+    const C_SIGNATUREREADY = "SignatureReady";
 
 }
 
