@@ -531,6 +531,20 @@ class TransactionBuilder
     }
 
     /**
+     * Get the line number of the most recently added line
+     *
+     * @return int|null
+     */
+    public function getCurrentLineNumber()
+    {
+        try {
+            return $this->getMostRecentLineIndex();
+        } catch (\Exception $e) {
+            return null;
+        }
+    }
+
+    /**
      * Create this transaction
      *
      * @param string $include Specifies objects to include in the response after transaction is created
