@@ -122,6 +122,105 @@ class TransactionBuilder
     }
 
     /**
+     * Set VAT business identification number for customer
+     *
+     * @param   string              no
+     * @return TransactionBuilder
+     */
+    public function withBusinessIdentificationNo($no)
+    {
+        $this->_model['businessIdentificationNo'] = $no;
+        return $this;
+    }
+
+    /**
+     * Set client application customer or usage type
+     *
+     * @param   string              code    (See API endpoint `/api/v2/definitions/entityusecodes` for a list of allowable values)
+     * @return TransactionBuilder
+     */
+    public function withEntityUseCode($code)
+    {
+        $this->_model['entityUseCode'] = $code;
+        return $this;
+    }
+
+    /**
+     * Set purchase order number
+     *
+     * @param   string              no
+     * @return TransactionBuilder
+     */
+    public function withPurchaseOrderNo($no)
+    {
+        $this->_model['purchaseOrderNo'] = $no;
+        return $this;
+    }
+
+    /**
+     * Set customer-provided reference code
+     *
+     * @param   string              code
+     * @return TransactionBuilder
+     */
+    public function withReferenceCode($code)
+    {
+        $this->_model['referenceCode'] = $code;
+        return $this;
+    }
+
+    /**
+     * Set the currency code
+     *
+     * @param   string              code    (three-character ISO-4217 currency code)
+     * @return TransactionBuilder
+     */
+    public function withCurrencyCode($code)
+    {
+        $this->_model['currencyCode'] = $code;
+        return $this;
+    }
+
+    /**
+     * Set the sale location code for reporting this document to the tax authority
+     *
+     * @param   string              code
+     * @return TransactionBuilder
+     */
+    public function withReportingLocationCode($code)
+    {
+        $this->_model['reportingLocationCode'] = $code;
+        return $this;
+    }
+
+    /**
+     * Set flag for seller as importer of record
+     *
+     * @return TransactionBuilder
+     */
+    public function withSellerIsImporterOfRecord()
+    {
+        $this->_model['isSellerImporterOfRecord'] = true;
+        return $this;
+    }
+
+    /**
+     * Set exchange rate information
+     *
+     * @param   float               rate
+     * @param   date                effectiveDate
+     * @return TransactionBuilder
+     */
+    public function withExchangeRate($rate, $effectiveDate = null)
+    {
+        $this->_model['exchangeRate'] = $rate;
+        if ($effectiveDate) {
+            $this->_model['exchangeRateEffectiveDate'] = $effectiveDate;
+        }
+        return $this;
+    }
+
+    /**
      * Add a parameter at the document level
      *
      * @param   string              name
@@ -277,6 +376,54 @@ class TransactionBuilder
         ];
 
         // Continue building
+        return $this;
+    }
+
+    /**
+     * Set description for current line
+     *
+     * @param   string              description
+     * @return TransactionBuilder
+     * @throws \Exception
+     */
+    public function withLineDescription($description)
+    {
+        $li = $this->getMostRecentLineIndex();
+        $this->_model['lines'][$li]['description'] = $description;
+
+        return $this;
+    }
+
+    /**
+     * Set flag on current line to indicate tax is included
+     *
+     * @return TransactionBuilder
+     * @throws \Exception
+     */
+    public function withLineTaxIncluded()
+    {
+        $li = $this->getMostRecentLineIndex();
+        $this->_model['lines'][$li]['taxIncluded'] = true;
+
+        return $this;
+    }
+
+    /**
+     * Set customer defined fields for current line
+     *
+     * @param   string              ref1
+     * @param   string              ref2
+     * @return TransactionBuilder
+     * @throws \Exception
+     */
+    public function withLineCustomFields($ref1, $ref2 = null)
+    {
+        $li = $this->getMostRecentLineIndex();
+        $this->_model['lines'][$li]['ref1'] = $ref1;
+        if ($ref2) {
+            $this->_model['lines'][$li]['ref2'] = $ref2;
+        }
+
         return $this;
     }
 
