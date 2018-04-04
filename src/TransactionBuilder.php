@@ -34,17 +34,18 @@ class TransactionBuilder
      *
      * @param AvaTaxClient  $client        The AvaTaxClient object to use to create this transaction
      * @param string        $companyCode   The code of the company for this transaction
-     * @param DocumentType  $type          The type of transaction to create (See DocumentType::* for a list of allowable values)
+     * @param string        $type          The type of transaction to create (See DocumentType::* for a list of allowable values)
      * @param string        $customerCode  The customer code for this transaction
+     * @param string|null   $dateTime      The datetime of the transaction, defaults to current time when null (Format: Y-m-d)
      */
-    public function __construct($client, $companyCode, $type, $customerCode)
+    public function __construct($client, $companyCode, $type, $customerCode, $dateTime = null)
     {
         $this->_client = $client;
         $this->_line_number = 1;
         $this->_model = [
             'companyCode' => $companyCode,
             'customerCode' => $customerCode,
-            'date' => date('Y-m-d H:i:s'),
+            'date' => $dateTime !== null ? $dateTime : date('Y-m-d'),
             'type' => $type,
             'lines' => [],
         ];
@@ -288,7 +289,7 @@ class TransactionBuilder
      * @param   float               $longitude  The longitude of the geolocation for this transaction
      * @return  TransactionBuilder
      */
-     public function withLatLong($type, $latitude, $longitude)
+    public function withLatLong($type, $latitude, $longitude)
     {
         $this->_model['addresses'][$type] = [
             'latitude' => $latitude,
@@ -569,5 +570,30 @@ class TransactionBuilder
             'adjustmentReason' => $reason
         ];
     }
+    
+    /**
+     * Add Avalara LineItemModel objects to the lines array
+     *
+     * @return  TransactionBuilder
+     */
+    public function withLineItem($thing)
+    {
+        $mode = is_array($thing) ? 'multi' : 'single';
+
+        if ($mode === 'single') {
+            $this->_model['lines'][] = (array)$thing;
+            $this->_line_number++;
+        }
+
+
+        if ($mode === 'multi') {
+            foreach($thing as $lineItem) {
+                $this->_model['lines'][] = (array)$lineItem;
+                $this->_line_number++;
+            }
+        }
+
+        return $this;
+    }    
 }
 ?>

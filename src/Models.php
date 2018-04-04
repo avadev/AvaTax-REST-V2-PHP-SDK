@@ -899,6 +899,104 @@ class AvaTaxMessage
 }
 
 /**
+ * Represents information about a tax form known to Avalara
+ */
+class AvaFileFormModel
+{
+
+    /**
+     * @var int Unique Id of the form
+     */
+    public $id;
+
+    /**
+     * @var string Name of the file being returned
+     */
+    public $returnName;
+
+    /**
+     * @var string Name of the submitted form
+     */
+    public $formName;
+
+    /**
+     * @var string A description of the submitted form
+     */
+    public $description;
+
+    /**
+     * @var string The date this form starts to take effect
+     */
+    public $effDate;
+
+    /**
+     * @var string The date the form finishes to take effect
+     */
+    public $endDate;
+
+    /**
+     * @var string State/Province/Region where the form is submitted for
+     */
+    public $region;
+
+    /**
+     * @var string The country this form is submitted for
+     */
+    public $country;
+
+    /**
+     * @var string The type of the form being submitted (See FormTypeId::* for a list of allowable values)
+     */
+    public $formTypeId;
+
+    /**
+     * @var string  (See FilingOptionTypeId::* for a list of allowable values)
+     */
+    public $filingOptionTypeId;
+
+    /**
+     * @var string The type of the due date (See DueDateTypeId::* for a list of allowable values)
+     */
+    public $dueDateTypeId;
+
+    /**
+     * @var int Due date
+     */
+    public $dueDay;
+
+    /**
+     * @var string  (See DueDateTypeId::* for a list of allowable values)
+     */
+    public $efileDueDateTypeId;
+
+    /**
+     * @var int The date by when the E-filing should be submitted
+     */
+    public $efileDueDay;
+
+    /**
+     * @var string The time of day by when the E-filing should be submitted
+     */
+    public $efileDueTime;
+
+    /**
+     * @var boolean Whether the customer has discount
+     */
+    public $hasVendorDiscount;
+
+    /**
+     * @var string The way system does the rounding (See RoundingTypeId::* for a list of allowable values)
+     */
+    public $roundingTypeId;
+
+    /**
+     * @var string The outlet type of the form (See OutletTypeId::* for a list of allowable values)
+     */
+    public $outletTypeId;
+
+}
+
+/**
  * Represents a batch of uploaded documents.
  */
 class BatchModel
@@ -1175,7 +1273,7 @@ class CertExpressInvitationModel
     public $date;
 
     /**
-     * @var string The web link (URL) that a customer can click on or visit to begin using this CertExpress invitation.     This value is only usable if the status of this invitation is `Ready` and the request was created with type `Download`.
+     * @var string The web link (URL) that a customer can click on or visit to begin using this CertExpress invitation.     This value is only usable if the status of this invitation is `Ready` and the request was created with type `Download`.  NOTE: This link usually takes a few minutes to be available.
      */
     public $requestLink;
 
@@ -1301,6 +1399,11 @@ class CustomerModel
      * @var CertificateModel[] A list of exemption certficates that apply to this customer. You can fetch this data by specifying   `$include=certificates` when calling a customer fetch API.
      */
     public $certificates;
+
+    /**
+     * @var CustomFieldModel[] A list of custom fields defined on this customer.     For more information about custom fields, see the [Avalara Help Center article about custom fields](https://help.avalara.com/0021_Avalara_CertCapture/All_About_CertCapture/Edit_or_Remove_Details_about_Customers).
+     */
+    public $customFields;
 
 }
 
@@ -1476,6 +1579,29 @@ class CertificateModel
 }
 
 /**
+ * A custom field provides extra information about a customer or certificate.
+ * 
+ * Custom fields are provided to permit you to store additional information about an exemption certificate or customer. They are available to 
+ * support additional use cases beyond that supported directly by Avalara's exemption certificate software.
+ * 
+ * For more information about custom fields, see the [Avalara Help Center article about custom fields](https://help.avalara.com/0021_Avalara_CertCapture/All_About_CertCapture/Edit_or_Remove_Details_about_Customers).
+ */
+class CustomFieldModel
+{
+
+    /**
+     * @var string The name of the custom field.
+     */
+    public $name;
+
+    /**
+     * @var string The value of the custom field.
+     */
+    public $value;
+
+}
+
+/**
  * An exemption reason defines why a certificate allows a customer to be exempt
  * for purposes of tax calculation. For a full list of defined exemption reasons,
  * please call the `ListCertificateExemptionReasons` API.
@@ -1616,6 +1742,11 @@ class ProvisionStatusModel
      * @var int The accountId of the company represented by this status
      */
     public $accountId;
+
+    /**
+     * @var int The AvaTax company represented by this status
+     */
+    public $companyId;
 
 }
 
@@ -2167,9 +2298,14 @@ class NexusModel
     public $region;
 
     /**
-     * @var string The jurisdiction type of the jurisdiction in which this company declared nexus. (See JurisTypeId::* for a list of allowable values)
+     * @var string (DEPRECATED) The jurisdiction type of the jurisdiction in which this company declared nexus.  NOTE: Use jurisdictionTypeId instead. (See JurisTypeId::* for a list of allowable values)
      */
     public $jurisTypeId;
+
+    /**
+     * @var string The type of the jurisdiction in which this company declared nexus. (See JurisdictionType::* for a list of allowable values)
+     */
+    public $jurisdictionTypeId;
 
     /**
      * @var string The code identifying the jurisdiction in which this company declared nexus.
@@ -2440,9 +2576,14 @@ class TaxRuleModel
     public $jurisCode;
 
     /**
-     * @var string The type of the jurisdiction to which this tax rule applies. (See JurisTypeId::* for a list of allowable values)
+     * @var string (DEPRECATED) The type of the jurisdiction to which this tax rule applies.  NOTE: Use jurisdictionTypeId instead. (See JurisTypeId::* for a list of allowable values)
      */
     public $jurisTypeId;
+
+    /**
+     * @var string The type of the jurisdiction to which this tax rule applies. (See JurisdictionType::* for a list of allowable values)
+     */
+    public $jurisdictionTypeId;
 
     /**
      * @var string DEPRECATED - The type of customer usage to which this rule applies.  Please use entityUseCode instead.
@@ -2842,6 +2983,11 @@ class LocationSettingModel
      * @var int The unique ID number of the location question answered.
      */
     public $questionId;
+
+    /**
+     * @var string The name of the question
+     */
+    public $questionName;
 
     /**
      * @var string The answer the user provided.
@@ -4351,99 +4497,6 @@ class RateTypeModel
 /**
  * Represents information about a tax form known to Avalara
  */
-class AvaFileFormModel
-{
-
-    /**
-     * @var int Unique Id of the form
-     */
-    public $id;
-
-    /**
-     * @var string Name of the file being returned
-     */
-    public $returnName;
-
-    /**
-     * @var string Name of the submitted form
-     */
-    public $formName;
-
-    /**
-     * @var string A description of the submitted form
-     */
-    public $description;
-
-    /**
-     * @var string The date this form starts to take effect
-     */
-    public $effDate;
-
-    /**
-     * @var string The date the form finishes to take effect
-     */
-    public $endDate;
-
-    /**
-     * @var string State/Province/Region where the form is submitted for
-     */
-    public $region;
-
-    /**
-     * @var string The country this form is submitted for
-     */
-    public $country;
-
-    /**
-     * @var int The type of the form being submitted
-     */
-    public $formTypeId;
-
-    /**
-     * @var int 
-     */
-    public $filingOptionTypeId;
-
-    /**
-     * @var int The type of the due date
-     */
-    public $dueDateTypeId;
-
-    /**
-     * @var int Due date
-     */
-    public $dueDay;
-
-    /**
-     * @var int 
-     */
-    public $efileDueDateTypeId;
-
-    /**
-     * @var int The date by when the E-filing should be submitted
-     */
-    public $efileDueDay;
-
-    /**
-     * @var string The time of day by when the E-filing should be submitted
-     */
-    public $efileDueTime;
-
-    /**
-     * @var boolean Whether the customer has discount
-     */
-    public $hasVendorDiscount;
-
-    /**
-     * @var int The way system does the rounding
-     */
-    public $roundingTypeId;
-
-}
-
-/**
- * Represents information about a tax form known to Avalara
- */
 class FormMasterModel
 {
 
@@ -5586,6 +5639,64 @@ class FilingCalendarModel
      */
     public $modifiedUserId;
 
+    /**
+     * @var CompanyReturnSettingModel[] CompanyReturn settings for complext filing calendar
+     */
+    public $settings;
+
+}
+
+/**
+ * 
+ */
+class CompanyReturnSettingModel
+{
+
+    /**
+     * @var int The unique ID of this CompanyReturnsSetting
+     */
+    public $id;
+
+    /**
+     * @var int The CompanyReturn Id
+     */
+    public $companyReturnId;
+
+    /**
+     * @var int The TaxFormCatalog filingQuestionId.
+     */
+    public $filingQuestionId;
+
+    /**
+     * @var string Filing question code as defined in TaxFormCatalog.
+     */
+    public $filingQuestionCode;
+
+    /**
+     * @var string The value of this setting
+     */
+    public $value;
+
+    /**
+     * @var string The date when this record was created.
+     */
+    public $createdDate;
+
+    /**
+     * @var int The User ID of the user who created this record.
+     */
+    public $createdUserId;
+
+    /**
+     * @var string The date/time when this record was last modified.
+     */
+    public $modifiedDate;
+
+    /**
+     * @var int The user ID of the user who last modified this record.
+     */
+    public $modifiedUserId;
+
 }
 
 /**
@@ -6626,6 +6737,11 @@ class FilingReturnModel
     public $year;
 
     /**
+     * @var FilingAttachmentModel[] The attachments for this return.
+     */
+    public $attachments;
+
+    /**
      * @var string The date when this record was created.
      */
     public $createdDate;
@@ -6841,6 +6957,24 @@ class FilingPaymentModel
      * @var int The user ID of the user who last modified this record.
      */
     public $modifiedUserId;
+
+}
+
+/**
+ * An attachment associated with a filing return
+ */
+class FilingAttachmentModel
+{
+
+    /**
+     * @var int The resourceFileId used to retrieve the attachment
+     */
+    public $resourceFileId;
+
+    /**
+     * @var string The description of the attachment
+     */
+    public $description;
 
 }
 
@@ -7067,7 +7201,7 @@ class TransactionModel
     public $status;
 
     /**
-     * @var string The type of the transaction. For Returns customers, a transaction type of "Invoice" will be reported to the tax authorities.  A sales transaction represents a sale from the company to a customer. A purchase transaction represents a purchase made by the company.  A return transaction represents a customer who decided to request a refund after purchasing a product from the company. An inventory   transfer transaction represents goods that were moved from one location of the company to another location without changing ownership. (See DocumentType::* for a list of allowable values)
+     * @var string The type of the transaction.     Transactions of type `SalesOrder`, `ReturnOrder`, and so on are temporary estimates and will not be saved.    Transactions of type `SalesInvoice, `ReturnInvoice`, and so on are permanent transactions that can be reported to tax authorities  if they are in status `Committed`.    A sales transaction represents a sale from the company to a customer. A purchase transaction represents a purchase made by the company.  A return transaction represents a customer who decided to request a refund after purchasing a product from the company. An inventory   transfer transaction represents goods that were moved from one location of the company to another location without changing ownership. (See DocumentType::* for a list of allowable values)
      */
     public $type;
 
@@ -7092,9 +7226,14 @@ class TransactionModel
     public $entityUseCode;
 
     /**
-     * @var string CustomerVendorCode
+     * @var string DEPRECATED - Please use `customerCode`.    This field has been renamed to `customerCode` to match documentation for other APIs related to exemption customers.
      */
     public $customerVendorCode;
+
+    /**
+     * @var string Unique code identifying the customer that requested this transaction.     When you specify a `customerCode`, AvaTax will look to see if a customer exists with this code in the exemption certificate system.  If that customer exists, and if that customer has uploaded an exemption certificate that applies to this transaction, the relevant  parts of this transaction that can use the exemption certificate will be treated as exempt.
+     */
+    public $customerCode;
 
     /**
      * @var string If this transaction was exempt, this field will contain the word "Exempt".
@@ -7112,7 +7251,7 @@ class TransactionModel
     public $locationCode;
 
     /**
-     * @var string If this transaction was made from a specific reporting location, this is the code string of the location.  For customers using Returns, this indicates how tax will be reported according to different locations on the tax forms.  In another words, this code does not affect the address of a transaction, it instead affects which tax return it will be reported on.  Both locationCode and reportingLocationCode refer to LocationCode in Document table, if both are set, reportingLocationCode wins
+     * @var string For customers who use [location-based tax reporting](https://developer.avalara.com/avatax/dev-guide/locations/location-based-reporting),   this field controls how this transaction will be filed for multi-location tax filings.    If you specify a non-null value for this field, AvaTax will ensure that this transaction is reported on the tax return associated   with the [LocationModel](https://developer.avalara.com/api-reference/avatax/rest/v2/models/LocationModel/) identified by this code.    This field does not affect any addresses for the transaction. It only controls the tax filing behavior of this transaction.    If you are looking for information about how to set up addresses for a transaction, please see [Using Address Types](https://developer.avalara.com/avatax/dev-guide/customizing-transaction/address-types/)   in the AvaTax Developer Guide.
      */
     public $reportingLocationCode;
 
@@ -7267,17 +7406,17 @@ class TransactionModel
     public $taxDate;
 
     /**
-     * @var TransactionLineModel[] Optional: A list of line items in this transaction. To fetch this list, add the query string "?$include=Lines" or "?$include=Details" to your URL.
+     * @var TransactionLineModel[] A list of line items in this transaction. To fetch this list, add the query string `?$include=Lines` or `?$include=Details` to your URL.
      */
     public $lines;
 
     /**
-     * @var TransactionAddressModel[] Optional: A list of line items in this transaction. To fetch this list, add the query string "?$include=Addresses" to your URL.
+     * @var TransactionAddressModel[] A list of line items in this transaction. To fetch this list, add the query string `?$include=Addresses` to your URL.    For more information about transaction addresses, please see [Using Address Types](https://developer.avalara.com/avatax/dev-guide/customizing-transaction/address-types/)   in the AvaTax Developer Guide.
      */
     public $addresses;
 
     /**
-     * @var TransactionLocationTypeModel[] Optional: A list of location types in this transaction. To fetch this list, add the query string "?$include=Addresses" to your URL.
+     * @var TransactionLocationTypeModel[] A list of location types in this transaction. To fetch this list, add the query string `?$include=Addresses` to your URL.
      */
     public $locationTypes;
 
@@ -7817,9 +7956,14 @@ class TransactionLineDetailModel
     public $stateAssignedNo;
 
     /**
-     * @var string The type of the jurisdiction to which this tax detail applies. (See JurisTypeId::* for a list of allowable values)
+     * @var string (DEPRECATED) The type of the jurisdiction to which this tax detail applies.  NOTE: Use jurisdictionTypeId instead. (See JurisTypeId::* for a list of allowable values)
      */
     public $jurisType;
+
+    /**
+     * @var string The type of the jurisdiction in which this tax detail applies. (See JurisdictionType::* for a list of allowable values)
+     */
+    public $jurisdictionType;
 
     /**
      * @var float The amount of this line item that was considered nontaxable in this tax detail.
@@ -8362,7 +8506,7 @@ class AddressLocationInfo
 {
 
     /**
-     * @var string If you wish to use the address of an existing location for this company, specify the address here.  Otherwise, leave this value empty.
+     * @var string If you wish to use the address of an existing location for this company, specify the address here.  Otherwise, leave this value empty.    The `locationCode` field on this object allows you to quickly use the address of an existing `locationModel` object instead  of having to retype the address completely.    This field does not affect the behavior of transactions that must be filed on location-based tax returns. To specify how a  transaction will be reported on location-based tax returns, please see the `reportingLocationCode` field   on the [CreateTransactionModel](https://developer.avalara.com/api-reference/avatax/rest/v2/models/CreateTransactionModel/) element.
      */
     public $locationCode;
 
@@ -8631,7 +8775,7 @@ class NoticeModel
     public $filingFrequency;
 
     /**
-     * @var string The filing type of the notice (See FilingTypeId::* for a list of allowable values)
+     * @var string The filing type of the notice (See TaxNoticeFilingTypeId::* for a list of allowable values)
      */
     public $filingTypeId;
 
@@ -9932,6 +10076,24 @@ class RemoveTransactionLineModel
      * @var boolean ption to renumber lines after removal. After renumber, the line number becomes: "1", "2", "3", ...
      */
     public $renumber;
+
+}
+
+/**
+ * Information about a username.
+ */
+class UsernameModel
+{
+
+    /**
+     * @var string The username.
+     */
+    public $username;
+
+    /**
+     * @var boolean Whether or not the username is taken.
+     */
+    public $taken;
 
 }
 
