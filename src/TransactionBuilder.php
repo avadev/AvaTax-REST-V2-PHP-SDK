@@ -34,7 +34,7 @@ class TransactionBuilder
      *
      * @param AvaTaxClient  $client        The AvaTaxClient object to use to create this transaction
      * @param string        $companyCode   The code of the company for this transaction
-     * @param DocumentType  $type          The type of transaction to create (See DocumentType::* for a list of allowable values)
+     * @param string        $type          The type of transaction to create (See DocumentType::* for a list of allowable values)
      * @param string        $customerCode  The customer code for this transaction
      * @param string|null   $dateTime      The datetime of the transaction, defaults to current time when null (Format: Y-m-d)
      */
