@@ -517,6 +517,19 @@ class TransactionBuilder
     }
 
     /**
+     * Specific a currency code for this transaction
+     *
+     * @param   string              $currencyCode Specific the three-character ISO 4217 code that is being used for this transaction (optional)
+     * @return  TransactionBuilder
+     */
+    public function withCurrencyCode($currencyCode)
+    {
+
+        $this->_model['currencyCode'] = $currencyCode;
+        return $this;
+    }
+
+    /**
      * Checks to see if the current model has a line.
      *
      * @return  int
