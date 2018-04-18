@@ -557,6 +557,19 @@ class TransactionBuilder
     }
 
     /**
+     * Create this transaction, or adjust an existing transaction that has the same transaction code.
+     *
+     * @param string $include
+     * @return TransactionModel
+     */
+    public function createOrAdjust($include = null)
+    {
+        $createOrAdjustTransactionModel = new CreateOrAdjustTransactionModel();
+        $createOrAdjustTransactionModel->createTransactionModel = $this->_model;
+        return $this->_client->createOrAdjustTransaction($include, $createOrAdjustTransactionModel);
+    }
+
+    /**
      * Create a transaction adjustment request that can be used with the AdjustTransaction() API call
      *
      * @return  AdjustTransactionModel
