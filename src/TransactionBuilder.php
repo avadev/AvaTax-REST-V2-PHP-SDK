@@ -566,7 +566,8 @@ class TransactionBuilder
     public function getCurrentLineNumber()
     {
         try {
-            return $this->getMostRecentLineIndex();
+            $li = $this->getMostRecentLineIndex();
+            return $this->_model['lines'][$li]['number'];
         } catch (\Exception $e) {
             return null;
         }
