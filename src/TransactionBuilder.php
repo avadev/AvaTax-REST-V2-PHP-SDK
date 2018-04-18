@@ -431,15 +431,20 @@ class TransactionBuilder
     /**
      * Add a line to this transaction
      *
-     * @param   float               $amount      Value of the item.
-     * @param   float               $quantity    Quantity of the item.
-     * @param   string              $taxCode     Tax Code of the item. If left blank, the default item (P0000000) is assumed.
+     * @param   float  $amount      Value of the item.
+     * @param   float  $quantity    Quantity of the item.
+     * @param   string $itemCode
+     * @param   string $taxCode     Tax Code of the item. If left blank, the default item (P0000000) is assumed.
+     * @param   string $lineNumber  Custom Line number, defaults to auto-incremented number if null
      * @return  TransactionBuilder
      */
-    public function withLine($amount, $quantity, $itemCode, $taxCode)
+    public function withLine($amount, $quantity, $itemCode, $taxCode, $lineNumber = null)
     {
+        if($lineNumber === null) {
+            $lineNumber = $this->_line_number;
+        }
         $l = [
-            'number' => $this->_line_number,
+            'number' => $lineNumber,
             'quantity' => $quantity,
             'amount' => $amount,
             'taxCode' => $taxCode,
@@ -464,12 +469,17 @@ class TransactionBuilder
      * @param   string              $region      State or Region of the location.
      * @param   string              $postalCode  Postal/zip code of the location.
      * @param   string              $country     The two-letter country code of the location.
+     * @param   string              $lineNumber  Custom Line number, defaults to auto-incremented number if null
      * @return  TransactionBuilder
      */
-    public function withSeparateAddressLine($amount, $type, $line1, $line2, $line3, $city, $region, $postalCode, $country)
+    public function withSeparateAddressLine($amount, $type, $line1, $line2, $line3, $city, $region, $postalCode,
+        $country, $lineNumber = null)
     {
+        if($lineNumber === null) {
+            $lineNumber = $this->_line_number;
+        }
         $l = [
-            'number' => $this->_line_number,
+            'number' => $lineNumber,
             'quantity' => 1,
             'amount' => $amount,
             'addresses' => [
@@ -498,12 +508,16 @@ class TransactionBuilder
      *
      * @param   float               $amount         The amount of this line item
      * @param   string              $exemptionCode  The exemption code for this line item
+     * @param   string              $lineNumber     Custom Line number, defaults to auto-incremented number if null
      * @return  TransactionBuilder
      */
-    public function withExemptLine($amount, $itemCode, $exemptionCode)
+    public function withExemptLine($amount, $itemCode, $exemptionCode, $lineNumber = null)
     {
+        if($lineNumber === null) {
+            $lineNumber = $this->_line_number;
+        }
         $l = [
-            'number' => $this->_line_number,
+            'number' => $lineNumber,
             'quantity' => 1,
             'amount' => $amount,
             'exemptionCode' => $exemptionCode,
