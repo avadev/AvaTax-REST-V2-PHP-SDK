@@ -51,15 +51,14 @@ class AvaTaxClientBase
      * @param string $machineName   Specify the machine name of the machine on which this code is executing here.  Should not contain any semicolons.
      * @param string $environment   Indicates which server to use; acceptable values are "sandbox" or "production", or the full URL of your AvaTax instance.
      * @param array $guzzleParams   Extra parameters to pass to the guzzle HTTP client (http://docs.guzzlephp.org/en/latest/request-options.html)
-     * @param bool $catchExceptions Indicates if client exceptions should automatically be caught and returned as a message string
      */
-    public function __construct($appName, $appVersion, $machineName, $environment, $guzzleParams = [], $catchExceptions = true)
+    public function __construct($appName, $appVersion, $machineName, $environment, $guzzleParams = [])
     {
         $this->appName = $appName;
         $this->appVersion = $appVersion;
         $this->machineName = $machineName;
         $this->environment = $environment;
-        $this->catchExceptions = $catchExceptions;
+        $this->catchExceptions = true;
 
         // Determine startup environment
         $env = 'https://rest.avatax.com';
@@ -120,7 +119,7 @@ class AvaTaxClientBase
      * @param bool $catchExceptions
      * @return AvaTaxClient
      */
-    public function setCatchExceptions($catchExceptions = true)
+    public function withCatchExceptions($catchExceptions = true)
     {
         $this->catchExceptions = $catchExceptions;
         return $this;
