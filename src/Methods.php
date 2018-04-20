@@ -224,6 +224,206 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Approve an advanced rule script to run.
+     *
+     * This API is available by invite only and implementation support is required. 
+     * Please contact your Customer Account Manager if you are interested in using 
+     * Advanced Rules in your AvaTax integration.
+     *
+     * 
+     * @param int $accountId The ID of the account that owns the Advanced Rule.
+     * @param string $scriptType The script transform type: Request or Response. (See AdvancedRuleScriptType::* for a list of allowable values)
+     * @return AdvancedRuleScriptModel
+     */
+    public function approveAdvancedRuleScript($accountId, $scriptType)
+    {
+        $path = "/api/v2/accounts/{$accountId}/advancedrulescripts/{$scriptType}/approve";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Create an advanced rule.
+     *
+     * This API is available by invite only and implementation support is required. 
+     * Please contact your Customer Account Manager if you are interested in using 
+     * Advanced Rules in your AvaTax integration.
+     *
+     * 
+     * @param int $accountId The ID of the account that will own the Advanced Rule.
+     * @param string $scriptType The script transform type, Request or Response. (See AdvancedRuleScriptType::* for a list of allowable values)
+     * @param string $crashBehavior The behavior the script should take if it crashes: Fail or Proceed. (See AdvancedRuleCrashBehavior::* for a list of allowable values)
+     * @param object $file The JavaScript file containing the advanced rule.
+     * @return string
+     */
+    public function createAdvancedRuleScript($accountId, $scriptType, $crashBehavior, $file)
+    {
+        $path = "/api/v2/accounts/{$accountId}/advancedrulescripts/{$scriptType}";
+        $guzzleParams = [
+            'query' => ['crashBehavior' => $crashBehavior],
+            'body' => null
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Create a lookup table for an advanced rule
+     *
+     * This API is available by invite only and implementation support is required. 
+     * Please contact your Customer Account Manager if you are interested in using 
+     * Advanced Rules in your AvaTax integration.
+     *
+     * 
+     * @param int $accountId The ID of the account that owns the Advanced Rule.
+     * @param string $csvTableName The name to assign the CSV lookup table.
+     * @param object $file A CSV file containing lookup data for an advanced rule.
+     * @return string
+     */
+    public function createAdvancedRuleTable($accountId, $csvTableName, $file)
+    {
+        $path = "/api/v2/accounts/{$accountId}/advancedruletables/{$csvTableName}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Delete an account's active advanced rule
+     *
+     * This API is available by invite only and implementation support is required. 
+     * Please contact your Customer Account Manager if you are interested in using 
+     * Advanced Rules in your AvaTax integration.
+     *
+     * 
+     * @param int $accountId The ID of the account that owns the Advanced Rule.
+     * @param string $scriptType The script transform type: Request or Response. (See AdvancedRuleScriptType::* for a list of allowable values)
+     * @return ErrorDetail[]
+     */
+    public function deleteAdvancedRuleScript($accountId, $scriptType)
+    {
+        $path = "/api/v2/accounts/{$accountId}/advancedrulescripts/{$scriptType}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Delete a lookup table for an advanced rule.
+     *
+     * This API is available by invite only and implementation support is required. 
+     * Please contact your Customer Account Manager if you are interested in using 
+     * Advanced Rules in your AvaTax integration.
+     *
+     * 
+     * @param int $accountId The ID of the account that owns the Advanced Rule.
+     * @param string $csvTableName The name of the CSV lookup table to delete.
+     * @return ErrorDetail[]
+     */
+    public function deleteAdvancedRuleTable($accountId, $csvTableName)
+    {
+        $path = "/api/v2/accounts/{$accountId}/advancedruletables/{$csvTableName}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Get an account's advanced rule script.
+     *
+     * This API is available by invite only and implementation support is required. 
+     * Please contact your Customer Account Manager if you are interested in using 
+     * Advanced Rules in your AvaTax integration.
+     *
+     * 
+     * @param int $accountId The ID of the account that owns the Advanced Rule.
+     * @param string $scriptType The script transform type: Request or Response. (See AdvancedRuleScriptType::* for a list of allowable values)
+     * @return AdvancedRuleScriptModel
+     */
+    public function getAdvancedRuleScript($accountId, $scriptType)
+    {
+        $path = "/api/v2/accounts/{$accountId}/advancedrulescripts/{$scriptType}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Get an advanced rule lookup table for an account
+     *
+     * This API is available by invite only and implementation support is required. 
+     * Please contact your Customer Account Manager if you are interested in using 
+     * Advanced Rules in your AvaTax integration.
+     *
+     * 
+     * @param int $accountId The ID of the account that owns the Advanced Rule.
+     * @param string $csvTableName The name of the CSV lookup table to get.
+     * @return AdvancedRuleTableModel
+     */
+    public function getAdvancedRuleTable($accountId, $csvTableName)
+    {
+        $path = "/api/v2/accounts/{$accountId}/advancedruletables/{$csvTableName}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Get all advanced rule lookup tables for an account
+     *
+     * This API is available by invite only and implementation support is required. 
+     * Please contact your Customer Account Manager if you are interested in using 
+     * Advanced Rules in your AvaTax integration.
+     *
+     * 
+     * @param int $accountId The ID of the account that owns the Advanced Rule.
+     * @return AdvancedRuleTableModel
+     */
+    public function getAdvancedRuleTables($accountId)
+    {
+        $path = "/api/v2/accounts/{$accountId}/advancedruletables";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Unapprove an advanced rule script so that it cannot be run.
+     *
+     * This API is available by invite only and implementation support is required. 
+     * Please contact your Customer Account Manager if you are interested in using 
+     * Advanced Rules in your AvaTax integration.
+     *
+     * 
+     * @param int $accountId The ID of the account that owns the Advanced Rule.
+     * @param string $scriptType The script transform type: Request or Response. (See AdvancedRuleScriptType::* for a list of allowable values)
+     * @return AdvancedRuleScriptModel
+     */
+    public function unapproveAdvancedRuleScript($accountId, $scriptType)
+    {
+        $path = "/api/v2/accounts/{$accountId}/advancedrulescripts/{$scriptType}/unapprove";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
      * Create a new AvaFileForm
      *
      * Create one or more AvaFileForms
@@ -1687,6 +1887,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * identify any certificates linked to this `customer` object. If any certificate applies to the transaction,
      * AvaTax will record the appropriate elements of the transaction as exempt and link it to the `certificate`.
      * 
+     * A nested object such as CustomFields could be specified and created along with the customer object. To fetch the
+     * nested object, please call 'GetCustomer' API with appropriate $include parameters.
+     * 
      * Using exemption certificates endpoints requires setup of an auditable document storage for each company that will use certificates.
      * Companies that do not have this storage system set up will receive the error `CertCaptureNotConfiguredError` when they call exemption
      * certificate related APIs. To check if this company is set up, call `GetCertificateSetup`. To request setup of the auditable document 
@@ -2091,7 +2294,7 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
-     * List certificate attributes used by a company
+     * List the certificate exempt reasons defined by a company
      *
      * List the certificate exempt reasons defined by a company.
      * 
@@ -2147,10 +2350,9 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
-     * Retrieve the full list of communications transactiontypes
+     * Retrieve the full list of communications service types
      *
-     * Returns full list of communications transaction types which
-     * are accepted in communication tax calculation requests.
+     * Returns full list of service types for a given transaction type ID.
      *
      * 
      * @param int $id The transaction type ID to examine
@@ -4628,7 +4830,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * Call this API to obtain a free AvaTax sandbox account.
      * 
-     * This API is free to use. No authentication credentials are required to call this API.
+     * This API is free to use. No authentication credentials are required to call this API. You must read and accept Avalara's terms and conditions.
      * The account will grant a full trial version of AvaTax (e.g. AvaTaxPro) for a limited period of time.
      * After this introductory period, you may continue to use the free TaxRates API.
      * 
@@ -5698,7 +5900,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Note that not all fields within a nexus can be updated; Avalara publishes a list of all defined nexus at the
      * '/api/v2/definitions/nexus' endpoint.
      * You may only define nexus matching the official list of declared nexus.
-     * Please allow 1 minute before start using the created Nexus in your transactions.
+     * Please allow 1 minute before using the created nexus in your transactions.
      *
      * 
      * @param int $companyId The ID of the company that owns this nexus.
@@ -5708,6 +5910,41 @@ class AvaTaxClient extends AvaTaxClientBase
     public function createNexus($companyId, $model)
     {
         $path = "/api/v2/companies/{$companyId}/nexus";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Creates nexus for a list of addresses.
+     *
+     * This call is intended to simplify adding all applicable nexus to a company, for an address or addresses. Calling this 
+     * API declares nexus for this company, for the list of addresses provided,
+     * for the date range provided. You may also use this API to extend effective date on an already-declared nexus.
+     * 
+     * The concept of 'Nexus' indicates a place where your company has sufficient physical presence and is obligated
+     * to collect and remit transaction-based taxes.
+     * 
+     * When defining companies in AvaTax, you must declare nexus for your company in order to correctly calculate tax
+     * in all jurisdictions affected by your transactions.
+     * 
+     * Note that not all fields within a nexus can be updated; Avalara publishes a list of all defined nexus at the
+     * '/api/v2/definitions/nexus' endpoint.
+     * 
+     * You may only define nexus matching the official list of declared nexus.
+     * 
+     * Please allow 1 minute before using the created nexus in your transactions.
+     *
+     * 
+     * @param int $companyId The ID of the company that will own this nexus.
+     * @param DeclareNexusByAddressModel[] $model The nexus you wish to create.
+     * @return NexusByAddressModel[]
+     */
+    public function declareNexusByAddress($companyId, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/nexus/byaddress";
         $guzzleParams = [
             'query' => [],
             'body' => json_encode($model)
@@ -5864,7 +6101,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * You may only define nexus matching the official list of declared nexus.
      * All data from the existing object will be replaced with data in the object you PUT. 
      * To set a field's value to null, you may either set its value to null or omit that field from the object you post.
-     * Please allow 1 minute to start seeing your updated Nexus taking effect on your transactions.
+     * Please allow 1 minute for your updated Nexus to take effect on your transactions.
      *
      * 
      * @param int $companyId The ID of the company that this nexus belongs to.
@@ -6705,7 +6942,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The unique ID number of the company to report on.
      * @param ExportDocumentLineModel $model Options that may be configured to customize the report.
-     * @return object
+     * @return ReportModel[]
      */
     public function initiateExportDocumentLineReport($companyId, $model)
     {
@@ -6749,12 +6986,15 @@ class AvaTaxClient extends AvaTaxClientBase
      * Create a new setting
      *
      * Create one or more new setting objects attached to this company.
-     * A 'setting' is a piece of user-defined data that can be attached to a company, and it provides you the ability to store information
-     * not defined or managed by Avalara.
-     * You may create, update, and delete your own settings objects as required, and there is no mandatory data format for the 'name' and 
-     * 'value' data fields.
-     * To ensure correct operation of other programs or connectors, please create a new GUID for your application and use that value for
-     * the 'set' data field.
+     * 
+     * The company settings system is a metadata system that you can use to store extra information
+     * about a company. Your integration or connector could use this data storage to keep track of
+     * preference information, reminders, or any other storage that would need to persist even if
+     * the customer uninstalls your application.
+     * 
+     * A setting can refer to any type of data you need to remember about this company object.
+     * When creating this object, you may define your own `set`, `name`, and `value` parameters.
+     * To define your own values, please choose a `set` name that begins with `X-` to indicate an extension.
      *
      * 
      * @param int $companyId The ID of the company that owns this setting.
@@ -6775,6 +7015,15 @@ class AvaTaxClient extends AvaTaxClientBase
      * Delete a single setting
      *
      * Mark the setting object at this URL as deleted.
+     * 
+     * The company settings system is a metadata system that you can use to store extra information
+     * about a company. Your integration or connector could use this data storage to keep track of
+     * preference information, reminders, or any other storage that would need to persist even if
+     * the customer uninstalls your application.
+     * 
+     * A setting can refer to any type of data you need to remember about this company object.
+     * When creating this object, you may define your own `set`, `name`, and `value` parameters.
+     * To define your own values, please choose a `set` name that begins with `X-` to indicate an extension.
      *
      * 
      * @param int $companyId The ID of the company that owns this setting.
@@ -6795,12 +7044,15 @@ class AvaTaxClient extends AvaTaxClientBase
      * Retrieve a single setting
      *
      * Get a single setting object by its unique ID.
-     * A 'setting' is a piece of user-defined data that can be attached to a company, and it provides you the ability to store information
-     * not defined or managed by Avalara.
-     * You may create, update, and delete your own settings objects as required, and there is no mandatory data format for the 'name' and 
-     * 'value' data fields.
-     * To ensure correct operation of other programs or connectors, please create a new GUID for your application and use that value for
-     * the 'set' data field.
+     * 
+     * The company settings system is a metadata system that you can use to store extra information
+     * about a company. Your integration or connector could use this data storage to keep track of
+     * preference information, reminders, or any other storage that would need to persist even if
+     * the customer uninstalls your application.
+     * 
+     * A setting can refer to any type of data you need to remember about this company object.
+     * When creating this object, you may define your own `set`, `name`, and `value` parameters.
+     * To define your own values, please choose a `set` name that begins with `X-` to indicate an extension.
      *
      * 
      * @param int $companyId The ID of the company that owns this setting
@@ -6821,12 +7073,15 @@ class AvaTaxClient extends AvaTaxClientBase
      * Retrieve all settings for this company
      *
      * List all setting objects attached to this company.
-     * A 'setting' is a piece of user-defined data that can be attached to a company, and it provides you the ability to store information
-     * not defined or managed by Avalara.
-     * You may create, update, and delete your own settings objects as required, and there is no mandatory data format for the 'name' and 
-     * 'value' data fields.
-     * To ensure correct operation of other programs or connectors, please create a new GUID for your application and use that value for
-     * the 'set' data field.
+     * 
+     * The company settings system is a metadata system that you can use to store extra information
+     * about a company. Your integration or connector could use this data storage to keep track of
+     * preference information, reminders, or any other storage that would need to persist even if
+     * the customer uninstalls your application.
+     * 
+     * A setting can refer to any type of data you need to remember about this company object.
+     * When creating this object, you may define your own `set`, `name`, and `value` parameters.
+     * To define your own values, please choose a `set` name that begins with `X-` to indicate an extension.
      * 
      * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
      * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
@@ -6854,12 +7109,15 @@ class AvaTaxClient extends AvaTaxClientBase
      * Retrieve all settings
      *
      * Get multiple setting objects across all companies.
-     * A 'setting' is a piece of user-defined data that can be attached to a company, and it provides you the ability to store information
-     * not defined or managed by Avalara.
-     * You may create, update, and delete your own settings objects as required, and there is no mandatory data format for the 'name' and 
-     * 'value' data fields.
-     * To ensure correct operation of other programs or connectors, please create a new GUID for your application and use that value for
-     * the 'set' data field.
+     * 
+     * The company settings system is a metadata system that you can use to store extra information
+     * about a company. Your integration or connector could use this data storage to keep track of
+     * preference information, reminders, or any other storage that would need to persist even if
+     * the customer uninstalls your application.
+     * 
+     * A setting can refer to any type of data you need to remember about this company object.
+     * When creating this object, you may define your own `set`, `name`, and `value` parameters.
+     * To define your own values, please choose a `set` name that begins with `X-` to indicate an extension.
      * 
      * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
      * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
@@ -6886,14 +7144,19 @@ class AvaTaxClient extends AvaTaxClientBase
      * Update a single setting
      *
      * Replace the existing setting object at this URL with an updated object.
-     * A 'setting' is a piece of user-defined data that can be attached to a company, and it provides you the ability to store information
-     * not defined or managed by Avalara.
-     * You may create, update, and delete your own settings objects as required, and there is no mandatory data format for the 'name' and 
-     * 'value' data fields.
-     * To ensure correct operation of other programs or connectors, please create a new GUID for your application and use that value for
-     * the 'set' data field.
-     * All data from the existing object will be replaced with data in the object you PUT. 
-     * To set a field's value to null, you may either set its value to null or omit that field from the object you post.
+     * 
+     * The company settings system is a metadata system that you can use to store extra information
+     * about a company. Your integration or connector could use this data storage to keep track of
+     * preference information, reminders, or any other storage that would need to persist even if
+     * the customer uninstalls your application.
+     * 
+     * A setting can refer to any type of data you need to remember about this company object.
+     * When creating this object, you may define your own `set`, `name`, and `value` parameters.
+     * To define your own values, please choose a `set` name that begins with `X-` to indicate an extension.
+     *  
+     * All data from the existing object will be replaced with data in the object you `PUT`. 
+     * 
+     * To set a field's value to `null`, you may either set its value to `null` or omit that field from the object when calling update.
      *
      * 
      * @param int $companyId The ID of the company that this setting belongs to.
@@ -7234,13 +7497,14 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * 
      * @param string $date The date for which point-of-sale data would be calculated (today by default). Example input: 2016-12-31
+     * @param string $region If the region is provided, this API is going to generate the tax rate per zipcode for only the region specified.
      * @return object
      */
-    public function downloadTaxRatesByZipCode($date)
+    public function downloadTaxRatesByZipCode($date, $region)
     {
         $path = "/api/v2/taxratesbyzipcode/download/{$date}";
         $guzzleParams = [
-            'query' => [],
+            'query' => ['region' => $region],
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
@@ -8019,6 +8283,30 @@ class AvaTaxClient extends AvaTaxClientBase
         $guzzleParams = [
             'query' => ['documentType' => $documentType],
             'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Uncommit a transaction for reporting
+     *
+     * Adjusts a transaction by changing it to an uncommitted status.
+     * 
+     * Transactions that have been previously reported to a tax authority by Avalara Managed Returns are considered `locked` and are 
+     * no longer available to be uncommitted.
+     *
+     * 
+     * @param string $companyCode The company code of the company that recorded this transaction
+     * @param string $transactionCode The transaction code to commit
+     * @param string $documentType (Optional): The document type of the transaction to commit. If not provided, the default is SalesInvoice. (See DocumentType::* for a list of allowable values)
+     * @return TransactionModel
+     */
+    public function uncommitTransaction($companyCode, $transactionCode, $documentType)
+    {
+        $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/uncommit";
+        $guzzleParams = [
+            'query' => ['documentType' => $documentType],
+            'body' => null
         ];
         return $this->restCall($path, 'POST', $guzzleParams);
     }
