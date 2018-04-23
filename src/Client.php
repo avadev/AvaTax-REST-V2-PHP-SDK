@@ -47,10 +47,21 @@ class AvaTaxClientBase
      * @param string $environment  Indicates which server to use; acceptable values are "sandbox" or "production", or the full URL of your AvaTax instance.
      * @param array $guzzleParams  Extra parameters to pass to the guzzle HTTP client (http://docs.guzzlephp.org/en/latest/request-options.html)
      */
-    public function __construct($appName, $appVersion, $machineName, $environment, $guzzleParams = [])
+    public function __construct($appName, $appVersion, $machineName="", $environment, $guzzleParams = [])
     {
-        $this->appName = $appName;
+        // app name and app version are mandatory fields.
+        if ($appName == "" || $appName == null || $appVersion == "" || $appVersion == null) {
+            throw new Exception('appName and appVersion are manadatory fields!');
+        }
+
+        // machine name is nullable, but must be empty string to avoid error when concat in client string.
+        if ($machineName == null) {
+            $machineName = "";
+        }
+
+        // assign client header params to current client object
         $this->appVersion = $appVersion;
+        $this->appName = $appName;
         $this->machineName = $machineName;
         $this->environment = $environment;
 
