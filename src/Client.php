@@ -39,7 +39,12 @@ class AvaTaxClientBase
     private $environment;
 
     /**
-     * Construct a new AvaTaxClient 
+     * @var bool        The setting for whether the client should catch exceptions
+     */
+    private $catchExceptions;
+
+    /**
+     * Construct a new AvaTaxClient
      *
      * @param string $appName      Specify the name of your application here.  Should not contain any semicolons.
      * @param string $appVersion   Specify the version number of your application here.  Should not contain any semicolons.
@@ -64,6 +69,7 @@ class AvaTaxClientBase
         $this->appName = $appName;
         $this->machineName = $machineName;
         $this->environment = $environment;
+        $this->catchExceptions = true;
 
         // Determine startup environment
         $env = 'https://rest.avatax.com';
@@ -117,7 +123,19 @@ class AvaTaxClientBase
         $this->auth = [$bearerToken];
         return $this;
     }
-	
+
+    /**
+     * Configure the client to either catch web request exceptions and return a message or throw the exception
+     *
+     * @param bool $catchExceptions
+     * @return AvaTaxClient
+     */
+    public function withCatchExceptions($catchExceptions = true)
+    {
+        $this->catchExceptions = $catchExceptions;
+        return $this;
+    }
+
     /**
      * Make a single REST call to the AvaTax v2 API server
      *
@@ -150,6 +168,9 @@ class AvaTaxClientBase
             $body = $response->getBody();
             return json_decode($body);
         } catch (\Exception $e) {
+            if (!$this->catchExceptions) {
+                throw $e;
+            }
             return $e->getMessage();
         }
     }
