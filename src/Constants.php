@@ -27,6 +27,28 @@ class TransactionAddressType
 
 
 /**
+ * 
+ */
+class AdvancedRuleScriptType
+{
+    const C_REQUESTRULE = "RequestRule";
+    const C_RESPONSERULE = "ResponseRule";
+
+}
+
+
+/**
+ * 
+ */
+class AdvancedRuleCrashBehavior
+{
+    const C_FAILONERROR = "FailOnError";
+    const C_PROCEEDWITHORIGINAL = "ProceedWithOriginal";
+
+}
+
+
+/**
  * Casing to use for validation result
  */
 class TextCase
@@ -631,7 +653,6 @@ class ErrorCodeId
     const C_DELETEUSERSELFERROR = "DeleteUserSelfError";
     const C_OLDPASSWORDINVALID = "OldPasswordInvalid";
     const C_CANNOTCHANGEPASSWORD = "CannotChangePassword";
-    const C_CANNOTCHANGECOMPANYCODE = "CannotChangeCompanyCode";
     const C_DATEFORMATERROR = "DateFormatError";
     const C_NODEFAULTCOMPANY = "NoDefaultCompany";
     const C_AUTHENTICATIONEXCEPTION = "AuthenticationException";
@@ -739,6 +760,7 @@ class ErrorCodeId
     const C_USERNOACCESS = "UserNoAccess";
     const C_INVALIDENTRY = "InvalidEntry";
     const C_TRANSACTIONALREADYCANCELLED = "TransactionAlreadyCancelled";
+    const C_QUERYPARAMETEROUTOFRANGE = "QueryParameterOutOfRange";
 
     /**
      * Batch errors
@@ -771,7 +793,7 @@ class ErrorCodeId
     const C_INVALIDPARAMETERVALUE = "InvalidParameterValue";
     const C_COMPANYCODECONFLICT = "CompanyCodeConflict";
     const C_DOCUMENTFETCHLIMIT = "DocumentFetchLimit";
-    const C_ADDRESSINCOMPLETE = "AddressIncomplete";
+    const C_INVALIDADDRESS = "InvalidAddress";
     const C_ADDRESSLOCATIONNOTFOUND = "AddressLocationNotFound";
     const C_MISSINGLINE = "MissingLine";
     const C_INVALIDADDRESSTEXTCASE = "InvalidAddressTextCase";
@@ -779,7 +801,6 @@ class ErrorCodeId
     const C_MULTIDOCUMENTTYPESERROR = "MultiDocumentTypesError";
     const C_INVALIDDOCUMENTTYPESTOFETCH = "InvalidDocumentTypesToFetch";
     const C_TIMEOUTREQUESTED = "TimeoutRequested";
-    const C_INVALIDADDRESS = "InvalidAddress";
     const C_INVALIDPOSTALCODE = "InvalidPostalCode";
 
     /**
@@ -822,6 +843,7 @@ class ErrorCodeId
      * Free API error codes
      */
     const C_MUSTUSECREATETRANSACTION = "MustUseCreateTransaction";
+    const C_MUSTACCEPTTERMSANDCONDITIONS = "MustAcceptTermsAndConditions";
 
     /**
      * Filing Calendar Error Codes
@@ -914,6 +936,15 @@ class ErrorCodeId
      */
     const C_CANNOTDELETEPARENTBEFORECHILDNEXUS = "CannotDeleteParentBeforeChildNexus";
     const C_NEXUSCHILDDATEMISMATCH = "NexusChildDateMismatch";
+
+    /**
+     * Advanced rule errors
+     */
+    const C_ADVANCEDRULEBADSCRIPT = "AdvancedRuleBadScript";
+    const C_ADVANCEDRULEBADCSVTABLE = "AdvancedRuleBadCsvTable";
+    const C_ADVANCEDRULEREQUESTRULEERROR = "AdvancedRuleRequestRuleError";
+    const C_ADVANCEDRULERESPONSERULEERROR = "AdvancedRuleResponseRuleError";
+    const C_INVALIDDOCUMENTSTATUSTOADDORDELETELINES = "InvalidDocumentStatusToAddOrDeleteLines";
 
 }
 
@@ -1450,6 +1481,14 @@ class AddressTypeId
      */
     const C_SALESPERSON = "Salesperson";
 
+    /**
+     * This location is a marketplace vendor that handles transactions on behalf of the company.
+     *  When you select `Marketplace` as the address type for a location, you must then choose either
+     *  `SellersRemitsTax` or `MarketplaceRemitsTax` to indicate which business entity is responsible
+     *  for collecting and remitting tax for this location.
+     */
+    const C_MARKETPLACE = "Marketplace";
+
 }
 
 
@@ -1483,6 +1522,23 @@ class AddressCategoryId
      * Address is a type not reflected in the other lists
      */
     const C_OTHER = "Other";
+
+    /**
+     * The marketplace vendor does not collect and remit tax for transactions tied to this
+     *  location. Use this option if you are using a marketplace vendor to handle your transactions
+     *  and your company is responsible for collecting and remitting all taxes for transactions tied
+     *  to this location.
+     */
+    const C_SELLERSREMITSTAX = "SellersRemitsTax";
+
+    /**
+     * The marketplace vendor collects and remits tax on your behalf for all transactions tied
+     *  to this location. Use this option if your marketplace vendor already pays sales and use
+     *  taxes on your behalf. When this option is selected, all transactions tied to this location
+     *  will be treated as already filed, and will be listed on each sales tax return as amounts
+     *  already paid.
+     */
+    const C_MARKETPLACEREMITSTAX = "MarketplaceRemitsTax";
 
 }
 
@@ -2112,6 +2168,7 @@ class AdjustmentTypeId
     const C_DISCOUNT = "Discount";
     const C_ROUNDING = "Rounding";
     const C_CSPFEE = "CspFee";
+    const C_MARKETPLACE = "Marketplace";
 
 }
 

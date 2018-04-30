@@ -503,6 +503,16 @@ class FreeTrialRequestModel
      */
     public $website;
 
+    /**
+     * @var boolean Read Avalara's terms and conditions is necessary for a free trial account
+     */
+    public $haveReadAvalaraTermsAndConditions;
+
+    /**
+     * @var boolean Accept Avalara's terms and conditions is necessary for a free trial
+     */
+    public $acceptAvalaraTermsAndConditions;
+
 }
 
 /**
@@ -895,6 +905,72 @@ class AvaTaxMessage
      * @var string The name of the code or service that generated this message
      */
     public $source;
+
+}
+
+/**
+ * Represents an advanced rule script
+ */
+class AdvancedRuleScriptModel
+{
+
+    /**
+     * @var int The unique ID of the script
+     */
+    public $id;
+
+    /**
+     * @var int Account ID
+     */
+    public $accountId;
+
+    /**
+     * @var string How to proceed if the rule crashes (See AdvancedRuleCrashBehavior::* for a list of allowable values)
+     */
+    public $crashBehavior;
+
+    /**
+     * @var string The type of script - request or response (See AdvancedRuleScriptType::* for a list of allowable values)
+     */
+    public $scriptType;
+
+    /**
+     * @var string The JavaScript rule
+     */
+    public $script;
+
+    /**
+     * @var boolean The rule has been approved
+     */
+    public $isApproved;
+
+}
+
+/**
+ * Represents an advanced rule table
+ */
+class AdvancedRuleTableModel
+{
+
+    /**
+     * @var int The unique ID of the table
+     */
+    public $id;
+
+    /**
+     * @var int Account ID
+     */
+    public $accountId;
+
+    /**
+     * @var string The name of the table
+     */
+    public $csvTableName;
+
+    /**
+     * @var string The CSV data
+     */
+    public $csvTable;
 
 }
 
@@ -2416,9 +2492,15 @@ class NexusModel
 
 /**
  * This object is used to keep track of custom information about a company.
+ * 
+ * The company settings system is a metadata system that you can use to store extra information
+ * about a company. Your integration or connector could use this data storage to keep track of
+ * preference information, reminders, or any other storage that would need to persist even if
+ * the customer uninstalls your application.
+ * 
  * A setting can refer to any type of data you need to remember about this company object.
- * When creating this object, you may define your own "set", "name", and "value" parameters.
- * To define your own values, please choose a "set" name that begins with "X-" to indicate an extension.
+ * When creating this object, you may define your own `set`, `name`, and `value` parameters.
+ * To define your own values, please choose a `set` name that begins with `X-` to indicate an extension.
  */
 class SettingModel
 {
@@ -2434,7 +2516,7 @@ class SettingModel
     public $companyId;
 
     /**
-     * @var string A user-defined "set" containing this name-value pair.
+     * @var string A user-defined "set" containing this setting.    Avalara defines some sets that cannot be changed. To create your own set, choose a set  name that begins with `X-` to indicate that this is an extension value.    We recommend that you choose a set name that clearly identifies your application, and then  store data within name/value pairs within that set. For example, if you were creating an   application called MyApp, you might choose to create a set named `X-MyCompany-MyApp`.
      */
     public $set;
 
@@ -3737,6 +3819,11 @@ class IsoCountryModel
      * @var IsoLocalizedName[] A list of localized names in a variety of languages.    This list is maintained by the International Standards Organization.
      */
     public $localizedNames;
+
+    /**
+     * @var boolean Whether or not this country requires a region in postal addresses.
+     */
+    public $addressesRequireRegion;
 
 }
 
@@ -7301,7 +7388,7 @@ class TransactionModel
     public $totalDiscount;
 
     /**
-     * @var float The total tax calculated for all lines in this transaction.
+     * @var float The total tax for all lines in this transaction.    If you used a `taxOverride` of type `taxAmount` for any lines in this transaction, this value   may be different than the amount of tax calculated by AvaTax. The amount of tax calculated by  AvaTax will be stored in the `totalTaxCalculated` field, whereas this field will contain the  total tax that was charged on the transaction.    You can compare the `totalTax` and `totalTaxCalculated` fields to check for any discrepancies  between an external tax calculation provider and the calculation performed by AvaTax.
      */
     public $totalTax;
 
@@ -7311,7 +7398,7 @@ class TransactionModel
     public $totalTaxable;
 
     /**
-     * @var float If a tax override was applied to this transaction, indicates the amount of tax Avalara calculated for the transaction.
+     * @var float The amount of tax that AvaTax calculated for the transaction.    If you used a `taxOverride` of type `taxAmount` for any lines in this transaction, this value   will still represent the amount that AvaTax calculated for this transaction, although the field  `totalTax` will be the total amount of tax after all overrides are applied.    You can compare the `totalTax` and `totalTaxCalculated` fields to check for any discrepancies  between an external tax calculation provider and the calculation performed by AvaTax.
      */
     public $totalTaxCalculated;
 
@@ -7569,7 +7656,7 @@ class TransactionLineModel
     public $sourcing;
 
     /**
-     * @var float The amount of tax generated for this line item.
+     * @var float The tax for this line in this transaction.    If you used a `taxOverride` of type `taxAmount` for this line, this value   will represent the amount of your override. AvaTax will still attempt to calculate the correct tax  for this line and will store that calculated value in the `taxCalculated` field.    You can compare the `tax` and `taxCalculated` fields to check for any discrepancies  between an external tax calculation provider and the calculation performed by AvaTax.
      */
     public $tax;
 
@@ -7579,7 +7666,7 @@ class TransactionLineModel
     public $taxableAmount;
 
     /**
-     * @var float The tax calculated for this line by Avalara. If the transaction was calculated with a tax override, this amount will be different from the "tax" value.
+     * @var float The amount of tax that AvaTax calculated for the transaction.    If you used a `taxOverride` of type `taxAmount` for this line, there will be a difference between  the `tax` field which represents your override, and the `taxCalculated` field which represents the  amount of tax that AvaTax calculated for this line.    You can compare the `tax` and `taxCalculated` fields to check for any discrepancies  between an external tax calculation provider and the calculation performed by AvaTax.
      */
     public $taxCalculated;
 
@@ -8019,6 +8106,16 @@ class TransactionLineDetailModel
      * @var string The type of tax that was calculated. Depends on the company's nexus settings as well as the jurisdiction's tax laws. (See TaxType::* for a list of allowable values)
      */
     public $taxType;
+
+    /**
+     * @var string The id of the tax subtype.
+     */
+    public $taxSubTypeId;
+
+    /**
+     * @var string The id of the tax type group.
+     */
+    public $taxTypeGroupId;
 
     /**
      * @var string The name of the tax against which this tax amount was calculated.
@@ -8703,6 +8800,97 @@ class VerifyMultiDocumentModel
      * @var float Set this value if you wish to verify a match between `verifyTotalTax` and  the `totalTax` value on the transaction recorded in AvaTax.    If you leave this field empty, we will skip verification for this field.
      */
     public $verifyTotalTax;
+
+}
+
+/**
+ * Use this object to provide an address and date range where your company does business.
+ * This address will be used to determine what jurisdictions you should declare nexus and
+ * calculate tax.
+ */
+class DeclareNexusByAddressModel
+{
+
+    /**
+     * @var string The earliest date on which your company does business at this address. If you omit  a value in this field, nexus will be declared at the earliest possible date for this  jurisdiction.
+     */
+    public $effectiveDate;
+
+    /**
+     * @var string The date on which your company stopped doing business at this address, or empty if  your company has no plans to stop doing business at this address.
+     */
+    public $endDate;
+
+    /**
+     * @var string Specify the text case for the validated address result. If not specified, will return uppercase. (See TextCase::* for a list of allowable values)
+     */
+    public $textCase;
+
+    /**
+     * @var string First line of the street address
+     */
+    public $line1;
+
+    /**
+     * @var string Second line of the street address
+     */
+    public $line2;
+
+    /**
+     * @var string Third line of the street address
+     */
+    public $line3;
+
+    /**
+     * @var string City component of the address
+     */
+    public $city;
+
+    /**
+     * @var string Name or ISO 3166 code identifying the region within the country.    This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions    For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
+     */
+    public $region;
+
+    /**
+     * @var string Name or ISO 3166 code identifying the country.    This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries    For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
+     */
+    public $country;
+
+    /**
+     * @var string Postal Code / Zip Code component of the address.
+     */
+    public $postalCode;
+
+    /**
+     * @var float Geospatial latitude measurement, in Decimal Degrees floating point format.
+     */
+    public $latitude;
+
+    /**
+     * @var float Geospatial longitude measurement, in Decimal Degrees floating point format.
+     */
+    public $longitude;
+
+}
+
+/**
+ * Contains information about nexus jurisdictions that were declared
+ * as a result of a call to `DeclareNexusByAddress`. For each address,
+ * this object model contains a list of the nexus objects that were declared
+ * according to the geocoding that corresponds to this address.
+ */
+class NexusByAddressModel
+{
+
+    /**
+     * @var DeclareNexusByAddressModel The address that was provided by the user in the call to `DeclareNexusByAddress`
+     */
+    public $address;
+
+    /**
+     * @var NexusModel[] List of all nexus objects that were affected by declaring nexus at the address specified  by `address`.
+     */
+    public $declaredNexus;
 
 }
 
