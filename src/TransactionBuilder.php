@@ -171,18 +171,6 @@ class TransactionBuilder
     }
 
     /**
-     * Set the currency code
-     *
-     * @param   string              code    (three-character ISO-4217 currency code)
-     * @return TransactionBuilder
-     */
-    public function withCurrencyCode($code)
-    {
-        $this->_model['currencyCode'] = $code;
-        return $this;
-    }
-
-    /**
      * Set the sale location code for reporting this document to the tax authority
      *
      * @param   string              code
