@@ -56,7 +56,7 @@ class AvaTaxClientBase
     {
         // app name and app version are mandatory fields.
         if ($appName == "" || $appName == null || $appVersion == "" || $appVersion == null) {
-            throw new Exception('appName and appVersion are manadatory fields!');
+            throw new \Exception('appName and appVersion are manadatory fields!');
         }
 
         // machine name is nullable, but must be empty string to avoid error when concat in client string.
