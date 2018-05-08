@@ -41,8 +41,12 @@ final class AvaTaxClientTest extends TestCase
         $this->assertTrue(count($testCompany->nexus) > 0, "Test company should have nexus");
         $this->assertTrue(count($testCompany->locations)> 0, "Test company should have locations");
         
-        // Construct a new transaction
-        $tb = new Avalara\TransactionBuilder($client, $testCompany->companyCode, Avalara\DocumentType::C_SALESINVOICE, 'ABC');
+        // Construct and assert if we can initiate a new transaction builder object
+        $tb = new Avalara\TransactionBuilder($client, "DEFAULT", Avalara\DocumentType::C_SALESINVOICE, 'ABC');
+        $this->assertNotNull($tb, "TransactionBuilder object can be created");
+        $this->assertInstanceOf(Avalara\TransactionBuilder::class, $tb);
+
+        // Put in transaction details to the TransactionBuilder object we just created
         $t = $tb->withAddress('ShipFrom', '123 Main Street', null, null, 'Irvine', 'CA', '92615', 'US')
             ->withAddress('ShipTo', '100 Ravine Lane', null, null, 'Bainbridge Island', 'WA', '98110', 'US')
             ->withLine(100.0, 1, null, "P0000000")
@@ -53,6 +57,13 @@ final class AvaTaxClientTest extends TestCase
             ->withLineAddress(Avalara\TransactionAddressType::C_SHIPTO, "1500 Broadway", null, null, "New York", "NY", "10019", "US")
             ->withLine(50.0, 1, null, "FR010000")
             ->create();
+
+        $this->assertNotNull($t, "Response stdClass is not null");
+        $this->assertTrue($t->status == "Saved", "The transaction is saved");
+        $this->assertTrue($t->type == "SalesInvoice", "The transaction type is SalesInvoice");
+
+
+        // echo out the transaction response from CreateTransaction
         echo '<pre>' . json_encode($t, JSON_PRETTY_PRINT) . '</pre>';
     }
 }
