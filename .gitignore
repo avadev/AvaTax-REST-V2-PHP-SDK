@@ -252,3 +252,9 @@ paket-files/
 *.sln.iml
 composer.lock
 vendor/
+
+
+# DS Store cache files
+.DS_Store
+*/.DS_Store
+
