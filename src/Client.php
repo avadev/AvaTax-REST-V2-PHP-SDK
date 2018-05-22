@@ -11,37 +11,37 @@ class AvaTaxClientBase
   /**
      * @var Client     The Guzzle client to use to connect to AvaTax
      */
-    private $client;
+    protected $client;
 
     /**
      * @var array      The authentication credentials to use to connect to AvaTax
      */
-    private $auth;
+    protected $auth;
 
     /**
      * @var string      The application name as reported to AvaTax
      */
-    private $appName;
+    protected $appName;
 
     /**
      * @var string      The application version as reported to AvaTax
      */
-    private $appVersion;
+    protected $appVersion;
 
     /**
      * @var string      The machine name as reported to AvaTax
      */
-    private $machineName;
+    protected $machineName;
 
     /**
      * @var string      The root URL of the AvaTax environment to contact
      */
-    private $environment;
+    protected $environment;
 
     /**
      * @var bool        The setting for whether the client should catch exceptions
      */
-    private $catchExceptions;
+    protected $catchExceptions;
 
     /**
      * Construct a new AvaTaxClient
@@ -135,6 +135,17 @@ class AvaTaxClientBase
         $this->catchExceptions = $catchExceptions;
         return $this;
     }
+
+    /**
+     * Return the client object, for extended class(es) to retrive the client object
+     *
+     * @return AvaTaxClient
+     */
+    public function getClient()
+    {
+        return $this;
+    }
+
 
     /**
      * Make a single REST call to the AvaTax v2 API server
