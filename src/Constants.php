@@ -27,28 +27,6 @@ class TransactionAddressType
 
 
 /**
- * 
- */
-class AdvancedRuleScriptType
-{
-    const C_REQUESTRULE = "RequestRule";
-    const C_RESPONSERULE = "ResponseRule";
-
-}
-
-
-/**
- * 
- */
-class AdvancedRuleCrashBehavior
-{
-    const C_FAILONERROR = "FailOnError";
-    const C_PROCEEDWITHORIGINAL = "ProceedWithOriginal";
-
-}
-
-
-/**
  * Casing to use for validation result
  */
 class TextCase
@@ -432,6 +410,26 @@ class ServiceTypeId
      * MRSComplianceManager
      */
     const C_MRSCOMPLIANCEMANAGER = "MRSComplianceManager";
+
+    /**
+     * AvaBikeTax
+     */
+    const C_AVABIKETAX = "AvaBikeTax";
+
+    /**
+     * AvaCheckoutBag
+     */
+    const C_AVACHECKOUTBAG = "AvaCheckoutBag";
+
+    /**
+     * TFOCompliance
+     */
+    const C_TFOCOMPLIANCE = "TFOCompliance";
+
+    /**
+     * Send Sales Rate file service
+     */
+    const C_SENDSALESRATEFILE = "SendSalesRateFile";
 
 }
 
@@ -854,12 +852,6 @@ class ErrorCodeId
     const C_OVERLAPPINGFILINGCALENDAR = "OverlappingFilingCalendar";
 
     /**
-     * Location error codes
-     */
-    const C_QUESTIONNOTNEEDEDFORTHISADDRESS = "QuestionNotNeededForThisAddress";
-    const C_QUESTIONNOTVALIDFORTHISADDRESS = "QuestionNotValidForThisAddress";
-
-    /**
      * Create or update transaction error codes
      */
     const C_CANNOTMODIFYLOCKEDTRANSACTION = "CannotModifyLockedTransaction";
@@ -887,6 +879,7 @@ class ErrorCodeId
     const C_INVALIDPDFORIMAGEFILE = "InvalidPdfOrImageFile";
     const C_INVALIDCOVERLETTERTITLE = "InvalidCoverLetterTitle";
     const C_ACCOUNTNOTPROVISIONED = "AccountNotProvisioned";
+    const C_INVALIDREQUESTCONTENTTYPE = "InvalidRequestContentType";
 
     /**
      * Multi document error codes
@@ -944,7 +937,13 @@ class ErrorCodeId
     const C_ADVANCEDRULEBADCSVTABLE = "AdvancedRuleBadCsvTable";
     const C_ADVANCEDRULEREQUESTRULEERROR = "AdvancedRuleRequestRuleError";
     const C_ADVANCEDRULERESPONSERULEERROR = "AdvancedRuleResponseRuleError";
+    const C_ADVANCEDRULENOTAPPROVED = "AdvancedRuleNotApproved";
     const C_INVALIDDOCUMENTSTATUSTOADDORDELETELINES = "InvalidDocumentStatusToAddOrDeleteLines";
+
+    /**
+     * SendSales API errors
+     */
+    const C_UNSUPPORTEDFILEFORMAT = "UnsupportedFileFormat";
 
 }
 
@@ -1101,6 +1100,28 @@ class JurisdictionType
      * Special Tax Jurisdiction
      */
     const C_SPECIAL = "Special";
+
+}
+
+
+/**
+ * 
+ */
+class AdvancedRuleCrashBehavior
+{
+    const C_FAILONERROR = "FailOnError";
+    const C_PROCEEDWITHORIGINAL = "ProceedWithOriginal";
+
+}
+
+
+/**
+ * 
+ */
+class AdvancedRuleScriptType
+{
+    const C_REQUESTRULE = "RequestRule";
+    const C_RESPONSERULE = "ResponseRule";
 
 }
 
@@ -1484,7 +1505,7 @@ class AddressTypeId
     /**
      * This location is a marketplace vendor that handles transactions on behalf of the company.
      *  When you select `Marketplace` as the address type for a location, you must then choose either
-     *  `SellersRemitsTax` or `MarketplaceRemitsTax` to indicate which business entity is responsible
+     *  `SellerRemitsTax` or `MarketplaceRemitsTax` to indicate which business entity is responsible
      *  for collecting and remitting tax for this location.
      */
     const C_MARKETPLACE = "Marketplace";
@@ -1529,7 +1550,7 @@ class AddressCategoryId
      *  and your company is responsible for collecting and remitting all taxes for transactions tied
      *  to this location.
      */
-    const C_SELLERSREMITSTAX = "SellersRemitsTax";
+    const C_SELLERREMITSTAX = "SellerRemitsTax";
 
     /**
      * The marketplace vendor collects and remits tax on your behalf for all transactions tied
@@ -1590,15 +1611,11 @@ class NexusTypeId
 
     /**
      * Indicates the entity is voluntarily collecting tax (default)
-     *  
-     *  This has replaced Collect
      */
     const C_SALESORSELLERSUSETAX = "SalesOrSellersUseTax";
 
     /**
      * Indicates the entity is required to collect tax in the state
-     *  
-     *  This has replaced Legal
      */
     const C_SALESTAX = "SalesTax";
 

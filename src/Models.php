@@ -944,6 +944,11 @@ class AdvancedRuleScriptModel
      */
     public $isApproved;
 
+    /**
+     * @var boolean The rule has been disabled
+     */
+    public $isDisabled;
+
 }
 
 /**
@@ -1026,7 +1031,7 @@ class AvaFileFormModel
     public $formTypeId;
 
     /**
-     * @var string  (See FilingOptionTypeId::* for a list of allowable values)
+     * @var string The type of Filing option (See FilingOptionTypeId::* for a list of allowable values)
      */
     public $filingOptionTypeId;
 
@@ -1041,7 +1046,7 @@ class AvaFileFormModel
     public $dueDay;
 
     /**
-     * @var string  (See DueDateTypeId::* for a list of allowable values)
+     * @var string The type of E-file due date. (See DueDateTypeId::* for a list of allowable values)
      */
     public $efileDueDateTypeId;
 
@@ -1603,7 +1608,7 @@ class CertificateModel
     public $isSingleCertificate;
 
     /**
-     * @var ExemptionReasonModel The exemption reason associated with this certificate.
+     * @var ExemptionReasonModel The exemption reason associated with this certificate. For example, the reason code for exemption  for purposes of resale is `RESALE`.     For a list of exemption reasons, call `ListCertificateExemptReasons`.
      */
     public $exemptionReason;
 
@@ -1971,42 +1976,42 @@ class CompanyModel
     public $modifiedUserId;
 
     /**
-     * @var ContactModel[] Optional: A list of contacts defined for this company. To fetch this list, add the query string "?$include=Contacts" to your URL.
+     * @var ContactModel[] Optional: A list of contacts defined for this company. To fetch this list, add the query string `?$include=Contacts` to your URL.    When calling `CreateCompany`, you may provide a list of objects in this element and they will be created alongside the company.  The `UpdateCompany` API does not permit updating nested objects.
      */
     public $contacts;
 
     /**
-     * @var ItemModel[] Optional: A list of items defined for this company. To fetch this list, add the query string "?$include=Items" to your URL.
+     * @var ItemModel[] Optional: A list of items defined for this company. To fetch this list, add the query string `?$include=Items` to your URL.    When calling `CreateCompany`, you may provide a list of objects in this element and they will be created alongside the company.  The `UpdateCompany` API does not permit updating nested objects.
      */
     public $items;
 
     /**
-     * @var LocationModel[] Optional: A list of locations defined for this company. To fetch this list, add the query string "?$include=Locations" to your URL.
+     * @var LocationModel[] Optional: A list of locations defined for this company. To fetch this list, add the query string `?$include=Locations` to your URL.    When calling `CreateCompany`, you may provide a list of objects in this element and they will be created alongside the company.  The `UpdateCompany` API does not permit updating nested objects.
      */
     public $locations;
 
     /**
-     * @var NexusModel[] Optional: A list of nexus defined for this company. To fetch this list, add the query string "?$include=Nexus" to your URL.
+     * @var NexusModel[] Optional: A list of nexus defined for this company. To fetch this list, add the query string `?$include=Nexus` to your URL.    When calling `CreateCompany`, you may provide a list of objects in this element and they will be created alongside the company.  The `UpdateCompany` API does not permit updating nested objects.
      */
     public $nexus;
 
     /**
-     * @var SettingModel[] Optional: A list of settings defined for this company. To fetch this list, add the query string "?$include=Settings" to your URL.
+     * @var SettingModel[] Optional: A list of settings defined for this company. To fetch this list, add the query string `?$include=Settings` to your URL.    When calling `CreateCompany`, you may provide a list of objects in this element and they will be created alongside the company.  The `UpdateCompany` API does not permit updating nested objects.
      */
     public $settings;
 
     /**
-     * @var TaxCodeModel[] Optional: A list of tax codes defined for this company. To fetch this list, add the query string "?$include=TaxCodes" to your URL.
+     * @var TaxCodeModel[] Optional: A list of tax codes defined for this company. To fetch this list, add the query string `?$include=TaxCodes` to your URL.    When calling `CreateCompany`, you may provide a list of objects in this element and they will be created alongside the company.  The `UpdateCompany` API does not permit updating nested objects.
      */
     public $taxCodes;
 
     /**
-     * @var TaxRuleModel[] Optional: A list of tax rules defined for this company. To fetch this list, add the query string "?$include=TaxRules" to your URL.
+     * @var TaxRuleModel[] Optional: A list of tax rules defined for this company. To fetch this list, add the query string `?$include=TaxRules` to your URL.    When calling `CreateCompany`, you may provide a list of objects in this element and they will be created alongside the company.  The `UpdateCompany` API does not permit updating nested objects.
      */
     public $taxRules;
 
     /**
-     * @var UPCModel[] Optional: A list of UPCs defined for this company. To fetch this list, add the query string "?$include=UPCs" to your URL.
+     * @var UPCModel[] Optional: A list of UPCs defined for this company. To fetch this list, add the query string `?$include=UPCs` to your URL.    When calling `CreateCompany`, you may provide a list of objects in this element and they will be created alongside the company.  The `UpdateCompany` API does not permit updating nested objects.
      */
     public $upcs;
 
@@ -4297,7 +4302,7 @@ class SkyscraperStatusModel
     public $country;
 
     /**
-     * @var string They Scraper type (See ScraperType::* for a list of allowable values)
+     * @var string The Scraper type (See ScraperType::* for a list of allowable values)
      */
     public $scraperType;
 
@@ -5120,6 +5125,26 @@ class TaxTypeGroupModel
      */
     public $description;
 
+    /**
+     * @var int If this tax type group requires a subscription, this contains the ID number of the subscription type required to use it.
+     */
+    public $subscriptionTypeId;
+
+    /**
+     * @var string If this tax type group requires a subscription, this contains the friendly name of the subscription type required to use it.
+     */
+    public $subscriptionDescription;
+
+    /**
+     * @var string The name of the tab in the AvaTax website corresponding to this tax type group.
+     */
+    public $tabName;
+
+    /**
+     * @var boolean True if this tax type group is displayed in the user interface of the AvaTax website.
+     */
+    public $showColumn;
+
 }
 
 /**
@@ -5170,6 +5195,26 @@ class NexusTaxTypeGroupModel
      * @var string The description of this nexus tax type group.
      */
     public $description;
+
+    /**
+     * @var int If this tax type group requires a subscription, this contains the ID number of the subscription type required to use it.
+     */
+    public $subscriptionTypeId;
+
+    /**
+     * @var string If this tax type group requires a subscription, this contains the friendly name of the subscription type required to use it.
+     */
+    public $subscriptionDescription;
+
+    /**
+     * @var string The name of the tab in the AvaTax website corresponding to this tax type group.
+     */
+    public $tabName;
+
+    /**
+     * @var boolean True if this tax type group is displayed in the user interface of the AvaTax website.
+     */
+    public $showColumn;
 
 }
 
@@ -5625,6 +5670,11 @@ class FilingCalendarModel
      * @var int If you are required to prepay a percentage of taxes for future periods, please specify the percentage in whole numbers;   for example, the value 90 would indicate 90%.
      */
     public $prepayPercentage;
+
+    /**
+     * @var float If your company is required to make a prepayment that is designated by a fixed amount each period, please specify the amount here.
+     */
+    public $fixedPrepaymentAmount;
 
     /**
      * @var string The type of tax to report on this return. (See MatchingTaxType::* for a list of allowable values)
@@ -6167,6 +6217,11 @@ class LoginVerificationInputModel
     public $region;
 
     /**
+     * @var string TaxFormCode for the verification request
+     */
+    public $taxFormCode;
+
+    /**
      * @var string Username that we are using for verification
      */
     public $username;
@@ -6360,6 +6415,11 @@ class FilingReturnModelBasic
     public $accrualType;
 
     /**
+     * @var FilingAttachmentModel[] The attachments for this return.
+     */
+    public $attachments;
+
+    /**
      * @var string The date when this record was created.
      */
     public $createdDate;
@@ -6373,6 +6433,24 @@ class FilingReturnModelBasic
      * @var string The date/time when this record was last modified.
      */
     public $modifiedDate;
+
+}
+
+/**
+ * An attachment associated with a filing return
+ */
+class FilingAttachmentModel
+{
+
+    /**
+     * @var int The resourceFileId used to retrieve the attachment
+     */
+    public $resourceFileId;
+
+    /**
+     * @var string The description of the attachment
+     */
+    public $description;
 
 }
 
@@ -6759,6 +6837,11 @@ class FilingReturnModel
     public $nonTaxableAccrualAmount;
 
     /**
+     * @var float The total amount of taxable sales accrued in the current active period
+     */
+    public $taxableAccrualAmount;
+
+    /**
      * @var float The total amount of sales tax accrued in the current active period
      */
     public $salesTaxAccrualAmount;
@@ -7044,24 +7127,6 @@ class FilingPaymentModel
      * @var int The user ID of the user who last modified this record.
      */
     public $modifiedUserId;
-
-}
-
-/**
- * An attachment associated with a filing return
- */
-class FilingAttachmentModel
-{
-
-    /**
-     * @var int The resourceFileId used to retrieve the attachment
-     */
-    public $resourceFileId;
-
-    /**
-     * @var string The description of the attachment
-     */
-    public $description;
 
 }
 
@@ -7522,6 +7587,11 @@ class TransactionModel
      */
     public $messages;
 
+    /**
+     * @var InvoiceMessageModel[] Invoice messages associated with this document. Currently, this stores legally-required VAT messages.
+     */
+    public $invoiceMessages;
+
 }
 
 /**
@@ -7953,6 +8023,24 @@ class TransactionSummary
      * @var float The amount of the transaction that was exempt.
      */
     public $exemption;
+
+}
+
+/**
+ * Represents a message to be displayed on an invoice.
+ */
+class InvoiceMessageModel
+{
+
+    /**
+     * @var string The content of the invoice message.
+     */
+    public $content;
+
+    /**
+     * @var string[] The applicable tax line numbers and codes.
+     */
+    public $lineNumbers;
 
 }
 
