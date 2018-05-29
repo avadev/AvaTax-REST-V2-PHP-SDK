@@ -27,6 +27,28 @@ class TransactionAddressType
 
 
 /**
+ * 
+ */
+class AdvancedRuleScriptType
+{
+    const C_REQUESTRULE = "RequestRule";
+    const C_RESPONSERULE = "ResponseRule";
+
+}
+
+
+/**
+ * 
+ */
+class AdvancedRuleCrashBehavior
+{
+    const C_FAILONERROR = "FailOnError";
+    const C_PROCEEDWITHORIGINAL = "ProceedWithOriginal";
+
+}
+
+
+/**
  * Casing to use for validation result
  */
 class TextCase
@@ -1100,28 +1122,6 @@ class JurisdictionType
      * Special Tax Jurisdiction
      */
     const C_SPECIAL = "Special";
-
-}
-
-
-/**
- * 
- */
-class AdvancedRuleCrashBehavior
-{
-    const C_FAILONERROR = "FailOnError";
-    const C_PROCEEDWITHORIGINAL = "ProceedWithOriginal";
-
-}
-
-
-/**
- * 
- */
-class AdvancedRuleScriptType
-{
-    const C_REQUESTRULE = "RequestRule";
-    const C_RESPONSERULE = "ResponseRule";
 
 }
 

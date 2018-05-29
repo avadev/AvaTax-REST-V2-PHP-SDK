@@ -224,6 +224,250 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Approve an advanced rule script to run.
+     *
+     * This API is available by invite only and implementation support is required. 
+     * Please contact your Customer Account Manager if you are interested in using 
+     * Advanced Rules in your AvaTax integration.
+     *
+     * 
+     * @param int $accountId The ID of the account that owns the Advanced Rule.
+     * @param string $scriptType The script transform type: Request or Response. (See AdvancedRuleScriptType::* for a list of allowable values)
+     * @return AdvancedRuleScriptModel
+     */
+    public function approveAdvancedRuleScript($accountId, $scriptType)
+    {
+        $path = "/api/v2/accounts/{$accountId}/advancedrulescripts/{$scriptType}/approve";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Create an advanced rule.
+     *
+     * This API is available by invite only and implementation support is required. 
+     * Please contact your Customer Account Manager if you are interested in using 
+     * Advanced Rules in your AvaTax integration.
+     *
+     * 
+     * @param int $accountId The ID of the account that will own the Advanced Rule.
+     * @param string $scriptType The script transform type, Request or Response. (See AdvancedRuleScriptType::* for a list of allowable values)
+     * @param string $crashBehavior The behavior the script should take if it crashes: Fail or Proceed. (See AdvancedRuleCrashBehavior::* for a list of allowable values)
+     * @param object $file The JavaScript file containing the advanced rule.
+     * @return string
+     */
+    public function createAdvancedRuleScript($accountId, $scriptType, $crashBehavior, $file)
+    {
+        $path = "/api/v2/accounts/{$accountId}/advancedrulescripts/{$scriptType}";
+        $guzzleParams = [
+            'query' => ['crashBehavior' => $crashBehavior],
+            'body' => null
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Create a lookup table for an advanced rule
+     *
+     * This API is available by invite only and implementation support is required. 
+     * Please contact your Customer Account Manager if you are interested in using 
+     * Advanced Rules in your AvaTax integration.
+     *
+     * 
+     * @param int $accountId The ID of the account that owns the Advanced Rule.
+     * @param string $csvTableName The name to assign the CSV lookup table.
+     * @param object $file A CSV file containing lookup data for an advanced rule.
+     * @return string
+     */
+    public function createAdvancedRuleTable($accountId, $csvTableName, $file)
+    {
+        $path = "/api/v2/accounts/{$accountId}/advancedruletables/{$csvTableName}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Delete an account's active advanced rule
+     *
+     * This API is available by invite only and implementation support is required. 
+     * Please contact your Customer Account Manager if you are interested in using 
+     * Advanced Rules in your AvaTax integration.
+     *
+     * 
+     * @param int $accountId The ID of the account that owns the Advanced Rule.
+     * @param string $scriptType The script transform type: Request or Response. (See AdvancedRuleScriptType::* for a list of allowable values)
+     * @return ErrorDetail[]
+     */
+    public function deleteAdvancedRuleScript($accountId, $scriptType)
+    {
+        $path = "/api/v2/accounts/{$accountId}/advancedrulescripts/{$scriptType}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Delete a lookup table for an advanced rule.
+     *
+     * This API is available by invite only and implementation support is required. 
+     * Please contact your Customer Account Manager if you are interested in using 
+     * Advanced Rules in your AvaTax integration.
+     *
+     * 
+     * @param int $accountId The ID of the account that owns the Advanced Rule.
+     * @param string $csvTableName The name of the CSV lookup table to delete.
+     * @return ErrorDetail[]
+     */
+    public function deleteAdvancedRuleTable($accountId, $csvTableName)
+    {
+        $path = "/api/v2/accounts/{$accountId}/advancedruletables/{$csvTableName}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Disable an advanced rule so that it cannot be run.
+     *
+     * This API is available by invite only and implementation support is required. 
+     * Please contact your Customer Account Manager if you are interested in using 
+     * Advanced Rules in your AvaTax integration. ///
+     *
+     * 
+     * @param int $accountId 
+     * @param string $scriptType The script transform type: Request or Response. (See AdvancedRuleScriptType::* for a list of allowable values)
+     * @return AdvancedRuleScriptModel
+     */
+    public function disableAdvancedRuleScript($accountId, $scriptType)
+    {
+        $path = "/api/v2/accounts/{$accountId}/advancedrulescripts/{$scriptType}/disable";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Enable an approved advanced rule so that it can be run.
+     *
+     * This API is available by invite only and implementation support is required. 
+     * Please contact your Customer Account Manager if you are interested in using 
+     * Advanced Rules in your AvaTax integration.
+     *
+     * 
+     * @param int $accountId 
+     * @param string $scriptType The script transform type: Request or Response. (See AdvancedRuleScriptType::* for a list of allowable values)
+     * @return AdvancedRuleScriptModel
+     */
+    public function enableAdvancedRuleScript($accountId, $scriptType)
+    {
+        $path = "/api/v2/accounts/{$accountId}/advancedrulescripts/{$scriptType}/enable";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Get an account's advanced rule script.
+     *
+     * This API is available by invite only and implementation support is required. 
+     * Please contact your Customer Account Manager if you are interested in using 
+     * Advanced Rules in your AvaTax integration.
+     *
+     * 
+     * @param int $accountId The ID of the account that owns the Advanced Rule.
+     * @param string $scriptType The script transform type: Request or Response. (See AdvancedRuleScriptType::* for a list of allowable values)
+     * @return AdvancedRuleScriptModel
+     */
+    public function getAdvancedRuleScript($accountId, $scriptType)
+    {
+        $path = "/api/v2/accounts/{$accountId}/advancedrulescripts/{$scriptType}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Get an advanced rule lookup table for an account
+     *
+     * This API is available by invite only and implementation support is required. 
+     * Please contact your Customer Account Manager if you are interested in using 
+     * Advanced Rules in your AvaTax integration.
+     *
+     * 
+     * @param int $accountId The ID of the account that owns the Advanced Rule.
+     * @param string $csvTableName The name of the CSV lookup table to get.
+     * @return AdvancedRuleTableModel
+     */
+    public function getAdvancedRuleTable($accountId, $csvTableName)
+    {
+        $path = "/api/v2/accounts/{$accountId}/advancedruletables/{$csvTableName}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Get all advanced rule lookup tables for an account
+     *
+     * This API is available by invite only and implementation support is required. 
+     * Please contact your Customer Account Manager if you are interested in using 
+     * Advanced Rules in your AvaTax integration.
+     *
+     * 
+     * @param int $accountId The ID of the account that owns the Advanced Rule.
+     * @return AdvancedRuleTableModel
+     */
+    public function getAdvancedRuleTables($accountId)
+    {
+        $path = "/api/v2/accounts/{$accountId}/advancedruletables";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Unapprove an advanced rule script so that it cannot be run.
+     *
+     * This API is available by invite only and implementation support is required. 
+     * Please contact your Customer Account Manager if you are interested in using 
+     * Advanced Rules in your AvaTax integration.
+     *
+     * 
+     * @param int $accountId The ID of the account that owns the Advanced Rule.
+     * @param string $scriptType The script transform type: Request or Response. (See AdvancedRuleScriptType::* for a list of allowable values)
+     * @return AdvancedRuleScriptModel
+     */
+    public function unapproveAdvancedRuleScript($accountId, $scriptType)
+    {
+        $path = "/api/v2/accounts/{$accountId}/advancedrulescripts/{$scriptType}/unapprove";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
      * Create a new AvaFileForm
      *
      * Create one or more AvaFileForms
