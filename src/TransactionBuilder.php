@@ -519,6 +519,18 @@ class TransactionBuilder
     }
 
     /**
+     * Add a exemption number for this document
+     *
+     * @param   string              $exemptionNo     Exemption Number for this document.
+     * @return  TransactionBuilder
+     */
+    public function withExemptionNo($exemptionNo)
+    {
+        $this->_model['exemptionNo'] = $exemptionNo;
+        return $this;
+    }
+
+    /**
      * Specific a currency code for this transaction
      *
      * @param   string              $currencyCode Specific the three-character ISO 4217 code that is being used for this transaction (optional)
