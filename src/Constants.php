@@ -970,6 +970,11 @@ class ErrorCodeId
      */
     const C_UNSUPPORTEDFILEFORMAT = "UnsupportedFileFormat";
 
+    /**
+     * SendSales API errors
+     */
+    const C_UNSUPPORTEDFILEFORMAT = "UnsupportedFileFormat";
+
 }
 
 

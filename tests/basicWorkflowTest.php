@@ -40,7 +40,7 @@ final class AvaTaxClientTest extends TestCase
         $this->assertNotNull($testCompany, "Test company should be created");
         $this->assertTrue(count($testCompany->nexus) > 0, "Test company should have nexus");
         $this->assertTrue(count($testCompany->locations)> 0, "Test company should have locations");
-        
+
         // Construct and assert if we can initiate a new transaction builder object
         $tb = new Avalara\TransactionBuilder($client, "DEFAULT", Avalara\DocumentType::C_SALESINVOICE, 'ABC');
         $this->assertNotNull($tb, "TransactionBuilder object can be created");
@@ -62,10 +62,29 @@ final class AvaTaxClientTest extends TestCase
         $this->assertTrue($t->status == "Saved", "The transaction is saved");
         $this->assertTrue($t->type == "SalesInvoice", "The transaction type is SalesInvoice");
 
-
         // echo out the transaction response from CreateTransaction
-        echo '<pre>' . json_encode($t, JSON_PRETTY_PRINT) . '</pre>';
+        // echo '<pre>' . json_encode($t, JSON_PRETTY_PRINT) . '</pre>';
     }
+
+    public function testExtendingAvaTaxWorkFlow()
+    {
+        // Create an instance of an extended class of AvaTaxClient, and test the inherited functionalities and also the ability to add additional config/info on the client object
+        $client = new Avalara\ClientExtensionExample('phpTestApp', '1.0', 'travis-ci', 'sandbox', [], 'my additional client info');
+        $myClient = $client->getClient();
+
+        // assertions with comment
+        $this->assertInstanceOf(Avalara\AvaTaxClient::class, $myClient, "getClient returns an AvaTaxClient object when called by an instance from an extended class");
+        $this->assertTrue($myClient->echoAddedConfig() == "my additional client info", "Extended method can hold additional client configuration/info");
+        
+        // add credentials
+        $client->withSecurity(getenv('SANDBOX_USERNAME'), getenv('SANDBOX_PASSWORD'));
+
+        // Call 'Ping' to verify that we are connected
+        $p = $client->Ping();
+        $this->assertNotNull($p, "Should be able to call Ping");
+
+    }
+
 }
 
 
