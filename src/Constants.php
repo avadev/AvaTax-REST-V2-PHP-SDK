@@ -824,6 +824,12 @@ class ErrorCodeId
     const C_INVALIDPOSTALCODE = "InvalidPostalCode";
 
     /**
+     * Subscription error codes
+     */
+    const C_INVALIDSUBSCRIPTIONDESCRIPTION = "InvalidSubscriptionDescription";
+    const C_INVALIDSUBSCRIPTIONTYPEID = "InvalidSubscriptionTypeId";
+
+    /**
      * Represents a malformed document fetch command
      */
     const C_BADDOCUMENTFETCH = "BadDocumentFetch";
@@ -902,6 +908,8 @@ class ErrorCodeId
     const C_INVALIDCOVERLETTERTITLE = "InvalidCoverLetterTitle";
     const C_ACCOUNTNOTPROVISIONED = "AccountNotProvisioned";
     const C_INVALIDREQUESTCONTENTTYPE = "InvalidRequestContentType";
+    const C_EXEMPTIONPAGINATIONLIMITS = "ExemptionPaginationLimits";
+    const C_EXEMPTIONSORTLIMITS = "ExemptionSortLimits";
 
     /**
      * Multi document error codes
@@ -924,12 +932,6 @@ class ErrorCodeId
      */
     const C_COMMSCONFIGCLIENTIDMISSING = "CommsConfigClientIdMissing";
     const C_COMMSCONFIGCLIENTIDBADVALUE = "CommsConfigClientIdBadValue";
-
-    /**
-     * BizTech API error codes
-     */
-    const C_BIZTECHCUSTOMERACCOUNTFAILURE = "BizTechCustomerAccountFailure";
-    const C_BIZTECHOPPORTUNITYCREATIONFAILURE = "BizTechOpportunityCreationFailure";
 
     /**
      * Account Activate error codes
@@ -961,6 +963,12 @@ class ErrorCodeId
     const C_ADVANCEDRULERESPONSERULEERROR = "AdvancedRuleResponseRuleError";
     const C_ADVANCEDRULENOTAPPROVED = "AdvancedRuleNotApproved";
     const C_INVALIDDOCUMENTSTATUSTOADDORDELETELINES = "InvalidDocumentStatusToAddOrDeleteLines";
+    const C_TAXRULEREQUIRESNEXUS = "TaxRuleRequiresNexus";
+
+    /**
+     * SendSales API errors
+     */
+    const C_UNSUPPORTEDFILEFORMAT = "UnsupportedFileFormat";
 
     /**
      * SendSales API errors
@@ -2233,53 +2241,96 @@ class PaymentType
 
 
 /**
- * Document Status
+ * The `DocumentStatus` value indicates the state of the document as it moves through the
+ *  AvaTax document workflow. More information about the AvaTax document workflow is available
+ *  in the [AvaTax Developer Guide](https://developer.avalara.com/avatax/dev-guide/transactions/should-i-commit).
  */
 class DocumentStatus
 {
 
     /**
-     * Temporary document not saved (SalesOrder, PurchaseOrder)
+     * Temporary document not saved (SalesOrder, PurchaseOrder).
+     *  
+     *  This document has not been recorded to AvaTax
      */
     const C_TEMPORARY = "Temporary";
 
     /**
-     * Saved document (SalesInvoice or PurchaseInvoice) ready to be posted
+     * Saved document (SalesInvoice or PurchaseInvoice) ready to be posted.
+     *  
+     *  This status indicates that the transaction has been saved to AvaTax, but is not available
+     *  to be reported on a tax filing, and has not yet been verified by a business process that 
+     *  posts transactions.
+     *  
+     *  To mark this transaction as `Posted`, please call `VerifyTransaction` or `SettleTransaction`.
+     *  
+     *  To mark this transaction as `Committed`, please call `CommitTransaction` or `SettleTransaction`.
+     *  
+     *  To adjust or void this transaction, call `AdjustTransaction`, `CreateOrAdjustTransaction`, or
+     *  `VoidTransaction`.
      */
     const C_SAVED = "Saved";
 
     /**
-     * A posted document (not committed)
+     * A posted document (not committed).
+     *  
+     *  This status indicates that the transaction has been saved to AvaTax, and has been verified
+     *  by a business process that posts transactions, but is not ready to report on a tax filing.
+     *  
+     *  To mark this transaction as `Committed`, please call `CommitTransaction` or `SettleTransaction`.
+     *  
+     *  To adjust or void this transaction, call `AdjustTransaction`, `CreateOrAdjustTransaction`, or
+     *  `VoidTransaction`.
      */
     const C_POSTED = "Posted";
 
     /**
-     * A posted document that has been committed
+     * A posted document that has been committed.
+     *  
+     *  This status indicates that the transaction has been saved to AvaTax and can be reported
+     *  on a tax filing.
+     *  
+     *  If you use Avalara's Managed Returns Service, these transactions will be captured and reported
+     *  on a tax return. When this occurs, the transaction's `locked` flag will be set to true. Once
+     *  the transaction is locked, no further changes may occur.
+     *  
+     *  As long as the transaction has not been locked, you may adjust or void this transaction using 
+     *  `AdjustTransaction`, `CreateOrAdjustTransaction`, or `VoidTransaction`.
      */
     const C_COMMITTED = "Committed";
 
     /**
-     * A Committed document that has been cancelled
+     * A document that has been cancelled.
+     *  
+     *  This status indicates that the transaction has been cancelled or voided. Cancelled and Voided
+     *  are synonyms.
+     *  
+     *  When a transaction has been cancelled, it is considered to no longer exist. You are free to create 
+     *  a new transaction with the same code.
      */
     const C_CANCELLED = "Cancelled";
 
     /**
-     * A document that has been adjusted
+     * An older version of a document that has been adjusted.
+     *  
+     *  When you call `AdjustTransaction`, AvaTax preserves a record of the old document as well as a record
+     *  of the new document. The old document is changed to the status `Adjusted`, and the new document
+     *  is created in the status you requested.
      */
     const C_ADJUSTED = "Adjusted";
 
     /**
-     * A document which is in Queue status and processed later
+     * DEPRECATED - A document which is in Queue status and processed later.
      */
     const C_QUEUED = "Queued";
 
     /**
-     * A document which is Pending for Approval
+     * DEPRECATED - A document which is Pending for Approval.
      */
     const C_PENDINGAPPROVAL = "PendingApproval";
 
     /**
-     * Any status (for searching)
+     * DEPRECATED - Represents "a document in any status" when searching.
      */
     const C_ANY = "Any";
 
@@ -2784,6 +2835,35 @@ class CommentType
      * Customer comments are those comments that both compliance and the customer can read
      */
     const C_CUSTOMER = "Customer";
+
+}
+
+
+/**
+ * Severity level of a notification.
+ */
+class NotificationSeverityLevel
+{
+
+    /**
+     * Low priority notification, Default.
+     */
+    const C_NEUTRAL = "Neutral";
+
+    /**
+     * Medium priority notification.
+     */
+    const C_ADVISORY = "Advisory";
+
+    /**
+     * High priority notification.
+     */
+    const C_BLOCKING = "Blocking";
+
+    /**
+     * A completed notification
+     */
+    const C_COMPLETE = "Complete";
 
 }
 
