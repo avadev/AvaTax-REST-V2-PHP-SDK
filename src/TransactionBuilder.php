@@ -417,6 +417,21 @@ class TransactionBuilder
     }
 
     /**
+     * Set HS code for current line
+     *
+     * @param   string              hsCode
+     * @return  TransactionBuilder
+     * @throws  \Exception
+     */
+    public function withLineHsCode($hsCode)
+    {
+        $li = $this->getMostRecentLineIndex();
+        $this->_model['lines'][$li]['hsCode'] = $hsCode;
+
+        return $this;
+    }
+
+    /**
      * Add a line to this transaction
      *
      * @param   float  $amount      Value of the item.
