@@ -185,11 +185,13 @@ class TransactionBuilder
     /**
      * Set flag for seller as importer of record
      *
+     * @param bool $isSeller
+     *
      * @return TransactionBuilder
      */
-    public function withSellerIsImporterOfRecord()
+    public function withSellerIsImporterOfRecord($isSeller = true)
     {
-        $this->_model['isSellerImporterOfRecord'] = true;
+        $this->_model['isSellerImporterOfRecord'] = $isSeller;
         return $this;
     }
 
