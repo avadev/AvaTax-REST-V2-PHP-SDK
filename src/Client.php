@@ -1,5 +1,6 @@
 <?php
 namespace Avalara;
+use Exception;
 use GuzzleHttp\Client;
 
 /**
@@ -50,7 +51,9 @@ class AvaTaxClientBase
      * @param string $appVersion   Specify the version number of your application here.  Should not contain any semicolons.
      * @param string $machineName  Specify the machine name of the machine on which this code is executing here.  Should not contain any semicolons.
      * @param string $environment  Indicates which server to use; acceptable values are "sandbox" or "production", or the full URL of your AvaTax instance.
-     * @param array $guzzleParams  Extra parameters to pass to the guzzle HTTP client (http://docs.guzzlephp.org/en/latest/request-options.html)
+     * @param array  $guzzleParams Extra parameters to pass to the guzzle HTTP client (http://docs.guzzlephp.org/en/latest/request-options.html)
+     *
+     * @throws Exception
      */
     public function __construct($appName, $appVersion, $machineName="", $environment, $guzzleParams = [])
     {
@@ -147,42 +150,60 @@ class AvaTaxClientBase
     }
 
 
+    /** @noinspection PhpDocMissingThrowsInspection */
     /**
      * Make a single REST call to the AvaTax v2 API server
      *
-     * @param string $apiUrl           The relative path of the API on the server
-     * @param string $verb             The HTTP verb being used in this request
-     * @param string $guzzleParams     The Guzzle parameters for this request, including query string and body parameters
+     * @param string $apiUrl       The relative path of the API on the server
+     * @param string $verb         The HTTP verb being used in this request
+     * @param array  $guzzleParams The Guzzle parameters for this request, including query string and body parameters
+     *
+     * @return mixed|string
+     * @throws \Exception
      */
-    protected function restCall($apiUrl, $verb, $guzzleParams)
+    protected function restCall( $apiUrl, $verb, $guzzleParams )
     {
-        // Set authentication on the parameters
-        if(count($this->auth) == 2){
-		if (!isset($guzzleParams['auth'])){
-			$guzzleParams['auth'] = $this->auth;
-		}
-		$guzzleParams['headers'] = [
-			'Accept' => 'application/json',
-			'X-Avalara-Client' => "{$this->appName}; {$this->appVersion}; PhpRestClient; 17.5.0-67; {$this->machineName}"
-		];
-	 } else {
-		$guzzleParams['headers'] = [
-			'Accept' => 'application/json',
-			'Authorization' => 'Bearer '.$this->auth[0],
-			'X-Avalara-Client' => "{$this->appName}; {$this->appVersion}; PhpRestClient; 17.5.0-67; {$this->machineName}"
-		];
-	 }
+        $guzzleParams['headers'] = array_merge(
+            [
+                'Accept'           => 'application/json',
+                'X-Avalara-Client' => "{$this->appName}; {$this->appVersion}; PhpRestClient; 17.5.0-67; {$this->machineName}"
+            ],
+            isset( $guzzleParams['headers'] ) ? $guzzleParams['headers'] : []
+        );
+
+        switch (count( $this->auth ))
+        {
+            case 1:
+                $guzzleParams['headers']['Authorization'] = "Bearer {$this->auth[0]}";
+                break;
+            // Set authentication on the parameters
+            case 2:
+            default:
+                if (!isset( $guzzleParams['auth'] ))
+                {
+                    $guzzleParams['auth'] = $this->auth;
+                }
+                break;
+        }
 
         // Contact the server
-        try {
-            $response = $this->client->request($verb, $apiUrl, $guzzleParams);
+        try
+        {
+            // Ignore uncaught Guzzle exception as the interface doesn't extend throwable, even though subclasses do
+            /** @noinspection PhpUnhandledExceptionInspection */
+            $response = $this->client->request( $verb, $apiUrl, $guzzleParams );
             $body = $response->getBody();
-            return json_decode($body);
-        } catch (\Exception $e) {
-            if (!$this->catchExceptions) {
-                throw $e;
+
+            return $guzzleParams['headers']['Accept'] === 'application/json' ? json_decode($body) : $body;
+        }
+        catch (\Exception $exception)
+        {
+            if ($this->catchExceptions !== true)
+            {
+                throw $exception;
             }
-            return $e->getMessage();
+
+            return $exception->getMessage();
         }
     }
 }
