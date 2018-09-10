@@ -69,7 +69,7 @@ class TransactionBuilder
      */
     public function withDiagnostics()
     {
-        $this->_model['debugLevel'] = Constants::TAXDEBUGLEVEL_DIAGNOSTIC;
+        $this->_model['debugLevel'] = TaxDebugLevel::C_DIAGNOSTIC;
         return $this;
     }
 
@@ -354,7 +354,7 @@ class TransactionBuilder
     public function withLineTaxOverride($type, $reason, $taxAmount, $taxDate)
     {
         // Address the DateOverride constraint.
-        if (($type == Constants::TAXOVERRIDETYPE_TAXDATE) && (empty($taxDate))) {
+        if (($type == TaxOverrideType::C_TAXDATE) && (empty($taxDate))) {
             throw new Exception("A valid date is required for a Tax Date Tax Override.");
         }
 
