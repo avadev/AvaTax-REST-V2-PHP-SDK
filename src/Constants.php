@@ -884,6 +884,7 @@ class ErrorCodeId
     const C_ACCOUNTEXISTSDIFFERENTEMAIL = "AccountExistsDifferentEmail";
     const C_AVALARAIDENTITYAPIERROR = "AvalaraIdentityApiError";
     const C_INVALIDIPADDRESS = "InvalidIPAddress";
+    const C_OFFERCODEALREADYAPPLIED = "OfferCodeAlreadyApplied";
 
     /**
      * Refund API error codes
