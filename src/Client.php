@@ -51,12 +51,14 @@ class AvaTaxClientBase
      * @param string $machineName  Specify the machine name of the machine on which this code is executing here.  Should not contain any semicolons.
      * @param string $environment  Indicates which server to use; acceptable values are "sandbox" or "production", or the full URL of your AvaTax instance.
      * @param array $guzzleParams  Extra parameters to pass to the guzzle HTTP client (http://docs.guzzlephp.org/en/latest/request-options.html)
+     *
+     * @throws \Exception
      */
     public function __construct($appName, $appVersion, $machineName="", $environment, $guzzleParams = [])
     {
         // app name and app version are mandatory fields.
         if ($appName == "" || $appName == null || $appVersion == "" || $appVersion == null) {
-            throw new Exception('appName and appVersion are manadatory fields!');
+            throw new \Exception('appName and appVersion are mandatory fields!');
         }
 
         // machine name is nullable, but must be empty string to avoid error when concat in client string.
@@ -153,25 +155,28 @@ class AvaTaxClientBase
      * @param string $apiUrl           The relative path of the API on the server
      * @param string $verb             The HTTP verb being used in this request
      * @param string $guzzleParams     The Guzzle parameters for this request, including query string and body parameters
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Exception
      */
     protected function restCall($apiUrl, $verb, $guzzleParams)
     {
         // Set authentication on the parameters
-        if(count($this->auth) == 2){
-		if (!isset($guzzleParams['auth'])){
-			$guzzleParams['auth'] = $this->auth;
-		}
-		$guzzleParams['headers'] = [
-			'Accept' => 'application/json',
-			'X-Avalara-Client' => "{$this->appName}; {$this->appVersion}; PhpRestClient; 18.10.5-260; {$this->machineName}"
-		];
-	 } else {
-		$guzzleParams['headers'] = [
-			'Accept' => 'application/json',
-			'Authorization' => 'Bearer '.$this->auth[0],
-			'X-Avalara-Client' => "{$this->appName}; {$this->appVersion}; PhpRestClient; 18.10.5-260; {$this->machineName}"
-		];
-	 }
+        if (count($this->auth) == 2) {
+            if (!isset($guzzleParams['auth'])) {
+                $guzzleParams['auth'] = $this->auth;
+            }
+            $guzzleParams['headers'] = [
+                'Accept' => 'application/json',
+                'X-Avalara-Client' => "{$this->appName}; {$this->appVersion}; PhpRestClient; 18.10.5-260; {$this->machineName}"
+            ];
+        } else {
+            $guzzleParams['headers'] = [
+                'Accept' => 'application/json',
+                'Authorization' => 'Bearer '.$this->auth[0],
+                'X-Avalara-Client' => "{$this->appName}; {$this->appVersion}; PhpRestClient; 18.10.5-260; {$this->machineName}"
+            ];
+        }
 
         // Contact the server
         try {
@@ -186,4 +191,3 @@ class AvaTaxClientBase
         }
     }
 }
-?>
