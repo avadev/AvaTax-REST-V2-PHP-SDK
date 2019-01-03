@@ -7,6 +7,14 @@ use PHPUnit\Framework\TestCase;
  */
 final class AvaTaxClientTest extends TestCase
 {
+    /**
+     * @expectedException \Exception
+     */
+    public function testConstructorThrowsExceptionForMissingRequirements()
+    {
+        new Avalara\AvaTaxClient('', '', '', '');
+    }
+    
     public function testBasicWorkflow()
     {
         // Create a new client
@@ -82,11 +90,5 @@ final class AvaTaxClientTest extends TestCase
         // Call 'Ping' to verify that we are connected
         $p = $client->Ping();
         $this->assertNotNull($p, "Should be able to call Ping");
-
     }
-
 }
-
-
-
-?>

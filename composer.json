@@ -45,8 +45,7 @@
         "issues": "https://github.com/avadev/AvaTax-REST-V2-PHP-SDK/issues"
     },
     "autoload": {
-        "psr-4": {
-            "Avalara\\": "src/"
-        }
+        "classmap": ["src/"],
+        "exclude-from-classmap": ["src/AvaTaxClient.php"]
     }
 }

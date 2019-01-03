@@ -429,6 +429,36 @@ class ServiceTypeId
     const C_AVABOTTLE = "AvaBottle";
 
     /**
+     * AvaComms
+     */
+    const C_AVACOMMS = "AvaComms";
+
+    /**
+     * AvaEWaste
+     */
+    const C_AVAEWASTE = "AvaEWaste";
+
+    /**
+     * AvaExemptTier1
+     */
+    const C_AVAEXEMPTTIER1 = "AvaExemptTier1";
+
+    /**
+     * AvaExemptTier2
+     */
+    const C_AVAEXEMPTTIER2 = "AvaExemptTier2";
+
+    /**
+     * AvaExemptTier3
+     */
+    const C_AVAEXEMPTTIER3 = "AvaExemptTier3";
+
+    /**
+     * AvaExemptTier4
+     */
+    const C_AVAEXEMPTTIER4 = "AvaExemptTier4";
+
+    /**
      * MRSComplianceManager
      */
     const C_MRSCOMPLIANCEMANAGER = "MRSComplianceManager";
@@ -479,6 +509,9 @@ class AccountStatusId
 
     /**
      * The account is new and is currently in the onboarding process.
+     *  
+     *  An account is considered new until the account administrator has reviewed and accepted 
+     *  [Avalara's terms and conditions](https://www.avalara.com/us/en/legal/terms.html).
      */
     const C_NEW = "New";
 
@@ -701,7 +734,14 @@ class ErrorCodeId
     const C_MODELSTATEINVALID = "ModelStateInvalid";
     const C_DATERANGEERROR = "DateRangeError";
     const C_INVALIDDATERANGEERROR = "InvalidDateRangeError";
+    const C_RULEMUSTHAVETAXCODE = "RuleMustHaveTaxCode";
+    const C_RULETYPERESTRICTED = "RuleTypeRestricted";
+    const C_ALLJURISRULELIMITS = "AllJurisRuleLimits";
+    const C_INVALIDCOMPANYLOCATIONSETTING = "InvalidCompanyLocationSetting";
+    const C_INVALIDADJUSTMENTTYPE = "InvalidAdjustmentType";
     const C_DELETEINFORMATION = "DeleteInformation";
+    const C_OUTOFRANGE = "OutOfRange";
+    const C_UNSPECIFIEDTIMEZONE = "UnspecifiedTimeZone";
     const C_CANNOTCREATEDELETEDOBJECTS = "CannotCreateDeletedObjects";
     const C_CANNOTMODIFYDELETEDOBJECTS = "CannotModifyDeletedObjects";
     const C_RETURNNAMENOTFOUND = "ReturnNameNotFound";
@@ -740,7 +780,6 @@ class ErrorCodeId
     const C_DUPLICATESYSTEMTAXCODE = "DuplicateSystemTaxCode";
     const C_SSTOVERRIDESNOTAVAILABLE = "SSTOverridesNotAvailable";
     const C_NEXUSDATEMISMATCH = "NexusDateMismatch";
-    const C_TECHSUPPORTAUDITREQUIRED = "TechSupportAuditRequired";
     const C_NEXUSPARENTDATEMISMATCH = "NexusParentDateMismatch";
     const C_BEARERTOKENPARSEUSERIDERROR = "BearerTokenParseUserIdError";
     const C_RETRIEVEUSERERROR = "RetrieveUserError";
@@ -762,13 +801,13 @@ class ErrorCodeId
     const C_REPORTNOTINITIATED = "ReportNotInitiated";
     const C_FAILEDTOBUILDREPORT = "FailedToBuildReport";
     const C_REPORTNOTFINISHED = "ReportNotFinished";
-    const C_FAILEDTOUPLOADREPORT = "FailedToUploadReport";
     const C_FAILEDTODOWNLOADREPORT = "FailedToDownloadReport";
     const C_MALFORMEDFILTEREXCEPTION = "MalformedFilterException";
     const C_EXPECTEDCONJUNCTIONERROR = "ExpectedConjunctionError";
     const C_CRITERIANOTSUPPORTEDERROR = "CriteriaNotSupportedError";
     const C_COMPANYACCOUNTANDPARENTACCOUNTMISMATCH = "CompanyAccountAndParentAccountMismatch";
     const C_INVALIDFILECONTENTTYPE = "InvalidFileContentType";
+    const C_REQUESTTOOLARGE = "RequestTooLarge";
     const C_ECMSDISABLED = "EcmsDisabled";
     const C_UNKNOWNCONJUNCTIONERROR = "UnknownConjunctionError";
     const C_NOLINESDISCOUNTED = "NoLinesDiscounted";
@@ -800,7 +839,6 @@ class ErrorCodeId
     const C_POINTOFSALEFILESIZE = "PointOfSaleFileSize";
     const C_POINTOFSALESETUP = "PointOfSaleSetup";
     const C_INVALIDINPUTDATE = "InvalidInputDate";
-    const C_REQUESTEDFILENOTEXIST = "RequestedFileNotExist";
 
     /**
      * Errors in Soap V1 Passthrough / GetTax calls
@@ -809,24 +847,26 @@ class ErrorCodeId
     const C_ADDRESSCONFLICTEXCEPTION = "AddressConflictException";
     const C_DOCUMENTCODECONFLICT = "DocumentCodeConflict";
     const C_MISSINGADDRESS = "MissingAddress";
-    const C_INVALIDPARAMETER = "InvalidParameter";
     const C_INVALIDPARAMETERVALUE = "InvalidParameterValue";
-    const C_COMPANYCODECONFLICT = "CompanyCodeConflict";
     const C_DOCUMENTFETCHLIMIT = "DocumentFetchLimit";
     const C_INVALIDADDRESS = "InvalidAddress";
     const C_ADDRESSLOCATIONNOTFOUND = "AddressLocationNotFound";
     const C_MISSINGLINE = "MissingLine";
     const C_INVALIDADDRESSTEXTCASE = "InvalidAddressTextCase";
     const C_DOCUMENTNOTCOMMITTED = "DocumentNotCommitted";
-    const C_MULTIDOCUMENTTYPESERROR = "MultiDocumentTypesError";
     const C_INVALIDDOCUMENTTYPESTOFETCH = "InvalidDocumentTypesToFetch";
     const C_TIMEOUTREQUESTED = "TimeoutRequested";
     const C_INVALIDPOSTALCODE = "InvalidPostalCode";
 
     /**
+     * Subscription error codes
+     */
+    const C_INVALIDSUBSCRIPTIONDESCRIPTION = "InvalidSubscriptionDescription";
+    const C_INVALIDSUBSCRIPTIONTYPEID = "InvalidSubscriptionTypeId";
+
+    /**
      * Represents a malformed document fetch command
      */
-    const C_BADDOCUMENTFETCH = "BadDocumentFetch";
     const C_CANNOTCHANGEFILINGSTATUS = "CannotChangeFilingStatus";
 
     /**
@@ -844,6 +884,7 @@ class ErrorCodeId
     const C_ACCOUNTEXISTSDIFFERENTEMAIL = "AccountExistsDifferentEmail";
     const C_AVALARAIDENTITYAPIERROR = "AvalaraIdentityApiError";
     const C_INVALIDIPADDRESS = "InvalidIPAddress";
+    const C_OFFERCODEALREADYAPPLIED = "OfferCodeAlreadyApplied";
 
     /**
      * Refund API error codes
@@ -880,13 +921,14 @@ class ErrorCodeId
     const C_LINEALREADYEXISTS = "LineAlreadyExists";
     const C_LINEDOESNOTEXIST = "LineDoesNotExist";
     const C_LINESNOTSPECIFIED = "LinesNotSpecified";
+    const C_LINEDETAILSDOESNOTEXIST = "LineDetailsDoesNotExist";
+    const C_CANNOTCREATETRANSACTIONWITHDELETEDDATASOURCE = "CannotCreateTransactionWithDeletedDataSource";
 
     /**
      * Exempt cert error codes
      */
     const C_INVALIDBUSINESSTYPE = "InvalidBusinessType";
     const C_CANNOTMODIFYEXEMPTCERT = "CannotModifyExemptCert";
-    const C_CERTIFICATESFIELDINVALID = "CertificatesFieldInvalid";
     const C_CERTIFICATESERROR = "CertificatesError";
     const C_MISSINGREQUIREDFIELDS = "MissingRequiredFields";
     const C_CERTIFICATESNOTSETUP = "CertificatesNotSetup";
@@ -902,6 +944,11 @@ class ErrorCodeId
     const C_INVALIDCOVERLETTERTITLE = "InvalidCoverLetterTitle";
     const C_ACCOUNTNOTPROVISIONED = "AccountNotProvisioned";
     const C_INVALIDREQUESTCONTENTTYPE = "InvalidRequestContentType";
+    const C_EXEMPTIONPAGINATIONLIMITS = "ExemptionPaginationLimits";
+    const C_EXEMPTIONSORTLIMITS = "ExemptionSortLimits";
+    const C_CUSTOMERCANTBEBOTHSHIPTOANDBILLTO = "CustomerCantBeBothShipToAndBillTo";
+    const C_BILLTOCUSTOMEREXPECTED = "BillToCustomerExpected";
+    const C_SHIPTOCUSTOMEREXPECTED = "ShipToCustomerExpected";
 
     /**
      * Multi document error codes
@@ -926,12 +973,6 @@ class ErrorCodeId
     const C_COMMSCONFIGCLIENTIDBADVALUE = "CommsConfigClientIdBadValue";
 
     /**
-     * BizTech API error codes
-     */
-    const C_BIZTECHCUSTOMERACCOUNTFAILURE = "BizTechCustomerAccountFailure";
-    const C_BIZTECHOPPORTUNITYCREATIONFAILURE = "BizTechOpportunityCreationFailure";
-
-    /**
      * Account Activate error codes
      */
     const C_ACCOUNTINNEWSTATUSEXCEPTION = "AccountInNewStatusException";
@@ -953,6 +994,11 @@ class ErrorCodeId
     const C_NEXUSCHILDDATEMISMATCH = "NexusChildDateMismatch";
 
     /**
+     * Remote validation Error
+     */
+    const C_REMOTEVALIDATIONERROR = "RemoteValidationError";
+
+    /**
      * Advanced rule errors
      */
     const C_ADVANCEDRULEBADSCRIPT = "AdvancedRuleBadScript";
@@ -960,12 +1006,33 @@ class ErrorCodeId
     const C_ADVANCEDRULEREQUESTRULEERROR = "AdvancedRuleRequestRuleError";
     const C_ADVANCEDRULERESPONSERULEERROR = "AdvancedRuleResponseRuleError";
     const C_ADVANCEDRULENOTAPPROVED = "AdvancedRuleNotApproved";
+
+    /**
+     * Miscellaneous
+     */
     const C_INVALIDDOCUMENTSTATUSTOADDORDELETELINES = "InvalidDocumentStatusToAddOrDeleteLines";
+    const C_TAXRULEREQUIRESNEXUS = "TaxRuleRequiresNexus";
+    const C_UPCCODENOTUNIQUE = "UPCCodeNotUnique";
+    const C_CANNOTUPDATESOURCEORINSTANCE = "CannotUpdateSourceOrInstance";
 
     /**
      * SendSales API errors
      */
     const C_UNSUPPORTEDFILEFORMAT = "UnsupportedFileFormat";
+    const C_UNSUPPORTEDOUTPUTFILETYPE = "UnsupportedOutputFileType";
+
+    /**
+     * TaxProfile API errors
+     */
+    const C_TAXPROFILENOTPROVIDED = "TaxProfileNotProvided";
+    const C_INVALIDTAXPROFILE = "InvalidTaxProfile";
+    const C_COMPANYTAXPROFILEENTRYREQUIRED = "CompanyTaxProfileEntryRequired";
+    const C_ERRORREADINGTAXPROFILEENTRY = "ErrorReadingTaxProfileEntry";
+
+    /**
+     * AuditAccount API errors
+     */
+    const C_TRACEDATANOTAVAILABLE = "TraceDataNotAvailable";
 
 }
 
@@ -1176,6 +1243,11 @@ class FormTypeId
      * Denotes the form type is Prepayment
      */
     const C_PREPAYMENT = "Prepayment";
+
+    /**
+     * Denotes the form type is Prepayment Allowance
+     */
+    const C_PREPAYMENTALLOWED = "PrepaymentAllowed";
 
 }
 
@@ -1641,9 +1713,9 @@ class Sourcing
 {
 
     /**
-     * Mixed sourcing, for states that do both origin and destination calculation
+     * Origin
      */
-    const C_MIXED = "Mixed";
+    const C_ORIGIN = "Origin";
 
     /**
      * Destination
@@ -1651,9 +1723,9 @@ class Sourcing
     const C_DESTINATION = "Destination";
 
     /**
-     * Origin
+     * Mixed sourcing, for states that do both origin and destination calculation
      */
-    const C_ORIGIN = "Origin";
+    const C_MIXED = "Mixed";
 
 }
 
@@ -1695,21 +1767,6 @@ class MatchingTaxType
 {
 
     /**
-     * Match medical excise type
-     */
-    const C_EXCISE = "Excise";
-
-    /**
-     * Match Lodging tax type
-     */
-    const C_LODGING = "Lodging";
-
-    /**
-     * Match bottle tax type
-     */
-    const C_BOTTLE = "Bottle";
-
-    /**
      * Match all tax types
      */
     const C_ALL = "All";
@@ -1725,19 +1782,19 @@ class MatchingTaxType
     const C_CONSUMERUSETAX = "ConsumerUseTax";
 
     /**
-     * Match both Consumer Use and Seller's Use Tax types
+     * Match Sales Tax only
      */
-    const C_CONSUMERSUSEANDSELLERSUSETAX = "ConsumersUseAndSellersUseTax";
+    const C_SALESTAX = "SalesTax";
 
     /**
-     * Match both Consumer Use and Sales Tax types
+     * Match Seller's Use Tax only
      */
-    const C_CONSUMERUSEANDSALESTAX = "ConsumerUseAndSalesTax";
+    const C_USETAX = "UseTax";
 
     /**
-     * Match Fee tax types only
+     * Match VAT Output Tax only
      */
-    const C_FEE = "Fee";
+    const C_VATOUTPUTTAX = "VATOutputTax";
 
     /**
      * Match VAT Input Tax only
@@ -1750,9 +1807,9 @@ class MatchingTaxType
     const C_VATNONRECOVERABLEINPUTTAX = "VATNonrecoverableInputTax";
 
     /**
-     * Match VAT Output Tax only
+     * Match Fee tax types only
      */
-    const C_VATOUTPUTTAX = "VATOutputTax";
+    const C_FEE = "Fee";
 
     /**
      * Match Rental tax types only
@@ -1760,14 +1817,34 @@ class MatchingTaxType
     const C_RENTAL = "Rental";
 
     /**
-     * Match Sales Tax only
+     * Match both Consumer Use and Sales Tax types
      */
-    const C_SALESTAX = "SalesTax";
+    const C_CONSUMERUSEANDSALESTAX = "ConsumerUseAndSalesTax";
 
     /**
-     * Match Seller's Use Tax only
+     * Match both Consumer Use and Seller's Use Tax types
      */
-    const C_USETAX = "UseTax";
+    const C_CONSUMERSUSEANDSELLERSUSETAX = "ConsumersUseAndSellersUseTax";
+
+    /**
+     * Match medical excise type
+     */
+    const C_EXCISE = "Excise";
+
+    /**
+     * Match Lodging tax type
+     */
+    const C_LODGING = "Lodging";
+
+    /**
+     * Match bottle tax type
+     */
+    const C_BOTTLE = "Bottle";
+
+    /**
+     * Match RentToOwn tax type
+     */
+    const C_RENTTOOWN = "RentToOwn";
 
 }
 
@@ -1777,55 +1854,72 @@ class MatchingTaxType
  */
 class RateType
 {
-    const C_REDUCEDA = "ReducedA";
-    const C_REDUCEDB = "ReducedB";
     const C_FOOD = "Food";
     const C_GENERAL = "General";
     const C_INCREASEDSTANDARD = "IncreasedStandard";
     const C_LINENRENTAL = "LinenRental";
     const C_MEDICAL = "Medical";
     const C_PARKING = "Parking";
-    const C_SUPERREDUCED = "SuperReduced";
+    const C_REDUCEDA = "ReducedA";
+    const C_REDUCEDB = "ReducedB";
     const C_REDUCEDR = "ReducedR";
     const C_STANDARD = "Standard";
+    const C_SUPERREDUCED = "SuperReduced";
     const C_ZERO = "Zero";
+    const C_SERVICES = "Services";
 
 }
 
 
 /**
- * TaxRuleTypeId
+ * Specifies the type of custom tax rule you have created.
  */
 class TaxRuleTypeId
 {
 
     /**
-     * RateRule
+     * Reserved for Avalara internal usage.
      */
     const C_RATERULE = "RateRule";
 
     /**
-     * RateOverrideRule
+     * Specifies a rule that changes the rate of tax for a specified set of criteria.
+     *  
+     *  This rule can apply to one specific type of product (identified by `TaxCode`) or all products (identified by a null `TaxCode`).
      */
     const C_RATEOVERRIDERULE = "RateOverrideRule";
 
     /**
-     * BaseRule
+     * Specifies a rule that changes the tax base of a specific product.
+     *  
+     *  This rule can apply to one specific type of product (identified by `TaxCode`) or all products (identified by a null `TaxCode`).
      */
     const C_BASERULE = "BaseRule";
 
     /**
-     * ExemptEntityRule
+     * Indicates that a particular product is exempt from tax due to an exempt usage reason.
+     *  
+     *  Amounts exempted by this rule are stored in the `exemptAmount` field on the transaction.
      */
     const C_EXEMPTENTITYRULE = "ExemptEntityRule";
 
     /**
-     * ProductTaxabilityRule
+     * Specifies a rule that changes whether a product is taxable or not.
+     *  
+     *  This rule must be applied to a specific type of product. If you attempt to create a product taxability rule while
+     *  leaving the `TaxCode` and `TaxCodeId` fields empty, you will get an error.
+     *  
+     *  A `value` field of `1` means that this tax code is taxable; `0` means it is nontaxable.
+     *  
+     *  Amounts that are considered not taxable according to this rule are stored in the `nonTaxableAmount`
+     *  column in a transaction.
+     *  
+     *  This type of rule can also determine the rate type for a product or to apply a cap or threshold.
      */
     const C_PRODUCTTAXABILITYRULE = "ProductTaxabilityRule";
 
     /**
-     * NexusRule
+     * Reserved for Avalara internal usage.
      */
     const C_NEXUSRULE = "NexusRule";
 
@@ -1948,44 +2042,217 @@ class CompanyFilingStatus
 
 
 /**
- * The data type that must be passed in a parameter bag
+ * The `DocumentStatus` value indicates the state of the document as it moves through the
+ *  AvaTax document workflow. More information about the AvaTax document workflow is available
+ *  in the [AvaTax Developer Guide](https://developer.avalara.com/avatax/dev-guide/transactions/should-i-commit).
  */
-class ParameterBagDataType
+class DocumentStatus
 {
 
     /**
-     * This data type is a string.
+     * Temporary document not saved (SalesOrder, PurchaseOrder).
+     *  
+     *  This document has not been recorded to AvaTax
      */
-    const C_STRING = "String";
+    const C_TEMPORARY = "Temporary";
 
     /**
-     * This data type is either 'true' or 'false'.
+     * Saved document (SalesInvoice or PurchaseInvoice) ready to be posted.
+     *  
+     *  This status indicates that the transaction has been saved to AvaTax, but is not available
+     *  to be reported on a tax filing, and has not yet been verified by a business process that 
+     *  posts transactions.
+     *  
+     *  To mark this transaction as `Posted`, please call `VerifyTransaction` or `SettleTransaction`.
+     *  
+     *  To mark this transaction as `Committed`, please call `CommitTransaction` or `SettleTransaction`.
+     *  
+     *  To adjust or void this transaction, call `AdjustTransaction`, `CreateOrAdjustTransaction`, or
+     *  `VoidTransaction`.
      */
-    const C_BOOLEAN = "Boolean";
+    const C_SAVED = "Saved";
 
     /**
-     * This data type is a numeric value. It can include decimals.
+     * A posted document (not committed).
+     *  
+     *  This status indicates that the transaction has been saved to AvaTax, and has been verified
+     *  by a business process that posts transactions, but is not ready to report on a tax filing.
+     *  
+     *  To mark this transaction as `Committed`, please call `CommitTransaction` or `SettleTransaction`.
+     *  
+     *  To adjust or void this transaction, call `AdjustTransaction`, `CreateOrAdjustTransaction`, or
+     *  `VoidTransaction`.
      */
-    const C_NUMERIC = "Numeric";
+    const C_POSTED = "Posted";
+
+    /**
+     * A posted document that has been committed.
+     *  
+     *  This status indicates that the transaction has been saved to AvaTax and can be reported
+     *  on a tax filing.
+     *  
+     *  If you use Avalara's Managed Returns Service, these transactions will be captured and reported
+     *  on a tax return. When this occurs, the transaction's `locked` flag will be set to true. Once
+     *  the transaction is locked, no further changes may occur.
+     *  
+     *  As long as the transaction has not been locked, you may adjust or void this transaction using 
+     *  `AdjustTransaction`, `CreateOrAdjustTransaction`, or `VoidTransaction`.
+     */
+    const C_COMMITTED = "Committed";
+
+    /**
+     * A document that has been cancelled.
+     *  
+     *  This status indicates that the transaction has been cancelled or voided. Cancelled and Voided
+     *  are synonyms.
+     *  
+     *  When a transaction has been cancelled, it is considered to no longer exist. You are free to create 
+     *  a new transaction with the same code.
+     */
+    const C_CANCELLED = "Cancelled";
+
+    /**
+     * An older version of a document that has been adjusted.
+     *  
+     *  When you call `AdjustTransaction`, AvaTax preserves a record of the old document as well as a record
+     *  of the new document. The old document is changed to the status `Adjusted`, and the new document
+     *  is created in the status you requested.
+     */
+    const C_ADJUSTED = "Adjusted";
+
+    /**
+     * DEPRECATED - A document which is queued for later processing.
+     */
+    const C_QUEUED = "Queued";
+
+    /**
+     * Indicates that this document requires approval from a governmental agency before it can be finalized.
+     *  
+     *  Some governments require active verification of transactions before they can be finalized. When AvaTax
+     *  detects that a transaction must be verified with a governmental agency, this transaction will be flagged
+     *  as `PendingApproval` until the government has certified the transaction.
+     */
+    const C_PENDINGAPPROVAL = "PendingApproval";
+
+    /**
+     * DEPRECATED - Represents "a document in any status" when searching. Please search using the 
+     *  [Filtering in REST](/avatax/filtering-in-rest/) documentation.
+     */
+    const C_ANY = "Any";
 
 }
 
 
 /**
- * Type of verification task
+ * Represents a type of tax override requested by the customer.
+ *  
+ *  AvaTax allows customers to override some behavior of the AvaTax engine. When you use a
+ *  Tax Override, you can import tax that was previously calculated and charged to the customer exactly
+ *  as it was charged. AvaTax will record the type of override used for each transaction.
  */
-class ScraperType
+class TaxOverrideType
 {
 
     /**
-     * Indicates that is is a login type
+     * AvaTax calculated the tax for this transaction, and no override occurred.
      */
-    const C_LOGIN = "Login";
+    const C_NONE = "None";
 
     /**
-     * Indicates that it is a Customer DOR Data type
+     * AvaTax calculated tax for this transaction, but the final tax amount on the transaction was
+     *  determined outside of AvaTax. To see the tax amounts determined by AvaTax, look at the
+     *  `taxCalculated` field. To see the tax amounts determined by the customer's outside tax engine,
+     *  look at the `taxAmount` field.
+     *  
+     *  This behavior can also occur when a customer requests a refund. For refunds calculated using the
+     *  `RefundTransaction` API, AvaTax will ensure that the exact tax charged to the customer is refunded
+     *  to the customer using a tax amount override.
      */
-    const C_CUSTOMERDORDATA = "CustomerDorData";
+    const C_TAXAMOUNT = "TaxAmount";
+
+    /**
+     * Entity exemption was ignored (e.g. item was consumed)
+     */
+    const C_EXEMPTION = "Exemption";
+
+    /**
+     * AvaTax was instructed to calculate this transaction using the tax rules that were in effect
+     *  on a different day than the transaction occurred. 
+     *  
+     *  This behavior typically occurs during refunds. If the customer attempts to return a product
+     *  without a receipt that shows the exact tax amount paid, AvaTax can calculate tax on the date
+     *  when they believed that the product was purchased.
+     */
+    const C_TAXDATE = "TaxDate";
+
+    /**
+     * To support Consumer Use Tax
+     */
+    const C_ACCRUEDTAXAMOUNT = "AccruedTaxAmount";
+
+    /**
+     * Derive the taxable amount from the tax amount
+     */
+    const C_DERIVETAXABLE = "DeriveTaxable";
+
+}
+
+
+/**
+ * Indicates the type of adjustment that was performed on a transaction
+ */
+class AdjustmentReason
+{
+
+    /**
+     * The transaction has not been adjusted
+     */
+    const C_NOTADJUSTED = "NotAdjusted";
+
+    /**
+     * A sourcing issue existed which caused the transaction to be adjusted
+     */
+    const C_SOURCINGISSUE = "SourcingIssue";
+
+    /**
+     * Transaction was adjusted to reconcile it with a general ledger
+     */
+    const C_RECONCILEDWITHGENERALLEDGER = "ReconciledWithGeneralLedger";
+
+    /**
+     * Transaction was adjusted after an exemption certificate was applied
+     */
+    const C_EXEMPTCERTAPPLIED = "ExemptCertApplied";
+
+    /**
+     * Transaction was adjusted when the price of an item changed
+     */
+    const C_PRICEADJUSTED = "PriceAdjusted";
+
+    /**
+     * Transaction was adjusted due to a product return
+     */
+    const C_PRODUCTRETURNED = "ProductReturned";
+
+    /**
+     * Transaction was adjusted due to a product exchange
+     */
+    const C_PRODUCTEXCHANGED = "ProductExchanged";
+
+    /**
+     * Transaction was adjusted due to bad or uncollectable debt
+     */
+    const C_BADDEBT = "BadDebt";
+
+    /**
+     * Transaction was adjusted for another reason not specified
+     */
+    const C_OTHER = "Other";
+
+    /**
+     * Offline
+     */
+    const C_OFFLINE = "Offline";
 
 }
 
@@ -2011,6 +2278,99 @@ class BoundaryLevel
      * 5-digit zip precision
      */
     const C_ZIP5 = "Zip5";
+
+}
+
+
+/**
+ * Tax type
+ */
+class TaxType
+{
+
+    /**
+     * Sales tax
+     */
+    const C_SALES = "Sales";
+
+    /**
+     * Use tax
+     */
+    const C_USE = "Use";
+
+    /**
+     * Consumer Use Tax
+     */
+    const C_CONSUMERUSE = "ConsumerUse";
+
+    /**
+     * VAT/GST Output tax
+     */
+    const C_OUTPUT = "Output";
+
+    /**
+     * VAT/GST Input tax
+     */
+    const C_INPUT = "Input";
+
+    /**
+     * VAT/GST Nonrecoverable Input tax
+     */
+    const C_NONRECOVERABLE = "Nonrecoverable";
+
+    /**
+     * Fee - PIFs (Public Improvement Fees) and RSFs (Retail Sales Fees)
+     */
+    const C_FEE = "Fee";
+
+    /**
+     * Rental Tax
+     */
+    const C_RENTAL = "Rental";
+
+    /**
+     * Medical Excise Tax
+     */
+    const C_EXCISE = "Excise";
+
+    /**
+     * Match Lodging tax type
+     */
+    const C_LODGING = "Lodging";
+
+    /**
+     * Match bottle tax type
+     */
+    const C_BOTTLE = "Bottle";
+
+    /**
+     * EWaste tax type
+     */
+    const C_EWASTE = "EWaste";
+
+    /**
+     * LandedCost tax type
+     */
+    const C_LANDEDCOST = "LandedCost";
+
+}
+
+
+/**
+ * Type of verification task
+ */
+class ScraperType
+{
+
+    /**
+     * Indicates that is is a login type
+     */
+    const C_LOGIN = "Login";
+
+    /**
+     * Indicates that it is a Customer DOR Data type
+     */
+    const C_CUSTOMERDORDATA = "CustomerDorData";
 
 }
 
@@ -2171,28 +2531,6 @@ class AdjustmentPeriodTypeId
 /**
  * 
  */
-class AdjustmentTypeId
-{
-    const C_OTHER = "Other";
-    const C_CURRENTPERIODROUNDING = "CurrentPeriodRounding";
-    const C_PRIORPERIODROUNDING = "PriorPeriodRounding";
-    const C_CURRENTPERIODDISCOUNT = "CurrentPeriodDiscount";
-    const C_PRIORPERIODDISCOUNT = "PriorPeriodDiscount";
-    const C_CURRENTPERIODCOLLECTION = "CurrentPeriodCollection";
-    const C_PRIORPERIODCOLLECTION = "PriorPeriodCollection";
-    const C_PENALTY = "Penalty";
-    const C_INTEREST = "Interest";
-    const C_DISCOUNT = "Discount";
-    const C_ROUNDING = "Rounding";
-    const C_CSPFEE = "CspFee";
-    const C_MARKETPLACE = "Marketplace";
-
-}
-
-
-/**
- * 
- */
 class PaymentAccountTypeId
 {
     const C_NONE = "None";
@@ -2228,232 +2566,6 @@ class PaymentType
      * The payment is a prior CSP fee
      */
     const C_PRIORCSPFEE = "PriorCspFee";
-
-}
-
-
-/**
- * Document Status
- */
-class DocumentStatus
-{
-
-    /**
-     * Temporary document not saved (SalesOrder, PurchaseOrder)
-     */
-    const C_TEMPORARY = "Temporary";
-
-    /**
-     * Saved document (SalesInvoice or PurchaseInvoice) ready to be posted
-     */
-    const C_SAVED = "Saved";
-
-    /**
-     * A posted document (not committed)
-     */
-    const C_POSTED = "Posted";
-
-    /**
-     * A posted document that has been committed
-     */
-    const C_COMMITTED = "Committed";
-
-    /**
-     * A Committed document that has been cancelled
-     */
-    const C_CANCELLED = "Cancelled";
-
-    /**
-     * A document that has been adjusted
-     */
-    const C_ADJUSTED = "Adjusted";
-
-    /**
-     * A document which is in Queue status and processed later
-     */
-    const C_QUEUED = "Queued";
-
-    /**
-     * A document which is Pending for Approval
-     */
-    const C_PENDINGAPPROVAL = "PendingApproval";
-
-    /**
-     * Any status (for searching)
-     */
-    const C_ANY = "Any";
-
-}
-
-
-/**
- * TaxOverrideTypeId
- */
-class TaxOverrideTypeId
-{
-
-    /**
-     * No override
-     */
-    const C_NONE = "None";
-
-    /**
-     * Tax was overriden by the client
-     */
-    const C_TAXAMOUNT = "TaxAmount";
-
-    /**
-     * Entity exemption was ignored (e.g. item was consumed)
-     */
-    const C_EXEMPTION = "Exemption";
-
-    /**
-     * Only the tax date was overriden
-     */
-    const C_TAXDATE = "TaxDate";
-
-    /**
-     * To support Consumer Use Tax
-     */
-    const C_ACCRUEDTAXAMOUNT = "AccruedTaxAmount";
-
-    /**
-     * Derive the taxable amount from the tax amount
-     */
-    const C_DERIVETAXABLE = "DeriveTaxable";
-
-}
-
-
-/**
- * Indicates the type of adjustment that was performed on a transaction
- */
-class AdjustmentReason
-{
-
-    /**
-     * The transaction has not been adjusted
-     */
-    const C_NOTADJUSTED = "NotAdjusted";
-
-    /**
-     * A sourcing issue existed which caused the transaction to be adjusted
-     */
-    const C_SOURCINGISSUE = "SourcingIssue";
-
-    /**
-     * Transaction was adjusted to reconcile it with a general ledger
-     */
-    const C_RECONCILEDWITHGENERALLEDGER = "ReconciledWithGeneralLedger";
-
-    /**
-     * Transaction was adjusted after an exemption certificate was applied
-     */
-    const C_EXEMPTCERTAPPLIED = "ExemptCertApplied";
-
-    /**
-     * Transaction was adjusted when the price of an item changed
-     */
-    const C_PRICEADJUSTED = "PriceAdjusted";
-
-    /**
-     * Transaction was adjusted due to a product return
-     */
-    const C_PRODUCTRETURNED = "ProductReturned";
-
-    /**
-     * Transaction was adjusted due to a product exchange
-     */
-    const C_PRODUCTEXCHANGED = "ProductExchanged";
-
-    /**
-     * Transaction was adjusted due to bad or uncollectable debt
-     */
-    const C_BADDEBT = "BadDebt";
-
-    /**
-     * Transaction was adjusted for another reason not specified
-     */
-    const C_OTHER = "Other";
-
-    /**
-     * Offline
-     */
-    const C_OFFLINE = "Offline";
-
-}
-
-
-/**
- * Tax type
- */
-class TaxType
-{
-
-    /**
-     * Match Lodging tax type
-     */
-    const C_LODGING = "Lodging";
-
-    /**
-     * Match bottle tax type
-     */
-    const C_BOTTLE = "Bottle";
-
-    /**
-     * EWaste tax type
-     */
-    const C_EWASTE = "EWaste";
-
-    /**
-     * LandedCost tax type
-     */
-    const C_LANDEDCOST = "LandedCost";
-
-    /**
-     * Consumer Use Tax
-     */
-    const C_CONSUMERUSE = "ConsumerUse";
-
-    /**
-     * Medical Excise Tax
-     */
-    const C_EXCISE = "Excise";
-
-    /**
-     * Fee - PIFs (Public Improvement Fees) and RSFs (Retail Sales Fees)
-     */
-    const C_FEE = "Fee";
-
-    /**
-     * VAT/GST Input tax
-     */
-    const C_INPUT = "Input";
-
-    /**
-     * VAT/GST Nonrecoverable Input tax
-     */
-    const C_NONRECOVERABLE = "Nonrecoverable";
-
-    /**
-     * VAT/GST Output tax
-     */
-    const C_OUTPUT = "Output";
-
-    /**
-     * Rental Tax
-     */
-    const C_RENTAL = "Rental";
-
-    /**
-     * Sales tax
-     */
-    const C_SALES = "Sales";
-
-    /**
-     * Use tax
-     */
-    const C_USE = "Use";
 
 }
 
@@ -2526,45 +2638,6 @@ class TaxDebugLevel
      * User requests additional diagnostic information when creating a tax transaction
      */
     const C_DIAGNOSTIC = "Diagnostic";
-
-}
-
-
-/**
- * TaxOverride reasons
- */
-class TaxOverrideType
-{
-
-    /**
-     * No override
-     */
-    const C_NONE = "None";
-
-    /**
-     * Tax was overriden by the client
-     */
-    const C_TAXAMOUNT = "TaxAmount";
-
-    /**
-     * Entity exemption was ignored (e.g. item was consumed)
-     */
-    const C_EXEMPTION = "Exemption";
-
-    /**
-     * Only the tax date was overriden
-     */
-    const C_TAXDATE = "TaxDate";
-
-    /**
-     * To support Consumer Use Tax
-     */
-    const C_ACCRUEDTAXAMOUNT = "AccruedTaxAmount";
-
-    /**
-     * Derive the taxable amount from the tax amount
-     */
-    const C_DERIVETAXABLE = "DeriveTaxable";
 
 }
 
@@ -2789,6 +2862,35 @@ class CommentType
 
 
 /**
+ * Severity level of a notification.
+ */
+class NotificationSeverityLevel
+{
+
+    /**
+     * A completed notification
+     */
+    const C_COMPLETE = "Complete";
+
+    /**
+     * Low priority notification, Default.
+     */
+    const C_NEUTRAL = "Neutral";
+
+    /**
+     * Medium priority notification.
+     */
+    const C_ADVISORY = "Advisory";
+
+    /**
+     * High priority notification.
+     */
+    const C_BLOCKING = "Blocking";
+
+}
+
+
+/**
  * Different types of formats allowed for exporting a report
  */
 class ReportFormat
@@ -2815,24 +2917,24 @@ class ReportDateFilter
 {
 
     /**
-     * The date when the transaction is posted
-     */
-    const C_DOCUMENTDATE = "DocumentDate";
-
-    /**
-     * The date when the transaction is paid for
-     */
-    const C_PAYMENTDATE = "PaymentDate";
-
-    /**
      * The date when the transaction is added to report
      */
     const C_REPORTINGDATE = "ReportingDate";
 
     /**
+     * The date when the transaction is posted
+     */
+    const C_DOCUMENTDATE = "DocumentDate";
+
+    /**
      * The date when the transaction is being taxed
      */
     const C_TAXDATE = "TaxDate";
+
+    /**
+     * The date when the transaction is paid for
+     */
+    const C_PAYMENTDATE = "PaymentDate";
 
 }
 
@@ -2844,14 +2946,14 @@ class ReportDocType
 {
 
     /**
-     * Output all ConsumerUse tax transactions in the report
-     */
-    const C_CONSUMERUSE = "ConsumerUse";
-
-    /**
      * Output all Sales tax transactions in the report
      */
     const C_SALES = "Sales";
+
+    /**
+     * Output all ConsumerUse tax transactions in the report
+     */
+    const C_CONSUMERUSE = "ConsumerUse";
 
 }
 
