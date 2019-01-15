@@ -38,7 +38,7 @@ To use the AvaTax PHP SDK from Composer:
 
 The PHP SDK uses a fluent interface to define a connection to AvaTax and to make API calls to calculate tax on transactions.  Here's an example of connecting to the API.
 
-```
+```php
 <?php
 
 // Include the AvaTaxClient library
@@ -79,5 +79,5 @@ $t = $tb->withAddress('ShipFrom', '123 Main Street', null, null, 'Irvine', 'CA',
     ->create();
 echo('<h2>Transaction #2</h2>');
 echo('<pre>' . json_encode($t, JSON_PRETTY_PRINT) . '</pre>');
-
+?>
 ```

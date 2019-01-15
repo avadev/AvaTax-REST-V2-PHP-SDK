@@ -27,6 +27,10 @@
         {
             "name": "Bob Maidens",
             "email": "bob.maidens@avalara.com"
+        },
+        {
+            "name": "Genevieve Conty",
+            "email": "genevieve.conty@avalara.com"
         }
     ],
     "license": "Apache-2.0",
