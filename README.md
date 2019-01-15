@@ -79,5 +79,6 @@ $t = $tb->withAddress('ShipFrom', '123 Main Street', null, null, 'Irvine', 'CA',
     ->create();
 echo('<h2>Transaction #2</h2>');
 echo('<pre>' . json_encode($t, JSON_PRETTY_PRINT) . '</pre>');
+
 ?>
 ```
