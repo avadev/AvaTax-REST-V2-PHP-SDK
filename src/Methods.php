@@ -67,15 +67,14 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * 
      * @param int $id The ID of the account to activate
-     * @param string $include Elements to include when fetching the account
      * @param ActivateAccountModel $model The activation request
      * @return AccountModel
      */
-    public function activateAccount($id, $include=null, $model)
+    public function activateAccount($id, $model)
     {
         $path = "/api/v2/accounts/{$id}/activate";
         $guzzleParams = [
-            'query' => ['$include' => $include],
+            'query' => [],
             'body' => json_encode($model)
         ];
         return $this->restCall($path, 'POST', $guzzleParams);
@@ -580,7 +579,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Get the AvaFileForm object identified by this URL.
      *
      * 
-     * @param string $id The primary key of this AvaFileForm
+     * @param int $id The primary key of this AvaFileForm
      * @return AvaFileFormModel
      */
     public function getAvaFileForm($id)
@@ -973,14 +972,15 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * 
      * @param int $companyId The ID number of the company recording this certificate
+     * @param boolean $preValidatedExemptionReason If set to true, the certificate will bypass the human verification process.
      * @param CertificateModel[] $model Certificates to be created
      * @return CertificateModel[]
      */
-    public function createCertificates($companyId, $model)
+    public function createCertificates($companyId, $preValidatedExemptionReason, $model)
     {
         $path = "/api/v2/companies/{$companyId}/certificates";
         $guzzleParams = [
-            'query' => [],
+            'query' => ['$preValidatedExemptionReason' => $preValidatedExemptionReason],
             'body' => json_encode($model)
         ];
         return $this->restCall($path, 'POST', $guzzleParams);
@@ -1666,15 +1666,15 @@ class AvaTaxClient extends AvaTaxClientBase
      * Retrieve a list of all configuration settings tied to this company.
      * 
      * Configuration settings provide you with the ability to control features of your account and of your
-     * tax software. The category names `AvaCertServiceConfig` is reserved for
-     * Avalara internal software configuration values; to store your own account-level settings, please
+     * tax software. The category name `AvaCertServiceConfig` is reserved for
+     * Avalara internal software configuration values; to store your own company-level settings, please
      * create a new category name that begins with `X-`, for example, `X-MyCustomCategory`.
      * 
      * Company settings are permanent settings that cannot be deleted. You can set the value of a
-     * company setting to null if desired.
+     * company setting to null if desired and if the particular setting supports it.
      * 
-     * Avalara-based account settings for `AvaCertServiceConfig` affect your account's exemption certificate
-     * processing, and should only be changed with care.
+     * Avalara-based company settings for `AvaCertServiceConfig` affect your company's exemption certificate
+     * processing, and should be changed with care.
      *
      * 
      * @param int $id 
@@ -1802,20 +1802,20 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
-     * Change configuration settings for this account
+     * Change configuration settings for this company
      *
-     * Update configuration settings tied to this account.
+     * Update configuration settings tied to this company.
      * 
      * Configuration settings provide you with the ability to control features of your account and of your
      * tax software. The category names `AvaCertServiceConfig` is reserved for
-     * Avalara internal software configuration values; to store your own account-level settings, please
+     * Avalara internal software configuration values; to store your own company-level settings, please
      * create a new category name that begins with `X-`, for example, `X-MyCustomCategory`.
      * 
      * Company settings are permanent settings that cannot be deleted. You can set the value of a
-     * company setting to null if desired.
+     * company setting to null if desired and if the particular setting supports it.
      * 
-     * Avalara-based account settings for `AvaCertServiceConfig` affect your account's exemption certificate
-     * processing, and should only be changed with care.
+     * Avalara-based company settings for `AvaCertServiceConfig` affect your company's exemption certificate
+     * processing, and should be changed with care.
      *
      * 
      * @param int $id 
@@ -2508,10 +2508,10 @@ class AvaTaxClient extends AvaTaxClientBase
      * Test whether a form supports online login verification
      *
      * This API is intended to be useful to identify whether the user should be allowed
-     * to automatically verify their login and password.
+     * to automatically verify their login and password. This API will provide a result only if the form supports automatic online login verification.
      *
      * 
-     * @param string $form The name of the form you would like to verify. This can be the tax form code or the legacy return name
+     * @param string $form The name of the form you would like to verify. This is the tax form code
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
@@ -3401,6 +3401,30 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Retrieve the parameters by companyCode and itemCode.
+     *
+     * Returns the list of parameters based on the company country and state jurisdiction and the item code.
+     *
+     * 
+     * @param string $companyCode Company code.
+     * @param string $itemCode Item code.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listParametersByItem($companyCode, $itemCode, $filter=null, $top=null, $skip=null, $orderBy=null)
+    {
+        $path = "/api/v2/definitions/parameters/byitem/{$companyCode}/{$itemCode}";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * Retrieve the full list of Avalara-supported permissions
      *
      * Returns the full list of Avalara-supported permission types.
@@ -3466,6 +3490,57 @@ class AvaTaxClient extends AvaTaxClientBase
     public function listPreferredPrograms($filter=null, $top=null, $skip=null, $orderBy=null)
     {
         $path = "/api/v2/definitions/preferredprograms";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * List all available product classification systems.
+     *
+     * List all available product classification systems.
+     * 
+     * Tax authorities use product classification systems as a way to identify products and associate them with a tax rate.
+     * More than one tax authority might use the same product classification system, but they might charge different tax rates for products.
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listProductClassificationSystems($filter=null, $top=null, $skip=null, $orderBy=null)
+    {
+        $path = "/api/v2/definitions/productclassificationsystems";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * List all product classification systems available to a company based on its nexus.
+     *
+     * Lists all product classification systems available to a company based on its nexus.
+     * 
+     * Tax authorities use product classification systems as a way to identify products and associate them with a tax rate.
+     * More than one tax authority might use the same product classification system, but they might charge different tax rates for products.
+     *
+     * 
+     * @param string $companyCode The company code.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listProductClassificationSystemsByCompany($companyCode, $filter=null, $top=null, $skip=null, $orderBy=null)
+    {
+        $path = "/api/v2/definitions/productclassificationsystems/bycompany/{$companyCode}";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
@@ -4812,7 +4887,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The ID of the company that owns the filings.
      * @param int $id The id of the filing return your retrieving
      * @param boolean $details Indicates if you would like the credit details returned
-     * @return FetchResult
+     * @return FilingReturnModel
      */
     public function getFilingReturn($companyId, $id, $details)
     {
@@ -5292,6 +5367,64 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Add classifications to an item.
+     *
+     * Add classifications to an item.
+     * 
+     * A classification is the code for a product in a particular tax system. Classifications enable an item to be used in multiple tax systems which may have different tax rates for a product.
+     * 
+     * When an item is used in a transaction, the applicable classification will be used to determine the appropriate tax rate.
+     * 
+     * An item may only have one classification per tax system.
+     *
+     * 
+     * @param int $companyId The company id.
+     * @param int $itemId The item id.
+     * @param ItemClassificationInputModel[] $model The item classifications you wish to create.
+     * @return ItemClassificationOutputModel[]
+     */
+    public function createItemClassifications($companyId, $itemId, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/items/{$itemId}/classifications";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Add parameters to an item.
+     *
+     * Add parameters to an item.
+     * 
+     * Some items can be taxed differently depending on the properties of that item, such as the item grade or by a particular measurement of that item. In AvaTax, these tax-affecting properties are called "parameters".
+     * 
+     * A parameter added to an item will be used by default in tax calculation but will not show on the transaction line referencing the item .
+     * 
+     * A parameter specified on a transaction line will override an item parameter if they share the same parameter name.
+     * 
+     * To see available parameters for this item, call `/api/v2/definitions/parameters?$filter=attributeType eq Product`
+     * 
+     * Some parameters are only available for use if you have subscribed to specific AvaTax services. To see which parameters you are able to use, add the query parameter "$showSubscribed=true" to the parameter definition call above.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this item parameter.
+     * @param int $itemId The item id.
+     * @param ItemParameterModel[] $model The item parameters you wish to create.
+     * @return ItemParameterModel[]
+     */
+    public function createItemParameters($companyId, $itemId, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/items/{$itemId}/parameters";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
      * Create a new item
      *
      * Creates one or more new item objects attached to this company.
@@ -5301,6 +5434,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * and other data fields. AvaTax will automatically look up each `itemCode` and apply the correct tax codes and parameters
      * from the item table instead. This allows your CreateTransaction call to be as simple as possible, and your tax compliance
      * team can manage your item catalog and adjust the tax behavior of items without having to modify your software.
+     *  
+     * The tax code takes precedence over the tax code id if both are provided.
      *
      * 
      * @param int $companyId The ID of the company that owns this item.
@@ -5320,13 +5455,15 @@ class AvaTaxClient extends AvaTaxClientBase
     /**
      * Delete a single item
      *
-     * Marks the item object at this URL as deleted.
+     * Deletes the item object at this URL.
      * 
      * Items are a way of separating your tax calculation process from your tax configuration details. If you choose, you
      * can provide `itemCode` values for each `CreateTransaction()` API call rather than specifying tax codes, parameters, descriptions,
      * and other data fields. AvaTax will automatically look up each `itemCode` and apply the correct tax codes and parameters
      * from the item table instead. This allows your CreateTransaction call to be as simple as possible, and your tax compliance
      * team can manage your item catalog and adjust the tax behavior of items without having to modify your software.
+     * 
+     * Deleting an item will also delete the parameters and classifications associated with that item.
      *
      * 
      * @param int $companyId The ID of the company that owns this item.
@@ -5336,6 +5473,58 @@ class AvaTaxClient extends AvaTaxClientBase
     public function deleteItem($companyId, $id)
     {
         $path = "/api/v2/companies/{$companyId}/items/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Delete a single item classification.
+     *
+     * Delete a single item classification.
+     * 
+     * A classification is the code for a product in a particular tax system. Classifications enable an item to be used in multiple tax systems which may have different tax rates for a product.
+     * 
+     * When an item is used in a transaction, the applicable classification will be used to determine the appropriate tax rate.
+     *
+     * 
+     * @param int $companyId The company id.
+     * @param int $itemId The item id.
+     * @param int $id The item classification id.
+     * @return ErrorDetail[]
+     */
+    public function deleteItemClassification($companyId, $itemId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/items/{$itemId}/classifications/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Delete a single item parameter
+     *
+     * Delete a single item parameter.
+     * 
+     * Some items can be taxed differently depending on the properties of that item, such as the item grade or by a particular measurement of that item. In AvaTax, these tax-affecting properties are called "parameters".
+     * 
+     * A parameter added to an item will be used by default in tax calculation but will not show on the transaction line referencing the item .
+     * 
+     * A parameter specified on a transaction line will override an item parameter if they share the same parameter name.
+     *
+     * 
+     * @param int $companyId The company id
+     * @param int $itemId The item id
+     * @param int $id The parameter id
+     * @return ErrorDetail[]
+     */
+    public function deleteItemParameter($companyId, $itemId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/items/{$itemId}/parameters/{$id}";
         $guzzleParams = [
             'query' => [],
             'body' => null
@@ -5357,13 +5546,130 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns this item object
      * @param int $id The primary key of this item
+     * @param string $include A comma separated list of additional data to retrieve.
      * @return ItemModel
      */
-    public function getItem($companyId, $id)
+    public function getItem($companyId, $id, $include=null)
     {
         $path = "/api/v2/companies/{$companyId}/items/{$id}";
         $guzzleParams = [
+            'query' => ['$include' => $include],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single item classification.
+     *
+     * Retrieve a single item classification.
+     * 
+     * A classification is the code for a product in a particular tax system. Classifications enable an item to be used in multiple tax systems which may have different tax rates for a product.
+     * 
+     * When an item is used in a transaction, the applicable classification will be used to determine the appropriate tax rate.
+     *
+     * 
+     * @param int $companyId The company id.
+     * @param int $itemId The item id.
+     * @param int $id The item classification id.
+     * @return ItemClassificationOutputModel
+     */
+    public function getItemClassification($companyId, $itemId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/items/{$itemId}/classifications/{$id}";
+        $guzzleParams = [
             'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single item parameter
+     *
+     * Retrieve a single item parameter.
+     * 
+     * Some items can be taxed differently depending on the properties of that item, such as the item grade or by a particular measurement of that item. In AvaTax, these tax-affecting properties are called "parameters".
+     * 
+     * A parameter added to an item will be used by default in tax calculation but will not show on the transaction line referencing the item .
+     * 
+     * A parameter specified on a transaction line will override an item parameter if they share the same parameter name.
+     *
+     * 
+     * @param int $companyId The company id
+     * @param int $itemId The item id
+     * @param int $id The parameter id
+     * @return ItemParameterModel
+     */
+    public function getItemParameter($companyId, $itemId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/items/{$itemId}/parameters/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve classifications for an item.
+     *
+     * List classifications for an item.
+     * 
+     * A classification is the code for a product in a particular tax system. Classifications enable an item to be used in multiple tax systems which may have different tax rates for a product.
+     * 
+     * When an item is used in a transaction, the applicable classification will be used to determine the appropriate tax rate.
+     * 
+     * Search for specific objects using the criteria in the `$filter` classification; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` classifications.
+     *
+     * 
+     * @param int $companyId The company id.
+     * @param int $itemId The item id.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listItemClassifications($companyId, $itemId, $filter=null, $top=null, $skip=null, $orderBy=null)
+    {
+        $path = "/api/v2/companies/{$companyId}/items/{$itemId}/classifications";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve parameters for an item
+     *
+     * List parameters for an item.
+     * 
+     * Some items can be taxed differently depending on the properties of that item, such as the item grade or by a particular measurement of that item. In AvaTax, these tax-affecting properties are called "parameters".
+     * 
+     * A parameter added to an item will be used by default in tax calculation but will not show on the transaction line referencing the item .
+     * 
+     * A parameter specified on a transaction line will override an item parameter if they share the same parameter name.
+     * 
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     *
+     * 
+     * @param int $companyId The company id
+     * @param int $itemId The item id
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listItemParameters($companyId, $itemId, $filter=null, $top=null, $skip=null, $orderBy=null)
+    {
+        $path = "/api/v2/companies/{$companyId}/items/{$itemId}/parameters";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
@@ -5386,7 +5692,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * You may specify one or more of the following values in the `$include` parameter to fetch additional nested data, using commas to separate multiple values:
      *  
-     * * Attributes
+     * * Parameters
+     * * Classifications
      *
      * 
      * @param int $companyId The ID of the company that defined these items
@@ -5421,10 +5728,6 @@ class AvaTaxClient extends AvaTaxClientBase
      * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
      * 
      * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
-     * 
-     * You may specify one or more of the following values in the `$include` parameter to fetch additional nested data, using commas to separate multiple values:
-     *  
-     * * Attributes
      *
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
@@ -5457,6 +5760,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * All data from the existing object will be replaced with data in the object you PUT. To set a field's value to null, 
      * you may either set its value to null or omit that field from the object you post.
+     *  
+     * The tax code takes precedence over the tax code id if both are provided.
      *
      * 
      * @param int $companyId The ID of the company that this item belongs to.
@@ -5467,6 +5772,62 @@ class AvaTaxClient extends AvaTaxClientBase
     public function updateItem($companyId, $id, $model)
     {
         $path = "/api/v2/companies/{$companyId}/items/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Update an item classification.
+     *
+     * Update an item classification.
+     * 
+     * A classification is the code for a product in a particular tax system. Classifications enable an item to be used in multiple tax systems which may have different tax rates for a product.
+     * 
+     * When an item is used in a transaction, the applicable classification will be used to determine the appropriate tax rate.
+     * 
+     * An item may only have one classification per tax system.
+     *
+     * 
+     * @param int $companyId The company id.
+     * @param int $itemId The item id.
+     * @param int $id The item classification id.
+     * @param ItemClassificationInputModel $model The item object you wish to update.
+     * @return ItemClassificationOutputModel
+     */
+    public function updateItemClassification($companyId, $itemId, $id, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/items/{$itemId}/classifications/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Update an item parameter
+     *
+     * Update an item parameter.
+     * 
+     * Some items can be taxed differently depending on the properties of that item, such as the item grade or by a particular measurement of that item. In AvaTax, these tax-affecting properties are called "parameters".
+     * 
+     * A parameter added to an item will be used by default in tax calculation but will not show on the transaction line referencing the item .
+     * 
+     * A parameter specified on a transaction line will override an item parameter if they share the same parameter name.
+     *
+     * 
+     * @param int $companyId The company id.
+     * @param int $itemId The item id
+     * @param int $id The item parameter id
+     * @param ItemParameterModel $model The item object you wish to update.
+     * @return ItemParameterModel
+     */
+    public function updateItemParameter($companyId, $itemId, $id, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/items/{$itemId}/parameters/{$id}";
         $guzzleParams = [
             'query' => [],
             'body' => json_encode($model)
@@ -7259,14 +7620,15 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * 
      * @param int $userId The unique ID of the user whose password will be changed
+     * @param boolean $unmigrateFromAi If user's password was migrated to AI, undo this.
      * @param SetPasswordModel $model The new password for this user
      * @return string
      */
-    public function resetPassword($userId, $model)
+    public function resetPassword($userId, $unmigrateFromAi, $model)
     {
         $path = "/api/v2/passwords/{$userId}/reset";
         $guzzleParams = [
-            'query' => [],
+            'query' => ['unmigrateFromAi' => $unmigrateFromAi],
             'body' => json_encode($model)
         ];
         return $this->restCall($path, 'POST', $guzzleParams);
@@ -8720,6 +9082,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Addresses
      * * SummaryOnly (omit lines and details - reduces API response size)
      * * LinesOnly (omit details - reduces API response size)
+     * * TaxDetailsByTaxType - Includes the aggregated tax, exempt tax, taxable and non-taxable for each tax type returned in the transaction summary.
      *
      * 
      * @param int $id The unique ID number of the transaction to retrieve
@@ -8968,7 +9331,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $companyCode The company code of the company that recorded this transaction
      * @param string $transactionCode The transaction code to void
      * @param string $documentType (Optional): The document type of the transaction to void. If not provided, the default is SalesInvoice. (See DocumentType::* for a list of allowable values)
-     * @param VoidTransactionModel $model The void request you wish to execute
+     * @param VoidTransactionModel $model The void request you wish to execute. To void a transaction the code must be set to 'DocVoided'
      * @return TransactionModel
      */
     public function voidTransaction($companyCode, $transactionCode, $documentType, $model)

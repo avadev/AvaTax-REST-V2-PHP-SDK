@@ -692,6 +692,7 @@ class ErrorCodeId
     const C_RANGECOMPAREERROR = "RangeCompareError";
     const C_RANGESETERROR = "RangeSetError";
     const C_TAXPAYERNUMBERREQUIRED = "TaxpayerNumberRequired";
+    const C_ENTITYLIMITEXCEEDED = "EntityLimitExceeded";
     const C_COMMONPASSWORD = "CommonPassword";
     const C_WEAKPASSWORD = "WeakPassword";
     const C_STRINGLENGTHERROR = "StringLengthError";
@@ -726,6 +727,7 @@ class ErrorCodeId
     const C_NOFILTERCRITERIAEXCEPTION = "NoFilterCriteriaException";
     const C_OPENCLAUSEEXCEPTION = "OpenClauseException";
     const C_JSONFORMATERROR = "JsonFormatError";
+    const C_INVALIDDECIMALVALUE = "InvalidDecimalValue";
     const C_UNHANDLEDEXCEPTION = "UnhandledException";
     const C_REPORTINGCOMPANYMUSTHAVECONTACTSERROR = "ReportingCompanyMustHaveContactsError";
     const C_COMPANYPROFILENOTSET = "CompanyProfileNotSet";
@@ -1014,6 +1016,8 @@ class ErrorCodeId
     const C_TAXRULEREQUIRESNEXUS = "TaxRuleRequiresNexus";
     const C_UPCCODENOTUNIQUE = "UPCCodeNotUnique";
     const C_CANNOTUPDATESOURCEORINSTANCE = "CannotUpdateSourceOrInstance";
+    const C_TAXCODEASSOCIATEDWITHITEMCODENOTFOUND = "TaxCodeAssociatedWithItemCodeNotFound";
+    const C_DUPLICATESYSTEMFORITEM = "DuplicateSystemForItem";
 
     /**
      * SendSales API errors
@@ -1033,6 +1037,15 @@ class ErrorCodeId
      * AuditAccount API errors
      */
     const C_TRACEDATANOTAVAILABLE = "TraceDataNotAvailable";
+
+    /**
+     * Item parameter errors
+     */
+    const C_INVALIDPARAMETERUNITMEASUREMENTTYPE = "InvalidParameterUnitMeasurementType";
+    const C_PARAMETERUNITREQUIRED = "ParameterUnitRequired";
+    const C_INVALIDPARAMETERVALUEDATATYPE = "InvalidParameterValueDataType";
+    const C_INVALIDPARAMETERATTRIBUTETYPE = "InvalidParameterAttributeType";
+    const C_SUBSCRIPTIONREQUIREDFORPARAMETER = "SubscriptionRequiredForParameter";
 
 }
 
@@ -1632,6 +1645,11 @@ class AddressCategoryId
      *  already paid.
      */
     const C_MARKETPLACEREMITSTAX = "MarketplaceRemitsTax";
+
+    /**
+     * Address refers to the mailing address of your company which is not a physical location.
+     */
+    const C_NONPHYSICAL = "NonPhysical";
 
 }
 
@@ -2566,6 +2584,50 @@ class PaymentType
      * The payment is a prior CSP fee
      */
     const C_PRIORCSPFEE = "PriorCspFee";
+
+}
+
+
+/**
+ * What object experienced the error?
+ */
+class ErrorTargetCode
+{
+
+    /**
+     * Error target is unknown
+     */
+    const C_UNKNOWN = "Unknown";
+
+    /**
+     * There was an error in the request URL, querystring, or body
+     */
+    const C_HTTPREQUEST = "HttpRequest";
+
+    /**
+     * There was an error in the HTTP Request headers
+     */
+    const C_HTTPREQUESTHEADERS = "HttpRequestHeaders";
+
+    /**
+     * Some data provided by the user was incorrect
+     */
+    const C_INCORRECTDATA = "IncorrectData";
+
+    /**
+     * There was an error in the AvaTax API Server
+     */
+    const C_AVATAXAPISERVER = "AvaTaxApiServer";
+
+    /**
+     * There was an error in the Avalara Identity Server
+     */
+    const C_AVALARAIDENTITYSERVER = "AvalaraIdentityServer";
+
+    /**
+     * The customer's account setup does not permit certain actions
+     */
+    const C_CUSTOMERACCOUNTSETUP = "CustomerAccountSetup";
 
 }
 

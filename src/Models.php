@@ -192,7 +192,7 @@ class UserModel
     public $securityRoleId;
 
     /**
-     * @var string The status of the user's password. (See PasswordStatusId::* for a list of allowable values)
+     * @var string The status of the user's password. For a new user created, this is always going to be `UserMustChange` (See PasswordStatusId::* for a list of allowable values)
      */
     public $passwordStatus;
 
@@ -1876,6 +1876,11 @@ class CertificateModel
     public $exemptionReason;
 
     /**
+     * @var string The status of the certificate
+     */
+    public $status;
+
+    /**
      * @var string The date/time when this record was created.
      */
     public $createdDate;
@@ -2435,12 +2440,12 @@ class ItemModel
     public $itemCode;
 
     /**
-     * @var int The unique ID number of the tax code that is applied when selling this item.  When creating or updating an item, you can either specify the Tax Code ID number or the Tax Code string; you do not need to specify both values.
+     * @var int DEPRECATED - For identifying an `Item` with `Avalara TaxCode`, please call the [CreateItemClassification API] with your ItemCode and the Avalara TaxCode.  The unique ID number of the tax code that is applied when selling this item.  When creating or updating an item, you can either specify the Tax Code ID number or the Tax Code string; you do not need to specify both values.
      */
     public $taxCodeId;
 
     /**
-     * @var string The unique code string of the Tax Code that is applied when selling this item.  When creating or updating an item, you can either specify the Tax Code ID number or the Tax Code string; you do not need to specify both values.
+     * @var string DEPRECATED - For identifying an `Item` with `Avalara TaxCode`, please call the [CreateItemClassification API] with your ItemCode and the Avalara TaxCode.  The unique code string of the Tax Code that is applied when selling this item.  When creating or updating an item, you can either specify the Tax Code ID number or the Tax Code string; you do not need to specify both values.
      */
     public $taxCode;
 
@@ -2448,6 +2453,11 @@ class ItemModel
      * @var string A friendly description of this item in your product catalog.
      */
     public $description;
+
+    /**
+     * @var string A way to group similar items.
+     */
+    public $itemGroup;
 
     /**
      * @var string The date when this record was created.
@@ -2468,6 +2478,16 @@ class ItemModel
      * @var int The user ID of the user who last modified this record.
      */
     public $modifiedUserId;
+
+    /**
+     * @var ClassificationModel[] List of classifications that belong to this item.  A single classification consits of a productCode and a systemCode for a particular item.
+     */
+    public $classifications;
+
+    /**
+     * @var ItemParameterModel[] List of item parameters.
+     */
+    public $parameters;
 
 }
 
@@ -3329,6 +3349,57 @@ class EcmsModel
      * @var EcmsDetailModel[] Exempt Cert details
      */
     public $details;
+
+}
+
+/**
+ * Represents a classification for a given item.
+ */
+class ClassificationModel
+{
+
+    /**
+     * @var string The product code of an item in a given system.
+     */
+    public $productCode;
+
+    /**
+     * @var string The system code in which the product belongs.
+     */
+    public $systemCode;
+
+}
+
+/**
+ * Represents a parameter associated with an item.
+ */
+class ItemParameterModel
+{
+
+    /**
+     * @var int The id of the parameter.
+     */
+    public $id;
+
+    /**
+     * @var string The parameter's name.
+     */
+    public $name;
+
+    /**
+     * @var string The value for the parameter.
+     */
+    public $value;
+
+    /**
+     * @var string The unit of measurement code for the parameter.
+     */
+    public $unit;
+
+    /**
+     * @var int The item id
+     */
+    public $itemId;
 
 }
 
@@ -4381,7 +4452,7 @@ class TransactionModel
     public $totalTaxable;
 
     /**
-     * @var float The amount of tax that AvaTax calculated for the transaction.    If you used a `taxOverride` of type `taxAmount` for any lines in this transaction, this value   will still represent the amount that AvaTax calculated for this transaction, although the field  `totalTax` will be the total amount of tax after all overrides are applied.    You can compare the `totalTax` and `totalTaxCalculated` fields to check for any discrepancies  between an external tax calculation provider and the calculation performed by AvaTax.
+     * @var float The amount of tax that AvaTax calculated for the transaction.    If you used a `taxOverride` of type `taxAmount` for any lines in this transaction, this value   will represent the amount that AvaTax calculated for this transaction without applying the override.  The field `totalTax` will be the total amount of tax after all overrides are applied.    You can compare the `totalTax` and `totalTaxCalculated` fields to check for any discrepancies  between an external tax calculation provider and the calculation performed by AvaTax.
      */
     public $totalTaxCalculated;
 
@@ -4659,7 +4730,7 @@ class TransactionLineModel
     public $taxableAmount;
 
     /**
-     * @var float The amount of tax that AvaTax calculated for the transaction.    If you used a `taxOverride` of type `taxAmount` for this line, there will be a difference between  the `tax` field which represents your override, and the `taxCalculated` field which represents the  amount of tax that AvaTax calculated for this line.    You can compare the `tax` and `taxCalculated` fields to check for any discrepancies  between an external tax calculation provider and the calculation performed by AvaTax.
+     * @var float The amount of tax that AvaTax calculated for the transaction.    If you used a `taxOverride` of type `taxAmount`, there may be a difference between  the `tax` field which applies your override, and the `taxCalculated` field which  represents the amount of tax that AvaTax calculated without the override.    You can compare the `tax` and `taxCalculated` fields to check for any discrepancies  between an external tax calculation provider and the calculation performed by AvaTax.
      */
     public $taxCalculated;
 
@@ -4933,7 +5004,7 @@ class TransactionSummary
     public $tax;
 
     /**
-     * @var float Tax Calculated by Avalara AvaTax. This may be overriden by a TaxOverride.TaxAmount.
+     * @var float The amount of tax that AvaTax calculated for the transaction.     If you used a `taxOverride` of type `taxAmount`, there may be a difference between  the `tax` field which applies your override, and the `TaxCalculated` field which  represents the amount of tax that AvaTax calculated for this transaction without override.     You can use this for comparison.
      */
     public $taxCalculated;
 
@@ -5177,7 +5248,7 @@ class TransactionLineDetailModel
     public $taxRegionId;
 
     /**
-     * @var float The amount of tax that was calculated. This amount may be different if a tax override was used.  If the customer specified a tax override, this calculated tax value represents the amount of tax that would  have been charged if Avalara had calculated the tax for the rule.
+     * @var float The amount of tax that AvaTax calculated.  If an override for tax amount is used, there may be a difference between the tax  field which applies your override, and the this amount that is calculated without override.
      */
     public $taxCalculated;
 
@@ -5530,6 +5601,31 @@ class ParameterModel
      */
     public $regularExpression;
 
+    /**
+     * @var string Label that helps the user to identify a parameter
+     */
+    public $label;
+
+    /**
+     * @var string A help url that provides more information about the parameter
+     */
+    public $helpUrl;
+
+    /**
+     * @var string The type of parameter as determined by its application, e.g. Product, Transaction, Calculated
+     */
+    public $attributeType;
+
+    /**
+     * @var string[] If the parameter is of enumeration data type, then this list will be populated with all of the possible enumeration values.
+     */
+    public $values;
+
+    /**
+     * @var string The unit of measurement type of the parameter
+     */
+    public $measurementType;
+
 }
 
 /**
@@ -5775,6 +5871,72 @@ class CurrencyModel
      * @var int The number of decimal digits to use when formatting a currency value for display.
      */
     public $decimalDigits;
+
+}
+
+/**
+ * Represents a product classification system.
+ */
+class ProductClassificationSystemModel
+{
+
+    /**
+     * @var int Its Integer SystemId value for System
+     */
+    public $systemId;
+
+    /**
+     * @var string The System code for this System.
+     */
+    public $systemCode;
+
+    /**
+     * @var string A friendly human-readable name representing this System.
+     */
+    public $description;
+
+    /**
+     * @var string custom value set for the system
+     */
+    public $customsValue;
+
+    /**
+     * @var ProductSystemCountryModel[] List of all countries that belong to the system including
+     */
+    public $countries;
+
+}
+
+/**
+ * Represents a System Country.
+ */
+class ProductSystemCountryModel
+{
+
+    /**
+     * @var int Its Integer SystemCountryId value for SystemCountry
+     */
+    public $systemCountryId;
+
+    /**
+     * @var int Its Integer SystemId value for SystemCountry
+     */
+    public $systemId;
+
+    /**
+     * @var string string value of country code for SystemCountry
+     */
+    public $country;
+
+    /**
+     * @var string DateTime as EffDate for SystemCountry
+     */
+    public $effDate;
+
+    /**
+     * @var string DateTime as EffDate for SystemCountry
+     */
+    public $endDate;
 
 }
 
@@ -9206,6 +9368,152 @@ class FilingsCheckupAuthorityModel
 }
 
 /**
+ * Product classification input model.
+ */
+class ItemClassificationInputModel
+{
+
+    /**
+     * @var string The product code of an item in a given system.
+     */
+    public $productCode;
+
+    /**
+     * @var string The system code in which the product belongs.
+     */
+    public $systemCode;
+
+}
+
+/**
+ * Product classification output model.
+ */
+class ItemClassificationOutputModel
+{
+
+    /**
+     * @var int The unique ID number of this product.
+     */
+    public $id;
+
+    /**
+     * @var int The unique ID number of the item this product belongs to.
+     */
+    public $itemId;
+
+    /**
+     * @var int The system id which the product belongs.
+     */
+    public $systemId;
+
+    /**
+     * @var string A unique code representing this item.
+     */
+    public $productCode;
+
+    /**
+     * @var string A unique code representing this item.
+     */
+    public $systemCode;
+
+}
+
+/**
+ * Represents a request to sync items.
+ */
+class SyncItemsRequestModel
+{
+
+    /**
+     * @var ItemSyncModel[] A list of items to sync with AvaTax.
+     */
+    public $items;
+
+}
+
+/**
+ * An abridged item model used for syncing product catalogs with AvaTax.
+ */
+class ItemSyncModel
+{
+
+    /**
+     * @var string A unique code representing this item.
+     */
+    public $itemCode;
+
+    /**
+     * @var string A friendly description of the item. If your company has enrolled in Streamlined Sales Tax, this description must be auditable.
+     */
+    public $description;
+
+    /**
+     * @var string A group to which the item belongs.
+     */
+    public $itemGroup;
+
+    /**
+     * @var string The tax code of the item (optional)
+     */
+    public $taxCode;
+
+}
+
+/**
+ * The response returned after an item sync was requested.
+ */
+class SyncItemsResponseModel
+{
+
+    /**
+     * @var string The status of the request
+     */
+    public $status;
+
+}
+
+/**
+ * Helper function for throwing known error response
+ */
+class ErrorResult
+{
+
+    /**
+     * @var ErrorInfo Information about the error(s)
+     */
+    public $error;
+
+}
+
+/**
+ * Information about the error that occurred
+ */
+class ErrorInfo
+{
+
+    /**
+     * @var string Type of error that occurred (See ErrorCodeId::* for a list of allowable values)
+     */
+    public $code;
+
+    /**
+     * @var string Short one-line message to summaryize what went wrong
+     */
+    public $message;
+
+    /**
+     * @var string What object or service caused the error? (See ErrorTargetCode::* for a list of allowable values)
+     */
+    public $target;
+
+    /**
+     * @var ErrorDetail[] Array of detailed error messages
+     */
+    public $details;
+
+}
+
+/**
  * Tells you whether this location object has been correctly set up to the local jurisdiction's standards
  */
 class LocationValidationModel
@@ -9781,7 +10089,7 @@ class VoidTransactionModel
 {
 
     /**
-     * @var string Please specify the reason for voiding or cancelling this transaction (See VoidReasonCode::* for a list of allowable values)
+     * @var string Please specify the reason for voiding or cancelling this transaction.  To void the transaction, please specify the reason 'DocVoided'.  If you do not provide a reason, the void command will fail. (See VoidReasonCode::* for a list of allowable values)
      */
     public $code;
 
@@ -10209,6 +10517,11 @@ class NoticeModel
      * @var int The id of the compliance contact
      */
     public $complianceContactId;
+
+    /**
+     * @var string The tax form code of the notice
+     */
+    public $taxFormCode;
 
     /**
      * @var string The document reference of the notice
@@ -10912,6 +11225,11 @@ class PointOfSaleDataRequestModel
      * @var string[] A list of tax codes to include in this point-of-sale file. If no tax codes are specified, response will include all distinct tax codes associated with the Items within your company.
      */
     public $taxCodes;
+
+    /**
+     * @var string[] A list of item codes to include in this point-of-sale file. If no item codes are specified, responese will include all distinct item codes associated with the Items within your company.
+     */
+    public $itemCodes;
 
     /**
      * @var string[] A list of location codes to include in this point-of-sale file. If no location codes are specified, response will include all locations within your company.
