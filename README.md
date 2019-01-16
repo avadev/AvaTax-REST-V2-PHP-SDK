@@ -6,7 +6,7 @@ This GitHub repository is the PHP SDK for Avalara's world-class tax service, Ava
 
 Packagist
 
-[![Packagist](https://img.shields.io/packagist/v/avalara/avataxclient.svg?style=plastic)](https://packagist.org/packages/avalara/avataxclient#18.12.0)
+[![Packagist](https://img.shields.io/packagist/v/avalara/avataxclient.svg?style=plastic)](https://packagist.org/packages/avalara/avataxclient)
 
 Travis-CI
 
