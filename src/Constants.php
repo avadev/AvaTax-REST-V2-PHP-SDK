@@ -31,8 +31,8 @@ class TransactionAddressType
  */
 class AdvancedRuleScriptType
 {
-    const C_REQUESTRULE = "RequestRule";
-    const C_RESPONSERULE = "ResponseRule";
+    const C_REQUESTRULE = 0;
+    const C_RESPONSERULE = 1;
 
 }
 
@@ -42,8 +42,8 @@ class AdvancedRuleScriptType
  */
 class AdvancedRuleCrashBehavior
 {
-    const C_FAILONERROR = "FailOnError";
-    const C_PROCEEDWITHORIGINAL = "ProceedWithOriginal";
+    const C_FAILONERROR = 0;
+    const C_PROCEEDWITHORIGINAL = 1;
 
 }
 
@@ -57,12 +57,12 @@ class TextCase
     /**
      * Upper case
      */
-    const C_UPPER = "Upper";
+    const C_UPPER = 0;
 
     /**
      * Mixed Case
      */
-    const C_MIXED = "Mixed";
+    const C_MIXED = 1;
 
 }
 
@@ -83,7 +83,7 @@ class DocumentType
      *  
      *  This is a temporary document type and is not saved in tax history.
      */
-    const C_SALESORDER = "SalesOrder";
+    const C_SALESORDER = 0;
 
     /**
      * Represents a sale that has been finalized.
@@ -94,7 +94,7 @@ class DocumentType
      *  
      *  This is a permanent document and is recorded in AvaTax.
      */
-    const C_SALESINVOICE = "SalesInvoice";
+    const C_SALESINVOICE = 1;
 
     /**
      * Represents an estimate, or a purchase order, or a quote.
@@ -106,7 +106,7 @@ class DocumentType
      *  
      *  This is a temporary document type and is not saved in tax history.
      */
-    const C_PURCHASEORDER = "PurchaseOrder";
+    const C_PURCHASEORDER = 2;
 
     /**
      * Represents a sale that has been finalized.
@@ -117,7 +117,7 @@ class DocumentType
      *  
      *  This is a permanent document and is recorded in AvaTax.
      */
-    const C_PURCHASEINVOICE = "PurchaseInvoice";
+    const C_PURCHASEINVOICE = 3;
 
     /**
      * Represents an estimate of tax to be refunded if a refund or return is processed.
@@ -130,7 +130,7 @@ class DocumentType
      *  
      *  This is a temporary document type and is not saved in tax history.
      */
-    const C_RETURNORDER = "ReturnOrder";
+    const C_RETURNORDER = 4;
 
     /**
      * Represents an refund that has been finalized.
@@ -147,7 +147,7 @@ class DocumentType
      *  on a sales tax filing, and some refund transactions may be unable to file immediately due to credit netting
      *  rules.
      */
-    const C_RETURNINVOICE = "ReturnInvoice";
+    const C_RETURNINVOICE = 5;
 
     /**
      * Represents a proposed movement of inventory from one jurisdiction to another.
@@ -160,7 +160,7 @@ class DocumentType
      *  
      *  This is a temporary document type and is not saved in tax history.
      */
-    const C_INVENTORYTRANSFERORDER = "InventoryTransferOrder";
+    const C_INVENTORYTRANSFERORDER = 6;
 
     /**
      * Represents a movement of inventory from one jurisdiction to another that has been finalized.
@@ -173,7 +173,7 @@ class DocumentType
      *  
      *  This is a permanent document and is recorded in AvaTax.
      */
-    const C_INVENTORYTRANSFERINVOICE = "InventoryTransferInvoice";
+    const C_INVENTORYTRANSFERINVOICE = 7;
 
     /**
      * Represents a VAT "Reverse Charge" mechanism transaction as defined in the European Union.
@@ -184,7 +184,7 @@ class DocumentType
      *  
      *  This is a temporary document type and is not saved in tax history.
      */
-    const C_REVERSECHARGEORDER = "ReverseChargeOrder";
+    const C_REVERSECHARGEORDER = 8;
 
     /**
      * Represents a VAT "Reverse Charge" mechanism transaction as defined in the European Union.
@@ -195,7 +195,7 @@ class DocumentType
      *  
      *  This is a permanent document and is recorded in AvaTax.
      */
-    const C_REVERSECHARGEINVOICE = "ReverseChargeInvoice";
+    const C_REVERSECHARGEINVOICE = 9;
 
     /**
      * Not a real document type.
@@ -203,7 +203,7 @@ class DocumentType
      *  This value is used when querying for documents. You can specify the type `Any` in some cases to permit the
      *  system to find any document matching other criteria.
      */
-    const C_ANY = "Any";
+    const C_ANY = -1;
 
 }
 
@@ -217,12 +217,12 @@ class CertificatePreviewType
     /**
      * Download a full printable PDF
      */
-    const C_PDF = "Pdf";
+    const C_PDF = 1;
 
     /**
      * Download a single page of the certificate in JPG format
      */
-    const C_JPEG = "Jpeg";
+    const C_JPEG = 2;
 
 }
 
@@ -236,37 +236,37 @@ class FilingFrequencyId
     /**
      * File once per month
      */
-    const C_MONTHLY = "Monthly";
+    const C_MONTHLY = 1;
 
     /**
      * File once per three months
      */
-    const C_QUARTERLY = "Quarterly";
+    const C_QUARTERLY = 2;
 
     /**
      * File twice per year
      */
-    const C_SEMIANNUALLY = "SemiAnnually";
+    const C_SEMIANNUALLY = 3;
 
     /**
      * File once per year
      */
-    const C_ANNUALLY = "Annually";
+    const C_ANNUALLY = 4;
 
     /**
      * File every other month
      */
-    const C_BIMONTHLY = "Bimonthly";
+    const C_BIMONTHLY = 5;
 
     /**
      * File only when there are documents to report
      */
-    const C_OCCASIONAL = "Occasional";
+    const C_OCCASIONAL = 6;
 
     /**
      * File for the first two months of each quarter, then do not file on the quarterly month.
      */
-    const C_INVERSEQUARTERLY = "InverseQuarterly";
+    const C_INVERSEQUARTERLY = 7;
 
 }
 
@@ -276,23 +276,23 @@ class FilingFrequencyId
  */
 class FilingStatusId
 {
-    const C_PENDINGAPPROVAL = "PendingApproval";
-    const C_DIRTY = "Dirty";
-    const C_APPROVEDTOFILE = "ApprovedToFile";
-    const C_PENDINGFILING = "PendingFiling";
-    const C_PENDINGFILINGONBEHALF = "PendingFilingOnBehalf";
-    const C_FILED = "Filed";
-    const C_FILEDONBEHALF = "FiledOnBehalf";
-    const C_RETURNACCEPTED = "ReturnAccepted";
-    const C_RETURNACCEPTEDONBEHALF = "ReturnAcceptedOnBehalf";
-    const C_PAYMENTREMITTED = "PaymentRemitted";
-    const C_VOIDED = "Voided";
-    const C_PENDINGRETURN = "PendingReturn";
-    const C_PENDINGRETURNONBEHALF = "PendingReturnOnBehalf";
-    const C_DONOTFILE = "DoNotFile";
-    const C_RETURNREJECTED = "ReturnRejected";
-    const C_RETURNREJECTEDONBEHALF = "ReturnRejectedOnBehalf";
-    const C_APPROVEDTOFILEONBEHALF = "ApprovedToFileOnBehalf";
+    const C_PENDINGAPPROVAL = 0;
+    const C_DIRTY = 1;
+    const C_APPROVEDTOFILE = 2;
+    const C_PENDINGFILING = 3;
+    const C_PENDINGFILINGONBEHALF = 4;
+    const C_FILED = 5;
+    const C_FILEDONBEHALF = 6;
+    const C_RETURNACCEPTED = 7;
+    const C_RETURNACCEPTEDONBEHALF = 8;
+    const C_PAYMENTREMITTED = 9;
+    const C_VOIDED = 10;
+    const C_PENDINGRETURN = 11;
+    const C_PENDINGRETURNONBEHALF = 12;
+    const C_DONOTFILE = 13;
+    const C_RETURNREJECTED = 14;
+    const C_RETURNREJECTEDONBEHALF = 15;
+    const C_APPROVEDTOFILEONBEHALF = 16;
 
 }
 
@@ -306,17 +306,17 @@ class PointOfSaleFileType
     /**
      * File is in Javascript Object Notation format
      */
-    const C_JSON = "Json";
+    const C_JSON = 0;
 
     /**
      * File is in Comma Separated Values format
      */
-    const C_CSV = "Csv";
+    const C_CSV = 1;
 
     /**
      * File is in Extended Markup Language format
      */
-    const C_XML = "Xml";
+    const C_XML = 2;
 
 }
 
@@ -326,8 +326,8 @@ class PointOfSaleFileType
  */
 class PointOfSalePartnerId
 {
-    const C_DMA = "DMA";
-    const C_AX7 = "AX7";
+    const C_DMA = 1;
+    const C_AX7 = 2;
 
 }
 
@@ -341,147 +341,147 @@ class ServiceTypeId
     /**
      * None
      */
-    const C_NONE = "None";
+    const C_NONE = 0;
 
     /**
      * AvaTaxST
      */
-    const C_AVATAXST = "AvaTaxST";
+    const C_AVATAXST = 1;
 
     /**
      * AvaTaxPro
      */
-    const C_AVATAXPRO = "AvaTaxPro";
+    const C_AVATAXPRO = 2;
 
     /**
      * AvaTaxGlobal
      */
-    const C_AVATAXGLOBAL = "AvaTaxGlobal";
+    const C_AVATAXGLOBAL = 3;
 
     /**
      * AutoAddress
      */
-    const C_AUTOADDRESS = "AutoAddress";
+    const C_AUTOADDRESS = 4;
 
     /**
      * AutoReturns
      */
-    const C_AUTORETURNS = "AutoReturns";
+    const C_AUTORETURNS = 5;
 
     /**
      * TaxSolver
      */
-    const C_TAXSOLVER = "TaxSolver";
+    const C_TAXSOLVER = 6;
 
     /**
      * AvaTaxCsp
      */
-    const C_AVATAXCSP = "AvaTaxCsp";
+    const C_AVATAXCSP = 7;
 
     /**
      * Twe
      */
-    const C_TWE = "Twe";
+    const C_TWE = 8;
 
     /**
      * Mrs
      */
-    const C_MRS = "Mrs";
+    const C_MRS = 9;
 
     /**
      * AvaCert
      */
-    const C_AVACERT = "AvaCert";
+    const C_AVACERT = 10;
 
     /**
      * AuthorizationPartner
      */
-    const C_AUTHORIZATIONPARTNER = "AuthorizationPartner";
+    const C_AUTHORIZATIONPARTNER = 11;
 
     /**
      * CertCapture
      */
-    const C_CERTCAPTURE = "CertCapture";
+    const C_CERTCAPTURE = 12;
 
     /**
      * AvaUpc
      */
-    const C_AVAUPC = "AvaUpc";
+    const C_AVAUPC = 13;
 
     /**
      * AvaCUT
      */
-    const C_AVACUT = "AvaCUT";
+    const C_AVACUT = 14;
 
     /**
      * AvaLandedCost
      */
-    const C_AVALANDEDCOST = "AvaLandedCost";
+    const C_AVALANDEDCOST = 15;
 
     /**
      * AvaLodging
      */
-    const C_AVALODGING = "AvaLodging";
+    const C_AVALODGING = 16;
 
     /**
      * AvaBottle
      */
-    const C_AVABOTTLE = "AvaBottle";
+    const C_AVABOTTLE = 17;
 
     /**
      * AvaComms
      */
-    const C_AVACOMMS = "AvaComms";
+    const C_AVACOMMS = 18;
 
     /**
      * AvaEWaste
      */
-    const C_AVAEWASTE = "AvaEWaste";
+    const C_AVAEWASTE = 19;
 
     /**
      * AvaExemptTier1
      */
-    const C_AVAEXEMPTTIER1 = "AvaExemptTier1";
+    const C_AVAEXEMPTTIER1 = 20;
 
     /**
      * AvaExemptTier2
      */
-    const C_AVAEXEMPTTIER2 = "AvaExemptTier2";
+    const C_AVAEXEMPTTIER2 = 21;
 
     /**
      * AvaExemptTier3
      */
-    const C_AVAEXEMPTTIER3 = "AvaExemptTier3";
+    const C_AVAEXEMPTTIER3 = 22;
 
     /**
      * AvaExemptTier4
      */
-    const C_AVAEXEMPTTIER4 = "AvaExemptTier4";
+    const C_AVAEXEMPTTIER4 = 23;
 
     /**
      * MRSComplianceManager
      */
-    const C_MRSCOMPLIANCEMANAGER = "MRSComplianceManager";
+    const C_MRSCOMPLIANCEMANAGER = 24;
 
     /**
      * AvaBikeTax
      */
-    const C_AVABIKETAX = "AvaBikeTax";
+    const C_AVABIKETAX = 25;
 
     /**
      * AvaCheckoutBag
      */
-    const C_AVACHECKOUTBAG = "AvaCheckoutBag";
+    const C_AVACHECKOUTBAG = 26;
 
     /**
      * TFOCompliance
      */
-    const C_TFOCOMPLIANCE = "TFOCompliance";
+    const C_TFOCOMPLIANCE = 27;
 
     /**
      * Send Sales Rate file service
      */
-    const C_SENDSALESRATEFILE = "SendSalesRateFile";
+    const C_SENDSALESRATEFILE = 28;
 
 }
 
@@ -495,17 +495,17 @@ class AccountStatusId
     /**
      * This account is not currently active.
      */
-    const C_INACTIVE = "Inactive";
+    const C_INACTIVE = 0;
 
     /**
      * This account is active and in use.
      */
-    const C_ACTIVE = "Active";
+    const C_ACTIVE = 1;
 
     /**
      * This account is flagged as a test account and may be temporary.
      */
-    const C_TEST = "Test";
+    const C_TEST = 2;
 
     /**
      * The account is new and is currently in the onboarding process.
@@ -513,7 +513,7 @@ class AccountStatusId
      *  An account is considered new until the account administrator has reviewed and accepted 
      *  [Avalara's terms and conditions](https://www.avalara.com/us/en/legal/terms.html).
      */
-    const C_NEW = "New";
+    const C_NEW = 3;
 
 }
 
@@ -527,117 +527,117 @@ class SecurityRoleId
     /**
      * NoAccess
      */
-    const C_NOACCESS = "NoAccess";
+    const C_NOACCESS = 0;
 
     /**
      * SiteAdmin
      */
-    const C_SITEADMIN = "SiteAdmin";
+    const C_SITEADMIN = 1;
 
     /**
      * AccountOperator
      */
-    const C_ACCOUNTOPERATOR = "AccountOperator";
+    const C_ACCOUNTOPERATOR = 2;
 
     /**
      * AccountAdmin
      */
-    const C_ACCOUNTADMIN = "AccountAdmin";
+    const C_ACCOUNTADMIN = 3;
 
     /**
      * AccountUser
      */
-    const C_ACCOUNTUSER = "AccountUser";
+    const C_ACCOUNTUSER = 4;
 
     /**
      * SystemAdmin
      */
-    const C_SYSTEMADMIN = "SystemAdmin";
+    const C_SYSTEMADMIN = 5;
 
     /**
      * Registrar
      */
-    const C_REGISTRAR = "Registrar";
+    const C_REGISTRAR = 6;
 
     /**
      * CSPTester
      */
-    const C_CSPTESTER = "CSPTester";
+    const C_CSPTESTER = 7;
 
     /**
      * CSPAdmin
      */
-    const C_CSPADMIN = "CSPAdmin";
+    const C_CSPADMIN = 8;
 
     /**
      * SystemOperator
      */
-    const C_SYSTEMOPERATOR = "SystemOperator";
+    const C_SYSTEMOPERATOR = 9;
 
     /**
      * TechnicalSupportUser
      */
-    const C_TECHNICALSUPPORTUSER = "TechnicalSupportUser";
+    const C_TECHNICALSUPPORTUSER = 10;
 
     /**
      * TechnicalSupportAdmin
      */
-    const C_TECHNICALSUPPORTADMIN = "TechnicalSupportAdmin";
+    const C_TECHNICALSUPPORTADMIN = 11;
 
     /**
      * TreasuryUser
      */
-    const C_TREASURYUSER = "TreasuryUser";
+    const C_TREASURYUSER = 12;
 
     /**
      * TreasuryAdmin
      */
-    const C_TREASURYADMIN = "TreasuryAdmin";
+    const C_TREASURYADMIN = 13;
 
     /**
      * ComplianceUser
      */
-    const C_COMPLIANCEUSER = "ComplianceUser";
+    const C_COMPLIANCEUSER = 14;
 
     /**
      * ComplianceAdmin
      */
-    const C_COMPLIANCEADMIN = "ComplianceAdmin";
+    const C_COMPLIANCEADMIN = 15;
 
     /**
      * ProStoresOperator
      */
-    const C_PROSTORESOPERATOR = "ProStoresOperator";
+    const C_PROSTORESOPERATOR = 16;
 
     /**
      * CompanyUser
      */
-    const C_COMPANYUSER = "CompanyUser";
+    const C_COMPANYUSER = 17;
 
     /**
      * CompanyAdmin
      */
-    const C_COMPANYADMIN = "CompanyAdmin";
+    const C_COMPANYADMIN = 18;
 
     /**
      * ComplianceTempUser
      */
-    const C_COMPLIANCETEMPUSER = "ComplianceTempUser";
+    const C_COMPLIANCETEMPUSER = 19;
 
     /**
      * ComplianceRootUser
      */
-    const C_COMPLIANCEROOTUSER = "ComplianceRootUser";
+    const C_COMPLIANCEROOTUSER = 20;
 
     /**
      * ComplianceOperator
      */
-    const C_COMPLIANCEOPERATOR = "ComplianceOperator";
+    const C_COMPLIANCEOPERATOR = 21;
 
     /**
      * SSTAdmin
      */
-    const C_SSTADMIN = "SSTAdmin";
+    const C_SSTADMIN = 22;
 
 }
 
@@ -651,17 +651,17 @@ class PasswordStatusId
     /**
      * UserCannotChange
      */
-    const C_USERCANNOTCHANGE = "UserCannotChange";
+    const C_USERCANNOTCHANGE = 0;
 
     /**
      * UserCanChange
      */
-    const C_USERCANCHANGE = "UserCanChange";
+    const C_USERCANCHANGE = 1;
 
     /**
      * UserMustChange
      */
-    const C_USERMUSTCHANGE = "UserMustChange";
+    const C_USERMUSTCHANGE = 2;
 
 }
 
@@ -675,377 +675,380 @@ class ErrorCodeId
     /**
      * Server has a configuration or setup problem
      */
-    const C_SERVERCONFIGURATION = "ServerConfiguration";
+    const C_SERVERCONFIGURATION = 1;
 
     /**
      * User doesn't have rights to this account or company
      */
-    const C_ACCOUNTINVALIDEXCEPTION = "AccountInvalidException";
-    const C_COMPANYINVALIDEXCEPTION = "CompanyInvalidException";
+    const C_ACCOUNTINVALIDEXCEPTION = 2;
+    const C_COMPANYINVALIDEXCEPTION = 3;
 
     /**
      * Use this error message when the user is trying to fetch a single object and the object either does not exist or cannot be seen by the current user.
      */
-    const C_ENTITYNOTFOUNDERROR = "EntityNotFoundError";
-    const C_VALUEREQUIREDERROR = "ValueRequiredError";
-    const C_RANGEERROR = "RangeError";
-    const C_RANGECOMPAREERROR = "RangeCompareError";
-    const C_RANGESETERROR = "RangeSetError";
-    const C_TAXPAYERNUMBERREQUIRED = "TaxpayerNumberRequired";
-    const C_ENTITYLIMITEXCEEDED = "EntityLimitExceeded";
-    const C_COMMONPASSWORD = "CommonPassword";
-    const C_WEAKPASSWORD = "WeakPassword";
-    const C_STRINGLENGTHERROR = "StringLengthError";
-    const C_MAXSTRINGLENGTHERROR = "MaxStringLengthError";
-    const C_EMAILVALIDATIONERROR = "EmailValidationError";
-    const C_EMAILMISSINGERROR = "EmailMissingError";
-    const C_PARSERFIELDNAMEERROR = "ParserFieldNameError";
-    const C_PARSERFIELDVALUEERROR = "ParserFieldValueError";
-    const C_PARSERSYNTAXERROR = "ParserSyntaxError";
-    const C_PARSERTOOMANYPARAMETERSERROR = "ParserTooManyParametersError";
-    const C_PARSERUNTERMINATEDVALUEERROR = "ParserUnterminatedValueError";
-    const C_DELETEUSERSELFERROR = "DeleteUserSelfError";
-    const C_OLDPASSWORDINVALID = "OldPasswordInvalid";
-    const C_CANNOTCHANGEPASSWORD = "CannotChangePassword";
-    const C_DATEFORMATERROR = "DateFormatError";
-    const C_NODEFAULTCOMPANY = "NoDefaultCompany";
-    const C_AUTHENTICATIONEXCEPTION = "AuthenticationException";
-    const C_AUTHORIZATIONEXCEPTION = "AuthorizationException";
-    const C_VALIDATIONEXCEPTION = "ValidationException";
-    const C_INACTIVEUSERERROR = "InactiveUserError";
-    const C_AUTHENTICATIONINCOMPLETE = "AuthenticationIncomplete";
-    const C_BASICAUTHINCORRECT = "BasicAuthIncorrect";
-    const C_IDENTITYSERVERERROR = "IdentityServerError";
-    const C_BEARERTOKENINVALID = "BearerTokenInvalid";
-    const C_MODELREQUIREDEXCEPTION = "ModelRequiredException";
-    const C_ACCOUNTEXPIREDEXCEPTION = "AccountExpiredException";
-    const C_VISIBILITYERROR = "VisibilityError";
-    const C_BEARERTOKENNOTSUPPORTED = "BearerTokenNotSupported";
-    const C_INVALIDSECURITYROLE = "InvalidSecurityRole";
-    const C_INVALIDREGISTRARACTION = "InvalidRegistrarAction";
-    const C_REMOTESERVERERROR = "RemoteServerError";
-    const C_NOFILTERCRITERIAEXCEPTION = "NoFilterCriteriaException";
-    const C_OPENCLAUSEEXCEPTION = "OpenClauseException";
-    const C_JSONFORMATERROR = "JsonFormatError";
-    const C_INVALIDDECIMALVALUE = "InvalidDecimalValue";
-    const C_UNHANDLEDEXCEPTION = "UnhandledException";
-    const C_REPORTINGCOMPANYMUSTHAVECONTACTSERROR = "ReportingCompanyMustHaveContactsError";
-    const C_COMPANYPROFILENOTSET = "CompanyProfileNotSet";
-    const C_CANNOTASSIGNUSERTOCOMPANY = "CannotAssignUserToCompany";
-    const C_MUSTASSIGNUSERTOCOMPANY = "MustAssignUserToCompany";
-    const C_MODELSTATEINVALID = "ModelStateInvalid";
-    const C_DATERANGEERROR = "DateRangeError";
-    const C_INVALIDDATERANGEERROR = "InvalidDateRangeError";
-    const C_RULEMUSTHAVETAXCODE = "RuleMustHaveTaxCode";
-    const C_RULETYPERESTRICTED = "RuleTypeRestricted";
-    const C_ALLJURISRULELIMITS = "AllJurisRuleLimits";
-    const C_INVALIDCOMPANYLOCATIONSETTING = "InvalidCompanyLocationSetting";
-    const C_INVALIDADJUSTMENTTYPE = "InvalidAdjustmentType";
-    const C_DELETEINFORMATION = "DeleteInformation";
-    const C_OUTOFRANGE = "OutOfRange";
-    const C_UNSPECIFIEDTIMEZONE = "UnspecifiedTimeZone";
-    const C_CANNOTCREATEDELETEDOBJECTS = "CannotCreateDeletedObjects";
-    const C_CANNOTMODIFYDELETEDOBJECTS = "CannotModifyDeletedObjects";
-    const C_RETURNNAMENOTFOUND = "ReturnNameNotFound";
-    const C_INVALIDADDRESSTYPEANDCATEGORY = "InvalidAddressTypeAndCategory";
-    const C_DEFAULTCOMPANYLOCATION = "DefaultCompanyLocation";
-    const C_INVALIDCOUNTRY = "InvalidCountry";
-    const C_INVALIDCOUNTRYREGION = "InvalidCountryRegion";
-    const C_BRAZILVALIDATIONERROR = "BrazilValidationError";
-    const C_BRAZILEXEMPTVALIDATIONERROR = "BrazilExemptValidationError";
-    const C_BRAZILPISCOFINSERROR = "BrazilPisCofinsError";
-    const C_JURISDICTIONNOTFOUNDERROR = "JurisdictionNotFoundError";
-    const C_MEDICALEXCISEERROR = "MedicalExciseError";
-    const C_RATEDEPENDSTAXABILITYERROR = "RateDependsTaxabilityError";
-    const C_RATEDEPENDSEUROPEERROR = "RateDependsEuropeError";
-    const C_INVALIDRATETYPECODE = "InvalidRateTypeCode";
-    const C_RATETYPENOTSUPPORTED = "RateTypeNotSupported";
-    const C_CANNOTUPDATENESTEDOBJECTS = "CannotUpdateNestedObjects";
-    const C_UPCCODEINVALIDCHARS = "UPCCodeInvalidChars";
-    const C_UPCCODEINVALIDLENGTH = "UPCCodeInvalidLength";
-    const C_INCORRECTPATHERROR = "IncorrectPathError";
-    const C_INVALIDJURISDICTIONTYPE = "InvalidJurisdictionType";
-    const C_MUSTCONFIRMRESETLICENSEKEY = "MustConfirmResetLicenseKey";
-    const C_DUPLICATECOMPANYCODE = "DuplicateCompanyCode";
-    const C_TINFORMATERROR = "TINFormatError";
-    const C_DUPLICATENEXUSERROR = "DuplicateNexusError";
-    const C_UNKNOWNNEXUSERROR = "UnknownNexusError";
-    const C_PARENTNEXUSNOTFOUND = "ParentNexusNotFound";
-    const C_INVALIDTAXCODETYPE = "InvalidTaxCodeType";
-    const C_CANNOTACTIVATECOMPANY = "CannotActivateCompany";
-    const C_DUPLICATEENTITYPROPERTY = "DuplicateEntityProperty";
-    const C_REPORTINGENTITYERROR = "ReportingEntityError";
-    const C_INVALIDRETURNOPERATIONERROR = "InvalidReturnOperationError";
-    const C_CANNOTDELETECOMPANY = "CannotDeleteCompany";
-    const C_COUNTRYOVERRIDESNOTAVAILABLE = "CountryOverridesNotAvailable";
-    const C_JURISDICTIONOVERRIDEMISMATCH = "JurisdictionOverrideMismatch";
-    const C_DUPLICATESYSTEMTAXCODE = "DuplicateSystemTaxCode";
-    const C_SSTOVERRIDESNOTAVAILABLE = "SSTOverridesNotAvailable";
-    const C_NEXUSDATEMISMATCH = "NexusDateMismatch";
-    const C_NEXUSPARENTDATEMISMATCH = "NexusParentDateMismatch";
-    const C_BEARERTOKENPARSEUSERIDERROR = "BearerTokenParseUserIdError";
-    const C_RETRIEVEUSERERROR = "RetrieveUserError";
-    const C_INVALIDCONFIGURATIONSETTING = "InvalidConfigurationSetting";
-    const C_INVALIDCONFIGURATIONVALUE = "InvalidConfigurationValue";
-    const C_INVALIDENUMVALUE = "InvalidEnumValue";
-    const C_TAXCODEASSOCIATEDTAXRULE = "TaxCodeAssociatedTaxRule";
-    const C_CANNOTSWITCHACCOUNTID = "CannotSwitchAccountId";
-    const C_REQUESTINCOMPLETE = "RequestIncomplete";
-    const C_ACCOUNTNOTNEW = "AccountNotNew";
-    const C_PASSWORDLENGTHINVALID = "PasswordLengthInvalid";
-    const C_LOCALNEXUSCONFLICT = "LocalNexusConflict";
-    const C_INVALIDECMSOVERRIDECODE = "InvalidEcmsOverrideCode";
-    const C_ACCOUNTDOESNOTEXIST = "AccountDoesNotExist";
-    const C_INVALIDTAXTYPE = "InvalidTaxType";
-    const C_INCORRECTFIELDVALUE = "IncorrectFieldValue";
-    const C_LEADINGORTRAILINGEXCEPTION = "LeadingOrTrailingException";
-    const C_NOTENOUGHADDRESSESINFO = "NotEnoughAddressesInfo";
-    const C_REPORTNOTINITIATED = "ReportNotInitiated";
-    const C_FAILEDTOBUILDREPORT = "FailedToBuildReport";
-    const C_REPORTNOTFINISHED = "ReportNotFinished";
-    const C_FAILEDTODOWNLOADREPORT = "FailedToDownloadReport";
-    const C_MALFORMEDFILTEREXCEPTION = "MalformedFilterException";
-    const C_EXPECTEDCONJUNCTIONERROR = "ExpectedConjunctionError";
-    const C_CRITERIANOTSUPPORTEDERROR = "CriteriaNotSupportedError";
-    const C_COMPANYACCOUNTANDPARENTACCOUNTMISMATCH = "CompanyAccountAndParentAccountMismatch";
-    const C_INVALIDFILECONTENTTYPE = "InvalidFileContentType";
-    const C_REQUESTTOOLARGE = "RequestTooLarge";
-    const C_ECMSDISABLED = "EcmsDisabled";
-    const C_UNKNOWNCONJUNCTIONERROR = "UnknownConjunctionError";
-    const C_NOLINESDISCOUNTED = "NoLinesDiscounted";
-    const C_FAILEDTODELETE = "FailedToDelete";
-    const C_CIRCULARCOMPANYHIERARCHIES = "CircularCompanyHierarchies";
-    const C_DUPLICATEENTRY = "DuplicateEntry";
-    const C_DUPLICATEFIELDNAMEINORDERBY = "DuplicateFieldNameInOrderBy";
-    const C_CANNOTADJUSTDOCUMENTTYPE = "CannotAdjustDocumentType";
-    const C_USERNOACCESS = "UserNoAccess";
-    const C_INVALIDENTRY = "InvalidEntry";
-    const C_TRANSACTIONALREADYCANCELLED = "TransactionAlreadyCancelled";
-    const C_QUERYPARAMETEROUTOFRANGE = "QueryParameterOutOfRange";
+    const C_ENTITYNOTFOUNDERROR = 4;
+    const C_VALUEREQUIREDERROR = 5;
+    const C_RANGEERROR = 6;
+    const C_RANGECOMPAREERROR = 7;
+    const C_RANGESETERROR = 8;
+    const C_TAXPAYERNUMBERREQUIRED = 9;
+    const C_ENTITYLIMITEXCEEDED = 10;
+    const C_COMMONPASSWORD = 11;
+    const C_WEAKPASSWORD = 12;
+    const C_STRINGLENGTHERROR = 13;
+    const C_MAXSTRINGLENGTHERROR = 14;
+    const C_EMAILVALIDATIONERROR = 15;
+    const C_EMAILMISSINGERROR = 16;
+    const C_PARSERFIELDNAMEERROR = 17;
+    const C_PARSERFIELDVALUEERROR = 18;
+    const C_PARSERSYNTAXERROR = 19;
+    const C_PARSERTOOMANYPARAMETERSERROR = 20;
+    const C_PARSERUNTERMINATEDVALUEERROR = 21;
+    const C_DELETEUSERSELFERROR = 22;
+    const C_OLDPASSWORDINVALID = 23;
+    const C_CANNOTCHANGEPASSWORD = 24;
+    const C_DATEFORMATERROR = 26;
+    const C_NODEFAULTCOMPANY = 27;
+    const C_AUTHENTICATIONEXCEPTION = 30;
+    const C_AUTHORIZATIONEXCEPTION = 31;
+    const C_VALIDATIONEXCEPTION = 32;
+    const C_INACTIVEUSERERROR = 33;
+    const C_AUTHENTICATIONINCOMPLETE = 34;
+    const C_BASICAUTHINCORRECT = 35;
+    const C_IDENTITYSERVERERROR = 36;
+    const C_BEARERTOKENINVALID = 37;
+    const C_MODELREQUIREDEXCEPTION = 38;
+    const C_ACCOUNTEXPIREDEXCEPTION = 39;
+    const C_VISIBILITYERROR = 40;
+    const C_BEARERTOKENNOTSUPPORTED = 41;
+    const C_INVALIDSECURITYROLE = 42;
+    const C_INVALIDREGISTRARACTION = 43;
+    const C_REMOTESERVERERROR = 44;
+    const C_NOFILTERCRITERIAEXCEPTION = 45;
+    const C_OPENCLAUSEEXCEPTION = 46;
+    const C_JSONFORMATERROR = 47;
+    const C_INVALIDDECIMALVALUE = 48;
+    const C_UNHANDLEDEXCEPTION = 50;
+    const C_REPORTINGCOMPANYMUSTHAVECONTACTSERROR = 60;
+    const C_COMPANYPROFILENOTSET = 61;
+    const C_CANNOTASSIGNUSERTOCOMPANY = 62;
+    const C_MUSTASSIGNUSERTOCOMPANY = 63;
+    const C_MODELSTATEINVALID = 70;
+    const C_DATERANGEERROR = 80;
+    const C_INVALIDDATERANGEERROR = 81;
+    const C_RULEMUSTHAVETAXCODE = 82;
+    const C_RULETYPERESTRICTED = 83;
+    const C_ALLJURISRULELIMITS = 84;
+    const C_INVALIDCOMPANYLOCATIONSETTING = 85;
+    const C_INVALIDADJUSTMENTTYPE = 99;
+    const C_DELETEINFORMATION = 100;
+    const C_OUTOFRANGE = 118;
+    const C_UNSPECIFIEDTIMEZONE = 119;
+    const C_CANNOTCREATEDELETEDOBJECTS = 120;
+    const C_CANNOTMODIFYDELETEDOBJECTS = 121;
+    const C_RETURNNAMENOTFOUND = 122;
+    const C_INVALIDADDRESSTYPEANDCATEGORY = 123;
+    const C_DEFAULTCOMPANYLOCATION = 124;
+    const C_INVALIDCOUNTRY = 125;
+    const C_INVALIDCOUNTRYREGION = 126;
+    const C_BRAZILVALIDATIONERROR = 127;
+    const C_BRAZILEXEMPTVALIDATIONERROR = 128;
+    const C_BRAZILPISCOFINSERROR = 129;
+    const C_JURISDICTIONNOTFOUNDERROR = 130;
+    const C_MEDICALEXCISEERROR = 131;
+    const C_RATEDEPENDSTAXABILITYERROR = 132;
+    const C_RATEDEPENDSEUROPEERROR = 133;
+    const C_INVALIDRATETYPECODE = 134;
+    const C_RATETYPENOTSUPPORTED = 135;
+    const C_CANNOTUPDATENESTEDOBJECTS = 136;
+    const C_UPCCODEINVALIDCHARS = 137;
+    const C_UPCCODEINVALIDLENGTH = 138;
+    const C_INCORRECTPATHERROR = 139;
+    const C_INVALIDJURISDICTIONTYPE = 140;
+    const C_MUSTCONFIRMRESETLICENSEKEY = 141;
+    const C_DUPLICATECOMPANYCODE = 142;
+    const C_TINFORMATERROR = 143;
+    const C_DUPLICATENEXUSERROR = 144;
+    const C_UNKNOWNNEXUSERROR = 145;
+    const C_PARENTNEXUSNOTFOUND = 146;
+    const C_INVALIDTAXCODETYPE = 147;
+    const C_CANNOTACTIVATECOMPANY = 148;
+    const C_DUPLICATEENTITYPROPERTY = 149;
+    const C_REPORTINGENTITYERROR = 150;
+    const C_INVALIDRETURNOPERATIONERROR = 151;
+    const C_CANNOTDELETECOMPANY = 152;
+    const C_COUNTRYOVERRIDESNOTAVAILABLE = 153;
+    const C_JURISDICTIONOVERRIDEMISMATCH = 154;
+    const C_DUPLICATESYSTEMTAXCODE = 155;
+    const C_SSTOVERRIDESNOTAVAILABLE = 156;
+    const C_NEXUSDATEMISMATCH = 157;
+    const C_NEXUSPARENTDATEMISMATCH = 159;
+    const C_BEARERTOKENPARSEUSERIDERROR = 160;
+    const C_RETRIEVEUSERERROR = 161;
+    const C_INVALIDCONFIGURATIONSETTING = 162;
+    const C_INVALIDCONFIGURATIONVALUE = 163;
+    const C_INVALIDENUMVALUE = 164;
+    const C_TAXCODEASSOCIATEDTAXRULE = 165;
+    const C_CANNOTSWITCHACCOUNTID = 166;
+    const C_REQUESTINCOMPLETE = 167;
+    const C_ACCOUNTNOTNEW = 168;
+    const C_PASSWORDLENGTHINVALID = 169;
+    const C_LOCALNEXUSCONFLICT = 170;
+    const C_INVALIDECMSOVERRIDECODE = 171;
+    const C_ACCOUNTDOESNOTEXIST = 172;
+    const C_INVALIDTAXTYPE = 173;
+    const C_INCORRECTFIELDVALUE = 174;
+    const C_LEADINGORTRAILINGEXCEPTION = 175;
+    const C_NOTENOUGHADDRESSESINFO = 176;
+    const C_REPORTNOTINITIATED = 177;
+    const C_FAILEDTOBUILDREPORT = 178;
+    const C_REPORTNOTFINISHED = 179;
+    const C_FAILEDTODOWNLOADREPORT = 181;
+    const C_MALFORMEDFILTEREXCEPTION = 182;
+    const C_EXPECTEDCONJUNCTIONERROR = 183;
+    const C_CRITERIANOTSUPPORTEDERROR = 184;
+    const C_COMPANYACCOUNTANDPARENTACCOUNTMISMATCH = 185;
+    const C_INVALIDFILECONTENTTYPE = 186;
+    const C_REQUESTTOOLARGE = 187;
+    const C_ECMSDISABLED = 188;
+    const C_UNKNOWNCONJUNCTIONERROR = 189;
+    const C_NOLINESDISCOUNTED = 190;
+    const C_FAILEDTODELETE = 191;
+    const C_CIRCULARCOMPANYHIERARCHIES = 192;
+    const C_DUPLICATEENTRY = 193;
+    const C_DUPLICATEFIELDNAMEINORDERBY = 194;
+    const C_CANNOTADJUSTDOCUMENTTYPE = 195;
+    const C_USERNOACCESS = 196;
+    const C_INVALIDENTRY = 197;
+    const C_TRANSACTIONALREADYCANCELLED = 198;
+    const C_QUERYPARAMETEROUTOFRANGE = 199;
 
     /**
      * Batch errors
      */
-    const C_BATCHSALESAUDITMUSTBEZIPPEDERROR = "BatchSalesAuditMustBeZippedError";
-    const C_BATCHZIPMUSTCONTAINONEFILEERROR = "BatchZipMustContainOneFileError";
-    const C_BATCHINVALIDFILETYPEERROR = "BatchInvalidFileTypeError";
-    const C_BATCHCANNOTSAVEBATCHFILE = "BatchCannotSaveBatchFile";
-    const C_BATCHCANNOTGETBATCHFILE = "BatchCannotGetBatchFile";
-    const C_BATCHCANNOTDELETEBATCHFILE = "BatchCannotDeleteBatchFile";
-    const C_BATCHMUSTCONTAINONEFILE = "BatchMustContainOneFile";
-    const C_MISSINGBATCHFILECONTENT = "MissingBatchFileContent";
+    const C_BATCHSALESAUDITMUSTBEZIPPEDERROR = 200;
+    const C_BATCHZIPMUSTCONTAINONEFILEERROR = 201;
+    const C_BATCHINVALIDFILETYPEERROR = 202;
+    const C_BATCHCANNOTSAVEBATCHFILE = 203;
+    const C_BATCHCANNOTGETBATCHFILE = 204;
+    const C_BATCHCANNOTDELETEBATCHFILE = 205;
+    const C_BATCHMUSTCONTAINONEFILE = 206;
+    const C_MISSINGBATCHFILECONTENT = 207;
 
     /**
      * Point Of Sale API exceptions
      */
-    const C_POINTOFSALEFILESIZE = "PointOfSaleFileSize";
-    const C_POINTOFSALESETUP = "PointOfSaleSetup";
-    const C_INVALIDINPUTDATE = "InvalidInputDate";
+    const C_POINTOFSALEFILESIZE = 250;
+    const C_POINTOFSALESETUP = 251;
+    const C_INVALIDINPUTDATE = 252;
 
     /**
      * Errors in Soap V1 Passthrough / GetTax calls
      */
-    const C_GETTAXERROR = "GetTaxError";
-    const C_ADDRESSCONFLICTEXCEPTION = "AddressConflictException";
-    const C_DOCUMENTCODECONFLICT = "DocumentCodeConflict";
-    const C_MISSINGADDRESS = "MissingAddress";
-    const C_INVALIDPARAMETERVALUE = "InvalidParameterValue";
-    const C_DOCUMENTFETCHLIMIT = "DocumentFetchLimit";
-    const C_INVALIDADDRESS = "InvalidAddress";
-    const C_ADDRESSLOCATIONNOTFOUND = "AddressLocationNotFound";
-    const C_MISSINGLINE = "MissingLine";
-    const C_INVALIDADDRESSTEXTCASE = "InvalidAddressTextCase";
-    const C_DOCUMENTNOTCOMMITTED = "DocumentNotCommitted";
-    const C_INVALIDDOCUMENTTYPESTOFETCH = "InvalidDocumentTypesToFetch";
-    const C_TIMEOUTREQUESTED = "TimeoutRequested";
-    const C_INVALIDPOSTALCODE = "InvalidPostalCode";
+    const C_GETTAXERROR = 300;
+    const C_ADDRESSCONFLICTEXCEPTION = 301;
+    const C_DOCUMENTCODECONFLICT = 303;
+    const C_MISSINGADDRESS = 304;
+    const C_INVALIDPARAMETERVALUE = 306;
+    const C_DOCUMENTFETCHLIMIT = 308;
+    const C_INVALIDADDRESS = 309;
+    const C_ADDRESSLOCATIONNOTFOUND = 310;
+    const C_MISSINGLINE = 311;
+    const C_INVALIDADDRESSTEXTCASE = 312;
+    const C_DOCUMENTNOTCOMMITTED = 313;
+    const C_INVALIDDOCUMENTTYPESTOFETCH = 315;
+    const C_TIMEOUTREQUESTED = 316;
+    const C_INVALIDPOSTALCODE = 317;
 
     /**
      * Subscription error codes
      */
-    const C_INVALIDSUBSCRIPTIONDESCRIPTION = "InvalidSubscriptionDescription";
-    const C_INVALIDSUBSCRIPTIONTYPEID = "InvalidSubscriptionTypeId";
+    const C_INVALIDSUBSCRIPTIONDESCRIPTION = 318;
+    const C_INVALIDSUBSCRIPTIONTYPEID = 319;
 
     /**
      * Represents a malformed document fetch command
      */
-    const C_CANNOTCHANGEFILINGSTATUS = "CannotChangeFilingStatus";
+    const C_CANNOTCHANGEFILINGSTATUS = 401;
 
     /**
      * Represents a SQL server timeout error / deadlock error
      */
-    const C_SERVERUNREACHABLE = "ServerUnreachable";
+    const C_SERVERUNREACHABLE = 500;
 
     /**
      * Partner API error codes
      */
-    const C_SUBSCRIPTIONREQUIRED = "SubscriptionRequired";
-    const C_ACCOUNTEXISTS = "AccountExists";
-    const C_INVITATIONONLY = "InvitationOnly";
-    const C_FREETRIALNOTAVAILABLE = "FreeTrialNotAvailable";
-    const C_ACCOUNTEXISTSDIFFERENTEMAIL = "AccountExistsDifferentEmail";
-    const C_AVALARAIDENTITYAPIERROR = "AvalaraIdentityApiError";
-    const C_INVALIDIPADDRESS = "InvalidIPAddress";
-    const C_OFFERCODEALREADYAPPLIED = "OfferCodeAlreadyApplied";
+    const C_SUBSCRIPTIONREQUIRED = 600;
+    const C_ACCOUNTEXISTS = 601;
+    const C_INVITATIONONLY = 602;
+    const C_FREETRIALNOTAVAILABLE = 606;
+    const C_ACCOUNTEXISTSDIFFERENTEMAIL = 607;
+    const C_AVALARAIDENTITYAPIERROR = 608;
+    const C_INVALIDIPADDRESS = 609;
+    const C_OFFERCODEALREADYAPPLIED = 610;
 
     /**
      * Refund API error codes
      */
-    const C_INVALIDDOCUMENTSTATUSFORREFUND = "InvalidDocumentStatusForRefund";
-    const C_REFUNDTYPEANDPERCENTAGEMISMATCH = "RefundTypeAndPercentageMismatch";
-    const C_INVALIDDOCUMENTTYPEFORREFUND = "InvalidDocumentTypeForRefund";
-    const C_REFUNDTYPEANDLINEMISMATCH = "RefundTypeAndLineMismatch";
-    const C_REFUNDLINESREQUIRED = "RefundLinesRequired";
-    const C_INVALIDREFUNDTYPE = "InvalidRefundType";
-    const C_REFUNDPERCENTAGEFORTAXONLY = "RefundPercentageForTaxOnly";
-    const C_LINENOOUTOFRANGE = "LineNoOutOfRange";
-    const C_REFUNDPERCENTAGEOUTOFRANGE = "RefundPercentageOutOfRange";
-    const C_REFUNDPERCENTAGEMISSING = "RefundPercentageMissing";
+    const C_INVALIDDOCUMENTSTATUSFORREFUND = 700;
+    const C_REFUNDTYPEANDPERCENTAGEMISMATCH = 701;
+    const C_INVALIDDOCUMENTTYPEFORREFUND = 702;
+    const C_REFUNDTYPEANDLINEMISMATCH = 703;
+    const C_REFUNDLINESREQUIRED = 704;
+    const C_INVALIDREFUNDTYPE = 705;
+    const C_REFUNDPERCENTAGEFORTAXONLY = 706;
+    const C_LINENOOUTOFRANGE = 707;
+    const C_REFUNDPERCENTAGEOUTOFRANGE = 708;
+    const C_REFUNDPERCENTAGEMISSING = 709;
 
     /**
      * Free API error codes
      */
-    const C_MUSTUSECREATETRANSACTION = "MustUseCreateTransaction";
-    const C_MUSTACCEPTTERMSANDCONDITIONS = "MustAcceptTermsAndConditions";
+    const C_MUSTUSECREATETRANSACTION = 800;
+    const C_MUSTACCEPTTERMSANDCONDITIONS = 801;
 
     /**
      * Filing Calendar Error Codes
      */
-    const C_FILINGCALENDARCANNOTBEDELETED = "FilingCalendarCannotBeDeleted";
-    const C_INVALIDEFFECTIVEDATE = "InvalidEffectiveDate";
-    const C_NONOUTLETFORM = "NonOutletForm";
-    const C_OVERLAPPINGFILINGCALENDAR = "OverlappingFilingCalendar";
+    const C_FILINGCALENDARCANNOTBEDELETED = 900;
+    const C_INVALIDEFFECTIVEDATE = 901;
+    const C_NONOUTLETFORM = 902;
+    const C_OVERLAPPINGFILINGCALENDAR = 903;
+    const C_FILINGCALENDARCANNOTBEEDITED = 904;
 
     /**
      * Create or update transaction error codes
      */
-    const C_CANNOTMODIFYLOCKEDTRANSACTION = "CannotModifyLockedTransaction";
-    const C_LINEALREADYEXISTS = "LineAlreadyExists";
-    const C_LINEDOESNOTEXIST = "LineDoesNotExist";
-    const C_LINESNOTSPECIFIED = "LinesNotSpecified";
-    const C_LINEDETAILSDOESNOTEXIST = "LineDetailsDoesNotExist";
-    const C_CANNOTCREATETRANSACTIONWITHDELETEDDATASOURCE = "CannotCreateTransactionWithDeletedDataSource";
+    const C_CANNOTMODIFYLOCKEDTRANSACTION = 1100;
+    const C_LINEALREADYEXISTS = 1101;
+    const C_LINEDOESNOTEXIST = 1102;
+    const C_LINESNOTSPECIFIED = 1103;
+    const C_LINEDETAILSDOESNOTEXIST = 1104;
+    const C_CANNOTCREATETRANSACTIONWITHDELETEDDATASOURCE = 1105;
 
     /**
      * Exempt cert error codes
      */
-    const C_INVALIDBUSINESSTYPE = "InvalidBusinessType";
-    const C_CANNOTMODIFYEXEMPTCERT = "CannotModifyExemptCert";
-    const C_CERTIFICATESERROR = "CertificatesError";
-    const C_MISSINGREQUIREDFIELDS = "MissingRequiredFields";
-    const C_CERTIFICATESNOTSETUP = "CertificatesNotSetup";
-    const C_ADDRELATIONSHIPSERROR = "AddRelationshipsError";
-    const C_MISSINGEXPOSUREZONE = "MissingExposureZone";
-    const C_CONFLICTINGEXPOSUREZONE = "ConflictingExposureZone";
-    const C_MISSINGFIELDTOCREATEEXPOSUREZONE = "MissingFieldToCreateExposureZone";
-    const C_MISSINGEXEMPTREASON = "MissingExemptReason";
-    const C_INVALIDEXEMPTREASON = "InvalidExemptReason";
-    const C_INVALIDEXEMPTIONOPERATION = "InvalidExemptionOperation";
-    const C_CONFLICTINGFIELDS = "ConflictingFields";
-    const C_INVALIDPDFORIMAGEFILE = "InvalidPdfOrImageFile";
-    const C_INVALIDCOVERLETTERTITLE = "InvalidCoverLetterTitle";
-    const C_ACCOUNTNOTPROVISIONED = "AccountNotProvisioned";
-    const C_INVALIDREQUESTCONTENTTYPE = "InvalidRequestContentType";
-    const C_EXEMPTIONPAGINATIONLIMITS = "ExemptionPaginationLimits";
-    const C_EXEMPTIONSORTLIMITS = "ExemptionSortLimits";
-    const C_CUSTOMERCANTBEBOTHSHIPTOANDBILLTO = "CustomerCantBeBothShipToAndBillTo";
-    const C_BILLTOCUSTOMEREXPECTED = "BillToCustomerExpected";
-    const C_SHIPTOCUSTOMEREXPECTED = "ShipToCustomerExpected";
+    const C_INVALIDBUSINESSTYPE = 1200;
+    const C_CANNOTMODIFYEXEMPTCERT = 1201;
+    const C_CERTIFICATESERROR = 1203;
+    const C_MISSINGREQUIREDFIELDS = 1204;
+    const C_CERTIFICATESNOTSETUP = 1205;
+    const C_ADDRELATIONSHIPSERROR = 1206;
+    const C_MISSINGEXPOSUREZONE = 1207;
+    const C_CONFLICTINGEXPOSUREZONE = 1208;
+    const C_MISSINGFIELDTOCREATEEXPOSUREZONE = 1209;
+    const C_MISSINGEXEMPTREASON = 1210;
+    const C_INVALIDEXEMPTREASON = 1211;
+    const C_INVALIDEXEMPTIONOPERATION = 1212;
+    const C_CONFLICTINGFIELDS = 1213;
+    const C_INVALIDPDFORIMAGEFILE = 1214;
+    const C_INVALIDCOVERLETTERTITLE = 1215;
+    const C_ACCOUNTNOTPROVISIONED = 1216;
+    const C_INVALIDREQUESTCONTENTTYPE = 1217;
+    const C_EXEMPTIONPAGINATIONLIMITS = 1218;
+    const C_EXEMPTIONSORTLIMITS = 1219;
+    const C_CUSTOMERCANTBEBOTHSHIPTOANDBILLTO = 1220;
+    const C_BILLTOCUSTOMEREXPECTED = 1221;
+    const C_SHIPTOCUSTOMEREXPECTED = 1222;
+    const C_ECMSSSTCERTSREQUIRED = 1223;
 
     /**
      * Multi document error codes
      */
-    const C_TRANSACTIONNOTCANCELLED = "TransactionNotCancelled";
-    const C_TOOMANYTRANSACTIONS = "TooManyTransactions";
-    const C_ONLYTAXDATEOVERRIDEISALLOWED = "OnlyTaxDateOverrideIsAllowed";
-    const C_TRANSACTIONALREADYEXISTS = "TransactionAlreadyExists";
-    const C_DATEMISMATCH = "DateMismatch";
-    const C_INVALIDDOCUMENTSTATUSFORVERIFY = "InvalidDocumentStatusForVerify";
-    const C_TOTALAMOUNTMISMATCH = "TotalAmountMismatch";
-    const C_TOTALTAXMISMATCH = "TotalTaxMismatch";
-    const C_INVALIDDOCUMENTSTATUSFORCOMMIT = "InvalidDocumentStatusForCommit";
-    const C_INVALIDDOCUMENTTYPE = "InvalidDocumentType";
-    const C_MULTIDOCUMENTPARTIALLYLOCKED = "MultiDocumentPartiallyLocked";
-    const C_TRANSACTIONISCOMMITTED = "TransactionIsCommitted";
+    const C_TRANSACTIONNOTCANCELLED = 1300;
+    const C_TOOMANYTRANSACTIONS = 1301;
+    const C_ONLYTAXDATEOVERRIDEISALLOWED = 1302;
+    const C_TRANSACTIONALREADYEXISTS = 1303;
+    const C_DATEMISMATCH = 1305;
+    const C_INVALIDDOCUMENTSTATUSFORVERIFY = 1306;
+    const C_TOTALAMOUNTMISMATCH = 1307;
+    const C_TOTALTAXMISMATCH = 1308;
+    const C_INVALIDDOCUMENTSTATUSFORCOMMIT = 1309;
+    const C_INVALIDDOCUMENTTYPE = 1310;
+    const C_MULTIDOCUMENTPARTIALLYLOCKED = 1312;
+    const C_TRANSACTIONISCOMMITTED = 1313;
 
     /**
      * Communications Tax error codes
      */
-    const C_COMMSCONFIGCLIENTIDMISSING = "CommsConfigClientIdMissing";
-    const C_COMMSCONFIGCLIENTIDBADVALUE = "CommsConfigClientIdBadValue";
+    const C_COMMSCONFIGCLIENTIDMISSING = 1400;
+    const C_COMMSCONFIGCLIENTIDBADVALUE = 1401;
 
     /**
      * Account Activate error codes
      */
-    const C_ACCOUNTINNEWSTATUSEXCEPTION = "AccountInNewStatusException";
+    const C_ACCOUNTINNEWSTATUSEXCEPTION = 1404;
 
     /**
      * Worksheet Exception
      */
-    const C_WORKSHEETEXCEPTION = "WorksheetException";
-    const C_INVALIDACCOUNTOVERRIDE = "InvalidAccountOverride";
-    const C_ACCOUNTOVERRIDENOTAUTHORIZED = "AccountOverrideNotAuthorized";
-    const C_PARSERFIELDNOTQUERYABLEERROR = "ParserFieldNotQueryableError";
-    const C_USERNAMEREQUIRED = "UsernameRequired";
-    const C_INVALIDAUDITMESSAGE = "InvalidAuditMessage";
+    const C_WORKSHEETEXCEPTION = 1405;
+    const C_INVALIDACCOUNTOVERRIDE = 1406;
+    const C_ACCOUNTOVERRIDENOTAUTHORIZED = 1407;
+    const C_PARSERFIELDNOTQUERYABLEERROR = 1408;
+    const C_USERNAMEREQUIRED = 1409;
+    const C_INVALIDAUDITMESSAGE = 1410;
 
     /**
      * Nexus validation error codes
      */
-    const C_CANNOTDELETEPARENTBEFORECHILDNEXUS = "CannotDeleteParentBeforeChildNexus";
-    const C_NEXUSCHILDDATEMISMATCH = "NexusChildDateMismatch";
+    const C_CANNOTDELETEPARENTBEFORECHILDNEXUS = 1500;
+    const C_NEXUSCHILDDATEMISMATCH = 1501;
 
     /**
      * Remote validation Error
      */
-    const C_REMOTEVALIDATIONERROR = "RemoteValidationError";
+    const C_REMOTEVALIDATIONERROR = 1502;
 
     /**
      * Advanced rule errors
      */
-    const C_ADVANCEDRULEBADSCRIPT = "AdvancedRuleBadScript";
-    const C_ADVANCEDRULEBADCSVTABLE = "AdvancedRuleBadCsvTable";
-    const C_ADVANCEDRULEREQUESTRULEERROR = "AdvancedRuleRequestRuleError";
-    const C_ADVANCEDRULERESPONSERULEERROR = "AdvancedRuleResponseRuleError";
-    const C_ADVANCEDRULENOTAPPROVED = "AdvancedRuleNotApproved";
+    const C_ADVANCEDRULEBADSCRIPT = 1600;
+    const C_ADVANCEDRULEBADCSVTABLE = 1601;
+    const C_ADVANCEDRULEREQUESTRULEERROR = 1602;
+    const C_ADVANCEDRULERESPONSERULEERROR = 1603;
+    const C_ADVANCEDRULENOTAPPROVED = 1604;
 
     /**
      * Miscellaneous
      */
-    const C_INVALIDDOCUMENTSTATUSTOADDORDELETELINES = "InvalidDocumentStatusToAddOrDeleteLines";
-    const C_TAXRULEREQUIRESNEXUS = "TaxRuleRequiresNexus";
-    const C_UPCCODENOTUNIQUE = "UPCCodeNotUnique";
-    const C_CANNOTUPDATESOURCEORINSTANCE = "CannotUpdateSourceOrInstance";
-    const C_TAXCODEASSOCIATEDWITHITEMCODENOTFOUND = "TaxCodeAssociatedWithItemCodeNotFound";
-    const C_DUPLICATESYSTEMFORITEM = "DuplicateSystemForItem";
+    const C_INVALIDDOCUMENTSTATUSTOADDORDELETELINES = 1700;
+    const C_TAXRULEREQUIRESNEXUS = 1701;
+    const C_UPCCODENOTUNIQUE = 1702;
+    const C_CANNOTUPDATESOURCEORINSTANCE = 1703;
+    const C_TAXCODEASSOCIATEDWITHITEMCODENOTFOUND = 1704;
+    const C_DUPLICATESYSTEMFORITEM = 1705;
+    const C_CANNOTDISMISSGLOBALNOTIFICATION = 1706;
 
     /**
      * SendSales API errors
      */
-    const C_UNSUPPORTEDFILEFORMAT = "UnsupportedFileFormat";
-    const C_UNSUPPORTEDOUTPUTFILETYPE = "UnsupportedOutputFileType";
+    const C_UNSUPPORTEDFILEFORMAT = 1800;
+    const C_UNSUPPORTEDOUTPUTFILETYPE = 1801;
 
     /**
      * TaxProfile API errors
      */
-    const C_TAXPROFILENOTPROVIDED = "TaxProfileNotProvided";
-    const C_INVALIDTAXPROFILE = "InvalidTaxProfile";
-    const C_COMPANYTAXPROFILEENTRYREQUIRED = "CompanyTaxProfileEntryRequired";
-    const C_ERRORREADINGTAXPROFILEENTRY = "ErrorReadingTaxProfileEntry";
+    const C_TAXPROFILENOTPROVIDED = 1900;
+    const C_INVALIDTAXPROFILE = 1901;
+    const C_COMPANYTAXPROFILEENTRYREQUIRED = 1902;
+    const C_ERRORREADINGTAXPROFILEENTRY = 1903;
 
     /**
      * AuditAccount API errors
      */
-    const C_TRACEDATANOTAVAILABLE = "TraceDataNotAvailable";
+    const C_TRACEDATANOTAVAILABLE = 2000;
 
     /**
      * Item parameter errors
      */
-    const C_INVALIDPARAMETERUNITMEASUREMENTTYPE = "InvalidParameterUnitMeasurementType";
-    const C_PARAMETERUNITREQUIRED = "ParameterUnitRequired";
-    const C_INVALIDPARAMETERVALUEDATATYPE = "InvalidParameterValueDataType";
-    const C_INVALIDPARAMETERATTRIBUTETYPE = "InvalidParameterAttributeType";
-    const C_SUBSCRIPTIONREQUIREDFORPARAMETER = "SubscriptionRequiredForParameter";
+    const C_INVALIDPARAMETERUNITMEASUREMENTTYPE = 2100;
+    const C_PARAMETERUNITREQUIRED = 2101;
+    const C_INVALIDPARAMETERVALUEDATATYPE = 2102;
+    const C_INVALIDPARAMETERATTRIBUTETYPE = 2103;
+    const C_SUBSCRIPTIONREQUIREDFORPARAMETER = 2104;
 
 }
 
@@ -1059,22 +1062,22 @@ class SeverityLevel
     /**
      * Operation succeeded
      */
-    const C_SUCCESS = "Success";
+    const C_SUCCESS = 0;
 
     /**
      * Warnings occured, operation succeeded
      */
-    const C_WARNING = "Warning";
+    const C_WARNING = 1;
 
     /**
      * Errors occured, operation failed
      */
-    const C_ERROR = "Error";
+    const C_ERROR = 2;
 
     /**
      * Unexpected exceptions occurred, operation failed
      */
-    const C_EXCEPTION = "Exception";
+    const C_EXCEPTION = 3;
 
 }
 
@@ -1088,17 +1091,17 @@ class WelcomeEmail
     /**
      * Normal
      */
-    const C_NORMAL = "Normal";
+    const C_NORMAL = 0;
 
     /**
      * Suppressed
      */
-    const C_SUPPRESSED = "Suppressed";
+    const C_SUPPRESSED = 1;
 
     /**
      * Custom
      */
-    const C_CUSTOM = "Custom";
+    const C_CUSTOM = 2;
 
 }
 
@@ -1112,62 +1115,62 @@ class ResolutionQuality
     /**
      * Location was not geocoded
      */
-    const C_NOTCODED = "NotCoded";
+    const C_NOTCODED = 0;
 
     /**
      * Location was already geocoded on the request
      */
-    const C_EXTERNAL = "External";
+    const C_EXTERNAL = 1;
 
     /**
      * Avalara-defined country centroid
      */
-    const C_COUNTRYCENTROID = "CountryCentroid";
+    const C_COUNTRYCENTROID = 2;
 
     /**
      * Avalara-defined state / province centroid
      */
-    const C_REGIONCENTROID = "RegionCentroid";
+    const C_REGIONCENTROID = 3;
 
     /**
      * Geocoded at a level more coarse than a PostalCentroid1
      */
-    const C_PARTIALCENTROID = "PartialCentroid";
+    const C_PARTIALCENTROID = 4;
 
     /**
      * Largest postal code (zip5 in US, left three in CA, etc
      */
-    const C_POSTALCENTROIDGOOD = "PostalCentroidGood";
+    const C_POSTALCENTROIDGOOD = 5;
 
     /**
      * Better postal code (zip7 in US)
      */
-    const C_POSTALCENTROIDBETTER = "PostalCentroidBetter";
+    const C_POSTALCENTROIDBETTER = 6;
 
     /**
      * Best postal code (zip9 in US, complete postal code elsewhere)
      */
-    const C_POSTALCENTROIDBEST = "PostalCentroidBest";
+    const C_POSTALCENTROIDBEST = 7;
 
     /**
      * Nearest intersection
      */
-    const C_INTERSECTION = "Intersection";
+    const C_INTERSECTION = 8;
 
     /**
      * Interpolated to rooftop
      */
-    const C_INTERPOLATED = "Interpolated";
+    const C_INTERPOLATED = 9;
 
     /**
      * Assumed to be rooftop level, non-interpolated
      */
-    const C_ROOFTOP = "Rooftop";
+    const C_ROOFTOP = 10;
 
     /**
      * Pulled from a static list of geocodes for specific jurisdictions
      */
-    const C_CONSTANT = "Constant";
+    const C_CONSTANT = 11;
 
 }
 
@@ -1181,27 +1184,27 @@ class JurisdictionType
     /**
      * Country
      */
-    const C_COUNTRY = "Country";
+    const C_COUNTRY = 0;
 
     /**
      * State
      */
-    const C_STATE = "State";
+    const C_STATE = 1;
 
     /**
      * County
      */
-    const C_COUNTY = "County";
+    const C_COUNTY = 2;
 
     /**
      * City
      */
-    const C_CITY = "City";
+    const C_CITY = 3;
 
     /**
      * Special Tax Jurisdiction
      */
-    const C_SPECIAL = "Special";
+    const C_SPECIAL = 4;
 
 }
 
@@ -1215,52 +1218,52 @@ class FormTypeId
     /**
      * Denotes the form type is Sales and Use Tax
      */
-    const C_SALESANDUSE = "SalesAndUse";
+    const C_SALESANDUSE = 0;
 
     /**
      * Denotes the form type is Sales Tax only
      */
-    const C_SALES = "Sales";
+    const C_SALES = 1;
 
     /**
      * Denotes the form type is Sellers Use Tax only
      */
-    const C_SELLERSUSE = "SellersUse";
+    const C_SELLERSUSE = 2;
 
     /**
      * Denotes the form type is Lodging Tax only
      */
-    const C_LODGING = "Lodging";
+    const C_LODGING = 3;
 
     /**
      * Denotes the form type is Sales and Lodging Tax
      */
-    const C_SALESANDLODGING = "SalesAndLodging";
+    const C_SALESANDLODGING = 4;
 
     /**
      * Denotes the form type is Consumer Use Tax only
      */
-    const C_CONSUMERUSE = "ConsumerUse";
+    const C_CONSUMERUSE = 5;
 
     /**
      * Denotes the form type is Resort and Rental Tax
      */
-    const C_RESORTANDRENTAL = "ResortAndRental";
+    const C_RESORTANDRENTAL = 6;
 
     /**
      * Denotes the form type is Tourist and Rental Tax
      */
-    const C_TOURISTANDRENTAL = "TouristAndRental";
+    const C_TOURISTANDRENTAL = 7;
 
     /**
      * Denotes the form type is Prepayment
      */
-    const C_PREPAYMENT = "Prepayment";
+    const C_PREPAYMENT = 8;
 
     /**
      * Denotes the form type is Prepayment Allowance
      */
-    const C_PREPAYMENTALLOWED = "PrepaymentAllowed";
+    const C_PREPAYMENTALLOWED = 9;
 
 }
 
@@ -1274,17 +1277,17 @@ class FilingOptionTypeId
     /**
      * Denotes the tax return is being filed on paper.
      */
-    const C_PAPER = "Paper";
+    const C_PAPER = 0;
 
     /**
      * Denotes the form can be efiled optionally.
      */
-    const C_OPTIONALEFILE = "OptionalEfile";
+    const C_OPTIONALEFILE = 1;
 
     /**
      * Denotes the form is being filed via efile.
      */
-    const C_MANDATORYEFILE = "MandatoryEfile";
+    const C_MANDATORYEFILE = 2;
 
 }
 
@@ -1298,17 +1301,17 @@ class DueDateTypeId
     /**
      * Denotes form is due on the due day
      */
-    const C_BYDAY = "ByDay";
+    const C_BYDAY = 0;
 
     /**
      * Denotes form is due by last day of the month
      */
-    const C_BYLASTDAY = "ByLastDay";
+    const C_BYLASTDAY = 1;
 
     /**
      * Denotes form is due by second to last day of the month
      */
-    const C_BYSECONDLASTDAY = "BySecondLastDay";
+    const C_BYSECONDLASTDAY = 2;
 
 }
 
@@ -1322,22 +1325,22 @@ class RoundingTypeId
     /**
      * There is no rounding on the return
      */
-    const C_NONE = "None";
+    const C_NONE = 0;
 
     /**
      * Round to the nearest whole number
      */
-    const C_NEAREST = "Nearest";
+    const C_NEAREST = 1;
 
     /**
      * Always round up
      */
-    const C_UP = "Up";
+    const C_UP = 2;
 
     /**
      * Always round down
      */
-    const C_DOWN = "Down";
+    const C_DOWN = 3;
 
 }
 
@@ -1353,22 +1356,22 @@ class OutletTypeId
     /**
      * File a single return per cycle for your entire business.
      */
-    const C_NONE = "None";
+    const C_NONE = 0;
 
     /**
      * You may file separate forms for each outlet; contact the tax authority for more details about location based reporting requirements.
      */
-    const C_SCHEDULE = "Schedule";
+    const C_SCHEDULE = 1;
 
     /**
      * You may file separate forms for each outlet; contact the tax authority for more details about location based reporting requirements.
      */
-    const C_DUPLICATE = "Duplicate";
+    const C_DUPLICATE = 2;
 
     /**
      * File a single return, but you must have a line item for each place of business.
      */
-    const C_CONSOLIDATED = "Consolidated";
+    const C_CONSOLIDATED = 3;
 
 }
 
@@ -1378,24 +1381,24 @@ class OutletTypeId
  */
 class BatchType
 {
-    const C_AVACERTUPDATE = "AvaCertUpdate";
-    const C_AVACERTUPDATEALL = "AvaCertUpdateAll";
-    const C_BATCHMAINTENANCE = "BatchMaintenance";
-    const C_COMPANYLOCATIONIMPORT = "CompanyLocationImport";
-    const C_DOCUMENTIMPORT = "DocumentImport";
-    const C_EXEMPTCERTIMPORT = "ExemptCertImport";
-    const C_ITEMIMPORT = "ItemImport";
-    const C_SALESAUDITEXPORT = "SalesAuditExport";
-    const C_SSTPTESTDECKIMPORT = "SstpTestDeckImport";
-    const C_TAXRULEIMPORT = "TaxRuleImport";
+    const C_AVACERTUPDATE = 0;
+    const C_AVACERTUPDATEALL = 1;
+    const C_BATCHMAINTENANCE = 2;
+    const C_COMPANYLOCATIONIMPORT = 3;
+    const C_DOCUMENTIMPORT = 4;
+    const C_EXEMPTCERTIMPORT = 5;
+    const C_ITEMIMPORT = 6;
+    const C_SALESAUDITEXPORT = 7;
+    const C_SSTPTESTDECKIMPORT = 8;
+    const C_TAXRULEIMPORT = 9;
 
     /**
      * This batch type represents tax transaction data being uploaded to AvaTax. Each line in the batch represents a single transaction
      *  or a line in a multi-line transaction. For reference, see [Batched Transactions in REST v2](http://developer.avalara.com/blog/2016/10/24/batch-transaction-upload-in-rest-v2)
      */
-    const C_TRANSACTIONIMPORT = "TransactionImport";
-    const C_UPCBULKIMPORT = "UPCBulkImport";
-    const C_UPCVALIDATIONIMPORT = "UPCValidationImport";
+    const C_TRANSACTIONIMPORT = 10;
+    const C_UPCBULKIMPORT = 11;
+    const C_UPCVALIDATIONIMPORT = 12;
 
 }
 
@@ -1409,47 +1412,47 @@ class BatchStatus
     /**
      * Batch file has been received and is in the queue to be processed.
      */
-    const C_WAITING = "Waiting";
+    const C_WAITING = 0;
 
     /**
      * Batch file experienced system errors and cannot be processed.
      */
-    const C_SYSTEMERRORS = "SystemErrors";
+    const C_SYSTEMERRORS = 1;
 
     /**
      * Batch file is cancelled
      */
-    const C_CANCELLED = "Cancelled";
+    const C_CANCELLED = 2;
 
     /**
      * Batch file has been completely processed.
      */
-    const C_COMPLETED = "Completed";
+    const C_COMPLETED = 3;
 
     /**
      * Batch file is currently being created.
      */
-    const C_CREATING = "Creating";
+    const C_CREATING = 4;
 
     /**
      * Batch file has been deleted.
      */
-    const C_DELETED = "Deleted";
+    const C_DELETED = 5;
 
     /**
      * Batch file was processed with some errors.
      */
-    const C_ERRORS = "Errors";
+    const C_ERRORS = 6;
 
     /**
      * Batch processing was paused.
      */
-    const C_PAUSED = "Paused";
+    const C_PAUSED = 7;
 
     /**
      * Batch is currently being processed.
      */
-    const C_PROCESSING = "Processing";
+    const C_PROCESSING = 8;
 
 }
 
@@ -1463,20 +1466,20 @@ class CertificateRequestDeliveryMethod
     /**
      * The invitation will be sent via email to the recipient's email address.
      */
-    const C_EMAIL = "Email";
+    const C_EMAIL = 1;
 
     /**
      * The invitation will be sent via facsimile to the recipient's facsimile phone number.
      *  
      *  Facsimile transmission make take time to process and deliver via phone lines.
      */
-    const C_FAX = "Fax";
+    const C_FAX = 2;
 
     /**
      * The request will be processed and turned into a web link (URL) which the user can click on to visit the CertExpress site and immediately
      *  begin entering data about their certificates.
      */
-    const C_DOWNLOAD = "Download";
+    const C_DOWNLOAD = 3;
 
 }
 
@@ -1491,12 +1494,12 @@ class CertExpressInvitationStatus
      * The CertExpress website is currently building a landing page for the customer. Please
      *  wait about 10 seconds and fetch this request again to see when it will be ready.
      */
-    const C_INPROGRESS = "InProgress";
+    const C_INPROGRESS = 0;
 
     /**
      * Indicates that the CertExpress invitation has been completed and is ready to use.
      */
-    const C_READY = "Ready";
+    const C_READY = 1;
 
 }
 
@@ -1510,15 +1513,15 @@ class CertCaptureProvisionStatus
     /**
      * Account and company are provisioned
      */
-    const C_PROVISIONED = "Provisioned";
+    const C_PROVISIONED = 0;
 
     /**
      * Provision job is being queued
      *  This could also be an indication that some companies under an account has been provisioned, while others
      *  under the same account has not.
      */
-    const C_INPROGRESS = "InProgress";
-    const C_NOTPROVISIONED = "NotProvisioned";
+    const C_INPROGRESS = 1;
+    const C_NOTPROVISIONED = 2;
 
 }
 
@@ -1532,12 +1535,12 @@ class RoundingLevelId
     /**
      * Round tax on each line separately
      */
-    const C_LINE = "Line";
+    const C_LINE = 0;
 
     /**
      * Round tax at the document level
      */
-    const C_DOCUMENT = "Document";
+    const C_DOCUMENT = 1;
 
 }
 
@@ -1551,22 +1554,22 @@ class TaxDependencyLevelId
     /**
      * Document
      */
-    const C_DOCUMENT = "Document";
+    const C_DOCUMENT = 0;
 
     /**
      * State
      */
-    const C_STATE = "State";
+    const C_STATE = 1;
 
     /**
      * TaxRegion
      */
-    const C_TAXREGION = "TaxRegion";
+    const C_TAXREGION = 2;
 
     /**
      * Address
      */
-    const C_ADDRESS = "Address";
+    const C_ADDRESS = 3;
 
 }
 
@@ -1580,12 +1583,12 @@ class AddressTypeId
     /**
      * A business location, for example a store, warehouse, or office.
      */
-    const C_LOCATION = "Location";
+    const C_LOCATION = 1;
 
     /**
      * A person's address who performs sales tasks for the company remotely from an office.
      */
-    const C_SALESPERSON = "Salesperson";
+    const C_SALESPERSON = 2;
 
     /**
      * This location is a marketplace vendor that handles transactions on behalf of the company.
@@ -1593,7 +1596,7 @@ class AddressTypeId
      *  `SellerRemitsTax` or `MarketplaceRemitsTax` to indicate which business entity is responsible
      *  for collecting and remitting tax for this location.
      */
-    const C_MARKETPLACE = "Marketplace";
+    const C_MARKETPLACE = 3;
 
 }
 
@@ -1607,27 +1610,27 @@ class AddressCategoryId
     /**
      * Address refers to a storefront location
      */
-    const C_STOREFRONT = "Storefront";
+    const C_STOREFRONT = 1;
 
     /**
      * Address refers to a main office of this company
      */
-    const C_MAINOFFICE = "MainOffice";
+    const C_MAINOFFICE = 2;
 
     /**
      * Address refers to a warehouse or other non-public location
      */
-    const C_WAREHOUSE = "Warehouse";
+    const C_WAREHOUSE = 3;
 
     /**
      * Address refers to a location for a single salesperson
      */
-    const C_SALESPERSON = "Salesperson";
+    const C_SALESPERSON = 4;
 
     /**
      * Address is a type not reflected in the other lists
      */
-    const C_OTHER = "Other";
+    const C_OTHER = 5;
 
     /**
      * The marketplace vendor does not collect and remit tax for transactions tied to this
@@ -1635,7 +1638,7 @@ class AddressCategoryId
      *  and your company is responsible for collecting and remitting all taxes for transactions tied
      *  to this location.
      */
-    const C_SELLERREMITSTAX = "SellerRemitsTax";
+    const C_SELLERREMITSTAX = 6;
 
     /**
      * The marketplace vendor collects and remits tax on your behalf for all transactions tied
@@ -1644,12 +1647,12 @@ class AddressCategoryId
      *  will be treated as already filed, and will be listed on each sales tax return as amounts
      *  already paid.
      */
-    const C_MARKETPLACEREMITSTAX = "MarketplaceRemitsTax";
+    const C_MARKETPLACEREMITSTAX = 7;
 
     /**
      * Address refers to the mailing address of your company which is not a physical location.
      */
-    const C_NONPHYSICAL = "NonPhysical";
+    const C_NONPHYSICAL = 8;
 
 }
 
@@ -1663,27 +1666,27 @@ class JurisTypeId
     /**
      * State
      */
-    const C_STA = "STA";
+    const C_STA = 1;
 
     /**
      * County
      */
-    const C_CTY = "CTY";
+    const C_CTY = 2;
 
     /**
      * City
      */
-    const C_CIT = "CIT";
+    const C_CIT = 3;
 
     /**
      * Special
      */
-    const C_STJ = "STJ";
+    const C_STJ = 4;
 
     /**
      * Country
      */
-    const C_CNT = "CNT";
+    const C_CNT = 5;
 
 }
 
@@ -1697,29 +1700,29 @@ class NexusTypeId
     /**
      * Indicates no nexus
      */
-    const C_NONE = "None";
+    const C_NONE = 0;
 
     /**
      * Indicates the entity is voluntarily collecting tax (default)
      */
-    const C_SALESORSELLERSUSETAX = "SalesOrSellersUseTax";
+    const C_SALESORSELLERSUSETAX = 1;
 
     /**
      * Indicates the entity is required to collect tax in the state
      */
-    const C_SALESTAX = "SalesTax";
+    const C_SALESTAX = 2;
 
     /**
      * Indicates the entity is registered as a Volunteer in an SST state.
      *  Only your SST administrator may set this option.
      */
-    const C_SSTVOLUNTEER = "SSTVolunteer";
+    const C_SSTVOLUNTEER = 3;
 
     /**
      * Indicates the entity is registered as a Non-Volunteer in an SST state.
      *  Only your SST administrator may set this option.
      */
-    const C_SSTNONVOLUNTEER = "SSTNonVolunteer";
+    const C_SSTNONVOLUNTEER = 4;
 
 }
 
@@ -1731,19 +1734,19 @@ class Sourcing
 {
 
     /**
-     * Origin
+     * Mixed sourcing, for states that do both origin and destination calculation
      */
-    const C_ORIGIN = "Origin";
+    const C_MIXED = 42;
 
     /**
      * Destination
      */
-    const C_DESTINATION = "Destination";
+    const C_DESTINATION = 68;
 
     /**
-     * Mixed sourcing, for states that do both origin and destination calculation
+     * Origin
      */
-    const C_MIXED = "Mixed";
+    const C_ORIGIN = 79;
 
 }
 
@@ -1757,21 +1760,21 @@ class LocalNexusTypeId
     /**
      * Only the specific nexus objects declared for this company are declared.
      */
-    const C_SELECTED = "Selected";
+    const C_SELECTED = 0;
 
     /**
      * Customer declares nexus in all state administered taxing authorities.
      *  
      *  This value only takes effect if you set `hasLocalNexus` = true.
      */
-    const C_STATEADMINISTERED = "StateAdministered";
+    const C_STATEADMINISTERED = 1;
 
     /**
      * Customer declares nexus in all local taxing authorities. 
      *  
      *  This value only takes effect if you set `hasLocalNexus` = true.
      */
-    const C_ALL = "All";
+    const C_ALL = 2;
 
 }
 
@@ -1785,84 +1788,84 @@ class MatchingTaxType
 {
 
     /**
-     * Match all tax types
-     */
-    const C_ALL = "All";
-
-    /**
-     * Match both Sales and Use Tax only
-     */
-    const C_BOTHSALESANDUSETAX = "BothSalesAndUseTax";
-
-    /**
-     * Match Consumer Use Tax only
-     */
-    const C_CONSUMERUSETAX = "ConsumerUseTax";
-
-    /**
-     * Match Sales Tax only
-     */
-    const C_SALESTAX = "SalesTax";
-
-    /**
-     * Match Seller's Use Tax only
-     */
-    const C_USETAX = "UseTax";
-
-    /**
-     * Match VAT Output Tax only
-     */
-    const C_VATOUTPUTTAX = "VATOutputTax";
-
-    /**
-     * Match VAT Input Tax only
-     */
-    const C_VATINPUTTAX = "VATInputTax";
-
-    /**
-     * Match VAT Nonrecoverable Input Tax only
-     */
-    const C_VATNONRECOVERABLEINPUTTAX = "VATNonrecoverableInputTax";
-
-    /**
-     * Match Fee tax types only
-     */
-    const C_FEE = "Fee";
-
-    /**
-     * Match Rental tax types only
-     */
-    const C_RENTAL = "Rental";
-
-    /**
-     * Match both Consumer Use and Sales Tax types
-     */
-    const C_CONSUMERUSEANDSALESTAX = "ConsumerUseAndSalesTax";
-
-    /**
-     * Match both Consumer Use and Seller's Use Tax types
-     */
-    const C_CONSUMERSUSEANDSELLERSUSETAX = "ConsumersUseAndSellersUseTax";
-
-    /**
      * Match medical excise type
      */
-    const C_EXCISE = "Excise";
+    const C_EXCISE = 5;
 
     /**
      * Match Lodging tax type
      */
-    const C_LODGING = "Lodging";
+    const C_LODGING = 6;
 
     /**
      * Match bottle tax type
      */
-    const C_BOTTLE = "Bottle";
+    const C_BOTTLE = 7;
 
     /**
      * Match RentToOwn tax type
      */
-    const C_RENTTOOWN = "RentToOwn";
+    const C_RENTTOOWN = 8;
+
+    /**
+     * Match all tax types
+     */
+    const C_ALL = 65;
+
+    /**
+     * Match both Sales and Use Tax only
+     */
+    const C_BOTHSALESANDUSETAX = 66;
+
+    /**
+     * Match Consumer Use Tax only
+     */
+    const C_CONSUMERUSETAX = 67;
+
+    /**
+     * Match both Consumer Use and Seller's Use Tax types
+     */
+    const C_CONSUMERSUSEANDSELLERSUSETAX = 68;
+
+    /**
+     * Match both Consumer Use and Sales Tax types
+     */
+    const C_CONSUMERUSEANDSALESTAX = 69;
+
+    /**
+     * Match Fee tax types only
+     */
+    const C_FEE = 70;
+
+    /**
+     * Match VAT Input Tax only
+     */
+    const C_VATINPUTTAX = 73;
+
+    /**
+     * Match VAT Nonrecoverable Input Tax only
+     */
+    const C_VATNONRECOVERABLEINPUTTAX = 78;
+
+    /**
+     * Match VAT Output Tax only
+     */
+    const C_VATOUTPUTTAX = 79;
+
+    /**
+     * Match Rental tax types only
+     */
+    const C_RENTAL = 82;
+
+    /**
+     * Match Sales Tax only
+     */
+    const C_SALESTAX = 83;
+
+    /**
+     * Match Seller's Use Tax only
+     */
+    const C_USETAX = 85;
 
 }
 
@@ -1872,19 +1875,19 @@ class MatchingTaxType
  */
 class RateType
 {
-    const C_FOOD = "Food";
-    const C_GENERAL = "General";
-    const C_INCREASEDSTANDARD = "IncreasedStandard";
-    const C_LINENRENTAL = "LinenRental";
-    const C_MEDICAL = "Medical";
-    const C_PARKING = "Parking";
-    const C_REDUCEDA = "ReducedA";
-    const C_REDUCEDB = "ReducedB";
-    const C_REDUCEDR = "ReducedR";
-    const C_STANDARD = "Standard";
-    const C_SUPERREDUCED = "SuperReduced";
-    const C_ZERO = "Zero";
-    const C_SERVICES = "Services";
+    const C_REDUCEDA = 65;
+    const C_REDUCEDB = 66;
+    const C_FOOD = 70;
+    const C_GENERAL = 71;
+    const C_INCREASEDSTANDARD = 73;
+    const C_LINENRENTAL = 76;
+    const C_MEDICAL = 77;
+    const C_PARKING = 80;
+    const C_SUPERREDUCED = 81;
+    const C_REDUCEDR = 82;
+    const C_STANDARD = 83;
+    const C_SERVICES = 88;
+    const C_ZERO = 90;
 
 }
 
@@ -1898,28 +1901,28 @@ class TaxRuleTypeId
     /**
      * Reserved for Avalara internal usage.
      */
-    const C_RATERULE = "RateRule";
+    const C_RATERULE = 0;
 
     /**
      * Specifies a rule that changes the rate of tax for a specified set of criteria.
      *  
      *  This rule can apply to one specific type of product (identified by `TaxCode`) or all products (identified by a null `TaxCode`).
      */
-    const C_RATEOVERRIDERULE = "RateOverrideRule";
+    const C_RATEOVERRIDERULE = 1;
 
     /**
      * Specifies a rule that changes the tax base of a specific product.
      *  
      *  This rule can apply to one specific type of product (identified by `TaxCode`) or all products (identified by a null `TaxCode`).
      */
-    const C_BASERULE = "BaseRule";
+    const C_BASERULE = 2;
 
     /**
      * Indicates that a particular product is exempt from tax due to an exempt usage reason.
      *  
      *  Amounts exempted by this rule are stored in the `exemptAmount` field on the transaction.
      */
-    const C_EXEMPTENTITYRULE = "ExemptEntityRule";
+    const C_EXEMPTENTITYRULE = 3;
 
     /**
      * Specifies a rule that changes whether a product is taxable or not.
@@ -1934,12 +1937,12 @@ class TaxRuleTypeId
      *  
      *  This type of rule can also determine the rate type for a product or to apply a cap or threshold.
      */
-    const C_PRODUCTTAXABILITYRULE = "ProductTaxabilityRule";
+    const C_PRODUCTTAXABILITYRULE = 4;
 
     /**
      * Reserved for Avalara internal usage.
      */
-    const C_NEXUSRULE = "NexusRule";
+    const C_NEXUSRULE = 5;
 
 }
 
@@ -1953,12 +1956,12 @@ class ExemptCertTypeId
     /**
      * Blanked certificate
      */
-    const C_BLANKET = "Blanket";
+    const C_BLANKET = 0;
 
     /**
      * Single use
      */
-    const C_SINGLEUSE = "SingleUse";
+    const C_SINGLEUSE = 1;
 
 }
 
@@ -1972,22 +1975,22 @@ class ExemptCertStatusId
     /**
      * Inactive certificate
      */
-    const C_INACTIVE = "Inactive";
+    const C_INACTIVE = 0;
 
     /**
      * Active certificate
      */
-    const C_ACTIVE = "Active";
+    const C_ACTIVE = 1;
 
     /**
      * Expired certificate
      */
-    const C_EXPIRED = "Expired";
+    const C_EXPIRED = 2;
 
     /**
      * Revoked certificate
      */
-    const C_REVOKED = "Revoked";
+    const C_REVOKED = 3;
 
 }
 
@@ -2001,17 +2004,17 @@ class ExemptCertReviewStatusId
     /**
      * Review pending
      */
-    const C_PENDING = "Pending";
+    const C_PENDING = 0;
 
     /**
      * Certificate was accepted
      */
-    const C_ACCEPTED = "Accepted";
+    const C_ACCEPTED = 1;
 
     /**
      * Certificate was rejected
      */
-    const C_REJECTED = "Rejected";
+    const C_REJECTED = 2;
 
 }
 
@@ -2026,35 +2029,35 @@ class CompanyFilingStatus
      * This company is not a reporting entity and cannot file taxes. To change this behavior, you must mark
      *  the company as a reporting entity.
      */
-    const C_NOREPORTING = "NoReporting";
+    const C_NOREPORTING = 0;
 
     /**
      * This company is a reporting entity, but Avalara is not currently filing tax returns for this company.
      */
-    const C_NOTYETFILING = "NotYetFiling";
+    const C_NOTYETFILING = 1;
 
     /**
      * The customer has requested that Avalara Managed Returns begin filing for this company, however filing has
      *  not yet started. Avalara's compliance team is reviewing this request and will update the company to
      *  first filing status when complete.
      */
-    const C_FILINGREQUESTED = "FilingRequested";
+    const C_FILINGREQUESTED = 2;
 
     /**
      * Avalara has begun filing tax returns for this company. Normally, this status will change to `Active` after 
      *  one month of successful filing of tax returns.
      */
-    const C_FIRSTFILING = "FirstFiling";
+    const C_FIRSTFILING = 3;
 
     /**
      * Avalara currently files tax returns for this company.
      */
-    const C_ACTIVE = "Active";
+    const C_ACTIVE = 4;
 
     /**
      * This company has not been configured for compliance
      */
-    const C_NOTCONFIGUREDFORCOMPLIANCE = "NotConfiguredForCompliance";
+    const C_NOTCONFIGUREDFORCOMPLIANCE = 5;
 
 }
 
@@ -2072,7 +2075,7 @@ class DocumentStatus
      *  
      *  This document has not been recorded to AvaTax
      */
-    const C_TEMPORARY = "Temporary";
+    const C_TEMPORARY = 0;
 
     /**
      * Saved document (SalesInvoice or PurchaseInvoice) ready to be posted.
@@ -2088,7 +2091,7 @@ class DocumentStatus
      *  To adjust or void this transaction, call `AdjustTransaction`, `CreateOrAdjustTransaction`, or
      *  `VoidTransaction`.
      */
-    const C_SAVED = "Saved";
+    const C_SAVED = 1;
 
     /**
      * A posted document (not committed).
@@ -2101,7 +2104,7 @@ class DocumentStatus
      *  To adjust or void this transaction, call `AdjustTransaction`, `CreateOrAdjustTransaction`, or
      *  `VoidTransaction`.
      */
-    const C_POSTED = "Posted";
+    const C_POSTED = 2;
 
     /**
      * A posted document that has been committed.
@@ -2116,7 +2119,7 @@ class DocumentStatus
      *  As long as the transaction has not been locked, you may adjust or void this transaction using 
      *  `AdjustTransaction`, `CreateOrAdjustTransaction`, or `VoidTransaction`.
      */
-    const C_COMMITTED = "Committed";
+    const C_COMMITTED = 3;
 
     /**
      * A document that has been cancelled.
@@ -2127,7 +2130,7 @@ class DocumentStatus
      *  When a transaction has been cancelled, it is considered to no longer exist. You are free to create 
      *  a new transaction with the same code.
      */
-    const C_CANCELLED = "Cancelled";
+    const C_CANCELLED = 4;
 
     /**
      * An older version of a document that has been adjusted.
@@ -2136,12 +2139,12 @@ class DocumentStatus
      *  of the new document. The old document is changed to the status `Adjusted`, and the new document
      *  is created in the status you requested.
      */
-    const C_ADJUSTED = "Adjusted";
+    const C_ADJUSTED = 5;
 
     /**
      * DEPRECATED - A document which is queued for later processing.
      */
-    const C_QUEUED = "Queued";
+    const C_QUEUED = 6;
 
     /**
      * Indicates that this document requires approval from a governmental agency before it can be finalized.
@@ -2150,13 +2153,13 @@ class DocumentStatus
      *  detects that a transaction must be verified with a governmental agency, this transaction will be flagged
      *  as `PendingApproval` until the government has certified the transaction.
      */
-    const C_PENDINGAPPROVAL = "PendingApproval";
+    const C_PENDINGAPPROVAL = 7;
 
     /**
      * DEPRECATED - Represents "a document in any status" when searching. Please search using the 
      *  [Filtering in REST](/avatax/filtering-in-rest/) documentation.
      */
-    const C_ANY = "Any";
+    const C_ANY = -1;
 
 }
 
@@ -2174,7 +2177,7 @@ class TaxOverrideType
     /**
      * AvaTax calculated the tax for this transaction, and no override occurred.
      */
-    const C_NONE = "None";
+    const C_NONE = 0;
 
     /**
      * AvaTax calculated tax for this transaction, but the final tax amount on the transaction was
@@ -2186,12 +2189,12 @@ class TaxOverrideType
      *  `RefundTransaction` API, AvaTax will ensure that the exact tax charged to the customer is refunded
      *  to the customer using a tax amount override.
      */
-    const C_TAXAMOUNT = "TaxAmount";
+    const C_TAXAMOUNT = 1;
 
     /**
      * Entity exemption was ignored (e.g. item was consumed)
      */
-    const C_EXEMPTION = "Exemption";
+    const C_EXEMPTION = 2;
 
     /**
      * AvaTax was instructed to calculate this transaction using the tax rules that were in effect
@@ -2201,17 +2204,17 @@ class TaxOverrideType
      *  without a receipt that shows the exact tax amount paid, AvaTax can calculate tax on the date
      *  when they believed that the product was purchased.
      */
-    const C_TAXDATE = "TaxDate";
+    const C_TAXDATE = 3;
 
     /**
      * To support Consumer Use Tax
      */
-    const C_ACCRUEDTAXAMOUNT = "AccruedTaxAmount";
+    const C_ACCRUEDTAXAMOUNT = 4;
 
     /**
      * Derive the taxable amount from the tax amount
      */
-    const C_DERIVETAXABLE = "DeriveTaxable";
+    const C_DERIVETAXABLE = 5;
 
 }
 
@@ -2225,52 +2228,52 @@ class AdjustmentReason
     /**
      * The transaction has not been adjusted
      */
-    const C_NOTADJUSTED = "NotAdjusted";
+    const C_NOTADJUSTED = 0;
 
     /**
      * A sourcing issue existed which caused the transaction to be adjusted
      */
-    const C_SOURCINGISSUE = "SourcingIssue";
+    const C_SOURCINGISSUE = 1;
 
     /**
      * Transaction was adjusted to reconcile it with a general ledger
      */
-    const C_RECONCILEDWITHGENERALLEDGER = "ReconciledWithGeneralLedger";
+    const C_RECONCILEDWITHGENERALLEDGER = 2;
 
     /**
      * Transaction was adjusted after an exemption certificate was applied
      */
-    const C_EXEMPTCERTAPPLIED = "ExemptCertApplied";
+    const C_EXEMPTCERTAPPLIED = 3;
 
     /**
      * Transaction was adjusted when the price of an item changed
      */
-    const C_PRICEADJUSTED = "PriceAdjusted";
+    const C_PRICEADJUSTED = 4;
 
     /**
      * Transaction was adjusted due to a product return
      */
-    const C_PRODUCTRETURNED = "ProductReturned";
+    const C_PRODUCTRETURNED = 5;
 
     /**
      * Transaction was adjusted due to a product exchange
      */
-    const C_PRODUCTEXCHANGED = "ProductExchanged";
+    const C_PRODUCTEXCHANGED = 6;
 
     /**
      * Transaction was adjusted due to bad or uncollectable debt
      */
-    const C_BADDEBT = "BadDebt";
+    const C_BADDEBT = 7;
 
     /**
      * Transaction was adjusted for another reason not specified
      */
-    const C_OTHER = "Other";
+    const C_OTHER = 8;
 
     /**
      * Offline
      */
-    const C_OFFLINE = "Offline";
+    const C_OFFLINE = 9;
 
 }
 
@@ -2285,17 +2288,17 @@ class BoundaryLevel
     /**
      * Street address precision
      */
-    const C_ADDRESS = "Address";
+    const C_ADDRESS = 0;
 
     /**
      * 9-digit zip precision
      */
-    const C_ZIP9 = "Zip9";
+    const C_ZIP9 = 1;
 
     /**
      * 5-digit zip precision
      */
-    const C_ZIP5 = "Zip5";
+    const C_ZIP5 = 2;
 
 }
 
@@ -2307,69 +2310,69 @@ class TaxType
 {
 
     /**
-     * Sales tax
-     */
-    const C_SALES = "Sales";
-
-    /**
-     * Use tax
-     */
-    const C_USE = "Use";
-
-    /**
-     * Consumer Use Tax
-     */
-    const C_CONSUMERUSE = "ConsumerUse";
-
-    /**
-     * VAT/GST Output tax
-     */
-    const C_OUTPUT = "Output";
-
-    /**
-     * VAT/GST Input tax
-     */
-    const C_INPUT = "Input";
-
-    /**
-     * VAT/GST Nonrecoverable Input tax
-     */
-    const C_NONRECOVERABLE = "Nonrecoverable";
-
-    /**
-     * Fee - PIFs (Public Improvement Fees) and RSFs (Retail Sales Fees)
-     */
-    const C_FEE = "Fee";
-
-    /**
-     * Rental Tax
-     */
-    const C_RENTAL = "Rental";
-
-    /**
-     * Medical Excise Tax
-     */
-    const C_EXCISE = "Excise";
-
-    /**
      * Match Lodging tax type
      */
-    const C_LODGING = "Lodging";
+    const C_LODGING = 6;
 
     /**
      * Match bottle tax type
      */
-    const C_BOTTLE = "Bottle";
+    const C_BOTTLE = 7;
 
     /**
      * EWaste tax type
      */
-    const C_EWASTE = "EWaste";
+    const C_EWASTE = 10;
 
     /**
      * LandedCost tax type
      */
-    const C_LANDEDCOST = "LandedCost";
+    const C_LANDEDCOST = 12;
+
+    /**
+     * Consumer Use Tax
+     */
+    const C_CONSUMERUSE = 67;
+
+    /**
+     * Medical Excise Tax
+     */
+    const C_EXCISE = 69;
+
+    /**
+     * Fee - PIFs (Public Improvement Fees) and RSFs (Retail Sales Fees)
+     */
+    const C_FEE = 70;
+
+    /**
+     * VAT/GST Input tax
+     */
+    const C_INPUT = 73;
+
+    /**
+     * VAT/GST Nonrecoverable Input tax
+     */
+    const C_NONRECOVERABLE = 78;
+
+    /**
+     * VAT/GST Output tax
+     */
+    const C_OUTPUT = 79;
+
+    /**
+     * Rental Tax
+     */
+    const C_RENTAL = 82;
+
+    /**
+     * Sales tax
+     */
+    const C_SALES = 83;
+
+    /**
+     * Use tax
+     */
+    const C_USE = 85;
 
 }
 
@@ -2383,12 +2386,12 @@ class ScraperType
     /**
      * Indicates that is is a login type
      */
-    const C_LOGIN = "Login";
+    const C_LOGIN = 1;
 
     /**
      * Indicates that it is a Customer DOR Data type
      */
-    const C_CUSTOMERDORDATA = "CustomerDorData";
+    const C_CUSTOMERDORDATA = 2;
 
 }
 
@@ -2402,37 +2405,37 @@ class FilingTypeId
     /**
      * Denotes the tax return is being filed on paper.
      */
-    const C_PAPERRETURN = "PaperReturn";
+    const C_PAPERRETURN = 0;
 
     /**
      * Denotes the tax return is being filed via electronic means; excludes SST electronic filing.
      */
-    const C_ELECTRONICRETURN = "ElectronicReturn";
+    const C_ELECTRONICRETURN = 1;
 
     /**
      * Denotes the tax return is an SST filing.
      */
-    const C_SER = "SER";
+    const C_SER = 2;
 
     /**
      * Denotes a return is paid via EFT and filed on paper without payment.
      */
-    const C_EFTPAPER = "EFTPaper";
+    const C_EFTPAPER = 3;
 
     /**
      * Denotes a return is paid via phone and filed on paper without payment.
      */
-    const C_PHONEPAPER = "PhonePaper";
+    const C_PHONEPAPER = 4;
 
     /**
      * Denotes a return is prepared but delivered to the customer for filing and payment.
      */
-    const C_SIGNATUREREADY = "SignatureReady";
+    const C_SIGNATUREREADY = 5;
 
     /**
      * Denotes a return which is filed online but paid by check.
      */
-    const C_EFILECHECK = "EfileCheck";
+    const C_EFILECHECK = 6;
 
 }
 
@@ -2446,47 +2449,47 @@ class FilingRequestStatus
     /**
      * Customer is building a request for a new filing calendar
      */
-    const C_NEW = "New";
+    const C_NEW = 1;
 
     /**
      * Customer’s information validated before submitting to go live. All required information as per state and form selection is entered.
      */
-    const C_VALIDATED = "Validated";
+    const C_VALIDATED = 2;
 
     /**
      * Customer submitted a request for a new filing calendar
      */
-    const C_PENDING = "Pending";
+    const C_PENDING = 3;
 
     /**
      * Filing calender is active
      */
-    const C_ACTIVE = "Active";
+    const C_ACTIVE = 4;
 
     /**
      * Customer requested to deactivate filing calendar
      */
-    const C_PENDINGSTOP = "PendingStop";
+    const C_PENDINGSTOP = 5;
 
     /**
      * Filing calendar is inactive
      */
-    const C_INACTIVE = "Inactive";
+    const C_INACTIVE = 6;
 
     /**
      * This indicates that there is a new change request.
      */
-    const C_CHANGEREQUEST = "ChangeRequest";
+    const C_CHANGEREQUEST = 7;
 
     /**
      * This indicates that the change request was approved.
      */
-    const C_REQUESTAPPROVED = "RequestApproved";
+    const C_REQUESTAPPROVED = 8;
 
     /**
      * This indicates that compliance rejected the request.
      */
-    const C_REQUESTDENIED = "RequestDenied";
+    const C_REQUESTDENIED = 9;
 
 }
 
@@ -2500,12 +2503,12 @@ class AccrualType
     /**
      * Filing indicates that this tax return should be filed with its tax authority by its due date. For example, if you file annually, you will have eleven months of Accrual returns and one Filing return.
      */
-    const C_FILING = "Filing";
+    const C_FILING = 1;
 
     /**
      * An Accrual filing indicates taxes that are accrued, intended to be filed on a future tax return. For example, if you file annually, you will have eleven months of Accrual returns and one Filing return.
      */
-    const C_ACCRUAL = "Accrual";
+    const C_ACCRUAL = 2;
 
 }
 
@@ -2519,17 +2522,17 @@ class WorksheetTypeId
     /**
      * The original filing for a period
      */
-    const C_ORIGINAL = "Original";
+    const C_ORIGINAL = 0;
 
     /**
      * Represents an amended filing for a period
      */
-    const C_AMENDED = "Amended";
+    const C_AMENDED = 1;
 
     /**
      * Represents a test filing
      */
-    const C_TEST = "Test";
+    const C_TEST = 2;
 
 }
 
@@ -2539,9 +2542,9 @@ class WorksheetTypeId
  */
 class AdjustmentPeriodTypeId
 {
-    const C_NONE = "None";
-    const C_CURRENTPERIOD = "CurrentPeriod";
-    const C_NEXTPERIOD = "NextPeriod";
+    const C_NONE = 0;
+    const C_CURRENTPERIOD = 1;
+    const C_NEXTPERIOD = 2;
 
 }
 
@@ -2551,10 +2554,10 @@ class AdjustmentPeriodTypeId
  */
 class PaymentAccountTypeId
 {
-    const C_NONE = "None";
-    const C_ACCOUNTSRECEIVABLEACCOUNTSPAYABLE = "AccountsReceivableAccountsPayable";
-    const C_ACCOUNTSRECEIVABLE = "AccountsReceivable";
-    const C_ACCOUNTSPAYABLE = "AccountsPayable";
+    const C_NONE = 0;
+    const C_ACCOUNTSRECEIVABLEACCOUNTSPAYABLE = 1;
+    const C_ACCOUNTSRECEIVABLE = 2;
+    const C_ACCOUNTSPAYABLE = 3;
 
 }
 
@@ -2568,22 +2571,22 @@ class PaymentType
     /**
      * The payment is for the current payment
      */
-    const C_CURRENTPERIOD = "CurrentPeriod";
+    const C_CURRENTPERIOD = 0;
 
     /**
      * The payment is a prepayment
      */
-    const C_PREPAYMENT = "Prepayment";
+    const C_PREPAYMENT = 1;
 
     /**
      * The payment is a prior payment
      */
-    const C_PRIORPAYMENT = "PriorPayment";
+    const C_PRIORPAYMENT = 2;
 
     /**
      * The payment is a prior CSP fee
      */
-    const C_PRIORCSPFEE = "PriorCspFee";
+    const C_PRIORCSPFEE = 3;
 
 }
 
@@ -2597,37 +2600,37 @@ class ErrorTargetCode
     /**
      * Error target is unknown
      */
-    const C_UNKNOWN = "Unknown";
+    const C_UNKNOWN = 0;
 
     /**
      * There was an error in the request URL, querystring, or body
      */
-    const C_HTTPREQUEST = "HttpRequest";
+    const C_HTTPREQUEST = 1;
 
     /**
      * There was an error in the HTTP Request headers
      */
-    const C_HTTPREQUESTHEADERS = "HttpRequestHeaders";
+    const C_HTTPREQUESTHEADERS = 2;
 
     /**
      * Some data provided by the user was incorrect
      */
-    const C_INCORRECTDATA = "IncorrectData";
+    const C_INCORRECTDATA = 3;
 
     /**
      * There was an error in the AvaTax API Server
      */
-    const C_AVATAXAPISERVER = "AvaTaxApiServer";
+    const C_AVATAXAPISERVER = 10;
 
     /**
      * There was an error in the Avalara Identity Server
      */
-    const C_AVALARAIDENTITYSERVER = "AvalaraIdentityServer";
+    const C_AVALARAIDENTITYSERVER = 11;
 
     /**
      * The customer's account setup does not permit certain actions
      */
-    const C_CUSTOMERACCOUNTSETUP = "CustomerAccountSetup";
+    const C_CUSTOMERACCOUNTSETUP = 12;
 
 }
 
@@ -2641,22 +2644,22 @@ class RefundType
     /**
      * Refund the whole transaction.
      */
-    const C_FULL = "Full";
+    const C_FULL = 0;
 
     /**
      * Refund only specific lines from the original a transaction.
      */
-    const C_PARTIAL = "Partial";
+    const C_PARTIAL = 1;
 
     /**
      * Only refund the tax part of the transaction.
      */
-    const C_TAXONLY = "TaxOnly";
+    const C_TAXONLY = 2;
 
     /**
      * Refund a percentage of the value of this transaction.
      */
-    const C_PERCENTAGE = "Percentage";
+    const C_PERCENTAGE = 3;
 
 }
 
@@ -2670,17 +2673,17 @@ class ServiceMode
     /**
      * Automatically use local or remote (default)
      */
-    const C_AUTOMATIC = "Automatic";
+    const C_AUTOMATIC = 0;
 
     /**
      * Local server only
      */
-    const C_LOCAL = "Local";
+    const C_LOCAL = 1;
 
     /**
      * Remote server only
      */
-    const C_REMOTE = "Remote";
+    const C_REMOTE = 2;
 
 }
 
@@ -2694,12 +2697,12 @@ class TaxDebugLevel
     /**
      * User requests the normal level of debug information when creating a tax transaction
      */
-    const C_NORMAL = "Normal";
+    const C_NORMAL = 0;
 
     /**
      * User requests additional diagnostic information when creating a tax transaction
      */
-    const C_DIAGNOSTIC = "Diagnostic";
+    const C_DIAGNOSTIC = 1;
 
 }
 
@@ -2713,28 +2716,28 @@ class VoidReasonCode
     /**
      * Unspecified reason
      */
-    const C_UNSPECIFIED = "Unspecified";
+    const C_UNSPECIFIED = 0;
 
     /**
      * Post operation failed - Document status will be changed to unposted
      */
-    const C_POSTFAILED = "PostFailed";
+    const C_POSTFAILED = 1;
 
     /**
      * Document deleted - If committed, document status will be changed to Cancelled. If not committed, document will be
      *  deleted.
      */
-    const C_DOCDELETED = "DocDeleted";
+    const C_DOCDELETED = 2;
 
     /**
      * Document has been voided and DocStatus will be set to Cancelled
      */
-    const C_DOCVOIDED = "DocVoided";
+    const C_DOCVOIDED = 3;
 
     /**
      * AdjustTax operation has been cancelled. Adjustment will be reversed.
      */
-    const C_ADJUSTMENTCANCELLED = "AdjustmentCancelled";
+    const C_ADJUSTMENTCANCELLED = 4;
 
 }
 
@@ -2748,17 +2751,17 @@ class ApiCallStatus
     /**
      * If the original api call is availabe on S3
      */
-    const C_ORIGINALAPICALLAVAILABLE = "OriginalApiCallAvailable";
+    const C_ORIGINALAPICALLAVAILABLE = 0;
 
     /**
      * if the original api call is not available, reconstructed api call should always be available
      */
-    const C_RECONSTRUCTEDAPICALLAVAILABLE = "ReconstructedApiCallAvailable";
+    const C_RECONSTRUCTEDAPICALLAVAILABLE = 1;
 
     /**
      * Any other api call status
      */
-    const C_ANY = "Any";
+    const C_ANY = -1;
 
 }
 
@@ -2772,27 +2775,27 @@ class NoticeCustomerType
     /**
      * AvaTax Returns
      */
-    const C_AVATAXRETURNS = "AvaTaxReturns";
+    const C_AVATAXRETURNS = 1;
 
     /**
      * Stand Alone
      */
-    const C_STANDALONE = "StandAlone";
+    const C_STANDALONE = 2;
 
     /**
      * Strategic
      */
-    const C_STRATEGIC = "Strategic";
+    const C_STRATEGIC = 3;
 
     /**
      * SST
      */
-    const C_SST = "SST";
+    const C_SST = 4;
 
     /**
      * TrustFile
      */
-    const C_TRUSTFILE = "TrustFile";
+    const C_TRUSTFILE = 5;
 
 }
 
@@ -2806,52 +2809,52 @@ class TaxNoticeFilingTypeId
     /**
      * Denotes the tax return is being filed via electronic means; excludes SST electronic filing.
      */
-    const C_ELECTRONICRETURN = "ElectronicReturn";
+    const C_ELECTRONICRETURN = 1;
 
     /**
      * Denotes the tax return is being filed on paper.
      */
-    const C_PAPERRETURN = "PaperReturn";
+    const C_PAPERRETURN = 2;
 
     /**
      * Denotes the tax return that was not filed.
      */
-    const C_RETURNNOTFILED = "ReturnNotFiled";
+    const C_RETURNNOTFILED = 3;
 
     /**
      * Denotes a return is paid via EFT and filed on paper without payment.
      */
-    const C_EFTPAPER = "EFTPaper";
+    const C_EFTPAPER = 4;
 
     /**
      * Denotes the tax return is an SST filing.
      */
-    const C_SER = "SER";
+    const C_SER = 5;
 
     /**
      * Denotes the tax return is a Trudsfile-EDI filing.
      */
-    const C_TRUSTFILEEDI = "TrustfileEdi";
+    const C_TRUSTFILEEDI = 6;
 
     /**
      * Denotes the tax return is an uploaded file.
      */
-    const C_UPLOADFILE = "UploadFile";
+    const C_UPLOADFILE = 7;
 
     /**
      * Denotes the tax return was manually filed via paper
      */
-    const C_PAPERMANUAL = "PaperManual";
+    const C_PAPERMANUAL = 8;
 
     /**
      * Denotes a cert capture return
      */
-    const C_CERTCAPTURE = "CertCapture";
+    const C_CERTCAPTURE = 9;
 
     /**
      * Denotes a signature ready return
      */
-    const C_SIGNATUREREADY = "SignatureReady";
+    const C_SIGNATUREREADY = 10;
 
 }
 
@@ -2865,12 +2868,12 @@ class FundingOption
     /**
      * Pull
      */
-    const C_PULL = "Pull";
+    const C_PULL = 1;
 
     /**
      * Wire
      */
-    const C_WIRE = "Wire";
+    const C_WIRE = 2;
 
 }
 
@@ -2884,22 +2887,22 @@ class NoticePriorityId
     /**
      * Immediate Attention Required
      */
-    const C_IMMEDIATEATTENTIONREQUIRED = "ImmediateAttentionRequired";
+    const C_IMMEDIATEATTENTIONREQUIRED = 1;
 
     /**
      * High
      */
-    const C_HIGH = "High";
+    const C_HIGH = 2;
 
     /**
      * Normal
      */
-    const C_NORMAL = "Normal";
+    const C_NORMAL = 3;
 
     /**
      * Low
      */
-    const C_LOW = "Low";
+    const C_LOW = 4;
 
 }
 
@@ -2913,12 +2916,12 @@ class CommentType
     /**
      * Internal comments are those comments only intended to be for compliance users
      */
-    const C_INTERNAL = "Internal";
+    const C_INTERNAL = 1;
 
     /**
      * Customer comments are those comments that both compliance and the customer can read
      */
-    const C_CUSTOMER = "Customer";
+    const C_CUSTOMER = 2;
 
 }
 
@@ -2930,24 +2933,24 @@ class NotificationSeverityLevel
 {
 
     /**
-     * A completed notification
-     */
-    const C_COMPLETE = "Complete";
-
-    /**
      * Low priority notification, Default.
      */
-    const C_NEUTRAL = "Neutral";
+    const C_NEUTRAL = 0;
 
     /**
      * Medium priority notification.
      */
-    const C_ADVISORY = "Advisory";
+    const C_ADVISORY = 1;
 
     /**
      * High priority notification.
      */
-    const C_BLOCKING = "Blocking";
+    const C_BLOCKING = 2;
+
+    /**
+     * A completed notification
+     */
+    const C_COMPLETE = -1;
 
 }
 
@@ -2961,12 +2964,12 @@ class ReportFormat
     /**
      * The Comma Separated Values file format
      */
-    const C_CSV = "CSV";
+    const C_CSV = 0;
 
     /**
      * The Extensible Markup Language file format
      */
-    const C_XML = "XML";
+    const C_XML = 1;
 
 }
 
@@ -2979,24 +2982,24 @@ class ReportDateFilter
 {
 
     /**
-     * The date when the transaction is added to report
-     */
-    const C_REPORTINGDATE = "ReportingDate";
-
-    /**
      * The date when the transaction is posted
      */
-    const C_DOCUMENTDATE = "DocumentDate";
-
-    /**
-     * The date when the transaction is being taxed
-     */
-    const C_TAXDATE = "TaxDate";
+    const C_DOCUMENTDATE = 68;
 
     /**
      * The date when the transaction is paid for
      */
-    const C_PAYMENTDATE = "PaymentDate";
+    const C_PAYMENTDATE = 80;
+
+    /**
+     * The date when the transaction is added to report
+     */
+    const C_REPORTINGDATE = 82;
+
+    /**
+     * The date when the transaction is being taxed
+     */
+    const C_TAXDATE = 84;
 
 }
 
@@ -3008,14 +3011,14 @@ class ReportDocType
 {
 
     /**
-     * Output all Sales tax transactions in the report
-     */
-    const C_SALES = "Sales";
-
-    /**
      * Output all ConsumerUse tax transactions in the report
      */
-    const C_CONSUMERUSE = "ConsumerUse";
+    const C_CONSUMERUSE = 67;
+
+    /**
+     * Output all Sales tax transactions in the report
+     */
+    const C_SALES = 83;
 
 }
 
@@ -3029,22 +3032,22 @@ class CompanyAccessLevel
     /**
      * No permission to access companies.
      */
-    const C_NONE = "None";
+    const C_NONE = 0;
 
     /**
      * Permission to access a single company and its children.
      */
-    const C_SINGLECOMPANY = "SingleCompany";
+    const C_SINGLECOMPANY = 1;
 
     /**
      * Permission to access all companies in a single account.
      */
-    const C_SINGLEACCOUNT = "SingleAccount";
+    const C_SINGLEACCOUNT = 2;
 
     /**
      * Permission to access all companies in all accounts. Reserved for system administration tasks.
      */
-    const C_ALLCOMPANIES = "AllCompanies";
+    const C_ALLCOMPANIES = 3;
 
 }
 
@@ -3058,22 +3061,22 @@ class AuthenticationTypeId
     /**
      * This API call was not authenticated.
      */
-    const C_NONE = "None";
+    const C_NONE = 0;
 
     /**
      * This API call was authenticated by your username/password.
      */
-    const C_USERNAMEPASSWORD = "UsernamePassword";
+    const C_USERNAMEPASSWORD = 1;
 
     /**
      * This API call was authenticated by your Avalara Account ID and private license key.
      */
-    const C_ACCOUNTIDLICENSEKEY = "AccountIdLicenseKey";
+    const C_ACCOUNTIDLICENSEKEY = 2;
 
     /**
      * This API call was authenticated by OpenID Bearer Token.
      */
-    const C_OPENIDBEARERTOKEN = "OpenIdBearerToken";
+    const C_OPENIDBEARERTOKEN = 3;
 
 }
 

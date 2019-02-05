@@ -5025,6 +5025,32 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Retrieve a list of filings for the specified company in the year and month of a given filing period.
+     *
+     * This API is available by invitation only.
+     * A "filing period" is the year and month of the date of the latest customer transaction allowed to be reported on a filing, 
+     * based on filing frequency of filing.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $year The year of the filing period.
+     * @param int $month The two digit month of the filing period.
+     * @param string $country The two-character ISO-3166 code for the country.
+     * @param string $region The two or three character region code for the region.
+     * @param string $formCode The unique code of the form.
+     * @return FetchResult
+     */
+    public function getTaxFilings($companyId, $year, $month, $country, $region, $formCode)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings";
+        $guzzleParams = [
+            'query' => ['year' => $year, 'month' => $month, 'country' => $country, 'region' => $region, 'formCode' => $formCode],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * Rebuild a set of filings for the specified company in the given filing period.
      *
      * This API is available by invitation only.

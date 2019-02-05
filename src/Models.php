@@ -4567,7 +4567,7 @@ class TransactionModel
     public $summary;
 
     /**
-     * @var TaxDetailsByTaxType[] Constains the tax details per tax type
+     * @var TaxDetailsByTaxType[] Contains the tax details per tax type
      */
     public $taxDetailsByTaxType;
 
@@ -9277,6 +9277,311 @@ class Message
      * @var string 
      */
     public $summary;
+
+}
+
+/**
+ * Represents a listing of all tax calculation data for filings and for accruing to future filings.
+ */
+class MultiTaxFilingModel
+{
+
+    /**
+     * @var int The unique ID number of this filing.
+     */
+    public $id;
+
+    /**
+     * @var int The unique ID number of the company for this filing.
+     */
+    public $companyId;
+
+    /**
+     * @var int The month of the filing period for this tax filing.  The filing period represents the year and month of the last day of taxes being reported on this filing.  For example, an annual tax filing for Jan-Dec 2015 would have a filing period of Dec 2015.
+     */
+    public $month;
+
+    /**
+     * @var int The year of the filing period for this tax filing.  The filing period represents the year and month of the last day of taxes being reported on this filing.  For example, an annual tax filing for Jan-Dec 2015 would have a filing period of Dec 2015.
+     */
+    public $year;
+
+    /**
+     * @var string Indicates whether this is an original or an amended filing. (See WorksheetTypeId::* for a list of allowable values)
+     */
+    public $type;
+
+    /**
+     * @var FilingsTaxSummaryModel A summary of all taxes compbined for this period
+     */
+    public $taxSummary;
+
+    /**
+     * @var FilingsTaxDetailsModel[] A detailed breakdown of the taxes in this filing
+     */
+    public $taxDetails;
+
+    /**
+     * @var MultiTaxFilingRegionModel[] A listing of regional tax filings within this time period.
+     */
+    public $filingRegions;
+
+}
+
+/**
+ * Represents a listing of all tax calculation data for filings and for accruing to future filings.
+ */
+class FilingsTaxSummaryModel
+{
+
+    /**
+     * @var float The total sales amount
+     */
+    public $salesAmount;
+
+    /**
+     * @var float The taxable amount
+     */
+    public $taxableAmount;
+
+    /**
+     * @var float The nontaxable amount
+     */
+    public $nonTaxableAmount;
+
+    /**
+     * @var float The tax amount
+     */
+    public $taxAmount;
+
+    /**
+     * @var float The remittance amount
+     */
+    public $remittanceAmount;
+
+    /**
+     * @var float The collect amount
+     */
+    public $collectAmount;
+
+    /**
+     * @var float The sales accrual amount
+     */
+    public $salesAccrualAmount;
+
+    /**
+     * @var float The taxable sales accrual amount
+     */
+    public $taxableAccrualAmount;
+
+    /**
+     * @var float The nontaxable accrual amount
+     */
+    public $nonTaxableAccrualAmount;
+
+    /**
+     * @var float The tax accrual amount
+     */
+    public $taxAccrualAmount;
+
+}
+
+/**
+ * Represents a listing of all tax calculation data for filings and for accruing to future filings.
+ */
+class FilingsTaxDetailsModel
+{
+
+    /**
+     * @var string The tax type associated with the summary (See TaxType::* for a list of allowable values)
+     */
+    public $taxType;
+
+    /**
+     * @var float The total sales amount
+     */
+    public $salesAmount;
+
+    /**
+     * @var float The nontaxable amount
+     */
+    public $nonTaxableAmount;
+
+    /**
+     * @var float The tax amount
+     */
+    public $taxAmount;
+
+    /**
+     * @var int The number of nights
+     */
+    public $numberOfNights;
+
+}
+
+/**
+ * Regions
+ */
+class MultiTaxFilingRegionModel
+{
+
+    /**
+     * @var string The two-character ISO-3166 code for the country.
+     */
+    public $country;
+
+    /**
+     * @var string The two or three character region code for the region.
+     */
+    public $region;
+
+    /**
+     * @var boolean Whether or not you have nexus in this region.
+     */
+    public $hasNexus;
+
+    /**
+     * @var string The current status of the filing region. (See FilingStatusId::* for a list of allowable values)
+     */
+    public $status;
+
+    /**
+     * @var FilingsTaxSummaryModel A summary of all taxes compbined for this period
+     */
+    public $regionTaxSummary;
+
+    /**
+     * @var FilingsTaxDetailsModel[] A detailed breakdown of the taxes in this filing
+     */
+    public $regionTaxDetails;
+
+    /**
+     * @var FilingsCheckupSuggestedFormModel[] A list of tax returns in this region.
+     */
+    public $suggestReturns;
+
+    /**
+     * @var MultiTaxFilingReturnModel[] A list of tax returns in this region.
+     */
+    public $returns;
+
+}
+
+/**
+ * Filing Returns Model
+ */
+class MultiTaxFilingReturnModel
+{
+
+    /**
+     * @var int The unique ID number of this filing return.
+     */
+    public $id;
+
+    /**
+     * @var int The unique ID number of the filing calendar associated with this return.
+     */
+    public $filingCalendarId;
+
+    /**
+     * @var string The current status of the filing return. (See FilingStatusId::* for a list of allowable values)
+     */
+    public $status;
+
+    /**
+     * @var string The filing frequency of the return. (See FilingFrequencyId::* for a list of allowable values)
+     */
+    public $filingFrequency;
+
+    /**
+     * @var string The filing type of the return. (See FilingTypeId::* for a list of allowable values)
+     */
+    public $filingType;
+
+    /**
+     * @var string The name of the form.
+     */
+    public $formName;
+
+    /**
+     * @var string The unique code of the form.
+     */
+    public $formCode;
+
+    /**
+     * @var string A description for the return.
+     */
+    public $description;
+
+    /**
+     * @var int Tax Authority ID of this return
+     */
+    public $taxAuthorityId;
+
+    /**
+     * @var string The date the return was filed by Avalara.
+     */
+    public $filedDate;
+
+    /**
+     * @var string Accrual type of the return (See AccrualType::* for a list of allowable values)
+     */
+    public $accrualType;
+
+    /**
+     * @var string The start date of this return
+     */
+    public $startPeriod;
+
+    /**
+     * @var string The end date of this return
+     */
+    public $endPeriod;
+
+    /**
+     * @var FilingsTaxSummaryModel A summary of all taxes compbined for this period
+     */
+    public $returnTaxSummary;
+
+    /**
+     * @var FilingsTaxDetailsModel[] A detailed breakdown of the taxes in this filing
+     */
+    public $returnTaxDetails;
+
+    /**
+     * @var FilingReturnCreditModel The excluded carry over credit documents
+     */
+    public $excludedCarryOverCredits;
+
+    /**
+     * @var FilingReturnCreditModel The applied carry over credit documents
+     */
+    public $appliedCarryOverCredits;
+
+    /**
+     * @var float Total amount of adjustments on this return
+     */
+    public $totalAdjustments;
+
+    /**
+     * @var FilingAdjustmentModel[] The Adjustments for this return.
+     */
+    public $adjustments;
+
+    /**
+     * @var float Total amount of payments on this return
+     */
+    public $totalPayments;
+
+    /**
+     * @var FilingPaymentModel[] The payments for this return.
+     */
+    public $payments;
+
+    /**
+     * @var FilingAttachmentModel[] The attachments for this return.
+     */
+    public $attachments;
 
 }
 
