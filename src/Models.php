@@ -354,7 +354,7 @@ class NewAccountRequestModel
     public $userPassword;
 
     /**
-     * @var string This option controls what type of a welcome email is sent when the account is created.    * `Normal` - A standard welcome email will be sent.  * `Suppressed` - No email will be sent.  * `Custom` - If your Avalara business development representative provides you with a customized welcome email for your customers, please select this option. (See WelcomeEmail::* for a list of allowable values)
+     * @var string This option controls what type of a welcome email is sent when the account is created.    * `Normal` - A standard welcome email will be sent.  * `Suppressed` - No email will be sent.  * `Custom` - If your Avalara business development representative provides you with a customized welcome email for your customers, please select this option.
      */
     public $welcomeEmail;
 
@@ -1577,12 +1577,12 @@ class CertExpressInvitationModel
     public $coverLettersOnly;
 
     /**
-     * @var int[] When an invitation is sent, it contains a list of exposure zones for which the customer is invited to upload  their exemption certificates. This list contains the ID numbers of the exposure zones identified.    For a list of exposure zones, please call `ListCertificateExposureZones`.
+     * @var int[] When an invitation is sent, it contains a list of exposure zones for which the customer is invited to upload  their exemption certificates. This list contains the ID numbers of the exposure zones identified.     For a list of exposure zones, please call `ListCertificateExposureZones`.
      */
     public $exposureZones;
 
     /**
-     * @var int[] The list of exemption reasons identified by this CertExpress invitation.    For a list of reason codes, please call `ListCertificateExemptReasons`.
+     * @var int[] The list of exemption reasons identified by this CertExpress invitation.     For a list of reason codes, please call `ListCertificateExemptReasons`.
      */
     public $exemptReasons;
 
@@ -1901,7 +1901,7 @@ class CertificateModel
     public $customers;
 
     /**
-     * @var PoNumberModel[] A list of purchase order numbers that are valid for use with this certificate.    If this certificate is applicable for all purchase order numbers, this field will be empty.    You can fetch this data by specifying `$include=ponumbers` when calling a certificate fetch API.
+     * @var PoNumberModel[] A list of purchase order numbers that are valid for use with this certificate.    If this certificate is applicable for all purchase order numbers, this field will be empty.    You can fetch this data by specifying `$include=po_numbers` when calling a certificate fetch API.
      */
     public $poNumbers;
 
@@ -2164,7 +2164,7 @@ class CompanyModel
     public $isActive;
 
     /**
-     * @var string For United States companies, this field contains your Taxpayer Identification Number.   This is a nine digit number that is usually called an EIN for an Employer Identification Number if this company is a corporation,   or SSN for a Social Security Number if this company is a person.  This value is required if you subscribe to Avalara Managed Returns or the SST Certified Service Provider services,   but it is optional if you do not subscribe to either of those services.
+     * @var string For United States companies, this field contains your Taxpayer Identification Number.  This is a nine digit number that is usually called an EIN for an Employer Identification Number if this company is a corporation,  or SSN for a Social Security Number if this company is a person.  This value is required if you subscribe to Avalara Managed Returns or the SST Certified Service Provider services,  but it is optional if you do not subscribe to either of those services.
      */
     public $taxpayerIdNumber;
 
@@ -2244,42 +2244,42 @@ class CompanyModel
     public $modifiedUserId;
 
     /**
-     * @var ContactModel[] Optional: A list of contacts defined for this company. To fetch this list, add the query string `?$include=Contacts` to your URL.    When calling `CreateCompany`, you may provide a list of objects in this element and they will be created alongside the company.  The `UpdateCompany` API does not permit updating nested objects.
+     * @var ContactModel[] Optional: A list of contacts defined for this company. To fetch this list, add the query string `?$include=Contacts` to your URL.     When calling `CreateCompany`, you may provide a list of objects in this element and they will be created alongside the company.  The `UpdateCompany` API does not permit updating nested objects.
      */
     public $contacts;
 
     /**
-     * @var ItemModel[] Optional: A list of items defined for this company. To fetch this list, add the query string `?$include=Items` to your URL.    When calling `CreateCompany`, you may provide a list of objects in this element and they will be created alongside the company.  The `UpdateCompany` API does not permit updating nested objects.
+     * @var ItemModel[] Optional: A list of items defined for this company. To fetch this list, add the query string `?$include=Items` to your URL.     When calling `CreateCompany`, you may provide a list of objects in this element and they will be created alongside the company.  The `UpdateCompany` API does not permit updating nested objects.
      */
     public $items;
 
     /**
-     * @var LocationModel[] Optional: A list of locations defined for this company. To fetch this list, add the query string `?$include=Locations` to your URL.    When calling `CreateCompany`, you may provide a list of objects in this element and they will be created alongside the company.  The `UpdateCompany` API does not permit updating nested objects.
+     * @var LocationModel[] Optional: A list of locations defined for this company. To fetch this list, add the query string `?$include=Locations` to your URL.     When calling `CreateCompany`, you may provide a list of objects in this element and they will be created alongside the company.  The `UpdateCompany` API does not permit updating nested objects.
      */
     public $locations;
 
     /**
-     * @var NexusModel[] Optional: A list of nexus defined for this company. To fetch this list, add the query string `?$include=Nexus` to your URL.    When calling `CreateCompany`, you may provide a list of objects in this element and they will be created alongside the company.  The `UpdateCompany` API does not permit updating nested objects.
+     * @var NexusModel[] Optional: A list of nexus defined for this company. To fetch this list, add the query string `?$include=Nexus` to your URL.     When calling `CreateCompany`, you may provide a list of objects in this element and they will be created alongside the company.  The `UpdateCompany` API does not permit updating nested objects.
      */
     public $nexus;
 
     /**
-     * @var SettingModel[] Optional: A list of settings defined for this company. To fetch this list, add the query string `?$include=Settings` to your URL.    When calling `CreateCompany`, you may provide a list of objects in this element and they will be created alongside the company.  The `UpdateCompany` API does not permit updating nested objects.
+     * @var SettingModel[] Optional: A list of settings defined for this company. To fetch this list, add the query string `?$include=Settings` to your URL.     When calling `CreateCompany`, you may provide a list of objects in this element and they will be created alongside the company.  The `UpdateCompany` API does not permit updating nested objects.
      */
     public $settings;
 
     /**
-     * @var TaxCodeModel[] Optional: A list of tax codes defined for this company. To fetch this list, add the query string `?$include=TaxCodes` to your URL.    When calling `CreateCompany`, you may provide a list of objects in this element and they will be created alongside the company.  The `UpdateCompany` API does not permit updating nested objects.
+     * @var TaxCodeModel[] Optional: A list of tax codes defined for this company. To fetch this list, add the query string `?$include=TaxCodes` to your URL.     When calling `CreateCompany`, you may provide a list of objects in this element and they will be created alongside the company.  The `UpdateCompany` API does not permit updating nested objects.
      */
     public $taxCodes;
 
     /**
-     * @var TaxRuleModel[] Optional: A list of tax rules defined for this company. To fetch this list, add the query string `?$include=TaxRules` to your URL.    When calling `CreateCompany`, you may provide a list of objects in this element and they will be created alongside the company.  The `UpdateCompany` API does not permit updating nested objects.
+     * @var TaxRuleModel[] Optional: A list of tax rules defined for this company. To fetch this list, add the query string `?$include=TaxRules` to your URL.     When calling `CreateCompany`, you may provide a list of objects in this element and they will be created alongside the company.  The `UpdateCompany` API does not permit updating nested objects.
      */
     public $taxRules;
 
     /**
-     * @var UPCModel[] Optional: A list of UPCs defined for this company. To fetch this list, add the query string `?$include=UPCs` to your URL.    When calling `CreateCompany`, you may provide a list of objects in this element and they will be created alongside the company.  The `UpdateCompany` API does not permit updating nested objects.
+     * @var UPCModel[] Optional: A list of UPCs defined for this company. To fetch this list, add the query string `?$include=UPCs` to your URL.     When calling `CreateCompany`, you may provide a list of objects in this element and they will be created alongside the company.  The `UpdateCompany` API does not permit updating nested objects.
      */
     public $upcs;
 
@@ -2554,7 +2554,7 @@ class LocationModel
     public $county;
 
     /**
-     * @var string Name or ISO 3166 code identifying the region within the country of the physical address of this location.    This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions    For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
+     * @var string Name or ISO 3166 code identifying the region within the country of the physical address of this location.     This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions     For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
      */
     public $region;
 
@@ -2564,7 +2564,7 @@ class LocationModel
     public $postalCode;
 
     /**
-     * @var string Name or ISO 3166 code identifying the country of the physical address of this location.    This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries    For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
+     * @var string Name or ISO 3166 code identifying the country of the physical address of this location.     This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries     For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
      */
     public $country;
 
@@ -2629,7 +2629,7 @@ class LocationModel
     public $modifiedUserId;
 
     /**
-     * @var LocationSettingModel[] Extra information required by certain jurisdictions for filing.  For a list of settings recognized by Avalara, query the endpoint "/api/v2/definitions/locationquestions".   To determine the list of settings required for this location, query the endpoint "/api/v2/companies/(id)/locations/(id)/validate".
+     * @var LocationSettingModel[] Extra information required by certain jurisdictions for filing.  For a list of settings recognized by Avalara, query the endpoint "/api/v2/definitions/locationquestions".  To determine the list of settings required for this location, query the endpoint "/api/v2/companies/(id)/locations/(id)/validate".
      */
     public $settings;
 
@@ -2637,14 +2637,14 @@ class LocationModel
 
 /**
  * Represents a declaration of nexus within a particular taxing jurisdiction.
- * 
+ *  
  * To create a nexus declaration for your company, you must first call the Definitions API `ListNexus` to obtain a
- * list of Avalara-defined nexus. Once you have determined which nexus you wish to declare, you should customize 
+ * list of Avalara-defined nexus. Once you have determined which nexus you wish to declare, you should customize
  * only the user-selectable fields in this object.
- * 
- * The user selectable fields for the nexus object are `companyId`, `effectiveDate`, `endDate`, `localNexusTypeId`, 
+ *  
+ * The user selectable fields for the nexus object are `companyId`, `effectiveDate`, `endDate`, `localNexusTypeId`,
  * `taxId`, `nexusTypeId`, `hasPermanentEstablishment`, and `isSellerImporterOfRecord`.
- * 
+ *  
  * When calling `CreateNexus` or `UpdateNexus`, all values in your nexus object except for the user-selectable fields
  * must match an Avalara-defined system nexus object. You can retrieve a list of Avalara-defined system nexus objects
  * by calling `ListNexus`. If any data does not match, AvaTax may not recognize your nexus declaration.
@@ -2653,22 +2653,22 @@ class NexusModel
 {
 
     /**
-     * @var int The unique ID number of this declaration of nexus.    This field is defined automatically when you declare nexus. You do not need to provide a value for this field.
+     * @var int The unique ID number of this declaration of nexus.     This field is defined automatically when you declare nexus. You do not need to provide a value for this field.
      */
     public $id;
 
     /**
-     * @var int The unique ID number of the company that declared nexus.    This field is user-selectable and should be provided when creating or updating a nexus object.
+     * @var int The unique ID number of the company that declared nexus.     This field is user-selectable and should be provided when creating or updating a nexus object.
      */
     public $companyId;
 
     /**
-     * @var string Name or ISO 3166 code identifying the country in which this company declared nexus.    This field is defined by Avalara. All Avalara-defined fields must match an Avalara-defined nexus object found by calling `ListNexus`.
+     * @var string Name or ISO 3166 code identifying the country in which this company declared nexus.     This field is defined by Avalara. All Avalara-defined fields must match an Avalara-defined nexus object found by calling `ListNexus`.
      */
     public $country;
 
     /**
-     * @var string Name or ISO 3166 code identifying the region within the country.    This field is defined by Avalara. All Avalara-defined fields must match an Avalara-defined nexus object found by calling `ListNexus`.
+     * @var string Name or ISO 3166 code identifying the region within the country.     This field is defined by Avalara. All Avalara-defined fields must match an Avalara-defined nexus object found by calling `ListNexus`.
      */
     public $region;
 
@@ -2678,112 +2678,112 @@ class NexusModel
     public $jurisTypeId;
 
     /**
-     * @var string The type of the jurisdiction in which this company declared nexus.    This field is defined by Avalara. All Avalara-defined fields must match an Avalara-defined nexus object found by calling `ListNexus`. (See JurisdictionType::* for a list of allowable values)
+     * @var string The type of the jurisdiction in which this company declared nexus.     This field is defined by Avalara. All Avalara-defined fields must match an Avalara-defined nexus object found by calling `ListNexus`. (See JurisdictionType::* for a list of allowable values)
      */
     public $jurisdictionTypeId;
 
     /**
-     * @var string The code identifying the jurisdiction in which this company declared nexus.    This field is defined by Avalara. All Avalara-defined fields must match an Avalara-defined nexus object found by calling `ListNexus`.
+     * @var string The code identifying the jurisdiction in which this company declared nexus.     This field is defined by Avalara. All Avalara-defined fields must match an Avalara-defined nexus object found by calling `ListNexus`.
      */
     public $jurisCode;
 
     /**
-     * @var string The common name of the jurisdiction in which this company declared nexus.    This field is defined by Avalara. All Avalara-defined fields must match an Avalara-defined nexus object found by calling `ListNexus`.
+     * @var string The common name of the jurisdiction in which this company declared nexus.     This field is defined by Avalara. All Avalara-defined fields must match an Avalara-defined nexus object found by calling `ListNexus`.
      */
     public $jurisName;
 
     /**
-     * @var string The date when this nexus began. If not known, set to null.    This field is user-selectable and should be provided when creating or updating a nexus object.
+     * @var string The date when this nexus began. If not known, set to null.     This field is user-selectable and should be provided when creating or updating a nexus object.
      */
     public $effectiveDate;
 
     /**
-     * @var string If this nexus will end or has ended on a specific date, set this to the date when this nexus ends.    This field is user-selectable and should be provided when creating or updating a nexus object.
+     * @var string If this nexus will end or has ended on a specific date, set this to the date when this nexus ends.     This field is user-selectable and should be provided when creating or updating a nexus object.
      */
     public $endDate;
 
     /**
-     * @var string The short name of the jurisdiction.    This field is defined by Avalara. All Avalara-defined fields must match an Avalara-defined nexus object found by calling `ListNexus`.
+     * @var string The short name of the jurisdiction.     This field is defined by Avalara. All Avalara-defined fields must match an Avalara-defined nexus object found by calling `ListNexus`.
      */
     public $shortName;
 
     /**
-     * @var string The signature code of the boundary region as defined by Avalara.    This field is defined by Avalara. All Avalara-defined fields must match an Avalara-defined nexus object found by calling `ListNexus`.
+     * @var string The signature code of the boundary region as defined by Avalara.     This field is defined by Avalara. All Avalara-defined fields must match an Avalara-defined nexus object found by calling `ListNexus`.
      */
     public $signatureCode;
 
     /**
-     * @var string The state assigned number of this jurisdiction.    This field is defined by Avalara. All Avalara-defined fields must match an Avalara-defined nexus object found by calling `ListNexus`.
+     * @var string The state assigned number of this jurisdiction.     This field is defined by Avalara. All Avalara-defined fields must match an Avalara-defined nexus object found by calling `ListNexus`.
      */
     public $stateAssignedNo;
 
     /**
-     * @var string The type of nexus that this company is declaring.    If you are voluntarily declaring nexus in a jurisdiction, you should select `SalesOrSellersUseTax` for your  nexus type option. This option allows you to calculate tax correctly whether you are selling in-state or  shipping from an out-of-state location.    If you are legally obligated to declare nexus due to physical presence or other sufficient nexus, you  should select `SalesTax`. This indicates that, as a legal requirement, your company must always collect  and remit full sales tax in this jurisdiction.    If you are participating in the Streamlined Sales Tax program, your SST administrator will select nexus  settings for you in all SST jurisdictions. Do not select any SST options by yourself.    This field is user-selectable and should be provided when creating or updating a nexus object. (See NexusTypeId::* for a list of allowable values)
+     * @var string The type of nexus that this company is declaring.     If you are voluntarily declaring nexus in a jurisdiction, you should select `SalesOrSellersUseTax` for your  nexus type option. This option allows you to calculate tax correctly whether you are selling in-state or  shipping from an out-of-state location.     If you are legally obligated to declare nexus due to physical presence or other sufficient nexus, you  should select `SalesTax`. This indicates that, as a legal requirement, your company must always collect  and remit full sales tax in this jurisdiction.     If you are participating in the Streamlined Sales Tax program, your SST administrator will select nexus  settings for you in all SST jurisdictions. Do not select any SST options by yourself.     This field is user-selectable and should be provided when creating or updating a nexus object. (See NexusTypeId::* for a list of allowable values)
      */
     public $nexusTypeId;
 
     /**
-     * @var string Indicates whether this nexus is defined as origin or destination nexus.    This field is defined by Avalara. All Avalara-defined fields must match an Avalara-defined nexus object found by calling `ListNexus`. (See Sourcing::* for a list of allowable values)
+     * @var string Indicates whether this nexus is defined as origin or destination nexus.     This field is defined by Avalara. All Avalara-defined fields must match an Avalara-defined nexus object found by calling `ListNexus`. (See Sourcing::* for a list of allowable values)
      */
     public $sourcing;
 
     /**
-     * @var boolean True if you are also declaring local nexus within this jurisdiction.  Many U.S. states have options for declaring nexus in local jurisdictions as well as within the state.    This field is defined by Avalara. All Avalara-defined fields must match an Avalara-defined nexus object found by calling `ListNexus`.
+     * @var boolean True if you are also declaring local nexus within this jurisdiction.  Many U.S. states have options for declaring nexus in local jurisdictions as well as within the state.     This field is defined by Avalara. All Avalara-defined fields must match an Avalara-defined nexus object found by calling `ListNexus`.
      */
     public $hasLocalNexus;
 
     /**
-     * @var string If you are declaring local nexus within this jurisdiction, this indicates whether you are declaring only   a specified list of local jurisdictions, all state-administered local jurisdictions, or all local jurisdictions.    This field is user-selectable and should be provided when creating or updating a nexus object. (See LocalNexusTypeId::* for a list of allowable values)
+     * @var string If you are declaring local nexus within this jurisdiction, this indicates whether you are declaring only  a specified list of local jurisdictions, all state-administered local jurisdictions, or all local jurisdictions.     This field is user-selectable and should be provided when creating or updating a nexus object. (See LocalNexusTypeId::* for a list of allowable values)
      */
     public $localNexusTypeId;
 
     /**
-     * @var boolean Set this value to true if your company has a permanent establishment within this jurisdiction.    This field is user-selectable and should be provided when creating or updating a nexus object.
+     * @var boolean Set this value to true if your company has a permanent establishment within this jurisdiction.     This field is user-selectable and should be provided when creating or updating a nexus object.
      */
     public $hasPermanentEstablishment;
 
     /**
-     * @var string Optional - the tax identification number under which you declared nexus.    This field is user-selectable and should be provided when creating or updating a nexus object.
+     * @var string Optional - the tax identification number under which you declared nexus.     This field is user-selectable and should be provided when creating or updating a nexus object.
      */
     public $taxId;
 
     /**
-     * @var boolean For the United States, this flag indicates whether this particular nexus falls within a U.S. State that participates   in the Streamlined Sales Tax program. For countries other than the US, this flag is null.    This field is defined by Avalara. All Avalara-defined fields must match an Avalara-defined nexus object found by calling `ListNexus`.
+     * @var boolean For the United States, this flag indicates whether this particular nexus falls within a U.S. State that participates  in the Streamlined Sales Tax program. For countries other than the US, this flag is null.     This field is defined by Avalara. All Avalara-defined fields must match an Avalara-defined nexus object found by calling `ListNexus`.
      */
     public $streamlinedSalesTax;
 
     /**
-     * @var string The date when this record was created.    This field is defined automatically when you declare nexus. You do not need to provide a value for this field.
+     * @var string The date when this record was created.     This field is defined automatically when you declare nexus. You do not need to provide a value for this field.
      */
     public $createdDate;
 
     /**
-     * @var int The User ID of the user who created this record.    This field is defined automatically when you declare nexus. You do not need to provide a value for this field.
+     * @var int The User ID of the user who created this record.     This field is defined automatically when you declare nexus. You do not need to provide a value for this field.
      */
     public $createdUserId;
 
     /**
-     * @var string The date/time when this record was last modified.    This field is defined automatically when you declare nexus. You do not need to provide a value for this field.
+     * @var string The date/time when this record was last modified.     This field is defined automatically when you declare nexus. You do not need to provide a value for this field.
      */
     public $modifiedDate;
 
     /**
-     * @var int The user ID of the user who last modified this record.    This field is defined automatically when you declare nexus. You do not need to provide a value for this field.
+     * @var int The user ID of the user who last modified this record.     This field is defined automatically when you declare nexus. You do not need to provide a value for this field.
      */
     public $modifiedUserId;
 
     /**
-     * @var string The type of nexus that this company is declaring.Replaces NexusTypeId.  Use [ListNexusTaxTypeGroups](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListNexusTaxTypeGroups/) API for a list of nexus tax type groups.    This field is defined by Avalara. All Avalara-defined fields must match an Avalara-defined nexus object found by calling `ListNexus`.
+     * @var string The type of nexus that this company is declaring.Replaces NexusTypeId.  Use [ListNexusTaxTypeGroups](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListNexusTaxTypeGroups/) API for a list of nexus tax type groups.     This field is defined by Avalara. All Avalara-defined fields must match an Avalara-defined nexus object found by calling `ListNexus`.
      */
     public $nexusTaxTypeGroup;
 
     /**
-     * @var int A unique ID number of the tax authority that is associated with this nexus.    This field is defined by Avalara. All Avalara-defined fields must match an Avalara-defined nexus object found by calling `ListNexus`.
+     * @var int A unique ID number of the tax authority that is associated with this nexus.     This field is defined by Avalara. All Avalara-defined fields must match an Avalara-defined nexus object found by calling `ListNexus`.
      */
     public $taxAuthorityId;
 
     /**
-     * @var boolean For nexus declarations at the country level, specifies whether this company is considered the importer of record in this nexus region.    Some taxes only apply if the seller is the importer of record for a product. In cases where companies are working together to  ship products, there may be mutual agreement as to which company is the entity designated as importer of record. The importer  of record will then be the company designated to pay taxes marked as being obligated to the importer of record.    Set this value to `true` to consider your company as the importer of record and collect these taxes. Leave this value as false  or null and taxes will be calculated as if your company is not the importer of record.    This value may also be set during each transaction API call. See `CreateTransaction()` for more information.    This field is user-selectable and should be provided when creating or updating a nexus object.
+     * @var boolean For nexus declarations at the country level, specifies whether this company is considered the importer of record in this nexus region.     Some taxes only apply if the seller is the importer of record for a product. In cases where companies are working together to  ship products, there may be mutual agreement as to which company is the entity designated as importer of record. The importer  of record will then be the company designated to pay taxes marked as being obligated to the importer of record.     Set this value to `true` to consider your company as the importer of record and collect these taxes. Leave this value as false  or null and taxes will be calculated as if your company is not the importer of record.     This value may also be set during each transaction API call. See `CreateTransaction()` for more information.     This field is user-selectable and should be provided when creating or updating a nexus object.
      */
     public $isSellerImporterOfRecord;
 
@@ -2916,12 +2916,12 @@ class TaxCodeModel
 }
 
 /**
- * Represents a tax rule that changes the behavior of Avalara's tax engine for certain products and/or entity use codes 
+ * Represents a tax rule that changes the behavior of Avalara's tax engine for certain products and/or entity use codes
  * in certain jurisdictions.
  *  
- * Avalara supports a few different types of tax rules. For information about tax rule types, see 
+ * Avalara supports a few different types of tax rules. For information about tax rule types, see
  * [TaxRuleTypeId](https://developer.avalara.com/api-reference/avatax/rest/v2/models/enums/TaxRuleTypeId/)
- * 
+ *  
  * Because different types of tax rules have different behavior, some fields may change their behavior based on
  * the type of tax rule selected. Please read the documentation for each field carefully and ensure that
  * the value you send is appropriate for the type of tax rule.
@@ -2940,27 +2940,27 @@ class TaxRuleModel
     public $companyId;
 
     /**
-     * @var int For rules that apply to a specific tax code only, this specifies which tax code is affected by this rule.    You can choose to specify a tax code either by passing its unique ID number in the `taxCodeId` field or   by passing its alphanumeric code in the `taxCode` field. To search for the appropriate tax code for your  custom rule, use the `ListTaxCodes` API.    The `RateOverrideRule`, `BaseRule`, and `ExemptEntityRule` rule types can be applied to all tax codes. To  make a rule that applies to all tax codes, leave both fields blank.    The `ProductTaxabilityRule` rule must be associated with a tax code. If you attempt to create a product taxability rule  without a tax code, you will get an error message.
+     * @var int For rules that apply to a specific tax code only, this specifies which tax code is affected by this rule.     You can choose to specify a tax code either by passing its unique ID number in the `taxCodeId` field or  by passing its alphanumeric code in the `taxCode` field. To search for the appropriate tax code for your  custom rule, use the `ListTaxCodes` API.     The `RateOverrideRule`, `BaseRule`, and `ExemptEntityRule` rule types can be applied to all tax codes. To  make a rule that applies to all tax codes, leave both fields blank.     The `ProductTaxabilityRule` rule must be associated with a tax code. If you attempt to create a product taxability rule  without a tax code, you will get an error message.
      */
     public $taxCodeId;
 
     /**
-     * @var string For rules that apply to a specific tax code only, this specifies which tax code is affected by this rule.    You can choose to specify a tax code either by passing its unique ID number in the `taxCodeId` field or   by passing its alphanumeric code in the `taxCode` field. To search for the appropriate tax code for your  custom rule, use the `ListTaxCodes` API.    The `RateOverrideRule`, `BaseRule`, and `ExemptEntityRule` rule types can be applied to all tax codes. To  make a rule that applies to all tax codes, leave both fields blank.    The `ProductTaxabilityRule` rule must be associated with a tax code. If you attempt to create a product taxability rule  without a tax code, you will get an error message.
+     * @var string For rules that apply to a specific tax code only, this specifies which tax code is affected by this rule.     You can choose to specify a tax code either by passing its unique ID number in the `taxCodeId` field or  by passing its alphanumeric code in the `taxCode` field. To search for the appropriate tax code for your  custom rule, use the `ListTaxCodes` API.     The `RateOverrideRule`, `BaseRule`, and `ExemptEntityRule` rule types can be applied to all tax codes. To  make a rule that applies to all tax codes, leave both fields blank.     The `ProductTaxabilityRule` rule must be associated with a tax code. If you attempt to create a product taxability rule  without a tax code, you will get an error message.
      */
     public $taxCode;
 
     /**
-     * @var string For U.S. tax rules, this is the state's Federal Information Processing Standard (FIPS) code.    This field is required for rules that apply to specific jurisdictions in the United States. It is not required  if you set the `isAllJuris` flag to true.
+     * @var string For U.S. tax rules, this is the state's Federal Information Processing Standard (FIPS) code.     This field is required for rules that apply to specific jurisdictions in the United States. It is not required  if you set the `isAllJuris` flag to true.
      */
     public $stateFIPS;
 
     /**
-     * @var string The name of the jurisdiction to which this tax rule applies.    Custom tax rules can apply to a specific jurisdiction or to all jurisdictions. To select a jurisdiction, use the   [ListJurisdictions API](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListJurisdictions/)  or the [ListJurisdictionsByAddress API](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListJurisdictionsByAddress/).   To set a rule that applies to all jurisdictions of a specific type, see `isAllJuris`.    Once you have determined which jurisdiction you wish to assign to the tax rule, you should fill in the `jurisName`, `jurisCode`, and  `jurisdictionTypeId` fields using the information you retrieved from the API above.
+     * @var string The name of the jurisdiction to which this tax rule applies.     Custom tax rules can apply to a specific jurisdiction or to all jurisdictions. To select a jurisdiction, use the  [ListJurisdictions API](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListJurisdictions/)  or the [ListJurisdictionsByAddress API](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListJurisdictionsByAddress/).  To set a rule that applies to all jurisdictions of a specific type, see `isAllJuris`.     Once you have determined which jurisdiction you wish to assign to the tax rule, you should fill in the `jurisName`, `jurisCode`, and  `jurisdictionTypeId` fields using the information you retrieved from the API above.
      */
     public $jurisName;
 
     /**
-     * @var string The code of the jurisdiction to which this tax rule applies.    Custom tax rules can apply to a specific jurisdiction or to all jurisdictions. To select a jurisdiction, use the   [ListJurisdictions API](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListJurisdictions/)  or the [ListJurisdictionsByAddress API](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListJurisdictionsByAddress/).     Once you have determined which jurisdiction you wish to assign to the tax rule, you should fill in the `jurisName`, `jurisCode`, and  `jurisdictionTypeId` fields using the information you retrieved from the API above.
+     * @var string The code of the jurisdiction to which this tax rule applies.     Custom tax rules can apply to a specific jurisdiction or to all jurisdictions. To select a jurisdiction, use the  [ListJurisdictions API](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListJurisdictions/)  or the [ListJurisdictionsByAddress API](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListJurisdictionsByAddress/).     Once you have determined which jurisdiction you wish to assign to the tax rule, you should fill in the `jurisName`, `jurisCode`, and  `jurisdictionTypeId` fields using the information you retrieved from the API above.
      */
     public $jurisCode;
 
@@ -2970,7 +2970,7 @@ class TaxRuleModel
     public $jurisTypeId;
 
     /**
-     * @var string The type of the jurisdiction to which this tax rule applies.    Custom tax rules can apply to a specific jurisdiction or to all jurisdictions. To select a jurisdiction, use the   [ListJurisdictions API](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListJurisdictions/)  or the [ListJurisdictionsByAddress API](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListJurisdictionsByAddress/).     Once you have determined which jurisdiction you wish to assign to the tax rule, you should fill in the `jurisName`, `jurisCode`, and  `jurisdictionTypeId` fields using the information you retrieved from the API above.    To make a custom tax rule for US or Canada that applies to all jurisdictions of a specific type, see the `isAllJuris`   field for more information. (See JurisdictionType::* for a list of allowable values)
+     * @var string The type of the jurisdiction to which this tax rule applies.     Custom tax rules can apply to a specific jurisdiction or to all jurisdictions. To select a jurisdiction, use the  [ListJurisdictions API](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListJurisdictions/)  or the [ListJurisdictionsByAddress API](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListJurisdictionsByAddress/).     Once you have determined which jurisdiction you wish to assign to the tax rule, you should fill in the `jurisName`, `jurisCode`, and  `jurisdictionTypeId` fields using the information you retrieved from the API above.     To make a custom tax rule for US or Canada that applies to all jurisdictions of a specific type, see the `isAllJuris`  field for more information. (See JurisdictionType::* for a list of allowable values)
      */
     public $jurisdictionTypeId;
 
@@ -2980,12 +2980,12 @@ class TaxRuleModel
     public $customerUsageType;
 
     /**
-     * @var string The entity use code to which this rule applies.    You can create custom `entityUseCode` values with specific behavior using this API, or you can change   the behavior of Avalara's system-defined entity use codes.    For a full list of Avalara-defined entity use codes, see the [ListEntityUseCodes API](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListEntityUseCodes/).
+     * @var string The entity use code to which this rule applies.     You can create custom `entityUseCode` values with specific behavior using this API, or you can change  the behavior of Avalara's system-defined entity use codes.     For a full list of Avalara-defined entity use codes, see the [ListEntityUseCodes API](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListEntityUseCodes/).
      */
     public $entityUseCode;
 
     /**
-     * @var string Some tax type groups contain multiple different types of tax. To create a rule that affects only one  type of tax within a tax type group, set this value to the code matching the specific tax type within   that group. The custom tax rule will then only apply to taxes calculated for that specific type.    For rules that affect all tax types, use the value `A` to match `All` tax types within that group. (See MatchingTaxType::* for a list of allowable values)
+     * @var string Some tax type groups contain multiple different types of tax. To create a rule that affects only one  type of tax within a tax type group, set this value to the code matching the specific tax type within  that group. The custom tax rule will then only apply to taxes calculated for that specific type.     For rules that affect all tax types, use the value `A` to match `All` tax types within that group. (See MatchingTaxType::* for a list of allowable values)
      */
     public $taxTypeId;
 
@@ -2995,32 +2995,32 @@ class TaxRuleModel
     public $rateTypeId;
 
     /**
-     * @var string Indicates the code of the rate type that applies to this rule. Use [ListRateTypesByCountry](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListRateTypesByCountry/) API for a full list of rate type codes.    If you specify a value in the rateTypeCode field, this rule will cause tax lines that are affected by the rule   to change to a different rate type code.
+     * @var string Indicates the code of the rate type that applies to this rule. Use [ListRateTypesByCountry](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListRateTypesByCountry/) API for a full list of rate type codes.     If you specify a value in the rateTypeCode field, this rule will cause tax lines that are affected by the rule  to change to a different rate type code.
      */
     public $rateTypeCode;
 
     /**
-     * @var string This type value determines the behavior of the tax rule.    You can specify that this rule controls the product's taxability or exempt / nontaxable status, the product's rate   (for example, if you have been granted an official ruling for your product's rate that differs from the official rate),   or other types of behavior. (See TaxRuleTypeId::* for a list of allowable values)
+     * @var string This type value determines the behavior of the tax rule.     You can specify that this rule controls the product's taxability or exempt / nontaxable status, the product's rate  (for example, if you have been granted an official ruling for your product's rate that differs from the official rate),  or other types of behavior. (See TaxRuleTypeId::* for a list of allowable values)
      */
     public $taxRuleTypeId;
 
     /**
-     * @var boolean Allows you to make tax rules apply to lower jurisdictions. This feature is only available in the United States and Canada.    * In the United States, this value can be used for rules written at the `State` jurisdictional level. If set to `true`, this rule will at the state level, county level, city level, and special jurisdiction level.  * In Canada, this value can be used for rules written at the `Country` or `State` jurisdictional levels. If set to `true`, this rule will at all lower jurisdictional levels.    For any other use case, this value must be `false`.
+     * @var boolean Allows you to make tax rules apply to lower jurisdictions. This feature is only available in the United States and Canada.     * In the United States, this value can be used for rules written at the `State` jurisdictional level. If set to `true`, this rule will at the state level, county level, city level, and special jurisdiction level.  * In Canada, this value can be used for rules written at the `Country` or `State` jurisdictional levels. If set to `true`, this rule will at all lower jurisdictional levels.     For any other use case, this value must be `false`.
      */
     public $isAllJuris;
 
     /**
-     * @var float This field has different behavior based on the type of the tax rule.    * For a product taxability rule, this value is either 1 or 0, indicating taxable or non-taxable.  * For a rate override rule, this value is the corrected rate stored as a decimal, for example, a rate of 5% would be stored as 0.05 decimal. If you use the special value of 1.0, only the cap and threshold values will be applied and the rate will be left alone.
+     * @var float This field has different behavior based on the type of the tax rule.     * For a product taxability rule, this value is either 1 or 0, indicating taxable or non-taxable.  * For a rate override rule, this value is the corrected rate stored as a decimal, for example, a rate of 5% would be stored as 0.05 decimal. If you use the special value of 1.0, only the cap and threshold values will be applied and the rate will be left alone.
      */
     public $value;
 
     /**
-     * @var float The maximum cap for the price of this item according to this rule. Any amount above this cap will not be subject to this rule.    For example, if you must pay 5% of a product's value up to a maximum value of $1000, you would set the `cap` to `1000.00` and the `value` to `0.05`.
+     * @var float The maximum cap for the price of this item according to this rule. Any amount above this cap will not be subject to this rule.     For example, if you must pay 5% of a product's value up to a maximum value of $1000, you would set the `cap` to `1000.00` and the `value` to `0.05`.
      */
     public $cap;
 
     /**
-     * @var float The per-unit threshold that must be met before this rule applies.     For example, if your product is nontaxable unless it is above $100 per product, you would set the `threshold` value to `100`. In this case, the rate  for the rule would apply to the entire amount above $100.    You can also create rules that make the entire product taxable if it exceeds a threshold, but is nontaxable   if it is below the threshold. To choose this, set the `options` field to the value `TaxAll`.
+     * @var float The per-unit threshold that must be met before this rule applies.     For example, if your product is nontaxable unless it is above $100 per product, you would set the `threshold` value to `100`. In this case, the rate  for the rule would apply to the entire amount above $100.     You can also create rules that make the entire product taxable if it exceeds a threshold, but is nontaxable  if it is below the threshold. To choose this, set the `options` field to the value `TaxAll`.
      */
     public $threshold;
 
@@ -3045,7 +3045,7 @@ class TaxRuleModel
     public $description;
 
     /**
-     * @var string For U.S. tax rules, this is the county's Federal Information Processing Standard (FIPS) code.    This field is required for rules that apply to specific jurisdictions in the United States. It is not required  if you set the `isAllJuris` flag to true.
+     * @var string For U.S. tax rules, this is the county's Federal Information Processing Standard (FIPS) code.     This field is required for rules that apply to specific jurisdictions in the United States. It is not required  if you set the `isAllJuris` flag to true.
      */
     public $countyFIPS;
 
@@ -3055,12 +3055,12 @@ class TaxRuleModel
     public $isSTPro;
 
     /**
-     * @var string Name or ISO 3166 code identifying the country where this rule will apply.    This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries    For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
+     * @var string Name or ISO 3166 code identifying the country where this rule will apply.     This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries     For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
      */
     public $country;
 
     /**
-     * @var string Name or ISO 3166 code identifying the region where this rule will apply.    This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions    For a full list of all supported codes and names, please see the Definitions API `ListRegions`.  NOTE: Region is required for US and not required for non-US countries because the user may be either creating a Country-level or Region-level rule.
+     * @var string Name or ISO 3166 code identifying the region where this rule will apply.     This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions     For a full list of all supported codes and names, please see the Definitions API `ListRegions`.  NOTE: Region is required for US and not required for non-US countries because the user may be either creating a Country-level or Region-level rule.
      */
     public $region;
 
@@ -3070,12 +3070,12 @@ class TaxRuleModel
     public $sourcing;
 
     /**
-     * @var string This field has different behavior based on the type of rule.    * For a product taxability rule, if the rule applies to an item, this value will override the tax type group of the original product.  * For other rules, this value determines what tax type groups will be affected by the rule.    Refer to `ListTaxTypeGroups` for a list of tax type groups supported by AvaTax.
+     * @var string This field has different behavior based on the type of rule.     * For a product taxability rule, if the rule applies to an item, this value will override the tax type group of the original product.  * For other rules, this value determines what tax type groups will be affected by the rule.     Refer to `ListTaxTypeGroups` for a list of tax type groups supported by AvaTax.
      */
     public $taxTypeGroup;
 
     /**
-     * @var string This field has different behavior based on the type of rule.    * For a product taxability rule, if the rule applies to an item, this value will override the tax sub type of the original product.  * For other rules, this value determines what tax sub types will be affected by the rule.    Refer to `ListTaxSubtypes` for a list of tax sub types supported by AvaTax.
+     * @var string This field has different behavior based on the type of rule.     * For a product taxability rule, if the rule applies to an item, this value will override the tax sub type of the original product.  * For other rules, this value determines what tax sub types will be affected by the rule.     Refer to `ListTaxSubtypes` for a list of tax sub types supported by AvaTax.
      */
     public $taxSubType;
 
@@ -3085,7 +3085,7 @@ class TaxRuleModel
     public $nonPassthroughExpression;
 
     /**
-     * @var string The currency code to use for this rule.    For a list of currencies supported by AvaTax, use the [ListCurrencies API](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListCurrencies/).
+     * @var string The currency code to use for this rule.     For a list of currencies supported by AvaTax, use the [ListCurrencies API](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListCurrencies/).
      */
     public $currencyCode;
 
@@ -3095,7 +3095,7 @@ class TaxRuleModel
     public $preferredProgramId;
 
     /**
-     * @var int For tax rules that are calculated using units of measurement, this indicates the unit of measurement type  used to calculate the amounts for this rule.    For a list of units of measurement, use the [ListUnitsOfMeasurement API](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListUnitOfMeasurement/).
+     * @var int For tax rules that are calculated using units of measurement, this indicates the unit of measurement type  used to calculate the amounts for this rule.     For a list of units of measurement, use the [ListUnitsOfMeasurement API](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListUnitOfMeasurement/).
      */
     public $uomId;
 
@@ -4342,7 +4342,7 @@ class TransactionModel
     public $status;
 
     /**
-     * @var string The type of the transaction.     Transactions of type `SalesOrder`, `ReturnOrder`, and so on are temporary estimates and will not be saved.    Transactions of type `SalesInvoice, `ReturnInvoice`, and so on are permanent transactions that can be reported to tax authorities  if they are in status `Committed`.    A sales transaction represents a sale from the company to a customer. A purchase transaction represents a purchase made by the company.  A return transaction represents a customer who decided to request a refund after purchasing a product from the company. An inventory   transfer transaction represents goods that were moved from one location of the company to another location without changing ownership. (See DocumentType::* for a list of allowable values)
+     * @var string The type of the transaction.     Transactions of type `SalesOrder`, `ReturnOrder`, and so on are temporary estimates and will not be saved.     Transactions of type `SalesInvoice, `ReturnInvoice`, and so on are permanent transactions that can be reported to tax authorities  if they are in status `Committed`.     A sales transaction represents a sale from the company to a customer. A purchase transaction represents a purchase made by the company.  A return transaction represents a customer who decided to request a refund after purchasing a product from the company. An inventory  transfer transaction represents goods that were moved from one location of the company to another location without changing ownership. (See DocumentType::* for a list of allowable values)
      */
     public $type;
 
@@ -4367,7 +4367,7 @@ class TransactionModel
     public $entityUseCode;
 
     /**
-     * @var string DEPRECATED - Please use `customerCode`.    This field has been renamed to `customerCode` to match documentation for other APIs related to exemption customers.
+     * @var string DEPRECATED - Please use `customerCode`.     This field has been renamed to `customerCode` to match documentation for other APIs related to exemption customers.
      */
     public $customerVendorCode;
 
@@ -4377,7 +4377,7 @@ class TransactionModel
     public $customerCode;
 
     /**
-     * @var string The customer Tax Id Number (tax_number) associated with a certificate - Sales tax calculation requests first determine if there is an applicable   ECMS entry available, and will utilize it for exemption processing. If no applicable ECMS entry is available, the AvaTax service   will determine if an Exemption Number field is populated or an Entity/Use Code is included in the sales tax calculation request,   and will perform exemption processing using either of those two options.
+     * @var string The customer Tax Id Number (tax_number) associated with a certificate - Sales tax calculation requests first determine if there is an applicable  ECMS entry available, and will utilize it for exemption processing. If no applicable ECMS entry is available, the AvaTax service  will determine if an Exemption Number field is populated or an Entity/Use Code is included in the sales tax calculation request,  and will perform exemption processing using either of those two options.
      */
     public $exemptNo;
 
@@ -4392,7 +4392,7 @@ class TransactionModel
     public $locationCode;
 
     /**
-     * @var string For customers who use [location-based tax reporting](https://developer.avalara.com/avatax/dev-guide/locations/location-based-reporting),   this field controls how this transaction will be filed for multi-location tax filings.    If you specify a non-null value for this field, AvaTax will ensure that this transaction is reported on the tax return associated   with the [LocationModel](https://developer.avalara.com/api-reference/avatax/rest/v2/models/LocationModel/) identified by this code.    This field does not affect any addresses for the transaction. It only controls the tax filing behavior of this transaction.    If you are looking for information about how to set up addresses for a transaction, please see [Using Address Types](https://developer.avalara.com/avatax/dev-guide/customizing-transaction/address-types/)   in the AvaTax Developer Guide.
+     * @var string For customers who use [location-based tax reporting](https://developer.avalara.com/avatax/dev-guide/locations/location-based-reporting),  this field controls how this transaction will be filed for multi-location tax filings.     If you specify a non-null value for this field, AvaTax will ensure that this transaction is reported on the tax return associated  with the [LocationModel](https://developer.avalara.com/api-reference/avatax/rest/v2/models/LocationModel/) identified by this code.     This field does not affect any addresses for the transaction. It only controls the tax filing behavior of this transaction.     If you are looking for information about how to set up addresses for a transaction, please see [Using Address Types](https://developer.avalara.com/avatax/dev-guide/customizing-transaction/address-types/)  in the AvaTax Developer Guide.
      */
     public $reportingLocationCode;
 
@@ -4442,7 +4442,7 @@ class TransactionModel
     public $totalDiscount;
 
     /**
-     * @var float The total tax for all lines in this transaction.    If you used a `taxOverride` of type `taxAmount` for any lines in this transaction, this value   may be different than the amount of tax calculated by AvaTax. The amount of tax calculated by  AvaTax will be stored in the `totalTaxCalculated` field, whereas this field will contain the  total tax that was charged on the transaction.    You can compare the `totalTax` and `totalTaxCalculated` fields to check for any discrepancies  between an external tax calculation provider and the calculation performed by AvaTax.
+     * @var float The total tax for all lines in this transaction.     If you used a `taxOverride` of type `taxAmount` for any lines in this transaction, this value  may be different than the amount of tax calculated by AvaTax. The amount of tax calculated by  AvaTax will be stored in the `totalTaxCalculated` field, whereas this field will contain the  total tax that was charged on the transaction.     You can compare the `totalTax` and `totalTaxCalculated` fields to check for any discrepancies  between an external tax calculation provider and the calculation performed by AvaTax.
      */
     public $totalTax;
 
@@ -4452,7 +4452,7 @@ class TransactionModel
     public $totalTaxable;
 
     /**
-     * @var float The amount of tax that AvaTax calculated for the transaction.    If you used a `taxOverride` of type `taxAmount` for any lines in this transaction, this value   will represent the amount that AvaTax calculated for this transaction without applying the override.  The field `totalTax` will be the total amount of tax after all overrides are applied.    You can compare the `totalTax` and `totalTaxCalculated` fields to check for any discrepancies  between an external tax calculation provider and the calculation performed by AvaTax.
+     * @var float The amount of tax that AvaTax calculated for the transaction.     If you used a `taxOverride` of type `taxAmount` for any lines in this transaction, this value  will represent the amount that AvaTax calculated for this transaction without applying the override.  The field `totalTax` will be the total amount of tax after all overrides are applied.     You can compare the `totalTax` and `totalTaxCalculated` fields to check for any discrepancies  between an external tax calculation provider and the calculation performed by AvaTax.
      */
     public $totalTaxCalculated;
 
@@ -4512,7 +4512,7 @@ class TransactionModel
     public $exchangeRate;
 
     /**
-     * @var boolean By default, the value is null, when the value is null, the value can be set at nexus level and used.  If the value is not null, it will override the value at nexus level.    If true, this seller was considered the importer of record of a product shipped internationally.    If this transaction is not an international transaction, this field may be left blank.    The "importer of record" is liable to pay customs and import duties for products shipped internationally. If   you specify that the seller is the importer of record, then estimates of customs and import duties will be added  as tax details to the transaction. Otherwise, the buyer is considered the importer of record, and customs  and import duties will not be added to the tax details for this transaction.
+     * @var boolean By default, the value is null, when the value is null, the value can be set at nexus level and used.  If the value is not null, it will override the value at nexus level.     If true, this seller was considered the importer of record of a product shipped internationally.     If this transaction is not an international transaction, this field may be left blank.     The "importer of record" is liable to pay customs and import duties for products shipped internationally. If  you specify that the seller is the importer of record, then estimates of customs and import duties will be added  as tax details to the transaction. Otherwise, the buyer is considered the importer of record, and customs  and import duties will not be added to the tax details for this transaction.
      */
     public $isSellerImporterOfRecord;
 
@@ -4552,7 +4552,7 @@ class TransactionModel
     public $lines;
 
     /**
-     * @var TransactionAddressModel[] A list of line items in this transaction. To fetch this list, add the query string `?$include=Addresses` to your URL.    For more information about transaction addresses, please see [Using Address Types](https://developer.avalara.com/avatax/dev-guide/customizing-transaction/address-types/)   in the AvaTax Developer Guide.
+     * @var TransactionAddressModel[] A list of line items in this transaction. To fetch this list, add the query string `?$include=Addresses` to your URL.     For more information about transaction addresses, please see [Using Address Types](https://developer.avalara.com/avatax/dev-guide/customizing-transaction/address-types/)  in the AvaTax Developer Guide.
      */
     public $addresses;
 
@@ -5288,7 +5288,7 @@ class TransactionLineDetailModel
     public $unitOfBasis;
 
     /**
-     * @var boolean True if this value is a non-passthrough tax.    A non-passthrough tax is a tax that may not be charged to a customer; it must be paid directly by the company.
+     * @var boolean True if this value is a non-passthrough tax.     A non-passthrough tax is a tax that may not be charged to a customer; it must be paid directly by the company.
      */
     public $isNonPassThru;
 
@@ -6301,7 +6301,7 @@ class requiredFilingCalendarDataFieldModel
 
 /**
  * Represents an override of tax jurisdictions for a specific address.
- * 
+ *  
  * During the time period represented by EffDate through EndDate, all tax decisions for addresses matching
  * this override object will be assigned to the list of jurisdictions designated in this object.
  */
@@ -6334,12 +6334,12 @@ class JurisdictionOverrideModel
     public $city;
 
     /**
-     * @var string Name or ISO 3166 code identifying the region within the country to be affected by this override.    Note that only United States addresses are affected by the jurisdiction override system.    This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions    For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
+     * @var string Name or ISO 3166 code identifying the region within the country to be affected by this override.     Note that only United States addresses are affected by the jurisdiction override system.     This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions     For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
      */
     public $region;
 
     /**
-     * @var string The two character ISO-3166 country code of the country affected by this override.    Note that only United States addresses are affected by the jurisdiction override system.
+     * @var string The two character ISO-3166 country code of the country affected by this override.     Note that only United States addresses are affected by the jurisdiction override system.
      */
     public $country;
 
@@ -6437,7 +6437,7 @@ class JurisdictionModel
     public $signatureCode;
 
     /**
-     * @var string Name or ISO 3166 code identifying the region within the country.    This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions    For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
+     * @var string Name or ISO 3166 code identifying the region within the country.     This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions     For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
      */
     public $region;
 
@@ -6457,7 +6457,7 @@ class JurisdictionModel
     public $county;
 
     /**
-     * @var string Name or ISO 3166 code identifying the country of this jurisdiction.    This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries    For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
+     * @var string Name or ISO 3166 code identifying the country of this jurisdiction.     This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries     For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
      */
     public $country;
 
@@ -7470,12 +7470,12 @@ class FilingCalendarModel
     public $returnName;
 
     /**
-     * @var string Name or ISO 3166 code identifying the country that issued the tax form for this filing calendar.    This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries    For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
+     * @var string Name or ISO 3166 code identifying the country that issued the tax form for this filing calendar.     This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries     For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
      */
     public $formCountry;
 
     /**
-     * @var string Name or ISO 3166 code identifying the region that issued the tax form for this filing calendar.    This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions    For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
+     * @var string Name or ISO 3166 code identifying the region that issued the tax form for this filing calendar.     This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions     For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
      */
     public $formRegion;
 
@@ -7530,27 +7530,27 @@ class FilingCalendarModel
     public $line1;
 
     /**
-     * @var string DEPRECATED - The second line of the mailing address that will be used when filling out this tax return.  Please note that some tax forms do not support multiple address lines.    Field will be no longer be available after the 17.9 release.
+     * @var string DEPRECATED - The second line of the mailing address that will be used when filling out this tax return.  Please note that some tax forms do not support multiple address lines.     Field will be no longer be available after the 17.9 release.
      */
     public $line2;
 
     /**
-     * @var string DEPRECATED - The city name of the mailing address that will be used when filling out this tax return.    Field will be no longer be available after the 17.9 release.
+     * @var string DEPRECATED - The city name of the mailing address that will be used when filling out this tax return.     Field will be no longer be available after the 17.9 release.
      */
     public $city;
 
     /**
-     * @var string DEPRECATED - The state, region, or province of the mailing address that will be used when filling out this tax return.    Field will be no longer be available after the 17.9 release.
+     * @var string DEPRECATED - The state, region, or province of the mailing address that will be used when filling out this tax return.     Field will be no longer be available after the 17.9 release.
      */
     public $region;
 
     /**
-     * @var string DEPRECATED - The postal code or zip code of the mailing address that will be used when filling out this tax return.    Field will be no longer be available after the 17.9 release.
+     * @var string DEPRECATED - The postal code or zip code of the mailing address that will be used when filling out this tax return.     Field will be no longer be available after the 17.9 release.
      */
     public $postalCode;
 
     /**
-     * @var string DEPRECATED - The two character ISO-3166 country code of the mailing address that will be used when filling out this tax return.    Field will be no longer be available after the 17.9 release.
+     * @var string DEPRECATED - The two character ISO-3166 country code of the mailing address that will be used when filling out this tax return.     Field will be no longer be available after the 17.9 release.
      */
     public $country;
 
@@ -7570,7 +7570,7 @@ class FilingCalendarModel
     public $mailingAddressCity;
 
     /**
-     * @var string Name or ISO 3166 code identifying the region of the mailing address that will be used when filling out this tax return.    This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions    For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
+     * @var string Name or ISO 3166 code identifying the region of the mailing address that will be used when filling out this tax return.     This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions     For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
      */
     public $mailingAddressRegion;
 
@@ -7580,7 +7580,7 @@ class FilingCalendarModel
     public $mailingAddressPostalCode;
 
     /**
-     * @var string Name or ISO 3166 code identifying the country of the mailing address that will be used when filling out this tax return.    This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries    For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
+     * @var string Name or ISO 3166 code identifying the country of the mailing address that will be used when filling out this tax return.     This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries     For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
      */
     public $mailingAddressCountry;
 
@@ -7625,7 +7625,7 @@ class FilingCalendarModel
     public $eFilePassword;
 
     /**
-     * @var int If you are required to prepay a percentage of taxes for future periods, please specify the percentage in whole numbers;   for example, the value 90 would indicate 90%.
+     * @var int If you are required to prepay a percentage of taxes for future periods, please specify the percentage in whole numbers;  for example, the value 90 would indicate 90%.
      */
     public $prepayPercentage;
 
@@ -8253,12 +8253,12 @@ class FilingReturnModelBasic
     public $region;
 
     /**
-     * @var int The month of the filing period for this tax filing.   The filing period represents the year and month of the last day of taxes being reported on this filing.   For example, an annual tax filing for Jan-Dec 2015 would have a filing period of Dec 2015.
+     * @var int The month of the filing period for this tax filing.  The filing period represents the year and month of the last day of taxes being reported on this filing.  For example, an annual tax filing for Jan-Dec 2015 would have a filing period of Dec 2015.
      */
     public $endPeriodMonth;
 
     /**
-     * @var int The year of the filing period for this tax filing.  The filing period represents the year and month of the last day of taxes being reported on this filing.   For example, an annual tax filing for Jan-Dec 2015 would have a filing period of Dec 2015.
+     * @var int The year of the filing period for this tax filing.  The filing period represents the year and month of the last day of taxes being reported on this filing.  For example, an annual tax filing for Jan-Dec 2015 would have a filing period of Dec 2015.
      */
     public $endPeriodYear;
 
@@ -8429,12 +8429,12 @@ class FilingModel
     public $companyId;
 
     /**
-     * @var int The month of the filing period for this tax filing.   The filing period represents the year and month of the last day of taxes being reported on this filing.   For example, an annual tax filing for Jan-Dec 2015 would have a filing period of Dec 2015.
+     * @var int The month of the filing period for this tax filing.  The filing period represents the year and month of the last day of taxes being reported on this filing.  For example, an annual tax filing for Jan-Dec 2015 would have a filing period of Dec 2015.
      */
     public $month;
 
     /**
-     * @var int The year of the filing period for this tax filing.  The filing period represents the year and month of the last day of taxes being reported on this filing.   For example, an annual tax filing for Jan-Dec 2015 would have a filing period of Dec 2015.
+     * @var int The year of the filing period for this tax filing.  The filing period represents the year and month of the last day of taxes being reported on this filing.  For example, an annual tax filing for Jan-Dec 2015 would have a filing period of Dec 2015.
      */
     public $year;
 
@@ -8855,12 +8855,12 @@ class FilingReturnModel
     public $accrualType;
 
     /**
-     * @var int The month of the filing period for this tax filing.   The filing period represents the year and month of the last day of taxes being reported on this filing.   For example, an annual tax filing for Jan-Dec 2015 would have a filing period of Dec 2015.
+     * @var int The month of the filing period for this tax filing.  The filing period represents the year and month of the last day of taxes being reported on this filing.  For example, an annual tax filing for Jan-Dec 2015 would have a filing period of Dec 2015.
      */
     public $month;
 
     /**
-     * @var int The year of the filing period for this tax filing.  The filing period represents the year and month of the last day of taxes being reported on this filing.   For example, an annual tax filing for Jan-Dec 2015 would have a filing period of Dec 2015.
+     * @var int The year of the filing period for this tax filing.  The filing period represents the year and month of the last day of taxes being reported on this filing.  For example, an annual tax filing for Jan-Dec 2015 would have a filing period of Dec 2015.
      */
     public $year;
 
@@ -9861,7 +9861,7 @@ class CommitMultiDocumentModel
 
 /**
  * A MultiDocument transaction represents a sale or purchase that occurred between more than two companies.
- * 
+ *  
  * A traditional transaction requires exactly two parties: a seller and a buyer. MultiDocument transactions can
  * involve a marketplace of vendors, each of which contributes some portion of the final transaction. Within
  * a MultiDocument transaction, each individual buyer and seller pair are matched up and converted to a separate
@@ -9881,12 +9881,12 @@ class MultiDocumentModel
     public $accountId;
 
     /**
-     * @var string The transaction code of the MultiDocument transaction.    All individual transactions within this MultiDocument object will have this code as a prefix.
+     * @var string The transaction code of the MultiDocument transaction.     All individual transactions within this MultiDocument object will have this code as a prefix.
      */
     public $code;
 
     /**
-     * @var string Indicates the type of MultiDocument transaction. Common values are:    * SalesOrder - An estimate that is not permanently recorded  * SalesInvoice - An invoice that can be reported on a tax return    For more information about document types, see [DocumentType](https://developer.avalara.com/api-reference/avatax/rest/v2/models/enums/DocumentType/) (See DocumentType::* for a list of allowable values)
+     * @var string Indicates the type of MultiDocument transaction. Common values are:     * SalesOrder - An estimate that is not permanently recorded  * SalesInvoice - An invoice that can be reported on a tax return     For more information about document types, see [DocumentType](https://developer.avalara.com/api-reference/avatax/rest/v2/models/enums/DocumentType/) (See DocumentType::* for a list of allowable values)
      */
     public $type;
 
@@ -10689,12 +10689,12 @@ class NoticeModel
     public $customerTypeId;
 
     /**
-     * @var string Name or ISO 3166 code identifying the country that sent this notice.    This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries    For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
+     * @var string Name or ISO 3166 code identifying the country that sent this notice.     This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries     For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
      */
     public $country;
 
     /**
-     * @var string Name or ISO 3166 code identifying the region within the country that sent this notice.    This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions    For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
+     * @var string Name or ISO 3166 code identifying the region within the country that sent this notice.     This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions     For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
      */
     public $region;
 
@@ -11172,11 +11172,11 @@ class ResourceFileUploadRequestModel
 
 /**
  * Represents a single notification.
- * 
+ *  
  * A notification is a message from Avalara that may have relevance to your business. You may want
  * to regularly review notifications and then dismiss them when you are certain that you have addressed
  * any relevant concerns raised by this notification.
- * 
+ *  
  * An example of a notification would be a message about new software, or a change to AvaTax that may
  * affect you, or a potential issue with your company's tax profile.
  */
@@ -11199,12 +11199,12 @@ class NotificationModel
     public $companyId;
 
     /**
-     * @var string The type name of object referred to by this notification, if any.    Some notifications may include information about a related data object.    For example, if this notification was related to a nexus declaration, the `referenceObject` field would  be `Nexus` and the `referenceId` field would be the unique ID number of that nexus.
+     * @var string The type name of object referred to by this notification, if any.     Some notifications may include information about a related data object.     For example, if this notification was related to a nexus declaration, the `referenceObject` field would  be `Nexus` and the `referenceId` field would be the unique ID number of that nexus.
      */
     public $referenceObject;
 
     /**
-     * @var int The unique reference Id number of the object referred to by this notification, if any.    Some notifications may include information about a related data object.    For example, if this notification was related to a nexus declaration, the `referenceObject` field would  be `Nexus` and the `referenceId` field would be the unique ID number of that nexus.
+     * @var int The unique reference Id number of the object referred to by this notification, if any.     Some notifications may include information about a related data object.     For example, if this notification was related to a nexus declaration, the `referenceObject` field would  be `Nexus` and the `referenceId` field would be the unique ID number of that nexus.
      */
     public $referenceId;
 
@@ -11214,12 +11214,12 @@ class NotificationModel
     public $severityLevelId;
 
     /**
-     * @var string The category of this notification.    Notification categories are a useful way to group related notifications together. Category names may change   over time.    For Example: "Backdated Transactions" or "Nexus Jurisdiction Alerts", or "Certificate Expiration".
+     * @var string The category of this notification.     Notification categories are a useful way to group related notifications together. Category names may change  over time.     For Example: "Backdated Transactions" or "Nexus Jurisdiction Alerts", or "Certificate Expiration".
      */
     public $category;
 
     /**
-     * @var string The topic of this notification.    Notification topics contain information about the notification. They are a summary of the issue and can  help you decide what type of action to take.    For Example: "Backdated Transactions" or "Nexus Jurisdiction Alerts", or "Certificate Expiration".
+     * @var string The topic of this notification.     Notification topics contain information about the notification. They are a summary of the issue and can  help you decide what type of action to take.     For Example: "Backdated Transactions" or "Nexus Jurisdiction Alerts", or "Certificate Expiration".
      */
     public $topic;
 
@@ -11234,17 +11234,17 @@ class NotificationModel
     public $needsAction;
 
     /**
-     * @var string If there is a specific action suggested by this notification, this is the name of the action.    An action is a suggested next step such as "Review Your Tax Profile." If an action is suggested,  you should give the viewer a hyperlink to the location referred to by `actionLink` and give the  hyperlink the name `actionName`.
+     * @var string If there is a specific action suggested by this notification, this is the name of the action.     An action is a suggested next step such as "Review Your Tax Profile." If an action is suggested,  you should give the viewer a hyperlink to the location referred to by `actionLink` and give the  hyperlink the name `actionName`.
      */
     public $actionName;
 
     /**
-     * @var string If there is a specific action suggested by this notification, this is the URL of the action.    An action is a suggested next step such as "Review Your Tax Profile." If an action is suggested,  you should give the viewer a hyperlink to the location referred to by `actionLink` and give the  hyperlink the name `actionName`.
+     * @var string If there is a specific action suggested by this notification, this is the URL of the action.     An action is a suggested next step such as "Review Your Tax Profile." If an action is suggested,  you should give the viewer a hyperlink to the location referred to by `actionLink` and give the  hyperlink the name `actionName`.
      */
     public $actionLink;
 
     /**
-     * @var string If there is a specific action suggested by this notification, and if this action is requested  by a specific due date, this value will be the due date for the action.    An action is a suggested next step such as "Review Your Tax Profile." If an action is suggested,  you should give the viewer a hyperlink to the location referred to by `actionLink` and give the  hyperlink the name `actionName`.     For actions that have deadlines, such as "Confirm your tax registration before filing", this value   will be set to the deadline date for the action. Otherwise, this value will be null.
+     * @var string If there is a specific action suggested by this notification, and if this action is requested  by a specific due date, this value will be the due date for the action.     An action is a suggested next step such as "Review Your Tax Profile." If an action is suggested,  you should give the viewer a hyperlink to the location referred to by `actionLink` and give the  hyperlink the name `actionName`.     For actions that have deadlines, such as "Confirm your tax registration before filing", this value  will be set to the deadline date for the action. Otherwise, this value will be null.
      */
     public $actionDueDate;
 
