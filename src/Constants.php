@@ -268,6 +268,11 @@ class FilingFrequencyId
      */
     const C_INVERSEQUARTERLY = 7;
 
+    /**
+     * File every week
+     */
+    const C_WEEKLY = 8;
+
 }
 
 
@@ -699,11 +704,11 @@ class ErrorCodeId
     const C_MAXSTRINGLENGTHERROR = 14;
     const C_EMAILVALIDATIONERROR = 15;
     const C_EMAILMISSINGERROR = 16;
-    const C_PARSERFIELDNAMEERROR = 17;
-    const C_PARSERFIELDVALUEERROR = 18;
-    const C_PARSERSYNTAXERROR = 19;
-    const C_PARSERTOOMANYPARAMETERSERROR = 20;
-    const C_PARSERUNTERMINATEDVALUEERROR = 21;
+    const C_INVALIDQUERYFIELD = 17;
+    const C_INVALIDQUERYVALUE = 18;
+    const C_SYNTAXERROR = 19;
+    const C_TOOMANYPARAMETERSERROR = 20;
+    const C_UNTERMINATEDVALUEERROR = 21;
     const C_DELETEUSERSELFERROR = 22;
     const C_OLDPASSWORDINVALID = 23;
     const C_CANNOTCHANGEPASSWORD = 24;
@@ -729,6 +734,7 @@ class ErrorCodeId
     const C_JSONFORMATERROR = 47;
     const C_INVALIDDECIMALVALUE = 48;
     const C_UNHANDLEDEXCEPTION = 50;
+    const C_INACTIVEACCOUNT = 51;
     const C_REPORTINGCOMPANYMUSTHAVECONTACTSERROR = 60;
     const C_COMPANYPROFILENOTSET = 61;
     const C_CANNOTASSIGNUSERTOCOMPANY = 62;
@@ -987,9 +993,10 @@ class ErrorCodeId
     const C_WORKSHEETEXCEPTION = 1405;
     const C_INVALIDACCOUNTOVERRIDE = 1406;
     const C_ACCOUNTOVERRIDENOTAUTHORIZED = 1407;
-    const C_PARSERFIELDNOTQUERYABLEERROR = 1408;
+    const C_FIELDNOTQUERYABLEERROR = 1408;
     const C_USERNAMEREQUIRED = 1409;
     const C_INVALIDAUDITMESSAGE = 1410;
+    const C_FIELDNOTORDERABLEERROR = 1411;
 
     /**
      * Nexus validation error codes
@@ -1079,29 +1086,6 @@ class SeverityLevel
      */
     const C_EXCEPTION = 3;
 
-}
-
-
-/**
- * Represents the type of welcome email for the users
- */
-class WelcomeEmail
-{
-
-    /**
-     * Normal
-     */
-    const C_NORMAL = 0;
-
-    /**
-     * Suppressed
-     */
-    const C_SUPPRESSED = 1;
-
-    /**
-     * Custom
-     */
-    const C_CUSTOM = 2;
 }
 
 
