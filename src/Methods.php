@@ -24,15 +24,15 @@ class AvaTaxClient extends AvaTaxClientBase
      * Reset this account's license key
      *
      * Resets the existing license key for this account to a new key.
-     * 
+     *  
      * To reset your account, you must specify the ID of the account you wish to reset and confirm the action.
-     * 
+     *  
      * This API is only available to account administrators for the account in question, and may only be called after
      * an account has been activated by reading and accepting Avalara's terms and conditions. To activate your account
      * please log onto the AvaTax website or call the `ActivateAccount` API.
-     * 
+     *  
      * Resetting a license key cannot be undone. Any previous license keys will immediately cease to work when a new key is created.
-     * 
+     *  
      * When you call this API, all account administrators for this account will receive an email with the newly updated license key.
      * The email will specify which user reset the license key and it will contain the new key to use to update your connectors.
      *
@@ -55,13 +55,13 @@ class AvaTaxClient extends AvaTaxClientBase
      * Activate an account by accepting terms and conditions
      *
      * Activate the account specified by the unique accountId number.
-     * 
-     * This activation request can only be called by account administrators. You must indicate 
+     *  
+     * This activation request can only be called by account administrators. You must indicate
      * that you have read and accepted Avalara's terms and conditions to call this API.
-     * 
+     *  
      * Once you have activated your account, use the `AccountResetLicenseKey` API to generate
      * a license key for your account.
-     * 
+     *  
      * If you have not read or accepted the terms and conditions, this API call will return the
      * unchanged account model.
      *
@@ -84,15 +84,15 @@ class AvaTaxClient extends AvaTaxClientBase
      * Retrieve audit history for an account.
      *
      * Retrieve audit trace history for an account.
-     * 
+     *  
      * Your audit trace history contains a record of all API calls made against the AvaTax REST API. You can use this API to investigate
      * problems and see exactly what information was sent back and forth between your code and AvaTax.
-     * 
+     *  
      * When specifying a start and end datetime, please include a valid timezone indicator, such as the "Z" present in the examples for the start and end query parameters.
      * You can learn more about valid time zone designators at https://en.wikipedia.org/wiki/ISO_8601#Time_zone_designators.
-     * 
+     *  
      * This API enforces limits to the amount of data retrieved. These limits are subject to change.
-     * 
+     *  
      * * You may request data from a maximum of a one-hour time period.
      * * The amount of data and number of API calls returned by this API are limited and may be adjusted at any time.
      * * Old records may be migrated out of immediately available storage. To request older data, please contact your account manager.
@@ -121,7 +121,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * Get the account object identified by this URL.
      * You may use the '$include' parameter to fetch additional nested data:
-     * 
+     *  
      * * Subscriptions
      * * Users
      *
@@ -144,15 +144,15 @@ class AvaTaxClient extends AvaTaxClientBase
      * Get configuration settings for this account
      *
      * Retrieve a list of all configuration settings tied to this account.
-     * 
+     *  
      * Configuration settings provide you with the ability to control features of your account and of your
      * tax software. The category names `TaxServiceConfig` and `AddressServiceConfig` are reserved for
      * Avalara internal software configuration values; to store your own account-level settings, please
      * create a new category name that begins with `X-`, for example, `X-MyCustomCategory`.
-     * 
+     *  
      * Account settings are permanent settings that cannot be deleted. You can set the value of an
      * account setting to null if desired.
-     * 
+     *  
      * Avalara-based account settings for `TaxServiceConfig` and `AddressServiceConfig` affect your account's
      * tax calculation and address resolution, and should only be changed with care.
      *
@@ -174,9 +174,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * Retrieve all accounts
      *
      * List all account objects that can be seen by the current user.
-     * 
+     *  
      * This API lists all accounts you are allowed to see. In general, most users will only be able to see their own account.
-     * 
+     *  
      * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
      * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
      * You may specify one or more of the following values in the `$include` parameter to fetch additional nested data, using commas to separate multiple values:
@@ -208,15 +208,15 @@ class AvaTaxClient extends AvaTaxClientBase
      * Change configuration settings for this account
      *
      * Update configuration settings tied to this account.
-     * 
+     *  
      * Configuration settings provide you with the ability to control features of your account and of your
      * tax software. The category names `TaxServiceConfig` and `AddressServiceConfig` are reserved for
      * Avalara internal software configuration values; to store your own account-level settings, please
      * create a new category name that begins with `X-`, for example, `X-MyCustomCategory`.
-     * 
+     *  
      * Account settings are permanent settings that cannot be deleted. You can set the value of an
      * account setting to null if desired.
-     * 
+     *  
      * Avalara-based account settings for `TaxServiceConfig` and `AddressServiceConfig` affect your account's
      * tax calculation and address resolution, and should only be changed with care.
      *
@@ -286,250 +286,6 @@ class AvaTaxClient extends AvaTaxClientBase
         $guzzleParams = [
             'query' => [],
             'body' => json_encode($model)
-        ];
-        return $this->restCall($path, 'POST', $guzzleParams);
-    }
-
-    /**
-     * Approve an advanced rule script to run.
-     *
-     * This API is available by invite only and implementation support is required. 
-     * Please contact your Customer Account Manager if you are interested in using 
-     * Advanced Rules in your AvaTax integration.
-     *
-     * 
-     * @param int $accountId The ID of the account that owns the Advanced Rule.
-     * @param string $scriptType The script transform type: Request or Response. (See AdvancedRuleScriptType::* for a list of allowable values)
-     * @return AdvancedRuleScriptModel
-     */
-    public function approveAdvancedRuleScript($accountId, $scriptType)
-    {
-        $path = "/api/v2/accounts/{$accountId}/advancedrulescripts/{$scriptType}/approve";
-        $guzzleParams = [
-            'query' => [],
-            'body' => null
-        ];
-        return $this->restCall($path, 'POST', $guzzleParams);
-    }
-
-    /**
-     * Create an advanced rule.
-     *
-     * This API is available by invite only and implementation support is required. 
-     * Please contact your Customer Account Manager if you are interested in using 
-     * Advanced Rules in your AvaTax integration.
-     *
-     * 
-     * @param int $accountId The ID of the account that will own the Advanced Rule.
-     * @param string $scriptType The script transform type, Request or Response. (See AdvancedRuleScriptType::* for a list of allowable values)
-     * @param string $crashBehavior The behavior the script should take if it crashes: Fail or Proceed. (See AdvancedRuleCrashBehavior::* for a list of allowable values)
-     * @param object $file The JavaScript file containing the advanced rule.
-     * @return string
-     */
-    public function createAdvancedRuleScript($accountId, $scriptType, $crashBehavior, $file)
-    {
-        $path = "/api/v2/accounts/{$accountId}/advancedrulescripts/{$scriptType}";
-        $guzzleParams = [
-            'query' => ['crashBehavior' => $crashBehavior],
-            'body' => null
-        ];
-        return $this->restCall($path, 'POST', $guzzleParams);
-    }
-
-    /**
-     * Create a lookup table for an advanced rule
-     *
-     * This API is available by invite only and implementation support is required. 
-     * Please contact your Customer Account Manager if you are interested in using 
-     * Advanced Rules in your AvaTax integration.
-     *
-     * 
-     * @param int $accountId The ID of the account that owns the Advanced Rule.
-     * @param string $csvTableName The name to assign the CSV lookup table.
-     * @param object $file A CSV file containing lookup data for an advanced rule.
-     * @return string
-     */
-    public function createAdvancedRuleTable($accountId, $csvTableName, $file)
-    {
-        $path = "/api/v2/accounts/{$accountId}/advancedruletables/{$csvTableName}";
-        $guzzleParams = [
-            'query' => [],
-            'body' => null
-        ];
-        return $this->restCall($path, 'POST', $guzzleParams);
-    }
-
-    /**
-     * Delete an account's active advanced rule
-     *
-     * This API is available by invite only and implementation support is required. 
-     * Please contact your Customer Account Manager if you are interested in using 
-     * Advanced Rules in your AvaTax integration.
-     *
-     * 
-     * @param int $accountId The ID of the account that owns the Advanced Rule.
-     * @param string $scriptType The script transform type: Request or Response. (See AdvancedRuleScriptType::* for a list of allowable values)
-     * @return ErrorDetail[]
-     */
-    public function deleteAdvancedRuleScript($accountId, $scriptType)
-    {
-        $path = "/api/v2/accounts/{$accountId}/advancedrulescripts/{$scriptType}";
-        $guzzleParams = [
-            'query' => [],
-            'body' => null
-        ];
-        return $this->restCall($path, 'DELETE', $guzzleParams);
-    }
-
-    /**
-     * Delete a lookup table for an advanced rule.
-     *
-     * This API is available by invite only and implementation support is required. 
-     * Please contact your Customer Account Manager if you are interested in using 
-     * Advanced Rules in your AvaTax integration.
-     *
-     * 
-     * @param int $accountId The ID of the account that owns the Advanced Rule.
-     * @param string $csvTableName The name of the CSV lookup table to delete.
-     * @return ErrorDetail[]
-     */
-    public function deleteAdvancedRuleTable($accountId, $csvTableName)
-    {
-        $path = "/api/v2/accounts/{$accountId}/advancedruletables/{$csvTableName}";
-        $guzzleParams = [
-            'query' => [],
-            'body' => null
-        ];
-        return $this->restCall($path, 'DELETE', $guzzleParams);
-    }
-
-    /**
-     * Disable an advanced rule so that it cannot be run.
-     *
-     * This API is available by invite only and implementation support is required. 
-     * Please contact your Customer Account Manager if you are interested in using 
-     * Advanced Rules in your AvaTax integration. ///
-     *
-     * 
-     * @param int $accountId 
-     * @param string $scriptType The script transform type: Request or Response. (See AdvancedRuleScriptType::* for a list of allowable values)
-     * @return AdvancedRuleScriptModel
-     */
-    public function disableAdvancedRuleScript($accountId, $scriptType)
-    {
-        $path = "/api/v2/accounts/{$accountId}/advancedrulescripts/{$scriptType}/disable";
-        $guzzleParams = [
-            'query' => [],
-            'body' => null
-        ];
-        return $this->restCall($path, 'POST', $guzzleParams);
-    }
-
-    /**
-     * Enable an approved advanced rule so that it can be run.
-     *
-     * This API is available by invite only and implementation support is required. 
-     * Please contact your Customer Account Manager if you are interested in using 
-     * Advanced Rules in your AvaTax integration.
-     *
-     * 
-     * @param int $accountId 
-     * @param string $scriptType The script transform type: Request or Response. (See AdvancedRuleScriptType::* for a list of allowable values)
-     * @return AdvancedRuleScriptModel
-     */
-    public function enableAdvancedRuleScript($accountId, $scriptType)
-    {
-        $path = "/api/v2/accounts/{$accountId}/advancedrulescripts/{$scriptType}/enable";
-        $guzzleParams = [
-            'query' => [],
-            'body' => null
-        ];
-        return $this->restCall($path, 'POST', $guzzleParams);
-    }
-
-    /**
-     * Get an account's advanced rule script.
-     *
-     * This API is available by invite only and implementation support is required. 
-     * Please contact your Customer Account Manager if you are interested in using 
-     * Advanced Rules in your AvaTax integration.
-     *
-     * 
-     * @param int $accountId The ID of the account that owns the Advanced Rule.
-     * @param string $scriptType The script transform type: Request or Response. (See AdvancedRuleScriptType::* for a list of allowable values)
-     * @return AdvancedRuleScriptModel
-     */
-    public function getAdvancedRuleScript($accountId, $scriptType)
-    {
-        $path = "/api/v2/accounts/{$accountId}/advancedrulescripts/{$scriptType}";
-        $guzzleParams = [
-            'query' => [],
-            'body' => null
-        ];
-        return $this->restCall($path, 'GET', $guzzleParams);
-    }
-
-    /**
-     * Get an advanced rule lookup table for an account
-     *
-     * This API is available by invite only and implementation support is required. 
-     * Please contact your Customer Account Manager if you are interested in using 
-     * Advanced Rules in your AvaTax integration.
-     *
-     * 
-     * @param int $accountId The ID of the account that owns the Advanced Rule.
-     * @param string $csvTableName The name of the CSV lookup table to get.
-     * @return AdvancedRuleTableModel
-     */
-    public function getAdvancedRuleTable($accountId, $csvTableName)
-    {
-        $path = "/api/v2/accounts/{$accountId}/advancedruletables/{$csvTableName}";
-        $guzzleParams = [
-            'query' => [],
-            'body' => null
-        ];
-        return $this->restCall($path, 'GET', $guzzleParams);
-    }
-
-    /**
-     * Get all advanced rule lookup tables for an account
-     *
-     * This API is available by invite only and implementation support is required. 
-     * Please contact your Customer Account Manager if you are interested in using 
-     * Advanced Rules in your AvaTax integration.
-     *
-     * 
-     * @param int $accountId The ID of the account that owns the Advanced Rule.
-     * @return AdvancedRuleTableModel
-     */
-    public function getAdvancedRuleTables($accountId)
-    {
-        $path = "/api/v2/accounts/{$accountId}/advancedruletables";
-        $guzzleParams = [
-            'query' => [],
-            'body' => null
-        ];
-        return $this->restCall($path, 'GET', $guzzleParams);
-    }
-
-    /**
-     * Unapprove an advanced rule script so that it cannot be run.
-     *
-     * This API is available by invite only and implementation support is required. 
-     * Please contact your Customer Account Manager if you are interested in using 
-     * Advanced Rules in your AvaTax integration.
-     *
-     * 
-     * @param int $accountId The ID of the account that owns the Advanced Rule.
-     * @param string $scriptType The script transform type: Request or Response. (See AdvancedRuleScriptType::* for a list of allowable values)
-     * @return AdvancedRuleScriptModel
-     */
-    public function unapproveAdvancedRuleScript($accountId, $scriptType)
-    {
-        $path = "/api/v2/accounts/{$accountId}/advancedrulescripts/{$scriptType}/unapprove";
-        $guzzleParams = [
-            'query' => [],
-            'body' => null
         ];
         return $this->restCall($path, 'POST', $guzzleParams);
     }
@@ -1457,17 +1213,17 @@ class AvaTaxClient extends AvaTaxClientBase
      * Change the filing status of this company
      *
      * Changes the current filing status of this company.
-     * 
+     *  
      * For customers using Avalara's Managed Returns Service, each company within their account can request
      * for Avalara to file tax returns on their behalf. Avalara compliance team members will review all
      * requested filing calendars prior to beginning filing tax returns on behalf of this company.
-     * 
+     *  
      * The following changes may be requested through this API:
-     * 
+     *  
      * * If a company is in `NotYetFiling` status, the customer may request this be changed to `FilingRequested`.
      * * Avalara compliance team members may change a company from `FilingRequested` to `FirstFiling`.
      * * Avalara compliance team members may change a company from `FirstFiling` to `Active`.
-     * 
+     *  
      * All other status changes must be requested through the Avalara customer support team.
      *
      * 
@@ -1497,7 +1253,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Declare nexus in all taxing jurisdictions for that main office address
      * * Activate the company
      *  
-     * This API only provides a limited subset of functionality compared to the 'Create Company' API call. 
+     * This API only provides a limited subset of functionality compared to the 'Create Company' API call.
      * If you need additional features or options not present in this 'Quick Setup' API call, please use the full 'Create Company' call instead.
      * Please allow 1 minute before making transactions using the company.
      *
@@ -1540,8 +1296,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * Request managed returns funding setup for a company
      *
      * This API is available by invitation only.
-     * Companies that use the Avalara Managed Returns or the SST Certified Service Provider services are 
-     * required to setup their funding configuration before Avalara can begin filing tax returns on their 
+     * Companies that use the Avalara Managed Returns or the SST Certified Service Provider services are
+     * required to setup their funding configuration before Avalara can begin filing tax returns on their
      * behalf.
      * Funding configuration for each company is set up by submitting a funding setup request, which can
      * be sent either via email or via an embedded HTML widget.
@@ -1635,7 +1391,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Get the company object identified by this URL.
      * A 'company' represents a single corporation or individual that is registered to handle transactional taxes.
      * You may specify one or more of the following values in the '$include' parameter to fetch additional nested data, using commas to separate multiple values:
-     * 
+     *  
      *  * Contacts
      *  * Items
      *  * Locations
@@ -1647,7 +1403,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * 
      * @param int $id The ID of the company to retrieve.
-     * @param string $include OPTIONAL: A comma separated list of special fetch options.       * Child objects - Specify one or more of the following to retrieve objects related to each company: "Contacts", "FilingCalendars", "Items", "Locations", "Nexus", "TaxCodes", or "TaxRules".   * Deleted objects - Specify "FetchDeleted" to retrieve information about previously deleted objects.
+     * @param string $include OPTIONAL: A comma separated list of special fetch options.      * Child objects - Specify one or more of the following to retrieve objects related to each company: "Contacts", "FilingCalendars", "Items", "Locations", "Nexus", "TaxCodes", or "TaxRules".   * Deleted objects - Specify "FetchDeleted" to retrieve information about previously deleted objects.
      * @return CompanyModel
      */
     public function getCompany($id, $include=null)
@@ -1664,15 +1420,15 @@ class AvaTaxClient extends AvaTaxClientBase
      * Get configuration settings for this company
      *
      * Retrieve a list of all configuration settings tied to this company.
-     * 
+     *  
      * Configuration settings provide you with the ability to control features of your account and of your
      * tax software. The category name `AvaCertServiceConfig` is reserved for
      * Avalara internal software configuration values; to store your own company-level settings, please
      * create a new category name that begins with `X-`, for example, `X-MyCustomCategory`.
-     * 
+     *  
      * Company settings are permanent settings that cannot be deleted. You can set the value of a
      * company setting to null if desired and if the particular setting supports it.
-     * 
+     *  
      * Avalara-based company settings for `AvaCertServiceConfig` affect your company's exemption certificate
      * processing, and should be changed with care.
      *
@@ -1694,13 +1450,13 @@ class AvaTaxClient extends AvaTaxClientBase
      * Get this company's filing status
      *
      * Retrieve the current filing status of this company.
-     * 
+     *  
      * For customers using Avalara's Managed Returns Service, each company within their account can request
      * for Avalara to file tax returns on their behalf. Avalara compliance team members will review all
      * requested filing calendars prior to beginning filing tax returns on behalf of this company.
-     * 
+     *  
      * A company's filing status can be one of the following values:
-     * 
+     *  
      * * `NoReporting` - This company is not configured to report tax returns; instead, it reports through a parent company.
      * * `NotYetFiling` - This company has not yet begun filing tax returns through Avalara's Managed Returns Service.
      * * `FilingRequested` - The company has requested to begin filing tax returns, but Avalara's compliance team has not yet begun filing.
@@ -1747,7 +1503,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Retrieve a list of MRS Companies with account
      *
      * This API is available by invitation only.
-     * 
+     *  
      * Get a list of companies with an active MRS service.
      *
      * 
@@ -1767,9 +1523,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * Retrieve all companies
      *
      * Get multiple company objects.
-     * 
+     *  
      * A `company` represents a single corporation or individual that is registered to handle transactional taxes.
-     * 
+     *  
      * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
      * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
      * You may specify one or more of the following values in the `$include` parameter to fetch additional nested data, using commas to separate multiple values:
@@ -1805,15 +1561,15 @@ class AvaTaxClient extends AvaTaxClientBase
      * Change configuration settings for this company
      *
      * Update configuration settings tied to this company.
-     * 
+     *  
      * Configuration settings provide you with the ability to control features of your account and of your
      * tax software. The category names `AvaCertServiceConfig` is reserved for
      * Avalara internal software configuration values; to store your own company-level settings, please
      * create a new category name that begins with `X-`, for example, `X-MyCustomCategory`.
-     * 
+     *  
      * Company settings are permanent settings that cannot be deleted. You can set the value of a
      * company setting to null if desired and if the particular setting supports it.
-     * 
+     *  
      * Avalara-based company settings for `AvaCertServiceConfig` affect your company's exemption certificate
      * processing, and should be changed with care.
      *
@@ -1838,7 +1594,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Replace the existing company object at this URL with an updated object.
      *  
      * A `CompanyModel` represents a single corporation or individual that is registered to handle transactional taxes.
-     * All data from the existing object will be replaced with data in the object you PUT. 
+     * All data from the existing object will be replaced with data in the object you PUT.
      *  
      * When calling `UpdateCompany`, you are permitted to update the company itself. Updates to the nested objects
      * such as contacts, locations, or settings are not permitted. To update the nested objects
@@ -1853,6 +1609,188 @@ class AvaTaxClient extends AvaTaxClientBase
     public function updateCompany($id, $model)
     {
         $path = "/api/v2/companies/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single tax rate.
+     *
+     * This API is available by invitation only.
+     *
+     * 
+     * @param int $id The ID of the tax rate to retrieve.
+     * @return ComplianceTaxRateModel
+     */
+    public function getTaxRate($id)
+    {
+        $path = "/api/v2/compliance/taxrates/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single tax region.
+     *
+     * This API is available by invitation only.
+     *
+     * 
+     * @param int $id The ID of the tax region to retrieve.
+     * @return TaxRegionModel
+     */
+    public function getTaxRegion($id)
+    {
+        $path = "/api/v2/compliance/taxregions/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve jurisdictions and rates in a combined format.
+     *
+     * This API is available by invitation only.
+     *
+     * 
+     * @param string $effectiveDate Used to limit the jurisdictions returned.
+     * @param string $endDate Used to limit the jurisdictions returned.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
+     * @param string $include A comma separated list of objects to fetch underneath this jurisdiction.
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return ComplianceJurisdictionRateModel
+     */
+    public function queryJurisdictionRates($effectiveDate, $endDate, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)
+    {
+        $path = "/api/v2/compliance/jurisdictionrates";
+        $guzzleParams = [
+            'query' => ['effectiveDate' => $effectiveDate, 'endDate' => $endDate, '$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all unique jurisdictions.
+     *
+     * This API is available by invitation only.
+     *  
+     * You may specify one or more of the following values in the '$include' parameter to fetch additional nested data, using commas to separate multiple values:
+     *  
+     * * TaxRates
+     *
+     * 
+     * @param string $country The two-character ISO-3166 code for the country.
+     * @param string $region The two or three character region code for the region.
+     * @param string $effectiveDate Used to limit the jurisdictions or rates returned.
+     * @param string $endDate Used to limit the jurisdictions or rates returned.
+     * @param string $aggregationOption Aggregation method used if rates are returned using the '$include' parameter. (See StackAggregationOption::* for a list of allowable values)
+     * @param string $include A comma separated list of objects to fetch underneath this tax rate.
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @return ComplianceJurisdictionModel
+     */
+    public function queryJurisdictions($country, $region, $effectiveDate, $endDate, $aggregationOption, $include=null, $top=null, $skip=null)
+    {
+        $path = "/api/v2/compliance/jurisdictions/{$country}/{$region}";
+        $guzzleParams = [
+            'query' => ['effectiveDate' => $effectiveDate, 'endDate' => $endDate, 'aggregationOption' => $aggregationOption, '$include' => $include, '$top' => $top, '$skip' => $skip],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all tax rates.
+     *
+     * This API is available by invitation only.
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
+     * @param string $include A comma separated list of objects to fetch underneath this tax rate.
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return ComplianceTaxRateModel
+     */
+    public function queryTaxRates($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)
+    {
+        $path = "/api/v2/compliance/taxrates";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all tax region jurisdictions.
+     *
+     * This API is available by invitation only.
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
+     * @param string $include A comma separated list of objects to fetch underneath this tax region jurisdiction.
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return TaxRegionJurisdictionModel
+     */
+    public function queryTaxRegionJurisdictions($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)
+    {
+        $path = "/api/v2/compliance/taxregionjurisdictions";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all tax regions.
+     *
+     * This API is available by invitation only.
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
+     * @param string $include A comma separated list of objects to fetch underneath this tax region.
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return TaxRegionModel
+     */
+    public function queryTaxRegions($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)
+    {
+        $path = "/api/v2/compliance/taxregions";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * API to modify the reference fields at the document and the line level.
+     *
+     * 
+     *
+     * 
+     * @param int $companyId 
+     * @param TransactionReferenceFieldModel[] $model 
+     * @return FetchResult
+     */
+    public function tagTransaction($companyId, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/transactions/tag";
         $guzzleParams = [
             'query' => [],
             'body' => json_encode($model)
@@ -4064,6 +4002,110 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Bridge API for integration of validated certificates
+     *
+     * This API is for use by invitation only.
+     *
+     * 
+     * @param EcmsModel[] $model Either a single exempt certificate or an array of certificates to create
+     * @return EcmsModel[]
+     */
+    public function certCaptureBridge($model)
+    {
+        $path = "/api/v2/certcapturebridge";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Get an ECMS identified by company id and ECMS id
+     *
+     * Get an ECMS identified by company id and ECMS id.
+     * An ECMS data represents a documentation based on which companies can claim tax exemption
+     * You may attach nested data objects such as exempt cert detail, and those objects will be created with certificate.
+     * You may specify one or more of the following values in the `$include` parameter to fetch additional nested data, using commas to separate multiple values:
+     *  
+     * * Details
+     *
+     * 
+     * @param int $companyId company to retrieve exempt certificate for
+     * @param int $ecmsId exempt certificate Id
+     * @param string $include 
+     * @return EcmsModel
+     */
+    public function getECMSById($companyId, $ecmsId, $include=null)
+    {
+        $path = "/api/v2/companies/{$companyId}/ecms/{$ecmsId}";
+        $guzzleParams = [
+            'query' => ['$include' => $include],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Get list of ECMS data for this company
+     *
+     * Get list of ECMS data for this company
+     * An ECMS data represents a documentation based on which companies can claim tax exemption
+     * You may attach nested data objects such as ECMS detail, and those objects will be created with certificate.
+     * You may specify one or more of the following values in the `$include` parameter to fetch additional nested data, using commas to separate multiple values:
+     *  
+     * * Details
+     *
+     * 
+     * @param int $companyId which company to retrieve certificates from
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
+     * @param string $include 
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return EcmsModel[]
+     */
+    public function listECMSByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)
+    {
+        $path = "/api/v2/companies/{$companyId}/ecms";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Get all exempt certificates
+     *
+     * Get all ECMS currently available in database.
+     * An ECMS data represents a documentation based on which companies can claim tax exemption
+     * You may attach nested data objects such as ECMS detail, and those objects will be created with certificate.
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     * You may specify one or more of the following values in the `$include` parameter to fetch additional nested data, using commas to separate multiple values:
+     *  
+     * * Details
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
+     * @param string $include 
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return EcmsModel[]
+     */
+    public function queryECMS($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)
+    {
+        $path = "/api/v2/ecms";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * Approve existing Filing Request
      *
      * This API is available by invitation only.
@@ -4399,6 +4441,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * Retrieve all filing calendars
      *
      * This API is available by invitation only.
+     * 
+     * This API is deprecated - please use POST `/api/v2/filingrequests/query` API.
      *
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* formCountry, formRegion, taxFormCode, taxAuthorityId, taxAuthorityName, taxAuthorityType, settings
@@ -4420,9 +4464,36 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Retrieve all filing calendars
+     *
+     * This API is available by invitation only.
+     * 
+     * This API is intended to replace the GET `/api/v2/filingcalendars` API. The fetch request object is posted on the body of the request instead of the URI, so it's not limited by a set number of characters.
+     * The documentation of the GET API shows how filtering, sorting and pagination works.
+     *
+     * 
+     * @param string $returnCountry If specified, fetches only filing calendars that apply to tax filings in this specific country. Uses ISO 3166 country codes.
+     * @param string $returnRegion If specified, fetches only filing calendars that apply to tax filings in this specific region. Uses ISO 3166 region codes.
+     * @param QueryRequestModel $model Query object to filter, sort and paginate the filing calendars.
+     * @return FetchResult
+     */
+    public function queryFilingCalendarsPost($returnCountry, $returnRegion, $model)
+    {
+        $path = "/api/v2/filingcalendars/query";
+        $guzzleParams = [
+            'query' => ['returnCountry' => $returnCountry, 'returnRegion' => $returnRegion],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
      * Retrieve all filing requests
      *
      * This API is available by invitation only.
+     * 
+     * This API is deprecated - please use POST `/api/v2/filingrequests/query` API.
+     * 
      * A "filing request" represents a request to change an existing filing calendar. Filing requests
      * are reviewed and validated by Avalara Compliance before being implemented.
      * 
@@ -4445,6 +4516,29 @@ class AvaTaxClient extends AvaTaxClientBase
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all filing requests
+     *
+     * This API is available by invitation only.
+     * 
+     * This API is intended to replace the GET `/api/v2/filingrequests` API. The fetch request object is posted on the body of the request instead of the URI, so it's not limited by a set number of characters.
+     * The documentation of the GET API shows how filtering, sorting and pagination works.
+     *
+     * 
+     * @param int $filingCalendarId Specific filing calendar id for the request
+     * @param QueryRequestModel $model Query object to filter, sort and paginate the filing calendars.
+     * @return FetchResult
+     */
+    public function queryFilingRequestsPost($filingCalendarId, $model)
+    {
+        $path = "/api/v2/filingrequests/query";
+        $guzzleParams = [
+            'query' => ['filingCalendarId' => $filingCalendarId],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
     }
 
     /**
@@ -4480,7 +4574,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * This API is available by invitation only.
      *
      * 
-     * @param int $companyId The unique ID of the company that owns the filing request object
+     * @param int $companyId The unique ID of the company that owns the filing calendar object
      * @param int $id The unique ID of the filing calendar object
      * @param FilingCalendarModel $model The filing calendar model you are wishing to update with.
      * @return FilingCalendarModel
@@ -4802,6 +4896,26 @@ class AvaTaxClient extends AvaTaxClientBase
     public function filingsCheckupReports($companyId, $year, $month)
     {
         $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/checkup";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a list of filings for the specified accrual return.
+     *
+     * 
+     *
+     * 
+     * @param int $companyId The ID of the company that owns these batches
+     * @param int $filingReturnId The ID of the accrual return
+     * @return FetchResult
+     */
+    public function getAccrualFillings($companyId, $filingReturnId)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/accrual/{$filingReturnId}";
         $guzzleParams = [
             'query' => [],
             'body' => null
@@ -5215,10 +5329,10 @@ class AvaTaxClient extends AvaTaxClientBase
      * FREE API - Request a free trial of AvaTax
      *
      * Call this API to obtain a free AvaTax account.
-     * 
-     * This API is free to use. No authentication credentials are required to call this API. You must read and 
-     * accept [Avalara's terms and conditions](https://www1.avalara.com/us/en/legal/terms.html) for the account to be 
-     * created. 
+     *  
+     * This API is free to use. No authentication credentials are required to call this API. You must read and
+     * accept [Avalara's terms and conditions](https://www1.avalara.com/us/en/legal/terms.html) for the account to be
+     * created.
      *  
      * If all conditions are met, this API will grant a free trial version of AvaTax. For a list of functionality
      * available in the free trial and its limitations, please see the [AvaTax Developer Website Free Trial page](https://developer.avalara.com/avatax/signup/).
@@ -5338,14 +5452,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * Request the javascript for a funding setup widget
      *
      * This API is available by invitation only.
-     * Companies that use the Avalara Managed Returns or the SST Certified Service Provider services are 
-     * required to setup their funding configuration before Avalara can begin filing tax returns on their 
+     * Companies that use the Avalara Managed Returns or the SST Certified Service Provider services are
+     * required to setup their funding configuration before Avalara can begin filing tax returns on their
      * behalf.
      * Funding configuration for each company is set up by submitting a funding setup request, which can
      * be sent either via email or via an embedded HTML widget.
      * When the funding configuration is submitted to Avalara, it will be reviewed by treasury team members
      * before approval.
-     * This API returns back the actual javascript code to insert into your application to render the 
+     * This API returns back the actual javascript code to insert into your application to render the
      * JavaScript funding setup widget inline.
      * Use the 'methodReturn.javaScript' return value to insert this widget into your HTML page.
      * This API requires a subscription to Avalara Managed Returns or SST Certified Service Provider.
@@ -5368,8 +5482,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * Retrieve status about a funding setup request
      *
      * This API is available by invitation only.
-     * Companies that use the Avalara Managed Returns or the SST Certified Service Provider services are 
-     * required to setup their funding configuration before Avalara can begin filing tax returns on their 
+     * Companies that use the Avalara Managed Returns or the SST Certified Service Provider services are
+     * required to setup their funding configuration before Avalara can begin filing tax returns on their
      * behalf.
      * Funding configuration for each company is set up by submitting a funding setup request, which can
      * be sent either via email or via an embedded HTML widget.
@@ -5771,6 +5885,37 @@ class AvaTaxClient extends AvaTaxClientBase
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Sync items from a product catalog
+     *
+     * Syncs a list of items with AvaTax without waiting for them to be created. It is ideal for syncing large product catalogs
+     * with AvaTax. 
+     * 
+     * Any invalid or duplicate items will be ignored. To diagnose why an item is not created, use the normal create transaction API to receive validation information.
+     * 
+     * This API is currently limited to 1000 items per call (the limit is subject to change).
+     * 
+     * Items are a way of separating your tax calculation process from your tax configuration details. If you choose, you
+     * can provide `itemCode` values for each `CreateTransaction()` API call rather than specifying tax codes, parameters, descriptions,
+     * and other data fields. AvaTax will automatically look up each `itemCode` and apply the correct tax codes and parameters
+     * from the item table instead. This allows your CreateTransaction call to be as simple as possible, and your tax compliance
+     * team can manage your item catalog and adjust the tax behavior of items without having to modify your software.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this item.
+     * @param SyncItemsRequestModel $model The request object.
+     * @return SyncItemsResponseModel
+     */
+    public function syncItems($companyId, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/items/sync";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
     }
 
     /**
@@ -6744,6 +6889,33 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Summarize nexus by NexusTaxTypeGroup for this company
+     *
+     * Provides a summary of nexus information useful for quickly displaying key information.
+     * 
+     * The concept of Nexus indicates a place where your company is legally obligated to collect and remit transactional 
+     * taxes. The legal requirements for nexus may vary per country and per jurisdiction; please seek advice from your
+     * accountant or lawyer prior to declaring nexus.
+     * 
+     * This API produces only basic information about your company's nexus declarations. For example, it will show
+     * the number of nexus declarations of each tax type. To request more information about your company's nexus 
+     * declarations, please use `QueryNexus` or `ListNexusByCompany`.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns these nexus objects
+     * @return NexusSummaryModel
+     */
+    public function nexusSummary($companyId)
+    {
+        $path = "/api/v2/companies/{$companyId}/nexus/summary";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * Retrieve all nexus
      *
      * Get multiple nexus objects across all companies.
@@ -7196,7 +7368,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * List all tax notice objects assigned to this company.
      * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
      * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
-     * 
+     *  
      * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
      * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
      *
@@ -7223,10 +7395,13 @@ class AvaTaxClient extends AvaTaxClientBase
      * Retrieve all notices.
      *
      * This API is available by invitation only.
+     * 
+     * This API is deprecated - please use POST `/api/v2/notices/query` API.
+     * 
      * Get multiple notice objects across all companies.
      * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
      * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
-     * 
+     *  
      * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
      * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
      *
@@ -7249,10 +7424,32 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Retrieve all notices.
+     *
+     * This API is available by invitation only.
+     * 
+     * This API is intended to replace the GET `/api/v2/notices` API. The fetch request object is posted on the body of the request instead of the URI, so it's not limited by a set number of characters.
+     * The documentation of the GET API shows how filtering, sorting and pagination works.
+     *
+     * 
+     * @param QueryRequestModel $model Query object to filter, sort and paginate the filing calendars.
+     * @return FetchResult
+     */
+    public function queryNoticesPost($model)
+    {
+        $path = "/api/v2/notices/query";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
      * Update a single notice finance detail.
      *
      * This API is available by invitation only.
-     * All data from the existing object will be replaced with data in the object you PUT. 
+     * All data from the existing object will be replaced with data in the object you PUT.
      * To set a field's value to null, you may either set its value to null or omit that field from the object you post.
      *
      * 
@@ -7279,7 +7476,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Replace the existing notice object at this URL with an updated object.
      * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
      * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
-     * All data from the existing object will be replaced with data in the object you PUT. 
+     * All data from the existing object will be replaced with data in the object you PUT.
      * To set a field's value to null, you may either set its value to null or omit that field from the object you post.
      *
      * 
@@ -7302,7 +7499,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Update a single notice comment.
      *
      * This API is available by invitation only.
-     * All data from the existing object will be replaced with data in the object you PUT. 
+     * All data from the existing object will be replaced with data in the object you PUT.
      * To set a field's value to null, you may either set its value to null or omit that field from the object you post.
      *
      * 
@@ -7331,7 +7528,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company for this attachment.
      * @param ResourceFileUploadRequestModel $model The ResourceFileId of the attachment to download.
-     * @return object
+     * @return ResourceFileUploadResultModel
      */
     public function uploadAttachment($companyId, $model)
     {
@@ -7435,14 +7632,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * Request a new Avalara account
      *
      * This API is for use by partner onboarding services customers only.
-     * 
+     *  
      * Avalara invites select partners to refer new customers to the AvaTax service using the onboarding features
      * of AvaTax. These partners can create accounts for new customers using this API.
-     * 
+     *  
      * Calling this API creates an account with the specified product subscriptions, but does not configure billing.
      * The customer will receive information from Avalara about how to configure billing for their account.
      * You should call this API when a customer has requested to begin using Avalara services.
-     * 
+     *  
      * If the newly created account owner wishes, they can confirm that they have read and agree to the Avalara
      * terms and conditions. If they do so, they can receive a license key as part of this API and their
      * API will be created in `Active` status. If the customer has not yet read and accepted these terms and
@@ -7489,8 +7686,8 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * # For Registrar Use Only
      * This API is for use by Avalara Registrar administrative users only.
-     * 
-     * Create a single new account object. 
+     *  
+     * Create a single new account object.
      * When creating an account object you may attach subscriptions and users as part of the 'Create' call.
      *
      * 
@@ -7565,7 +7762,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * # For Registrar Use Only
      * This API is for use by Avalara Registrar administrative users only.
-     * 
+     *  
      * Delete an account.
      * Deleting an account will delete all companies and all account level users attached to this account.
      *
@@ -7665,7 +7862,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * # For Registrar Use Only
      * This API is for use by Avalara Registrar administrative users only.
-     * 
+     *  
      * Replace an existing account object with an updated account object.
      *
      * 
@@ -8399,6 +8596,29 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Retrieve send-sale tax content for this company.
+     *
+     * This API is available by invitation only.
+     *
+     * 
+     * @param string $date The date for which we are fetching tax content.
+     * @param string $taxCode The tax code for which we are fetching tax content.
+     * @param int $companyId The unique ID number of the company which is fetching tax content.
+     * @param string $format Requests a specific data format for this content file. (See SendSalesOutputFileFormat::* for a list of allowable values)
+     * @param string $type Requests a specific encoding for this content file. (See SendSalesFileType::* for a list of allowable values)
+     * @return object
+     */
+    public function downloadSendSalesRateFile($date, $taxCode, $companyId, $format, $type)
+    {
+        $path = "/api/v2/sendsalescontent/download/{$companyId}/{$taxCode}/{$date}";
+        $guzzleParams = [
+            'query' => ['format' => $format, 'type' => $type],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * Download a file listing tax rates by postal code
      *
      * Download a CSV file containing all five digit postal codes in the United States and their sales
@@ -8455,6 +8675,54 @@ class AvaTaxClient extends AvaTaxClientBase
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Export the tax profile of this company to a backup file
+     *
+     * Exports the tax profile of a company to a file, containing all information that affects tax calculation for this company.
+     * 
+     * A tax profile is a series of decisions and configuration choices that affect your company's tax calculation. These decisions
+     * include your nexus declarations, your item catalog, your custom tax rules, and so on.
+     * 
+     * This API can be used to export a complete zip file containing your company's current tax profile, and you can then restore this
+     * profile to a different company or compare it over time to see if your profile has been changed.
+     *
+     * 
+     * @param int $companyId The unique ID number of the company whose profile you wish to retrieve.
+     * @return object
+     */
+    public function exportTaxProfile($companyId)
+    {
+        $path = "/api/v2/companies/{$companyId}/taxprofile";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Import a tax profile.
+     *
+     * Imports a tax profile to a new company, along with the option to import account settings.
+     *
+     * 
+     * @param int $accountId The account id of the account to which the tax profile will be imported.
+     * @param string $newCompanyCode The companyCode to use for the imported company.
+     * @param boolean $replaceAccountSettings Replace the current account settings with the ones in the tax profile.
+     * @param boolean $bypassNexusValidation Enable invalid nexus to be imported.
+     * @param object $taxProfile The taxProfile
+     * @return object
+     */
+    public function importTaxProfile($accountId, $newCompanyCode, $replaceAccountSettings, $bypassNexusValidation, $taxProfile)
+    {
+        $path = "/api/v2/taxprofile";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
     }
 
     /**
@@ -9641,6 +9909,28 @@ class AvaTaxClient extends AvaTaxClientBase
         $path = "/api/v2/accounts/{$accountId}/users/{$id}/entitlements";
         $guzzleParams = [
             'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Get information about a username.
+     *
+     * You may call this API prior to creating a user, to check if a particular username is available for use. Using this API, you can 
+     * present a friendly experience prior to attempting to create a new user object.
+     * 
+     * Please ensure that the query string is url encoded if you wish to check information for a user that contains url-sensitive characters.
+     *
+     * 
+     * @param string $username The username to search.
+     * @return UsernameModel
+     */
+    public function getUsername($username)
+    {
+        $path = "/api/v2/usernames";
+        $guzzleParams = [
+            'query' => ['username' => $username],
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
