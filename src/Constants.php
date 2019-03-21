@@ -27,28 +27,6 @@ class TransactionAddressType
 
 
 /**
- * 
- */
-class AdvancedRuleScriptType
-{
-    const C_REQUESTRULE = 0;
-    const C_RESPONSERULE = 1;
-
-}
-
-
-/**
- * 
- */
-class AdvancedRuleCrashBehavior
-{
-    const C_FAILONERROR = 0;
-    const C_PROCEEDWITHORIGINAL = 1;
-
-}
-
-
-/**
  * Casing to use for validation result
  */
 class TextCase
@@ -338,6 +316,66 @@ class PointOfSalePartnerId
 
 
 /**
+ * Defines how a stack rate is determined for a specific country and region.
+ */
+class StackAggregationOption
+{
+
+    /**
+     * No aggregation.
+     *  The component rate is used for the stack rate.
+     */
+    const C_NOSTACKAGGREGATION = 0;
+
+    /**
+     * Rates are aggregated across all jurisdiction types.
+     */
+    const C_FULLSTACKAGGREGATION = 1;
+
+    /**
+     * State and county rates are aggregated.
+     */
+    const C_AGGREGATESTATEANDCOUNTY = 2;
+
+    /**
+     * City and county rates are aggregated.
+     */
+    const C_AGGREGATECITYANDCOUNTY = 3;
+
+}
+
+
+/**
+ * 
+ */
+class SendSalesOutputFileFormat
+{
+    const C_STANDARD = 1;
+    const C_DMA = 2;
+
+}
+
+
+/**
+ * 
+ */
+class SendSalesFileType
+{
+
+    /**
+     * File is in Comma Separated Values format
+     */
+    const C_CSV = 0;
+
+    /**
+     * File is in Javascript Object Notation format
+     */
+    const C_JSON = 1;
+
+}
+
+
+/**
  * Represents the type of service or subscription given to a user
  */
 class ServiceTypeId
@@ -488,6 +526,26 @@ class ServiceTypeId
      */
     const C_SENDSALESRATEFILE = 28;
 
+    /**
+     * AvaMeals
+     */
+    const C_AVAMEALS = 29;
+
+    /**
+     * AvaAlcohol
+     */
+    const C_AVAALCOHOL = 30;
+
+    /**
+     * Accounting Firm ARA Service Type
+     */
+    const C_ARA = 31;
+
+    /**
+     * Accounting Firm ManagedARA Service Type
+     */
+    const C_MANAGEDARA = 32;
+
 }
 
 
@@ -519,6 +577,30 @@ class AccountStatusId
      *  [Avalara's terms and conditions](https://www.avalara.com/us/en/legal/terms.html).
      */
     const C_NEW = 3;
+
+}
+
+
+/**
+ * Status of an Avalara account
+ */
+class AccountTypeId
+{
+
+    /**
+     * Regular AvaTax account.
+     */
+    const C_REGULAR = 1;
+
+    /**
+     * Firm account.
+     */
+    const C_FIRM = 2;
+
+    /**
+     * Client account created by firm.
+     */
+    const C_FIRMCLIENT = 3;
 
 }
 
@@ -644,6 +726,16 @@ class SecurityRoleId
      */
     const C_SSTADMIN = 22;
 
+    /**
+     * FirmUser
+     */
+    const C_FIRMUSER = 23;
+
+    /**
+     * FirmAdmin
+     */
+    const C_FIRMADMIN = 24;
+
 }
 
 
@@ -714,6 +806,8 @@ class ErrorCodeId
     const C_CANNOTCHANGEPASSWORD = 24;
     const C_DATEFORMATERROR = 26;
     const C_NODEFAULTCOMPANY = 27;
+    const C_ACCOUNTTYPENOTSUPPORTED = 28;
+    const C_INVALIDFIRMCLIENTOFFER = 29;
     const C_AUTHENTICATIONEXCEPTION = 30;
     const C_AUTHORIZATIONEXCEPTION = 31;
     const C_VALIDATIONEXCEPTION = 32;
@@ -733,8 +827,10 @@ class ErrorCodeId
     const C_OPENCLAUSEEXCEPTION = 46;
     const C_JSONFORMATERROR = 47;
     const C_INVALIDDECIMALVALUE = 48;
+    const C_LINKAGESTATUSUPDATENOTSUPPORTED = 49;
     const C_UNHANDLEDEXCEPTION = 50;
     const C_INACTIVEACCOUNT = 51;
+    const C_LINKAGENOTALLOWED = 52;
     const C_REPORTINGCOMPANYMUSTHAVECONTACTSERROR = 60;
     const C_COMPANYPROFILENOTSET = 61;
     const C_CANNOTASSIGNUSERTOCOMPANY = 62;
@@ -893,6 +989,7 @@ class ErrorCodeId
     const C_AVALARAIDENTITYAPIERROR = 608;
     const C_INVALIDIPADDRESS = 609;
     const C_OFFERCODEALREADYAPPLIED = 610;
+    const C_ACCOUNTALREADYEXISTS = 611;
 
     /**
      * Refund API error codes
@@ -1012,11 +1109,9 @@ class ErrorCodeId
     /**
      * Advanced rule errors
      */
-    const C_ADVANCEDRULEBADSCRIPT = 1600;
-    const C_ADVANCEDRULEBADCSVTABLE = 1601;
     const C_ADVANCEDRULEREQUESTRULEERROR = 1602;
     const C_ADVANCEDRULERESPONSERULEERROR = 1603;
-    const C_ADVANCEDRULENOTAPPROVED = 1604;
+    const C_ADVANCEDRULEERROR = 1605;
 
     /**
      * Miscellaneous
@@ -1188,323 +1283,6 @@ class JurisdictionType
      * Special Tax Jurisdiction
      */
     const C_SPECIAL = 4;
-
-}
-
-
-/**
- * A list of possible AvaFile Form Types.
- */
-class FormTypeId
-{
-
-    /**
-     * Denotes the form type is Sales and Use Tax
-     */
-    const C_SALESANDUSE = 0;
-
-    /**
-     * Denotes the form type is Sales Tax only
-     */
-    const C_SALES = 1;
-
-    /**
-     * Denotes the form type is Sellers Use Tax only
-     */
-    const C_SELLERSUSE = 2;
-
-    /**
-     * Denotes the form type is Lodging Tax only
-     */
-    const C_LODGING = 3;
-
-    /**
-     * Denotes the form type is Sales and Lodging Tax
-     */
-    const C_SALESANDLODGING = 4;
-
-    /**
-     * Denotes the form type is Consumer Use Tax only
-     */
-    const C_CONSUMERUSE = 5;
-
-    /**
-     * Denotes the form type is Resort and Rental Tax
-     */
-    const C_RESORTANDRENTAL = 6;
-
-    /**
-     * Denotes the form type is Tourist and Rental Tax
-     */
-    const C_TOURISTANDRENTAL = 7;
-
-    /**
-     * Denotes the form type is Prepayment
-     */
-    const C_PREPAYMENT = 8;
-
-    /**
-     * Denotes the form type is Prepayment Allowance
-     */
-    const C_PREPAYMENTALLOWED = 9;
-
-}
-
-
-/**
- * A list of possible AvaFile filing option types.
- */
-class FilingOptionTypeId
-{
-
-    /**
-     * Denotes the tax return is being filed on paper.
-     */
-    const C_PAPER = 0;
-
-    /**
-     * Denotes the form can be efiled optionally.
-     */
-    const C_OPTIONALEFILE = 1;
-
-    /**
-     * Denotes the form is being filed via efile.
-     */
-    const C_MANDATORYEFILE = 2;
-
-}
-
-
-/**
- * A list of possible Due Date Types
- */
-class DueDateTypeId
-{
-
-    /**
-     * Denotes form is due on the due day
-     */
-    const C_BYDAY = 0;
-
-    /**
-     * Denotes form is due by last day of the month
-     */
-    const C_BYLASTDAY = 1;
-
-    /**
-     * Denotes form is due by second to last day of the month
-     */
-    const C_BYSECONDLASTDAY = 2;
-
-}
-
-
-/**
- * Indicates the rounding behavior of a form
- */
-class RoundingTypeId
-{
-
-    /**
-     * There is no rounding on the return
-     */
-    const C_NONE = 0;
-
-    /**
-     * Round to the nearest whole number
-     */
-    const C_NEAREST = 1;
-
-    /**
-     * Always round up
-     */
-    const C_UP = 2;
-
-    /**
-     * Always round down
-     */
-    const C_DOWN = 3;
-
-}
-
-
-/**
- * Indicates the behavior of a tax form for a company with multiple places of business.
- *  
- *  Some tax authorities require that a separate form must be filed for each place of business.
- */
-class OutletTypeId
-{
-
-    /**
-     * File a single return per cycle for your entire business.
-     */
-    const C_NONE = 0;
-
-    /**
-     * You may file separate forms for each outlet; contact the tax authority for more details about location based reporting requirements.
-     */
-    const C_SCHEDULE = 1;
-
-    /**
-     * You may file separate forms for each outlet; contact the tax authority for more details about location based reporting requirements.
-     */
-    const C_DUPLICATE = 2;
-
-    /**
-     * File a single return, but you must have a line item for each place of business.
-     */
-    const C_CONSOLIDATED = 3;
-
-}
-
-
-/**
- * The type of data contained in this batch
- */
-class BatchType
-{
-    const C_AVACERTUPDATE = 0;
-    const C_AVACERTUPDATEALL = 1;
-    const C_BATCHMAINTENANCE = 2;
-    const C_COMPANYLOCATIONIMPORT = 3;
-    const C_DOCUMENTIMPORT = 4;
-    const C_EXEMPTCERTIMPORT = 5;
-    const C_ITEMIMPORT = 6;
-    const C_SALESAUDITEXPORT = 7;
-    const C_SSTPTESTDECKIMPORT = 8;
-    const C_TAXRULEIMPORT = 9;
-
-    /**
-     * This batch type represents tax transaction data being uploaded to AvaTax. Each line in the batch represents a single transaction
-     *  or a line in a multi-line transaction. For reference, see [Batched Transactions in REST v2](http://developer.avalara.com/blog/2016/10/24/batch-transaction-upload-in-rest-v2)
-     */
-    const C_TRANSACTIONIMPORT = 10;
-    const C_UPCBULKIMPORT = 11;
-    const C_UPCVALIDATIONIMPORT = 12;
-
-}
-
-
-/**
- * The status of a batch file
- */
-class BatchStatus
-{
-
-    /**
-     * Batch file has been received and is in the queue to be processed.
-     */
-    const C_WAITING = 0;
-
-    /**
-     * Batch file experienced system errors and cannot be processed.
-     */
-    const C_SYSTEMERRORS = 1;
-
-    /**
-     * Batch file is cancelled
-     */
-    const C_CANCELLED = 2;
-
-    /**
-     * Batch file has been completely processed.
-     */
-    const C_COMPLETED = 3;
-
-    /**
-     * Batch file is currently being created.
-     */
-    const C_CREATING = 4;
-
-    /**
-     * Batch file has been deleted.
-     */
-    const C_DELETED = 5;
-
-    /**
-     * Batch file was processed with some errors.
-     */
-    const C_ERRORS = 6;
-
-    /**
-     * Batch processing was paused.
-     */
-    const C_PAUSED = 7;
-
-    /**
-     * Batch is currently being processed.
-     */
-    const C_PROCESSING = 8;
-
-}
-
-
-/**
- * The way of delivering request
- */
-class CertificateRequestDeliveryMethod
-{
-
-    /**
-     * The invitation will be sent via email to the recipient's email address.
-     */
-    const C_EMAIL = 1;
-
-    /**
-     * The invitation will be sent via facsimile to the recipient's facsimile phone number.
-     *  
-     *  Facsimile transmission make take time to process and deliver via phone lines.
-     */
-    const C_FAX = 2;
-
-    /**
-     * The request will be processed and turned into a web link (URL) which the user can click on to visit the CertExpress site and immediately
-     *  begin entering data about their certificates.
-     */
-    const C_DOWNLOAD = 3;
-
-}
-
-
-/**
- * Indicates the status of a CertExpress invitation link.
- */
-class CertExpressInvitationStatus
-{
-
-    /**
-     * The CertExpress website is currently building a landing page for the customer. Please
-     *  wait about 10 seconds and fetch this request again to see when it will be ready.
-     */
-    const C_INPROGRESS = 0;
-
-    /**
-     * Indicates that the CertExpress invitation has been completed and is ready to use.
-     */
-    const C_READY = 1;
-
-}
-
-
-/**
- * 
- */
-class CertCaptureProvisionStatus
-{
-
-    /**
-     * Account and company are provisioned
-     */
-    const C_PROVISIONED = 0;
-
-    /**
-     * Provision job is being queued
-     *  This could also be an indication that some companies under an account has been provisioned, while others
-     *  under the same account has not.
-     */
-    const C_INPROGRESS = 1;
-    const C_NOTPROVISIONED = 2;
 
 }
 
@@ -1998,6 +1776,323 @@ class ExemptCertReviewStatusId
      * Certificate was rejected
      */
     const C_REJECTED = 2;
+
+}
+
+
+/**
+ * A list of possible AvaFile Form Types.
+ */
+class FormTypeId
+{
+
+    /**
+     * Denotes the form type is Sales and Use Tax
+     */
+    const C_SALESANDUSE = 0;
+
+    /**
+     * Denotes the form type is Sales Tax only
+     */
+    const C_SALES = 1;
+
+    /**
+     * Denotes the form type is Sellers Use Tax only
+     */
+    const C_SELLERSUSE = 2;
+
+    /**
+     * Denotes the form type is Lodging Tax only
+     */
+    const C_LODGING = 3;
+
+    /**
+     * Denotes the form type is Sales and Lodging Tax
+     */
+    const C_SALESANDLODGING = 4;
+
+    /**
+     * Denotes the form type is Consumer Use Tax only
+     */
+    const C_CONSUMERUSE = 5;
+
+    /**
+     * Denotes the form type is Resort and Rental Tax
+     */
+    const C_RESORTANDRENTAL = 6;
+
+    /**
+     * Denotes the form type is Tourist and Rental Tax
+     */
+    const C_TOURISTANDRENTAL = 7;
+
+    /**
+     * Denotes the form type is Prepayment
+     */
+    const C_PREPAYMENT = 8;
+
+    /**
+     * Denotes the form type is Prepayment Allowance
+     */
+    const C_PREPAYMENTALLOWED = 9;
+
+}
+
+
+/**
+ * A list of possible AvaFile filing option types.
+ */
+class FilingOptionTypeId
+{
+
+    /**
+     * Denotes the tax return is being filed on paper.
+     */
+    const C_PAPER = 0;
+
+    /**
+     * Denotes the form can be efiled optionally.
+     */
+    const C_OPTIONALEFILE = 1;
+
+    /**
+     * Denotes the form is being filed via efile.
+     */
+    const C_MANDATORYEFILE = 2;
+
+}
+
+
+/**
+ * A list of possible Due Date Types
+ */
+class DueDateTypeId
+{
+
+    /**
+     * Denotes form is due on the due day
+     */
+    const C_BYDAY = 0;
+
+    /**
+     * Denotes form is due by last day of the month
+     */
+    const C_BYLASTDAY = 1;
+
+    /**
+     * Denotes form is due by second to last day of the month
+     */
+    const C_BYSECONDLASTDAY = 2;
+
+}
+
+
+/**
+ * Indicates the rounding behavior of a form
+ */
+class RoundingTypeId
+{
+
+    /**
+     * There is no rounding on the return
+     */
+    const C_NONE = 0;
+
+    /**
+     * Round to the nearest whole number
+     */
+    const C_NEAREST = 1;
+
+    /**
+     * Always round up
+     */
+    const C_UP = 2;
+
+    /**
+     * Always round down
+     */
+    const C_DOWN = 3;
+
+}
+
+
+/**
+ * Indicates the behavior of a tax form for a company with multiple places of business.
+ *  
+ *  Some tax authorities require that a separate form must be filed for each place of business.
+ */
+class OutletTypeId
+{
+
+    /**
+     * File a single return per cycle for your entire business.
+     */
+    const C_NONE = 0;
+
+    /**
+     * You may file separate forms for each outlet; contact the tax authority for more details about location based reporting requirements.
+     */
+    const C_SCHEDULE = 1;
+
+    /**
+     * You may file separate forms for each outlet; contact the tax authority for more details about location based reporting requirements.
+     */
+    const C_DUPLICATE = 2;
+
+    /**
+     * File a single return, but you must have a line item for each place of business.
+     */
+    const C_CONSOLIDATED = 3;
+
+}
+
+
+/**
+ * The type of data contained in this batch
+ */
+class BatchType
+{
+    const C_AVACERTUPDATE = 0;
+    const C_AVACERTUPDATEALL = 1;
+    const C_BATCHMAINTENANCE = 2;
+    const C_COMPANYLOCATIONIMPORT = 3;
+    const C_DOCUMENTIMPORT = 4;
+    const C_EXEMPTCERTIMPORT = 5;
+    const C_ITEMIMPORT = 6;
+    const C_SALESAUDITEXPORT = 7;
+    const C_SSTPTESTDECKIMPORT = 8;
+    const C_TAXRULEIMPORT = 9;
+
+    /**
+     * This batch type represents tax transaction data being uploaded to AvaTax. Each line in the batch represents a single transaction
+     *  or a line in a multi-line transaction. For reference, see [Batched Transactions in REST v2](http://developer.avalara.com/blog/2016/10/24/batch-transaction-upload-in-rest-v2)
+     */
+    const C_TRANSACTIONIMPORT = 10;
+    const C_UPCBULKIMPORT = 11;
+    const C_UPCVALIDATIONIMPORT = 12;
+
+}
+
+
+/**
+ * The status of a batch file
+ */
+class BatchStatus
+{
+
+    /**
+     * Batch file has been received and is in the queue to be processed.
+     */
+    const C_WAITING = 0;
+
+    /**
+     * Batch file experienced system errors and cannot be processed.
+     */
+    const C_SYSTEMERRORS = 1;
+
+    /**
+     * Batch file is cancelled
+     */
+    const C_CANCELLED = 2;
+
+    /**
+     * Batch file has been completely processed.
+     */
+    const C_COMPLETED = 3;
+
+    /**
+     * Batch file is currently being created.
+     */
+    const C_CREATING = 4;
+
+    /**
+     * Batch file has been deleted.
+     */
+    const C_DELETED = 5;
+
+    /**
+     * Batch file was processed with some errors.
+     */
+    const C_ERRORS = 6;
+
+    /**
+     * Batch processing was paused.
+     */
+    const C_PAUSED = 7;
+
+    /**
+     * Batch is currently being processed.
+     */
+    const C_PROCESSING = 8;
+
+}
+
+
+/**
+ * The way of delivering request
+ */
+class CertificateRequestDeliveryMethod
+{
+
+    /**
+     * The invitation will be sent via email to the recipient's email address.
+     */
+    const C_EMAIL = 1;
+
+    /**
+     * The invitation will be sent via facsimile to the recipient's facsimile phone number.
+     *  
+     *  Facsimile transmission make take time to process and deliver via phone lines.
+     */
+    const C_FAX = 2;
+
+    /**
+     * The request will be processed and turned into a web link (URL) which the user can click on to visit the CertExpress site and immediately
+     *  begin entering data about their certificates.
+     */
+    const C_DOWNLOAD = 3;
+
+}
+
+
+/**
+ * Indicates the status of a CertExpress invitation link.
+ */
+class CertExpressInvitationStatus
+{
+
+    /**
+     * The CertExpress website is currently building a landing page for the customer. Please
+     *  wait about 10 seconds and fetch this request again to see when it will be ready.
+     */
+    const C_INPROGRESS = 0;
+
+    /**
+     * Indicates that the CertExpress invitation has been completed and is ready to use.
+     */
+    const C_READY = 1;
+
+}
+
+
+/**
+ * 
+ */
+class CertCaptureProvisionStatus
+{
+
+    /**
+     * Account and company are provisioned
+     */
+    const C_PROVISIONED = 0;
+
+    /**
+     * Provision job is being queued
+     *  This could also be an indication that some companies under an account has been provisioned, while others
+     *  under the same account has not.
+     */
+    const C_INPROGRESS = 1;
+    const C_NOTPROVISIONED = 2;
 
 }
 
@@ -2575,6 +2670,35 @@ class PaymentType
 
 
 /**
+ * Account Linkage status
+ */
+class FirmClientLinkageStatus
+{
+
+    /**
+     * Requested
+     */
+    const C_REQUESTED = 1;
+
+    /**
+     * Approved
+     */
+    const C_APPROVED = 2;
+
+    /**
+     * Rejected
+     */
+    const C_REJECTED = 3;
+
+    /**
+     * Revoked
+     */
+    const C_REVOKED = 4;
+
+}
+
+
+/**
  * What object experienced the error?
  */
 class ErrorTargetCode
@@ -2779,6 +2903,16 @@ class NoticeCustomerType
      * TrustFile
      */
     const C_TRUSTFILE = 5;
+
+    /**
+     * PWC
+     */
+    const C_PWC = 6;
+
+    /**
+     * Hudson Group
+     */
+    const C_HUDSONGROUP = 7;
 
 }
 
@@ -3031,6 +3165,11 @@ class CompanyAccessLevel
      * Permission to access all companies in all accounts. Reserved for system administration tasks.
      */
     const C_ALLCOMPANIES = 3;
+
+    /**
+     * Permission to access all companies in all accounts managed by a firm account.
+     */
+    const C_FIRMMANAGEDACCOUNTS = 4;
 
 }
 
