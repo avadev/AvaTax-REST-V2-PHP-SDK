@@ -316,66 +316,6 @@ class PointOfSalePartnerId
 
 
 /**
- * Defines how a stack rate is determined for a specific country and region.
- */
-class StackAggregationOption
-{
-
-    /**
-     * No aggregation.
-     *  The component rate is used for the stack rate.
-     */
-    const C_NOSTACKAGGREGATION = 0;
-
-    /**
-     * Rates are aggregated across all jurisdiction types.
-     */
-    const C_FULLSTACKAGGREGATION = 1;
-
-    /**
-     * State and county rates are aggregated.
-     */
-    const C_AGGREGATESTATEANDCOUNTY = 2;
-
-    /**
-     * City and county rates are aggregated.
-     */
-    const C_AGGREGATECITYANDCOUNTY = 3;
-
-}
-
-
-/**
- * 
- */
-class SendSalesOutputFileFormat
-{
-    const C_STANDARD = 1;
-    const C_DMA = 2;
-
-}
-
-
-/**
- * 
- */
-class SendSalesFileType
-{
-
-    /**
-     * File is in Comma Separated Values format
-     */
-    const C_CSV = 0;
-
-    /**
-     * File is in Javascript Object Notation format
-     */
-    const C_JSON = 1;
-
-}
-
-
-/**
  * Represents the type of service or subscription given to a user
  */
 class ServiceTypeId
@@ -804,6 +744,7 @@ class ErrorCodeId
     const C_DELETEUSERSELFERROR = 22;
     const C_OLDPASSWORDINVALID = 23;
     const C_CANNOTCHANGEPASSWORD = 24;
+    const C_READONLY = 25;
     const C_DATEFORMATERROR = 26;
     const C_NODEFAULTCOMPANY = 27;
     const C_ACCOUNTTYPENOTSUPPORTED = 28;
@@ -827,14 +768,16 @@ class ErrorCodeId
     const C_OPENCLAUSEEXCEPTION = 46;
     const C_JSONFORMATERROR = 47;
     const C_INVALIDDECIMALVALUE = 48;
-    const C_LINKAGESTATUSUPDATENOTSUPPORTED = 49;
+    const C_PERMISSIONREQUIRED = 49;
     const C_UNHANDLEDEXCEPTION = 50;
     const C_INACTIVEACCOUNT = 51;
     const C_LINKAGENOTALLOWED = 52;
+    const C_LINKAGESTATUSUPDATENOTSUPPORTED = 53;
     const C_REPORTINGCOMPANYMUSTHAVECONTACTSERROR = 60;
     const C_COMPANYPROFILENOTSET = 61;
     const C_CANNOTASSIGNUSERTOCOMPANY = 62;
     const C_MUSTASSIGNUSERTOCOMPANY = 63;
+    const C_INVALIDTAXTYPEMAPPING = 64;
     const C_MODELSTATEINVALID = 70;
     const C_DATERANGEERROR = 80;
     const C_INVALIDDATERANGEERROR = 81;
@@ -1039,7 +982,6 @@ class ErrorCodeId
     const C_MISSINGREQUIREDFIELDS = 1204;
     const C_CERTIFICATESNOTSETUP = 1205;
     const C_ADDRELATIONSHIPSERROR = 1206;
-    const C_MISSINGEXPOSUREZONE = 1207;
     const C_CONFLICTINGEXPOSUREZONE = 1208;
     const C_MISSINGFIELDTOCREATEEXPOSUREZONE = 1209;
     const C_MISSINGEXEMPTREASON = 1210;
@@ -1123,6 +1065,8 @@ class ErrorCodeId
     const C_TAXCODEASSOCIATEDWITHITEMCODENOTFOUND = 1704;
     const C_DUPLICATESYSTEMFORITEM = 1705;
     const C_CANNOTDISMISSGLOBALNOTIFICATION = 1706;
+    const C_GENERICTAXCODEFORITEM = 1707;
+    const C_CANNOTCERTIFYCOMPANY = 1708;
 
     /**
      * SendSales API errors
@@ -1551,7 +1495,7 @@ class MatchingTaxType
     /**
      * Match medical excise type
      */
-    const C_EXCISE = 5;
+    const C_E = 5;
 
     /**
      * Match Lodging tax type
