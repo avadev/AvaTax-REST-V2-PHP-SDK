@@ -52,7 +52,7 @@ class DocumentType
 {
 
     /**
-     * Represents an estimate, or a sales order, or a quote. 
+     * Represents an estimate, or a sales order, or a quote.
      *  
      *  This document type is used before a sale has occurred to estimate the final amount of tax to be paid when the
      *  sale is completed.
@@ -103,7 +103,7 @@ class DocumentType
      *  This document type is used before a customer chooses to request a refund for a previous sale, and it
      *  estimates the final amount of tax to be refunded when the refund is completed.
      *  
-     *  For a return order, the `companyCode` of the transaction refers to the seller who is giving the refund 
+     *  For a return order, the `companyCode` of the transaction refers to the seller who is giving the refund
      *  and the `customerVendorCode` refers to the buyer who is requesting the refund.
      *  
      *  This is a temporary document type and is not saved in tax history.
@@ -116,7 +116,7 @@ class DocumentType
      *  This document type is used when a customer chooses to request a refund for a previous sale, and it
      *  records the final amount of tax that has been refunded when the refund is completed.
      *  
-     *  For a return invoice, the `companyCode` of the transaction refers to the seller who is giving the refund 
+     *  For a return invoice, the `companyCode` of the transaction refers to the seller who is giving the refund
      *  and the `customerVendorCode` refers to the buyer who is requesting the refund.
      *  
      *  This is a permanent document and is recorded in AvaTax.
@@ -201,81 +201,6 @@ class CertificatePreviewType
      * Download a single page of the certificate in JPG format
      */
     const C_JPEG = 2;
-
-}
-
-
-/**
- * Filing Frequency types
- */
-class FilingFrequencyId
-{
-
-    /**
-     * File once per month
-     */
-    const C_MONTHLY = 1;
-
-    /**
-     * File once per three months
-     */
-    const C_QUARTERLY = 2;
-
-    /**
-     * File twice per year
-     */
-    const C_SEMIANNUALLY = 3;
-
-    /**
-     * File once per year
-     */
-    const C_ANNUALLY = 4;
-
-    /**
-     * File every other month
-     */
-    const C_BIMONTHLY = 5;
-
-    /**
-     * File only when there are documents to report
-     */
-    const C_OCCASIONAL = 6;
-
-    /**
-     * File for the first two months of each quarter, then do not file on the quarterly month.
-     */
-    const C_INVERSEQUARTERLY = 7;
-
-    /**
-     * File every week
-     */
-    const C_WEEKLY = 8;
-
-}
-
-
-/**
- * Filing Status
- */
-class FilingStatusId
-{
-    const C_PENDINGAPPROVAL = 0;
-    const C_DIRTY = 1;
-    const C_APPROVEDTOFILE = 2;
-    const C_PENDINGFILING = 3;
-    const C_PENDINGFILINGONBEHALF = 4;
-    const C_FILED = 5;
-    const C_FILEDONBEHALF = 6;
-    const C_RETURNACCEPTED = 7;
-    const C_RETURNACCEPTEDONBEHALF = 8;
-    const C_PAYMENTREMITTED = 9;
-    const C_VOIDED = 10;
-    const C_PENDINGRETURN = 11;
-    const C_PENDINGRETURNONBEHALF = 12;
-    const C_DONOTFILE = 13;
-    const C_RETURNREJECTED = 14;
-    const C_RETURNREJECTEDONBEHALF = 15;
-    const C_APPROVEDTOFILEONBEHALF = 16;
 
 }
 
@@ -513,7 +438,7 @@ class AccountStatusId
     /**
      * The account is new and is currently in the onboarding process.
      *  
-     *  An account is considered new until the account administrator has reviewed and accepted 
+     *  An account is considered new until the account administrator has reviewed and accepted
      *  [Avalara's terms and conditions](https://www.avalara.com/us/en/legal/terms.html).
      */
     const C_NEW = 3;
@@ -759,7 +684,6 @@ class ErrorCodeId
     const C_BEARERTOKENINVALID = 37;
     const C_MODELREQUIREDEXCEPTION = 38;
     const C_ACCOUNTEXPIREDEXCEPTION = 39;
-    const C_VISIBILITYERROR = 40;
     const C_BEARERTOKENNOTSUPPORTED = 41;
     const C_INVALIDSECURITYROLE = 42;
     const C_INVALIDREGISTRARACTION = 43;
@@ -937,7 +861,6 @@ class ErrorCodeId
     /**
      * Refund API error codes
      */
-    const C_INVALIDDOCUMENTSTATUSFORREFUND = 700;
     const C_REFUNDTYPEANDPERCENTAGEMISMATCH = 701;
     const C_INVALIDDOCUMENTTYPEFORREFUND = 702;
     const C_REFUNDTYPEANDLINEMISMATCH = 703;
@@ -1010,10 +933,10 @@ class ErrorCodeId
     const C_INVALIDDOCUMENTSTATUSFORVERIFY = 1306;
     const C_TOTALAMOUNTMISMATCH = 1307;
     const C_TOTALTAXMISMATCH = 1308;
-    const C_INVALIDDOCUMENTSTATUSFORCOMMIT = 1309;
     const C_INVALIDDOCUMENTTYPE = 1310;
     const C_MULTIDOCUMENTPARTIALLYLOCKED = 1312;
     const C_TRANSACTIONISCOMMITTED = 1313;
+    const C_INVALIDDOCUMENTSTATUS = 1314;
 
     /**
      * Communications Tax error codes
@@ -1058,15 +981,19 @@ class ErrorCodeId
     /**
      * Miscellaneous
      */
-    const C_INVALIDDOCUMENTSTATUSTOADDORDELETELINES = 1700;
     const C_TAXRULEREQUIRESNEXUS = 1701;
     const C_UPCCODENOTUNIQUE = 1702;
-    const C_CANNOTUPDATESOURCEORINSTANCE = 1703;
     const C_TAXCODEASSOCIATEDWITHITEMCODENOTFOUND = 1704;
     const C_DUPLICATESYSTEMFORITEM = 1705;
     const C_CANNOTDISMISSGLOBALNOTIFICATION = 1706;
     const C_GENERICTAXCODEFORITEM = 1707;
     const C_CANNOTCERTIFYCOMPANY = 1708;
+    const C_NOVOIDEDDOCUMENTS = 1709;
+    const C_INADEQUATECOMMITTEDDOCUMENTS = 1710;
+    const C_DOCUMENTCODEISGUID = 1711;
+    const C_CUSTOMERVENDORCODEISGUID = 1712;
+    const C_CANNOTUPDATEACCOUNTTYPEID = 1713;
+    const C_INADEQUATEDOCUMENTLINECOUNT = 1714;
 
     /**
      * SendSales API errors
@@ -1095,6 +1022,12 @@ class ErrorCodeId
     const C_INVALIDPARAMETERVALUEDATATYPE = 2102;
     const C_INVALIDPARAMETERATTRIBUTETYPE = 2103;
     const C_SUBSCRIPTIONREQUIREDFORPARAMETER = 2104;
+
+    /**
+     * Accounting Firm errors
+     */
+    const C_INVALIDACCOUNTTYPE = 2105;
+    const C_NOEXEMPTIONNOORCUSTOMERUSAGETYPE = 2208;
 
 }
 
@@ -1475,7 +1408,7 @@ class LocalNexusTypeId
     const C_STATEADMINISTERED = 1;
 
     /**
-     * Customer declares nexus in all local taxing authorities. 
+     * Customer declares nexus in all local taxing authorities.
      *  
      *  This value only takes effect if you set `hasLocalNexus` = true.
      */
@@ -2066,7 +1999,7 @@ class CompanyFilingStatus
     const C_FILINGREQUESTED = 2;
 
     /**
-     * Avalara has begun filing tax returns for this company. Normally, this status will change to `Active` after 
+     * Avalara has begun filing tax returns for this company. Normally, this status will change to `Active` after
      *  one month of successful filing of tax returns.
      */
     const C_FIRSTFILING = 3;
@@ -2103,7 +2036,7 @@ class DocumentStatus
      * Saved document (SalesInvoice or PurchaseInvoice) ready to be posted.
      *  
      *  This status indicates that the transaction has been saved to AvaTax, but is not available
-     *  to be reported on a tax filing, and has not yet been verified by a business process that 
+     *  to be reported on a tax filing, and has not yet been verified by a business process that
      *  posts transactions.
      *  
      *  To mark this transaction as `Posted`, please call `VerifyTransaction` or `SettleTransaction`.
@@ -2138,7 +2071,7 @@ class DocumentStatus
      *  on a tax return. When this occurs, the transaction's `locked` flag will be set to true. Once
      *  the transaction is locked, no further changes may occur.
      *  
-     *  As long as the transaction has not been locked, you may adjust or void this transaction using 
+     *  As long as the transaction has not been locked, you may adjust or void this transaction using
      *  `AdjustTransaction`, `CreateOrAdjustTransaction`, or `VoidTransaction`.
      */
     const C_COMMITTED = 3;
@@ -2149,7 +2082,7 @@ class DocumentStatus
      *  This status indicates that the transaction has been cancelled or voided. Cancelled and Voided
      *  are synonyms.
      *  
-     *  When a transaction has been cancelled, it is considered to no longer exist. You are free to create 
+     *  When a transaction has been cancelled, it is considered to no longer exist. You are free to create
      *  a new transaction with the same code.
      */
     const C_CANCELLED = 4;
@@ -2178,7 +2111,7 @@ class DocumentStatus
     const C_PENDINGAPPROVAL = 7;
 
     /**
-     * DEPRECATED - Represents "a document in any status" when searching. Please search using the 
+     * DEPRECATED - Represents "a document in any status" when searching. Please search using the
      *  [Filtering in REST](/avatax/filtering-in-rest/) documentation.
      */
     const C_ANY = -1;
@@ -2220,7 +2153,7 @@ class TaxOverrideType
 
     /**
      * AvaTax was instructed to calculate this transaction using the tax rules that were in effect
-     *  on a different day than the transaction occurred. 
+     *  on a different day than the transaction occurred.
      *  
      *  This behavior typically occurs during refunds. If the customer attempts to return a product
      *  without a receipt that shows the exact tax amount paid, AvaTax can calculate tax on the date
@@ -2419,6 +2352,55 @@ class ScraperType
 
 
 /**
+ * Filing Frequency types
+ */
+class FilingFrequencyId
+{
+
+    /**
+     * File once per month
+     */
+    const C_MONTHLY = 1;
+
+    /**
+     * File once per three months
+     */
+    const C_QUARTERLY = 2;
+
+    /**
+     * File twice per year
+     */
+    const C_SEMIANNUALLY = 3;
+
+    /**
+     * File once per year
+     */
+    const C_ANNUALLY = 4;
+
+    /**
+     * File every other month
+     */
+    const C_BIMONTHLY = 5;
+
+    /**
+     * File only when there are documents to report
+     */
+    const C_OCCASIONAL = 6;
+
+    /**
+     * File for the first two months of each quarter, then do not file on the quarterly month.
+     */
+    const C_INVERSEQUARTERLY = 7;
+
+    /**
+     * File every week
+     */
+    const C_WEEKLY = 8;
+
+}
+
+
+/**
  * A list of possible AvaFile filing types.
  */
 class FilingTypeId
@@ -2512,6 +2494,32 @@ class FilingRequestStatus
      * This indicates that compliance rejected the request.
      */
     const C_REQUESTDENIED = 9;
+
+}
+
+
+/**
+ * Filing Status
+ */
+class FilingStatusId
+{
+    const C_PENDINGAPPROVAL = 0;
+    const C_DIRTY = 1;
+    const C_APPROVEDTOFILE = 2;
+    const C_PENDINGFILING = 3;
+    const C_PENDINGFILINGONBEHALF = 4;
+    const C_FILED = 5;
+    const C_FILEDONBEHALF = 6;
+    const C_RETURNACCEPTED = 7;
+    const C_RETURNACCEPTEDONBEHALF = 8;
+    const C_PAYMENTREMITTED = 9;
+    const C_VOIDED = 10;
+    const C_PENDINGRETURN = 11;
+    const C_PENDINGRETURNONBEHALF = 12;
+    const C_DONOTFILE = 13;
+    const C_RETURNREJECTED = 14;
+    const C_RETURNREJECTEDONBEHALF = 15;
+    const C_APPROVEDTOFILEONBEHALF = 16;
 
 }
 

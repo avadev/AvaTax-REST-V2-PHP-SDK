@@ -109,7 +109,7 @@ class SubscriptionModel
     public $subscriptionTypeId;
 
     /**
-     * @var string A friendly description of the service that the account is subscribed to. You can either provide the subscription type Id or this but not both. If   subscription type Id is provided, then this information is ignored and this field will be updated with the information from subscription type id.
+     * @var string A friendly description of the service that the account is subscribed to. You can either provide the subscription type Id or this but not both. If  subscription type Id is provided, then this information is ignored and this field will be updated with the information from subscription type id.
      */
     public $subscriptionDescription;
 
@@ -394,12 +394,12 @@ class NewAccountRequestModel
     public $marketingContext;
 
     /**
-     * @var string Type of the account to be created. Regular, Firm or FirmClient
+     * @var string Type of the account to be created. Regular, Firm or FirmClient (See AccountTypeId::* for a list of allowable values)
      */
     public $accountType;
 
     /**
-     * @var string United States Taxpayer ID number, usually your Employer Identification Number if you are a business or your   Social Security Number if you are an individual.  This value is required if you subscribe to Avalara Managed Returns or the SST Certified Service Provider services,   but it is optional if you do not subscribe to either of those services.
+     * @var string United States Taxpayer ID number, usually your Employer Identification Number if you are a business or your  Social Security Number if you are an individual.  This value is required if you subscribe to Avalara Managed Returns or the SST Certified Service Provider services,  but it is optional if you do not subscribe to either of those services.
      */
     public $taxPayerIdNumber;
 
@@ -422,12 +422,12 @@ class CompanyAddress
     public $city;
 
     /**
-     * @var string Name or ISO 3166 code identifying the region within the country.    This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions    For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
+     * @var string Name or ISO 3166 code identifying the region within the country.     This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions     For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
      */
     public $region;
 
     /**
-     * @var string Name or ISO 3166 code identifying the country.    This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries    For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
+     * @var string Name or ISO 3166 code identifying the country.     This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries     For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
      */
     public $country;
 
@@ -522,7 +522,7 @@ class FreeTrialRequestModel
     public $email;
 
     /**
-     * @var string The company or organizational name for this free trial. If this account is for personal use, it is acceptable   to use your full name here.
+     * @var string The company or organizational name for this free trial. If this account is for personal use, it is acceptable  to use your full name here.
      */
     public $company;
 
@@ -593,7 +593,7 @@ class LicenseKeyModel
     public $privateLicenseKey;
 
     /**
-     * @var string If your software allows you to specify the HTTP Authorization header directly, this is the header string you   should use when contacting Avalara to make API calls with this license key.
+     * @var string If your software allows you to specify the HTTP Authorization header directly, this is the header string you  should use when contacting Avalara to make API calls with this license key.
      */
     public $httpRequestHeader;
 
@@ -667,7 +667,7 @@ class AccountConfigurationModel
 
 /**
  * Provides detailed information about an API call.
- * 
+ *  
  * The information on this record was captured by AvaTax when your API call was made. If you are unsure why you
  * received an error, you can fetch these audit objects and examine the `RequestUrl`, `RequestBody`, and `ErrorMessage`
  * fields to determine root cause for the error.
@@ -796,12 +796,12 @@ class AuditModel
     public $isQueued;
 
     /**
-     * @var int If this API call included requests made to any of the AvaTax data layers, this contains the number of requests that were traced.    Please note that not all data layers support this measurement.
+     * @var int If this API call included requests made to any of the AvaTax data layers, this contains the number of requests that were traced.     Please note that not all data layers support this measurement.
      */
     public $databaseCallCount;
 
     /**
-     * @var string If this API call included requests made to any of the AvaTax data layers, this contains the total duration time measured for all the requests.    Please note that not all data layers support this measurement.
+     * @var string If this API call included requests made to any of the AvaTax data layers, this contains the total duration time measured for all the requests.     Please note that not all data layers support this measurement.
      */
     public $databaseCallDuration;
 
@@ -821,7 +821,7 @@ class AuditModel
     public $requestUrl;
 
     /**
-     * @var string If this request was an HTTP request that included a body such as a POST or a PUT, this will contain the request body sent by the client.    This request body is represented as a string, exactly as it was received from the client. Regardless of whether the request was JSON,  Base64 encoded bytes, or a CSV file, this contains the exact contents of the request body.
+     * @var string If this request was an HTTP request that included a body such as a POST or a PUT, this will contain the request body sent by the client.     This request body is represented as a string, exactly as it was received from the client. Regardless of whether the request was JSON,  Base64 encoded bytes, or a CSV file, this contains the exact contents of the request body.
      */
     public $requestBody;
 
@@ -917,12 +917,12 @@ class AddressValidationInfo
     public $city;
 
     /**
-     * @var string Name or ISO 3166 code identifying the region within the country.    This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions    For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
+     * @var string Name or ISO 3166 code identifying the region within the country.     This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions     For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
      */
     public $region;
 
     /**
-     * @var string Name or ISO 3166 code identifying the country.    This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries    For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
+     * @var string Name or ISO 3166 code identifying the country.     This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries     For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
      */
     public $country;
 
@@ -1008,12 +1008,12 @@ class AddressInfo
     public $city;
 
     /**
-     * @var string Name or ISO 3166 code identifying the region within the country.    This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions    For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
+     * @var string Name or ISO 3166 code identifying the region within the country.     This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions     For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
      */
     public $region;
 
     /**
-     * @var string Name or ISO 3166 code identifying the country.    This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries    For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
+     * @var string Name or ISO 3166 code identifying the country.     This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries     For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
      */
     public $country;
 
@@ -1041,7 +1041,7 @@ class ValidatedAddressInfo
 {
 
     /**
-     * @var string Address type code. One of:   * Firm or company address  * General Delivery address  * High-rise or business complex  * PO Box address  * Rural route address  * Street or residential address
+     * @var string Address type code. One of:  * Firm or company address  * General Delivery address  * High-rise or business complex  * PO Box address  * Rural route address  * Street or residential address
      */
     public $addressType;
 
@@ -1066,12 +1066,12 @@ class ValidatedAddressInfo
     public $city;
 
     /**
-     * @var string Name or ISO 3166 code identifying the region within the country.    This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions    For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
+     * @var string Name or ISO 3166 code identifying the region within the country.     This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions     For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
      */
     public $region;
 
     /**
-     * @var string Name or ISO 3166 code identifying the country.    This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries    For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
+     * @var string Name or ISO 3166 code identifying the country.     This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries     For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
      */
     public $country;
 
@@ -1532,7 +1532,7 @@ class ContactModel
     public $city;
 
     /**
-     * @var string Name or ISO 3166 code identifying the region within the country.    This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions    For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
+     * @var string Name or ISO 3166 code identifying the region within the country.     This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions     For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
      */
     public $region;
 
@@ -1542,7 +1542,7 @@ class ContactModel
     public $postalCode;
 
     /**
-     * @var string Name or ISO 3166 code identifying the country.    This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries    For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
+     * @var string Name or ISO 3166 code identifying the country.     This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries     For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
      */
     public $country;
 
@@ -1966,12 +1966,12 @@ class NexusModel
 
 /**
  * This object is used to keep track of custom information about a company.
- * 
+ *  
  * The company settings system is a metadata system that you can use to store extra information
  * about a company. Your integration or connector could use this data storage to keep track of
  * preference information, reminders, or any other storage that would need to persist even if
  * the customer uninstalls your application.
- * 
+ *  
  * A setting can refer to any type of data you need to remember about this company object.
  * When creating this object, you may define your own `set`, `name`, and `value` parameters.
  * To define your own values, please choose a `set` name that begins with `X-` to indicate an extension.
@@ -1990,7 +1990,7 @@ class SettingModel
     public $companyId;
 
     /**
-     * @var string A user-defined "set" containing this setting.    Avalara defines some sets that cannot be changed. To create your own set, choose a set  name that begins with `X-` to indicate that this is an extension value.    We recommend that you choose a set name that clearly identifies your application, and then  store data within name/value pairs within that set. For example, if you were creating an   application called MyApp, you might choose to create a set named `X-MyCompany-MyApp`.
+     * @var string A user-defined "set" containing this setting.     Avalara defines some sets that cannot be changed. To create your own set, choose a set  name that begins with `X-` to indicate that this is an extension value.     We recommend that you choose a set name that clearly identifies your application, and then  store data within name/value pairs within that set. For example, if you were creating an  application called MyApp, you might choose to create a set named `X-MyCompany-MyApp`.
      */
     public $set;
 
@@ -2416,7 +2416,7 @@ class EcmsModel
     public $city;
 
     /**
-     * @var string Name or ISO 3166 code identifying the region within the country.    This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions    For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
+     * @var string Name or ISO 3166 code identifying the region within the country.     This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions     For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
      */
     public $region;
 
@@ -2426,7 +2426,7 @@ class EcmsModel
     public $postalCode;
 
     /**
-     * @var string Name or ISO 3166 code identifying the country.    This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries    For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
+     * @var string Name or ISO 3166 code identifying the country.     This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries     For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
      */
     public $country;
 
@@ -2466,7 +2466,7 @@ class EcmsModel
     public $effectiveDate;
 
     /**
-     * @var string A list of applicable regions for this exempt certificate.    To list more than one applicable region, separate the list of region codes with commas.
+     * @var string A list of applicable regions for this exempt certificate.     To list more than one applicable region, separate the list of region codes with commas.
      */
     public $regionsApplicable;
 
@@ -2506,12 +2506,12 @@ class EcmsModel
     public $modifiedUserId;
 
     /**
-     * @var string Name or ISO 3166 code identifying the country that issued this ECMS certificate.    This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries    For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
+     * @var string Name or ISO 3166 code identifying the country that issued this ECMS certificate.     This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries     For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
      */
     public $countryIssued;
 
     /**
-     * @var string If the certificate record was synced from an AvaTax Certs account(as opposed to being entered in ECMS directly),   the unique AvaTax Certs identifier for the certificate record. Usually same as the Id of a Certificate.
+     * @var string If the certificate record was synced from an AvaTax Certs account(as opposed to being entered in ECMS directly),  the unique AvaTax Certs identifier for the certificate record. Usually same as the Id of a Certificate.
      */
     public $avaCertId;
 
@@ -2623,7 +2623,7 @@ class EcmsDetailModel
     public $stateFips;
 
     /**
-     * @var string Name or ISO 3166 code identifying the region within the country.    This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions    For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
+     * @var string Name or ISO 3166 code identifying the region within the country.     This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions     For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
      */
     public $region;
 
@@ -2633,7 +2633,7 @@ class EcmsDetailModel
     public $idNo;
 
     /**
-     * @var string Name or ISO 3166 code identifying the country.    This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries    For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
+     * @var string Name or ISO 3166 code identifying the country.     This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries     For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
      */
     public $country;
 
@@ -3039,7 +3039,7 @@ class CreateCertExpressInvitationModel
 {
 
     /**
-     * @var string If the value of `deliveryMethod` is set to `Email`, please specify the email address of the recipient   for the request.
+     * @var string If the value of `deliveryMethod` is set to `Email`, please specify the email address of the recipient  for the request.
      */
     public $recipient;
 
@@ -3049,7 +3049,7 @@ class CreateCertExpressInvitationModel
     public $coverLetterTitle;
 
     /**
-     * @var int[] You may optionally specify a list of exposure zones to request in this CertExpress invitation. If you list   more than one exposure zone, the customer will be prompted to provide an exemption certificate for each one.   If you do not provide a list of exposure zones, the customer will be prompted to select an exposure zone.    For a list of available exposure zones, please call `ListCertificateExposureZones`.
+     * @var int[] You may optionally specify a list of exposure zones to request in this CertExpress invitation. If you list  more than one exposure zone, the customer will be prompted to provide an exemption certificate for each one.  If you do not provide a list of exposure zones, the customer will be prompted to select an exposure zone.     For a list of available exposure zones, please call `ListCertificateExposureZones`.
      */
     public $exposureZones;
 
@@ -3059,7 +3059,7 @@ class CreateCertExpressInvitationModel
     public $exemptReasons;
 
     /**
-     * @var string Specify the type of invitation. CertExpress invitations can be delivered via email, web link, or  facsimile.     * If you specify `Email`, the invitation will be delivered via email. Please ask the customer to ensure that   * If you specify `Fax`, the invitation will be sent via fax to the customer's fax number on file.  * If you specify `Download`, the invitation will be prepared as a web link that you can display to the customer. (See CertificateRequestDeliveryMethod::* for a list of allowable values)
+     * @var string Specify the type of invitation. CertExpress invitations can be delivered via email, web link, or  facsimile.     * If you specify `Email`, the invitation will be delivered via email. Please ask the customer to ensure that  * If you specify `Fax`, the invitation will be sent via fax to the customer's fax number on file.  * If you specify `Download`, the invitation will be prepared as a web link that you can display to the customer. (See CertificateRequestDeliveryMethod::* for a list of allowable values)
      */
     public $deliveryMethod;
 
@@ -3182,7 +3182,7 @@ class CustomerModel
     public $companyId;
 
     /**
-     * @var string The unique code identifying this customer. Must be unique within your company.    This code should be used in the `customerCode` field of any call that creates or adjusts a transaction  in order to ensure that all exemptions that apply to this customer are correctly considered.    Note: This field is case sensitive.
+     * @var string The unique code identifying this customer. Must be unique within your company.     This code should be used in the `customerCode` field of any call that creates or adjusts a transaction  in order to ensure that all exemptions that apply to this customer are correctly considered.     Note: This field is case sensitive.
      */
     public $customerCode;
 
@@ -3197,7 +3197,7 @@ class CustomerModel
     public $name;
 
     /**
-     * @var string Indicates the "Attn:" component of the address for this customer, if this customer requires mailings to be shipped   to the attention of a specific person or department name.
+     * @var string Indicates the "Attn:" component of the address for this customer, if this customer requires mailings to be shipped  to the attention of a specific person or department name.
      */
     public $attnName;
 
@@ -3257,12 +3257,12 @@ class CustomerModel
     public $modifiedDate;
 
     /**
-     * @var string Name or ISO 3166 code identifying the country.    This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries    For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
+     * @var string Name or ISO 3166 code identifying the country.     This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries     For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
      */
     public $country;
 
     /**
-     * @var string Name or ISO 3166 code identifying the region within the country.    This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions    For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
+     * @var string Name or ISO 3166 code identifying the region within the country.     This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions     For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
      */
     public $region;
 
@@ -3277,12 +3277,12 @@ class CustomerModel
     public $isShip;
 
     /**
-     * @var string For customers in the United States, this field is the federal taxpayer ID number. For businesses, this is   a Federal Employer Identification Number. For individuals, this will be a Social Security Number.
+     * @var string For customers in the United States, this field is the federal taxpayer ID number. For businesses, this is  a Federal Employer Identification Number. For individuals, this will be a Social Security Number.
      */
     public $taxpayerIdNumber;
 
     /**
-     * @var CertificateModel[] A list of exemption certficates that apply to this customer. You can fetch this data by specifying   `$include=certificates` when calling a customer fetch API.
+     * @var CertificateModel[] A list of exemption certficates that apply to this customer. You can fetch this data by specifying  `$include=certificates` when calling a customer fetch API.
      */
     public $certificates;
 
@@ -3292,12 +3292,12 @@ class CustomerModel
     public $customFields;
 
     /**
-     * @var ExposureZoneModel[] A list of exposure zones where you do business with this customer.     To keep track of certificates that are needed for each customer, set this value to a list of all exposure zones where you  sell products to this customer. You can find a list of exposure zones by calling `ListExposureZones`.    This field is often called "Ship-To States" or "Ship-To Zones", since it generally refers to locations where you ship products  when this customer makes a purchase.    This field is useful for audit purposes since it helps you ensure you have the necessary certificates for each customer.
+     * @var ExposureZoneModel[] A list of exposure zones where you do business with this customer.     To keep track of certificates that are needed for each customer, set this value to a list of all exposure zones where you  sell products to this customer. You can find a list of exposure zones by calling `ListExposureZones`.     This field is often called "Ship-To States" or "Ship-To Zones", since it generally refers to locations where you ship products  when this customer makes a purchase.     This field is useful for audit purposes since it helps you ensure you have the necessary certificates for each customer.
      */
     public $exposureZones;
 
     /**
-     * @var CustomerModel[] A list of ship-to customer records that are connected to this bill-to customer.    Customer records represent businesses or individuals who can provide exemption certificates. Some customers  may have certificates that are linked to their shipping address or their billing address. To group these  customer records together, you may link multiple bill-to and ship-to addresses together to represent a single  entity that has multiple different addresses of different kinds.
+     * @var CustomerModel[] A list of ship-to customer records that are connected to this bill-to customer.     Customer records represent businesses or individuals who can provide exemption certificates. Some customers  may have certificates that are linked to their shipping address or their billing address. To group these  customer records together, you may link multiple bill-to and ship-to addresses together to represent a single  entity that has multiple different addresses of different kinds.
      */
     public $shipTos;
 
@@ -3305,7 +3305,7 @@ class CustomerModel
 
 /**
  * The CoverLetter model represents a message sent along with an invitation to use CertExpress to
- * upload certificates. An invitation allows customers to use CertExpress to upload their exemption 
+ * upload certificates. An invitation allows customers to use CertExpress to upload their exemption
  * certificates directly; this cover letter explains why the invitation was sent.
  */
 class CoverLetterModel
@@ -3371,7 +3371,7 @@ class CoverLetterModel
 /**
  * A certificate is a document stored in either AvaTax Exemptions or CertCapture. The certificate document
  * can contain information about a customer's eligibility for exemption from sales or use taxes based on
- * criteria you specify when you store the certificate. To view or manage your certificates directly, please 
+ * criteria you specify when you store the certificate. To view or manage your certificates directly, please
  * log onto the administrative website for the product you purchased.
  */
 class CertificateModel
@@ -3398,7 +3398,7 @@ class CertificateModel
     public $expirationDate;
 
     /**
-     * @var string File name for the image of this certificate.    When creating a certificate, if you do not upload a PDF or JPG image, you must specify the filename  of the certificate as it is tracked in your repository.    To create a certificate, you must provide one of the following fields: either a `filename`, a `pdf` file,  or an array of JPG `pages`. The API will return an error if you omit these fields or if you attempt to  put values in more than one of them.
+     * @var string File name for the image of this certificate.     When creating a certificate, if you do not upload a PDF or JPG image, you must specify the filename  of the certificate as it is tracked in your repository.     To create a certificate, you must provide one of the following fields: either a `filename`, a `pdf` file,  or an array of JPG `pages`. The API will return an error if you omit these fields or if you attempt to  put values in more than one of them.
      */
     public $filename;
 
@@ -3413,7 +3413,7 @@ class CertificateModel
     public $verified;
 
     /**
-     * @var float If this certificate provides exemption from transactional taxes, what percentage of the transaction   is considered exempt?    For a fully exempt certificate, this percentage should be 100.
+     * @var float If this certificate provides exemption from transactional taxes, what percentage of the transaction  is considered exempt?     For a fully exempt certificate, this percentage should be 100.
      */
     public $exemptPercentage;
 
@@ -3458,7 +3458,7 @@ class CertificateModel
     public $customers;
 
     /**
-     * @var PoNumberModel[] A list of purchase order numbers that are valid for use with this certificate.    If this certificate is applicable for all purchase order numbers, this field will be empty.    You can fetch this data by specifying `$include=po_numbers` when calling a certificate fetch API.
+     * @var PoNumberModel[] A list of purchase order numbers that are valid for use with this certificate.     If this certificate is applicable for all purchase order numbers, this field will be empty.     You can fetch this data by specifying `$include=po_numbers` when calling a certificate fetch API.
      */
     public $poNumbers;
 
@@ -3468,17 +3468,17 @@ class CertificateModel
     public $exposureZone;
 
     /**
-     * @var CertificateAttributeModel[] A list of certificate attributes that apply to this certificate.    You can fetch this data by specifying `$include=attributes` when calling a certificate fetch API.
+     * @var CertificateAttributeModel[] A list of certificate attributes that apply to this certificate.     You can fetch this data by specifying `$include=attributes` when calling a certificate fetch API.
      */
     public $attributes;
 
     /**
-     * @var string This field is available for input only. To retrieve the image after creation, use the   `DownloadCertificateImage` API.    When creating a certificate, you may optionally provide a PDF image in Base64 URLEncoded format.   PDFs are automatically parsed into individual page JPG images and can be retrieved back  later as either the original PDF or the individual pages.     To create a certificate, you must provide one of the following fields: either a `filename`, a `pdf` file,  or an array of JPG `pages`. The API will return an error if you omit these fields or if you attempt to  put values in more than one of them.
+     * @var string This field is available for input only. To retrieve the image after creation, use the  `DownloadCertificateImage` API.     When creating a certificate, you may optionally provide a PDF image in Base64 URLEncoded format.  PDFs are automatically parsed into individual page JPG images and can be retrieved back  later as either the original PDF or the individual pages.     To create a certificate, you must provide one of the following fields: either a `filename`, a `pdf` file,  or an array of JPG `pages`. The API will return an error if you omit these fields or if you attempt to  put values in more than one of them.
      */
     public $pdf;
 
     /**
-     * @var string[] This field is available for input only. To retrieve the image after creation, use the   `DownloadCertificateImage` API.    When creating a certificate, you may optionally provide a list of JPG images, one per page, in  Base64 URLEncoded format. These JPG images are automatically combined into a single downloadable  PDF and can be retrieved back later as either the original JPG images or the combined PDF.     To create a certificate, you must provide one of the following fields: either a `filename`, a `pdf` file,  or an array of JPG `pages`. The API will return an error if you omit these fields or if you attempt to  put values in more than one of them.
+     * @var string[] This field is available for input only. To retrieve the image after creation, use the  `DownloadCertificateImage` API.     When creating a certificate, you may optionally provide a list of JPG images, one per page, in  Base64 URLEncoded format. These JPG images are automatically combined into a single downloadable  PDF and can be retrieved back later as either the original JPG images or the combined PDF.     To create a certificate, you must provide one of the following fields: either a `filename`, a `pdf` file,  or an array of JPG `pages`. The API will return an error if you omit these fields or if you attempt to  put values in more than one of them.
      */
     public $pages;
 
@@ -3486,10 +3486,10 @@ class CertificateModel
 
 /**
  * A custom field provides extra information about a customer or certificate.
- * 
- * Custom fields are provided to permit you to store additional information about an exemption certificate or customer. They are available to 
+ *  
+ * Custom fields are provided to permit you to store additional information about an exemption certificate or customer. They are available to
  * support additional use cases beyond that supported directly by Avalara's exemption certificate software.
- * 
+ *  
  * For more information about custom fields, see the [Avalara Help Center article about custom fields](https://help.avalara.com/0021_Avalara_CertCapture/All_About_CertCapture/Edit_or_Remove_Details_about_Customers).
  */
 class CustomFieldModel
@@ -3602,7 +3602,7 @@ class PoNumberModel
 
 /**
  * A certificate attribute can be thought of as a feature or flag that is applied to a certificate.
- * A single certificate can be linked to zero, one, or many certificate attributes. The full list of 
+ * A single certificate can be linked to zero, one, or many certificate attributes. The full list of
  * attributes can be obtained by calling the `ListCertificateAttributes` API.
  */
 class CertificateAttributeModel
@@ -3632,7 +3632,7 @@ class CertificateAttributeModel
 
 /**
  * Contains information about a company's exemption certificate status.
- * 
+ *  
  * This model can be used to determine if your company is able to use the Customers, Certificates, and
  * CertExpressInvites APIs within AvaTax.
  */
@@ -3640,7 +3640,7 @@ class ProvisionStatusModel
 {
 
     /**
-     * @var string The status of exemption certificate setup for this company.    If this value is `Finished`, this company will then be able to use the Customers, Certificates, and  CertExpressInvites APIs within AvaTax. (See CertCaptureProvisionStatus::* for a list of allowable values)
+     * @var string The status of exemption certificate setup for this company.     If this value is `Finished`, this company will then be able to use the Customers, Certificates, and  CertExpressInvites APIs within AvaTax. (See CertCaptureProvisionStatus::* for a list of allowable values)
      */
     public $status;
 
@@ -3749,7 +3749,7 @@ class CompanyInitializationModel
     public $vatRegistrationId;
 
     /**
-     * @var string United States Taxpayer ID number, usually your Employer Identification Number if you are a business or your   Social Security Number if you are an individual.  This value is required if you subscribe to Avalara Managed Returns or the SST Certified Service Provider services,   but it is optional if you do not subscribe to either of those services.
+     * @var string United States Taxpayer ID number, usually your Employer Identification Number if you are a business or your  Social Security Number if you are an individual.  This value is required if you subscribe to Avalara Managed Returns or the SST Certified Service Provider services,  but it is optional if you do not subscribe to either of those services.
      */
     public $taxpayerIdNumber;
 
@@ -3774,7 +3774,7 @@ class CompanyInitializationModel
     public $city;
 
     /**
-     * @var string Name or ISO 3166 code identifying the region within the country.    This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions    For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
+     * @var string Name or ISO 3166 code identifying the region within the country.     This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions     For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
      */
     public $region;
 
@@ -3784,7 +3784,7 @@ class CompanyInitializationModel
     public $postalCode;
 
     /**
-     * @var string Name or ISO 3166 code identifying the country.    This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries    For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
+     * @var string Name or ISO 3166 code identifying the country.     This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries     For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
      */
     public $country;
 
@@ -3991,12 +3991,12 @@ class FundingInitiateModel
     public $requestEmail;
 
     /**
-     * @var string If you have requested an email for funding setup, this is the recipient who will receive an   email inviting them to setup funding configuration for Avalara Managed Returns. The recipient can  then click on a link in the email and setup funding configuration for this company.
+     * @var string If you have requested an email for funding setup, this is the recipient who will receive an  email inviting them to setup funding configuration for Avalara Managed Returns. The recipient can  then click on a link in the email and setup funding configuration for this company.
      */
     public $fundingEmailRecipient;
 
     /**
-     * @var boolean Set this value to true to request an HTML-based funding widget that can be embedded within an   existing user interface. A user can then interact with the HTML-based funding widget to set up  funding information for the company.
+     * @var boolean Set this value to true to request an HTML-based funding widget that can be embedded within an  existing user interface. A user can then interact with the HTML-based funding widget to set up  funding information for the company.
      */
     public $requestWidget;
 
@@ -4158,12 +4158,12 @@ class TaxRegionModel
     public $city;
 
     /**
-     * @var string Name or ISO 3166 code identifying the region within the country.    This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions    For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
+     * @var string Name or ISO 3166 code identifying the region within the country.     This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions     For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
      */
     public $region;
 
     /**
-     * @var string Name or ISO 3166 code identifying the country of this jurisdiction.    This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries    For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
+     * @var string Name or ISO 3166 code identifying the country of this jurisdiction.     This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries     For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
      */
     public $country;
 
@@ -4294,12 +4294,12 @@ class ComplianceJurisdictionModel
     public $city;
 
     /**
-     * @var string Name or ISO 3166 code identifying the region within the country.    This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions    For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
+     * @var string Name or ISO 3166 code identifying the region within the country.     This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions     For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
      */
     public $region;
 
     /**
-     * @var string Name or ISO 3166 code identifying the country of this jurisdiction.    This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries    For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
+     * @var string Name or ISO 3166 code identifying the country of this jurisdiction.     This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries     For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
      */
     public $country;
 
@@ -4370,12 +4370,12 @@ class ComplianceJurisdictionRateModel
     public $jurisdictionId;
 
     /**
-     * @var string Name or ISO 3166 code identifying the country of this jurisdiction.    This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries    For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
+     * @var string Name or ISO 3166 code identifying the country of this jurisdiction.     This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries     For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
      */
     public $country;
 
     /**
-     * @var string Name or ISO 3166 code identifying the region within the country.    This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions    For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
+     * @var string Name or ISO 3166 code identifying the region within the country.     This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions     For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
      */
     public $region;
 
@@ -4438,7 +4438,7 @@ class TransactionReferenceFieldModel
     public $documentId;
 
     /**
-     * @var string Sets the sale location code (Outlet ID) for reporting this document to the tax authority.    This value is used by Avalara Managed Returns to group documents together by reporting locations  for tax authorities that require location-based reporting.
+     * @var string Sets the sale location code (Outlet ID) for reporting this document to the tax authority.     This value is used by Avalara Managed Returns to group documents together by reporting locations  for tax authorities that require location-based reporting.
      */
     public $reportingLocationCode;
 
@@ -4827,7 +4827,7 @@ class TransactionLineModel
     public $certificateId;
 
     /**
-     * @var string The customer Tax Id Number (tax_number) associated with a certificate - Sales tax calculation requests first determine if there is an applicable   ECMS entry available, and will utilize it for exemption processing. If no applicable ECMS entry is available, the AvaTax service   will determine if an Exemption Number field is populated or an Entity/Use Code is included in the sales tax calculation request,   and will perform exemption processing using either of those two options.
+     * @var string The customer Tax Id Number (tax_number) associated with a certificate - Sales tax calculation requests first determine if there is an applicable  ECMS entry available, and will utilize it for exemption processing. If no applicable ECMS entry is available, the AvaTax service  will determine if an Exemption Number field is populated or an Entity/Use Code is included in the sales tax calculation request,  and will perform exemption processing using either of those two options.
      */
     public $exemptNo;
 
@@ -4882,7 +4882,7 @@ class TransactionLineModel
     public $sourcing;
 
     /**
-     * @var float The tax for this line in this transaction.    If you used a `taxOverride` of type `taxAmount` for this line, this value   will represent the amount of your override. AvaTax will still attempt to calculate the correct tax  for this line and will store that calculated value in the `taxCalculated` field.    You can compare the `tax` and `taxCalculated` fields to check for any discrepancies  between an external tax calculation provider and the calculation performed by AvaTax.
+     * @var float The tax for this line in this transaction.     If you used a `taxOverride` of type `taxAmount` for this line, this value  will represent the amount of your override. AvaTax will still attempt to calculate the correct tax  for this line and will store that calculated value in the `taxCalculated` field.     You can compare the `tax` and `taxCalculated` fields to check for any discrepancies  between an external tax calculation provider and the calculation performed by AvaTax.
      */
     public $tax;
 
@@ -4892,7 +4892,7 @@ class TransactionLineModel
     public $taxableAmount;
 
     /**
-     * @var float The amount of tax that AvaTax calculated for the transaction.    If you used a `taxOverride` of type `taxAmount`, there may be a difference between  the `tax` field which applies your override, and the `taxCalculated` field which  represents the amount of tax that AvaTax calculated without the override.    You can compare the `tax` and `taxCalculated` fields to check for any discrepancies  between an external tax calculation provider and the calculation performed by AvaTax.
+     * @var float The amount of tax that AvaTax calculated for the transaction.     If you used a `taxOverride` of type `taxAmount`, there may be a difference between  the `tax` field which applies your override, and the `taxCalculated` field which  represents the amount of tax that AvaTax calculated without the override.     You can compare the `tax` and `taxCalculated` fields to check for any discrepancies  between an external tax calculation provider and the calculation performed by AvaTax.
      */
     public $taxCalculated;
 
@@ -4937,17 +4937,17 @@ class TransactionLineModel
     public $taxOverrideReason;
 
     /**
-     * @var boolean Indicates whether the `amount` for this line already includes tax.    If this value is `true`, the final price of this line including tax will equal the value in `amount`.     If this value is `null` or `false`, the final price will equal `amount` plus whatever taxes apply to this line.
+     * @var boolean Indicates whether the `amount` for this line already includes tax.     If this value is `true`, the final price of this line including tax will equal the value in `amount`.     If this value is `null` or `false`, the final price will equal `amount` plus whatever taxes apply to this line.
      */
     public $taxIncluded;
 
     /**
-     * @var TransactionLineDetailModel[] Optional: A list of tax details for this line item.     Tax details represent taxes being charged by various tax authorities. Taxes that appear in the `details` collection are intended to be   displayed to the customer and charged as a 'tax' on the invoice.    To fetch this list, add the query string `?$include=Details` to your URL.
+     * @var TransactionLineDetailModel[] Optional: A list of tax details for this line item.     Tax details represent taxes being charged by various tax authorities. Taxes that appear in the `details` collection are intended to be  displayed to the customer and charged as a 'tax' on the invoice.     To fetch this list, add the query string `?$include=Details` to your URL.
      */
     public $details;
 
     /**
-     * @var TransactionLineDetailModel[] Optional: A list of non-passthrough tax details for this line item.    Tax details represent taxes being charged by various tax authorities. Taxes that appear in the `nonPassthroughDetails` collection are   taxes that must be paid directly by the company and not shown to the customer.
+     * @var TransactionLineDetailModel[] Optional: A list of non-passthrough tax details for this line item.     Tax details represent taxes being charged by various tax authorities. Taxes that appear in the `nonPassthroughDetails` collection are  taxes that must be paid directly by the company and not shown to the customer.
      */
     public $nonPassthroughDetails;
 
@@ -4962,7 +4962,7 @@ class TransactionLineModel
     public $parameters;
 
     /**
-     * @var string The cross-border harmonized system code (HSCode) used to calculate tariffs and duties for this line item.   For a full list of HS codes, see `ListCrossBorderCodes()`.
+     * @var string The cross-border harmonized system code (HSCode) used to calculate tariffs and duties for this line item.  For a full list of HS codes, see `ListCrossBorderCodes()`.
      */
     public $hsCode;
 
@@ -5129,6 +5129,11 @@ class TransactionSummary
      * @var string The tax type of this tax. (See TaxType::* for a list of allowable values)
      */
     public $taxType;
+
+    /**
+     * @var string The tax subtype of this tax.
+     */
+    public $taxSubType;
 
     /**
      * @var string The name of the tax.
@@ -5906,7 +5911,7 @@ class IsoCountryModel
     public $alpha3Code;
 
     /**
-     * @var string The full name of this country in uppercase.    For names in proper or formal case, or for names in other languages, please examine the `localizedNames` element for an appropriate name.
+     * @var string The full name of this country in uppercase.     For names in proper or formal case, or for names in other languages, please examine the `localizedNames` element for an appropriate name.
      */
     public $name;
 
@@ -5916,7 +5921,7 @@ class IsoCountryModel
     public $isEuropeanUnion;
 
     /**
-     * @var IsoLocalizedName[] A list of localized names in a variety of languages.    This list is maintained by the International Standards Organization.
+     * @var IsoLocalizedName[] A list of localized names in a variety of languages.     This list is maintained by the International Standards Organization.
      */
     public $localizedNames;
 
@@ -5935,12 +5940,12 @@ class IsoLocalizedName
 {
 
     /**
-     * @var string The two-character alphanumeric code identifying the language in which this name is used.    Note that languageAlpha2Code and language3AlphaCode refer to the same language.
+     * @var string The two-character alphanumeric code identifying the language in which this name is used.     Note that languageAlpha2Code and language3AlphaCode refer to the same language.
      */
     public $languageAlpha2Code;
 
     /**
-     * @var string The three-character alphanumeric code identifying the language in which this name is used.    Note that languageAlpha2Code and language3AlphaCode refer to the same language.
+     * @var string The three-character alphanumeric code identifying the language in which this name is used.     Note that languageAlpha2Code and language3AlphaCode refer to the same language.
      */
     public $languageAlpha3Code;
 
@@ -5968,7 +5973,7 @@ class IsoRegionModel
     public $code;
 
     /**
-     * @var string The full name, using localized characters, for this region, in uppercase.    For names in proper or formal case, or for names in other languages, please examine the `localizedNames` element for an appropriate name.
+     * @var string The full name, using localized characters, for this region, in uppercase.     For names in proper or formal case, or for names in other languages, please examine the `localizedNames` element for an appropriate name.
      */
     public $name;
 
@@ -5983,7 +5988,7 @@ class IsoRegionModel
     public $streamlinedSalesTax;
 
     /**
-     * @var IsoLocalizedName[] A list of localized names in a variety of languages.    This list is maintained by the International Standards Organization.
+     * @var IsoLocalizedName[] A list of localized names in a variety of languages.     This list is maintained by the International Standards Organization.
      */
     public $localizedNames;
 
@@ -6020,7 +6025,7 @@ class EntityUseCodeModel
 /**
  * A preferred program is a customs and/or duty program that can be used to handle cross-border transactions.
  * Customers who sign up for a preferred program may obtain better terms for their customs and duty payments.
- * 
+ *  
  * To indicate that your company has signed up for a preferred program, specify the `code` value from this
  * object as the value for the `AvaTax.LC.PreferredProgram` parameter in your transaction.
  */
@@ -7441,7 +7446,7 @@ class CommunicationsTransactionTypeModel
 }
 
 /**
- * The "Unit of Measurement" model captures information about a type of measurement. Types of measurement refer to 
+ * The "Unit of Measurement" model captures information about a type of measurement. Types of measurement refer to
  * different scales for the same dimension. For example, measurements of type "Distance" may include units of measurement
  * such as meters, feet, inches, and miles.
  */
@@ -7479,7 +7484,7 @@ class UomModel
     public $measurementTypeCode;
 
     /**
-     * @var string For a particular measurement type, this is the ID number of the unit of measurement object corresponding to the   International System of Units (abbreviated SI) unit of measurement standard. This pointer allows you to select  the SI unit of measurement for a particular measurement type.
+     * @var string For a particular measurement type, this is the ID number of the unit of measurement object corresponding to the  International System of Units (abbreviated SI) unit of measurement standard. This pointer allows you to select  the SI unit of measurement for a particular measurement type.
      */
     public $siUOM;
 
@@ -7497,14 +7502,14 @@ class UomModel
 
 /**
  * Describes an element in the harmonized tariff system.
- * 
+ *  
  * According to the [United States International Trade Commission](https://www.usitc.gov), the harmonized tariff schedule is defined as follows:
- * 
- * The HTS is a U.S. nomenclature system used to classify traded goods based on their material composition, product name, and/or intended 
- * function. The HTS is designed so that each article falls into only one category. It is divided into chapters, each of which has a 2-digit 
- * number. Each product category within the various chapters is designated by 4, 6, 8, or 10 digits. The 4-digit categories are called 
+ *  
+ * The HTS is a U.S. nomenclature system used to classify traded goods based on their material composition, product name, and/or intended
+ * function. The HTS is designed so that each article falls into only one category. It is divided into chapters, each of which has a 2-digit
+ * number. Each product category within the various chapters is designated by 4, 6, 8, or 10 digits. The 4-digit categories are called
  * "headings." The 6-, 8- and 10-digit classifications are called "subheadings."
- * 
+ *  
  * Within AvaTax, the `HsCodeModel` object can refer to sections, chapters, headings, subheadings, or articles. Each object represents one
  * classification. Many of these objects have child objects underneath them; these child objects are more specific than their parent objects.
  */
@@ -7512,17 +7517,17 @@ class HsCodeModel
 {
 
     /**
-     * @var string The harmonized tariff system code for this section and chapter.     A full HS code contains more than six characters. Partial HS codes with two, four, or six characters may have child codes underneath them.  A child code is one that contains greater specificity than a parent code. It is recommended that when you identify a product you use  the most detailed code available to identify it.    Top level sections do not have HS Codes.
+     * @var string The harmonized tariff system code for this section and chapter.     A full HS code contains more than six characters. Partial HS codes with two, four, or six characters may have child codes underneath them.  A child code is one that contains greater specificity than a parent code. It is recommended that when you identify a product you use  the most detailed code available to identify it.     Top level sections do not have HS Codes.
      */
     public $hsCode;
 
     /**
-     * @var int A unique identifier for this harmonized tariff system code.    To search for a list of child codes underneath a specific HS code, search for codes where the child's `parentHsCodeId` value matches the parent's `id` value.
+     * @var int A unique identifier for this harmonized tariff system code.     To search for a list of child codes underneath a specific HS code, search for codes where the child's `parentHsCodeId` value matches the parent's `id` value.
      */
     public $id;
 
     /**
-     * @var int The unique ID number of the parent HS code or HS code prefix.    To search for a list of child codes underneath a specific HS code, search for codes where the child's `parentHsCodeId` value matches the parent's `id` value.
+     * @var int The unique ID number of the parent HS code or HS code prefix.     To search for a list of child codes underneath a specific HS code, search for codes where the child's `parentHsCodeId` value matches the parent's `id` value.
      */
     public $parentHsCodeId;
 
@@ -7542,12 +7547,12 @@ class HsCodeModel
     public $destinationCountry;
 
     /**
-     * @var string For codes that have been expired or defined on specific dates, this value indicates the earliest  date for which this code is considered valid.    If this value is null, this code can be used for any valid date earlier than its end date.
+     * @var string For codes that have been expired or defined on specific dates, this value indicates the earliest  date for which this code is considered valid.     If this value is null, this code can be used for any valid date earlier than its end date.
      */
     public $effDate;
 
     /**
-     * @var string For codes that have been expired or defined on specific dates, this value indicates the latest  date for which this code is considered valid.    If this value is null, this code can be used for any valid date later than its effective date.
+     * @var string For codes that have been expired or defined on specific dates, this value indicates the latest  date for which this code is considered valid.     If this value is null, this code can be used for any valid date later than its effective date.
      */
     public $endDate;
 
@@ -7595,19 +7600,19 @@ class PostalCodeModel
  * A company-distance-threshold model indicates the distance between a company
  * and the taxing borders of various countries. Distance thresholds are necessary
  * to correctly calculate some value-added taxes.
- * 
+ *  
  * Distance thresholds only apply to sales of goods in certain countries. A distance threshold
  * is applied for each ship-from/ship-to combination of countries. The threshold amount is defined by
  * the ship-to country.
- * 
+ *  
  * Generally, if you have exceeded a distance threshold for taxes between a pair of countries, your tax calculation
  * will be determined to be the rate in the destination country. If you have not exceeded the threshold,
  * your tax calculation will be determined to be the rate in the origin country.
- * 
+ *  
  * The amount of a threshold is not tracked or managed in AvaTax, but the decision of your tax compliance department
- * as to whether you have exceeded this threshold is maintained in this object. 
- * 
- * By default, you are considered to have exceeded tax thresholds. If you wish to change this default, you can create 
+ * as to whether you have exceeded this threshold is maintained in this object.
+ *  
+ * By default, you are considered to have exceeded tax thresholds. If you wish to change this default, you can create
  * a company-distance-threshold object to select the correct behavior for this origin/destination tax calculation process.
  */
 class CompanyDistanceThresholdModel
@@ -7624,12 +7629,12 @@ class CompanyDistanceThresholdModel
     public $companyId;
 
     /**
-     * @var string The origin country for this threshold.    This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries    For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
+     * @var string The origin country for this threshold.     This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries     For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
      */
     public $originCountry;
 
     /**
-     * @var string The destination country for this threshold.    This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries    For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
+     * @var string The destination country for this threshold.     This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries     For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
      */
     public $destinationCountry;
 
@@ -7644,12 +7649,12 @@ class CompanyDistanceThresholdModel
     public $endDate;
 
     /**
-     * @var boolean True if your tax professional has determined that the value-added tax distance threshold is exceeded for this pair of countries.    If you set this value to `false`, your value added taxes will be calculated using the origin country. Otherwise, value  added taxes will be calculated on the destination country.
+     * @var boolean True if your tax professional has determined that the value-added tax distance threshold is exceeded for this pair of countries.     If you set this value to `false`, your value added taxes will be calculated using the origin country. Otherwise, value  added taxes will be calculated on the destination country.
      */
     public $thresholdExceeded;
 
     /**
-     * @var string Indicates the distance threshold type.    This value can be either `Sale` or `Purchase`.
+     * @var string Indicates the distance threshold type.     This value can be either `Sale` or `Purchase`.
      */
     public $type;
 
@@ -9930,9 +9935,19 @@ class FirmClientLinkageOutputModel
     public $firmAccountId;
 
     /**
+     * @var string FIrm Account name
+     */
+    public $firmAccountName;
+
+    /**
      * @var int Client Account to be linked with the firm
      */
     public $clientAccountId;
+
+    /**
+     * @var string Client Account name
+     */
+    public $clientAccountName;
 
     /**
      * @var string Offer requested
@@ -10165,17 +10180,17 @@ class CommitMultiDocumentModel
 {
 
     /**
-     * @var string Represents the unique code of this MultiDocument transaction.    A MultiDocument transaction is uniquely identified by its `accountId`, `code`, and `type`. ///
+     * @var string Represents the unique code of this MultiDocument transaction.     A MultiDocument transaction is uniquely identified by its `accountId`, `code`, and `type`. ///
      */
     public $code;
 
     /**
-     * @var string Represents the document type of this MultiDocument transaction. For more information about  document types, see [DocumentType](https://developer.avalara.com/api-reference/avatax/rest/v2/models/enums/DocumentType/).    A MultiDocument transaction is uniquely identified by its `accountId`, `code`, and `type`. (See DocumentType::* for a list of allowable values)
+     * @var string Represents the document type of this MultiDocument transaction. For more information about  document types, see [DocumentType](https://developer.avalara.com/api-reference/avatax/rest/v2/models/enums/DocumentType/).     A MultiDocument transaction is uniquely identified by its `accountId`, `code`, and `type`. (See DocumentType::* for a list of allowable values)
      */
     public $type;
 
     /**
-     * @var boolean Set this value to be `true` to commit this transaction.    Committing a transaction allows it to be reported on a tax filing. Uncommitted transactions will not be reported.
+     * @var boolean Set this value to be `true` to commit this transaction.     Committing a transaction allows it to be reported on a tax filing. Uncommitted transactions will not be reported.
      */
     public $commit;
 
@@ -10256,12 +10271,12 @@ class RefundTransactionModel
     public $refundDate;
 
     /**
-     * @var string Type of this refund.     To submit a full refund, specify `Full`.     To refund only specific lines from the transaction, specify `Partial` and indicate the lines you wish to apply in the `refundLines` field.    To refund the tax that was paid in the previous transaction, specify `TaxOnly`.    To issue a percentage-based discount, specify `Percentage`. (See RefundType::* for a list of allowable values)
+     * @var string Type of this refund.     To submit a full refund, specify `Full`.     To refund only specific lines from the transaction, specify `Partial` and indicate the lines you wish to apply in the `refundLines` field.     To refund the tax that was paid in the previous transaction, specify `TaxOnly`.     To issue a percentage-based discount, specify `Percentage`. (See RefundType::* for a list of allowable values)
      */
     public $refundType;
 
     /**
-     * @var float The percentage for refund.    This value only applies if you choose `refundType = Percentage` or `refundType = Partial`.
+     * @var float The percentage for refund.     This value only applies if you choose `refundType = Percentage` or `refundType = Partial`.
      */
     public $refundPercentage;
 
@@ -10304,7 +10319,7 @@ class CreateMultiDocumentModel
     public $allowAdjust;
 
     /**
-     * @var string Specifies the type of document to create. A document type ending with `Invoice` is a permanent transaction  that will be recorded in AvaTax. A document type ending with `Order` is a temporary estimate that will not  be preserved.    If you omit this value, the API will assume you want to create a `SalesOrder`. (See DocumentType::* for a list of allowable values)
+     * @var string Specifies the type of document to create. A document type ending with `Invoice` is a permanent transaction  that will be recorded in AvaTax. A document type ending with `Order` is a temporary estimate that will not  be preserved.     If you omit this value, the API will assume you want to create a `SalesOrder`. (See DocumentType::* for a list of allowable values)
      */
     public $type;
 
@@ -10314,7 +10329,7 @@ class CreateMultiDocumentModel
     public $companyCode;
 
     /**
-     * @var string Transaction Date - The date on the invoice, purchase order, etc.    By default, this date will be used to calculate the tax rates for the transaction. If you wish to use a  different date to calculate tax rates, please specify a `taxOverride` of type `taxDate`.
+     * @var string Transaction Date - The date on the invoice, purchase order, etc.     By default, this date will be used to calculate the tax rates for the transaction. If you wish to use a  different date to calculate tax rates, please specify a `taxOverride` of type `taxDate`.
      */
     public $date;
 
@@ -10334,7 +10349,7 @@ class CreateMultiDocumentModel
     public $customerUsageType;
 
     /**
-     * @var string Entity Use Code - The client application customer or usage type. For a list of   available usage types, use [ListEntityUseCodes](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListEntityUseCodes/) API.
+     * @var string Entity Use Code - The client application customer or usage type. For a list of  available usage types, use [ListEntityUseCodes](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListEntityUseCodes/) API.
      */
     public $entityUseCode;
 
@@ -10344,12 +10359,12 @@ class CreateMultiDocumentModel
     public $discount;
 
     /**
-     * @var string Purchase Order Number for this document.    This is required for single use exemption certificates to match the order and invoice with the certificate.
+     * @var string Purchase Order Number for this document.     This is required for single use exemption certificates to match the order and invoice with the certificate.
      */
     public $purchaseOrderNo;
 
     /**
-     * @var string Exemption Number for this document.    If you specify an exemption number for this document, this document will be considered exempt, and you  may be asked to provide proof of this exemption certificate in the event that you are asked by an auditor  to verify your exemptions.  Note: This is same as 'exemptNo' in TransactionModel.
+     * @var string Exemption Number for this document.     If you specify an exemption number for this document, this document will be considered exempt, and you  may be asked to provide proof of this exemption certificate in the event that you are asked by an auditor  to verify your exemptions.  Note: This is same as 'exemptNo' in TransactionModel.
      */
     public $exemptionNo;
 
@@ -10359,22 +10374,22 @@ class CreateMultiDocumentModel
     public $addresses;
 
     /**
-     * @var TransactionParameterModel[] Special parameters for this transaction.    To get a full list of available parameters, please use the [ListParameters](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListParameters/) endpoint.
+     * @var TransactionParameterModel[] Special parameters for this transaction.     To get a full list of available parameters, please use the [ListParameters](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListParameters/) endpoint.
      */
     public $parameters;
 
     /**
-     * @var string Customer-provided Reference Code with information about this transaction.    This field could be used to reference the original document for a return invoice, or for any other  reference purpose.
+     * @var string Customer-provided Reference Code with information about this transaction.     This field could be used to reference the original document for a return invoice, or for any other  reference purpose.
      */
     public $referenceCode;
 
     /**
-     * @var string Sets the sale location code (Outlet ID) for reporting this document to the tax authority.    This value is used by Avalara Managed Returns to group documents together by reporting locations  for tax authorities that require location-based reporting.
+     * @var string Sets the sale location code (Outlet ID) for reporting this document to the tax authority.     This value is used by Avalara Managed Returns to group documents together by reporting locations  for tax authorities that require location-based reporting.
      */
     public $reportingLocationCode;
 
     /**
-     * @var boolean Causes the document to be committed if true. This option is only applicable for invoice document   types, not orders.
+     * @var boolean Causes the document to be committed if true. This option is only applicable for invoice document  types, not orders.
      */
     public $commit;
 
@@ -10394,7 +10409,7 @@ class CreateMultiDocumentModel
     public $currencyCode;
 
     /**
-     * @var string Specifies whether the tax calculation is handled Local, Remote, or Automatic (default). This only   applies when using an AvaLocal server. (See ServiceMode::* for a list of allowable values)
+     * @var string Specifies whether the tax calculation is handled Local, Remote, or Automatic (default). This only  applies when using an AvaLocal server. (See ServiceMode::* for a list of allowable values)
      */
     public $serviceMode;
 
@@ -10414,12 +10429,12 @@ class CreateMultiDocumentModel
     public $posLaneCode;
 
     /**
-     * @var string VAT business identification number for the customer for this transaction. This number will be used for all lines   in the transaction, except for those lines where you have defined a different business identification number.    If you specify a VAT business identification number for the customer in this transaction and you have also set up  a business identification number for your company during company setup, this transaction will be treated as a   business-to-business transaction for VAT purposes and it will be calculated according to VAT tax rules.
+     * @var string VAT business identification number for the customer for this transaction. This number will be used for all lines  in the transaction, except for those lines where you have defined a different business identification number.     If you specify a VAT business identification number for the customer in this transaction and you have also set up  a business identification number for your company during company setup, this transaction will be treated as a  business-to-business transaction for VAT purposes and it will be calculated according to VAT tax rules.
      */
     public $businessIdentificationNo;
 
     /**
-     * @var boolean Specifies if the transaction should have value-added and cross-border taxes calculated with the seller as the importer of record.    Some taxes only apply if the seller is the importer of record for a product. In cases where companies are working together to  ship products, there may be mutual agreement as to which company is the entity designated as importer of record. The importer  of record will then be the company designated to pay taxes marked as being obligated to the importer of record.    Set this value to `true` to consider your company as the importer of record and collect these taxes.    This value may also be set at the Nexus level. See `NexusModel` for more information.
+     * @var boolean Specifies if the transaction should have value-added and cross-border taxes calculated with the seller as the importer of record.     Some taxes only apply if the seller is the importer of record for a product. In cases where companies are working together to  ship products, there may be mutual agreement as to which company is the entity designated as importer of record. The importer  of record will then be the company designated to pay taxes marked as being obligated to the importer of record.     Set this value to `true` to consider your company as the importer of record and collect these taxes.     This value may also be set at the Nexus level. See `NexusModel` for more information.
      */
     public $isSellerImporterOfRecord;
 
@@ -10462,17 +10477,17 @@ class MultiDocumentLineItemModel
     public $number;
 
     /**
-     * @var float Quantity of items in this line. This quantity value should always be a positive value representing the quantity of product that changed hands, even when handling returns or refunds.    If not provided, or if set to zero, the quantity value is assumed to be one (1).
+     * @var float Quantity of items in this line. This quantity value should always be a positive value representing the quantity of product that changed hands, even when handling returns or refunds.     If not provided, or if set to zero, the quantity value is assumed to be one (1).
      */
     public $quantity;
 
     /**
-     * @var float Total amount for this line. The amount represents the net currency value that changed hands from the customer (represented by the `customerCode` field) to the company (represented by the `companyCode`) field.    For sale transactions, this value must be positive. It indicates the amount of money paid by the customer to the company.    For refund or return transactions, this value must be negative.
+     * @var float Total amount for this line. The amount represents the net currency value that changed hands from the customer (represented by the `customerCode` field) to the company (represented by the `companyCode`) field.     For sale transactions, this value must be positive. It indicates the amount of money paid by the customer to the company.     For refund or return transactions, this value must be negative.
      */
     public $amount;
 
     /**
-     * @var AddressesModel The addresses to use for this transaction line.    If you set this value to `null`, or if you omit this element from your API call, then instead the transaction  will use the `addresses` from the document level.    If you specify any other value besides `null`, only addresses specified for this line will be used for this line.
+     * @var AddressesModel The addresses to use for this transaction line.     If you set this value to `null`, or if you omit this element from your API call, then instead the transaction  will use the `addresses` from the document level.     If you specify any other value besides `null`, only addresses specified for this line will be used for this line.
      */
     public $addresses;
 
@@ -10487,7 +10502,7 @@ class MultiDocumentLineItemModel
     public $customerUsageType;
 
     /**
-     * @var string Entity Use Code - The client application customer or usage type. This field allows you to designate a type of usage that   may make this transaction considered exempt by reason of exempt usage.    For a list of entity use codes, see the Definitions API `ListEntityUseCodes`.
+     * @var string Entity Use Code - The client application customer or usage type. This field allows you to designate a type of usage that  may make this transaction considered exempt by reason of exempt usage.     For a list of entity use codes, see the Definitions API `ListEntityUseCodes`.
      */
     public $entityUseCode;
 
@@ -10497,42 +10512,42 @@ class MultiDocumentLineItemModel
     public $itemCode;
 
     /**
-     * @var string The customer Tax Id Number (tax_number) associated with a certificate - Sales tax calculation requests first determine if there is an applicable   ECMS entry available, and will utilize it for exemption processing. If no applicable ECMS entry is available, the AvaTax service   will determine if an Exemption Number field is populated or an Entity/Use Code is included in the sales tax calculation request,   and will perform exemption processing using either of those two options.  Note: This is same as 'exemptNo' in TransactionModel.
+     * @var string The customer Tax Id Number (tax_number) associated with a certificate - Sales tax calculation requests first determine if there is an applicable  ECMS entry available, and will utilize it for exemption processing. If no applicable ECMS entry is available, the AvaTax service  will determine if an Exemption Number field is populated or an Entity/Use Code is included in the sales tax calculation request,  and will perform exemption processing using either of those two options.  Note: This is same as 'exemptNo' in TransactionModel.
      */
     public $exemptionCode;
 
     /**
-     * @var boolean True if the document discount should be applied to this line. If this value is false, or not provided, discounts will not be   applied to this line even if they are specified on the root `discount` element.
+     * @var boolean True if the document discount should be applied to this line. If this value is false, or not provided, discounts will not be  applied to this line even if they are specified on the root `discount` element.
      */
     public $discounted;
 
     /**
-     * @var boolean Indicates whether the `amount` for this line already includes tax.    If this value is `true`, the final price of this line including tax will equal the value in `amount`.     If this value is `null` or `false`, the final price will equal `amount` plus whatever taxes apply to this line.
+     * @var boolean Indicates whether the `amount` for this line already includes tax.     If this value is `true`, the final price of this line including tax will equal the value in `amount`.     If this value is `null` or `false`, the final price will equal `amount` plus whatever taxes apply to this line.
      */
     public $taxIncluded;
 
     /**
-     * @var string Revenue Account (Customer Defined Field).    This field is available for you to use to provide whatever information your implementation requires. It does not affect tax calculation.
+     * @var string Revenue Account (Customer Defined Field).     This field is available for you to use to provide whatever information your implementation requires. It does not affect tax calculation.
      */
     public $revenueAccount;
 
     /**
-     * @var string Ref1 (Customer Defined Field)    This field is available for you to use to provide whatever information your implementation requires. It does not affect tax calculation.
+     * @var string Ref1 (Customer Defined Field)     This field is available for you to use to provide whatever information your implementation requires. It does not affect tax calculation.
      */
     public $ref1;
 
     /**
-     * @var string Ref2 (Customer Defined Field)    This field is available for you to use to provide whatever information your implementation requires. It does not affect tax calculation.
+     * @var string Ref2 (Customer Defined Field)     This field is available for you to use to provide whatever information your implementation requires. It does not affect tax calculation.
      */
     public $ref2;
 
     /**
-     * @var string Item description.    For Streamlined Sales Tax (SST) customers, this field is required if an unmapped `itemCode` is used.
+     * @var string Item description.     For Streamlined Sales Tax (SST) customers, this field is required if an unmapped `itemCode` is used.
      */
     public $description;
 
     /**
-     * @var string VAT business identification number for the customer for this line item. If you leave this field empty,  this line item will use whatever business identification number you provided at the transaction level.    If you specify a VAT business identification number for the customer in this transaction and you have also set up  a business identification number for your company during company setup, this transaction will be treated as a   business-to-business transaction for VAT purposes and it will be calculated according to VAT tax rules.
+     * @var string VAT business identification number for the customer for this line item. If you leave this field empty,  this line item will use whatever business identification number you provided at the transaction level.     If you specify a VAT business identification number for the customer in this transaction and you have also set up  a business identification number for your company during company setup, this transaction will be treated as a  business-to-business transaction for VAT purposes and it will be calculated according to VAT tax rules.
      */
     public $businessIdentificationNo;
 
@@ -10542,12 +10557,12 @@ class MultiDocumentLineItemModel
     public $taxOverride;
 
     /**
-     * @var TransactionLineParameterModel[] Special parameters that apply to this line within this transaction.    To get a full list of available parameters, please use the `ListParameters` API.
+     * @var TransactionLineParameterModel[] Special parameters that apply to this line within this transaction.     To get a full list of available parameters, please use the `ListParameters` API.
      */
     public $parameters;
 
     /**
-     * @var string The Item code for Custom Duty / Global Import tax determination  Harmonized Tariff System code for this transaction.    For a list of harmonized tariff codes, see the Definitions API for harmonized tariff codes.
+     * @var string The Item code for Custom Duty / Global Import tax determination  Harmonized Tariff System code for this transaction.     For a list of harmonized tariff codes, see the Definitions API for harmonized tariff codes.
      */
     public $hsCode;
 
@@ -10555,19 +10570,19 @@ class MultiDocumentLineItemModel
 
 /**
  * Information about all the addresses involved in this transaction.
- * 
+ *  
  * For a physical in-person transaction at a retail point-of-sale location, please specify only one address using
  * the `singleLocation` field.
- * 
+ *  
  * For a transaction that was shipped, delivered, or provided from an origin location such as a warehouse to
  * a destination location such as a customer, please specify the `shipFrom` and `shipTo` addresses.
- * 
+ *  
  * In the United States, some jurisdictions recognize the address types `pointOfOrderOrigin` and `pointOfOrderAcceptance`.
  * These address types affect the sourcing models of some transactions.
- * 
- * If latitude and longitude information is provided for any of these addresses along with line, city, region, country and postal code information, 
- * we will be using only latitude and longitude and will discard line, city, region, country and postal code information for the transaction. 
- * Please ensure that you have the correct latitude/longitude information for the addresses prior to using the API. 
+ *  
+ * If latitude and longitude information is provided for any of these addresses along with line, city, region, country and postal code information,
+ * we will be using only latitude and longitude and will discard line, city, region, country and postal code information for the transaction.
+ * Please ensure that you have the correct latitude/longitude information for the addresses prior to using the API.
  * If you provide either latitude or longitude information but not both, we will be using the line, city, region, country and postal code information for the addresses.
  */
 class AddressesModel
@@ -10635,7 +10650,7 @@ class AddressLocationInfo
 {
 
     /**
-     * @var string If you wish to use the address of an existing location for this company, specify the address here.  Otherwise, leave this value empty.    The `locationCode` field on this object allows you to quickly use the address of an existing `locationModel` object instead  of having to retype the address completely.    This field does not affect the behavior of transactions that must be filed on location-based tax returns. To specify how a  transaction will be reported on location-based tax returns, please see the `reportingLocationCode` field   on the [CreateTransactionModel](https://developer.avalara.com/api-reference/avatax/rest/v2/models/CreateTransactionModel/) element.
+     * @var string If you wish to use the address of an existing location for this company, specify the address here.  Otherwise, leave this value empty.     The `locationCode` field on this object allows you to quickly use the address of an existing `locationModel` object instead  of having to retype the address completely.     This field does not affect the behavior of transactions that must be filed on location-based tax returns. To specify how a  transaction will be reported on location-based tax returns, please see the `reportingLocationCode` field  on the [CreateTransactionModel](https://developer.avalara.com/api-reference/avatax/rest/v2/models/CreateTransactionModel/) element.
      */
     public $locationCode;
 
@@ -10660,12 +10675,12 @@ class AddressLocationInfo
     public $city;
 
     /**
-     * @var string Name or ISO 3166 code identifying the region within the country.    This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions    For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
+     * @var string Name or ISO 3166 code identifying the region within the country.     This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions     For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
      */
     public $region;
 
     /**
-     * @var string Name or ISO 3166 code identifying the country.    This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries    For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
+     * @var string Name or ISO 3166 code identifying the country.     This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries     For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
      */
     public $country;
 
@@ -10698,7 +10713,7 @@ class AdjustMultiDocumentModel
     public $adjustmentReason;
 
     /**
-     * @var string If the AdjustmentReason is "Other", specify the reason here.    This is required when the AdjustmentReason is 8 (Other).
+     * @var string If the AdjustmentReason is "Other", specify the reason here.     This is required when the AdjustmentReason is 8 (Other).
      */
     public $adjustDescription;
 
@@ -10734,12 +10749,12 @@ class AuditMultiDocumentModel
     public $reconstructed;
 
     /**
-     * @var string Represents the unique code of this MultiDocument transaction.    A MultiDocument transaction is uniquely identified by its `accountId`, `code`, and `type`.
+     * @var string Represents the unique code of this MultiDocument transaction.     A MultiDocument transaction is uniquely identified by its `accountId`, `code`, and `type`.
      */
     public $code;
 
     /**
-     * @var string Represents the document type of this MultiDocument transaction. For more information about  document types, see [DocumentType](https://developer.avalara.com/api-reference/avatax/rest/v2/models/enums/DocumentType/).    A MultiDocument transaction is uniquely identified by its `accountId`, `code`, and `type`. (See DocumentType::* for a list of allowable values)
+     * @var string Represents the document type of this MultiDocument transaction. For more information about  document types, see [DocumentType](https://developer.avalara.com/api-reference/avatax/rest/v2/models/enums/DocumentType/).     A MultiDocument transaction is uniquely identified by its `accountId`, `code`, and `type`. (See DocumentType::* for a list of allowable values)
      */
     public $type;
 
@@ -10814,7 +10829,7 @@ class CreateTransactionModel
     public $lines;
 
     /**
-     * @var string Specifies the type of document to create. A document type ending with `Invoice` is a permanent transaction  that will be recorded in AvaTax. A document type ending with `Order` is a temporary estimate that will not  be preserved.    If you omit this value, the API will assume you want to create a `SalesOrder`. (See DocumentType::* for a list of allowable values)
+     * @var string Specifies the type of document to create. A document type ending with `Invoice` is a permanent transaction  that will be recorded in AvaTax. A document type ending with `Order` is a temporary estimate that will not  be preserved.     If you omit this value, the API will assume you want to create a `SalesOrder`. (See DocumentType::* for a list of allowable values)
      */
     public $type;
 
@@ -10824,7 +10839,7 @@ class CreateTransactionModel
     public $companyCode;
 
     /**
-     * @var string Transaction Date - The date on the invoice, purchase order, etc.    By default, this date will be used to calculate the tax rates for the transaction. If you wish to use a  different date to calculate tax rates, please specify a `taxOverride` of type `taxDate`.
+     * @var string Transaction Date - The date on the invoice, purchase order, etc.     By default, this date will be used to calculate the tax rates for the transaction. If you wish to use a  different date to calculate tax rates, please specify a `taxOverride` of type `taxDate`.
      */
     public $date;
 
@@ -10844,7 +10859,7 @@ class CreateTransactionModel
     public $customerUsageType;
 
     /**
-     * @var string Entity Use Code - The client application customer or usage type. For a list of   available usage types, use [ListEntityUseCodes](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListEntityUseCodes/) API.
+     * @var string Entity Use Code - The client application customer or usage type. For a list of  available usage types, use [ListEntityUseCodes](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListEntityUseCodes/) API.
      */
     public $entityUseCode;
 
@@ -10854,12 +10869,12 @@ class CreateTransactionModel
     public $discount;
 
     /**
-     * @var string Purchase Order Number for this document.    This is required for single use exemption certificates to match the order and invoice with the certificate.
+     * @var string Purchase Order Number for this document.     This is required for single use exemption certificates to match the order and invoice with the certificate.
      */
     public $purchaseOrderNo;
 
     /**
-     * @var string Exemption Number for this document.    If you specify an exemption number for this document, this document will be considered exempt, and you  may be asked to provide proof of this exemption certificate in the event that you are asked by an auditor  to verify your exemptions.  Note: This is same as 'exemptNo' in TransactionModel.
+     * @var string Exemption Number for this document.     If you specify an exemption number for this document, this document will be considered exempt, and you  may be asked to provide proof of this exemption certificate in the event that you are asked by an auditor  to verify your exemptions.  Note: This is same as 'exemptNo' in TransactionModel.
      */
     public $exemptionNo;
 
@@ -10869,22 +10884,22 @@ class CreateTransactionModel
     public $addresses;
 
     /**
-     * @var TransactionParameterModel[] Special parameters for this transaction.    To get a full list of available parameters, please use the [ListParameters](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListParameters/) endpoint.
+     * @var TransactionParameterModel[] Special parameters for this transaction.     To get a full list of available parameters, please use the [ListParameters](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListParameters/) endpoint.
      */
     public $parameters;
 
     /**
-     * @var string Customer-provided Reference Code with information about this transaction.    This field could be used to reference the original document for a return invoice, or for any other  reference purpose.
+     * @var string Customer-provided Reference Code with information about this transaction.     This field could be used to reference the original document for a return invoice, or for any other  reference purpose.
      */
     public $referenceCode;
 
     /**
-     * @var string Sets the sale location code (Outlet ID) for reporting this document to the tax authority.    This value is used by Avalara Managed Returns to group documents together by reporting locations  for tax authorities that require location-based reporting.
+     * @var string Sets the sale location code (Outlet ID) for reporting this document to the tax authority.     This value is used by Avalara Managed Returns to group documents together by reporting locations  for tax authorities that require location-based reporting.
      */
     public $reportingLocationCode;
 
     /**
-     * @var boolean Causes the document to be committed if true. This option is only applicable for invoice document   types, not orders.
+     * @var boolean Causes the document to be committed if true. This option is only applicable for invoice document  types, not orders.
      */
     public $commit;
 
@@ -10904,7 +10919,7 @@ class CreateTransactionModel
     public $currencyCode;
 
     /**
-     * @var string Specifies whether the tax calculation is handled Local, Remote, or Automatic (default). This only   applies when using an AvaLocal server. (See ServiceMode::* for a list of allowable values)
+     * @var string Specifies whether the tax calculation is handled Local, Remote, or Automatic (default). This only  applies when using an AvaLocal server. (See ServiceMode::* for a list of allowable values)
      */
     public $serviceMode;
 
@@ -10924,12 +10939,12 @@ class CreateTransactionModel
     public $posLaneCode;
 
     /**
-     * @var string VAT business identification number for the customer for this transaction. This number will be used for all lines   in the transaction, except for those lines where you have defined a different business identification number.    If you specify a VAT business identification number for the customer in this transaction and you have also set up  a business identification number for your company during company setup, this transaction will be treated as a   business-to-business transaction for VAT purposes and it will be calculated according to VAT tax rules.
+     * @var string VAT business identification number for the customer for this transaction. This number will be used for all lines  in the transaction, except for those lines where you have defined a different business identification number.     If you specify a VAT business identification number for the customer in this transaction and you have also set up  a business identification number for your company during company setup, this transaction will be treated as a  business-to-business transaction for VAT purposes and it will be calculated according to VAT tax rules.
      */
     public $businessIdentificationNo;
 
     /**
-     * @var boolean Specifies if the transaction should have value-added and cross-border taxes calculated with the seller as the importer of record.    Some taxes only apply if the seller is the importer of record for a product. In cases where companies are working together to  ship products, there may be mutual agreement as to which company is the entity designated as importer of record. The importer  of record will then be the company designated to pay taxes marked as being obligated to the importer of record.    Set this value to `true` to consider your company as the importer of record and collect these taxes.    This value may also be set at the Nexus level. See `NexusModel` for more information.
+     * @var boolean Specifies if the transaction should have value-added and cross-border taxes calculated with the seller as the importer of record.     Some taxes only apply if the seller is the importer of record for a product. In cases where companies are working together to  ship products, there may be mutual agreement as to which company is the entity designated as importer of record. The importer  of record will then be the company designated to pay taxes marked as being obligated to the importer of record.     Set this value to `true` to consider your company as the importer of record and collect these taxes.     This value may also be set at the Nexus level. See `NexusModel` for more information.
      */
     public $isSellerImporterOfRecord;
 
@@ -10962,17 +10977,17 @@ class LineItemModel
     public $number;
 
     /**
-     * @var float Quantity of items in this line. This quantity value should always be a positive value representing the quantity of product that changed hands, even when handling returns or refunds.    If not provided, or if set to zero, the quantity value is assumed to be one (1).
+     * @var float Quantity of items in this line. This quantity value should always be a positive value representing the quantity of product that changed hands, even when handling returns or refunds.     If not provided, or if set to zero, the quantity value is assumed to be one (1).
      */
     public $quantity;
 
     /**
-     * @var float Total amount for this line. The amount represents the net currency value that changed hands from the customer (represented by the `customerCode` field) to the company (represented by the `companyCode`) field.    For sale transactions, this value must be positive. It indicates the amount of money paid by the customer to the company.    For refund or return transactions, this value must be negative.
+     * @var float Total amount for this line. The amount represents the net currency value that changed hands from the customer (represented by the `customerCode` field) to the company (represented by the `companyCode`) field.     For sale transactions, this value must be positive. It indicates the amount of money paid by the customer to the company.     For refund or return transactions, this value must be negative.
      */
     public $amount;
 
     /**
-     * @var AddressesModel The addresses to use for this transaction line.    If you set this value to `null`, or if you omit this element from your API call, then instead the transaction  will use the `addresses` from the document level.    If you specify any other value besides `null`, only addresses specified for this line will be used for this line.
+     * @var AddressesModel The addresses to use for this transaction line.     If you set this value to `null`, or if you omit this element from your API call, then instead the transaction  will use the `addresses` from the document level.     If you specify any other value besides `null`, only addresses specified for this line will be used for this line.
      */
     public $addresses;
 
@@ -10987,7 +11002,7 @@ class LineItemModel
     public $customerUsageType;
 
     /**
-     * @var string Entity Use Code - The client application customer or usage type. This field allows you to designate a type of usage that   may make this transaction considered exempt by reason of exempt usage.    For a list of entity use codes, see the Definitions API `ListEntityUseCodes`.
+     * @var string Entity Use Code - The client application customer or usage type. This field allows you to designate a type of usage that  may make this transaction considered exempt by reason of exempt usage.     For a list of entity use codes, see the Definitions API `ListEntityUseCodes`.
      */
     public $entityUseCode;
 
@@ -10997,42 +11012,42 @@ class LineItemModel
     public $itemCode;
 
     /**
-     * @var string The customer Tax Id Number (tax_number) associated with a certificate - Sales tax calculation requests first determine if there is an applicable   ECMS entry available, and will utilize it for exemption processing. If no applicable ECMS entry is available, the AvaTax service   will determine if an Exemption Number field is populated or an Entity/Use Code is included in the sales tax calculation request,   and will perform exemption processing using either of those two options.  Note: This is same as 'exemptNo' in TransactionModel.
+     * @var string The customer Tax Id Number (tax_number) associated with a certificate - Sales tax calculation requests first determine if there is an applicable  ECMS entry available, and will utilize it for exemption processing. If no applicable ECMS entry is available, the AvaTax service  will determine if an Exemption Number field is populated or an Entity/Use Code is included in the sales tax calculation request,  and will perform exemption processing using either of those two options.  Note: This is same as 'exemptNo' in TransactionModel.
      */
     public $exemptionCode;
 
     /**
-     * @var boolean True if the document discount should be applied to this line. If this value is false, or not provided, discounts will not be   applied to this line even if they are specified on the root `discount` element.
+     * @var boolean True if the document discount should be applied to this line. If this value is false, or not provided, discounts will not be  applied to this line even if they are specified on the root `discount` element.
      */
     public $discounted;
 
     /**
-     * @var boolean Indicates whether the `amount` for this line already includes tax.    If this value is `true`, the final price of this line including tax will equal the value in `amount`.     If this value is `null` or `false`, the final price will equal `amount` plus whatever taxes apply to this line.
+     * @var boolean Indicates whether the `amount` for this line already includes tax.     If this value is `true`, the final price of this line including tax will equal the value in `amount`.     If this value is `null` or `false`, the final price will equal `amount` plus whatever taxes apply to this line.
      */
     public $taxIncluded;
 
     /**
-     * @var string Revenue Account (Customer Defined Field).    This field is available for you to use to provide whatever information your implementation requires. It does not affect tax calculation.
+     * @var string Revenue Account (Customer Defined Field).     This field is available for you to use to provide whatever information your implementation requires. It does not affect tax calculation.
      */
     public $revenueAccount;
 
     /**
-     * @var string Ref1 (Customer Defined Field)    This field is available for you to use to provide whatever information your implementation requires. It does not affect tax calculation.
+     * @var string Ref1 (Customer Defined Field)     This field is available for you to use to provide whatever information your implementation requires. It does not affect tax calculation.
      */
     public $ref1;
 
     /**
-     * @var string Ref2 (Customer Defined Field)    This field is available for you to use to provide whatever information your implementation requires. It does not affect tax calculation.
+     * @var string Ref2 (Customer Defined Field)     This field is available for you to use to provide whatever information your implementation requires. It does not affect tax calculation.
      */
     public $ref2;
 
     /**
-     * @var string Item description.    For Streamlined Sales Tax (SST) customers, this field is required if an unmapped `itemCode` is used.
+     * @var string Item description.     For Streamlined Sales Tax (SST) customers, this field is required if an unmapped `itemCode` is used.
      */
     public $description;
 
     /**
-     * @var string VAT business identification number for the customer for this line item. If you leave this field empty,  this line item will use whatever business identification number you provided at the transaction level.    If you specify a VAT business identification number for the customer in this transaction and you have also set up  a business identification number for your company during company setup, this transaction will be treated as a   business-to-business transaction for VAT purposes and it will be calculated according to VAT tax rules.
+     * @var string VAT business identification number for the customer for this line item. If you leave this field empty,  this line item will use whatever business identification number you provided at the transaction level.     If you specify a VAT business identification number for the customer in this transaction and you have also set up  a business identification number for your company during company setup, this transaction will be treated as a  business-to-business transaction for VAT purposes and it will be calculated according to VAT tax rules.
      */
     public $businessIdentificationNo;
 
@@ -11042,12 +11057,12 @@ class LineItemModel
     public $taxOverride;
 
     /**
-     * @var TransactionLineParameterModel[] Special parameters that apply to this line within this transaction.    To get a full list of available parameters, please use the `ListParameters` API.
+     * @var TransactionLineParameterModel[] Special parameters that apply to this line within this transaction.     To get a full list of available parameters, please use the `ListParameters` API.
      */
     public $parameters;
 
     /**
-     * @var string The Item code for Custom Duty / Global Import tax determination  Harmonized Tariff System code for this transaction.    For a list of harmonized tariff codes, see the Definitions API for harmonized tariff codes.
+     * @var string The Item code for Custom Duty / Global Import tax determination  Harmonized Tariff System code for this transaction.     For a list of harmonized tariff codes, see the Definitions API for harmonized tariff codes.
      */
     public $hsCode;
 
@@ -11055,37 +11070,37 @@ class LineItemModel
 
 /**
  * Verify that a MultiDocument object matches the information in your accounting system.
- * 
+ *  
  * If all attributes of the MultiDocument object match the values in your request, the
  * MultiDocument object will be moved to the document status `Posted`.
- * 
+ *  
  * For more information on document status, see [DocumentStatus](https://developer.avalara.com/api-reference/avatax/rest/v2/models/enums/DocumentStatus/).
  */
 class VerifyMultiDocumentModel
 {
 
     /**
-     * @var string Represents the unique code of this MultiDocument transaction.    A MultiDocument transaction is uniquely identified by its `accountId`, `code`, and `type`.
+     * @var string Represents the unique code of this MultiDocument transaction.     A MultiDocument transaction is uniquely identified by its `accountId`, `code`, and `type`.
      */
     public $code;
 
     /**
-     * @var string Represents the document type of this MultiDocument transaction. For more information about  document types, see [DocumentType](https://developer.avalara.com/api-reference/avatax/rest/v2/models/enums/DocumentType/).    A MultiDocument transaction is uniquely identified by its `accountId`, `code`, and `type`. (See DocumentType::* for a list of allowable values)
+     * @var string Represents the document type of this MultiDocument transaction. For more information about  document types, see [DocumentType](https://developer.avalara.com/api-reference/avatax/rest/v2/models/enums/DocumentType/).     A MultiDocument transaction is uniquely identified by its `accountId`, `code`, and `type`. (See DocumentType::* for a list of allowable values)
      */
     public $type;
 
     /**
-     * @var string Set this value if you wish to verify a match between `verifyTransactionDate` and  the `documentDate` value on the transaction recorded in AvaTax.    If you leave this field empty, we will skip verification for this field.
+     * @var string Set this value if you wish to verify a match between `verifyTransactionDate` and  the `documentDate` value on the transaction recorded in AvaTax.     If you leave this field empty, we will skip verification for this field.
      */
     public $verifyTransactionDate;
 
     /**
-     * @var float Set this value if you wish to verify a match between `verifyTotalAmount` and  the `totalAmount` value on the transaction recorded in AvaTax.    If you leave this field empty, we will skip verification for this field.
+     * @var float Set this value if you wish to verify a match between `verifyTotalAmount` and  the `totalAmount` value on the transaction recorded in AvaTax.     If you leave this field empty, we will skip verification for this field.
      */
     public $verifyTotalAmount;
 
     /**
-     * @var float Set this value if you wish to verify a match between `verifyTotalTax` and  the `totalTax` value on the transaction recorded in AvaTax.    If you leave this field empty, we will skip verification for this field.
+     * @var float Set this value if you wish to verify a match between `verifyTotalTax` and  the `totalTax` value on the transaction recorded in AvaTax.     If you leave this field empty, we will skip verification for this field.
      */
     public $verifyTotalTax;
 
@@ -11171,12 +11186,12 @@ class DeclareNexusByAddressModel
     public $city;
 
     /**
-     * @var string Name or ISO 3166 code identifying the region within the country.    This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions    For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
+     * @var string Name or ISO 3166 code identifying the region within the country.     This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions     For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
      */
     public $region;
 
     /**
-     * @var string Name or ISO 3166 code identifying the country.    This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries    For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
+     * @var string Name or ISO 3166 code identifying the country.     This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries     For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
      */
     public $country;
 
@@ -12156,15 +12171,15 @@ class PointOfSaleDataRequestModel
 
 /**
  * Contains information about the general tangible personal property sales tax rates for this jurisdiction.
- * 
+ *  
  * This rate is calculated by making assumptions about the tax calculation process. It does not account for:
- * 
+ *  
  * * Sourcing rules, such as origin-and-destination based transactions.
  * * Product taxability rules, such as different tax rates for different product types.
  * * Nexus declarations, where some customers are not obligated to collect tax in specific jurisdictions.
  * * Tax thresholds and rate differences by amounts.
  * * And many more custom use cases.
- * 
+ *  
  * To upgrade to a fully-featured and accurate tax process that handles these scenarios correctly, please
  * contact Avalara to upgrade to AvaTax!
  */
@@ -12218,7 +12233,7 @@ class AdjustTransactionModel
     public $adjustmentReason;
 
     /**
-     * @var string If the AdjustmentReason is "Other", specify the reason here.    This is required when the AdjustmentReason is 8 (Other).
+     * @var string If the AdjustmentReason is "Other", specify the reason here.     This is required when the AdjustmentReason is 8 (Other).
      */
     public $adjustmentDescription;
 
@@ -12230,8 +12245,8 @@ class AdjustTransactionModel
 }
 
 /**
- * Settle this transaction with your ledger by executing one or many actions against that transaction. 
- * 
+ * Settle this transaction with your ledger by executing one or many actions against that transaction.
+ *  
  * You may use this endpoint to verify the transaction, change the transaction's code, and commit the transaction for reporting purposes.
  * This endpoint may be used to execute any or all of these actions at once.
  */
@@ -12239,17 +12254,17 @@ class SettleTransactionModel
 {
 
     /**
-     * @var VerifyTransactionModel To verify this transaction, you may provide information in this field.    If you leave this field null, the transaction will not be verified.
+     * @var VerifyTransactionModel To verify this transaction, you may provide information in this field.     If you leave this field null, the transaction will not be verified.
      */
     public $verify;
 
     /**
-     * @var ChangeTransactionCodeModel To change the code for this transaction, you may provide information in this field.    If you leave this field null, the transaction's code will not be changed.
+     * @var ChangeTransactionCodeModel To change the code for this transaction, you may provide information in this field.     If you leave this field null, the transaction's code will not be changed.
      */
     public $changeCode;
 
     /**
-     * @var CommitTransactionModel To commit this transaction so that it can be reported on a tax filing, you may provide information in this field.    If you leave this field null, the transaction's commit status will not be changed.    If you use Avalara's Managed Returns Service, committing a transaction will allow that transaction to be filed.
+     * @var CommitTransactionModel To commit this transaction so that it can be reported on a tax filing, you may provide information in this field.     If you leave this field null, the transaction's commit status will not be changed.     If you use Avalara's Managed Returns Service, committing a transaction will allow that transaction to be filed.
      */
     public $commit;
 
@@ -12257,7 +12272,7 @@ class SettleTransactionModel
 
 /**
  * Verify this transaction by matching it to values in your accounting system.
- * 
+ *  
  * You may specify one or more of the following fields to verify: `date`, `totalAmount`, or `totalTax`.
  * This call will report an error if there is any difference between the data stored in AvaTax and
  * the data stored in your accounting system.
@@ -12266,17 +12281,17 @@ class VerifyTransactionModel
 {
 
     /**
-     * @var string Set this value if you wish to verify a match between `verifyTransactionDate` and  the `documentDate` value on the transaction recorded in AvaTax.    If you leave this field empty, we will skip verification for this field.
+     * @var string Set this value if you wish to verify a match between `verifyTransactionDate` and  the `documentDate` value on the transaction recorded in AvaTax.     If you leave this field empty, we will skip verification for this field.
      */
     public $verifyTransactionDate;
 
     /**
-     * @var float Set this value if you wish to verify a match between `verifyTotalAmount` and  the `totalAmount` value on the transaction recorded in AvaTax.    If you leave this field empty, we will skip verification for this field.
+     * @var float Set this value if you wish to verify a match between `verifyTotalAmount` and  the `totalAmount` value on the transaction recorded in AvaTax.     If you leave this field empty, we will skip verification for this field.
      */
     public $verifyTotalAmount;
 
     /**
-     * @var float Set this value if you wish to verify a match between `verifyTotalTax` and  the `totalTax` value on the transaction recorded in AvaTax.    If you leave this field empty, we will skip verification for this field.
+     * @var float Set this value if you wish to verify a match between `verifyTotalTax` and  the `totalTax` value on the transaction recorded in AvaTax.     If you leave this field empty, we will skip verification for this field.
      */
     public $verifyTotalTax;
 
@@ -12304,7 +12319,7 @@ class CommitTransactionModel
 {
 
     /**
-     * @var boolean Set this value to be `true` to commit this transaction.    Committing a transaction allows it to be reported on a tax filing. Uncommitted transactions will not be reported.
+     * @var boolean Set this value to be `true` to commit this transaction.     Committing a transaction allows it to be reported on a tax filing. Uncommitted transactions will not be reported.
      */
     public $commit;
 
@@ -12361,7 +12376,7 @@ class CreateOrAdjustTransactionModel
 {
 
     /**
-     * @var CreateTransactionModel The create transaction model to be created or updated.      If the transaction does not exist, create transaction.  If the transaction exists, adjust the existing transaction.
+     * @var CreateTransactionModel The create transaction model to be created or updated.     If the transaction does not exist, create transaction.  If the transaction exists, adjust the existing transaction.
      */
     public $createTransactionModel;
 
@@ -12408,7 +12423,7 @@ class AuditTransactionModel
 /**
  * This model contains a reconstructed CreateTransaction request object that could potentially be used
  * to recreate this transaction.
- * 
+ *  
  * Note that the API changes over time, and this reconstructed model is likely different from the exact request
  * that was originally used to create this transaction.
  */
