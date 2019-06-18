@@ -4083,6 +4083,36 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Checks to see if the company has a valid POA for a tax form code
+     *
+     * This API is available by invitation only.
+     *  
+     * This API fetches valid POA's for a company by TaxFormCode or by country/region
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Operator, Compliance Root User, Compliance Temp User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.
+     * * This API is available by invitation only.
+     *
+     * 
+     * @param int $companyId The company id that we are checking about
+     * @param string $taxFormCode The tax form code that we are checking
+     * @param string $country The country we are fetching POAs for
+     * @param string $region The region we are fetching POAs for
+     * @return PowerOfAttorneyCheckModel[]
+     */
+    public function activePowerOfAttorney($companyId, $taxFormCode, $country, $region)
+    {
+        $path = "/api/v2/companies/{$companyId}/filingcalendars/powerofattorney";
+        $guzzleParams = [
+            'query' => ['taxFormCode' => $taxFormCode, 'country' => $country, 'region' => $region],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * Retrieve a list of filings for the specified company in the year and month of a given filing period.
      *
      * This API is available by invitation only.

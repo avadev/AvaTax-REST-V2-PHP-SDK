@@ -407,9 +407,9 @@ class ServiceTypeId
     const C_ARA = 31;
 
     /**
-     * Accounting Firm ManagedARA Service Type
+     * Accounting Firm ARAManaged Service Type
      */
-    const C_MANAGEDARA = 32;
+    const C_ARAMANAGED = 32;
 
 }
 
@@ -762,7 +762,6 @@ class ErrorCodeId
     const C_REQUESTINCOMPLETE = 167;
     const C_ACCOUNTNOTNEW = 168;
     const C_PASSWORDLENGTHINVALID = 169;
-    const C_LOCALNEXUSCONFLICT = 170;
     const C_INVALIDECMSOVERRIDECODE = 171;
     const C_ACCOUNTDOESNOTEXIST = 172;
     const C_INVALIDTAXTYPE = 173;
@@ -970,6 +969,7 @@ class ErrorCodeId
      * Remote validation Error
      */
     const C_REMOTEVALIDATIONERROR = 1502;
+    const C_CANNOTMODIFYSSTNEXUS = 1503;
 
     /**
      * Advanced rule errors
@@ -986,14 +986,7 @@ class ErrorCodeId
     const C_TAXCODEASSOCIATEDWITHITEMCODENOTFOUND = 1704;
     const C_DUPLICATESYSTEMFORITEM = 1705;
     const C_CANNOTDISMISSGLOBALNOTIFICATION = 1706;
-    const C_GENERICTAXCODEFORITEM = 1707;
-    const C_CANNOTCERTIFYCOMPANY = 1708;
-    const C_NOVOIDEDDOCUMENTS = 1709;
-    const C_INADEQUATECOMMITTEDDOCUMENTS = 1710;
-    const C_DOCUMENTCODEISGUID = 1711;
-    const C_CUSTOMERVENDORCODEISGUID = 1712;
     const C_CANNOTUPDATEACCOUNTTYPEID = 1713;
-    const C_INADEQUATEDOCUMENTLINECOUNT = 1714;
 
     /**
      * SendSales API errors
@@ -1027,7 +1020,26 @@ class ErrorCodeId
      * Accounting Firm errors
      */
     const C_INVALIDACCOUNTTYPE = 2105;
+
+    /**
+     * Certify Company Errors
+     */
+    const C_GENERICTAXCODEFORITEM = 2200;
+    const C_CANNOTCERTIFYCOMPANY = 2201;
+    const C_NOVOIDEDDOCUMENTS = 2202;
+    const C_INADEQUATECOMMITTEDDOCUMENTS = 2203;
+    const C_DOCUMENTCODEISGUID = 2204;
+    const C_CUSTOMERVENDORCODEISGUID = 2205;
+    const C_INADEQUATEDOCUMENTLINECOUNT = 2206;
+    const C_SAMEDOCUMENTDESCRIPTION = 2207;
     const C_NOEXEMPTIONNOORCUSTOMERUSAGETYPE = 2208;
+    const C_INADEQUATEUNIQUEADDRESSES = 2209;
+    const C_ITEMCODESAREALLSAME = 2210;
+    const C_TAXCODESAREALLSAME = 2211;
+    const C_REPEATEDLINESINDOCUMENT = 2213;
+    const C_TAXDATEOVERRIDEANDNEGATIVELINEAMOUNT = 2214;
+    const C_ALLUSDCURRENCYCODES = 2215;
+    const C_NODOCUMENTSTOTEST = 2218;
 
 }
 
