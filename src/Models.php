@@ -399,7 +399,7 @@ class NewAccountRequestModel
     public $accountType;
 
     /**
-     * @var string United States Taxpayer ID number, usually your Employer Identification Number if you are a business or your  Social Security Number if you are an individual.  This value is required if you subscribe to Avalara Managed Returns or the SST Certified Service Provider services,  but it is optional if you do not subscribe to either of those services.
+     * @var string United States Taxpayer ID number, usually your Employer Identification Number if you are a business or your  Social Security Number if you are an individual.  This value is required if the address provided is inside the US and if you subscribed to the Avalara Managed Returns or SST Certified Service Provider service. Otherwise it is optional.
      */
     public $taxPayerIdNumber;
 
@@ -1329,7 +1329,7 @@ class CompanyModel
     public $isActive;
 
     /**
-     * @var string For United States companies, this field contains your Taxpayer Identification Number.  This is a nine digit number that is usually called an EIN for an Employer Identification Number if this company is a corporation,  or SSN for a Social Security Number if this company is a person.  This value is required if you subscribe to Avalara Managed Returns or the SST Certified Service Provider services,  but it is optional if you do not subscribe to either of those services.
+     * @var string For United States companies, this field contains your Taxpayer Identification Number.  This is a nine digit number that is usually called an EIN for an Employer Identification Number if this company is a corporation,  or SSN for a Social Security Number if this company is a person.  This value is required if the address provided is inside the US and if you subscribed to the Avalara Managed Returns or SST Certified Service Provider service. Otherwise it is optional.
      */
     public $taxpayerIdNumber;
 
@@ -3262,7 +3262,7 @@ class CustomerModel
     public $country;
 
     /**
-     * @var string Name or ISO 3166 code identifying the region within the country.     This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions     For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
+     * @var string ISO 3166 code identifying the region within the country.  Two and three character ISO 3166 region codes.     For a full list of all supported codes, please see the Definitions API `ListRegions`.
      */
     public $region;
 
@@ -3749,7 +3749,7 @@ class CompanyInitializationModel
     public $vatRegistrationId;
 
     /**
-     * @var string United States Taxpayer ID number, usually your Employer Identification Number if you are a business or your  Social Security Number if you are an individual.  This value is required if you subscribe to Avalara Managed Returns or the SST Certified Service Provider services,  but it is optional if you do not subscribe to either of those services.
+     * @var string United States Taxpayer ID number, usually your Employer Identification Number if you are a business or your  Social Security Number if you are an individual.  This value is required if the address provided is inside the US and if you subscribed to the Avalara Managed Returns or SST Certified Service Provider service. Otherwise it is optional.
      */
     public $taxpayerIdNumber;
 
@@ -5218,6 +5218,11 @@ class TaxDetailsByTaxType
      */
     public $totalTax;
 
+    /**
+     * @var TaxDetailsByTaxSubType[] Tax subtype details
+     */
+    public $taxSubTypeDetails;
+
 }
 
 /**
@@ -5532,6 +5537,39 @@ class TransactionLineParameterModel
      * @var string The unit of measure of the parameter value.
      */
     public $unit;
+
+}
+
+/**
+ * Tax Details by Tax subtype
+ */
+class TaxDetailsByTaxSubType
+{
+
+    /**
+     * @var string Tax subtype
+     */
+    public $taxSubType;
+
+    /**
+     * @var float Total taxable amount by tax type
+     */
+    public $totalTaxable;
+
+    /**
+     * @var float Total exempt by tax type
+     */
+    public $totalExempt;
+
+    /**
+     * @var float Total non taxable by tax type
+     */
+    public $totalNonTaxable;
+
+    /**
+     * @var float Total tax by tax type
+     */
+    public $totalTax;
 
 }
 
@@ -8453,6 +8491,77 @@ class LoginVerificationInputModel
 }
 
 /**
+ * Response when checking if a company has a POA on file with Avalara
+ */
+class PowerOfAttorneyCheckModel
+{
+
+    /**
+     * @var int companyId of the request
+     */
+    public $companyId;
+
+    /**
+     * @var string Country POA is for
+     */
+    public $country;
+
+    /**
+     * @var string Region POA is for
+     */
+    public $region;
+
+    /**
+     * @var boolean Notes if there is an actice POA
+     */
+    public $activePoa;
+
+    /**
+     * @var string Effective Date of the POA
+     */
+    public $effectiveDate;
+
+    /**
+     * @var string End Date of POA
+     */
+    public $expirationDate;
+
+    /**
+     * @var ResourceFileDownloadResult POA download
+     */
+    public $availablePoa;
+
+}
+
+/**
+ * Represents everything downloaded from resource files
+ */
+class ResourceFileDownloadResult
+{
+
+    /**
+     * @var boolean True if this download succeeded
+     */
+    public $success;
+
+    /**
+     * @var int Bytes of the file
+     */
+    public $bytes;
+
+    /**
+     * @var string Original filename
+     */
+    public $filename;
+
+    /**
+     * @var string Mime content type
+     */
+    public $contentType;
+
+}
+
+/**
  * Filing Returns Model
  */
 class FilingReturnModelBasic
@@ -9164,14 +9273,14 @@ class FilingsCheckupSuggestedFormModel
     public $region;
 
     /**
-     * @var string 
-     */
-    public $returnName;
-
-    /**
      * @var string Name of the suggested form returned
      */
     public $taxFormCode;
+
+    /**
+     * @var string Legacy Name of the suggested form returned
+     */
+    public $returnName;
 
 }
 
@@ -10006,6 +10115,69 @@ class FirmClientLinkageInputModel
      * @var string Offer to be associated
      */
     public $offer;
+
+}
+
+/**
+ * Represents a request for a new account with Avalara for a new Firm client.
+ */
+class NewFirmClientAccountRequestModel
+{
+
+    /**
+     * @var string The offer code provided to you by your Avalara business development contact.     This code controls what services and rates the customer will be provisioned with upon creation.     If you do not know your offer code, please contact your Avalara business development representative.
+     */
+    public $offer;
+
+    /**
+     * @var string The name of the account to create
+     */
+    public $accountName;
+
+    /**
+     * @var string First name of the primary contact person for this account
+     */
+    public $firstName;
+
+    /**
+     * @var string Last name of the primary contact person for this account
+     */
+    public $lastName;
+
+    /**
+     * @var string Title of the primary contact person for this account
+     */
+    public $title;
+
+    /**
+     * @var string Phone number of the primary contact person for this account
+     */
+    public $phoneNumber;
+
+    /**
+     * @var string Email of the primary contact person for this account
+     */
+    public $email;
+
+    /**
+     * @var string Company code to be assigned to the company created for this account.     If no company code is provided, this will be defaulted to "DEFAULT" company code.
+     */
+    public $companyCode;
+
+    /**
+     * @var CompanyAddress Address information of the account being created.
+     */
+    public $companyAddress;
+
+    /**
+     * @var string United States Taxpayer ID number, usually your Employer Identification Number if you are a business or your  Social Security Number if you are an individual.  This value is required if the address provided is inside the US and if you subscribed to the Avalara Managed Returns or SST Certified Service Provider service. Otherwise it is optional.
+     */
+    public $taxPayerIdNumber;
+
+    /**
+     * @var string[] Properties of the primary contact person for this account
+     */
+    public $properties;
 
 }
 
