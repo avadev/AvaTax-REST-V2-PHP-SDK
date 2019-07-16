@@ -411,6 +411,11 @@ class ServiceTypeId
      */
     const C_ARAMANAGED = 32;
 
+    /**
+     * Premium Returns Service Type
+     */
+    const C_MRSPREMIUM = 33;
+
 }
 
 
@@ -673,7 +678,6 @@ class ErrorCodeId
     const C_DATEFORMATERROR = 26;
     const C_NODEFAULTCOMPANY = 27;
     const C_ACCOUNTTYPENOTSUPPORTED = 28;
-    const C_INVALIDFIRMCLIENTOFFER = 29;
     const C_AUTHENTICATIONEXCEPTION = 30;
     const C_AUTHORIZATIONEXCEPTION = 31;
     const C_VALIDATIONEXCEPTION = 32;
@@ -762,6 +766,7 @@ class ErrorCodeId
     const C_REQUESTINCOMPLETE = 167;
     const C_ACCOUNTNOTNEW = 168;
     const C_PASSWORDLENGTHINVALID = 169;
+    const C_INVALIDPAGEKEY = 170;
     const C_INVALIDECMSOVERRIDECODE = 171;
     const C_ACCOUNTDOESNOTEXIST = 172;
     const C_INVALIDTAXTYPE = 173;
@@ -818,7 +823,7 @@ class ErrorCodeId
     const C_DOCUMENTCODECONFLICT = 303;
     const C_MISSINGADDRESS = 304;
     const C_INVALIDPARAMETERVALUE = 306;
-    const C_DOCUMENTFETCHLIMIT = 308;
+    const C_FETCHLIMIT = 308;
     const C_INVALIDADDRESS = 309;
     const C_ADDRESSLOCATIONNOTFOUND = 310;
     const C_MISSINGLINE = 311;
@@ -987,6 +992,7 @@ class ErrorCodeId
     const C_DUPLICATESYSTEMFORITEM = 1705;
     const C_CANNOTDISMISSGLOBALNOTIFICATION = 1706;
     const C_CANNOTUPDATEACCOUNTTYPEID = 1713;
+    const C_TAXPAYERNUMBERISREQUIRED = 1714;
 
     /**
      * SendSales API errors
@@ -1020,6 +1026,7 @@ class ErrorCodeId
      * Accounting Firm errors
      */
     const C_INVALIDACCOUNTTYPE = 2105;
+    const C_INVALIDFIRMSUBSCRIPTIONS = 2106;
 
     /**
      * Certify Company Errors
@@ -1036,10 +1043,14 @@ class ErrorCodeId
     const C_INADEQUATEUNIQUEADDRESSES = 2209;
     const C_ITEMCODESAREALLSAME = 2210;
     const C_TAXCODESAREALLSAME = 2211;
+    const C_LOCATIONCODENOTUSED = 2212;
     const C_REPEATEDLINESINDOCUMENT = 2213;
     const C_TAXDATEOVERRIDEANDNEGATIVELINEAMOUNT = 2214;
     const C_ALLUSDCURRENCYCODES = 2215;
+    const C_NOVATBUYERID = 2216;
+    const C_ALLUSCOUNTRYCODES = 2217;
     const C_NODOCUMENTSTOTEST = 2218;
+    const C_NOSHIPPINGCHARGE = 2219;
 
 }
 
@@ -2341,6 +2352,16 @@ class TaxType
      */
     const C_USE = 85;
 
+    /**
+     * Alcohol tax type
+     */
+    const C_ALCOHOL = 1014;
+
+    /**
+     * Batteries tax type
+     */
+    const C_BATTERIES = 1015;
+
 }
 
 
@@ -3046,11 +3067,6 @@ class ReportFormat
      * The Comma Separated Values file format
      */
     const C_CSV = 0;
-
-    /**
-     * The Extensible Markup Language file format
-     */
-    const C_XML = 1;
 
 }
 
