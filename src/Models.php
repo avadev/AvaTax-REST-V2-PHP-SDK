@@ -212,19 +212,9 @@ class UserModel
     public $createdDate;
 
     /**
-     * @var int The User ID of the user who created this record.
-     */
-    public $createdUserId;
-
-    /**
      * @var string The date/time when this record was last modified.
      */
     public $modifiedDate;
-
-    /**
-     * @var int The user ID of the user who last modified this record.
-     */
-    public $modifiedUserId;
 
 }
 
@@ -3421,6 +3411,11 @@ class CertificateModel
      * @var boolean This value is true if this certificate is a single (or standalone) certificate. This value is set  during the audit stage of the certificate validation process.
      */
     public $isSingleCertificate;
+
+    /**
+     * @var string Indicates the tax number passed in for the certificate.
+     */
+    public $exemptionNumber;
 
     /**
      * @var ExemptionReasonModel The exemption reason that CertCapture audit/internal logic identifies for created certificate.
@@ -7736,6 +7731,11 @@ class FilingCalendarModel
     public $taxFormCode;
 
     /**
+     * @var int The start period of a fiscal year for this form/company
+     */
+    public $fiscalYearStartMonth;
+
+    /**
      * @var string If this calendar is for a location-specific tax return, specify the location code here. To file for all locations, leave this value NULL.
      */
     public $locationCode;
@@ -7879,6 +7879,11 @@ class FilingCalendarModel
      * @var int If you are required to prepay a percentage of taxes for future periods, please specify the percentage in whole numbers;  for example, the value 90 would indicate 90%.
      */
     public $prepayPercentage;
+
+    /**
+     * @var boolean Determines if a prepayment is required for this filing calendar
+     */
+    public $prePaymentRequired;
 
     /**
      * @var float If your company is required to make a prepayment that is designated by a fixed amount each period, please specify the amount here.
@@ -8338,6 +8343,11 @@ class FilingRequestDataModel
      * @var int The months of the request
      */
     public $months;
+
+    /**
+     * @var int The start period of a fiscal year for this form/company
+     */
+    public $fiscalYearStartMonth;
 
     /**
      * @var string The type of tax to report on this return. (See MatchingTaxType::* for a list of allowable values)
@@ -10059,11 +10069,6 @@ class FirmClientLinkageOutputModel
     public $clientAccountName;
 
     /**
-     * @var string Offer requested
-     */
-    public $offer;
-
-    /**
      * @var string Created date of the linkage
      */
     public $createdDate;
@@ -10111,11 +10116,6 @@ class FirmClientLinkageInputModel
      */
     public $clientAccountName;
 
-    /**
-     * @var string Offer to be associated
-     */
-    public $offer;
-
 }
 
 /**
@@ -10123,11 +10123,6 @@ class FirmClientLinkageInputModel
  */
 class NewFirmClientAccountRequestModel
 {
-
-    /**
-     * @var string The offer code provided to you by your Avalara business development contact.     This code controls what services and rates the customer will be provisioned with upon creation.     If you do not know your offer code, please contact your Avalara business development representative.
-     */
-    public $offer;
 
     /**
      * @var string The name of the account to create
@@ -10170,7 +10165,7 @@ class NewFirmClientAccountRequestModel
     public $companyAddress;
 
     /**
-     * @var string United States Taxpayer ID number, usually your Employer Identification Number if you are a business or your  Social Security Number if you are an individual.  This value is required if the address provided is inside the US and if you subscribed to the Avalara Managed Returns or SST Certified Service Provider service. Otherwise it is optional.
+     * @var string United States Taxpayer ID number, usually your Employer Identification Number if you are a business or your  Social Security Number if you are an individual.  This value is required if the address provided is inside the US. Otherwise it is optional.
      */
     public $taxPayerIdNumber;
 
@@ -12116,7 +12111,7 @@ class ExportDocumentLineModel
 {
 
     /**
-     * @var string The output format: CSV, XML, etc. If no preference, report will be in CSV format. (See ReportFormat::* for a list of allowable values)
+     * @var string The file format. (See ReportFormat::* for a list of allowable values)
      */
     public $format;
 
