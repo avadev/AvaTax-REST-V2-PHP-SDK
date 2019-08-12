@@ -81,9 +81,9 @@ class AvaTaxClientBase
             $env = $environment;
         }
 
-        // Prevent overriding the base_uri 
+        // Prevent overriding the base_uri
         $guzzleParams['base_uri'] = $env;
-      
+
         // Configure the HTTP client
         $this->client = new Client($guzzleParams);
     }
@@ -182,7 +182,14 @@ class AvaTaxClientBase
         try {
             $response = $this->client->request($verb, $apiUrl, $guzzleParams);
             $body = $response->getBody();
-            return json_decode($body);
+
+            $JsonBody = json_decode($body);
+            if (is_null($JsonBody)) {
+              return $body;
+            } else {
+              return $JsonBody;
+            }
+
         } catch (\Exception $e) {
             if (!$this->catchExceptions) {
                 throw $e;
