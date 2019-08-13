@@ -334,6 +334,138 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Create a new AvaFileForm
+     *
+     * Create one or more AvaFileForms
+     * A 'AvaFileForm' represents a form supported by our returns team
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires the user role Compliance Root User.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param AvaFileFormModel[] $model The AvaFileForm you wish to create.
+     * @return AvaFileFormModel[]
+     */
+    public function createAvaFileForms($model)
+    {
+        $path = "/api/v2/avafileforms";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Delete a single AvaFileForm
+     *
+     * Marks the existing AvaFileForm object at this URL as deleted.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: Compliance Root User, ComplianceUser, FirmAdmin.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $id The ID of the AvaFileForm you wish to delete.
+     * @return ErrorDetail[]
+     */
+    public function deleteAvaFileForm($id)
+    {
+        $path = "/api/v2/avafileforms/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single AvaFileForm
+     *
+     * Get the AvaFileForm object identified by this URL.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, CompanyAdmin, CompanyUser, Compliance Root User, Compliance Temp User, ComplianceAdmin, ComplianceUser, FirmAdmin, FirmUser, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $id The primary key of this AvaFileForm
+     * @return AvaFileFormModel
+     */
+    public function getAvaFileForm($id)
+    {
+        $path = "/api/v2/avafileforms/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all AvaFileForms
+     *
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, CompanyAdmin, CompanyUser, Compliance Root User, Compliance Temp User, ComplianceAdmin, ComplianceUser, FirmAdmin, FirmUser, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* outletTypeId
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function queryAvaFileForms($filter=null, $top=null, $skip=null, $orderBy=null)
+    {
+        $path = "/api/v2/avafileforms";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Update a AvaFileForm
+     *
+     * All data from the existing object will be replaced with data in the object you PUT.
+     * To set a field's value to null, you may either set its value to null or omit that field from the object you post.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires the user role Compliance Root User.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $id The ID of the AvaFileForm you wish to update
+     * @param AvaFileFormModel $model The AvaFileForm model you wish to update.
+     * @return AvaFileFormModel
+     */
+    public function updateAvaFileForm($id, $model)
+    {
+        $path = "/api/v2/avafileforms/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
      * Create a new batch
      *
      * Create one or more new batch objects attached to this company.
@@ -753,7 +885,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The unique ID number of the company that recorded this certificate
      * @param int $id The unique ID number of this certificate
-     * @return CertificateModel
+     * @return ErrorDetail[]
      */
     public function deleteCertificate($companyId, $id)
     {
@@ -1062,7 +1194,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID number of the company to search
      * @param string $include OPTIONAL: A comma separated list of special fetch options. You can specify one or more of the following:      * customers - Retrieves the list of customers linked to the certificate.   * po_numbers - Retrieves all PO numbers tied to the certificate.   * attributes - Retrieves all attributes applied to the certificate.
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* exemptionNumber, status, pdf, pages
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* exemptionNumber, status, ecmsId, ecmsStatus, pdf, pages
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -1784,6 +1916,26 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * API to modify the reference fields at the document and the line level.
+     *
+     * 
+     *
+     * 
+     * @param int $companyId 
+     * @param TransactionReferenceFieldModel[] $model 
+     * @return FetchResult
+     */
+    public function tagTransaction($companyId, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/transactions/tag";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
      * Create a new contact
      *
      * Create one or more new contact objects.
@@ -2039,6 +2191,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *  
      * * Certificates - Fetch a list of certificates linked to this customer.
      * * CustomFields - Fetch a list of custom fields associated to this customer.
+     * * attributes - Retrieves all attributes applied to the customer.
      *  
      * Using exemption certificates endpoints requires setup of an auditable document storage for each company that will use certificates.
      * Companies that do not have this storage system set up will receive the error `CertCaptureNotConfiguredError` when they call exemption
@@ -2064,6 +2217,46 @@ class AvaTaxClient extends AvaTaxClientBase
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Link attributes to a customer
+     *
+     * Link one or many attributes to a customer.
+     *  
+     * A customer may have multiple attributes that control its behavior. You may link or unlink attributes to a
+     * customer at any time. The full list of defined attributes may be found using `QueryCompanyCustomerAttributes` API.
+     *  
+     * A customer object defines information about a person or business that purchases products from your
+     * company. When you create a tax transaction in AvaTax, you can use the `customerCode` from this
+     * record in your `CreateTransaction` API call. AvaTax will search for this `customerCode` value and
+     * identify any certificates linked to this customer object. If any certificate applies to the transaction,
+     * AvaTax will record the appropriate elements of the transaction as exempt and link it to the `certificate`.
+     *  
+     * Using exemption certificates endpoints requires setup of an auditable document storage for each company that will use certificates.
+     * Companies that do not have this storage system set up will receive the error `CertCaptureNotConfiguredError` when they call exemption
+     * certificate related APIs. To check if this company is set up, call `GetCertificateSetup`. To request setup of the auditable document
+     * storage for this company, call `RequestCertificateSetup`.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin.
+     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro.
+     *
+     * 
+     * @param int $companyId The unique ID number of the company that recorded the provided customer
+     * @param string $customerCode The unique code representing the current customer
+     * @param CustomerAttributeModel[] $model The list of attributes to link to the customer.
+     * @return FetchResult
+     */
+    public function linkAttributesToCustomer($companyId, $customerCode, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/attributes/link";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
     }
 
     /**
@@ -2142,6 +2335,45 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Retrieve a customer's attributes
+     *
+     * Retrieve the attributes linked to the customer identified by this URL.
+     *  
+     * A customer may have multiple attributes that control its behavior. You may link or unlink attributes to a
+     * customer at any time. The full list of defined attributes may be found using `QueryCompanyCustomerAttributes` API.
+     * 
+     * A customer object defines information about a person or business that purchases products from your
+     * company. When you create a tax transaction in AvaTax, you can use the `customerCode` from this
+     * record in your `CreateTransaction` API call. AvaTax will search for this `customerCode` value and
+     * identify any certificates linked to this customer object. If any certificate applies to the transaction,
+     * AvaTax will record the appropriate elements of the transaction as exempt and link it to the `certificate`.
+     *  
+     * Using exemption certificates endpoints requires setup of an auditable document storage for each company that will use certificates.
+     * Companies that do not have this storage system set up will receive the error `CertCaptureNotConfiguredError` when they call exemption
+     * certificate related APIs. To check if this company is set up, call `GetCertificateSetup`. To request setup of the auditable document
+     * storage for this company, call `RequestCertificateSetup`.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro.
+     *
+     * 
+     * @param int $companyId The unique ID number of the company that recorded the provided customer
+     * @param string $customerCode The unique code representing the current customer
+     * @return FetchResult
+     */
+    public function listAttributesForCustomer($companyId, $customerCode)
+    {
+        $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/attributes";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * List certificates linked to a customer
      *
      * List all certificates linked to a customer.
@@ -2166,7 +2398,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The unique ID number of the company that recorded this customer
      * @param string $customerCode The unique code representing this customer
      * @param string $include OPTIONAL: A comma separated list of special fetch options. You can specify one or more of the following:      * customers - Retrieves the list of customers linked to the certificate.   * po_numbers - Retrieves all PO numbers tied to the certificate.   * attributes - Retrieves all attributes applied to the certificate.
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* exemptionNumber, status, pdf, pages
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* exemptionNumber, status, ecmsId, ecmsStatus, pdf, pages
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -2237,6 +2469,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * You can use the `$include` parameter to fetch the following additional objects for expansion:
      *  
      * * Certificates - Fetch a list of certificates linked to this customer.
+     * * attributes - Retrieves all attributes applied to the customer.
      *  
      * Using exemption certificates endpoints requires setup of an auditable document storage for each company that will use certificates.
      * Companies that do not have this storage system set up will receive the error `CertCaptureNotConfiguredError` when they call exemption
@@ -2265,6 +2498,46 @@ class AvaTaxClient extends AvaTaxClientBase
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Unlink attributes from a customer
+     *
+     * Unlink one or many attributes from a customer.
+     *  
+     * A customer may have multiple attributes that control its behavior. You may link or unlink attributes to a
+     * customer at any time. The full list of defined attributes may be found using `QueryCompanyCustomerAttributes` API.
+     *  
+     * A customer object defines information about a person or business that purchases products from your
+     * company. When you create a tax transaction in AvaTax, you can use the `customerCode` from this
+     * record in your `CreateTransaction` API call. AvaTax will search for this `customerCode` value and
+     * identify any certificates linked to this customer object. If any certificate applies to the transaction,
+     * AvaTax will record the appropriate elements of the transaction as exempt and link it to the `certificate`.
+     *  
+     * Using exemption certificates endpoints requires setup of an auditable document storage for each company that will use certificates.
+     * Companies that do not have this storage system set up will receive the error `CertCaptureNotConfiguredError` when they call exemption
+     * certificate related APIs. To check if this company is set up, call `GetCertificateSetup`. To request setup of the auditable document
+     * storage for this company, call `RequestCertificateSetup`.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin.
+     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro.
+     *
+     * 
+     * @param int $companyId The unique ID number of the company that recorded the customer
+     * @param string $customerCode The unique code representing the current customer
+     * @param CustomerAttributeModel[] $model The list of attributes to unlink from the customer.
+     * @return FetchResult
+     */
+    public function unlinkAttributesFromCustomer($companyId, $customerCode, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/attributes/unlink";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
     }
 
     /**
@@ -4167,6 +4440,1077 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Approve existing Filing Request
+     *
+     * This API is available by invitation only.
+     * A "filing request" represents a request to change an existing filing calendar. Filing requests
+     * are reviewed and validated by Avalara Compliance before being implemented.
+     * The filing request must be in the "ChangeRequest" status to be approved.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $companyId The unique ID of the company that owns the filing request object
+     * @param int $id The unique ID of the filing request object
+     * @return FilingRequestModel
+     */
+    public function approveFilingRequest($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/filingrequests/{$id}/approve";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Cancel existing Filing Request
+     *
+     * This API is available by invitation only.
+     * A "filing request" represents a request to change an existing filing calendar. Filing requests
+     * are reviewed and validated by Avalara Compliance before being implemented.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $companyId The unique ID of the company that owns the filing request object
+     * @param int $id The unique ID of the filing request object
+     * @return FilingRequestModel
+     */
+    public function cancelFilingRequest($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/filingrequests/{$id}/cancel";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Create a new filing request to cancel a filing calendar
+     *
+     * This API is available by invitation only.
+     *  
+     * A "filing request" represents a request to change an existing filing calendar. Filing requests
+     * are reviewed and validated by Avalara Compliance before being implemented.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $companyId The unique ID of the company that owns the filing calendar object
+     * @param int $id The unique ID number of the filing calendar to cancel
+     * @param FilingRequestModel[] $model The cancellation request for this filing calendar
+     * @return FilingRequestModel
+     */
+    public function cancelFilingRequests($companyId, $id, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/filingcalendars/{$id}/cancel/request";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Create a filing calendar
+     *
+     * This API is available by invitation only and only available for users with Compliance access
+     * A "filing request" represents information that compliance uses to file a return
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $companyId The unique ID of the company that will add the new filing calendar
+     * @param FilingCalendarModel[] $model Filing calendars that will be added
+     * @return FilingCalendarModel[]
+     */
+    public function createFilingCalendars($companyId, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/filingcalendars";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Create a new filing request to create a filing calendar
+     *
+     * This API is available by invitation only.
+     * A "filing request" represents a request to change an existing filing calendar. Filing requests
+     * are reviewed and validated by Avalara Compliance before being implemented.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $companyId The unique ID of the company that will add the new filing calendar
+     * @param FilingRequestModel[] $model Information about the proposed new filing calendar
+     * @return FilingRequestModel[]
+     */
+    public function createFilingRequests($companyId, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/filingcalendars/add/request";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Create a company return setting
+     *
+     * This API is available by invitation only and only available for users with Compliance access
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     *
+     * 
+     * @param int $companyId The unique ID of the company that will add the new filing calendar
+     * @param int $filingCalendarId The unique ID of the filing calendar that will add the new filing calendar setting
+     * @param CompanyReturnSettingModel[] $model CompanyReturnSettings that will be added
+     * @return CompanyReturnSettingModel[]
+     */
+    public function createUpdateCompanyReturnSettings($companyId, $filingCalendarId, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/filingcalendars/{$filingCalendarId}/settings";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Returns a list of options for adding the specified form.
+     *
+     * This API is available by invitation only.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $companyId The unique ID of the company that owns the filing calendar object
+     * @param string $formCode The unique code of the form
+     * @return CycleAddOptionModel[]
+     */
+    public function cycleSafeAdd($companyId, $formCode)
+    {
+        $path = "/api/v2/companies/{$companyId}/filingcalendars/add/options";
+        $guzzleParams = [
+            'query' => ['formCode' => $formCode],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Indicates when changes are allowed to be made to a filing calendar.
+     *
+     * This API is available by invitation only.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $companyId The unique ID of the company that owns the filing calendar object
+     * @param int $id The unique ID of the filing calendar object
+     * @param FilingCalendarEditModel[] $model A list of filing calendar edits to be made
+     * @return CycleEditOptionModel
+     */
+    public function cycleSafeEdit($companyId, $id, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/filingcalendars/{$id}/edit/options";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Returns a list of options for expiring a filing calendar
+     *
+     * This API is available by invitation only.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $companyId The unique ID of the company that owns the filing calendar object
+     * @param int $id The unique ID of the filing calendar object
+     * @return CycleExpireModel
+     */
+    public function cycleSafeExpiration($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/filingcalendars/{$id}/cancel/options";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Delete a single filing calendar.
+     *
+     * This API is available by invitation only.
+     * Mark the existing notice object at this URL as deleted.
+     * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
+     * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this filing calendar.
+     * @param int $id The ID of the filing calendar you wish to delete.
+     * @return ErrorDetail[]
+     */
+    public function deleteFilingCalendar($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/filingcalendars/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single filing calendar
+     *
+     * This API is available by invitation only.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this filing calendar
+     * @param int $id The primary key of this filing calendar
+     * @return FilingCalendarModel
+     */
+    public function getFilingCalendar($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/filingcalendars/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single filing request
+     *
+     * This API is available by invitation only.
+     * A "filing request" represents a request to change an existing filing calendar. Filing requests
+     * are reviewed and validated by Avalara Compliance before being implemented.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this filing calendar
+     * @param int $id The primary key of this filing calendar
+     * @return FilingRequestModel
+     */
+    public function getFilingRequest($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/filingrequests/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all filing calendars for this company
+     *
+     * This API is available by invitation only.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns these batches
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxAuthorityId, taxAuthorityName, taxAuthorityType, settings
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @param string $returnCountry A comma separated list of countries
+     * @param string $returnRegion A comma separated list of regions
+     * @return FetchResult
+     */
+    public function listFilingCalendars($companyId, $filter=null, $top=null, $skip=null, $orderBy=null, $returnCountry, $returnRegion)
+    {
+        $path = "/api/v2/companies/{$companyId}/filingcalendars";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy, 'returnCountry' => $returnCountry, 'returnRegion' => $returnRegion],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all filing requests for this company
+     *
+     * This API is available by invitation only.
+     * A "filing request" represents a request to change an existing filing calendar. Filing requests
+     * are reviewed and validated by Avalara Compliance before being implemented.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns these batches
+     * @param int $filingCalendarId Specific filing calendar id for the request
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listFilingRequests($companyId, $filingCalendarId, $filter=null, $top=null, $skip=null, $orderBy=null)
+    {
+        $path = "/api/v2/companies/{$companyId}/filingrequests";
+        $guzzleParams = [
+            'query' => ['filingCalendarId' => $filingCalendarId, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * New request for getting for validating customer's login credentials
+     *
+     * This API is available by invitation only.
+     *  
+     * This API verifies that a customer has submitted correct login credentials for a tax authority's online filing system.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param LoginVerificationInputModel $model The model of the login information we are verifying
+     * @return LoginVerificationOutputModel
+     */
+    public function loginVerificationRequest($model)
+    {
+        $path = "/api/v2/filingcalendars/credentials/verify";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Gets the request status and Login Result
+     *
+     * This API is available by invitation only.
+     *  
+     * This API checks the status of a login verification request. It may only be called by authorized users from the account
+     * that initially requested the login verification.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $jobId The unique ID number of this login request
+     * @return LoginVerificationOutputModel
+     */
+    public function loginVerificationStatus($jobId)
+    {
+        $path = "/api/v2/filingcalendars/credentials/{$jobId}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all filing calendars
+     *
+     * This API is available by invitation only.
+     *  
+     * This API is deprecated - please use POST `/api/v2/filingrequests/query` API.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxAuthorityId, taxAuthorityName, taxAuthorityType, settings
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @param string $returnCountry If specified, fetches only filing calendars that apply to tax filings in this specific country. Uses ISO 3166 country codes.
+     * @param string $returnRegion If specified, fetches only filing calendars that apply to tax filings in this specific region. Uses ISO 3166 region codes.
+     * @return FetchResult
+     */
+    public function queryFilingCalendars($filter=null, $top=null, $skip=null, $orderBy=null, $returnCountry, $returnRegion)
+    {
+        $path = "/api/v2/filingcalendars";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy, 'returnCountry' => $returnCountry, 'returnRegion' => $returnRegion],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all filing calendars
+     *
+     * This API is available by invitation only.
+     *  
+     * This API is intended to replace the GET `/api/v2/filingcalendars` API. The fetch request object is posted on the body of the request instead of the URI, so it's not limited by a set number of characters.
+     * The documentation of the GET API shows how filtering, sorting and pagination works.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param string $returnCountry If specified, fetches only filing calendars that apply to tax filings in this specific country. Uses ISO 3166 country codes.
+     * @param string $returnRegion If specified, fetches only filing calendars that apply to tax filings in this specific region. Uses ISO 3166 region codes.
+     * @param QueryRequestModel $model Query object to filter, sort and paginate the filing calendars.
+     * @return FetchResult
+     */
+    public function queryFilingCalendarsPost($returnCountry, $returnRegion, $model)
+    {
+        $path = "/api/v2/filingcalendars/query";
+        $guzzleParams = [
+            'query' => ['returnCountry' => $returnCountry, 'returnRegion' => $returnRegion],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all filing requests
+     *
+     * This API is available by invitation only.
+     *  
+     * This API is deprecated - please use POST `/api/v2/filingrequests/query` API.
+     *  
+     * A "filing request" represents a request to change an existing filing calendar. Filing requests
+     * are reviewed and validated by Avalara Compliance before being implemented.
+     *  
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $filingCalendarId Specific filing calendar id for the request
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function queryFilingRequests($filingCalendarId, $filter=null, $top=null, $skip=null, $orderBy=null)
+    {
+        $path = "/api/v2/filingrequests";
+        $guzzleParams = [
+            'query' => ['filingCalendarId' => $filingCalendarId, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all filing requests
+     *
+     * This API is available by invitation only.
+     *  
+     * This API is intended to replace the GET `/api/v2/filingrequests` API. The fetch request object is posted on the body of the request instead of the URI, so it's not limited by a set number of characters.
+     * The documentation of the GET API shows how filtering, sorting and pagination works.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $filingCalendarId Specific filing calendar id for the request
+     * @param QueryRequestModel $model Query object to filter, sort and paginate the filing calendars.
+     * @return FetchResult
+     */
+    public function queryFilingRequestsPost($filingCalendarId, $model)
+    {
+        $path = "/api/v2/filingrequests/query";
+        $guzzleParams = [
+            'query' => ['filingCalendarId' => $filingCalendarId],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Create a new filing request to edit a filing calendar
+     *
+     * This API is available by invitation only.
+     *  
+     * A "filing request" represents a request to change an existing filing calendar. Filing requests
+     * are reviewed and validated by Avalara Compliance before being implemented.
+     *  
+     * Certain users may not update filing calendars directly. Instead, they may submit an edit request
+     * to modify the value of a filing calendar using this API.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $companyId The unique ID of the company that owns the filing calendar object
+     * @param int $id The unique ID number of the filing calendar to edit
+     * @param FilingRequestModel[] $model A list of filing calendar edits to be made
+     * @return FilingRequestModel
+     */
+    public function requestFilingCalendarUpdate($companyId, $id, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/filingcalendars/{$id}/edit/request";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Edit existing Filing Calendar
+     *
+     * This API is available by invitation only.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $companyId The unique ID of the company that owns the filing calendar object
+     * @param int $id The unique ID of the filing calendar object
+     * @param FilingCalendarModel $model The filing calendar model you are wishing to update with.
+     * @return FilingCalendarModel
+     */
+    public function updateFilingCalendar($companyId, $id, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/filingcalendars/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Edit existing Filing Request
+     *
+     * This API is available by invitation only.
+     * A "filing request" represents a request to change an existing filing calendar. Filing requests
+     * are reviewed and validated by Avalara Compliance before being implemented.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $companyId The unique ID of the company that owns the filing request object
+     * @param int $id The unique ID of the filing request object
+     * @param FilingRequestModel $model A list of filing calendar edits to be made
+     * @return FilingRequestModel
+     */
+    public function updateFilingRequest($companyId, $id, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/filingrequests/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Approve all filings for the specified company in the given filing period.
+     *
+     * This API is available by invitation only.
+     * Approving a return means the customer is ready to let Avalara file that return.
+     * Customer either approves themselves from admin console,
+     * else system auto-approves the night before the filing cycle.
+     * Sometimes Compliance has to manually unapprove and reapprove to modify liability or filing for the customer.
+     * A "filing period" is the year and month of the date of the latest customer transaction allowed to be reported on a filing,
+     * based on filing frequency of filing.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, CSPTester, FirmUser, SSTAdmin, TechnicalSupportAdmin.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $year The year of the filing period to approve.
+     * @param int $month The month of the filing period to approve.
+     * @param ApproveFilingsModel $model The approve request you wish to execute.
+     * @return FilingModel[]
+     */
+    public function approveFilings($companyId, $year, $month, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/approve";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Approve all filings for the specified company in the given filing period and country.
+     *
+     * This API is available by invitation only.
+     * Approving a return means the customer is ready to let Avalara file that return.
+     * Customer either approves themselves from admin console,
+     * else system auto-approves the night before the filing cycle.
+     * Sometimes Compliance has to manually unapprove and reapprove to modify liability or filing for the customer.
+     * A "filing period" is the year and month of the date of the latest customer transaction allowed to be reported on a filing,
+     * based on filing frequency of filing.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, CSPTester, FirmUser, SSTAdmin, TechnicalSupportAdmin.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $year The year of the filing period to approve.
+     * @param int $month The month of the filing period to approve.
+     * @param string $country The two-character ISO-3166 code for the country.
+     * @param ApproveFilingsModel $model The approve request you wish to execute.
+     * @return FilingModel[]
+     */
+    public function approveFilingsCountry($companyId, $year, $month, $country, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/{$country}/approve";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Approve all filings for the specified company in the given filing period, country and region.
+     *
+     * This API is available by invitation only.
+     * Approving a return means the customer is ready to let Avalara file that return.
+     * Customer either approves themselves from admin console,
+     * else system auto-approves the night before the filing cycle
+     * Sometimes Compliance has to manually unapprove and reapprove to modify liability or filing for the customer.
+     * A "filing period" is the year and month of the date of the latest customer transaction allowed to be reported on a filing,
+     * based on filing frequency of filing.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, CSPTester, FirmUser, SSTAdmin, TechnicalSupportAdmin.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $year The year of the filing period to approve.
+     * @param int $month The month of the filing period to approve.
+     * @param string $country The two-character ISO-3166 code for the country.
+     * @param string $region The two or three character region code for the region.
+     * @param ApproveFilingsModel $model The approve request you wish to execute.
+     * @return FilingModel[]
+     */
+    public function approveFilingsCountryRegion($companyId, $year, $month, $country, $region, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/{$country}/{$region}/approve";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Add an adjustment to a given filing.
+     *
+     * This API is available by invitation only.
+     * An "Adjustment" is usually an increase or decrease to customer funding to Avalara,
+     * such as early filer discount amounts that are refunded to the customer, or efile fees from websites.
+     * Sometimes may be a manual change in tax liability similar to an augmentation.
+     * This API creates a new adjustment for an existing tax filing.
+     * This API can only be used when the filing has not yet been approved.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filing being adjusted.
+     * @param int $year The year of the filing's filing period being adjusted.
+     * @param int $month The month of the filing's filing period being adjusted.
+     * @param string $country The two-character ISO-3166 code for the country of the filing being adjusted.
+     * @param string $region The two or three character region code for the region.
+     * @param string $formCode The unique code of the form being adjusted.
+     * @param FilingAdjustmentModel[] $model A list of Adjustments to be created for the specified filing.
+     * @return FilingAdjustmentModel[]
+     */
+    public function createReturnAdjustment($companyId, $year, $month, $country, $region, $formCode, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/{$country}/{$region}/{$formCode}/adjust";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Add an augmentation for a given filing.
+     *
+     * This API is available by invitation only.
+     * An "Augmentation" is a manually added increase or decrease in tax liability, by either customer or Avalara
+     * usually due to customer wanting to report tax Avatax does not support, e.g. bad debts, rental tax.
+     * This API creates a new augmentation for an existing tax filing.
+     * This API can only be used when the filing has not been approved.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, CSPTester, FirmUser, SSTAdmin, TechnicalSupportAdmin.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filing being changed.
+     * @param int $year The month of the filing's filing period being changed.
+     * @param int $month The month of the filing's filing period being changed.
+     * @param string $country The two-character ISO-3166 code for the country of the filing being changed.
+     * @param string $region The two or three character region code for the region of the filing being changed.
+     * @param string $formCode The unique code of the form being changed.
+     * @param FilingAugmentationModel[] $model A list of augmentations to be created for the specified filing.
+     * @return FilingAugmentationModel[]
+     */
+    public function createReturnAugmentation($companyId, $year, $month, $country, $region, $formCode, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/{$country}/{$region}/{$formCode}/augment";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Add an payment to a given filing.
+     *
+     * This API is available by invitation only.
+     * An "Payment" is usually an increase or decrease to customer funding to Avalara,
+     * such as early filer discount amounts that are refunded to the customer, or efile fees from websites.
+     * Sometimes may be a manual change in tax liability similar to an augmentation.
+     * This API creates a new payment for an existing tax filing.
+     * This API can only be used when the filing has not yet been approved.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, CSPTester, FirmUser, SSTAdmin, TechnicalSupportAdmin.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filing being adjusted.
+     * @param int $year The year of the filing's filing period being adjusted.
+     * @param int $month The month of the filing's filing period being adjusted.
+     * @param string $country The two-character ISO-3166 code for the country of the filing being adjusted.
+     * @param string $region The two or three character region code for the region.
+     * @param string $formCode The unique code of the form being adjusted.
+     * @param FilingPaymentModel[] $model A list of Payments to be created for the specified filing.
+     * @return FilingPaymentModel[]
+     */
+    public function createReturnPayment($companyId, $year, $month, $country, $region, $formCode, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/{$country}/{$region}/{$formCode}/payment";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Delete an adjustment for a given filing.
+     *
+     * This API is available by invitation only.
+     * An "Adjustment" is usually an increase or decrease to customer funding to Avalara,
+     * such as early filer discount amounts that are refunded to the customer, or efile fees from websites.
+     * Sometimes may be a manual change in tax liability similar to an augmentation.
+     * This API deletes an adjustment for an existing tax filing.
+     * This API can only be used when the filing has been unapproved.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, CSPTester, FirmUser, SSTAdmin, TechnicalSupportAdmin.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filing being adjusted.
+     * @param int $id The ID of the adjustment being deleted.
+     * @param string $type The type of adjustment that you are trying to delete.
+     * @return ErrorDetail[]
+     */
+    public function deleteReturnAdjustment($companyId, $id, $type)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/adjust/{$id}";
+        $guzzleParams = [
+            'query' => ['type' => $type],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Delete an augmentation for a given filing.
+     *
+     * This API is available by invitation only.
+     * An "Augmentation" is a manually added increase or decrease in tax liability, by either customer or Avalara
+     * usually due to customer wanting to report tax Avatax does not support, e.g. bad debts, rental tax.
+     * This API deletes an augmentation for an existing tax filing.
+     * This API can only be used when the filing has been unapproved.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, CSPTester, FirmUser, SSTAdmin, TechnicalSupportAdmin.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filing being changed.
+     * @param int $id The ID of the augmentation being added.
+     * @return ErrorDetail[]
+     */
+    public function deleteReturnAugmentation($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/augment/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Delete an payment for a given filing.
+     *
+     * This API is available by invitation only.
+     * An "Payment" is usually an increase or decrease to customer funding to Avalara,
+     * such as early filer discount amounts that are refunded to the customer, or efile fees from websites.
+     * Sometimes may be a manual change in tax liability similar to an augmentation.
+     * This API deletes an payment for an existing tax filing.
+     * This API can only be used when the filing has been unapproved.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, CSPTester, FirmUser, SSTAdmin, TechnicalSupportAdmin.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filing being adjusted.
+     * @param int $id The ID of the payment being deleted.
+     * @return ErrorDetail[]
+     */
+    public function deleteReturnPayment($companyId, $id)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/payment/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Retrieve worksheet checkup report for company and filing period.
+     *
+     * This API is available by invitation only.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $filingsId The unique id of the worksheet.
+     * @param int $companyId The unique ID of the company that owns the worksheet.
+     * @return FilingsCheckupModel
+     */
+    public function filingsCheckupReport($filingsId, $companyId)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$filingsId}/checkup";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve worksheet checkup report for company and filing period.
+     *
+     * This API is available by invitation only.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $companyId The unique ID of the company that owns the worksheets object.
+     * @param int $year The year of the filing period.
+     * @param int $month The month of the filing period.
+     * @return FilingsCheckupModel
+     */
+    public function filingsCheckupReports($companyId, $year, $month)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/checkup";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a list of filings for the specified accrual return.
+     *
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns these batches
+     * @param int $filingReturnId The ID of the accrual return
+     * @return FetchResult
+     */
+    public function getAccrualFillings($companyId, $filingReturnId)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/accrual/{$filingReturnId}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single attachment for a filing
+     *
+     * This API is available by invitation only.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $filingReturnId The unique id of the worksheet return.
+     * @param int $fileId The unique id of the document you are downloading
+     * @return object
+     */
+    public function getFilingAttachment($companyId, $filingReturnId, $fileId)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$filingReturnId}/attachment";
+        $guzzleParams = [
+            'query' => ['fileId' => $fileId],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * Retrieve a list of filings for the specified company in the year and month of a given filing period.
      *
      * This API is available by invitation only.
@@ -4222,6 +5566,633 @@ class AvaTaxClient extends AvaTaxClientBase
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a filing for the specified company and id.
+     *
+     * This API is available by invitation only.
+     * A "filing period" is the year and month of the date of the latest customer transaction allowed to be reported on a filing,
+     * based on filing frequency of filing.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $id The id of the filing return your retrieving
+     * @param boolean $details Indicates if you would like the credit details returned
+     * @return FilingReturnModel
+     */
+    public function getFilingReturn($companyId, $id, $details)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/returns/{$id}";
+        $guzzleParams = [
+            'query' => ['details' => $details],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a list of filings for the specified company in the year and month of a given filing period.
+     *
+     * This API is available by invitation only.
+     * A "filing period" is the year and month of the date of the latest customer transaction allowed to be reported on a filing,
+     * based on filing frequency of filing.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $year The year of the filing period.
+     * @param int $month The two digit month of the filing period.
+     * @return FetchResult
+     */
+    public function getFilings($companyId, $year, $month)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a list of filings for the specified company in the given filing period and country.
+     *
+     * This API is available by invitation only.
+     * A "filing period" is the year and month of the date of the latest customer transaction allowed to be reported on a filing,
+     * based on filing frequency of filing.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $year The year of the filing period.
+     * @param int $month The two digit month of the filing period.
+     * @param string $country The two-character ISO-3166 code for the country.
+     * @return FetchResult
+     */
+    public function getFilingsByCountry($companyId, $year, $month, $country)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/{$country}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a list of filings for the specified company in the filing period, country and region.
+     *
+     * This API is available by invitation only.
+     * A "filing period" is the year and month of the date of the latest customer transaction allowed to be reported on a filing,
+     * based on filing frequency of filing.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $year The year of the filing period.
+     * @param int $month The two digit month of the filing period.
+     * @param string $country The two-character ISO-3166 code for the country.
+     * @param string $region The two or three character region code for the region.
+     * @return FetchResult
+     */
+    public function getFilingsByCountryRegion($companyId, $year, $month, $country, $region)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/{$country}/{$region}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a list of filings for the specified company in the given filing period, country, region and form.
+     *
+     * This API is available by invitation only.
+     * A "filing period" is the year and month of the date of the latest customer transaction allowed to be reported on a filing,
+     * based on filing frequency of filing.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $year The year of the filing period.
+     * @param int $month The two digit month of the filing period.
+     * @param string $country The two-character ISO-3166 code for the country.
+     * @param string $region The two or three character region code for the region.
+     * @param string $formCode The unique code of the form.
+     * @return FetchResult
+     */
+    public function getFilingsByReturnName($companyId, $year, $month, $country, $region, $formCode)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/{$country}/{$region}/{$formCode}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a list of filings for the specified company in the year and month of a given filing period.
+     * This gets the basic information from the filings and doesn't include anything extra.
+     *
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns these batches
+     * @param int $endPeriodMonth The month of the period you are trying to retrieve
+     * @param int $endPeriodYear The year of the period you are trying to retrieve
+     * @param string $frequency The frequency of the return you are trying to retrieve (See FilingFrequencyId::* for a list of allowable values)
+     * @param string $status The status of the return(s) you are trying to retrieve (See FilingStatusId::* for a list of allowable values)
+     * @param string $country The country of the return(s) you are trying to retrieve
+     * @param string $region The region of the return(s) you are trying to retrieve
+     * @param int $filingCalendarId The filing calendar id of the return you are trying to retrieve
+     * @return FetchResult
+     */
+    public function getFilingsReturns($companyId, $endPeriodMonth, $endPeriodYear, $frequency, $status, $country, $region, $filingCalendarId)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/returns";
+        $guzzleParams = [
+            'query' => ['endPeriodMonth' => $endPeriodMonth, 'endPeriodYear' => $endPeriodYear, 'frequency' => $frequency, 'status' => $status, 'country' => $country, 'region' => $region, 'filingCalendarId' => $filingCalendarId],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a list of filings for the specified company in the year and month of a given filing period.
+     *
+     * This API is available by invitation only.
+     * A "filing period" is the year and month of the date of the latest customer transaction allowed to be reported on a filing,
+     * based on filing frequency of filing.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $year The year of the filing period.
+     * @param int $month The two digit month of the filing period.
+     * @param string $country The two-character ISO-3166 code for the country.
+     * @param string $region The two or three character region code for the region.
+     * @param string $formCode The unique code of the form.
+     * @return FetchResult
+     */
+    public function getTaxFilings($companyId, $year, $month, $country, $region, $formCode)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings";
+        $guzzleParams = [
+            'query' => ['year' => $year, 'month' => $month, 'country' => $country, 'region' => $region, 'formCode' => $formCode],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Rebuild a set of filings for the specified company in the given filing period.
+     *
+     * This API is available by invitation only.
+     * Rebuilding a return means re-creating or updating the amounts to be filed (worksheet) for a filing.
+     * Rebuilding has to be done whenever a customer adds transactions to a filing.
+     * A "filing period" is the year and month of the date of the latest customer transaction allowed to be reported on a filing,
+     * based on filing frequency of filing.
+     * This API requires filing to be unapproved.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, CSPTester, FirmUser, SSTAdmin, TechnicalSupportAdmin.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $year The year of the filing period to be rebuilt.
+     * @param int $month The month of the filing period to be rebuilt.
+     * @param RebuildFilingsModel $model The rebuild request you wish to execute.
+     * @return FetchResult
+     */
+    public function rebuildFilings($companyId, $year, $month, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/rebuild";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Rebuild a set of filings for the specified company in the given filing period and country.
+     *
+     * This API is available by invitation only.
+     * Rebuilding a return means re-creating or updating the amounts to be filed (worksheet) for a filing.
+     * Rebuilding has to be done whenever a customer adds transactions to a filing.
+     * A "filing period" is the year and month of the date of the latest customer transaction allowed to be reported on a filing,
+     * based on filing frequency of filing.
+     * This API requires filing to be unapproved.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, CSPTester, FirmUser, SSTAdmin, TechnicalSupportAdmin.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $year The year of the filing period to be rebuilt.
+     * @param int $month The month of the filing period to be rebuilt.
+     * @param string $country The two-character ISO-3166 code for the country.
+     * @param RebuildFilingsModel $model The rebuild request you wish to execute.
+     * @return FetchResult
+     */
+    public function rebuildFilingsByCountry($companyId, $year, $month, $country, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/{$country}/rebuild";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Rebuild a set of filings for the specified company in the given filing period, country and region.
+     *
+     * This API is available by invitation only.audit.CheckAuthorizationReturns(null, companyId);
+     * Rebuilding a return means re-creating or updating the amounts to be filed for a filing.
+     * Rebuilding has to be done whenever a customer adds transactions to a filing.
+     * A "filing period" is the year and month of the date of the latest customer transaction allowed to be reported on a filing,
+     * based on filing frequency of filing.
+     * This API requires filing to be unapproved.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, CSPTester, FirmUser, SSTAdmin, TechnicalSupportAdmin.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $year The year of the filing period to be rebuilt.
+     * @param int $month The month of the filing period to be rebuilt.
+     * @param string $country The two-character ISO-3166 code for the country.
+     * @param string $region The two or three character region code for the region.
+     * @param RebuildFilingsModel $model The rebuild request you wish to execute.
+     * @return FetchResult
+     */
+    public function rebuildFilingsByCountryRegion($companyId, $year, $month, $country, $region, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/{$country}/{$region}/rebuild";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Edit an adjustment for a given filing.
+     *
+     * This API is available by invitation only.
+     * An "Adjustment" is usually an increase or decrease to customer funding to Avalara,
+     * such as early filer discount amounts that are refunded to the customer, or efile fees from websites.
+     * Sometimes may be a manual change in tax liability similar to an augmentation.
+     * This API modifies an adjustment for an existing tax filing.
+     * This API can only be used when the filing has not yet been approved.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, CSPTester, FirmUser, SSTAdmin, TechnicalSupportAdmin.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filing being adjusted.
+     * @param int $id The ID of the adjustment being edited.
+     * @param FilingAdjustmentModel $model The updated Adjustment.
+     * @return FilingAdjustmentModel
+     */
+    public function updateReturnAdjustment($companyId, $id, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/adjust/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Edit an augmentation for a given filing.
+     *
+     * This API is available by invitation only.
+     * An "Augmentation" is a manually added increase or decrease in tax liability, by either customer or Avalara
+     * usually due to customer wanting to report tax Avatax does not support, e.g. bad debts, rental tax.
+     * This API modifies an augmentation for an existing tax filing.
+     * This API can only be used when the filing has not been approved.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, CSPTester, FirmUser, SSTAdmin, TechnicalSupportAdmin.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filing being changed.
+     * @param int $id The ID of the augmentation being edited.
+     * @param FilingAugmentationModel $model The updated Augmentation.
+     * @return FilingModel
+     */
+    public function updateReturnAugmentation($companyId, $id, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/augment/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Edit an payment for a given filing.
+     *
+     * This API is available by invitation only.
+     * An "Payment" is usually an increase or decrease to customer funding to Avalara,
+     * such as early filer discount amounts that are refunded to the customer, or efile fees from websites.
+     * Sometimes may be a manual change in tax liability similar to an augmentation.
+     * This API modifies an payment for an existing tax filing.
+     * This API can only be used when the filing has not yet been approved.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, CSPTester, FirmUser, SSTAdmin, TechnicalSupportAdmin.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filing being adjusted.
+     * @param int $id The ID of the payment being edited.
+     * @param FilingPaymentModel $model The updated Payment.
+     * @return FilingPaymentModel
+     */
+    public function updateReturnPayment($companyId, $id, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/payment/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Approves linkage to a firm for a client account
+     *
+     * This API enables the account admin of a client account to approve linkage request by a firm.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
+     *
+     * 
+     * @param int $id 
+     * @return FirmClientLinkageOutputModel
+     */
+    public function approveFirmClientLinkage($id)
+    {
+        $path = "/api/v2/firmclientlinkages/{$id}/approve";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Request a new FirmClient account and create an approved linkage to it
+     *
+     * This API is for use by Firms only.
+     *  
+     * Avalara allows firms to manage returns for clients without the clients needing to use AvaTax service.
+     * Firms can create accounts of FirmClient for customers they are managing using this API.
+     *  
+     * Calling this API creates an account with the specified product subscriptions, but without a new user for account.
+     * Account is then linked to the Firm so they can managed their returns.
+     * You should call this API when a customer does not have an AvaTax account and is to be managed only by the firm.
+     *  
+     * The created account will be created in `Active` status but there will be no user or license key associated with account.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: FirmAdmin, Registrar, SiteAdmin, SystemAdmin.
+     *
+     * 
+     * @param NewFirmClientAccountRequestModel $model Information about the account you wish to create.
+     * @return FirmClientLinkageOutputModel
+     */
+    public function createAndLinkNewFirmClientAccount($model)
+    {
+        $path = "/api/v2/firmclientlinkages/createandlinkclient";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Links a firm account with the client account
+     *
+     * This API enables the firm admins/firm users to request the linkage of a firm account and a client account.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
+     *
+     * 
+     * @param FirmClientLinkageInputModel $model FirmClientLinkageInputModel
+     * @return FirmClientLinkageOutputModel
+     */
+    public function createFirmClientLinkage($model)
+    {
+        $path = "/api/v2/firmclientlinkages";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Delete a linkage
+     *
+     * This API marks a linkage between a firm and client as deleted.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
+     *
+     * 
+     * @param int $id 
+     * @return ErrorDetail[]
+     */
+    public function deleteFirmClientLinkage($id)
+    {
+        $path = "/api/v2/firmclientlinkages/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Get linkage between a firm and client by id
+     *
+     * This API enables the firm admins/firm users to request the linkage of a firm account and a client account.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     *
+     * 
+     * @param int $id 
+     * @return FirmClientLinkageOutputModel
+     */
+    public function getFirmClientLinkage($id)
+    {
+        $path = "/api/v2/firmclientlinkages/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * List client linkages for a firm or client
+     *
+     * This API enables the firm or account users to request the associated linkages to the account.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* firmAccountName, clientAccountName
+     * @return FetchResult
+     */
+    public function listFirmClientLinkage($filter=null)
+    {
+        $path = "/api/v2/firmclientlinkages";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Rejects linkage to a firm for a client account
+     *
+     * This API enables the account admin of a client account to reject linkage request by a firm.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
+     *
+     * 
+     * @param int $id 
+     * @return FirmClientLinkageOutputModel
+     */
+    public function rejectFirmClientLinkage($id)
+    {
+        $path = "/api/v2/firmclientlinkages/{$id}/reject";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Reset linkage status between a client and firm back to requested
+     *
+     * This API enables the firm admin of a client account to reset a previously created linkage request by a firm.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
+     *
+     * 
+     * @param int $id 
+     * @return FirmClientLinkageOutputModel
+     */
+    public function resetFirmClientLinkage($id)
+    {
+        $path = "/api/v2/firmclientlinkages/{$id}/reset";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Revokes previously approved linkage to a firm for a client account
+     *
+     * This API enables the account admin of a client account to revoke a previously approved linkage request by a firm.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
+     *
+     * 
+     * @param int $id 
+     * @return FirmClientLinkageOutputModel
+     */
+    public function revokeFirmClientLinkage($id)
+    {
+        $path = "/api/v2/firmclientlinkages/{$id}/revoke";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
     }
 
     /**
@@ -4346,6 +6317,76 @@ class AvaTaxClient extends AvaTaxClientBase
         $path = "/api/v2/taxrates/bypostalcode";
         $guzzleParams = [
             'query' => ['country' => $country, 'postalCode' => $postalCode],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Request the javascript for a funding setup widget
+     *
+     * This API is available by invitation only.
+     * Companies that use the Avalara Managed Returns or the SST Certified Service Provider services are
+     * required to setup their funding configuration before Avalara can begin filing tax returns on their
+     * behalf.
+     * Funding configuration for each company is set up by submitting a funding setup request, which can
+     * be sent either via email or via an embedded HTML widget.
+     * When the funding configuration is submitted to Avalara, it will be reviewed by treasury team members
+     * before approval.
+     * This API returns back the actual javascript code to insert into your application to render the
+     * JavaScript funding setup widget inline.
+     * Use the 'methodReturn.javaScript' return value to insert this widget into your HTML page.
+     * This API requires a subscription to Avalara Managed Returns or SST Certified Service Provider.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $id The unique ID number of this funding request
+     * @return FundingStatusModel
+     */
+    public function activateFundingRequest($id)
+    {
+        $path = "/api/v2/fundingrequests/{$id}/widget";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve status about a funding setup request
+     *
+     * This API is available by invitation only.
+     * Companies that use the Avalara Managed Returns or the SST Certified Service Provider services are
+     * required to setup their funding configuration before Avalara can begin filing tax returns on their
+     * behalf.
+     * Funding configuration for each company is set up by submitting a funding setup request, which can
+     * be sent either via email or via an embedded HTML widget.
+     * When the funding configuration is submitted to Avalara, it will be reviewed by treasury team members
+     * before approval.
+     * This API checks the status on an existing funding request.
+     * This API requires a subscription to Avalara Managed Returns or SST Certified Service Provider.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $id The unique ID number of this funding request
+     * @return FundingStatusModel
+     */
+    public function fundingRequestStatus($id)
+    {
+        $path = "/api/v2/fundingrequests/{$id}";
+        $guzzleParams = [
+            'query' => [],
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
@@ -4840,6 +6881,41 @@ class AvaTaxClient extends AvaTaxClientBase
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Sync items from a product catalog
+     *
+     * Syncs a list of items with AvaTax without waiting for them to be created. It is ideal for syncing large product catalogs
+     * with AvaTax.
+     *  
+     * Any invalid or duplicate items will be ignored. To diagnose why an item is not created, use the normal create transaction API to receive validation information.
+     *  
+     * This API is currently limited to 1000 items per call (the limit is subject to change).
+     *  
+     * Items are a way of separating your tax calculation process from your tax configuration details. If you choose, you
+     * can provide `itemCode` values for each `CreateTransaction()` API call rather than specifying tax codes, parameters, descriptions,
+     * and other data fields. AvaTax will automatically look up each `itemCode` and apply the correct tax codes and parameters
+     * from the item table instead. This allows your CreateTransaction call to be as simple as possible, and your tax compliance
+     * team can manage your item catalog and adjust the tax behavior of items without having to modify your software.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this item.
+     * @param SyncItemsRequestModel $model The request object.
+     * @return SyncItemsResponseModel
+     */
+    public function syncItems($companyId, $model)
+    {
+        $path = "/api/v2/companies/{$companyId}/items/sync";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
     }
 
     /**
@@ -6737,6 +8813,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * When you dismiss a notification, the notification will track the user and time when it was
      * dismissed. You can then later review which employees of your company dismissed notifications to
      * determine if they were resolved appropriately.
+     *  
+     * A Global notification with null accountId and companyId cannot be dismissed and will expire within a given time span.
      * 
      * ### Security Policies
      * 
@@ -6924,6 +9002,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * A notification is a message from Avalara that may have relevance to your business. You may want
      * to regularly review notifications and then dismiss them when you are certain that you have addressed
      * any relevant concerns raised by this notification.
+     *  
+     * A Global notification is a message which is directed to all the accounts and is set to expire within
+     * a certain time and cannot be dismissed by the user. Make accountId and companyId null to create a global notification.
      *  
      * An example of a notification would be a message about new software, or a change to AvaTax that may
      * affect you, or a potential issue with your company's tax profile.

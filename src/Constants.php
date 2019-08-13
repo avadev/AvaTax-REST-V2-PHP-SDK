@@ -206,6 +206,81 @@ class CertificatePreviewType
 
 
 /**
+ * Filing Frequency types
+ */
+class FilingFrequencyId
+{
+
+    /**
+     * File once per month
+     */
+    const C_MONTHLY = 1;
+
+    /**
+     * File once per three months
+     */
+    const C_QUARTERLY = 2;
+
+    /**
+     * File twice per year
+     */
+    const C_SEMIANNUALLY = 3;
+
+    /**
+     * File once per year
+     */
+    const C_ANNUALLY = 4;
+
+    /**
+     * File every other month
+     */
+    const C_BIMONTHLY = 5;
+
+    /**
+     * File only when there are documents to report
+     */
+    const C_OCCASIONAL = 6;
+
+    /**
+     * File for the first two months of each quarter, then do not file on the quarterly month.
+     */
+    const C_INVERSEQUARTERLY = 7;
+
+    /**
+     * File every week
+     */
+    const C_WEEKLY = 8;
+
+}
+
+
+/**
+ * Filing Status
+ */
+class FilingStatusId
+{
+    const C_PENDINGAPPROVAL = 0;
+    const C_DIRTY = 1;
+    const C_APPROVEDTOFILE = 2;
+    const C_PENDINGFILING = 3;
+    const C_PENDINGFILINGONBEHALF = 4;
+    const C_FILED = 5;
+    const C_FILEDONBEHALF = 6;
+    const C_RETURNACCEPTED = 7;
+    const C_RETURNACCEPTEDONBEHALF = 8;
+    const C_PAYMENTREMITTED = 9;
+    const C_VOIDED = 10;
+    const C_PENDINGRETURN = 11;
+    const C_PENDINGRETURNONBEHALF = 12;
+    const C_DONOTFILE = 13;
+    const C_RETURNREJECTED = 14;
+    const C_RETURNREJECTEDONBEHALF = 15;
+    const C_APPROVEDTOFILEONBEHALF = 16;
+
+}
+
+
+/**
  * Type of file request
  */
 class PointOfSaleFileType
@@ -807,6 +882,7 @@ class ErrorCodeId
     const C_BATCHCANNOTDELETEBATCHFILE = 205;
     const C_BATCHMUSTCONTAINONEFILE = 206;
     const C_MISSINGBATCHFILECONTENT = 207;
+    const C_BATCHCANNOTBEDELETEDWHILEPROCESSING = 208;
 
     /**
      * Point Of Sale API exceptions
@@ -908,7 +984,6 @@ class ErrorCodeId
     const C_CERTIFICATESERROR = 1203;
     const C_MISSINGREQUIREDFIELDS = 1204;
     const C_CERTIFICATESNOTSETUP = 1205;
-    const C_ADDRELATIONSHIPSERROR = 1206;
     const C_CONFLICTINGEXPOSUREZONE = 1208;
     const C_MISSINGFIELDTOCREATEEXPOSUREZONE = 1209;
     const C_MISSINGEXEMPTREASON = 1210;
@@ -993,6 +1068,8 @@ class ErrorCodeId
     const C_CANNOTDISMISSGLOBALNOTIFICATION = 1706;
     const C_CANNOTUPDATEACCOUNTTYPEID = 1713;
     const C_TAXPAYERNUMBERISREQUIRED = 1714;
+    const C_REQUESTLIMITEXCEEDED = 1715;
+    const C_CONCURRENTREQUESTLIMITEXCEEDED = 1716;
 
     /**
      * SendSales API errors
@@ -1051,6 +1128,11 @@ class ErrorCodeId
     const C_ALLUSCOUNTRYCODES = 2217;
     const C_NODOCUMENTSTOTEST = 2218;
     const C_NOSHIPPINGCHARGE = 2219;
+
+    /**
+     * Company Controller Related Errors
+     */
+    const C_FAILEDTOUPDATECOMPANYLOCATION = 2314;
 
 }
 
@@ -1504,6 +1586,11 @@ class MatchingTaxType
     const C_VATINPUTTAX = 73;
 
     /**
+     * LightBulbs tax type
+     */
+    const C_LIGHTBULBS = 76;
+
+    /**
      * Match VAT Nonrecoverable Input Tax only
      */
     const C_VATNONRECOVERABLEINPUTTAX = 78;
@@ -1527,6 +1614,16 @@ class MatchingTaxType
      * Match Seller's Use Tax only
      */
     const C_USETAX = 85;
+
+    /**
+     * EWaste tax type
+     */
+    const C_EWASTE = 87;
+
+    /**
+     * Batteries tax type
+     */
+    const C_BATTERIES = 90;
 
 }
 
@@ -2362,6 +2459,11 @@ class TaxType
      */
     const C_BATTERIES = 1015;
 
+    /**
+     * LightBulbs
+     */
+    const C_LIGHTBULBS = 1016;
+
 }
 
 
@@ -2380,55 +2482,6 @@ class ScraperType
      * Indicates that it is a Customer DOR Data type
      */
     const C_CUSTOMERDORDATA = 2;
-
-}
-
-
-/**
- * Filing Frequency types
- */
-class FilingFrequencyId
-{
-
-    /**
-     * File once per month
-     */
-    const C_MONTHLY = 1;
-
-    /**
-     * File once per three months
-     */
-    const C_QUARTERLY = 2;
-
-    /**
-     * File twice per year
-     */
-    const C_SEMIANNUALLY = 3;
-
-    /**
-     * File once per year
-     */
-    const C_ANNUALLY = 4;
-
-    /**
-     * File every other month
-     */
-    const C_BIMONTHLY = 5;
-
-    /**
-     * File only when there are documents to report
-     */
-    const C_OCCASIONAL = 6;
-
-    /**
-     * File for the first two months of each quarter, then do not file on the quarterly month.
-     */
-    const C_INVERSEQUARTERLY = 7;
-
-    /**
-     * File every week
-     */
-    const C_WEEKLY = 8;
 
 }
 
@@ -2527,32 +2580,6 @@ class FilingRequestStatus
      * This indicates that compliance rejected the request.
      */
     const C_REQUESTDENIED = 9;
-
-}
-
-
-/**
- * Filing Status
- */
-class FilingStatusId
-{
-    const C_PENDINGAPPROVAL = 0;
-    const C_DIRTY = 1;
-    const C_APPROVEDTOFILE = 2;
-    const C_PENDINGFILING = 3;
-    const C_PENDINGFILINGONBEHALF = 4;
-    const C_FILED = 5;
-    const C_FILEDONBEHALF = 6;
-    const C_RETURNACCEPTED = 7;
-    const C_RETURNACCEPTEDONBEHALF = 8;
-    const C_PAYMENTREMITTED = 9;
-    const C_VOIDED = 10;
-    const C_PENDINGRETURN = 11;
-    const C_PENDINGRETURNONBEHALF = 12;
-    const C_DONOTFILE = 13;
-    const C_RETURNREJECTED = 14;
-    const C_RETURNREJECTEDONBEHALF = 15;
-    const C_APPROVEDTOFILEONBEHALF = 16;
 
 }
 
@@ -2679,50 +2706,6 @@ class FirmClientLinkageStatus
      * Revoked
      */
     const C_REVOKED = 4;
-
-}
-
-
-/**
- * What object experienced the error?
- */
-class ErrorTargetCode
-{
-
-    /**
-     * Error target is unknown
-     */
-    const C_UNKNOWN = 0;
-
-    /**
-     * There was an error in the request URL, querystring, or body
-     */
-    const C_HTTPREQUEST = 1;
-
-    /**
-     * There was an error in the HTTP Request headers
-     */
-    const C_HTTPREQUESTHEADERS = 2;
-
-    /**
-     * Some data provided by the user was incorrect
-     */
-    const C_INCORRECTDATA = 3;
-
-    /**
-     * There was an error in the AvaTax API Server
-     */
-    const C_AVATAXAPISERVER = 10;
-
-    /**
-     * There was an error in the Avalara Identity Server
-     */
-    const C_AVALARAIDENTITYSERVER = 11;
-
-    /**
-     * The customer's account setup does not permit certain actions
-     */
-    const C_CUSTOMERACCOUNTSETUP = 12;
 
 }
 
@@ -3024,6 +3007,11 @@ class CommentType
      * Customer comments are those comments that both compliance and the customer can read
      */
     const C_CUSTOMER = 2;
+
+    /**
+     * A comment that has a POA Attachment on it
+     */
+    const C_POAATTACHMENT = 3;
 
 }
 
