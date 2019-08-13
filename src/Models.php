@@ -1233,6 +1233,11 @@ class AdvancedRuleFullDetailsModel
     public $version;
 
     /**
+     * @var int[] Account Ids the rule is visible for in CUP, when IsVisibleInCUP = false
+     */
+    public $accountsVisibleFor;
+
+    /**
      * @var string Unique identifier for a rule
      */
     public $ruleId;
@@ -2686,6 +2691,24 @@ class ApproveAdvancedRuleModel
 }
 
 /**
+ * Model for toggling visibility of an advanced rule for an account
+ */
+class AdvancedRuleVisibilityModel
+{
+
+    /**
+     * @var boolean Should the rule be visible or not visible
+     */
+    public $isVisible;
+
+    /**
+     * @var int The account Id for which the rule is to be visible/not visible
+     */
+    public $accountId;
+
+}
+
+/**
  * Model representing an execution of an advanced rule for a company
  */
 class AdvancedRuleExecutionModel
@@ -3291,6 +3314,11 @@ class CustomerModel
      */
     public $shipTos;
 
+    /**
+     * @var CustomerAttributeModel[] A list of attributes that apply to this customer.     You can fetch this data by specifying `$include=attributes` when calling a customer fetch API.
+     */
+    public $attributes;
+
 }
 
 /**
@@ -3393,6 +3421,11 @@ class CertificateModel
     public $filename;
 
     /**
+     * @var boolean This value is true if there exists scanned PDF copy of this certificate or the PDF version of the form that the customer filled via the CertCapture wizard on S3 bucket.
+     */
+    public $documentExists;
+
+    /**
      * @var boolean True if this certificate is marked as valid. A valid certificate can be considered for exemption purposes.  When a certificate is marked invalid, it will no longer be considered when calculating exemption for  a customer.
      */
     public $valid;
@@ -3466,6 +3499,16 @@ class CertificateModel
      * @var CertificateAttributeModel[] A list of certificate attributes that apply to this certificate.     You can fetch this data by specifying `$include=attributes` when calling a certificate fetch API.
      */
     public $attributes;
+
+    /**
+     * @var int The unique ID number of current AvaTax Exemption Certificate that refers this certificate.
+     */
+    public $ecmsId;
+
+    /**
+     * @var string The status of current AvaTax Exemption Certificate that refers to this certificate.
+     */
+    public $ecmsStatus;
 
     /**
      * @var string This field is available for input only. To retrieve the image after creation, use the  `DownloadCertificateImage` API.     When creating a certificate, you may optionally provide a PDF image in Base64 URLEncoded format.  PDFs are automatically parsed into individual page JPG images and can be retrieved back  later as either the original PDF or the individual pages.     To create a certificate, you must provide one of the following fields: either a `filename`, a `pdf` file,  or an array of JPG `pages`. The API will return an error if you omit these fields or if you attempt to  put values in more than one of them.
@@ -3554,6 +3597,45 @@ class ExposureZoneModel
      * @var string Two character ISO 3166 county code for the country component of this exposure zone.
      */
     public $country;
+
+}
+
+/**
+ * A Customer's linked attribute denoting what features applied to the customer. A customer can
+ * be linked to multiple customer attributes and vice versa.
+ */
+class CustomerAttributeModel
+{
+
+    /**
+     * @var int A unique ID number representing this attribute.
+     */
+    public $id;
+
+    /**
+     * @var string A friendly readable name for this attribute.
+     */
+    public $name;
+
+    /**
+     * @var string A full help text description of the attribute.
+     */
+    public $description;
+
+    /**
+     * @var boolean This value is true if this is a system-defined attribute. System-defined attributes  cannot be modified or deleted on the CertCapture website.
+     */
+    public $isSystemCode;
+
+    /**
+     * @var boolean A flag denotes that future exemption certificate request won't be mailed to the customer
+     */
+    public $isNonDeliver;
+
+    /**
+     * @var boolean A flag denotes that this attribute can't be removed/added to a customer record
+     */
+    public $isChangeable;
 
 }
 
@@ -10098,6 +10180,16 @@ class FirmClientLinkageOutputModel
      */
     public $isDeleted;
 
+    /**
+     * @var string Name of the firm's point of contact person for the client
+     */
+    public $firmContactName;
+
+    /**
+     * @var string Email of the firm's point of contact person for the client
+     */
+    public $firmContactEmail;
+
 }
 
 /**
@@ -10278,47 +10370,6 @@ class SyncItemsResponseModel
      * @var string The status of the request
      */
     public $status;
-
-}
-
-/**
- * Helper function for throwing known error response
- */
-class ErrorResult
-{
-
-    /**
-     * @var ErrorInfo Information about the error(s)
-     */
-    public $error;
-
-}
-
-/**
- * Information about the error that occurred
- */
-class ErrorInfo
-{
-
-    /**
-     * @var string Type of error that occurred (See ErrorCodeId::* for a list of allowable values)
-     */
-    public $code;
-
-    /**
-     * @var string Short one-line message to summaryize what went wrong
-     */
-    public $message;
-
-    /**
-     * @var string What object or service caused the error? (See ErrorTargetCode::* for a list of allowable values)
-     */
-    public $target;
-
-    /**
-     * @var ErrorDetail[] Array of detailed error messages
-     */
-    public $details;
 
 }
 
@@ -11894,7 +11945,7 @@ class ResourceFileUploadRequestModel
 {
 
     /**
-     * @var int This stream contains the bytes of the file being uploaded.
+     * @var string This stream contains the bytes of the file being uploaded. (This value is encoded as a Base64 string)
      */
     public $content;
 
@@ -12667,6 +12718,37 @@ class RemoveTransactionLineModel
      * @var boolean ption to renumber lines after removal. After renumber, the line number becomes: "1", "2", "3", ...
      */
     public $renumber;
+
+}
+
+/**
+ * Response model used as output for InspectLine API.
+ */
+class InspectLineResponseModel
+{
+
+    /**
+     * @var DeterminationFactorModel[] A list of determination factors for a line that is being inspected through the InspectLine API.
+     */
+    public $determinationFactors;
+
+}
+
+/**
+ * This object represents a single determination factor for a line that is being inspected through the InspectLine API.
+ */
+class DeterminationFactorModel
+{
+
+    /**
+     * @var string Determination reason code.
+     */
+    public $code;
+
+    /**
+     * @var string Determination reason description.
+     */
+    public $description;
 
 }
 
