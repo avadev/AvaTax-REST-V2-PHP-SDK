@@ -1329,6 +1329,11 @@ class CompanyModel
     public $taxpayerIdNumber;
 
     /**
+     * @var boolean Set this field to true if the taxPayerIdNumber is a FEIN.
+     */
+    public $isFein;
+
+    /**
      * @var boolean Set this flag to true to give this company its own unique tax profile.  If this flag is true, this company will have its own Nexus, TaxRule, TaxCode, and Item definitions.  If this flag is false, this company will inherit all profile values from its parent.
      */
     public $hasProfile;
@@ -3831,6 +3836,11 @@ class CompanyInitializationModel
     public $taxpayerIdNumber;
 
     /**
+     * @var boolean Set this field to true if the taxPayerIdNumber is a FEIN.
+     */
+    public $isFein;
+
+    /**
      * @var string Address Line1
      */
     public $line1;
@@ -5563,6 +5573,11 @@ class TransactionLineDetailModel
      * @var boolean True if this value is a non-passthrough tax.     A non-passthrough tax is a tax that may not be charged to a customer; it must be paid directly by the company.
      */
     public $isNonPassThru;
+
+    /**
+     * @var boolean The Taxes/Fee component. True if the fee is applied.
+     */
+    public $isFee;
 
 }
 
@@ -7776,6 +7791,149 @@ class CompanyDistanceThresholdModel
 }
 
 /**
+ * Error Transaction Model
+ */
+class ErrorTransactionOutputModel
+{
+
+    /**
+     * @var string Error code of the error result from transaction creation (See ErrorCodeId::* for a list of allowable values)
+     */
+    public $errorCode;
+
+    /**
+     * @var string Error message of the error result from transaction creation
+     */
+    public $errorMessage;
+
+    /**
+     * @var string The full JSON of the error result from transaction creation
+     */
+    public $avataxErrorJson;
+
+    /**
+     * @var string The full JSON of the transaction creation request
+     */
+    public $avataxCreateTransactionJson;
+
+    /**
+     * @var string The datasource instance that made the transaction creation call
+     */
+    public $datasource;
+
+    /**
+     * @var string The date of the document
+     */
+    public $documentDate;
+
+    /**
+     * @var string Type of transaction of the error transaction (See DocumentType::* for a list of allowable values)
+     */
+    public $documentType;
+
+    /**
+     * @var string The internal reference code (used by the client application) of the error transaction
+     */
+    public $documentCode;
+
+}
+
+/**
+ * Request model for when a user is deleting multiple error transaction
+ */
+class DeleteErrorTransactionsRequestModel
+{
+
+    /**
+     * @var string The company code of the error transactions
+     */
+    public $companyCode;
+
+    /**
+     * @var ErrorTransactionModelBase[] List of error transactions to be deleted
+     */
+    public $models;
+
+}
+
+/**
+ * Base model class for single error transaction delete request
+ */
+class ErrorTransactionModelBase
+{
+
+    /**
+     * @var string Type of transaction of the error transaction (See DocumentType::* for a list of allowable values)
+     */
+    public $documentType;
+
+    /**
+     * @var string The internal reference code (used by the client application) of the error transaction
+     */
+    public $documentCode;
+
+}
+
+/**
+ * Response model of error transaction batch delete
+ */
+class DeleteErrorTransactionsResponseModel
+{
+
+    /**
+     * @var DeleteErrorTransactionResponseModel[] The individual result of each error transaction in the request batch
+     */
+    public $results;
+
+}
+
+/**
+ * Response model of a single error transaction delete
+ */
+class DeleteErrorTransactionResponseModel
+{
+
+    /**
+     * @var string Result of the deletion (See AvataxDeleteErrorTransactionStatus::* for a list of allowable values)
+     */
+    public $result;
+
+    /**
+     * @var string Type of transaction of the error transaction (See DocumentType::* for a list of allowable values)
+     */
+    public $documentType;
+
+    /**
+     * @var string The internal reference code (used by the client application) of the error transaction
+     */
+    public $documentCode;
+
+}
+
+/**
+ * Single error transaction delete request
+ */
+class DeleteErrorTransactionRequestModel
+{
+
+    /**
+     * @var string The company code of the error transaction
+     */
+    public $companyCode;
+
+    /**
+     * @var string Type of transaction of the error transaction (See DocumentType::* for a list of allowable values)
+     */
+    public $documentType;
+
+    /**
+     * @var string The internal reference code (used by the client application) of the error transaction
+     */
+    public $documentCode;
+
+}
+
+/**
  * Represents a commitment to file a tax return on a recurring basis.
  * Only used if you subscribe to Avalara Returns.
  */
@@ -9759,7 +9917,7 @@ class MultiTaxFilingModel
     public $type;
 
     /**
-     * @var FilingsTaxSummaryModel A summary of all taxes compbined for this period
+     * @var FilingsTaxSummaryModel A summary of all taxes combined for this period
      */
     public $taxSummary;
 
@@ -10014,6 +10172,16 @@ class MultiTaxFilingReturnModel
      * @var FilingAdjustmentModel[] The Adjustments for this return.
      */
     public $adjustments;
+
+    /**
+     * @var float Total amount of augmentations on this return
+     */
+    public $totalAugmentations;
+
+    /**
+     * @var FilingAugmentationModel[] The Augmentations for this return.
+     */
+    public $augmentations;
 
     /**
      * @var float Total amount of payments on this return
@@ -12384,6 +12552,39 @@ class PointOfSaleDataRequestModel
      * @var string A unique code assoicated with the Partner you may be working with. If you are not working with a Partner or your Partner has not provided you an ID, leave null. (See PointOfSalePartnerId::* for a list of allowable values)
      */
     public $partnerId;
+
+}
+
+/**
+ * SendSales Request Model.
+ */
+class SendSalesRequestModel
+{
+
+    /**
+     * @var int The companyId for which the send sales file is being generated.
+     */
+    public $companyId;
+
+    /**
+     * @var string[] List of taxCodes to be included in send sales file.
+     */
+    public $taxCodes;
+
+    /**
+     * @var string The date for which send sales file is being generated.
+     */
+    public $date;
+
+    /**
+     * @var string The send sales file format. (See SendSalesOutputFileFormat::* for a list of allowable values)
+     */
+    public $format;
+
+    /**
+     * @var string The send sales file type (See SendSalesFileType::* for a list of allowable values)
+     */
+    public $type;
 
 }
 
