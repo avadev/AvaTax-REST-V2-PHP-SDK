@@ -206,81 +206,6 @@ class CertificatePreviewType
 
 
 /**
- * Filing Frequency types
- */
-class FilingFrequencyId
-{
-
-    /**
-     * File once per month
-     */
-    const C_MONTHLY = 1;
-
-    /**
-     * File once per three months
-     */
-    const C_QUARTERLY = 2;
-
-    /**
-     * File twice per year
-     */
-    const C_SEMIANNUALLY = 3;
-
-    /**
-     * File once per year
-     */
-    const C_ANNUALLY = 4;
-
-    /**
-     * File every other month
-     */
-    const C_BIMONTHLY = 5;
-
-    /**
-     * File only when there are documents to report
-     */
-    const C_OCCASIONAL = 6;
-
-    /**
-     * File for the first two months of each quarter, then do not file on the quarterly month.
-     */
-    const C_INVERSEQUARTERLY = 7;
-
-    /**
-     * File every week
-     */
-    const C_WEEKLY = 8;
-
-}
-
-
-/**
- * Filing Status
- */
-class FilingStatusId
-{
-    const C_PENDINGAPPROVAL = 0;
-    const C_DIRTY = 1;
-    const C_APPROVEDTOFILE = 2;
-    const C_PENDINGFILING = 3;
-    const C_PENDINGFILINGONBEHALF = 4;
-    const C_FILED = 5;
-    const C_FILEDONBEHALF = 6;
-    const C_RETURNACCEPTED = 7;
-    const C_RETURNACCEPTEDONBEHALF = 8;
-    const C_PAYMENTREMITTED = 9;
-    const C_VOIDED = 10;
-    const C_PENDINGRETURN = 11;
-    const C_PENDINGRETURNONBEHALF = 12;
-    const C_DONOTFILE = 13;
-    const C_RETURNREJECTED = 14;
-    const C_RETURNREJECTEDONBEHALF = 15;
-    const C_APPROVEDTOFILEONBEHALF = 16;
-
-}
-
-
-/**
  * Type of file request
  */
 class PointOfSaleFileType
@@ -885,6 +810,11 @@ class ErrorCodeId
     const C_BATCHCANNOTBEDELETEDWHILEPROCESSING = 208;
 
     /**
+     * BizTech error
+     */
+    const C_INTERNALSERVERERROR = 209;
+
+    /**
      * Point Of Sale API exceptions
      */
     const C_POINTOFSALEFILESIZE = 250;
@@ -919,6 +849,11 @@ class ErrorCodeId
      * Represents a malformed document fetch command
      */
     const C_CANNOTCHANGEFILINGSTATUS = 401;
+
+    /**
+     * Represents a FEIN in incorrect format.
+     */
+    const C_FEINFORMATERROR = 402;
 
     /**
      * Represents a SQL server timeout error / deadlock error
@@ -1133,6 +1068,19 @@ class ErrorCodeId
      * Company Controller Related Errors
      */
     const C_FAILEDTOUPDATECOMPANYLOCATION = 2314;
+
+    /**
+     * Error Transaction Related Errors
+     */
+    const C_FAILEDTOCREATEERRORTRANSACTION = 2400;
+    const C_FAILEDTODELETEERRORTRANSACTIONS = 2401;
+    const C_FAILEDTOLISTERRORTRANSACTIONS = 2402;
+    const C_ERRORTRANSACTIONSSERVICEEXCEPTION = 2403;
+
+    /**
+     * Generic validation errors
+     */
+    const C_FIELDLENGTHERROR = 2500;
 
 }
 
@@ -2405,6 +2353,11 @@ class TaxType
     const C_LANDEDCOST = 12;
 
     /**
+     * Meals tax type
+     */
+    const C_MEALS = 15;
+
+    /**
      * Consumer Use Tax
      */
     const C_CONSUMERUSE = 67;
@@ -2482,6 +2435,74 @@ class ScraperType
      * Indicates that it is a Customer DOR Data type
      */
     const C_CUSTOMERDORDATA = 2;
+
+}
+
+
+/**
+ * Status when deleting an error transaction
+ */
+class AvataxDeleteErrorTransactionStatus
+{
+
+    /**
+     * Successful delete
+     */
+    const C_SUCCESS = 0;
+
+    /**
+     * Failed delete
+     */
+    const C_FAILURE = 1;
+
+}
+
+
+/**
+ * Filing Frequency types
+ */
+class FilingFrequencyId
+{
+
+    /**
+     * File once per month
+     */
+    const C_MONTHLY = 1;
+
+    /**
+     * File once per three months
+     */
+    const C_QUARTERLY = 2;
+
+    /**
+     * File twice per year
+     */
+    const C_SEMIANNUALLY = 3;
+
+    /**
+     * File once per year
+     */
+    const C_ANNUALLY = 4;
+
+    /**
+     * File every other month
+     */
+    const C_BIMONTHLY = 5;
+
+    /**
+     * File only when there are documents to report
+     */
+    const C_OCCASIONAL = 6;
+
+    /**
+     * File for the first two months of each quarter, then do not file on the quarterly month.
+     */
+    const C_INVERSEQUARTERLY = 7;
+
+    /**
+     * File every week
+     */
+    const C_WEEKLY = 8;
 
 }
 
@@ -2580,6 +2601,32 @@ class FilingRequestStatus
      * This indicates that compliance rejected the request.
      */
     const C_REQUESTDENIED = 9;
+
+}
+
+
+/**
+ * Filing Status
+ */
+class FilingStatusId
+{
+    const C_PENDINGAPPROVAL = 0;
+    const C_DIRTY = 1;
+    const C_APPROVEDTOFILE = 2;
+    const C_PENDINGFILING = 3;
+    const C_PENDINGFILINGONBEHALF = 4;
+    const C_FILED = 5;
+    const C_FILEDONBEHALF = 6;
+    const C_RETURNACCEPTED = 7;
+    const C_RETURNACCEPTEDONBEHALF = 8;
+    const C_PAYMENTREMITTED = 9;
+    const C_VOIDED = 10;
+    const C_PENDINGRETURN = 11;
+    const C_PENDINGRETURNONBEHALF = 12;
+    const C_DONOTFILE = 13;
+    const C_RETURNREJECTED = 14;
+    const C_RETURNREJECTEDONBEHALF = 15;
+    const C_APPROVEDTOFILEONBEHALF = 16;
 
 }
 
@@ -3104,6 +3151,36 @@ class ReportDocType
      * Output all Sales tax transactions in the report
      */
     const C_SALES = 83;
+
+}
+
+
+/**
+ * 
+ */
+class SendSalesOutputFileFormat
+{
+    const C_STANDARD = 1;
+    const C_DMA = 2;
+
+}
+
+
+/**
+ * 
+ */
+class SendSalesFileType
+{
+
+    /**
+     * File is in Comma Separated Values format
+     */
+    const C_CSV = 0;
+
+    /**
+     * File is in Javascript Object Notation format
+     */
+    const C_JSON = 1;
 
 }
 
