@@ -7797,7 +7797,7 @@ class ErrorTransactionOutputModel
 {
 
     /**
-     * @var string Error code of the error result from transaction creation (See ErrorCodeId::* for a list of allowable values)
+     * @var string Error code of the error result from transaction creation
      */
     public $errorCode;
 
@@ -7825,6 +7825,11 @@ class ErrorTransactionOutputModel
      * @var string The date of the document
      */
     public $documentDate;
+
+    /**
+     * @var string The date that this ErrorTransaction will be automatically purged from the detabase.
+     */
+    public $expiresAt;
 
     /**
      * @var string Type of transaction of the error transaction (See DocumentType::* for a list of allowable values)
@@ -7911,25 +7916,20 @@ class DeleteErrorTransactionResponseModel
 }
 
 /**
- * Single error transaction delete request
+ * Model that has the matching count for an errorcode
  */
-class DeleteErrorTransactionRequestModel
+class ErrorCodeOutputModel
 {
 
     /**
-     * @var string The company code of the error transaction
+     * @var string Name of the error code
      */
-    public $companyCode;
+    public $errorCode;
 
     /**
-     * @var string Type of transaction of the error transaction (See DocumentType::* for a list of allowable values)
+     * @var int Number of error code recorded
      */
-    public $documentType;
-
-    /**
-     * @var string The internal reference code (used by the client application) of the error transaction
-     */
-    public $documentCode;
+    public $count;
 
 }
 
@@ -12950,24 +12950,6 @@ class DeterminationFactorModel
      * @var string Determination reason description.
      */
     public $description;
-
-}
-
-/**
- * Information about a username.
- */
-class UsernameModel
-{
-
-    /**
-     * @var string The username.
-     */
-    public $username;
-
-    /**
-     * @var boolean Whether or not the username is taken.
-     */
-    public $taken;
 
 }
 
