@@ -5213,7 +5213,7 @@ class TransactionSummary
     public $stateAssignedNo;
 
     /**
-     * @var string The tax type of this tax.
+     * @var string The tax type of this tax. (See TaxType::* for a list of allowable values)
      */
     public $taxType;
 
@@ -5500,7 +5500,7 @@ class TransactionLineDetailModel
     public $taxableAmount;
 
     /**
-     * @var string The type of tax that was calculated. Depends on the company's nexus settings as well as the jurisdiction's tax laws.
+     * @var string The type of tax that was calculated. Depends on the company's nexus settings as well as the jurisdiction's tax laws. (See TaxType::* for a list of allowable values)
      */
     public $taxType;
 
@@ -7791,39 +7791,6 @@ class CompanyDistanceThresholdModel
 }
 
 /**
- * 
- */
-class CappedFetchResult[ErrorTransactionOutputModel]
-{
-
-    /**
-     * @var boolean 
-     */
-    public $_isRecordsetCountCapped;
-
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-
-    /**
-     * @var ErrorTransactionOutputModel[] 
-     */
-    public $value;
-
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-
-    /**
-     * @var string 
-     */
-    public $pageKey;
-
-}
-
-/**
  * Error Transaction Model
  */
 class ErrorTransactionOutputModel
@@ -7883,6 +7850,11 @@ class DeleteErrorTransactionsRequestModel
 {
 
     /**
+     * @var string The company code of the error transactions
+     */
+    public $companyCode;
+
+    /**
      * @var ErrorTransactionModelBase[] List of error transactions to be deleted
      */
     public $models;
@@ -7940,39 +7912,6 @@ class DeleteErrorTransactionResponseModel
      * @var string The internal reference code (used by the client application) of the error transaction
      */
     public $documentCode;
-
-}
-
-/**
- * 
- */
-class CappedFetchResult[ErrorCodeOutputModel]
-{
-
-    /**
-     * @var boolean 
-     */
-    public $_isRecordsetCountCapped;
-
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-
-    /**
-     * @var ErrorCodeOutputModel[] 
-     */
-    public $value;
-
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-
-    /**
-     * @var string 
-     */
-    public $pageKey;
 
 }
 
@@ -9075,34 +9014,6 @@ class FilingAttachmentModel
      * @var string The description of the attachment
      */
     public $description;
-
-}
-
-/**
- * Filing Returns Model
- */
-class FiledReturnModel
-{
-
-    /**
-     * @var int The unique ID number of the company filing return.
-     */
-    public $companyId;
-
-    /**
-     * @var int The month of the filing period for this tax filing.  The filing period represents the year and month of the last day of taxes being reported on this filing.  For example, an annual tax filing for Jan-Dec 2015 would have a filing period of Dec 2015.
-     */
-    public $endPeriodMonth;
-
-    /**
-     * @var int The year of the filing period for this tax filing.  The filing period represents the year and month of the last day of taxes being reported on this filing.  For example, an annual tax filing for Jan-Dec 2015 would have a filing period of Dec 2015.
-     */
-    public $endPeriodYear;
-
-    /**
-     * @var string The unique code of the form.
-     */
-    public $taxformCode;
 
 }
 
@@ -12882,16 +12793,6 @@ class BulkLockTransactionResult
  */
 class CreateOrAdjustTransactionModel
 {
-
-    /**
-     * @var string A reason code indicating why this adjustment was made (See AdjustmentReason::* for a list of allowable values)
-     */
-    public $adjustmentReason;
-
-    /**
-     * @var string If the AdjustmentReason is "Other", specify the reason here.     This is required when the AdjustmentReason is 8 (Other).
-     */
-    public $adjustmentDescription;
 
     /**
      * @var CreateTransactionModel The create transaction model to be created or updated.     If the transaction does not exist, create transaction.  If the transaction exists, adjust the existing transaction.
