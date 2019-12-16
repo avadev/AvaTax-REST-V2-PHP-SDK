@@ -206,6 +206,81 @@ class CertificatePreviewType
 
 
 /**
+ * Filing Frequency types
+ */
+class FilingFrequencyId
+{
+
+    /**
+     * File once per month
+     */
+    const C_MONTHLY = 1;
+
+    /**
+     * File once per three months
+     */
+    const C_QUARTERLY = 2;
+
+    /**
+     * File twice per year
+     */
+    const C_SEMIANNUALLY = 3;
+
+    /**
+     * File once per year
+     */
+    const C_ANNUALLY = 4;
+
+    /**
+     * File every other month
+     */
+    const C_BIMONTHLY = 5;
+
+    /**
+     * File only when there are documents to report
+     */
+    const C_OCCASIONAL = 6;
+
+    /**
+     * File for the first two months of each quarter, then do not file on the quarterly month.
+     */
+    const C_INVERSEQUARTERLY = 7;
+
+    /**
+     * File every week
+     */
+    const C_WEEKLY = 8;
+
+}
+
+
+/**
+ * Filing Status
+ */
+class FilingStatusId
+{
+    const C_PENDINGAPPROVAL = 0;
+    const C_DIRTY = 1;
+    const C_APPROVEDTOFILE = 2;
+    const C_PENDINGFILING = 3;
+    const C_PENDINGFILINGONBEHALF = 4;
+    const C_FILED = 5;
+    const C_FILEDONBEHALF = 6;
+    const C_RETURNACCEPTED = 7;
+    const C_RETURNACCEPTEDONBEHALF = 8;
+    const C_PAYMENTREMITTED = 9;
+    const C_VOIDED = 10;
+    const C_PENDINGRETURN = 11;
+    const C_PENDINGRETURNONBEHALF = 12;
+    const C_DONOTFILE = 13;
+    const C_RETURNREJECTED = 14;
+    const C_RETURNREJECTEDONBEHALF = 15;
+    const C_APPROVEDTOFILEONBEHALF = 16;
+
+}
+
+
+/**
  * Type of file request
  */
 class PointOfSaleFileType
@@ -236,185 +311,6 @@ class PointOfSalePartnerId
 {
     const C_DMA = 1;
     const C_AX7 = 2;
-
-}
-
-
-/**
- * Represents the type of service or subscription given to a user
- */
-class ServiceTypeId
-{
-
-    /**
-     * None
-     */
-    const C_NONE = 0;
-
-    /**
-     * AvaTaxST
-     */
-    const C_AVATAXST = 1;
-
-    /**
-     * AvaTaxPro
-     */
-    const C_AVATAXPRO = 2;
-
-    /**
-     * AvaTaxGlobal
-     */
-    const C_AVATAXGLOBAL = 3;
-
-    /**
-     * AutoAddress
-     */
-    const C_AUTOADDRESS = 4;
-
-    /**
-     * AutoReturns
-     */
-    const C_AUTORETURNS = 5;
-
-    /**
-     * TaxSolver
-     */
-    const C_TAXSOLVER = 6;
-
-    /**
-     * AvaTaxCsp
-     */
-    const C_AVATAXCSP = 7;
-
-    /**
-     * Twe
-     */
-    const C_TWE = 8;
-
-    /**
-     * Mrs
-     */
-    const C_MRS = 9;
-
-    /**
-     * AvaCert
-     */
-    const C_AVACERT = 10;
-
-    /**
-     * AuthorizationPartner
-     */
-    const C_AUTHORIZATIONPARTNER = 11;
-
-    /**
-     * CertCapture
-     */
-    const C_CERTCAPTURE = 12;
-
-    /**
-     * AvaUpc
-     */
-    const C_AVAUPC = 13;
-
-    /**
-     * AvaCUT
-     */
-    const C_AVACUT = 14;
-
-    /**
-     * AvaLandedCost
-     */
-    const C_AVALANDEDCOST = 15;
-
-    /**
-     * AvaLodging
-     */
-    const C_AVALODGING = 16;
-
-    /**
-     * AvaBottle
-     */
-    const C_AVABOTTLE = 17;
-
-    /**
-     * AvaComms
-     */
-    const C_AVACOMMS = 18;
-
-    /**
-     * AvaEWaste
-     */
-    const C_AVAEWASTE = 19;
-
-    /**
-     * AvaExemptTier1
-     */
-    const C_AVAEXEMPTTIER1 = 20;
-
-    /**
-     * AvaExemptTier2
-     */
-    const C_AVAEXEMPTTIER2 = 21;
-
-    /**
-     * AvaExemptTier3
-     */
-    const C_AVAEXEMPTTIER3 = 22;
-
-    /**
-     * AvaExemptTier4
-     */
-    const C_AVAEXEMPTTIER4 = 23;
-
-    /**
-     * MRSComplianceManager
-     */
-    const C_MRSCOMPLIANCEMANAGER = 24;
-
-    /**
-     * AvaBikeTax
-     */
-    const C_AVABIKETAX = 25;
-
-    /**
-     * AvaCheckoutBag
-     */
-    const C_AVACHECKOUTBAG = 26;
-
-    /**
-     * TFOCompliance
-     */
-    const C_TFOCOMPLIANCE = 27;
-
-    /**
-     * Send Sales Rate file service
-     */
-    const C_SENDSALESRATEFILE = 28;
-
-    /**
-     * AvaMeals
-     */
-    const C_AVAMEALS = 29;
-
-    /**
-     * AvaAlcohol
-     */
-    const C_AVAALCOHOL = 30;
-
-    /**
-     * Accounting Firm ARA Service Type
-     */
-    const C_ARA = 31;
-
-    /**
-     * Accounting Firm ARAManaged Service Type
-     */
-    const C_ARAMANAGED = 32;
-
-    /**
-     * Premium Returns Service Type
-     */
-    const C_MRSPREMIUM = 33;
 
 }
 
@@ -1006,6 +902,7 @@ class ErrorCodeId
     const C_REQUESTLIMITEXCEEDED = 1715;
     const C_CONCURRENTREQUESTLIMITEXCEEDED = 1716;
     const C_INVALIDDOCUMENTTYPEFORINSPECT = 1717;
+    const C_SERVICENOTREADY = 1718;
 
     /**
      * SendSales API errors
@@ -2321,100 +2218,6 @@ class BoundaryLevel
 
 
 /**
- * Tax type
- */
-class TaxType
-{
-
-    /**
-     * Match Lodging tax type
-     */
-    const C_LODGING = 6;
-
-    /**
-     * Match bottle tax type
-     */
-    const C_BOTTLE = 7;
-
-    /**
-     * EWaste tax type
-     */
-    const C_EWASTE = 10;
-
-    /**
-     * LandedCost tax type
-     */
-    const C_LANDEDCOST = 12;
-
-    /**
-     * Meals tax type
-     */
-    const C_MEALS = 15;
-
-    /**
-     * Consumer Use Tax
-     */
-    const C_CONSUMERUSE = 67;
-
-    /**
-     * Medical Excise Tax
-     */
-    const C_EXCISE = 69;
-
-    /**
-     * Fee - PIFs (Public Improvement Fees) and RSFs (Retail Sales Fees)
-     */
-    const C_FEE = 70;
-
-    /**
-     * VAT/GST Input tax
-     */
-    const C_INPUT = 73;
-
-    /**
-     * VAT/GST Nonrecoverable Input tax
-     */
-    const C_NONRECOVERABLE = 78;
-
-    /**
-     * VAT/GST Output tax
-     */
-    const C_OUTPUT = 79;
-
-    /**
-     * Rental Tax
-     */
-    const C_RENTAL = 82;
-
-    /**
-     * Sales tax
-     */
-    const C_SALES = 83;
-
-    /**
-     * Use tax
-     */
-    const C_USE = 85;
-
-    /**
-     * Alcohol tax type
-     */
-    const C_ALCOHOL = 1014;
-
-    /**
-     * Batteries tax type
-     */
-    const C_BATTERIES = 1015;
-
-    /**
-     * LightBulbs
-     */
-    const C_LIGHTBULBS = 1016;
-
-}
-
-
-/**
  * Type of verification task
  */
 class ScraperType
@@ -2448,55 +2251,6 @@ class AvataxDeleteErrorTransactionStatus
      * Failed delete
      */
     const C_FAILURE = 1;
-
-}
-
-
-/**
- * Filing Frequency types
- */
-class FilingFrequencyId
-{
-
-    /**
-     * File once per month
-     */
-    const C_MONTHLY = 1;
-
-    /**
-     * File once per three months
-     */
-    const C_QUARTERLY = 2;
-
-    /**
-     * File twice per year
-     */
-    const C_SEMIANNUALLY = 3;
-
-    /**
-     * File once per year
-     */
-    const C_ANNUALLY = 4;
-
-    /**
-     * File every other month
-     */
-    const C_BIMONTHLY = 5;
-
-    /**
-     * File only when there are documents to report
-     */
-    const C_OCCASIONAL = 6;
-
-    /**
-     * File for the first two months of each quarter, then do not file on the quarterly month.
-     */
-    const C_INVERSEQUARTERLY = 7;
-
-    /**
-     * File every week
-     */
-    const C_WEEKLY = 8;
 
 }
 
@@ -2595,32 +2349,6 @@ class FilingRequestStatus
      * This indicates that compliance rejected the request.
      */
     const C_REQUESTDENIED = 9;
-
-}
-
-
-/**
- * Filing Status
- */
-class FilingStatusId
-{
-    const C_PENDINGAPPROVAL = 0;
-    const C_DIRTY = 1;
-    const C_APPROVEDTOFILE = 2;
-    const C_PENDINGFILING = 3;
-    const C_PENDINGFILINGONBEHALF = 4;
-    const C_FILED = 5;
-    const C_FILEDONBEHALF = 6;
-    const C_RETURNACCEPTED = 7;
-    const C_RETURNACCEPTEDONBEHALF = 8;
-    const C_PAYMENTREMITTED = 9;
-    const C_VOIDED = 10;
-    const C_PENDINGRETURN = 11;
-    const C_PENDINGRETURNONBEHALF = 12;
-    const C_DONOTFILE = 13;
-    const C_RETURNREJECTED = 14;
-    const C_RETURNREJECTEDONBEHALF = 15;
-    const C_APPROVEDTOFILEONBEHALF = 16;
 
 }
 
