@@ -343,7 +343,6 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires the user role Compliance Root User.
      * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
-     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
      *
      * 
      * @param AvaFileFormModel[] $model The AvaFileForm you wish to create.
@@ -368,7 +367,6 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: Compliance Root User, ComplianceUser, FirmAdmin.
      * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
-     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
      *
      * 
      * @param int $id The ID of the AvaFileForm you wish to delete.
@@ -392,7 +390,6 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, CompanyAdmin, CompanyUser, Compliance Root User, Compliance Temp User, ComplianceAdmin, ComplianceUser, FirmAdmin, FirmUser, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin.
-     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
      *
      * 
@@ -419,7 +416,6 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, CompanyAdmin, CompanyUser, Compliance Root User, Compliance Temp User, ComplianceAdmin, ComplianceUser, FirmAdmin, FirmUser, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin.
      * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
-     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
      *
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* outletTypeId
@@ -448,7 +444,6 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires the user role Compliance Root User.
      * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
-     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
      *
      * 
      * @param int $id The ID of the AvaFileForm you wish to update
@@ -1613,7 +1608,6 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
-     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
      *
      * 
      * @param int $companyId The unique identifier of the company
@@ -1641,7 +1635,6 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
-     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
      *
      * 
      * @param int $companyId The unique identifier of the company
@@ -2173,7 +2166,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
      * @param string $customerCode The unique code representing this customer
-     * @return ErrorDetail[]
+     * @return CustomerModel
      */
     public function deleteCustomer($companyId, $customerCode)
     {
@@ -2350,7 +2343,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *  
      * A customer may have multiple attributes that control its behavior. You may link or unlink attributes to a
      * customer at any time. The full list of defined attributes may be found using `QueryCompanyCustomerAttributes` API.
-     * 
+     *  
      * A customer object defines information about a person or business that purchases products from your
      * company. When you create a tax transaction in AvaTax, you can use the `customerCode` from this
      * record in your `CreateTransaction` API call. AvaTax will search for this `customerCode` value and
@@ -2869,7 +2862,7 @@ class AvaTaxClient extends AvaTaxClientBase
     /**
      * List certificate attributes used by a company
      *
-     * List the certificate attributes defined by a company.
+     * List the certificate attributes defined by a company either specified by the user or the user's default company.
      *  
      * A certificate may have multiple attributes that control its behavior. You may apply or remove attributes to a
      * certificate at any time.
@@ -2878,17 +2871,18 @@ class AvaTaxClient extends AvaTaxClientBase
      * check and provision account.
      *
      * 
+     * @param int $companyid Id of the company the user wish to fetch the certificates' attributes from. If not specified the API will use user's default company.
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listCertificateAttributes($filter=null, $top=null, $skip=null, $orderBy=null)
+    public function listCertificateAttributes($companyid, $filter=null, $top=null, $skip=null, $orderBy=null)
     {
         $path = "/api/v2/definitions/certificateattributes";
         $guzzleParams = [
-            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'query' => ['companyid' => $companyid, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
@@ -4421,6 +4415,37 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Retrieve a list of filed returns for the specified company in the year and month of a given filing period.
+     *
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser, CompanyUser, AccountUser, CompanyAdmin, AccountAdmin.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns these batches
+     * @param int $endPeriodMonth The month of the period you are trying to retrieve
+     * @param int $endPeriodYear The year of the period you are trying to retrieve
+     * @param string $frequency The frequency of the return you are trying to retrieve (See FilingFrequencyId::* for a list of allowable values)
+     * @param string $status The status of the return(s) you are trying to retrieve (See FilingStatusId::* for a list of allowable values)
+     * @param string $country The country of the return(s) you are trying to retrieve
+     * @param string $region The region of the return(s) you are trying to retrieve
+     * @param int $filingCalendarId The filing calendar id of the return you are trying to retrieve
+     * @param string $taxformCode The unique tax form code of the form.
+     * @return FetchResult
+     */
+    public function getFiledReturns($companyId, $endPeriodMonth, $endPeriodYear, $frequency, $status, $country, $region, $filingCalendarId, $taxformCode)
+    {
+        $path = "/api/v2/companies/{$companyId}/filings/returns/filed";
+        $guzzleParams = [
+            'query' => ['endPeriodMonth' => $endPeriodMonth, 'endPeriodYear' => $endPeriodYear, 'frequency' => $frequency, 'status' => $status, 'country' => $country, 'region' => $region, 'filingCalendarId' => $filingCalendarId, 'taxformCode' => $taxformCode],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * Approves linkage to a firm for a client account
      *
      * This API enables the account admin of a client account to approve linkage request by a firm.
@@ -4783,7 +4808,6 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
-     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
      *
      * 
      * @param int $id The unique ID number of this funding request
@@ -4817,7 +4841,6 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
      * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
-     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
      *
      * 
      * @param int $id The unique ID number of this funding request
@@ -6649,7 +6672,7 @@ class AvaTaxClient extends AvaTaxClientBase
     /**
      * Request a new Avalara account
      *
-     * This API is for use by partner onboarding services customers only.
+     * This API is for use by partner provisioning services customers only.
      *  
      * Avalara invites select partners to refer new customers to the AvaTax service using the onboarding features
      * of AvaTax. These partners can create accounts for new customers using this API.
@@ -6668,7 +6691,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
      * * This API is available by invitation only.
-     * * This API is available by invitation only. To request access to this feature, please speak to a business development manager and request access to [Onboarding:RequestNewAccount].
+     * * This API is available by invitation only. To request access to this feature, please speak to a business development manager and request access to [Provisioning:RequestNewAccount].
      *
      * 
      * @param NewAccountRequestModel $model Information about the account you wish to create and the selected product offerings.
@@ -6687,14 +6710,14 @@ class AvaTaxClient extends AvaTaxClientBase
     /**
      * Request a new entitilement to an existing customer
      *
-     * This API is for use by partner onboarding services customers only. This will allow the partners to allow
+     * This API is for use by partner provisioning services customers only. This will allow the partners to allow
      * the add new entitlement to an existing customer
      * 
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
      * * This API is available by invitation only.
-     * * This API is available by invitation only. To request access to this feature, please speak to a business development manager and request access to [Onboarding:RequestNewAccount].
+     * * This API is available by invitation only. To request access to this feature, please speak to a business development manager and request access to [Provisioning:RequestNewAccount].
      *
      * 
      * @param int $id The avatax account id of the customer
@@ -8224,7 +8247,6 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires the user role Compliance Root User.
      * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
-     * * This API is available by invitation only.<br />*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser.
      *
      * 
      * @param BulkLockTransactionModel $model bulk lock request
@@ -9489,7 +9511,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * specific features of AvaTax.
      *
      * 
-     * @param string $serviceTypeId The service to check (See ServiceTypeId::* for a list of allowable values)
+     * @param string $serviceTypeId The service to check
      * @return SubscriptionModel
      */
     public function getMySubscription($serviceTypeId)
