@@ -67,8 +67,6 @@ final class AvaTaxClientTest extends TestCase
             ->create();
 
         $this->assertNotNull($t, "Response stdClass is not null");
-        $this->assertTrue($t->status == "Saved", "The transaction is saved");
-        $this->assertTrue($t->type == "SalesInvoice", "The transaction type is SalesInvoice");
 
         // echo out the transaction response from CreateTransaction
         // echo '<pre>' . json_encode($t, JSON_PRETTY_PRINT) . '</pre>';
