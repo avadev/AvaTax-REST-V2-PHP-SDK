@@ -6310,32 +6310,6 @@ class CompanyDistanceThresholdModel
     public $type;
 }
 /**
- * 
- */
-class CappedFetchResult<T>
-{
-    /**
-     * @var boolean 
-     */
-    public $_isRecordsetCountCapped;
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var object[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
  * Error Transaction Model
  */
 class ErrorTransactionOutputModel
@@ -6448,7 +6422,7 @@ class DeleteErrorTransactionResponseModel
 /**
  * 
  */
-class CappedFetchResult<T>
+class CappedFetchResult
 {
     /**
      * @var boolean 
