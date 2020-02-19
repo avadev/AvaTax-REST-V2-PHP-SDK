@@ -6309,6 +6309,7 @@ class CompanyDistanceThresholdModel
      */
     public $type;
 }
+
 /**
  * Error Transaction Model
  */
