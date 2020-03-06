@@ -177,7 +177,9 @@ class AvaTaxClientBase
                 'X-Avalara-Client' => "{$this->appName}; {$this->appVersion}; PhpRestClient; 20.1.0; {$this->machineName}"
             ];
         }
-
+        // timeout for 1200s (20 min)
+        $guzzleParams['timeout'] = 1200;
+        
         // Contact the server
         try {
             $response = $this->client->request($verb, $apiUrl, $guzzleParams);
