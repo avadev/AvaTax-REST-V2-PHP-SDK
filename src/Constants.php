@@ -584,7 +584,6 @@ class ErrorCodeId
     const C_INVALIDDATERANGEERROR = 81;
     const C_RULEMUSTHAVETAXCODE = 82;
     const C_RULETYPERESTRICTED = 83;
-    const C_ALLJURISRULELIMITS = 84;
     const C_INVALIDCOMPANYLOCATIONSETTING = 85;
     const C_INVALIDADJUSTMENTTYPE = 99;
     const C_DELETEINFORMATION = 100;
@@ -625,7 +624,6 @@ class ErrorCodeId
     const C_COUNTRYOVERRIDESNOTAVAILABLE = 153;
     const C_JURISDICTIONOVERRIDEMISMATCH = 154;
     const C_DUPLICATESYSTEMTAXCODE = 155;
-    const C_SSTOVERRIDESNOTAVAILABLE = 156;
     const C_NEXUSDATEMISMATCH = 157;
     const C_NEXUSPARENTDATEMISMATCH = 159;
     const C_BEARERTOKENPARSEUSERIDERROR = 160;
@@ -670,6 +668,7 @@ class ErrorCodeId
 
     /**
      * Batch errors
+     *  New batch error codes continue at 2501
      */
     const C_BATCHSALESAUDITMUSTBEZIPPEDERROR = 200;
     const C_BATCHZIPMUSTCONTAINONEFILEERROR = 201;
@@ -744,6 +743,7 @@ class ErrorCodeId
     const C_INVALIDIPADDRESS = 609;
     const C_OFFERCODEALREADYAPPLIED = 610;
     const C_ACCOUNTALREADYEXISTS = 611;
+    const C_LICENSEKEYNAMEALREADYEXISTSFORACCOUNT = 612;
 
     /**
      * Refund API error codes
@@ -883,6 +883,8 @@ class ErrorCodeId
     const C_UPDATELOCATIONREMITTANCEMISMATCHTYPEANDCATEGORY = 1719;
     const C_UPDATELOCATIONREMITTANCECHECKEXISTINGEFFECTIVEDATEERROR = 1720;
     const C_UPDATELOCATIONREMITTANCECHECKEXISTINGENDDATEERROR = 1721;
+    const C_ERRORCOUNTLIMITEXCEEDEDERROR = 1722;
+    const C_RATELIMITEXCEEDEDERROR = 1723;
 
     /**
      * SendSales API errors
@@ -904,7 +906,7 @@ class ErrorCodeId
     const C_TRACEDATANOTAVAILABLE = 2000;
 
     /**
-     * Item parameter errors
+     * Item and Nexus parameter errors
      */
     const C_INVALIDPARAMETERUNITMEASUREMENTTYPE = 2100;
     const C_PARAMETERUNITREQUIRED = 2101;
@@ -953,6 +955,18 @@ class ErrorCodeId
      */
     const C_FIELDLENGTHERROR = 2400;
     const C_INPUTCONTAINSBLACKLISTEDCHARACTERS = 2401;
+    const C_CANNOTCREATENESTEDOBJECTS = 2402;
+
+    /**
+     * Batch errors
+     *  For other batch errors, see: 200 - 208 above
+     */
+    const C_BATCHTRANSACTIONTYPEERROR = 2501;
+    const C_BATCHTRANSACTIONLINELIMITEXCEEDED = 2502;
+    const C_BATCHCOMPANYIDANDCOMPANYCODEMISMATCH = 2503;
+    const C_BATCHCANNOTBECANCELLEDSTATUSERROR = 2504;
+    const C_BATCHCANNOTBECANCELLEDFORMATERROR = 2505;
+    const C_INVALIDPARAMETERDATATYPE = 2600;
 
 }
 
@@ -1797,6 +1811,194 @@ class BatchStatus
 }
 
 /**
+ * Service modes for tax calculation when using an AvaLocal server.
+ */
+class ServiceMode
+{
+    /**
+     * Automatically use local or remote (default)
+     */
+    const C_AUTOMATIC = 0;
+
+    /**
+     * Local server only
+     */
+    const C_LOCAL = 1;
+
+    /**
+     * Remote server only
+     */
+    const C_REMOTE = 2;
+
+}
+
+/**
+ * Indicates the level of detail requested from a tax API call
+ */
+class TaxDebugLevel
+{
+    /**
+     * User requests the normal level of debug information when creating a tax transaction
+     */
+    const C_NORMAL = 0;
+
+    /**
+     * User requests additional diagnostic information when creating a tax transaction
+     */
+    const C_DIAGNOSTIC = 1;
+
+}
+
+/**
+ * Indicates the type of adjustment that was performed on a transaction
+ */
+class AdjustmentReason
+{
+    /**
+     * The transaction has not been adjusted
+     */
+    const C_NOTADJUSTED = 0;
+
+    /**
+     * A sourcing issue existed which caused the transaction to be adjusted
+     */
+    const C_SOURCINGISSUE = 1;
+
+    /**
+     * Transaction was adjusted to reconcile it with a general ledger
+     */
+    const C_RECONCILEDWITHGENERALLEDGER = 2;
+
+    /**
+     * Transaction was adjusted after an exemption certificate was applied
+     */
+    const C_EXEMPTCERTAPPLIED = 3;
+
+    /**
+     * Transaction was adjusted when the price of an item changed
+     */
+    const C_PRICEADJUSTED = 4;
+
+    /**
+     * Transaction was adjusted due to a product return
+     */
+    const C_PRODUCTRETURNED = 5;
+
+    /**
+     * Transaction was adjusted due to a product exchange
+     */
+    const C_PRODUCTEXCHANGED = 6;
+
+    /**
+     * Transaction was adjusted due to bad or uncollectable debt
+     */
+    const C_BADDEBT = 7;
+
+    /**
+     * Transaction was adjusted for another reason not specified
+     */
+    const C_OTHER = 8;
+
+    /**
+     * Offline
+     */
+    const C_OFFLINE = 9;
+
+}
+
+/**
+ * Reason code for voiding or cancelling a transaction
+ */
+class VoidReasonCode
+{
+    /**
+     * Unspecified reason
+     */
+    const C_UNSPECIFIED = 0;
+
+    /**
+     * Post operation failed - Document status will be changed to unposted
+     */
+    const C_POSTFAILED = 1;
+
+    /**
+     * Document deleted - If committed, document status will be changed to Cancelled. If not committed, document will be
+     *  deleted.
+     */
+    const C_DOCDELETED = 2;
+
+    /**
+     * Document has been voided and DocStatus will be set to Cancelled
+     */
+    const C_DOCVOIDED = 3;
+
+    /**
+     * AdjustTax operation has been cancelled. Adjustment will be reversed.
+     */
+    const C_ADJUSTMENTCANCELLED = 4;
+
+}
+
+/**
+ * Represents a type of tax override requested by the customer.
+ *  
+ *  AvaTax allows customers to override some behavior of the AvaTax engine. When you use a
+ *  Tax Override, you can import tax that was previously calculated and charged to the customer exactly
+ *  as it was charged. AvaTax will record the type of override used for each transaction.
+ */
+class TaxOverrideType
+{
+    /**
+     * AvaTax calculated the tax for this transaction, and no override occurred.
+     */
+    const C_NONE = 0;
+
+    /**
+     * AvaTax calculated tax for this transaction, but the final tax amount on the transaction was
+     *  determined outside of AvaTax. To see the tax amounts determined by AvaTax, look at the
+     *  `taxCalculated` field. To see the tax amounts determined by the customer's outside tax engine,
+     *  look at the `taxAmount` field.
+     *  
+     *  This behavior can also occur when a customer requests a refund. For refunds calculated using the
+     *  `RefundTransaction` API, AvaTax will ensure that the exact tax charged to the customer is refunded
+     *  to the customer using a tax amount override.
+     */
+    const C_TAXAMOUNT = 1;
+
+    /**
+     * Entity exemption was ignored (e.g. item was consumed)
+     */
+    const C_EXEMPTION = 2;
+
+    /**
+     * AvaTax was instructed to calculate this transaction using the tax rules that were in effect
+     *  on a different day than the transaction occurred.
+     *  
+     *  This behavior typically occurs during refunds. If the customer attempts to return a product
+     *  without a receipt that shows the exact tax amount paid, AvaTax can calculate tax on the date
+     *  when they believed that the product was purchased.
+     */
+    const C_TAXDATE = 3;
+
+    /**
+     * To support Consumer Use Tax
+     */
+    const C_ACCRUEDTAXAMOUNT = 4;
+
+    /**
+     * Derive the taxable amount from the tax amount
+     */
+    const C_DERIVETAXABLE = 5;
+
+    /**
+     * This is for the documents that are calculated outside of AvaTax and passed in to AvaTax
+     *  specifically for reporting/Returns purposes
+     */
+    const C_OUTOFHARBOR = 6;
+
+}
+
+/**
  * The way of delivering request
  */
 class CertificateRequestDeliveryMethod
@@ -2001,122 +2203,6 @@ class DocumentStatus
 }
 
 /**
- * Represents a type of tax override requested by the customer.
- *  
- *  AvaTax allows customers to override some behavior of the AvaTax engine. When you use a
- *  Tax Override, you can import tax that was previously calculated and charged to the customer exactly
- *  as it was charged. AvaTax will record the type of override used for each transaction.
- */
-class TaxOverrideType
-{
-    /**
-     * AvaTax calculated the tax for this transaction, and no override occurred.
-     */
-    const C_NONE = 0;
-
-    /**
-     * AvaTax calculated tax for this transaction, but the final tax amount on the transaction was
-     *  determined outside of AvaTax. To see the tax amounts determined by AvaTax, look at the
-     *  `taxCalculated` field. To see the tax amounts determined by the customer's outside tax engine,
-     *  look at the `taxAmount` field.
-     *  
-     *  This behavior can also occur when a customer requests a refund. For refunds calculated using the
-     *  `RefundTransaction` API, AvaTax will ensure that the exact tax charged to the customer is refunded
-     *  to the customer using a tax amount override.
-     */
-    const C_TAXAMOUNT = 1;
-
-    /**
-     * Entity exemption was ignored (e.g. item was consumed)
-     */
-    const C_EXEMPTION = 2;
-
-    /**
-     * AvaTax was instructed to calculate this transaction using the tax rules that were in effect
-     *  on a different day than the transaction occurred.
-     *  
-     *  This behavior typically occurs during refunds. If the customer attempts to return a product
-     *  without a receipt that shows the exact tax amount paid, AvaTax can calculate tax on the date
-     *  when they believed that the product was purchased.
-     */
-    const C_TAXDATE = 3;
-
-    /**
-     * To support Consumer Use Tax
-     */
-    const C_ACCRUEDTAXAMOUNT = 4;
-
-    /**
-     * Derive the taxable amount from the tax amount
-     */
-    const C_DERIVETAXABLE = 5;
-
-    /**
-     * This is for the documents that are calculated outside of AvaTax and passed in to AvaTax
-     *  specifically for reporting/Returns purposes
-     */
-    const C_OUTOFHARBOR = 6;
-
-}
-
-/**
- * Indicates the type of adjustment that was performed on a transaction
- */
-class AdjustmentReason
-{
-    /**
-     * The transaction has not been adjusted
-     */
-    const C_NOTADJUSTED = 0;
-
-    /**
-     * A sourcing issue existed which caused the transaction to be adjusted
-     */
-    const C_SOURCINGISSUE = 1;
-
-    /**
-     * Transaction was adjusted to reconcile it with a general ledger
-     */
-    const C_RECONCILEDWITHGENERALLEDGER = 2;
-
-    /**
-     * Transaction was adjusted after an exemption certificate was applied
-     */
-    const C_EXEMPTCERTAPPLIED = 3;
-
-    /**
-     * Transaction was adjusted when the price of an item changed
-     */
-    const C_PRICEADJUSTED = 4;
-
-    /**
-     * Transaction was adjusted due to a product return
-     */
-    const C_PRODUCTRETURNED = 5;
-
-    /**
-     * Transaction was adjusted due to a product exchange
-     */
-    const C_PRODUCTEXCHANGED = 6;
-
-    /**
-     * Transaction was adjusted due to bad or uncollectable debt
-     */
-    const C_BADDEBT = 7;
-
-    /**
-     * Transaction was adjusted for another reason not specified
-     */
-    const C_OTHER = 8;
-
-    /**
-     * Offline
-     */
-    const C_OFFLINE = 9;
-
-}
-
-/**
  * Jurisdiction boundary precision level found for address. This depends on the accuracy of the address
  *  as well as the precision level of the state provided jurisdiction boundaries.
  */
@@ -2212,6 +2298,16 @@ class FilingTypeId
      * Denotes a return which is filed online but paid by check.
      */
     const C_EFILECHECK = 6;
+
+}
+
+/**
+ * A list of bulk account validation statuses for filing calendars.
+ */
+class BulkAccountValidationStatus
+{    const C_NEW = 0;
+    const C_ADDED = 1;
+    const C_FAILED = 2;
 
 }
 
@@ -2409,78 +2505,6 @@ class RefundType
 }
 
 /**
- * Service modes for tax calculation when using an AvaLocal server.
- */
-class ServiceMode
-{
-    /**
-     * Automatically use local or remote (default)
-     */
-    const C_AUTOMATIC = 0;
-
-    /**
-     * Local server only
-     */
-    const C_LOCAL = 1;
-
-    /**
-     * Remote server only
-     */
-    const C_REMOTE = 2;
-
-}
-
-/**
- * Indicates the level of detail requested from a tax API call
- */
-class TaxDebugLevel
-{
-    /**
-     * User requests the normal level of debug information when creating a tax transaction
-     */
-    const C_NORMAL = 0;
-
-    /**
-     * User requests additional diagnostic information when creating a tax transaction
-     */
-    const C_DIAGNOSTIC = 1;
-
-}
-
-/**
- * Reason code for voiding or cancelling a transaction
- */
-class VoidReasonCode
-{
-    /**
-     * Unspecified reason
-     */
-    const C_UNSPECIFIED = 0;
-
-    /**
-     * Post operation failed - Document status will be changed to unposted
-     */
-    const C_POSTFAILED = 1;
-
-    /**
-     * Document deleted - If committed, document status will be changed to Cancelled. If not committed, document will be
-     *  deleted.
-     */
-    const C_DOCDELETED = 2;
-
-    /**
-     * Document has been voided and DocStatus will be set to Cancelled
-     */
-    const C_DOCVOIDED = 3;
-
-    /**
-     * AdjustTax operation has been cancelled. Adjustment will be reversed.
-     */
-    const C_ADJUSTMENTCANCELLED = 4;
-
-}
-
-/**
  * Indicates what level of auditing information is available for a transaction
  */
 class ApiCallStatus
@@ -2664,6 +2688,11 @@ class CommentType
      * A comment that has a POA Attachment on it
      */
     const C_POAATTACHMENT = 3;
+
+    /**
+     * Used when creating Notice Comments in Returns Console
+     */
+    const C_NOTICEVOUCHER = 4;
 
 }
 
