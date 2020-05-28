@@ -7019,7 +7019,7 @@ class CompanyDistanceThresholdModel
 /**
  * 
  */
-class CappedFetchResult<T>
+class CappedFetchResult
 {
     /**
      * @var boolean 
@@ -7155,7 +7155,7 @@ class DeleteErrorTransactionResponseModel
 /**
  * 
  */
-class CappedFetchResult<T>
+class CappedFetchResult
 {
     /**
      * @var boolean 
