@@ -31,6 +31,7 @@ class TransactionAddressType
  */
 class TextCase
 {
+
     /**
      * Upper case
      */
@@ -43,11 +44,13 @@ class TextCase
 
 }
 
+
 /**
  * Represents the different types of transactions that AvaTax can process.
  */
 class DocumentType
 {
+
     /**
      * Represents an estimate, or a sales order, or a quote.
      *  
@@ -182,11 +185,13 @@ class DocumentType
 
 }
 
+
 /**
  * Type of certificate preview to download
  */
 class CertificatePreviewType
 {
+
     /**
      * Download a full printable PDF
      */
@@ -199,11 +204,13 @@ class CertificatePreviewType
 
 }
 
+
 /**
  * Filing Frequency types
  */
 class FilingFrequencyId
 {
+
     /**
      * File once per month
      */
@@ -246,11 +253,13 @@ class FilingFrequencyId
 
 }
 
+
 /**
  * Filing Status
  */
 class FilingStatusId
-{    const C_PENDINGAPPROVAL = 0;
+{
+    const C_PENDINGAPPROVAL = 0;
     const C_DIRTY = 1;
     const C_APPROVEDTOFILE = 2;
     const C_PENDINGFILING = 3;
@@ -270,11 +279,13 @@ class FilingStatusId
 
 }
 
+
 /**
  * Type of file request
  */
 class PointOfSaleFileType
 {
+
     /**
      * File is in Javascript Object Notation format
      */
@@ -292,20 +303,24 @@ class PointOfSaleFileType
 
 }
 
+
 /**
  * 
  */
 class PointOfSalePartnerId
-{    const C_DMA = 1;
+{
+    const C_DMA = 1;
     const C_AX7 = 2;
 
 }
+
 
 /**
  * Status of an Avalara account
  */
 class AccountStatusId
 {
+
     /**
      * This account is not currently active.
      */
@@ -331,11 +346,13 @@ class AccountStatusId
 
 }
 
+
 /**
  * Status of an Avalara account
  */
 class AccountTypeId
 {
+
     /**
      * Regular AvaTax account.
      */
@@ -353,11 +370,13 @@ class AccountTypeId
 
 }
 
+
 /**
  * Permission level of a user
  */
 class SecurityRoleId
 {
+
     /**
      * NoAccess
      */
@@ -485,11 +504,13 @@ class SecurityRoleId
 
 }
 
+
 /**
  * PasswordStatusId
  */
 class PasswordStatusId
 {
+
     /**
      * UserCannotChange
      */
@@ -507,11 +528,13 @@ class PasswordStatusId
 
 }
 
+
 /**
  * Represents a error code message
  */
 class ErrorCodeId
 {
+
     /**
      * Server has a configuration or setup problem
      */
@@ -858,6 +881,7 @@ class ErrorCodeId
      */
     const C_REMOTEVALIDATIONERROR = 1502;
     const C_CANNOTMODIFYSSTNEXUS = 1503;
+    const C_INVALIDLOCALNEXUSTYPEID = 1504;
 
     /**
      * Advanced rule errors
@@ -970,11 +994,13 @@ class ErrorCodeId
 
 }
 
+
 /**
  * Severity of message
  */
 class SeverityLevel
 {
+
     /**
      * Operation succeeded
      */
@@ -997,11 +1023,13 @@ class SeverityLevel
 
 }
 
+
 /**
  * The address resolution quality of an address validation result
  */
 class ResolutionQuality
 {
+
     /**
      * Location was not geocoded
      */
@@ -1064,11 +1092,13 @@ class ResolutionQuality
 
 }
 
+
 /**
  * Jurisdiction Type
  */
 class JurisdictionType
 {
+
     /**
      * Country
      */
@@ -1096,11 +1126,13 @@ class JurisdictionType
 
 }
 
+
 /**
  * Choice of rounding level for a transaction
  */
 class RoundingLevelId
 {
+
     /**
      * Round tax on each line separately
      */
@@ -1113,11 +1145,13 @@ class RoundingLevelId
 
 }
 
+
 /**
  * TaxDependencyLevelId
  */
 class TaxDependencyLevelId
 {
+
     /**
      * Document
      */
@@ -1140,11 +1174,13 @@ class TaxDependencyLevelId
 
 }
 
+
 /**
  * Indicates whether this address refers to a person or an business
  */
 class AddressTypeId
 {
+
     /**
      * A business location, for example a store, warehouse, or office.
      */
@@ -1165,11 +1201,13 @@ class AddressTypeId
 
 }
 
+
 /**
  * The type of address represented by this object
  */
 class AddressCategoryId
 {
+
     /**
      * Address refers to a storefront location
      */
@@ -1219,11 +1257,13 @@ class AddressCategoryId
 
 }
 
+
 /**
  * Types of jurisdiction referenced in a transaction
  */
 class JurisTypeId
 {
+
     /**
      * State
      */
@@ -1251,11 +1291,13 @@ class JurisTypeId
 
 }
 
+
 /**
  * Describes the different types of statuses which describe an entity (company).
  */
 class NexusTypeId
 {
+
     /**
      * Indicates no nexus
      */
@@ -1285,11 +1327,13 @@ class NexusTypeId
 
 }
 
+
 /**
  * Sourcing
  */
 class Sourcing
 {
+
     /**
      * Mixed sourcing, for states that do both origin and destination calculation
      */
@@ -1307,11 +1351,13 @@ class Sourcing
 
 }
 
+
 /**
  * Describes nexus type id
  */
 class LocalNexusTypeId
 {
+
     /**
      * Only the specific nexus objects declared for this company are declared.
      */
@@ -1333,6 +1379,7 @@ class LocalNexusTypeId
 
 }
 
+
 /**
  * This data type is only used when an object must "Match" tax types. By specifying options here,
  *  you can indicate which tax types will match for the purposes of this object.
@@ -1340,6 +1387,7 @@ class LocalNexusTypeId
  */
 class MatchingTaxType
 {
+
     /**
      * Match medical excise type
      */
@@ -1437,11 +1485,13 @@ class MatchingTaxType
 
 }
 
+
 /**
  * 
  */
 class RateType
-{    const C_REDUCEDA = 65;
+{
+    const C_REDUCEDA = 65;
     const C_REDUCEDB = 66;
     const C_FOOD = 70;
     const C_GENERAL = 71;
@@ -1457,11 +1507,13 @@ class RateType
 
 }
 
+
 /**
  * Specifies the type of custom tax rule you have created.
  */
 class TaxRuleTypeId
 {
+
     /**
      * Reserved for Avalara internal usage.
      */
@@ -1510,11 +1562,13 @@ class TaxRuleTypeId
 
 }
 
+
 /**
  * Exempt Cert type
  */
 class ExemptCertTypeId
 {
+
     /**
      * Blanked certificate
      */
@@ -1527,11 +1581,13 @@ class ExemptCertTypeId
 
 }
 
+
 /**
  * Status for this exempt certificate
  */
 class ExemptCertStatusId
 {
+
     /**
      * Inactive certificate
      */
@@ -1554,11 +1610,13 @@ class ExemptCertStatusId
 
 }
 
+
 /**
  * Exempt certificate review status
  */
 class ExemptCertReviewStatusId
 {
+
     /**
      * Review pending
      */
@@ -1576,11 +1634,13 @@ class ExemptCertReviewStatusId
 
 }
 
+
 /**
  * A list of possible AvaFile Form Types.
  */
 class FormTypeId
 {
+
     /**
      * Denotes the form type is Sales and Use Tax
      */
@@ -1633,11 +1693,13 @@ class FormTypeId
 
 }
 
+
 /**
  * A list of possible AvaFile filing option types.
  */
 class FilingOptionTypeId
 {
+
     /**
      * Denotes the tax return is being filed on paper.
      */
@@ -1655,11 +1717,13 @@ class FilingOptionTypeId
 
 }
 
+
 /**
  * A list of possible Due Date Types
  */
 class DueDateTypeId
 {
+
     /**
      * Denotes form is due on the due day
      */
@@ -1677,11 +1741,13 @@ class DueDateTypeId
 
 }
 
+
 /**
  * Indicates the rounding behavior of a form
  */
 class RoundingTypeId
 {
+
     /**
      * There is no rounding on the return
      */
@@ -1704,6 +1770,7 @@ class RoundingTypeId
 
 }
 
+
 /**
  * Indicates the behavior of a tax form for a company with multiple places of business.
  *  
@@ -1711,6 +1778,7 @@ class RoundingTypeId
  */
 class OutletTypeId
 {
+
     /**
      * File a single return per cycle for your entire business.
      */
@@ -1733,11 +1801,13 @@ class OutletTypeId
 
 }
 
+
 /**
  * The type of data contained in this batch
  */
 class BatchType
-{    const C_AVACERTUPDATE = 0;
+{
+    const C_AVACERTUPDATE = 0;
     const C_AVACERTUPDATEALL = 1;
     const C_BATCHMAINTENANCE = 2;
     const C_COMPANYLOCATIONIMPORT = 3;
@@ -1758,11 +1828,13 @@ class BatchType
 
 }
 
+
 /**
  * The status of a batch file
  */
 class BatchStatus
 {
+
     /**
      * Batch file has been received and is in the queue to be processed.
      */
@@ -1810,11 +1882,13 @@ class BatchStatus
 
 }
 
+
 /**
  * Service modes for tax calculation when using an AvaLocal server.
  */
 class ServiceMode
 {
+
     /**
      * Automatically use local or remote (default)
      */
@@ -1832,11 +1906,13 @@ class ServiceMode
 
 }
 
+
 /**
  * Indicates the level of detail requested from a tax API call
  */
 class TaxDebugLevel
 {
+
     /**
      * User requests the normal level of debug information when creating a tax transaction
      */
@@ -1849,11 +1925,13 @@ class TaxDebugLevel
 
 }
 
+
 /**
  * Indicates the type of adjustment that was performed on a transaction
  */
 class AdjustmentReason
 {
+
     /**
      * The transaction has not been adjusted
      */
@@ -1906,11 +1984,13 @@ class AdjustmentReason
 
 }
 
+
 /**
  * Reason code for voiding or cancelling a transaction
  */
 class VoidReasonCode
 {
+
     /**
      * Unspecified reason
      */
@@ -1939,6 +2019,7 @@ class VoidReasonCode
 
 }
 
+
 /**
  * Represents a type of tax override requested by the customer.
  *  
@@ -1948,6 +2029,7 @@ class VoidReasonCode
  */
 class TaxOverrideType
 {
+
     /**
      * AvaTax calculated the tax for this transaction, and no override occurred.
      */
@@ -1998,11 +2080,13 @@ class TaxOverrideType
 
 }
 
+
 /**
  * The way of delivering request
  */
 class CertificateRequestDeliveryMethod
 {
+
     /**
      * The invitation will be sent via email to the recipient's email address.
      */
@@ -2023,11 +2107,13 @@ class CertificateRequestDeliveryMethod
 
 }
 
+
 /**
  * Indicates the status of a CertExpress invitation link.
  */
 class CertExpressInvitationStatus
 {
+
     /**
      * The CertExpress website is currently building a landing page for the customer. Please
      *  wait about 10 seconds and fetch this request again to see when it will be ready.
@@ -2041,11 +2127,13 @@ class CertExpressInvitationStatus
 
 }
 
+
 /**
  * 
  */
 class CertCaptureProvisionStatus
 {
+
     /**
      * Account and company are provisioned
      */
@@ -2061,11 +2149,13 @@ class CertCaptureProvisionStatus
 
 }
 
+
 /**
  * Indicates whether Avalara Managed Returns has begun filing for this company.
  */
 class CompanyFilingStatus
 {
+
     /**
      * This company is not a reporting entity and cannot file taxes. To change this behavior, you must mark
      *  the company as a reporting entity.
@@ -2102,6 +2192,7 @@ class CompanyFilingStatus
 
 }
 
+
 /**
  * The `DocumentStatus` value indicates the state of the document as it moves through the
  *  AvaTax document workflow. More information about the AvaTax document workflow is available
@@ -2109,6 +2200,7 @@ class CompanyFilingStatus
  */
 class DocumentStatus
 {
+
     /**
      * Temporary document not saved (SalesOrder, PurchaseOrder).
      *  
@@ -2202,12 +2294,14 @@ class DocumentStatus
 
 }
 
+
 /**
  * Jurisdiction boundary precision level found for address. This depends on the accuracy of the address
  *  as well as the precision level of the state provided jurisdiction boundaries.
  */
 class BoundaryLevel
 {
+
     /**
      * Street address precision
      */
@@ -2225,11 +2319,13 @@ class BoundaryLevel
 
 }
 
+
 /**
  * Type of verification task
  */
 class ScraperType
 {
+
     /**
      * Indicates that is is a login type
      */
@@ -2242,11 +2338,13 @@ class ScraperType
 
 }
 
+
 /**
  * Status when deleting an error transaction
  */
 class AvataxDeleteErrorTransactionStatus
 {
+
     /**
      * Successful delete
      */
@@ -2259,11 +2357,13 @@ class AvataxDeleteErrorTransactionStatus
 
 }
 
+
 /**
  * A list of possible AvaFile filing types.
  */
 class FilingTypeId
 {
+
     /**
      * Denotes the tax return is being filed on paper.
      */
@@ -2301,21 +2401,25 @@ class FilingTypeId
 
 }
 
+
 /**
  * A list of bulk account validation statuses for filing calendars.
  */
 class BulkAccountValidationStatus
-{    const C_NEW = 0;
+{
+    const C_NEW = 0;
     const C_ADDED = 1;
     const C_FAILED = 2;
 
 }
+
 
 /**
  * Filing Request Status types
  */
 class FilingRequestStatus
 {
+
     /**
      * Customer is building a request for a new filing calendar
      */
@@ -2363,11 +2467,13 @@ class FilingRequestStatus
 
 }
 
+
 /**
  * Accrual types
  */
 class AccrualType
 {
+
     /**
      * Filing indicates that this tax return should be filed with its tax authority by its due date. For example, if you file annually, you will have eleven months of Accrual returns and one Filing return.
      */
@@ -2380,11 +2486,13 @@ class AccrualType
 
 }
 
+
 /**
  * Filing worksheet Type
  */
 class WorksheetTypeId
 {
+
     /**
      * The original filing for a period
      */
@@ -2402,32 +2510,38 @@ class WorksheetTypeId
 
 }
 
+
 /**
  * 
  */
 class AdjustmentPeriodTypeId
-{    const C_NONE = 0;
+{
+    const C_NONE = 0;
     const C_CURRENTPERIOD = 1;
     const C_NEXTPERIOD = 2;
 
 }
 
+
 /**
  * 
  */
 class PaymentAccountTypeId
-{    const C_NONE = 0;
+{
+    const C_NONE = 0;
     const C_ACCOUNTSRECEIVABLEACCOUNTSPAYABLE = 1;
     const C_ACCOUNTSRECEIVABLE = 2;
     const C_ACCOUNTSPAYABLE = 3;
 
 }
 
+
 /**
  * Indicates the type of payments
  */
 class PaymentType
 {
+
     /**
      * The payment is for the current payment
      */
@@ -2450,11 +2564,13 @@ class PaymentType
 
 }
 
+
 /**
  * Account Linkage status
  */
 class FirmClientLinkageStatus
 {
+
     /**
      * Requested
      */
@@ -2477,11 +2593,13 @@ class FirmClientLinkageStatus
 
 }
 
+
 /**
  * Refund types
  */
 class RefundType
 {
+
     /**
      * Refund the whole transaction.
      */
@@ -2504,11 +2622,13 @@ class RefundType
 
 }
 
+
 /**
  * Indicates what level of auditing information is available for a transaction
  */
 class ApiCallStatus
 {
+
     /**
      * If the original api call is availabe on S3
      */
@@ -2526,11 +2646,13 @@ class ApiCallStatus
 
 }
 
+
 /**
  * Filing Frequency types
  */
 class NoticeCustomerType
 {
+
     /**
      * AvaTax Returns
      */
@@ -2568,11 +2690,13 @@ class NoticeCustomerType
 
 }
 
+
 /**
  * A list of possible AvaFile filing types for tax notices.
  */
 class TaxNoticeFilingTypeId
 {
+
     /**
      * Denotes the tax return is being filed via electronic means; excludes SST electronic filing.
      */
@@ -2625,11 +2749,13 @@ class TaxNoticeFilingTypeId
 
 }
 
+
 /**
  * Filing Frequency types
  */
 class FundingOption
 {
+
     /**
      * Pull
      */
@@ -2642,11 +2768,13 @@ class FundingOption
 
 }
 
+
 /**
  * Filing Frequency types
  */
 class NoticePriorityId
 {
+
     /**
      * Immediate Attention Required
      */
@@ -2669,11 +2797,13 @@ class NoticePriorityId
 
 }
 
+
 /**
  * Comment Types
  */
 class CommentType
 {
+
     /**
      * Internal comments are those comments only intended to be for compliance users
      */
@@ -2696,11 +2826,13 @@ class CommentType
 
 }
 
+
 /**
  * Severity level of a notification.
  */
 class NotificationSeverityLevel
 {
+
     /**
      * Low priority notification, Default.
      */
@@ -2723,11 +2855,13 @@ class NotificationSeverityLevel
 
 }
 
+
 /**
  * Different types of formats allowed for exporting a report
  */
 class ReportFormat
 {
+
     /**
      * The Comma Separated Values file format
      */
@@ -2735,12 +2869,14 @@ class ReportFormat
 
 }
 
+
 /**
  * The date filter type for report
  *  "RD" for Reporting Date, "DD" for Document Date, "TD" for Tax Date, "PD" for Payment Date
  */
 class ReportDateFilter
 {
+
     /**
      * The date when the transaction is posted
      */
@@ -2763,11 +2899,13 @@ class ReportDateFilter
 
 }
 
+
 /**
  * The output DocumentType for a report
  */
 class ReportDocType
 {
+
     /**
      * Output all ConsumerUse tax transactions in the report
      */
@@ -2780,21 +2918,25 @@ class ReportDocType
 
 }
 
+
 /**
  * 
  */
 class SendSalesOutputFileFormat
-{    const C_STANDARD = 1;
+{
+    const C_STANDARD = 1;
     const C_DMA = 2;
     const C_DMA_NEW = 3;
 
 }
+
 
 /**
  * 
  */
 class SendSalesFileType
 {
+
     /**
      * File is in Comma Separated Values format
      */
@@ -2807,11 +2949,13 @@ class SendSalesFileType
 
 }
 
+
 /**
  * Indicates the level of companies that can be accessed
  */
 class CompanyAccessLevel
 {
+
     /**
      * No permission to access companies.
      */
@@ -2839,11 +2983,13 @@ class CompanyAccessLevel
 
 }
 
+
 /**
  * Represents the type of authentication provided to the API call
  */
 class AuthenticationTypeId
 {
+
     /**
      * This API call was not authenticated.
      */
@@ -2865,4 +3011,5 @@ class AuthenticationTypeId
     const C_OPENIDBEARERTOKEN = 3;
 
 }
+
 ?>
