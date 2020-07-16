@@ -3035,6 +3035,16 @@ class AdvancedRuleLookupFileModel
      */
     public $version;
 
+    /**
+     * @var string Lookup file CreatedOn
+     */
+    public $createdDate;
+
+    /**
+     * @var string Lookup file ModifiedOn
+     */
+    public $modifiedDate;
+
 }
 
 /**
@@ -3689,6 +3699,16 @@ class AddressesModel
      * @var AddressLocationInfo The place of business where you accept/approve the customer’s order,  thereby becoming contractually obligated to make the sale. This address type is valid in the United States only  and only applies to tangible personal property.
      */
     public $pointOfOrderAcceptance;
+
+    /**
+     * @var AddressLocationInfo The address where the goods are located or where services are rendered.This address type is valid only for VAT transactions.
+     */
+    public $goodsPlaceOrServiceRendered;
+
+    /**
+     * @var AddressLocationInfo The address of the buyer importing a good from another country.This address type is valid only for VAT transactions.
+     */
+    public $import;
 
 }
 
@@ -8827,7 +8847,7 @@ class CompanyDistanceThresholdModel
 /**
  * 
  */
-class CappedFetchResult
+class CappedFetchResult[ErrorTransactionOutputModel]
 {
 
     /**
@@ -8994,6 +9014,39 @@ class DeleteErrorTransactionResponseModel
      * @var string The internal reference code (used by the client application) of the error transaction
      */
     public $documentCode;
+
+}
+
+/**
+ * 
+ */
+class CappedFetchResult[ErrorCodeOutputModel]
+{
+
+    /**
+     * @var boolean 
+     */
+    public $_isRecordsetCountCapped;
+
+    /**
+     * @var int 
+     */
+    public $_recordsetCount;
+
+    /**
+     * @var ErrorCodeOutputModel[] 
+     */
+    public $value;
+
+    /**
+     * @var string 
+     */
+    public $_nextLink;
+
+    /**
+     * @var string 
+     */
+    public $pageKey;
 
 }
 
@@ -11113,6 +11166,26 @@ class FilingsTaxSummaryModel
      * @var float The tax accrual amount
      */
     public $taxAccrualAmount;
+
+    /**
+     * @var float reportableSalesAmount
+     */
+    public $reportableSalesAmount;
+
+    /**
+     * @var float reportableNonTaxableAmount
+     */
+    public $reportableNonTaxableAmount;
+
+    /**
+     * @var float reportableTaxableAmount
+     */
+    public $reportableTaxableAmount;
+
+    /**
+     * @var float reportableTaxAmount
+     */
+    public $reportableTaxAmount;
 
 }
 
@@ -13780,6 +13853,11 @@ class PingResultModel
      * @var int The ID number of the currently authenticated user's account, if any.
      */
     public $authenticatedAccountId;
+
+    /**
+     * @var int The ID number of the currently authenticated user's company, if any.
+     */
+    public $authenticatedCompanyId;
 
     /**
      * @var string The connected Salesforce account.

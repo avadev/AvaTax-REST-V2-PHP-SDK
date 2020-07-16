@@ -483,6 +483,27 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Get audit records by account id and date range.
+     *
+     * 
+     *
+     * 
+     * @param int $accountId The ID of the account
+     * @param string $fromDate Date
+     * @param string $toDate Date
+     * @return AdvancedRuleLookupFileModel
+     */
+    public function getAuditRecords($accountId, $fromDate, $toDate)
+    {
+        $path = "/api/v2/advancedrules/audits/accounts/{$accountId}/from/{$fromDate}/to/{$toDate}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * Get the lookup files for a company
      *
      * 
@@ -2911,7 +2932,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro, BasicReturns.
      *
      * 
      * @param int $companyId The id of the company you which to create the datasources
@@ -2936,7 +2957,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro, BasicReturns.
      *
      * 
      * @param int $companyId The id of the company the datasource belongs to.
@@ -2961,7 +2982,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro, BasicReturns.
      *
      * 
      * @param int $companyId 
@@ -2986,7 +3007,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro, BasicReturns.
      *
      * 
      * @param int $companyId The id of the company you wish to retrieve the datasources.
@@ -3017,7 +3038,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro, BasicReturns.
      *
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* isEnabled, isSynced, isAuthorized, name, externalState
@@ -3044,7 +3065,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro, BasicReturns.
      *
      * 
      * @param int $companyId The id of the company the datasource belongs to.
@@ -4166,13 +4187,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @param string $countryCode If not null, return all records with this code.
      * @return FetchResult
      */
-    public function listProductClassificationSystems($filter=null, $top=null, $skip=null, $orderBy=null)
+    public function listProductClassificationSystems($filter=null, $top=null, $skip=null, $orderBy=null, $countryCode)
     {
         $path = "/api/v2/definitions/productclassificationsystems";
         $guzzleParams = [
-            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy, '$countryCode' => $countryCode],
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
@@ -4192,13 +4214,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @param string $countryCode If not null, return all records with this code.
      * @return FetchResult
      */
-    public function listProductClassificationSystemsByCompany($companyCode, $filter=null, $top=null, $skip=null, $orderBy=null)
+    public function listProductClassificationSystemsByCompany($companyCode, $filter=null, $top=null, $skip=null, $orderBy=null, $countryCode)
     {
         $path = "/api/v2/definitions/productclassificationsystems/bycompany/{$companyCode}";
         $guzzleParams = [
-            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy, '$countryCode' => $countryCode],
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
@@ -6249,6 +6272,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
@@ -6295,6 +6320,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
@@ -6333,6 +6360,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
@@ -6394,6 +6423,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
@@ -6436,6 +6467,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
@@ -6488,6 +6521,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
@@ -6537,6 +6572,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
@@ -6606,6 +6643,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
@@ -6644,6 +6683,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
@@ -6682,6 +6723,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
@@ -8509,7 +8552,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro, BasicReturns.
      *
      * 
      * @param string $include Specifies objects to include in the response after transaction is created
@@ -8555,12 +8598,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro, BasicReturns.
      *
      * 
      * @param string $companyCode The company code of the company that recorded this transaction
@@ -8603,12 +8648,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ProStoresOperator, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro, BasicReturns.
      *
      * 
      * @param string $companyCode The code identifying the company that owns this transaction
@@ -8648,12 +8695,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ProStoresOperator, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro, BasicReturns.
      *
      * 
      * @param string $companyCode The code identifying the company that owns this transaction
@@ -8730,12 +8779,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, ProStoresOperator, SSTAdmin, TechnicalSupportAdmin.
-     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro, BasicReturns.
      *
      * 
      * @param string $companyCode The company code of the company that recorded this transaction
@@ -8783,6 +8834,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
@@ -8952,7 +9005,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro, BasicReturns.
      *
      * 
      * @param string $include Specifies objects to include in the response after transaction is created
@@ -8995,6 +9048,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
@@ -9028,6 +9083,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
@@ -9122,6 +9179,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
@@ -9178,6 +9237,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
@@ -9242,12 +9303,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro, BasicReturns.
      *
      * 
      * @param string $companyCode The code of the company that made the original sale
@@ -9296,6 +9359,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
@@ -9342,12 +9407,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro, BasicReturns.
      *
      * 
      * @param string $companyCode The company code of the company that recorded this transaction
@@ -9385,12 +9452,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro, BasicReturns.
      *
      * 
      * @param string $companyCode The company code of the company that recorded this transaction
@@ -9435,12 +9504,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, ProStoresOperator, SSTAdmin, TechnicalSupportAdmin.
-     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro, BasicReturns.
      *
      * 
      * @param string $companyCode The company code of the company that recorded this transaction
@@ -9488,6 +9559,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
