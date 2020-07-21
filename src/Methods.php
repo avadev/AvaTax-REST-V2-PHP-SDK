@@ -47,8 +47,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param ResetLicenseKeyModel $model A request confirming that you wish to reset the license key of this account.
      * @return LicenseKeyModel
      */
-    public function accountResetLicenseKey($id, $model)
-    {
+    public function accountResetLicenseKey($id, $model)    {
         $path = "/api/v2/accounts/{$id}/resetlicensekey";
         $guzzleParams = [
             'query' => [],
@@ -80,8 +79,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param ActivateAccountModel $model The activation request
      * @return AccountModel
      */
-    public function activateAccount($id, $model)
-    {
+    public function activateAccount($id, $model)    {
         $path = "/api/v2/accounts/{$id}/activate";
         $guzzleParams = [
             'query' => [],
@@ -120,8 +118,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @return FetchResult
      */
-    public function auditAccount($id, $start, $end, $top=null, $skip=null)
-    {
+    public function auditAccount($id, $start, $end, $top=null, $skip=null)    {
         $path = "/api/v2/accounts/{$id}/audit";
         $guzzleParams = [
             'query' => ['start' => $start, 'end' => $end, '$top' => $top, '$skip' => $skip],
@@ -153,8 +150,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param AccountLicenseKeyModel $model 
      * @return LicenseKeyModel
      */
-    public function createLicenseKey($id, $model)
-    {
+    public function createLicenseKey($id, $model)    {
         $path = "/api/v2/accounts/{$id}/licensekey";
         $guzzleParams = [
             'query' => [],
@@ -181,8 +177,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $licensekeyname The license key name you wish to update.
      * @return ErrorDetail[]
      */
-    public function deleteLicenseKey($id, $licensekeyname)
-    {
+    public function deleteLicenseKey($id, $licensekeyname)    {
         $path = "/api/v2/accounts/{$id}/licensekey/{$licensekeyname}";
         $guzzleParams = [
             'query' => [],
@@ -209,8 +204,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $include A comma separated list of special fetch options
      * @return AccountModel
      */
-    public function getAccount($id, $include=null)
-    {
+    public function getAccount($id, $include=null)    {
         $path = "/api/v2/accounts/{$id}";
         $guzzleParams = [
             'query' => ['$include' => $include],
@@ -243,8 +237,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id 
      * @return AccountConfigurationModel[]
      */
-    public function getAccountConfiguration($id)
-    {
+    public function getAccountConfiguration($id)    {
         $path = "/api/v2/accounts/{$id}/configuration";
         $guzzleParams = [
             'query' => [],
@@ -265,8 +258,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $licensekeyname The ID of the account to retrieve
      * @return AccountLicenseKeyModel
      */
-    public function getLicenseKey($id, $licensekeyname)
-    {
+    public function getLicenseKey($id, $licensekeyname)    {
         $path = "/api/v2/accounts/{$id}/licensekey/{$licensekeyname}";
         $guzzleParams = [
             'query' => [],
@@ -288,8 +280,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The ID of the account to retrieve
      * @return AccountLicenseKeyModel[]
      */
-    public function getLicenseKeys($id)
-    {
+    public function getLicenseKeys($id)    {
         $path = "/api/v2/accounts/{$id}/licensekeys";
         $guzzleParams = [
             'query' => [],
@@ -326,8 +317,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function queryAccounts($include=null, $filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function queryAccounts($include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/accounts";
         $guzzleParams = [
             'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -361,8 +351,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param AccountConfigurationModel[] $model 
      * @return AccountConfigurationModel[]
      */
-    public function setAccountConfiguration($id, $model)
-    {
+    public function setAccountConfiguration($id, $model)    {
         $path = "/api/v2/accounts/{$id}/configuration";
         $guzzleParams = [
             'query' => [],
@@ -402,8 +391,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $textCase selectable text case for address validation (See TextCase::* for a list of allowable values)
      * @return AddressResolutionModel
      */
-    public function resolveAddress($line1, $line2, $line3, $city, $region, $postalCode, $country, $textCase)
-    {
+    public function resolveAddress($line1, $line2, $line3, $city, $region, $postalCode, $country, $textCase)    {
         $path = "/api/v2/addresses/resolve";
         $guzzleParams = [
             'query' => ['line1' => $line1, 'line2' => $line2, 'line3' => $line3, 'city' => $city, 'region' => $region, 'postalCode' => $postalCode, 'country' => $country, 'textCase' => $textCase],
@@ -431,8 +419,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param AddressValidationInfo $model The address to resolve
      * @return AddressResolutionModel
      */
-    public function resolveAddressPost($model)
-    {
+    public function resolveAddressPost($model)    {
         $path = "/api/v2/addresses/resolve";
         $guzzleParams = [
             'query' => [],
@@ -452,8 +439,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param AdvancedRuleLookupFileModel $model The lookup file you wish to create
      * @return AdvancedRuleLookupFileModel
      */
-    public function createCompanyLookupFile($accountId, $companyId, $model)
-    {
+    public function createCompanyLookupFile($accountId, $companyId, $model)    {
         $path = "/api/v2/advancedrules/accounts/{$accountId}/companies/{$companyId}/lookupFiles";
         $guzzleParams = [
             'query' => [],
@@ -472,14 +458,33 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $id The unique ID/GUID for the company lookup file to be deleted
      * @return ErrorDetail[]
      */
-    public function deleteLookupFile($accountId, $id)
-    {
+    public function deleteLookupFile($accountId, $id)    {
         $path = "/api/v2/advancedrules/accounts/{$accountId}/lookupFiles/{$id}";
         $guzzleParams = [
             'query' => [],
             'body' => null
         ];
         return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Get audit records by account id and date range.
+     *
+     * 
+     *
+     * 
+     * @param int $accountId The ID of the account
+     * @param string $fromDate Date
+     * @param string $toDate Date
+     * @return AdvancedRuleLookupFileModel
+     */
+    public function getAuditRecords($accountId, $fromDate, $toDate)    {
+        $path = "/api/v2/advancedrules/audits/accounts/{$accountId}/from/{$fromDate}/to/{$toDate}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
     }
 
     /**
@@ -492,8 +497,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The ID of the company for which to retrieve lookup files
      * @return FetchResult
      */
-    public function getCompanyLookupFiles($accountId, $companyId)
-    {
+    public function getCompanyLookupFiles($accountId, $companyId)    {
         $path = "/api/v2/advancedrules/accounts/{$accountId}/companies/{$companyId}/lookupFiles";
         $guzzleParams = [
             'query' => [],
@@ -512,8 +516,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $id The unique ID/GUID of the company lookup file to return
      * @return AdvancedRuleLookupFileModel
      */
-    public function getLookupFile($accountId, $id)
-    {
+    public function getLookupFile($accountId, $id)    {
         $path = "/api/v2/advancedrules/accounts/{$accountId}/lookupFiles/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -533,8 +536,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param AdvancedRuleLookupFileModel $model The new values to update the lookup file
      * @return AdvancedRuleLookupFileModel
      */
-    public function updateLookupFile($accountId, $id, $model)
-    {
+    public function updateLookupFile($accountId, $id, $model)    {
         $path = "/api/v2/advancedrules/accounts/{$accountId}/lookupFiles/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -558,8 +560,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param AvaFileFormModel[] $model The AvaFileForm you wish to create.
      * @return AvaFileFormModel[]
      */
-    public function createAvaFileForms($model)
-    {
+    public function createAvaFileForms($model)    {
         $path = "/api/v2/avafileforms";
         $guzzleParams = [
             'query' => [],
@@ -582,8 +583,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The ID of the AvaFileForm you wish to delete.
      * @return ErrorDetail[]
      */
-    public function deleteAvaFileForm($id)
-    {
+    public function deleteAvaFileForm($id)    {
         $path = "/api/v2/avafileforms/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -606,8 +606,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The primary key of this AvaFileForm
      * @return AvaFileFormModel
      */
-    public function getAvaFileForm($id)
-    {
+    public function getAvaFileForm($id)    {
         $path = "/api/v2/avafileforms/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -634,8 +633,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function queryAvaFileForms($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function queryAvaFileForms($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/avafileforms";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -660,8 +658,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param AvaFileFormModel $model The AvaFileForm model you wish to update.
      * @return AvaFileFormModel
      */
-    public function updateAvaFileForm($id, $model)
-    {
+    public function updateAvaFileForm($id, $model)    {
         $path = "/api/v2/avafileforms/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -695,8 +692,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The ID of the batch to cancel.
      * @return BatchModel
      */
-    public function cancelBatch($companyId, $id)
-    {
+    public function cancelBatch($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/batches/{$id}/cancel";
         $guzzleParams = [
             'query' => [],
@@ -737,8 +733,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param BatchModel[] $model The batch you wish to create.
      * @return BatchModel[]
      */
-    public function createBatches($companyId, $model)
-    {
+    public function createBatches($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/batches";
         $guzzleParams = [
             'query' => [],
@@ -777,8 +772,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param CreateTransactionBatchRequestModel $model The transaction batch you wish to create.
      * @return CreateTransactionBatchResponseModel
      */
-    public function createTransactionBatch($companyId, $model)
-    {
+    public function createTransactionBatch($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/batches/transactions";
         $guzzleParams = [
             'query' => [],
@@ -810,8 +804,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The ID of the batch to delete.
      * @return ErrorDetail[]
      */
-    public function deleteBatch($companyId, $id)
-    {
+    public function deleteBatch($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/batches/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -835,8 +828,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The primary key of this batch file object
      * @return object
      */
-    public function downloadBatch($companyId, $batchId, $id)
-    {
+    public function downloadBatch($companyId, $batchId, $id)    {
         $path = "/api/v2/companies/{$companyId}/batches/{$batchId}/files/{$id}/attachment";
         $guzzleParams = [
             'query' => [],
@@ -873,8 +865,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The primary key of this batch
      * @return BatchModel
      */
-    public function getBatch($companyId, $id)
-    {
+    public function getBatch($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/batches/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -921,8 +912,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listBatchesByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listBatchesByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/batches";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -965,8 +955,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function queryBatches($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function queryBatches($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/batches";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -1005,8 +994,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param CreateCertExpressInvitationModel[] $model the requests to send out to customers
      * @return CertExpressInvitationStatusModel[]
      */
-    public function createCertExpressInvitation($companyId, $customerCode, $model)
-    {
+    public function createCertExpressInvitation($companyId, $customerCode, $model)    {
         $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/certexpressinvites";
         $guzzleParams = [
             'query' => [],
@@ -1046,8 +1034,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $include OPTIONAL: A comma separated list of special fetch options. No options are defined at this time.
      * @return CertExpressInvitationModel
      */
-    public function getCertExpressInvitation($companyId, $customerCode, $id, $include=null)
-    {
+    public function getCertExpressInvitation($companyId, $customerCode, $id, $include=null)    {
         $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/certexpressinvites/{$id}";
         $guzzleParams = [
             'query' => ['$include' => $include],
@@ -1089,8 +1076,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listCertExpressInvitations($companyId, $include=null, $filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listCertExpressInvitations($companyId, $include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/certexpressinvites";
         $guzzleParams = [
             'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -1135,8 +1121,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param CertificateModel[] $model Certificates to be created
      * @return CertificateModel[]
      */
-    public function createCertificates($companyId, $preValidatedExemptionReason, $model)
-    {
+    public function createCertificates($companyId, $preValidatedExemptionReason, $model)    {
         $path = "/api/v2/companies/{$companyId}/certificates";
         $guzzleParams = [
             'query' => ['$preValidatedExemptionReason' => $preValidatedExemptionReason],
@@ -1172,8 +1157,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The unique ID number of this certificate
      * @return ErrorDetail[]
      */
-    public function deleteCertificate($companyId, $id)
-    {
+    public function deleteCertificate($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/certificates/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -1212,8 +1196,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $type The data format in which to retrieve the certificate image (See CertificatePreviewType::* for a list of allowable values)
      * @return object
      */
-    public function downloadCertificateImage($companyId, $id, $page, $type)
-    {
+    public function downloadCertificateImage($companyId, $id, $page, $type)    {
         $path = "/api/v2/companies/{$companyId}/certificates/{$id}/attachment";
         $guzzleParams = [
             'query' => ['$page' => $page, '$type' => $type],
@@ -1254,8 +1237,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $include OPTIONAL: A comma separated list of special fetch options. You can specify one or more of the following:      * customers - Retrieves the list of customers linked to the certificate.   * po_numbers - Retrieves all PO numbers tied to the certificate.   * attributes - Retrieves all attributes applied to the certificate.
      * @return CertificateModel
      */
-    public function getCertificate($companyId, $id, $include=null)
-    {
+    public function getCertificate($companyId, $id, $include=null)    {
         $path = "/api/v2/companies/{$companyId}/certificates/{$id}";
         $guzzleParams = [
             'query' => ['$include' => $include],
@@ -1284,8 +1266,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The company ID to check
      * @return ProvisionStatusModel
      */
-    public function getCertificateSetup($companyId)
-    {
+    public function getCertificateSetup($companyId)    {
         $path = "/api/v2/companies/{$companyId}/certificates/setup";
         $guzzleParams = [
             'query' => [],
@@ -1323,8 +1304,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param CertificateAttributeModel[] $model The list of attributes to link to this certificate.
      * @return FetchResult
      */
-    public function linkAttributesToCertificate($companyId, $id, $model)
-    {
+    public function linkAttributesToCertificate($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/certificates/{$id}/attributes/link";
         $guzzleParams = [
             'query' => [],
@@ -1363,8 +1343,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param LinkCustomersModel $model The list of customers needed be added to the Certificate for exemption
      * @return FetchResult
      */
-    public function linkCustomersToCertificate($companyId, $id, $model)
-    {
+    public function linkCustomersToCertificate($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/certificates/{$id}/customers/link";
         $guzzleParams = [
             'query' => [],
@@ -1401,8 +1380,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The unique ID number of this certificate
      * @return FetchResult
      */
-    public function listAttributesForCertificate($companyId, $id)
-    {
+    public function listAttributesForCertificate($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/certificates/{$id}/attributes";
         $guzzleParams = [
             'query' => [],
@@ -1440,8 +1418,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $include OPTIONAL: A comma separated list of special fetch options.   No options are currently available when fetching customers.
      * @return FetchResult
      */
-    public function listCustomersForCertificate($companyId, $id, $include=null)
-    {
+    public function listCustomersForCertificate($companyId, $id, $include=null)    {
         $path = "/api/v2/companies/{$companyId}/certificates/{$id}/customers";
         $guzzleParams = [
             'query' => ['$include' => $include],
@@ -1485,8 +1462,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function queryCertificates($companyId, $include=null, $filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function queryCertificates($companyId, $include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/certificates";
         $guzzleParams = [
             'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -1517,8 +1493,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId 
      * @return ProvisionStatusModel
      */
-    public function requestCertificateSetup($companyId)
-    {
+    public function requestCertificateSetup($companyId)    {
         $path = "/api/v2/companies/{$companyId}/certificates/setup";
         $guzzleParams = [
             'query' => [],
@@ -1556,8 +1531,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param CertificateAttributeModel[] $model The list of attributes to unlink from this certificate.
      * @return FetchResult
      */
-    public function unlinkAttributesFromCertificate($companyId, $id, $model)
-    {
+    public function unlinkAttributesFromCertificate($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/certificates/{$id}/attributes/unlink";
         $guzzleParams = [
             'query' => [],
@@ -1597,8 +1571,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param LinkCustomersModel $model The list of customers to unlink from this certificate
      * @return FetchResult
      */
-    public function unlinkCustomersFromCertificate($companyId, $id, $model)
-    {
+    public function unlinkCustomersFromCertificate($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/certificates/{$id}/customers/unlink";
         $guzzleParams = [
             'query' => [],
@@ -1633,8 +1606,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param CertificateModel $model The new certificate object that will replace the existing one
      * @return CertificateModel
      */
-    public function updateCertificate($companyId, $id, $model)
-    {
+    public function updateCertificate($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/certificates/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -1672,8 +1644,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param object $file The exemption certificate file you wanted to upload. Accepted formats are: PDF, JPEG, TIFF, PNG.
      * @return string
      */
-    public function uploadCertificateImage($companyId, $id, $file)
-    {
+    public function uploadCertificateImage($companyId, $id, $file)    {
         $path = "/api/v2/companies/{$companyId}/certificates/{$id}/attachment";
         $guzzleParams = [
             'query' => [],
@@ -1717,8 +1688,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The ID of the company to check if its integration is certified.
      * @return string
      */
-    public function certifyIntegration($id)
-    {
+    public function certifyIntegration($id)    {
         $path = "/api/v2/companies/{$id}/certify";
         $guzzleParams = [
             'query' => [],
@@ -1753,8 +1723,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param FilingStatusChangeModel $model 
      * @return string
      */
-    public function changeFilingStatus($id, $model)
-    {
+    public function changeFilingStatus($id, $model)    {
         $path = "/api/v2/companies/{$id}/filingstatus";
         $guzzleParams = [
             'query' => [],
@@ -1787,8 +1756,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param CompanyInitializationModel $model Information about the company you wish to create.
      * @return CompanyModel
      */
-    public function companyInitialize($model)
-    {
+    public function companyInitialize($model)    {
         $path = "/api/v2/companies/initialize";
         $guzzleParams = [
             'query' => [],
@@ -1814,8 +1782,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param CompanyModel[] $model Either a single company object or an array of companies to create
      * @return CompanyModel[]
      */
-    public function createCompanies($model)
-    {
+    public function createCompanies($model)    {
         $path = "/api/v2/companies";
         $guzzleParams = [
             'query' => [],
@@ -1848,8 +1815,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param FundingInitiateModel $model The funding initialization request
      * @return FundingStatusModel
      */
-    public function createFundingRequest($id, $model)
-    {
+    public function createFundingRequest($id, $model)    {
         $path = "/api/v2/companies/{$id}/funding/setup";
         $guzzleParams = [
             'query' => [],
@@ -1871,8 +1837,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The ID of the company you wish to delete.
      * @return ErrorDetail[]
      */
-    public function deleteCompany($id)
-    {
+    public function deleteCompany($id)    {
         $path = "/api/v2/companies/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -1898,8 +1863,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The unique identifier of the company
      * @return FundingConfigurationModel
      */
-    public function fundingConfigurationByCompany($companyId)
-    {
+    public function fundingConfigurationByCompany($companyId)    {
         $path = "/api/v2/companies/{$companyId}/funding/configuration";
         $guzzleParams = [
             'query' => [],
@@ -1926,8 +1890,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $currency The currency of the funding. USD and CAD are the only valid currencies
      * @return FundingConfigurationModel[]
      */
-    public function fundingConfigurationsByCompanyAndCurrency($companyId, $currency)
-    {
+    public function fundingConfigurationsByCompanyAndCurrency($companyId, $currency)    {
         $path = "/api/v2/companies/{$companyId}/funding/configurations";
         $guzzleParams = [
             'query' => ['currency' => $currency],
@@ -1962,8 +1925,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $include OPTIONAL: A comma separated list of special fetch options.      * Child objects - Specify one or more of the following to retrieve objects related to each company: "Contacts", "FilingCalendars", "Items", "Locations", "Nexus", "TaxCodes", "NonReportingChildren" or "TaxRules".   * Deleted objects - Specify "FetchDeleted" to retrieve information about previously deleted objects.
      * @return CompanyModel
      */
-    public function getCompany($id, $include=null)
-    {
+    public function getCompany($id, $include=null)    {
         $path = "/api/v2/companies/{$id}";
         $guzzleParams = [
             'query' => ['$include' => $include],
@@ -1996,8 +1958,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id 
      * @return CompanyConfigurationModel[]
      */
-    public function getCompanyConfiguration($id)
-    {
+    public function getCompanyConfiguration($id)    {
         $path = "/api/v2/companies/{$id}/configuration";
         $guzzleParams = [
             'query' => [],
@@ -2031,8 +1992,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id 
      * @return string
      */
-    public function getFilingStatus($id)
-    {
+    public function getFilingStatus($id)    {
         $path = "/api/v2/companies/{$id}/filingstatus";
         $guzzleParams = [
             'query' => [],
@@ -2058,8 +2018,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The unique identifier of the company
      * @return FundingStatusModel[]
      */
-    public function listFundingRequestsByCompany($id)
-    {
+    public function listFundingRequestsByCompany($id)    {
         $path = "/api/v2/companies/{$id}/funding";
         $guzzleParams = [
             'query' => [],
@@ -2082,8 +2041,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @return FetchResult
      */
-    public function listMrsCompanies()
-    {
+    public function listMrsCompanies()    {
         $path = "/api/v2/companies/mrs";
         $guzzleParams = [
             'query' => [],
@@ -2125,8 +2083,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function queryCompanies($include=null, $filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function queryCompanies($include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies";
         $guzzleParams = [
             'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -2160,8 +2117,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param CompanyConfigurationModel[] $model 
      * @return CompanyConfigurationModel[]
      */
-    public function setCompanyConfiguration($id, $model)
-    {
+    public function setCompanyConfiguration($id, $model)    {
         $path = "/api/v2/companies/{$id}/configuration";
         $guzzleParams = [
             'query' => [],
@@ -2194,8 +2150,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param CompanyModel $model The company object you wish to update.
      * @return CompanyModel
      */
-    public function updateCompany($id, $model)
-    {
+    public function updateCompany($id, $model)    {
         $path = "/api/v2/companies/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -2214,8 +2169,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param TransactionReferenceFieldModel[] $model 
      * @return FetchResult
      */
-    public function tagTransaction($companyId, $model)
-    {
+    public function tagTransaction($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/transactions/tag";
         $guzzleParams = [
             'query' => [],
@@ -2240,8 +2194,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param ContactModel[] $model The contacts you wish to create.
      * @return ContactModel[]
      */
-    public function createContacts($companyId, $model)
-    {
+    public function createContacts($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/contacts";
         $guzzleParams = [
             'query' => [],
@@ -2264,8 +2217,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The ID of the contact you wish to delete.
      * @return ErrorDetail[]
      */
-    public function deleteContact($companyId, $id)
-    {
+    public function deleteContact($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/contacts/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -2290,8 +2242,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The primary key of this contact
      * @return ContactModel
      */
-    public function getContact($companyId, $id)
-    {
+    public function getContact($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/contacts/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -2320,8 +2271,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listContactsByCompany($companyId, $filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listContactsByCompany($companyId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/contacts";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -2351,8 +2301,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function queryContacts($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function queryContacts($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/contacts";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -2380,8 +2329,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param ContactModel $model The contact you wish to update.
      * @return ContactModel
      */
-    public function updateContact($companyId, $id, $model)
-    {
+    public function updateContact($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/contacts/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -2419,8 +2367,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param CustomerModel[] $model The list of customer objects to be created
      * @return CustomerModel[]
      */
-    public function createCustomers($companyId, $model)
-    {
+    public function createCustomers($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/customers";
         $guzzleParams = [
             'query' => [],
@@ -2455,8 +2402,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $customerCode The unique code representing this customer
      * @return CustomerModel
      */
-    public function deleteCustomer($companyId, $customerCode)
-    {
+    public function deleteCustomer($companyId, $customerCode)    {
         $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}";
         $guzzleParams = [
             'query' => [],
@@ -2498,8 +2444,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $include Specify optional additional objects to include in this fetch request
      * @return CustomerModel
      */
-    public function getCustomer($companyId, $customerCode, $include=null)
-    {
+    public function getCustomer($companyId, $customerCode, $include=null)    {
         $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}";
         $guzzleParams = [
             'query' => ['$include' => $include],
@@ -2538,8 +2483,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param CustomerAttributeModel[] $model The list of attributes to link to the customer.
      * @return FetchResult
      */
-    public function linkAttributesToCustomer($companyId, $customerCode, $model)
-    {
+    public function linkAttributesToCustomer($companyId, $customerCode, $model)    {
         $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/attributes/link";
         $guzzleParams = [
             'query' => [],
@@ -2575,8 +2519,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param LinkCertificatesModel $model The list of certificates to link to this customer
      * @return FetchResult
      */
-    public function linkCertificatesToCustomer($companyId, $customerCode, $model)
-    {
+    public function linkCertificatesToCustomer($companyId, $customerCode, $model)    {
         $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/certificates/link";
         $guzzleParams = [
             'query' => [],
@@ -2613,8 +2556,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param LinkCustomersModel $model A list of information about ship-to customers to link to this bill-to customer.
      * @return CustomerModel
      */
-    public function linkShipToCustomersToBillCustomer($companyId, $code, $model)
-    {
+    public function linkShipToCustomersToBillCustomer($companyId, $code, $model)    {
         $path = "/api/v2/companies/{$companyId}/customers/billto/{$code}/shipto/link";
         $guzzleParams = [
             'query' => [],
@@ -2652,8 +2594,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $customerCode The unique code representing the current customer
      * @return FetchResult
      */
-    public function listAttributesForCustomer($companyId, $customerCode)
-    {
+    public function listAttributesForCustomer($companyId, $customerCode)    {
         $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/attributes";
         $guzzleParams = [
             'query' => [],
@@ -2693,8 +2634,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listCertificatesForCustomer($companyId, $customerCode, $include=null, $filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listCertificatesForCustomer($companyId, $customerCode, $include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/certificates";
         $guzzleParams = [
             'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -2734,8 +2674,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $region Search for certificates matching this region. Uses the ISO 3166 two or three character state, region, or province code.
      * @return ExemptionStatusModel
      */
-    public function listValidCertificatesForCustomer($companyId, $customerCode, $country, $region)
-    {
+    public function listValidCertificatesForCustomer($companyId, $customerCode, $country, $region)    {
         $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/certificates/{$country}/{$region}";
         $guzzleParams = [
             'query' => [],
@@ -2779,8 +2718,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function queryCustomers($companyId, $include=null, $filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function queryCustomers($companyId, $include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/customers";
         $guzzleParams = [
             'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -2819,8 +2757,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param CustomerAttributeModel[] $model The list of attributes to unlink from the customer.
      * @return FetchResult
      */
-    public function unlinkAttributesFromCustomer($companyId, $customerCode, $model)
-    {
+    public function unlinkAttributesFromCustomer($companyId, $customerCode, $model)    {
         $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/attributes/unlink";
         $guzzleParams = [
             'query' => [],
@@ -2856,8 +2793,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param LinkCertificatesModel $model The list of certificates to link to this customer
      * @return FetchResult
      */
-    public function unlinkCertificatesFromCustomer($companyId, $customerCode, $model)
-    {
+    public function unlinkCertificatesFromCustomer($companyId, $customerCode, $model)    {
         $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/certificates/unlink";
         $guzzleParams = [
             'query' => [],
@@ -2893,8 +2829,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param CustomerModel $model The new customer model that will replace the existing record at this URL
      * @return CustomerModel
      */
-    public function updateCustomer($companyId, $customerCode, $model)
-    {
+    public function updateCustomer($companyId, $customerCode, $model)    {
         $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}";
         $guzzleParams = [
             'query' => [],
@@ -2911,15 +2846,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro, BasicReturns.
      *
      * 
      * @param int $companyId The id of the company you which to create the datasources
      * @param DataSourceModel[] $model 
      * @return DataSourceModel[]
      */
-    public function createDataSources($companyId, $model)
-    {
+    public function createDataSources($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/datasources";
         $guzzleParams = [
             'query' => [],
@@ -2936,15 +2870,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro, BasicReturns.
      *
      * 
      * @param int $companyId The id of the company the datasource belongs to.
      * @param int $id The id of the datasource you wish to delete.
      * @return ErrorDetail[]
      */
-    public function deleteDataSource($companyId, $id)
-    {
+    public function deleteDataSource($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/datasources/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -2961,15 +2894,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro, BasicReturns.
      *
      * 
      * @param int $companyId 
      * @param int $id data source id
      * @return DataSourceModel
      */
-    public function getDataSourceById($companyId, $id)
-    {
+    public function getDataSourceById($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/datasources/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -2986,7 +2918,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro, BasicReturns.
      *
      * 
      * @param int $companyId The id of the company you wish to retrieve the datasources.
@@ -2996,8 +2928,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listDataSources($companyId, $filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listDataSources($companyId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/datasources";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -3017,7 +2948,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro, BasicReturns.
      *
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* isEnabled, isSynced, isAuthorized, name, externalState
@@ -3026,8 +2957,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function queryDataSources($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function queryDataSources($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/datasources";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -3044,7 +2974,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro, BasicReturns.
      *
      * 
      * @param int $companyId The id of the company the datasource belongs to.
@@ -3052,8 +2982,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param DataSourceModel $model 
      * @return DataSourceModel
      */
-    public function updateDataSource($companyId, $id, $model)
-    {
+    public function updateDataSource($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/datasources/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -3085,8 +3014,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $hsCode The partial or full HS Code for which you would like to view all of the parents.
      * @return FetchResult
      */
-    public function getCrossBorderCode($country, $hsCode)
-    {
+    public function getCrossBorderCode($country, $hsCode)    {
         $path = "/api/v2/definitions/crossborder/{$country}/{$hsCode}/hierarchy";
         $guzzleParams = [
             'query' => [],
@@ -3109,8 +3037,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function getLoginVerifierByForm($form, $filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function getLoginVerifierByForm($form, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/filingcalendars/loginverifiers/{$form}";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -3136,8 +3063,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listAvaFileForms($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listAvaFileForms($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/avafileforms";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -3165,8 +3091,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listCertificateAttributes($companyid, $filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listCertificateAttributes($companyid, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/certificateattributes";
         $guzzleParams = [
             'query' => ['companyid' => $companyid, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -3193,8 +3118,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listCertificateExemptReasons($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listCertificateExemptReasons($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/certificateexemptreasons";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -3221,8 +3145,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listCertificateExposureZones($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listCertificateExposureZones($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/certificateexposurezones";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -3244,8 +3167,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listCommunicationsServiceTypes($id, $filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listCommunicationsServiceTypes($id, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/communications/transactiontypes/{$id}/servicetypes";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -3267,8 +3189,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listCommunicationsTransactionTypes($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listCommunicationsTransactionTypes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/communications/transactiontypes";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -3290,8 +3211,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listCommunicationsTSPairs($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listCommunicationsTSPairs($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/communications/tspairs";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -3314,8 +3234,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listCountries($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listCountries($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/countries";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -3343,8 +3262,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listCoverLetters($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listCoverLetters($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/coverletters";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -3378,8 +3296,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listCrossBorderCodes($country, $hsCode, $filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listCrossBorderCodes($country, $hsCode, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/crossborder/{$country}/{$hsCode}";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -3405,8 +3322,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @return FetchResult
      */
-    public function listCrossBorderSections()
-    {
+    public function listCrossBorderSections()    {
         $path = "/api/v2/definitions/crossborder/sections";
         $guzzleParams = [
             'query' => [],
@@ -3430,8 +3346,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listCurrencies($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listCurrencies($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/currencies";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -3456,8 +3371,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listEntityUseCodes($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listEntityUseCodes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/entityusecodes";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -3479,8 +3393,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listFilingFrequencies($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listFilingFrequencies($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/filingfrequencies";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -3506,8 +3419,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listJurisdictions($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listJurisdictions($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/jurisdictions";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -3541,8 +3453,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listJurisdictionsByAddress($line1, $line2, $line3, $city, $region, $postalCode, $country, $filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listJurisdictionsByAddress($line1, $line2, $line3, $city, $region, $postalCode, $country, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/jurisdictionsnearaddress";
         $guzzleParams = [
             'query' => ['line1' => $line1, 'line2' => $line2, 'line3' => $line3, 'city' => $city, 'region' => $region, 'postalCode' => $postalCode, 'country' => $country, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -3577,8 +3488,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listLocationQuestionsByAddress($line1, $line2, $line3, $city, $region, $postalCode, $country, $latitude, $longitude, $filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listLocationQuestionsByAddress($line1, $line2, $line3, $city, $region, $postalCode, $country, $latitude, $longitude, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/locationquestions";
         $guzzleParams = [
             'query' => ['line1' => $line1, 'line2' => $line2, 'line3' => $line3, 'city' => $city, 'region' => $region, 'postalCode' => $postalCode, 'country' => $country, 'latitude' => $latitude, 'longitude' => $longitude, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -3601,8 +3511,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listLoginVerifiers($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listLoginVerifiers($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/filingcalendars/loginverifiers";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -3623,8 +3532,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listMarketplaceLocations($marketplaceId, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listMarketplaceLocations($marketplaceId, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/marketplacelocations";
         $guzzleParams = [
             'query' => ['marketplaceId' => $marketplaceId, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -3647,8 +3555,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listNexus($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listNexus($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/nexus";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -3680,8 +3587,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listNexusByAddress($line1, $line2, $line3, $city, $region, $postalCode, $country, $filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listNexusByAddress($line1, $line2, $line3, $city, $region, $postalCode, $country, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/nexus/byaddress";
         $guzzleParams = [
             'query' => ['line1' => $line1, 'line2' => $line2, 'line3' => $line3, 'city' => $city, 'region' => $region, 'postalCode' => $postalCode, 'country' => $country, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -3705,8 +3611,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listNexusByCountry($country, $filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listNexusByCountry($country, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/nexus/{$country}";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -3731,8 +3636,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listNexusByCountryAndRegion($country, $region, $filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listNexusByCountryAndRegion($country, $region, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/nexus/{$country}/{$region}";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -3764,8 +3668,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $formCode The form code that we are looking up the nexus for
      * @return NexusByTaxFormModel
      */
-    public function listNexusByFormCode($formCode)
-    {
+    public function listNexusByFormCode($formCode)    {
         $path = "/api/v2/definitions/nexus/byform/{$formCode}";
         $guzzleParams = [
             'query' => [],
@@ -3787,8 +3690,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listNexusTaxTypeGroups($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listNexusTaxTypeGroups($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/nexustaxtypegroups";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -3810,8 +3712,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listNoticeCustomerFundingOptions($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listNoticeCustomerFundingOptions($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/noticecustomerfundingoptions";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -3833,8 +3734,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listNoticeCustomerTypes($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listNoticeCustomerTypes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/noticecustomertypes";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -3856,8 +3756,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listNoticeFilingtypes($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listNoticeFilingtypes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/noticefilingtypes";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -3879,8 +3778,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listNoticePriorities($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listNoticePriorities($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/noticepriorities";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -3902,8 +3800,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listNoticeReasons($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listNoticeReasons($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/noticereasons";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -3925,8 +3822,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listNoticeResponsibilities($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listNoticeResponsibilities($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/noticeresponsibilities";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -3948,8 +3844,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listNoticeRootCauses($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listNoticeRootCauses($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/noticerootcauses";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -3971,8 +3866,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listNoticeStatuses($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listNoticeStatuses($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/noticestatuses";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -3994,8 +3888,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listNoticeTypes($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listNoticeTypes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/noticetypes";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -4018,8 +3911,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listParameters($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listParameters($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/parameters";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -4046,8 +3938,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listParametersByItem($companyCode, $itemCode, $filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listParametersByItem($companyCode, $itemCode, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/parameters/byitem/{$companyCode}/{$itemCode}";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -4070,8 +3961,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listParametersUsage($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listParametersUsage($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/parametersusage";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -4091,8 +3981,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @return FetchResult
      */
-    public function listPermissions($top=null, $skip=null)
-    {
+    public function listPermissions($top=null, $skip=null)    {
         $path = "/api/v2/definitions/permissions";
         $guzzleParams = [
             'query' => ['$top' => $top, '$skip' => $skip],
@@ -4113,8 +4002,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listPostalCodes($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listPostalCodes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/postalcodes";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -4143,8 +4031,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listPreferredPrograms($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listPreferredPrograms($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/preferredprograms";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -4166,13 +4053,13 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @param string $countryCode If not null, return all records with this code.
      * @return FetchResult
      */
-    public function listProductClassificationSystems($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listProductClassificationSystems($filter=null, $top=null, $skip=null, $orderBy=null, $countryCode)    {
         $path = "/api/v2/definitions/productclassificationsystems";
         $guzzleParams = [
-            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy, '$countryCode' => $countryCode],
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
@@ -4192,13 +4079,13 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @param string $countryCode If not null, return all records with this code.
      * @return FetchResult
      */
-    public function listProductClassificationSystemsByCompany($companyCode, $filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listProductClassificationSystemsByCompany($companyCode, $filter=null, $top=null, $skip=null, $orderBy=null, $countryCode)    {
         $path = "/api/v2/definitions/productclassificationsystems/bycompany/{$companyCode}";
         $guzzleParams = [
-            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy, '$countryCode' => $countryCode],
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
@@ -4218,8 +4105,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listRateTypesByCountry($country, $filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listRateTypesByCountry($country, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/countries/{$country}/ratetypes";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -4242,8 +4128,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listRegions($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listRegions($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/regions";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -4267,8 +4152,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listRegionsByCountry($country, $filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listRegionsByCountry($country, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/countries/{$country}/regions";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -4290,8 +4174,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listResourceFileTypes($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listResourceFileTypes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/resourcefiletypes";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -4314,8 +4197,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listSecurityRoles($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listSecurityRoles($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/securityroles";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -4339,8 +4221,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listSubscriptionTypes($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listSubscriptionTypes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/subscriptiontypes";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -4362,8 +4243,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listTaxAuthorities($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listTaxAuthorities($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/taxauthorities";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -4387,8 +4267,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listTaxAuthorityForms($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listTaxAuthorityForms($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/taxauthorityforms";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -4410,8 +4289,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listTaxAuthorityTypes($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listTaxAuthorityTypes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/taxauthoritytypes";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -4440,8 +4318,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listTaxCodes($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listTaxCodes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/taxcodes";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -4462,8 +4339,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @return TaxCodeTypesModel
      */
-    public function listTaxCodeTypes($top=null, $skip=null)
-    {
+    public function listTaxCodeTypes($top=null, $skip=null)    {
         $path = "/api/v2/definitions/taxcodetypes";
         $guzzleParams = [
             'query' => ['$top' => $top, '$skip' => $skip],
@@ -4485,8 +4361,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listTaxForms($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listTaxForms($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/taxforms";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -4508,8 +4383,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listTaxSubTypes($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listTaxSubTypes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/taxsubtypes";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -4531,8 +4405,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listTaxTypeGroups($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listTaxTypeGroups($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/taxtypegroups";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -4555,8 +4428,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listUnitOfMeasurement($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listUnitOfMeasurement($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/unitofmeasurements";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -4583,8 +4455,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param CompanyDistanceThresholdModel[] $model The DistanceThreshold object or objects you wish to create.
      * @return CompanyDistanceThresholdModel[]
      */
-    public function createDistanceThreshold($companyId, $model)
-    {
+    public function createDistanceThreshold($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/distancethresholds";
         $guzzleParams = [
             'query' => [],
@@ -4611,8 +4482,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The unique ID number of the DistanceThreshold object you wish to delete.
      * @return ErrorDetail[]
      */
-    public function deleteDistanceThreshold($companyId, $id)
-    {
+    public function deleteDistanceThreshold($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/distancethresholds/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -4639,8 +4509,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The unique ID number referring to this DistanceThreshold object
      * @return CompanyDistanceThresholdModel
      */
-    public function getDistanceThreshold($companyId, $id)
-    {
+    public function getDistanceThreshold($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/distancethresholds/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -4671,8 +4540,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listDistanceThresholds($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listDistanceThresholds($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/distancethresholds";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -4705,8 +4573,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function queryDistanceThresholds($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function queryDistanceThresholds($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/distancethresholds";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -4737,8 +4604,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param CompanyDistanceThresholdModel $model The new DistanceThreshold object to store.
      * @return CompanyDistanceThresholdModel
      */
-    public function updateDistanceThreshold($companyId, $id, $model)
-    {
+    public function updateDistanceThreshold($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/distancethresholds/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -4762,8 +4628,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyReturnSettingId The unique ID of the company return setting that will be deleted from the filing calendar
      * @return CompanyReturnSettingModel[]
      */
-    public function deleteCompanyReturnSettings($companyId, $filingCalendarId, $companyReturnSettingId)
-    {
+    public function deleteCompanyReturnSettings($companyId, $filingCalendarId, $companyReturnSettingId)    {
         $path = "/api/v2/companies/{$companyId}/filingcalendars/{$filingCalendarId}/setting/{$companyReturnSettingId}";
         $guzzleParams = [
             'query' => [],
@@ -4793,8 +4658,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $taxformCode The unique tax form code of the form.
      * @return FetchResult
      */
-    public function getFiledReturns($companyId, $endPeriodMonth, $endPeriodYear, $frequency, $status, $country, $region, $filingCalendarId, $taxformCode)
-    {
+    public function getFiledReturns($companyId, $endPeriodMonth, $endPeriodYear, $frequency, $status, $country, $region, $filingCalendarId, $taxformCode)    {
         $path = "/api/v2/companies/{$companyId}/filings/returns/filed";
         $guzzleParams = [
             'query' => ['endPeriodMonth' => $endPeriodMonth, 'endPeriodYear' => $endPeriodYear, 'frequency' => $frequency, 'status' => $status, 'country' => $country, 'region' => $region, 'filingCalendarId' => $filingCalendarId, 'taxformCode' => $taxformCode],
@@ -4816,8 +4680,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id 
      * @return FirmClientLinkageOutputModel
      */
-    public function approveFirmClientLinkage($id)
-    {
+    public function approveFirmClientLinkage($id)    {
         $path = "/api/v2/firmclientlinkages/{$id}/approve";
         $guzzleParams = [
             'query' => [],
@@ -4848,8 +4711,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param NewFirmClientAccountRequestModel $model Information about the account you wish to create.
      * @return FirmClientLinkageOutputModel
      */
-    public function createAndLinkNewFirmClientAccount($model)
-    {
+    public function createAndLinkNewFirmClientAccount($model)    {
         $path = "/api/v2/firmclientlinkages/createandlinkclient";
         $guzzleParams = [
             'query' => [],
@@ -4871,8 +4733,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param FirmClientLinkageInputModel $model FirmClientLinkageInputModel
      * @return FirmClientLinkageOutputModel
      */
-    public function createFirmClientLinkage($model)
-    {
+    public function createFirmClientLinkage($model)    {
         $path = "/api/v2/firmclientlinkages";
         $guzzleParams = [
             'query' => [],
@@ -4894,8 +4755,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id 
      * @return ErrorDetail[]
      */
-    public function deleteFirmClientLinkage($id)
-    {
+    public function deleteFirmClientLinkage($id)    {
         $path = "/api/v2/firmclientlinkages/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -4917,8 +4777,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id 
      * @return FirmClientLinkageOutputModel
      */
-    public function getFirmClientLinkage($id)
-    {
+    public function getFirmClientLinkage($id)    {
         $path = "/api/v2/firmclientlinkages/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -4940,8 +4799,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* firmAccountName, clientAccountName
      * @return FetchResult
      */
-    public function listFirmClientLinkage($filter=null)
-    {
+    public function listFirmClientLinkage($filter=null)    {
         $path = "/api/v2/firmclientlinkages";
         $guzzleParams = [
             'query' => ['$filter' => $filter],
@@ -4963,8 +4821,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id 
      * @return FirmClientLinkageOutputModel
      */
-    public function rejectFirmClientLinkage($id)
-    {
+    public function rejectFirmClientLinkage($id)    {
         $path = "/api/v2/firmclientlinkages/{$id}/reject";
         $guzzleParams = [
             'query' => [],
@@ -4986,8 +4843,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id 
      * @return FirmClientLinkageOutputModel
      */
-    public function resetFirmClientLinkage($id)
-    {
+    public function resetFirmClientLinkage($id)    {
         $path = "/api/v2/firmclientlinkages/{$id}/reset";
         $guzzleParams = [
             'query' => [],
@@ -5009,8 +4865,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id 
      * @return FirmClientLinkageOutputModel
      */
-    public function revokeFirmClientLinkage($id)
-    {
+    public function revokeFirmClientLinkage($id)    {
         $path = "/api/v2/firmclientlinkages/{$id}/revoke";
         $guzzleParams = [
             'query' => [],
@@ -5041,8 +4896,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param FreeTrialRequestModel $model Required information to provision a free trial account.
      * @return NewAccountModel
      */
-    public function requestFreeTrial($model)
-    {
+    public function requestFreeTrial($model)    {
         $path = "/api/v2/accounts/freetrials/request";
         $guzzleParams = [
             'query' => [],
@@ -5090,8 +4944,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $country Name or ISO 3166 code identifying the country.     This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries     For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
      * @return TaxRateModel
      */
-    public function taxRatesByAddress($line1, $line2, $line3, $city, $region, $postalCode, $country)
-    {
+    public function taxRatesByAddress($line1, $line2, $line3, $city, $region, $postalCode, $country)    {
         $path = "/api/v2/taxrates/byaddress";
         $guzzleParams = [
             'query' => ['line1' => $line1, 'line2' => $line2, 'line3' => $line3, 'city' => $city, 'region' => $region, 'postalCode' => $postalCode, 'country' => $country],
@@ -5136,8 +4989,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $postalCode The postal code of the location.
      * @return TaxRateModel
      */
-    public function taxRatesByPostalCode($country, $postalCode)
-    {
+    public function taxRatesByPostalCode($country, $postalCode)    {
         $path = "/api/v2/taxrates/bypostalcode";
         $guzzleParams = [
             'query' => ['country' => $country, 'postalCode' => $postalCode],
@@ -5171,8 +5023,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The unique ID number of this funding request
      * @return FundingStatusModel
      */
-    public function activateFundingRequest($id)
-    {
+    public function activateFundingRequest($id)    {
         $path = "/api/v2/fundingrequests/{$id}/widget";
         $guzzleParams = [
             'query' => [],
@@ -5204,8 +5055,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The unique ID number of this funding request
      * @return FundingStatusModel
      */
-    public function fundingRequestStatus($id)
-    {
+    public function fundingRequestStatus($id)    {
         $path = "/api/v2/fundingrequests/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -5232,8 +5082,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $itemId The ID of the item you wish to delete the classifications.
      * @return ErrorDetail[]
      */
-    public function batchDeleteItemClassifications($companyId, $itemId)
-    {
+    public function batchDeleteItemClassifications($companyId, $itemId)    {
         $path = "/api/v2/companies/{$companyId}/items/{$itemId}/classifications";
         $guzzleParams = [
             'query' => [],
@@ -5262,8 +5111,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $itemId The ID of the item you wish to delete the parameters.
      * @return ErrorDetail[]
      */
-    public function batchDeleteItemParameters($companyId, $itemId)
-    {
+    public function batchDeleteItemParameters($companyId, $itemId)    {
         $path = "/api/v2/companies/{$companyId}/items/{$itemId}/parameters";
         $guzzleParams = [
             'query' => [],
@@ -5293,8 +5141,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param ItemClassificationInputModel[] $model The item classifications you wish to create.
      * @return ItemClassificationOutputModel[]
      */
-    public function createItemClassifications($companyId, $itemId, $model)
-    {
+    public function createItemClassifications($companyId, $itemId, $model)    {
         $path = "/api/v2/companies/{$companyId}/items/{$itemId}/classifications";
         $guzzleParams = [
             'query' => [],
@@ -5328,8 +5175,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param ItemParameterModel[] $model The item parameters you wish to create.
      * @return ItemParameterModel[]
      */
-    public function createItemParameters($companyId, $itemId, $model)
-    {
+    public function createItemParameters($companyId, $itemId, $model)    {
         $path = "/api/v2/companies/{$companyId}/items/{$itemId}/parameters";
         $guzzleParams = [
             'query' => [],
@@ -5360,8 +5206,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param ItemModel[] $model The item you wish to create.
      * @return ItemModel[]
      */
-    public function createItems($companyId, $model)
-    {
+    public function createItems($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/items";
         $guzzleParams = [
             'query' => [],
@@ -5392,8 +5237,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The ID of the item you wish to delete.
      * @return ErrorDetail[]
      */
-    public function deleteItem($companyId, $id)
-    {
+    public function deleteItem($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/items/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -5421,8 +5265,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The item classification id.
      * @return ErrorDetail[]
      */
-    public function deleteItemClassification($companyId, $itemId, $id)
-    {
+    public function deleteItemClassification($companyId, $itemId, $id)    {
         $path = "/api/v2/companies/{$companyId}/items/{$itemId}/classifications/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -5452,8 +5295,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The parameter id
      * @return ErrorDetail[]
      */
-    public function deleteItemParameter($companyId, $itemId, $id)
-    {
+    public function deleteItemParameter($companyId, $itemId, $id)    {
         $path = "/api/v2/companies/{$companyId}/items/{$itemId}/parameters/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -5483,8 +5325,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $include A comma separated list of additional data to retrieve.
      * @return ItemModel
      */
-    public function getItem($companyId, $id, $include=null)
-    {
+    public function getItem($companyId, $id, $include=null)    {
         $path = "/api/v2/companies/{$companyId}/items/{$id}";
         $guzzleParams = [
             'query' => ['$include' => $include],
@@ -5512,8 +5353,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The item classification id.
      * @return ItemClassificationOutputModel
      */
-    public function getItemClassification($companyId, $itemId, $id)
-    {
+    public function getItemClassification($companyId, $itemId, $id)    {
         $path = "/api/v2/companies/{$companyId}/items/{$itemId}/classifications/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -5543,8 +5383,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The parameter id
      * @return ItemParameterModel
      */
-    public function getItemParameter($companyId, $itemId, $id)
-    {
+    public function getItemParameter($companyId, $itemId, $id)    {
         $path = "/api/v2/companies/{$companyId}/items/{$itemId}/parameters/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -5578,8 +5417,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listItemClassifications($companyId, $itemId, $filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listItemClassifications($companyId, $itemId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/items/{$itemId}/classifications";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -5615,8 +5453,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listItemParameters($companyId, $itemId, $filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listItemParameters($companyId, $itemId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/items/{$itemId}/parameters";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -5658,8 +5495,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listItemsByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listItemsByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/items";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -5695,8 +5531,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function queryItems($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function queryItems($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/items";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -5730,8 +5565,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param SyncItemsRequestModel $model The request object.
      * @return SyncItemsResponseModel
      */
-    public function syncItems($companyId, $model)
-    {
+    public function syncItems($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/items/sync";
         $guzzleParams = [
             'query' => [],
@@ -5766,8 +5600,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param ItemModel $model The item object you wish to update.
      * @return ItemModel
      */
-    public function updateItem($companyId, $id, $model)
-    {
+    public function updateItem($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/items/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -5798,8 +5631,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param ItemClassificationInputModel $model The item object you wish to update.
      * @return ItemClassificationOutputModel
      */
-    public function updateItemClassification($companyId, $itemId, $id, $model)
-    {
+    public function updateItemClassification($companyId, $itemId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/items/{$itemId}/classifications/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -5830,8 +5662,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param ItemParameterModel $model The item object you wish to update.
      * @return ItemParameterModel
      */
-    public function updateItemParameter($companyId, $itemId, $id, $model)
-    {
+    public function updateItemParameter($companyId, $itemId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/items/{$itemId}/parameters/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -5859,8 +5690,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param JurisdictionOverrideModel[] $model The jurisdiction override objects to create
      * @return JurisdictionOverrideModel[]
      */
-    public function createJurisdictionOverrides($accountId, $model)
-    {
+    public function createJurisdictionOverrides($accountId, $model)    {
         $path = "/api/v2/accounts/{$accountId}/jurisdictionoverrides";
         $guzzleParams = [
             'query' => [],
@@ -5883,8 +5713,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The ID of the override you wish to delete
      * @return ErrorDetail[]
      */
-    public function deleteJurisdictionOverride($accountId, $id)
-    {
+    public function deleteJurisdictionOverride($accountId, $id)    {
         $path = "/api/v2/accounts/{$accountId}/jurisdictionoverrides/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -5912,8 +5741,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The primary key of this override
      * @return JurisdictionOverrideModel
      */
-    public function getJurisdictionOverride($accountId, $id)
-    {
+    public function getJurisdictionOverride($accountId, $id)    {
         $path = "/api/v2/accounts/{$accountId}/jurisdictionoverrides/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -5948,8 +5776,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listJurisdictionOverridesByAccount($accountId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listJurisdictionOverridesByAccount($accountId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/accounts/{$accountId}/jurisdictionoverrides";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -5983,8 +5810,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function queryJurisdictionOverrides($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function queryJurisdictionOverrides($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/jurisdictionoverrides";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -6008,8 +5834,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param JurisdictionOverrideModel $model The jurisdictionoverride object you wish to update.
      * @return JurisdictionOverrideModel
      */
-    public function updateJurisdictionOverride($accountId, $id, $model)
-    {
+    public function updateJurisdictionOverride($accountId, $id, $model)    {
         $path = "/api/v2/accounts/{$accountId}/jurisdictionoverrides/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -6032,8 +5857,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param LocationModel[] $model The location you wish to create.
      * @return LocationModel[]
      */
-    public function createLocations($companyId, $model)
-    {
+    public function createLocations($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/locations";
         $guzzleParams = [
             'query' => [],
@@ -6056,8 +5880,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The ID of the location you wish to delete.
      * @return ErrorDetail[]
      */
-    public function deleteLocation($companyId, $id)
-    {
+    public function deleteLocation($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/locations/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -6090,8 +5913,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $include A comma separated list of additional data to retrieve.
      * @return LocationModel
      */
-    public function getLocation($companyId, $id, $include=null)
-    {
+    public function getLocation($companyId, $id, $include=null)    {
         $path = "/api/v2/companies/{$companyId}/locations/{$id}";
         $guzzleParams = [
             'query' => ['$include' => $include],
@@ -6129,8 +5951,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listLocationsByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listLocationsByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/locations";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -6168,8 +5989,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function queryLocations($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function queryLocations($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/locations";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -6195,8 +6015,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param LocationModel $model The location you wish to update.
      * @return LocationModel
      */
-    public function updateLocation($companyId, $id, $model)
-    {
+    public function updateLocation($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/locations/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -6221,8 +6040,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The primary key of this location
      * @return LocationValidationModel
      */
-    public function validateLocation($companyId, $id)
-    {
+    public function validateLocation($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/locations/{$id}/validate";
         $guzzleParams = [
             'query' => [],
@@ -6249,6 +6067,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
@@ -6263,8 +6083,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param AdjustMultiDocumentModel $model The adjust request you wish to execute
      * @return MultiDocumentModel
      */
-    public function adjustMultiDocumentTransaction($code, $type, $include=null, $model)
-    {
+    public function adjustMultiDocumentTransaction($code, $type, $include=null, $model)    {
         $path = "/api/v2/transactions/multidocument/{$code}/type/{$type}/adjust";
         $guzzleParams = [
             'query' => ['include' => $include],
@@ -6295,6 +6114,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
@@ -6307,8 +6128,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $type The transaction type for this MultiDocument transaction (See DocumentType::* for a list of allowable values)
      * @return AuditMultiDocumentModel
      */
-    public function auditMultiDocumentTransaction($code, $type)
-    {
+    public function auditMultiDocumentTransaction($code, $type)    {
         $path = "/api/v2/transactions/multidocument/{$code}/type/{$type}/audit";
         $guzzleParams = [
             'query' => [],
@@ -6333,6 +6153,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
@@ -6344,8 +6166,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param CommitMultiDocumentModel $model The commit request you wish to execute
      * @return MultiDocumentModel
      */
-    public function commitMultiDocumentTransaction($model)
-    {
+    public function commitMultiDocumentTransaction($model)    {
         $path = "/api/v2/transactions/multidocument/commit";
         $guzzleParams = [
             'query' => [],
@@ -6394,6 +6215,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
@@ -6406,8 +6229,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param CreateMultiDocumentModel $model the multi document transaction model
      * @return MultiDocumentModel
      */
-    public function createMultiDocumentTransaction($include=null, $model)
-    {
+    public function createMultiDocumentTransaction($include=null, $model)    {
         $path = "/api/v2/transactions/multidocument";
         $guzzleParams = [
             'query' => ['$include' => $include],
@@ -6436,6 +6258,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
@@ -6449,8 +6273,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $include Specifies objects to include in the response after transaction is created
      * @return MultiDocumentModel
      */
-    public function getMultiDocumentTransactionByCodeAndType($code, $type, $include=null)
-    {
+    public function getMultiDocumentTransactionByCodeAndType($code, $type, $include=null)    {
         $path = "/api/v2/transactions/multidocument/{$code}/type/{$type}";
         $guzzleParams = [
             'query' => ['$include' => $include],
@@ -6488,6 +6311,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
@@ -6500,8 +6325,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $include Specifies objects to include in the response after transaction is created
      * @return MultiDocumentModel
      */
-    public function getMultiDocumentTransactionById($id, $include=null)
-    {
+    public function getMultiDocumentTransactionById($id, $include=null)    {
         $path = "/api/v2/transactions/multidocument/{$id}";
         $guzzleParams = [
             'query' => ['$include' => $include],
@@ -6537,6 +6361,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
@@ -6552,8 +6378,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listMultiDocumentTransactions($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listMultiDocumentTransactions($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/transactions/multidocument";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -6606,6 +6431,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
@@ -6620,8 +6447,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param RefundTransactionModel $model Information about the refund to create
      * @return MultiDocumentModel
      */
-    public function refundMultiDocumentTransaction($code, $type, $include=null, $model)
-    {
+    public function refundMultiDocumentTransaction($code, $type, $include=null, $model)    {
         $path = "/api/v2/transactions/multidocument/{$code}/type/{$type}/refund";
         $guzzleParams = [
             'query' => ['$include' => $include],
@@ -6644,6 +6470,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
@@ -6655,8 +6483,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param VerifyMultiDocumentModel $model Information from your accounting system to verify against this MultiDocument transaction as it is stored in AvaTax
      * @return MultiDocumentModel
      */
-    public function verifyMultiDocumentTransaction($model)
-    {
+    public function verifyMultiDocumentTransaction($model)    {
         $path = "/api/v2/transactions/multidocument/verify";
         $guzzleParams = [
             'query' => [],
@@ -6682,6 +6509,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
@@ -6695,8 +6524,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param VoidTransactionModel $model The void request you wish to execute
      * @return MultiDocumentModel
      */
-    public function voidMultiDocumentTransaction($code, $type, $model)
-    {
+    public function voidMultiDocumentTransaction($code, $type, $model)    {
         $path = "/api/v2/transactions/multidocument/{$code}/type/{$type}/void";
         $guzzleParams = [
             'query' => [],
@@ -6737,8 +6565,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param NexusModel[] $model The nexus you wish to create.
      * @return NexusModel[]
      */
-    public function createNexus($companyId, $model)
-    {
+    public function createNexus($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/nexus";
         $guzzleParams = [
             'query' => [],
@@ -6775,8 +6602,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param DeclareNexusByAddressModel[] $model The nexus you wish to create.
      * @return NexusByAddressModel[]
      */
-    public function declareNexusByAddress($companyId, $model)
-    {
+    public function declareNexusByAddress($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/nexus/byaddress";
         $guzzleParams = [
             'query' => [],
@@ -6807,8 +6633,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param boolean $cascadeDelete If true, deletes all the child nexus if they exist along with parent nexus
      * @return ErrorDetail[]
      */
-    public function deleteNexus($companyId, $id, $cascadeDelete)
-    {
+    public function deleteNexus($companyId, $id, $cascadeDelete)    {
         $path = "/api/v2/companies/{$companyId}/nexus/{$id}";
         $guzzleParams = [
             'query' => ['cascadeDelete' => $cascadeDelete],
@@ -6839,8 +6664,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $include 
      * @return NexusModel
      */
-    public function getNexus($companyId, $id, $include=null)
-    {
+    public function getNexus($companyId, $id, $include=null)    {
         $path = "/api/v2/companies/{$companyId}/nexus/{$id}";
         $guzzleParams = [
             'query' => ['$include' => $include],
@@ -6875,8 +6699,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $include 
      * @return NexusByTaxFormModel
      */
-    public function getNexusByFormCode($companyId, $formCode, $include=null)
-    {
+    public function getNexusByFormCode($companyId, $formCode, $include=null)    {
         $path = "/api/v2/companies/{$companyId}/nexus/byform/{$formCode}";
         $guzzleParams = [
             'query' => ['$include' => $include],
@@ -6913,8 +6736,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listNexusByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listNexusByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/nexus";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -6950,8 +6772,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function queryNexus($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function queryNexus($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/nexus";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -6993,8 +6814,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param NexusModel $model The nexus object you wish to update.
      * @return NexusModel
      */
-    public function updateNexus($companyId, $id, $model)
-    {
+    public function updateNexus($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/nexus/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -7029,8 +6849,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The id of the notification you wish to mark as dismissed.
      * @return NotificationModel
      */
-    public function dismissNotification($id)
-    {
+    public function dismissNotification($id)    {
         $path = "/api/v2/notifications/{$id}/dismiss";
         $guzzleParams = [
             'query' => [],
@@ -7059,8 +6878,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The id of the notification to retrieve.
      * @return NotificationModel
      */
-    public function getNotification($id)
-    {
+    public function getNotification($id)    {
         $path = "/api/v2/notifications/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -7095,8 +6913,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listNotifications($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listNotifications($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/notifications";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -7133,8 +6950,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param NewAccountRequestModel $model Information about the account you wish to create and the selected product offerings.
      * @return NewAccountModel
      */
-    public function requestNewAccount($model)
-    {
+    public function requestNewAccount($model)    {
         $path = "/api/v2/accounts/request";
         $guzzleParams = [
             'query' => [],
@@ -7160,8 +6976,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $offer The offer to be added to an already existing customer
      * @return OfferModel
      */
-    public function requestNewEntitlement($id, $offer)
-    {
+    public function requestNewEntitlement($id, $offer)    {
         $path = "/api/v2/accounts/{$id}/entitlements/{$offer}";
         $guzzleParams = [
             'query' => [],
@@ -7187,8 +7002,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param AccountModel $model The account you wish to create.
      * @return AccountModel[]
      */
-    public function createAccount($model)
-    {
+    public function createAccount($model)    {
         $path = "/api/v2/accounts";
         $guzzleParams = [
             'query' => [],
@@ -7223,8 +7037,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param NotificationModel[] $model The notifications you wish to create.
      * @return NotificationModel[]
      */
-    public function createNotifications($model)
-    {
+    public function createNotifications($model)    {
         $path = "/api/v2/notifications";
         $guzzleParams = [
             'query' => [],
@@ -7251,8 +7064,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param SubscriptionModel[] $model The subscription you wish to create.
      * @return SubscriptionModel[]
      */
-    public function createSubscriptions($accountId, $model)
-    {
+    public function createSubscriptions($accountId, $model)    {
         $path = "/api/v2/accounts/{$accountId}/subscriptions";
         $guzzleParams = [
             'query' => [],
@@ -7278,8 +7090,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The ID of the account you wish to delete.
      * @return ErrorDetail[]
      */
-    public function deleteAccount($id)
-    {
+    public function deleteAccount($id)    {
         $path = "/api/v2/accounts/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -7311,8 +7122,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The id of the notification you wish to delete.
      * @return ErrorDetail[]
      */
-    public function deleteNotification($id)
-    {
+    public function deleteNotification($id)    {
         $path = "/api/v2/notifications/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -7338,8 +7148,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The ID of the subscription you wish to delete.
      * @return ErrorDetail[]
      */
-    public function deleteSubscription($accountId, $id)
-    {
+    public function deleteSubscription($accountId, $id)    {
         $path = "/api/v2/accounts/{$accountId}/subscriptions/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -7369,8 +7178,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param SetPasswordModel $model The new password for this user
      * @return string
      */
-    public function resetPassword($userId, $unmigrateFromAi, $model)
-    {
+    public function resetPassword($userId, $unmigrateFromAi, $model)    {
         $path = "/api/v2/passwords/{$userId}/reset";
         $guzzleParams = [
             'query' => ['unmigrateFromAi' => $unmigrateFromAi],
@@ -7396,8 +7204,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param AccountModel $model The account object you wish to update.
      * @return AccountModel
      */
-    public function updateAccount($id, $model)
-    {
+    public function updateAccount($id, $model)    {
         $path = "/api/v2/accounts/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -7430,8 +7237,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param NotificationModel $model The notification object you wish to update.
      * @return NotificationModel
      */
-    public function updateNotification($id, $model)
-    {
+    public function updateNotification($id, $model)    {
         $path = "/api/v2/notifications/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -7462,8 +7268,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param SubscriptionModel $model The subscription you wish to update.
      * @return SubscriptionModel
      */
-    public function updateSubscription($accountId, $id, $model)
-    {
+    public function updateSubscription($accountId, $id, $model)    {
         $path = "/api/v2/accounts/{$accountId}/subscriptions/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -7498,8 +7303,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The unique ID number of this report
      * @return object
      */
-    public function downloadReport($id)
-    {
+    public function downloadReport($id)    {
         $path = "/api/v2/reports/{$id}/attachment";
         $guzzleParams = [
             'query' => [],
@@ -7527,8 +7331,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The unique ID number of the report to retrieve
      * @return ReportModel
      */
-    public function getReport($id)
-    {
+    public function getReport($id)    {
         $path = "/api/v2/reports/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -7561,8 +7364,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param ExportDocumentLineModel $model Options that may be configured to customize the report.
      * @return ReportModel[]
      */
-    public function initiateExportDocumentLineReport($companyId, $model)
-    {
+    public function initiateExportDocumentLineReport($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/reports/exportdocumentline/initiate";
         $guzzleParams = [
             'query' => [],
@@ -7597,8 +7399,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @return FetchResult
      */
-    public function listReports($companyId, $pageKey, $skip=null, $top=null)
-    {
+    public function listReports($companyId, $pageKey, $skip=null, $top=null)    {
         $path = "/api/v2/reports";
         $guzzleParams = [
             'query' => ['companyId' => $companyId, 'pageKey' => $pageKey, '$skip' => $skip, '$top' => $top],
@@ -7630,8 +7431,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param SettingModel[] $model The setting you wish to create.
      * @return SettingModel[]
      */
-    public function createSettings($companyId, $model)
-    {
+    public function createSettings($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/settings";
         $guzzleParams = [
             'query' => [],
@@ -7663,8 +7463,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The ID of the setting you wish to delete.
      * @return ErrorDetail[]
      */
-    public function deleteSetting($companyId, $id)
-    {
+    public function deleteSetting($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/settings/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -7696,8 +7495,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The primary key of this setting
      * @return SettingModel
      */
-    public function getSetting($companyId, $id)
-    {
+    public function getSetting($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/settings/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -7736,8 +7534,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listSettingsByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listSettingsByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/settings";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -7775,8 +7572,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function querySettings($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function querySettings($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/settings";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -7813,8 +7609,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param SettingModel $model The setting you wish to update.
      * @return SettingModel
      */
-    public function updateSetting($companyId, $id, $model)
-    {
+    public function updateSetting($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/settings/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -7839,8 +7634,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The primary key of this subscription
      * @return SubscriptionModel
      */
-    public function getSubscription($accountId, $id)
-    {
+    public function getSubscription($accountId, $id)    {
         $path = "/api/v2/accounts/{$accountId}/subscriptions/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -7871,8 +7665,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listSubscriptionsByAccount($accountId, $filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listSubscriptionsByAccount($accountId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/accounts/{$accountId}/subscriptions";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -7902,8 +7695,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function querySubscriptions($filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function querySubscriptions($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/subscriptions";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -7930,8 +7722,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param TaxCodeModel[] $model The tax code you wish to create.
      * @return TaxCodeModel[]
      */
-    public function createTaxCodes($companyId, $model)
-    {
+    public function createTaxCodes($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/taxcodes";
         $guzzleParams = [
             'query' => [],
@@ -7954,8 +7745,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The ID of the tax code you wish to delete.
      * @return ErrorDetail[]
      */
-    public function deleteTaxCode($companyId, $id)
-    {
+    public function deleteTaxCode($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/taxcodes/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -7982,8 +7772,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The primary key of this tax code
      * @return TaxCodeModel
      */
-    public function getTaxCode($companyId, $id)
-    {
+    public function getTaxCode($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/taxcodes/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -8017,8 +7806,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listTaxCodesByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listTaxCodesByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/taxcodes";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -8051,8 +7839,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function queryTaxCodes($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function queryTaxCodes($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/taxcodes";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -8082,8 +7869,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param TaxCodeModel $model The tax code you wish to update.
      * @return TaxCodeModel
      */
-    public function updateTaxCode($companyId, $id, $model)
-    {
+    public function updateTaxCode($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/taxcodes/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -8128,8 +7914,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param PointOfSaleDataRequestModel $model Parameters about the desired file format and report format, specifying which company, locations and TaxCodes to include.
      * @return object
      */
-    public function buildTaxContentFile($model)
-    {
+    public function buildTaxContentFile($model)    {
         $path = "/api/v2/pointofsaledata/build";
         $guzzleParams = [
             'query' => [],
@@ -8179,8 +7964,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param boolean $includeJurisCodes When true, the file will include jurisdiction codes in the result.
      * @return object
      */
-    public function buildTaxContentFileForLocation($companyId, $id, $date, $format, $partnerId, $includeJurisCodes)
-    {
+    public function buildTaxContentFileForLocation($companyId, $id, $date, $format, $partnerId, $includeJurisCodes)    {
         $path = "/api/v2/companies/{$companyId}/locations/{$id}/pointofsaledata";
         $guzzleParams = [
             'query' => ['date' => $date, 'format' => $format, 'partnerId' => $partnerId, 'includeJurisCodes' => $includeJurisCodes],
@@ -8242,8 +8026,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $region A two character region code which limits results to a specific region.
      * @return object
      */
-    public function downloadTaxRatesByZipCode($date, $region)
-    {
+    public function downloadTaxRatesByZipCode($date, $region)    {
         $path = "/api/v2/taxratesbyzipcode/download/{$date}";
         $guzzleParams = [
             'query' => ['region' => $region],
@@ -8278,8 +8061,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param TaxRuleModel[] $model The tax rule you wish to create.
      * @return TaxRuleModel[]
      */
-    public function createTaxRules($companyId, $model)
-    {
+    public function createTaxRules($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/taxrules";
         $guzzleParams = [
             'query' => [],
@@ -8314,8 +8096,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The ID of the tax rule you wish to delete.
      * @return ErrorDetail[]
      */
-    public function deleteTaxRule($companyId, $id)
-    {
+    public function deleteTaxRule($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/taxrules/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -8350,8 +8131,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The primary key of this tax rule
      * @return TaxRuleModel
      */
-    public function getTaxRule($companyId, $id)
-    {
+    public function getTaxRule($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/taxrules/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -8393,8 +8173,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listTaxRules($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listTaxRules($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/taxrules";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -8435,8 +8214,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function queryTaxRules($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function queryTaxRules($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/taxrules";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -8472,8 +8250,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param TaxRuleModel $model The tax rule you wish to update.
      * @return TaxRuleModel
      */
-    public function updateTaxRule($companyId, $id, $model)
-    {
+    public function updateTaxRule($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/taxrules/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -8509,15 +8286,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro, BasicReturns.
      *
      * 
      * @param string $include Specifies objects to include in the response after transaction is created
      * @param AddTransactionLineModel $model information about the transaction and lines to be added
      * @return TransactionModel
      */
-    public function addLines($include=null, $model)
-    {
+    public function addLines($include=null, $model)    {
         $path = "/api/v2/companies/transactions/lines/add";
         $guzzleParams = [
             'query' => ['$include' => $include],
@@ -8555,12 +8331,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro, BasicReturns.
      *
      * 
      * @param string $companyCode The company code of the company that recorded this transaction
@@ -8570,8 +8348,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param AdjustTransactionModel $model The adjustment you wish to make
      * @return TransactionModel
      */
-    public function adjustTransaction($companyCode, $transactionCode, $documentType, $include=null, $model)
-    {
+    public function adjustTransaction($companyCode, $transactionCode, $documentType, $include=null, $model)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/adjust";
         $guzzleParams = [
             'query' => ['documentType' => $documentType, '$include' => $include],
@@ -8603,20 +8380,21 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ProStoresOperator, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro, BasicReturns.
      *
      * 
      * @param string $companyCode The code identifying the company that owns this transaction
      * @param string $transactionCode The code identifying the transaction
      * @return AuditTransactionModel
      */
-    public function auditTransaction($companyCode, $transactionCode)
-    {
+    public function auditTransaction($companyCode, $transactionCode)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/audit";
         $guzzleParams = [
             'query' => [],
@@ -8648,12 +8426,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ProStoresOperator, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro, BasicReturns.
      *
      * 
      * @param string $companyCode The code identifying the company that owns this transaction
@@ -8661,8 +8441,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $documentType The document type of the original transaction (See DocumentType::* for a list of allowable values)
      * @return AuditTransactionModel
      */
-    public function auditTransactionWithType($companyCode, $transactionCode, $documentType)
-    {
+    public function auditTransactionWithType($companyCode, $transactionCode, $documentType)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/types/{$documentType}/audit";
         $guzzleParams = [
             'query' => [],
@@ -8691,8 +8470,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param BulkLockTransactionModel $model bulk lock request
      * @return BulkLockTransactionResult
      */
-    public function bulkLockTransaction($model)
-    {
+    public function bulkLockTransaction($model)    {
         $path = "/api/v2/transactions/lock";
         $guzzleParams = [
             'query' => [],
@@ -8730,12 +8508,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, ProStoresOperator, SSTAdmin, TechnicalSupportAdmin.
-     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro, BasicReturns.
      *
      * 
      * @param string $companyCode The company code of the company that recorded this transaction
@@ -8745,8 +8525,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param ChangeTransactionCodeModel $model The code change request you wish to execute
      * @return TransactionModel
      */
-    public function changeTransactionCode($companyCode, $transactionCode, $documentType, $include=null, $model)
-    {
+    public function changeTransactionCode($companyCode, $transactionCode, $documentType, $include=null, $model)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/changecode";
         $guzzleParams = [
             'query' => ['documentType' => $documentType, '$include' => $include],
@@ -8783,6 +8562,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
@@ -8797,8 +8578,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param CommitTransactionModel $model The commit request you wish to execute
      * @return TransactionModel
      */
-    public function commitTransaction($companyCode, $transactionCode, $documentType, $include=null, $model)
-    {
+    public function commitTransaction($companyCode, $transactionCode, $documentType, $include=null, $model)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/commit";
         $guzzleParams = [
             'query' => ['documentType' => $documentType, '$include' => $include],
@@ -8854,8 +8634,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param CreateOrAdjustTransactionModel $model The transaction you wish to create or adjust
      * @return TransactionModel
      */
-    public function createOrAdjustTransaction($include=null, $model)
-    {
+    public function createOrAdjustTransaction($include=null, $model)    {
         $path = "/api/v2/transactions/createoradjust";
         $guzzleParams = [
             'query' => ['$include' => $include],
@@ -8918,8 +8697,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param CreateTransactionModel $model The transaction you wish to create
      * @return TransactionModel
      */
-    public function createTransaction($include=null, $model)
-    {
+    public function createTransaction($include=null, $model)    {
         $path = "/api/v2/transactions/create";
         $guzzleParams = [
             'query' => ['$include' => $include],
@@ -8952,15 +8730,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro, BasicReturns.
      *
      * 
      * @param string $include Specifies objects to include in the response after transaction is created
      * @param RemoveTransactionLineModel $model information about the transaction and lines to be removed
      * @return TransactionModel
      */
-    public function deleteLines($include=null, $model)
-    {
+    public function deleteLines($include=null, $model)    {
         $path = "/api/v2/companies/transactions/lines/delete";
         $guzzleParams = [
             'query' => ['$include' => $include],
@@ -8995,6 +8772,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
@@ -9009,8 +8788,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $include Specifies objects to include in this fetch call
      * @return TransactionModel
      */
-    public function getTransactionByCode($companyCode, $transactionCode, $documentType, $include=null)
-    {
+    public function getTransactionByCode($companyCode, $transactionCode, $documentType, $include=null)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}";
         $guzzleParams = [
             'query' => ['documentType' => $documentType, '$include' => $include],
@@ -9028,6 +8806,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
@@ -9042,8 +8822,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $include Specifies objects to include in this fetch call
      * @return TransactionModel
      */
-    public function getTransactionByCodeAndType($companyCode, $transactionCode, $documentType, $include=null)
-    {
+    public function getTransactionByCodeAndType($companyCode, $transactionCode, $documentType, $include=null)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/types/{$documentType}";
         $guzzleParams = [
             'query' => ['$include' => $include],
@@ -9083,8 +8862,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $include Specifies objects to include in this fetch call
      * @return TransactionModel
      */
-    public function getTransactionById($id, $include=null)
-    {
+    public function getTransactionById($id, $include=null)    {
         $path = "/api/v2/transactions/{$id}";
         $guzzleParams = [
             'query' => ['$include' => $include],
@@ -9122,6 +8900,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
@@ -9139,8 +8919,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listTransactionsByCompany($companyCode, $dataSourceId, $include=null, $filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listTransactionsByCompany($companyCode, $dataSourceId, $include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyCode}/transactions";
         $guzzleParams = [
             'query' => ['dataSourceId' => $dataSourceId, '$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -9178,6 +8957,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
@@ -9193,8 +8974,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param LockTransactionModel $model The lock request you wish to execute
      * @return TransactionModel
      */
-    public function lockTransaction($companyCode, $transactionCode, $documentType, $include=null, $model)
-    {
+    public function lockTransaction($companyCode, $transactionCode, $documentType, $include=null, $model)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/lock";
         $guzzleParams = [
             'query' => ['documentType' => $documentType, '$include' => $include],
@@ -9242,12 +9022,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro, BasicReturns.
      *
      * 
      * @param string $companyCode The code of the company that made the original sale
@@ -9258,8 +9040,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param RefundTransactionModel $model Information about the refund to create
      * @return TransactionModel
      */
-    public function refundTransaction($companyCode, $transactionCode, $include=null, $documentType, $useTaxDateOverride, $model)
-    {
+    public function refundTransaction($companyCode, $transactionCode, $include=null, $documentType, $useTaxDateOverride, $model)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/refund";
         $guzzleParams = [
             'query' => ['$include' => $include, 'documentType' => $documentType, 'useTaxDateOverride' => $useTaxDateOverride],
@@ -9296,6 +9077,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
@@ -9310,8 +9093,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param SettleTransactionModel $model The data from an external system to reconcile against AvaTax
      * @return TransactionModel
      */
-    public function settleTransaction($companyCode, $transactionCode, $documentType, $include=null, $model)
-    {
+    public function settleTransaction($companyCode, $transactionCode, $documentType, $include=null, $model)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/settle";
         $guzzleParams = [
             'query' => ['documentType' => $documentType, '$include' => $include],
@@ -9342,12 +9124,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro, BasicReturns.
      *
      * 
      * @param string $companyCode The company code of the company that recorded this transaction
@@ -9356,8 +9140,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $include Specifies objects to include in this fetch call
      * @return TransactionModel
      */
-    public function uncommitTransaction($companyCode, $transactionCode, $documentType, $include=null)
-    {
+    public function uncommitTransaction($companyCode, $transactionCode, $documentType, $include=null)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/uncommit";
         $guzzleParams = [
             'query' => ['documentType' => $documentType, '$include' => $include],
@@ -9385,12 +9168,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro, BasicReturns.
      *
      * 
      * @param string $companyCode The company code of the company that recorded this transaction
@@ -9399,8 +9184,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $include Specifies objects to include in this fetch call
      * @return TransactionModel
      */
-    public function unvoidTransaction($companyCode, $transactionCode, $documentType, $include=null)
-    {
+    public function unvoidTransaction($companyCode, $transactionCode, $documentType, $include=null)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/unvoid";
         $guzzleParams = [
             'query' => ['documentType' => $documentType, '$include' => $include],
@@ -9435,12 +9219,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, ProStoresOperator, SSTAdmin, TechnicalSupportAdmin.
-     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro, BasicReturns.
      *
      * 
      * @param string $companyCode The company code of the company that recorded this transaction
@@ -9450,8 +9236,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param VerifyTransactionModel $model The data from an external system to reconcile against AvaTax
      * @return TransactionModel
      */
-    public function verifyTransaction($companyCode, $transactionCode, $documentType, $include=null, $model)
-    {
+    public function verifyTransaction($companyCode, $transactionCode, $documentType, $include=null, $model)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/verify";
         $guzzleParams = [
             'query' => ['documentType' => $documentType, '$include' => $include],
@@ -9488,6 +9273,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
      * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
      * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
      * * Replace ' ' with '%20' For example: document Code becomes document%20Code
      * 
      * ### Security Policies
@@ -9503,8 +9290,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param VoidTransactionModel $model The void request you wish to execute. To void a transaction the code must be set to 'DocVoided'
      * @return TransactionModel
      */
-    public function voidTransaction($companyCode, $transactionCode, $documentType, $include=null, $model)
-    {
+    public function voidTransaction($companyCode, $transactionCode, $documentType, $include=null, $model)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/void";
         $guzzleParams = [
             'query' => ['documentType' => $documentType, '$include' => $include],
@@ -9529,8 +9315,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param UPCModel[] $model The UPC you wish to create.
      * @return UPCModel[]
      */
-    public function createUPCs($companyId, $model)
-    {
+    public function createUPCs($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/upcs";
         $guzzleParams = [
             'query' => [],
@@ -9554,8 +9339,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The ID of the UPC you wish to delete.
      * @return ErrorDetail[]
      */
-    public function deleteUPC($companyId, $id)
-    {
+    public function deleteUPC($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/upcs/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -9580,8 +9364,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The primary key of this UPC
      * @return UPCModel
      */
-    public function getUPC($companyId, $id)
-    {
+    public function getUPC($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/upcs/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -9613,8 +9396,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listUPCsByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listUPCsByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/upcs";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -9645,8 +9427,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function queryUPCs($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function queryUPCs($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/upcs";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -9674,8 +9455,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param UPCModel $model The UPC you wish to update.
      * @return UPCModel
      */
-    public function updateUPC($companyId, $id, $model)
-    {
+    public function updateUPC($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/upcs/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -9703,8 +9483,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param PasswordChangeModel $model An object containing your current password and the new password.
      * @return string
      */
-    public function changePassword($model)
-    {
+    public function changePassword($model)    {
         $path = "/api/v2/passwords";
         $guzzleParams = [
             'query' => [],
@@ -9735,8 +9514,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param UserModel[] $model The user or array of users you wish to create.
      * @return UserModel[]
      */
-    public function createUsers($accountId, $model)
-    {
+    public function createUsers($accountId, $model)    {
         $path = "/api/v2/accounts/{$accountId}/users";
         $guzzleParams = [
             'query' => [],
@@ -9764,8 +9542,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $accountId The accountID of the user you wish to delete.
      * @return ErrorDetail[]
      */
-    public function deleteUser($id, $accountId)
-    {
+    public function deleteUser($id, $accountId)    {
         $path = "/api/v2/accounts/{$accountId}/users/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -9794,8 +9571,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $include Optional fetch commands.
      * @return UserModel
      */
-    public function getUser($id, $accountId, $include=null)
-    {
+    public function getUser($id, $accountId, $include=null)    {
         $path = "/api/v2/accounts/{$accountId}/users/{$id}";
         $guzzleParams = [
             'query' => ['$include' => $include],
@@ -9832,8 +9608,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $accountId The accountID of the user you wish to get.
      * @return UserEntitlementModel
      */
-    public function getUserEntitlements($id, $accountId)
-    {
+    public function getUserEntitlements($id, $accountId)    {
         $path = "/api/v2/accounts/{$accountId}/users/{$id}/entitlements";
         $guzzleParams = [
             'query' => [],
@@ -9871,8 +9646,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function listUsersByAccount($accountId, $include=null, $filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function listUsersByAccount($accountId, $include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/accounts/{$accountId}/users";
         $guzzleParams = [
             'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -9911,8 +9685,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return FetchResult
      */
-    public function queryUsers($include=null, $filter=null, $top=null, $skip=null, $orderBy=null)
-    {
+    public function queryUsers($include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/users";
         $guzzleParams = [
             'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -9939,8 +9712,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param UserModel $model The user object you wish to update.
      * @return UserModel
      */
-    public function updateUser($id, $accountId, $model)
-    {
+    public function updateUser($id, $accountId, $model)    {
         $path = "/api/v2/accounts/{$accountId}/users/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -9965,8 +9737,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $serviceTypeId The service to check
      * @return SubscriptionModel
      */
-    public function getMySubscription($serviceTypeId)
-    {
+    public function getMySubscription($serviceTypeId)    {
         $path = "/api/v2/utilities/subscriptions/{$serviceTypeId}";
         $guzzleParams = [
             'query' => [],
@@ -9990,8 +9761,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @return FetchResult
      */
-    public function listMySubscriptions()
-    {
+    public function listMySubscriptions()    {
         $path = "/api/v2/utilities/subscriptions";
         $guzzleParams = [
             'query' => [],
@@ -10027,8 +9797,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @return PingResultModel
      */
-    public function ping()
-    {
+    public function ping()    {
         $path = "/api/v2/utilities/ping";
         $guzzleParams = [
             'query' => [],
