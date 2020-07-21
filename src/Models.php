@@ -7043,7 +7043,7 @@ class CompanyDistanceThresholdModel
 /**
  * 
  */
-class CappedFetchResult<T>
+class CappedFetchResult
 {
     /**
      * @var boolean 
@@ -7176,32 +7176,7 @@ class DeleteErrorTransactionResponseModel
      */
     public $documentCode;
 }
-/**
- * 
- */
-class CappedFetchResult<T>
-{
-    /**
-     * @var boolean 
-     */
-    public $_isRecordsetCountCapped;
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var object[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
+
 /**
  * Model that has the matching count for an errorcode
  */
