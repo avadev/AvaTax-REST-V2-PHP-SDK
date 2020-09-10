@@ -2,4 +2,8 @@
     <testsuite name="AvaTaxClient">
         <directory>./</directory>
     </testsuite>
+    <php>
+        <env name="SANDBOX_USERNAME" value="CHANGE_ME" force="true" />
+        <env name="SANDBOX_PASSWORD" value="CHANGE_ME" force="true" />
+    </php>
 </phpunit>
