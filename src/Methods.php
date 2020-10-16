@@ -116,7 +116,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $end The end datetime of audit history you with to retrieve, e.g. "2018-06-08T17:15:00Z. Defaults to the current time. Maximum of an hour after the start time.
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
-     * @return FetchResult
+     * @return AuditModelFetchResult
      */
     public function auditAccount($id, $start, $end, $top=null, $skip=null)    {
         $path = "/api/v2/accounts/{$id}/audit";
@@ -315,7 +315,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return AccountModelFetchResult
      */
     public function queryAccounts($include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/accounts";
@@ -429,6 +429,43 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Copy an existing advanced rule to a new environment
+     *
+     * 
+     *
+     * 
+     * @param string $ruleId 
+     * @param AdvancedRuleFullDetailsModel $model 
+     * @return AdvancedRuleFullDetailsModel
+     */
+    public function copyAdvancedRule($ruleId, $model)    {
+        $path = "/api/v2/advancedrules/rules/{$ruleId}/copy";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Create an advanced rule
+     *
+     * 
+     *
+     * 
+     * @param AdvancedRuleFullDetailsModel $model The advanced rule you wish to create
+     * @return AdvancedRuleFullDetailsModel
+     */
+    public function createAdvancedRule($model)    {
+        $path = "/api/v2/advancedrules/rules";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
      * Create a lookup file for a company
      *
      * 
@@ -449,6 +486,44 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Create a rule execution for a company
+     *
+     * 
+     *
+     * 
+     * @param int $accountId The ID of the account for the company
+     * @param int $companyId The ID of the company for which the rule execution is to be created
+     * @param AdvancedRuleExecutionModel $model The rule execution you wish to create
+     * @return AdvancedRuleExecutionModel
+     */
+    public function createCompanyRuleExecution($accountId, $companyId, $model)    {
+        $path = "/api/v2/advancedrules/accounts/{$accountId}/companies/{$companyId}/executions";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Delete an advanced rule that is not in use by a company
+     *
+     * 
+     *
+     * 
+     * @param string $ruleId The ID of the advanced rule to be deleted
+     * @return ErrorDetail[]
+     */
+    public function deleteAdvancedRule($ruleId)    {
+        $path = "/api/v2/advancedrules/rules/{$ruleId}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
      * Delete a lookup file
      *
      * 
@@ -465,6 +540,101 @@ class AvaTaxClient extends AvaTaxClientBase
             'body' => null
         ];
         return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Delete a rule execution
+     *
+     * 
+     *
+     * 
+     * @param int $accountId The ID of the account for the company the rule execution is for
+     * @param string $ruleExecutionId The unique ID/GUID for the rule execution to be deleted
+     * @return ErrorDetail[]
+     */
+    public function deleteRuleExecution($accountId, $ruleExecutionId)    {
+        $path = "/api/v2/advancedrules/accounts/{$accountId}/executions/{$ruleExecutionId}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Get an advanced rule by rule ID
+     *
+     * 
+     *
+     * 
+     * @param string $ruleId The ID of the rule to retrieve
+     * @return AdvancedRuleFullDetailsModel
+     */
+    public function getAdvancedRule($ruleId)    {
+        $path = "/api/v2/advancedrules/rules/{$ruleId}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Get an advanced rule by name
+     *
+     * 
+     *
+     * 
+     * @param string $name The name of the rule to retrieve
+     * @return AdvancedRuleFullDetailsModel
+     */
+    public function getAdvancedRuleByName($name)    {
+        $path = "/api/v2/advancedrules/rules/name/{$name}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve an advanced rule's customer data schema for a company
+     *
+     * 
+     *
+     * 
+     * @param string $ruleId The ID of the advance rule for which the schema is requested
+     * @param int $accountId The ID of the account of the requesting user
+     * @param int $companyId The ID of the company of the requesting user
+     * @return AdvancedRuleCustomerDataSchemaModel
+     */
+    public function getAdvancedRuleCustomerDataSchema($ruleId, $accountId, $companyId)    {
+        $path = "/api/v2/advancedrules/accounts/{$accountId}/companies/{$companyId}/rules/{$ruleId}/schema";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * List all advanced rules
+     *
+     * 
+     *
+     * 
+     * @param boolean $fullDetails Retrieve detailed advanced rule properties (limited to tech support level)
+     * @param boolean $includeTest Include test rules
+     * @param boolean $includeSystemRules Include rules used to retrieve enumerated values
+     * @return AdvancedRuleFullDetailsModelFetchResult
+     */
+    public function getAdvancedRules($fullDetails, $includeTest, $includeSystemRules)    {
+        $path = "/api/v2/advancedrules/rules";
+        $guzzleParams = [
+            'query' => ['fullDetails' => $fullDetails, 'includeTest' => $includeTest, 'includeSystemRules' => $includeSystemRules],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
     }
 
     /**
@@ -488,6 +658,24 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Retrieve companies that have an advanced rule configured in its rule execution configuration
+     *
+     * 
+     *
+     * 
+     * @param string $ruleId he ID of the advance rule for which companies are requested
+     * @return CompanyModelFetchResult
+     */
+    public function getCompaniesUsingAdvancedRule($ruleId)    {
+        $path = "/api/v2/advancedrules/rules/{$ruleId}/companies";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * Get the lookup files for a company
      *
      * 
@@ -495,12 +683,32 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $accountId The account ID for the company
      * @param int $companyId The ID of the company for which to retrieve lookup files
-     * @return FetchResult
+     * @return AdvancedRuleLookupFileModelFetchResult
      */
     public function getCompanyLookupFiles($accountId, $companyId)    {
         $path = "/api/v2/advancedrules/accounts/{$accountId}/companies/{$companyId}/lookupFiles";
         $guzzleParams = [
             'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Get the rule executions for a company
+     *
+     * 
+     *
+     * 
+     * @param int $accountId The account ID for the company
+     * @param int $companyId The ID of the company for which to retrieve rule executions
+     * @param string $effectiveDate Optional date which the rule executions should be effective
+     * @return AdvancedRuleExecutionModelFetchResult
+     */
+    public function getCompanyRuleExecutions($accountId, $companyId, $effectiveDate)    {
+        $path = "/api/v2/advancedrules/accounts/{$accountId}/companies/{$companyId}/executions";
+        $guzzleParams = [
+            'query' => ['effectiveDate' => $effectiveDate],
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
@@ -526,6 +734,102 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Get a rule execution for an accountId and ruleExecutionId
+     *
+     * 
+     *
+     * 
+     * @param int $accountId The ID of the account for the rule execution
+     * @param string $ruleExecutionId The unique ID/GUID of the rule execution to return
+     * @return AdvancedRuleExecutionModel
+     */
+    public function getRuleExecution($accountId, $ruleExecutionId)    {
+        $path = "/api/v2/advancedrules/accounts/{$accountId}/executions/{$ruleExecutionId}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Update an advanced rule
+     *
+     * Creates a new version of the advanced rule
+     *
+     * 
+     * @param string $ruleId The ID of the advanced rule to be updated
+     * @param AdvancedRuleFullDetailsModel $model The new values for the advanced rule
+     * @return AdvancedRuleFullDetailsModel
+     */
+    public function updateAdvancedRule($ruleId, $model)    {
+        $path = "/api/v2/advancedrules/rules/{$ruleId}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Set rule approved or unapproved
+     *
+     * 
+     *
+     * 
+     * @param string $ruleId The ID of the advanced rule to change the approved state
+     * @param ApproveAdvancedRuleModel $model The value to set approved state
+     * @return AdvancedRuleFullDetailsModel
+     */
+    public function updateAdvancedRuleApproval($ruleId, $model)    {
+        $path = "/api/v2/advancedrules/rules/{$ruleId}/approve";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Set rule visible or not visible for an account
+     *
+     * 
+     *
+     * 
+     * @param string $ruleId 
+     * @param AdvancedRuleVisibilityModel $model 
+     * @return AdvancedRuleFullDetailsModel
+     */
+    public function updateAdvancedRuleVisibility($ruleId, $model)    {
+        $path = "/api/v2/advancedrules/rules/{$ruleId}/visible";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Change the rule execution order for a company
+     *
+     * 
+     *
+     * 
+     * @param int $accountId The ID of the account for the company the rule execution is for
+     * @param int $companyId The ID of the company for which the rule execution order is being modified
+     * @param AdvancedRuleExecutionOrderModel $model A list of rule execution IDs for the company indicating the new execution order
+     * @return StringFetchResult
+     */
+    public function updateCompanyRuleExecutionOrder($accountId, $companyId, $model)    {
+        $path = "/api/v2/advancedrules/accounts/{$accountId}/companies/{$companyId}/executions/order";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
      * Update a lookup file
      *
      * 
@@ -538,6 +842,26 @@ class AvaTaxClient extends AvaTaxClientBase
      */
     public function updateLookupFile($accountId, $id, $model)    {
         $path = "/api/v2/advancedrules/accounts/{$accountId}/lookupFiles/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Update a rule execution
+     *
+     * 
+     *
+     * 
+     * @param int $accountId The ID of the account for the company the rule execution is for
+     * @param string $ruleExecutionId The unique ID/GUID of the rule execution to be updated
+     * @param AdvancedRuleExecutionModel $model The new values to update the rule execution
+     * @return AdvancedRuleExecutionModel
+     */
+    public function updateRuleExecution($accountId, $ruleExecutionId, $model)    {
+        $path = "/api/v2/advancedrules/accounts/{$accountId}/executions/{$ruleExecutionId}";
         $guzzleParams = [
             'query' => [],
             'body' => json_encode($model)
@@ -631,7 +955,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return AvaFileFormModelFetchResult
      */
     public function queryAvaFileForms($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/avafileforms";
@@ -910,7 +1234,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return BatchModelFetchResult
      */
     public function listBatchesByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/batches";
@@ -953,7 +1277,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return BatchModelFetchResult
      */
     public function queryBatches($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/batches";
@@ -1074,7 +1398,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return CertExpressInvitationModelFetchResult
      */
     public function listCertExpressInvitations($companyId, $include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/certexpressinvites";
@@ -1302,7 +1626,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The unique ID number of the company that recorded this certificate
      * @param int $id The unique ID number of this certificate
      * @param CertificateAttributeModel[] $model The list of attributes to link to this certificate.
-     * @return FetchResult
+     * @return CertificateAttributeModelFetchResult
      */
     public function linkAttributesToCertificate($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/certificates/{$id}/attributes/link";
@@ -1341,7 +1665,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The unique ID number of the company that recorded this certificate
      * @param int $id The unique ID number of this certificate
      * @param LinkCustomersModel $model The list of customers needed be added to the Certificate for exemption
-     * @return FetchResult
+     * @return CustomerModelFetchResult
      */
     public function linkCustomersToCertificate($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/certificates/{$id}/customers/link";
@@ -1378,7 +1702,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The unique ID number of the company that recorded this certificate
      * @param int $id The unique ID number of this certificate
-     * @return FetchResult
+     * @return CertificateAttributeModelFetchResult
      */
     public function listAttributesForCertificate($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/certificates/{$id}/attributes";
@@ -1416,7 +1740,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The unique ID number of the company that recorded this certificate
      * @param int $id The unique ID number of this certificate
      * @param string $include OPTIONAL: A comma separated list of special fetch options.   No options are currently available when fetching customers.
-     * @return FetchResult
+     * @return CustomerModelFetchResult
      */
     public function listCustomersForCertificate($companyId, $id, $include=null)    {
         $path = "/api/v2/companies/{$companyId}/certificates/{$id}/customers";
@@ -1460,7 +1784,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return CertificateModelFetchResult
      */
     public function queryCertificates($companyId, $include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/certificates";
@@ -1529,7 +1853,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The unique ID number of the company that recorded this certificate
      * @param int $id The unique ID number of this certificate
      * @param CertificateAttributeModel[] $model The list of attributes to unlink from this certificate.
-     * @return FetchResult
+     * @return CertificateAttributeModelFetchResult
      */
     public function unlinkAttributesFromCertificate($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/certificates/{$id}/attributes/unlink";
@@ -1569,7 +1893,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The unique ID number of the company that recorded this certificate
      * @param int $id The unique ID number of this certificate
      * @param LinkCustomersModel $model The list of customers to unlink from this certificate
-     * @return FetchResult
+     * @return CustomerModelFetchResult
      */
     public function unlinkCustomersFromCertificate($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/certificates/{$id}/customers/unlink";
@@ -1825,6 +2149,77 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Create Customers for a user
+     *
+     * Add customers for a company.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this customer.
+     * @param CustomerSupplierModel[] $model The Customers you wish to create.
+     * @return CustomerSupplierModel[]
+     */
+    public function createCSCustomers($companyId, $model)    {
+        $path = "/api/v2/companies/{$companyId}/supplierandcustomers/customers";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Add suppliers to a company.
+     *
+     * Add suppliers to a company.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this suppliers.
+     * @param CustomerSupplierModel[] $model The company suppliers you wish to create.
+     * @return CustomerSupplierModel[]
+     */
+    public function createCSSuppliers($companyId, $model)    {
+        $path = "/api/v2/companies/{$companyId}/supplierandcustomers/suppliers";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Add customer country parameter to a company.
+     *
+     * Add customer country parameters to a company.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this customer country parameter.
+     * @param string $customerCode Customer Code
+     * @param string $countryCode Country Code
+     * @param CustomerSupplierCountryParamModel[] $model The customer country parameters you wish to create.
+     * @return CustomerSupplierCountryParamModel[]
+     */
+    public function createCustomerCountryParam($companyId, $customerCode, $countryCode, $model)    {
+        $path = "/api/v2/companies/{$companyId}/supplierandcustomers/customers/{$customerCode}/{$countryCode}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
      * Request managed returns funding setup for a company
      *
      * This API is available by invitation only.
@@ -1850,6 +2245,31 @@ class AvaTaxClient extends AvaTaxClientBase
      */
     public function createFundingRequest($id, $model)    {
         $path = "/api/v2/companies/{$id}/funding/setup";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Add Supplier Country Parameters to a company.
+     *
+     * Add Supplier Country Parameter to a company.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this Supplier Country Parameter.
+     * @param string $supplierCode Supplier Code
+     * @param string $countryCode Country Code
+     * @param CustomerSupplierCountryParamModel[] $model The Supplier Country Parameters you wish to create.
+     * @return CustomerSupplierCountryParamModel[]
+     */
+    public function createSupplierCountryParams($companyId, $supplierCode, $countryCode, $model)    {
+        $path = "/api/v2/companies/{$companyId}/supplierandcustomers/suppliers/{$supplierCode}/{$countryCode}";
         $guzzleParams = [
             'query' => [],
             'body' => json_encode($model)
@@ -1900,6 +2320,100 @@ class AvaTaxClient extends AvaTaxClientBase
      */
     public function deleteCompanyParameter($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/parameters/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Delete a single company customer
+     *
+     * Delete a customer of a company.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, SSTAdmin, TechnicalSupportAdmin.
+     *
+     * 
+     * @param int $companyId The company id
+     * @param string $customerCode The customer code
+     * @return ErrorDetail[]
+     */
+    public function deleteCSCustomer($companyId, $customerCode)    {
+        $path = "/api/v2/companies/{$companyId}/supplierandcustomers/customers/{$customerCode}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Delete a single supplier
+     *
+     * Delete a supplier of a company.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, SSTAdmin, TechnicalSupportAdmin.
+     *
+     * 
+     * @param int $companyId The company id
+     * @param string $supplierCode The supplier code
+     * @return ErrorDetail[]
+     */
+    public function deleteCSSupplier($companyId, $supplierCode)    {
+        $path = "/api/v2/companies/{$companyId}/supplierandcustomers/suppliers/{$supplierCode}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Delete a single customer country parameter
+     *
+     * Delete a customer country parameter of a company.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, SSTAdmin, TechnicalSupportAdmin.
+     *
+     * 
+     * @param int $companyId The company id
+     * @param string $customerCode The customer code
+     * @param string $countryCode country code
+     * @return ErrorDetail[]
+     */
+    public function deleteCustomerCountryParam($companyId, $customerCode, $countryCode)    {
+        $path = "/api/v2/companies/{$companyId}/supplierandcustomers/customers/{$customerCode}/{$countryCode}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Delete a single Supplier Country Parameter
+     *
+     * Delete a Supplier Country Parameter of a company.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, SSTAdmin, TechnicalSupportAdmin.
+     *
+     * 
+     * @param int $companyId The company id
+     * @param string $supplierCode Supplier code
+     * @param string $countryCode Country code
+     * @return ErrorDetail[]
+     */
+    public function deleteSupplierCountryParam($companyId, $supplierCode, $countryCode)    {
+        $path = "/api/v2/companies/{$companyId}/supplierandcustomers/suppliers/{$supplierCode}/{$countryCode}";
         $guzzleParams = [
             'query' => [],
             'body' => null
@@ -2058,6 +2572,76 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Retrieve a Customer for a company by its CustomerCode
+     *
+     * Retrieves a single Customer for a company by its CustomerCode
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     *
+     * 
+     * @param int $companyId Company Id
+     * @param string $customerCode Customer Code
+     * @return CustomerSupplierModel
+     */
+    public function getCSCustomer($companyId, $customerCode)    {
+        $path = "/api/v2/companies/{$companyId}/supplierandcustomers/customers/{$customerCode}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single Supplier for a company by its SupplierCode
+     *
+     * Retrieves a Supplier for a company by its SupplierCode
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     *
+     * 
+     * @param int $companyId Company Id
+     * @param string $supplierCode Supplier Code
+     * @return CustomerSupplierModel
+     */
+    public function getCSSupplier($companyId, $supplierCode)    {
+        $path = "/api/v2/companies/{$companyId}/supplierandcustomers/suppliers/{$supplierCode}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a customer country parameter for a company by its CustomerCode and CountryCode
+     *
+     * Retrieve a customer country parameter for a company by its CustomerCode and CountryCode.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     *
+     * 
+     * @param int $companyId Company Id
+     * @param string $customerCode Customer Code
+     * @param string $countryCode Country Code
+     * @return CustomerSupplierCountryParamModel
+     */
+    public function getCustomerCountryParam($companyId, $customerCode, $countryCode)    {
+        $path = "/api/v2/companies/{$companyId}/supplierandcustomers/customers/{$customerCode}/{$countryCode}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * Get this company's filing status
      *
      * Retrieve the current filing status of this company.
@@ -2092,6 +2676,30 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Retrieve a single Supplier Country parameter
+     *
+     * Retrieves a single Supplier Country parameter of a company.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     *
+     * 
+     * @param int $companyId Company Id
+     * @param string $supplierCode Supplier Code
+     * @param string $countryCode Country Code
+     * @return CustomerSupplierCountryParamModel
+     */
+    public function getSupplierCountryParam($companyId, $supplierCode, $countryCode)    {
+        $path = "/api/v2/companies/{$companyId}/supplierandcustomers/suppliers/{$supplierCode}/{$countryCode}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * Retrieve parameters for a company
      *
      * Retrieve all parameters of a company.
@@ -2115,10 +2723,36 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return CompanyParameterDetailModelFetchResult
      */
     public function listCompanyParameterDetails($companyId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/parameters";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve Customers for a company
+     *
+     * Retrieve Customers for a company
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     *
+     * 
+     * @param int $companyId The company id
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return CustomerSupplierModelFetchResult
+     */
+    public function listCustomers($companyId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/companies/{$companyId}/supplierandcustomers/customers";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
@@ -2164,12 +2798,38 @@ class AvaTaxClient extends AvaTaxClientBase
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      *
      * 
-     * @return FetchResult
+     * @return MrsCompanyModelFetchResult
      */
     public function listMrsCompanies()    {
         $path = "/api/v2/companies/mrs";
         $guzzleParams = [
             'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve Suppliers for a company
+     *
+     * Retrieve all suppliers of a company.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     *
+     * 
+     * @param int $companyId The company id
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return CustomerSupplierModelFetchResult
+     */
+    public function listSuppliers($companyId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/companies/{$companyId}/supplierandcustomers/suppliers";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
@@ -2202,11 +2862,11 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * 
      * @param string $include A comma separated list of objects to fetch underneath this company. Any object with a URL path underneath this company can be fetched by specifying its name.
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* IsFein, contacts, items, locations, nexus, settings, taxCodes, taxRules, upcs, nonReportingChildCompanies, exemptCerts, parameters
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* IsFein, contacts, items, locations, nexus, settings, taxCodes, taxRules, upcs, nonReportingChildCompanies, exemptCerts, parameters, supplierandcustomers
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return CompanyModelFetchResult
      */
     public function queryCompanies($include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies";
@@ -2315,6 +2975,287 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Update a Customer
+     *
+     * Update a Customer
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
+     *
+     * 
+     * @param int $companyId The company id.
+     * @param string $customerCode The customer code
+     * @param CustomerSupplierModel $model The customer object you wish to update.
+     * @return CustomerSupplierModel
+     */
+    public function updateCSCustomer($companyId, $customerCode, $model)    {
+        $path = "/api/v2/companies/{$companyId}/supplierandcustomers/customers/{$customerCode}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Update a supplier
+     *
+     * Update a Supplier of a company.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
+     *
+     * 
+     * @param int $companyId The company id.
+     * @param string $supplierCode The supplier code
+     * @param CustomerSupplierModel $model The supplier object you wish to update.
+     * @return CustomerSupplierModel
+     */
+    public function updateCSSupplier($companyId, $supplierCode, $model)    {
+        $path = "/api/v2/companies/{$companyId}/supplierandcustomers/suppliers/{$supplierCode}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Update a customer country parameter for Customer
+     *
+     * Update a customer country parameter of a company.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
+     *
+     * 
+     * @param int $companyId The company id.
+     * @param string $customerCode The customer code
+     * @param string $countryCode The country code
+     * @param CustomerSupplierCountryParamModel $model The customer country parameter object you wish to update.
+     * @return CustomerSupplierCountryParamModel
+     */
+    public function updateCustomerCountryParam($companyId, $customerCode, $countryCode, $model)    {
+        $path = "/api/v2/companies/{$companyId}/supplierandcustomers/customers/{$customerCode}/{$countryCode}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Update a Supplier Country Parameter
+     *
+     * Update a Supplier Country Parameter of a company.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
+     *
+     * 
+     * @param int $companyId The company id.
+     * @param string $supplierCode The supplier code
+     * @param string $countryCode Country code
+     * @param CustomerSupplierCountryParamModel $model The Supplier Country Parameter object you wish to update.
+     * @return CustomerSupplierCountryParamModel
+     */
+    public function updateSupplierCountryParam($companyId, $supplierCode, $countryCode, $model)    {
+        $path = "/api/v2/companies/{$companyId}/supplierandcustomers/suppliers/{$supplierCode}/{$countryCode}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single tax rate.
+     *
+     * This API is available by invitation only.
+     * 
+     * ### Security Policies
+     * 
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $id The ID of the tax rate to retrieve.
+     * @return ComplianceTaxRateModel
+     */
+    public function getTaxRate($id)    {
+        $path = "/api/v2/compliance/taxrates/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single tax region.
+     *
+     * This API is available by invitation only.
+     * 
+     * ### Security Policies
+     * 
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $id The ID of the tax region to retrieve.
+     * @return TaxRegionModel
+     */
+    public function getTaxRegion($id)    {
+        $path = "/api/v2/compliance/taxregions/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve jurisdictions and rates in a combined format.
+     *
+     * This API is available by invitation only.
+     * 
+     * ### Security Policies
+     * 
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param string $effectiveDate Used to limit the jurisdictions returned.
+     * @param string $endDate Used to limit the jurisdictions returned.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
+     * @param string $include A comma separated list of objects to fetch underneath this jurisdiction.
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return ComplianceJurisdictionRateModel
+     */
+    public function queryJurisdictionRates($effectiveDate, $endDate, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/compliance/jurisdictionrates";
+        $guzzleParams = [
+            'query' => ['effectiveDate' => $effectiveDate, 'endDate' => $endDate, '$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all unique jurisdictions.
+     *
+     * This API is available by invitation only.
+     *  
+     * You may specify one or more of the following values in the '$include' parameter to fetch additional nested data, using commas to separate multiple values:
+     *  
+     * * TaxRates
+     * 
+     * ### Security Policies
+     * 
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param string $country The two-character ISO-3166 code for the country.
+     * @param string $region The two or three character region code for the region.
+     * @param string $effectiveDate Used to limit the jurisdictions or rates returned.
+     * @param string $endDate Used to limit the jurisdictions or rates returned.
+     * @param string $aggregationOption Aggregation method used if rates are returned using the '$include' parameter. (See StackAggregationOption::* for a list of allowable values)
+     * @param string $include A comma separated list of objects to fetch underneath this tax rate.
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @return ComplianceJurisdictionModel
+     */
+    public function queryJurisdictions($country, $region, $effectiveDate, $endDate, $aggregationOption, $include=null, $top=null, $skip=null)    {
+        $path = "/api/v2/compliance/jurisdictions/{$country}/{$region}";
+        $guzzleParams = [
+            'query' => ['effectiveDate' => $effectiveDate, 'endDate' => $endDate, 'aggregationOption' => $aggregationOption, '$include' => $include, '$top' => $top, '$skip' => $skip],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all tax rates.
+     *
+     * This API is available by invitation only.
+     * 
+     * ### Security Policies
+     * 
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
+     * @param string $include A comma separated list of objects to fetch underneath this tax rate.
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return ComplianceTaxRateModel
+     */
+    public function queryTaxRates($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/compliance/taxrates";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all tax region jurisdictions.
+     *
+     * This API is available by invitation only.
+     * 
+     * ### Security Policies
+     * 
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
+     * @param string $include A comma separated list of objects to fetch underneath this tax region jurisdiction.
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return TaxRegionJurisdictionModel
+     */
+    public function queryTaxRegionJurisdictions($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/compliance/taxregionjurisdictions";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all tax regions.
+     *
+     * This API is available by invitation only.
+     * 
+     * ### Security Policies
+     * 
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
+     * @param string $include A comma separated list of objects to fetch underneath this tax region.
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return TaxRegionModel
+     */
+    public function queryTaxRegions($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/compliance/taxregions";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * API to modify the reference fields at the document and the line level.
      *
      * 
@@ -2322,7 +3263,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId 
      * @param TransactionReferenceFieldModel[] $model 
-     * @return FetchResult
+     * @return TransactionModelFetchResult
      */
     public function tagTransaction($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/transactions/tag";
@@ -2424,7 +3365,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return ContactModelFetchResult
      */
     public function listContactsByCompany($companyId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/contacts";
@@ -2454,7 +3395,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return ContactModelFetchResult
      */
     public function queryContacts($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/contacts";
@@ -2636,7 +3577,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The unique ID number of the company that recorded the provided customer
      * @param string $customerCode The unique code representing the current customer
      * @param CustomerAttributeModel[] $model The list of attributes to link to the customer.
-     * @return FetchResult
+     * @return CustomerAttributeModelFetchResult
      */
     public function linkAttributesToCustomer($companyId, $customerCode, $model)    {
         $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/attributes/link";
@@ -2672,7 +3613,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The unique ID number of the company that recorded this customer
      * @param string $customerCode The unique code representing this customer
      * @param LinkCertificatesModel $model The list of certificates to link to this customer
-     * @return FetchResult
+     * @return CertificateModelFetchResult
      */
     public function linkCertificatesToCustomer($companyId, $customerCode, $model)    {
         $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/certificates/link";
@@ -2747,7 +3688,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The unique ID number of the company that recorded the provided customer
      * @param string $customerCode The unique code representing the current customer
-     * @return FetchResult
+     * @return CustomerAttributeModelFetchResult
      */
     public function listAttributesForCustomer($companyId, $customerCode)    {
         $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/attributes";
@@ -2787,7 +3728,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return CertificateModelFetchResult
      */
     public function listCertificatesForCustomer($companyId, $customerCode, $include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/certificates";
@@ -2871,7 +3812,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return CustomerModelFetchResult
      */
     public function queryCustomers($companyId, $include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/customers";
@@ -2910,7 +3851,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The unique ID number of the company that recorded the customer
      * @param string $customerCode The unique code representing the current customer
      * @param CustomerAttributeModel[] $model The list of attributes to unlink from the customer.
-     * @return FetchResult
+     * @return CustomerAttributeModelFetchResult
      */
     public function unlinkAttributesFromCustomer($companyId, $customerCode, $model)    {
         $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/attributes/unlink";
@@ -2946,7 +3887,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The unique ID number of the company that recorded this customer
      * @param string $customerCode The unique code representing this customer
      * @param LinkCertificatesModel $model The list of certificates to link to this customer
-     * @return FetchResult
+     * @return CertificateModelFetchResult
      */
     public function unlinkCertificatesFromCustomer($companyId, $customerCode, $model)    {
         $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/certificates/unlink";
@@ -3081,7 +4022,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return DataSourceModelFetchResult
      */
     public function listDataSources($companyId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/datasources";
@@ -3110,7 +4051,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return DataSourceModelFetchResult
      */
     public function queryDataSources($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/datasources";
@@ -3167,7 +4108,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param string $country The name or code of the destination country.
      * @param string $hsCode The partial or full HS Code for which you would like to view all of the parents.
-     * @return FetchResult
+     * @return HsCodeModelFetchResult
      */
     public function getCrossBorderCode($country, $hsCode)    {
         $path = "/api/v2/definitions/crossborder/{$country}/{$hsCode}/hierarchy";
@@ -3190,7 +4131,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return SkyscraperStatusModelFetchResult
      */
     public function getLoginVerifierByForm($form, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/filingcalendars/loginverifiers/{$form}";
@@ -3216,7 +4157,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return AvaFileFormModelFetchResult
      */
     public function listAvaFileForms($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/avafileforms";
@@ -3244,7 +4185,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return CertificateAttributeModelFetchResult
      */
     public function listCertificateAttributes($companyid, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/certificateattributes";
@@ -3271,7 +4212,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return ExemptionReasonModelFetchResult
      */
     public function listCertificateExemptReasons($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/certificateexemptreasons";
@@ -3298,7 +4239,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return ExposureZoneModelFetchResult
      */
     public function listCertificateExposureZones($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/certificateexposurezones";
@@ -3320,7 +4261,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return CommunicationsTSPairModelFetchResult
      */
     public function listCommunicationsServiceTypes($id, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/communications/transactiontypes/{$id}/servicetypes";
@@ -3342,7 +4283,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return CommunicationsTransactionTypeModelFetchResult
      */
     public function listCommunicationsTransactionTypes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/communications/transactiontypes";
@@ -3364,7 +4305,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return CommunicationsTSPairModelFetchResult
      */
     public function listCommunicationsTSPairs($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/communications/tspairs";
@@ -3387,7 +4328,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return IsoCountryModelFetchResult
      */
     public function listCountries($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/countries";
@@ -3415,7 +4356,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return CoverLetterModelFetchResult
      */
     public function listCoverLetters($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/coverletters";
@@ -3449,7 +4390,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return HsCodeModelFetchResult
      */
     public function listCrossBorderCodes($country, $hsCode, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/crossborder/{$country}/{$hsCode}";
@@ -3475,7 +4416,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * * This API depends on the following active services<br />*Required* (all): AvaTaxGlobal.
      *
      * 
-     * @return FetchResult
+     * @return HsCodeModelFetchResult
      */
     public function listCrossBorderSections()    {
         $path = "/api/v2/definitions/crossborder/sections";
@@ -3499,7 +4440,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return CurrencyModelFetchResult
      */
     public function listCurrencies($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/currencies";
@@ -3524,7 +4465,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return EntityUseCodeModelFetchResult
      */
     public function listEntityUseCodes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/entityusecodes";
@@ -3546,7 +4487,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return FilingFrequencyModelFetchResult
      */
     public function listFilingFrequencies($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/filingfrequencies";
@@ -3572,7 +4513,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return JurisdictionModelFetchResult
      */
     public function listJurisdictions($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/jurisdictions";
@@ -3606,7 +4547,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return JurisdictionOverrideModelFetchResult
      */
     public function listJurisdictionsByAddress($line1, $line2, $line3, $city, $region, $postalCode, $country, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/jurisdictionsnearaddress";
@@ -3641,7 +4582,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return LocationQuestionModelFetchResult
      */
     public function listLocationQuestionsByAddress($line1, $line2, $line3, $city, $region, $postalCode, $country, $latitude, $longitude, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/locationquestions";
@@ -3664,7 +4605,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return SkyscraperStatusModelFetchResult
      */
     public function listLoginVerifiers($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/filingcalendars/loginverifiers";
@@ -3685,7 +4626,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return MarketplaceLocationModelFetchResult
      */
     public function listMarketplaceLocations($marketplaceId, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/marketplacelocations";
@@ -3708,7 +4649,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return NexusModelFetchResult
      */
     public function listNexus($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/nexus";
@@ -3740,7 +4681,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return NexusModelFetchResult
      */
     public function listNexusByAddress($line1, $line2, $line3, $city, $region, $postalCode, $country, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/nexus/byaddress";
@@ -3764,7 +4705,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return NexusModelFetchResult
      */
     public function listNexusByCountry($country, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/nexus/{$country}";
@@ -3789,7 +4730,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return NexusModelFetchResult
      */
     public function listNexusByCountryAndRegion($country, $region, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/nexus/{$country}/{$region}";
@@ -3833,6 +4774,30 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Retrieve the full list of Avalara-supported nexus for a tax type group.
+     *
+     * Returns all Avalara-supported nexus for the specified specified tax type group.
+     *  
+     * This API is intended to be useful if your user interface needs to display a selectable list of nexus filtered by tax type group.
+     *
+     * 
+     * @param string $taxTypeGroup The tax type group to fetch the supporting system nexus for.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* streamlinedSalesTax, isSSTActive, taxAuthorityId, taxName, parameters
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return NexusModelFetchResult
+     */
+    public function listNexusByTaxTypeGroup($taxTypeGroup, $filter=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/definitions/nexus/bytaxtypegroup/{$taxTypeGroup}";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * Retrieve the full list of nexus tax type groups
      *
      * Returns the full list of Avalara-supported nexus tax type groups
@@ -3843,7 +4808,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return NexusTaxTypeGroupModelFetchResult
      */
     public function listNexusTaxTypeGroups($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/nexustaxtypegroups";
@@ -3865,7 +4830,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return NoticeCustomerFundingOptionModelFetchResult
      */
     public function listNoticeCustomerFundingOptions($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/noticecustomerfundingoptions";
@@ -3887,7 +4852,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return NoticeCustomerTypeModelFetchResult
      */
     public function listNoticeCustomerTypes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/noticecustomertypes";
@@ -3909,7 +4874,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return NoticeFilingTypeModelFetchResult
      */
     public function listNoticeFilingtypes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/noticefilingtypes";
@@ -3931,7 +4896,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return NoticePriorityModelFetchResult
      */
     public function listNoticePriorities($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/noticepriorities";
@@ -3953,7 +4918,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return NoticeReasonModelFetchResult
      */
     public function listNoticeReasons($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/noticereasons";
@@ -3975,7 +4940,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return NoticeResponsibilityModelFetchResult
      */
     public function listNoticeResponsibilities($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/noticeresponsibilities";
@@ -3997,7 +4962,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return NoticeRootCauseModelFetchResult
      */
     public function listNoticeRootCauses($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/noticerootcauses";
@@ -4019,7 +4984,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return NoticeStatusModelFetchResult
      */
     public function listNoticeStatuses($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/noticestatuses";
@@ -4041,7 +5006,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return NoticeTypeModelFetchResult
      */
     public function listNoticeTypes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/noticetypes";
@@ -4064,7 +5029,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return ParameterModelFetchResult
      */
     public function listParameters($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/parameters";
@@ -4091,7 +5056,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return ParameterModelFetchResult
      */
     public function listParametersByItem($companyCode, $itemCode, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/parameters/byitem/{$companyCode}/{$itemCode}";
@@ -4114,7 +5079,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return ParameterUsageModelFetchResult
      */
     public function listParametersUsage($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/parametersusage";
@@ -4134,7 +5099,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
-     * @return FetchResult
+     * @return StringFetchResult
      */
     public function listPermissions($top=null, $skip=null)    {
         $path = "/api/v2/definitions/permissions";
@@ -4155,7 +5120,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return PostalCodeModelFetchResult
      */
     public function listPostalCodes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/postalcodes";
@@ -4184,7 +5149,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return PreferredProgramModelFetchResult
      */
     public function listPreferredPrograms($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/preferredprograms";
@@ -4209,7 +5174,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @param string $countryCode If not null, return all records with this code.
-     * @return FetchResult
+     * @return ProductClassificationSystemModelFetchResult
      */
     public function listProductClassificationSystems($filter=null, $top=null, $skip=null, $orderBy=null, $countryCode)    {
         $path = "/api/v2/definitions/productclassificationsystems";
@@ -4235,7 +5200,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @param string $countryCode If not null, return all records with this code.
-     * @return FetchResult
+     * @return ProductClassificationSystemModelFetchResult
      */
     public function listProductClassificationSystemsByCompany($companyCode, $filter=null, $top=null, $skip=null, $orderBy=null, $countryCode)    {
         $path = "/api/v2/definitions/productclassificationsystems/bycompany/{$companyCode}";
@@ -4258,7 +5223,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return RateTypeModelFetchResult
      */
     public function listRateTypesByCountry($country, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/countries/{$country}/ratetypes";
@@ -4281,7 +5246,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return IsoRegionModelFetchResult
      */
     public function listRegions($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/regions";
@@ -4305,7 +5270,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return IsoRegionModelFetchResult
      */
     public function listRegionsByCountry($country, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/countries/{$country}/regions";
@@ -4327,7 +5292,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return ResourceFileTypeModelFetchResult
      */
     public function listResourceFileTypes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/resourcefiletypes";
@@ -4350,7 +5315,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return SecurityRoleModelFetchResult
      */
     public function listSecurityRoles($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/securityroles";
@@ -4374,7 +5339,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return SubscriptionTypeModelFetchResult
      */
     public function listSubscriptionTypes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/subscriptiontypes";
@@ -4396,7 +5361,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return TaxAuthorityModelFetchResult
      */
     public function listTaxAuthorities($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/taxauthorities";
@@ -4420,7 +5385,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return TaxAuthorityFormModelFetchResult
      */
     public function listTaxAuthorityForms($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/taxauthorityforms";
@@ -4442,7 +5407,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return TaxAuthorityTypeModelFetchResult
      */
     public function listTaxAuthorityTypes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/taxauthoritytypes";
@@ -4471,7 +5436,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return TaxCodeModelFetchResult
      */
     public function listTaxCodes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/taxcodes";
@@ -4514,7 +5479,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return FormMasterModelFetchResult
      */
     public function listTaxForms($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/taxforms";
@@ -4536,10 +5501,34 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return TaxSubTypeModelFetchResult
      */
     public function listTaxSubTypes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/taxsubtypes";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve the full list of tax sub types by jurisdiction code and region
+     *
+     * Returns the full list of Avalara-supported tax sub-types by jurisdiction and region
+     * This API is intended to be useful to identify all the different tax sub-types.
+     *
+     * 
+     * @param string $jurisdictionCode The jurisdiction code of the tax sub type.
+     * @param string $region The region of the tax sub type.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return TaxSubTypeModelFetchResult
+     */
+    public function listTaxSubTypesByJurisdictionAndRegion($jurisdictionCode, $region, $filter=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/definitions/taxsubtypes/{$jurisdictionCode}/{$region}";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
@@ -4558,7 +5547,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return TaxTypeGroupModelFetchResult
      */
     public function listTaxTypeGroups($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/taxtypegroups";
@@ -4581,12 +5570,40 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return UomModelFetchResult
      */
     public function listUnitOfMeasurement($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/unitofmeasurements";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * List customer attributes used by a company
+     *
+     * List the customer attributes defined by a company.
+     *  
+     * A customer may have multiple attributes that control its behavior. You may apply or remove attributes to a
+     * customer at any time.
+     *  
+     * If you see the 'CertCaptureNotConfiguredError', please use CheckProvision and RequestProvision endpoints to
+     * check and provision account.
+     *
+     * 
+     * @param int $companyid Id of the company the user wish to fetch the customers' attributes from. If not specified the API will use user's default company.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return CustomerAttributeModelFetchResult
+     */
+    public function queryCompanyCustomerAttributes($companyid, $filter=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/definitions/customerattributes";
+        $guzzleParams = [
+            'query' => ['companyid' => $companyid, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
@@ -4693,7 +5710,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return CompanyDistanceThresholdModelFetchResult
      */
     public function listDistanceThresholds($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/distancethresholds";
@@ -4726,7 +5743,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return CompanyDistanceThresholdModelFetchResult
      */
     public function queryDistanceThresholds($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/distancethresholds";
@@ -4769,6 +5786,103 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Get an ECMS identified by company id and ECMS id
+     *
+     * Get an ECMS identified by company id and ECMS id.
+     * An ECMS data represents a documentation based on which companies can claim tax exemption
+     * You may attach nested data objects such as exempt cert detail, and those objects will be created with certificate.
+     * You may specify one or more of the following values in the `$include` parameter to fetch additional nested data, using commas to separate multiple values:
+     *  
+     * * Details
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * * This API depends on the following active services<br />*Required* (all): AvaCert.
+     *
+     * 
+     * @param int $companyId company to retrieve exempt certificate for
+     * @param int $ecmsId exempt certificate Id
+     * @param string $include 
+     * @return EcmsModel
+     */
+    public function getECMSById($companyId, $ecmsId, $include=null)    {
+        $path = "/api/v2/companies/{$companyId}/ecms/{$ecmsId}";
+        $guzzleParams = [
+            'query' => ['$include' => $include],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Get list of ECMS data for this company
+     *
+     * Get list of ECMS data for this company
+     * An ECMS data represents a documentation based on which companies can claim tax exemption
+     * You may attach nested data objects such as ECMS detail, and those objects will be created with certificate.
+     * You may specify one or more of the following values in the `$include` parameter to fetch additional nested data, using commas to separate multiple values:
+     *  
+     * * Details
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * * This API depends on the following active services<br />*Required* (all): AvaCert.
+     *
+     * 
+     * @param int $companyId which company to retrieve certificates from
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* details
+     * @param string $include 
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return EcmsModelFetchResult
+     */
+    public function listECMSByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/companies/{$companyId}/ecms";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Get all exempt certificates
+     *
+     * Get all ECMS currently available in database.
+     * An ECMS data represents a documentation based on which companies can claim tax exemption
+     * You may attach nested data objects such as ECMS detail, and those objects will be created with certificate.
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     * You may specify one or more of the following values in the `$include` parameter to fetch additional nested data, using commas to separate multiple values:
+     *  
+     * * Details
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * * This API depends on the following active services<br />*Required* (all): AvaCert.
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* details
+     * @param string $include 
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return EcmsModelFetchResult
+     */
+    public function queryECMS($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/ecms";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * Create a new eCommerce token.
      *
      * Creates a new eCommerce token.
@@ -4782,7 +5896,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The company ID that will be issued this certificate.
      * @param CreateECommerceTokenInputModel $model 
-     * @return FetchResult
+     * @return ECommerceTokenOutputModelFetchResult
      */
     public function createECommerceToken($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/ecommercetokens";
@@ -4807,7 +5921,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The company ID that the refreshed certificate belongs to.
      * @param RefreshECommerceTokenInputModel $model 
-     * @return FetchResult
+     * @return ECommerceTokenOutputModelFetchResult
      */
     public function refreshECommerceToken($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/ecommercetokens";
@@ -4816,6 +5930,348 @@ class AvaTaxClient extends AvaTaxClientBase
             'body' => json_encode($model)
         ];
         return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Delete a batch of error transactions
+     *
+     * Delete a batch of error transactions attached to a company.
+     *  
+     * If any of the provided error transaction isn't found then it'll be treated as a success.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ProStoresOperator, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro, BasicReturns.
+     *
+     * 
+     * @param int $companyId ID number of the company to delete error transactions from.
+     * @param DeleteErrorTransactionsRequestModel $model The request that contains error transactions to be deleted
+     * @return DeleteErrorTransactionsResponseModel
+     */
+    public function deleteErrorTransactions($companyId, $model)    {
+        $path = "/api/v2/companies/{$companyId}/errortransactions";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Get a list of error transactions' error codes and its counts
+     *
+     * Get a list of error transactions' error codes and their counts
+     * When you try to create or adjust a transaction with a datasource for a company and for any reason that call fails with an error,
+     * those errors with their count can be retrieved by this API.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ProStoresOperator, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro, BasicReturns.
+     *
+     * 
+     * @param int $companyId ID number of the company to query from.
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @return ErrorCodeOutputModelCappedFetchResult
+     */
+    public function listErrorCodes($companyId, $top=null, $skip=null)    {
+        $path = "/api/v2/companies/{$companyId}/errortransactions/errorcodes";
+        $guzzleParams = [
+            'query' => ['$top' => $top, '$skip' => $skip],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve list of error transactions
+     *
+     * List error transactions attached to this company. Results are dependent on `$filter` if provided.
+     *  
+     * This endpoint is limited to returning 1000 error transactions at a time maximum.
+     *  
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ProStoresOperator, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro, BasicReturns.
+     *
+     * 
+     * @param int $companyId The company ID to filter error transactions on.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* companyId, avataxErrorJson, avataxCreateTransactionJson, expiresAt
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return ErrorTransactionOutputModelCappedFetchResult
+     */
+    public function listErrorTransactions($companyId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/companies/{$companyId}/errortransactions";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Checks to see if the company has a valid POA for a tax form code
+     *
+     * This API is available by invitation only.
+     *  
+     * This API fetches valid POA's for a company by TaxFormCode or by country/region
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Operator, Compliance Root User, Compliance Temp User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The company id that we are checking about
+     * @param string $taxFormCode The tax form code that we are checking
+     * @param string $country The country we are fetching POAs for
+     * @param string $region The region we are fetching POAs for
+     * @return PowerOfAttorneyCheckModel[]
+     */
+    public function activePowerOfAttorney($companyId, $taxFormCode, $country, $region)    {
+        $path = "/api/v2/companies/{$companyId}/filingcalendars/powerofattorney";
+        $guzzleParams = [
+            'query' => ['taxFormCode' => $taxFormCode, 'country' => $country, 'region' => $region],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Approve existing Filing Request
+     *
+     * This API is available by invitation only.
+     * A "filing request" represents a request to change an existing filing calendar. Filing requests
+     * are reviewed and validated by Avalara Compliance before being implemented.
+     * The filing request must be in the "ChangeRequest" status to be approved.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The unique ID of the company that owns the filing request object
+     * @param int $id The unique ID of the filing request object
+     * @return FilingRequestModel
+     */
+    public function approveFilingRequest($companyId, $id)    {
+        $path = "/api/v2/companies/{$companyId}/filingrequests/{$id}/approve";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Cancel existing Filing Request
+     *
+     * This API is available by invitation only.
+     * A "filing request" represents a request to change an existing filing calendar. Filing requests
+     * are reviewed and validated by Avalara Compliance before being implemented.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The unique ID of the company that owns the filing request object
+     * @param int $id The unique ID of the filing request object
+     * @return FilingRequestModel
+     */
+    public function cancelFilingRequest($companyId, $id)    {
+        $path = "/api/v2/companies/{$companyId}/filingrequests/{$id}/cancel";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Create a new filing request to cancel a filing calendar
+     *
+     * This API is available by invitation only.
+     *  
+     * A "filing request" represents a request to change an existing filing calendar. Filing requests
+     * are reviewed and validated by Avalara Compliance before being implemented.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The unique ID of the company that owns the filing calendar object
+     * @param int $id The unique ID number of the filing calendar to cancel
+     * @param FilingRequestModel[] $model The cancellation request for this filing calendar
+     * @return FilingRequestModel
+     */
+    public function cancelFilingRequests($companyId, $id, $model)    {
+        $path = "/api/v2/companies/{$companyId}/filingcalendars/{$id}/cancel/request";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Create a filing calendar
+     *
+     * This API is available by invitation only and only available for users with Compliance access
+     * A "filing request" represents information that compliance uses to file a return
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The unique ID of the company that will add the new filing calendar
+     * @param FilingCalendarModel[] $model Filing calendars that will be added
+     * @return FilingCalendarModel[]
+     */
+    public function createFilingCalendars($companyId, $model)    {
+        $path = "/api/v2/companies/{$companyId}/filingcalendars";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Create a new filing request to create a filing calendar
+     *
+     * This API is available by invitation only.
+     * A "filing request" represents a request to change an existing filing calendar. Filing requests
+     * are reviewed and validated by Avalara Compliance before being implemented.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The unique ID of the company that will add the new filing calendar
+     * @param FilingRequestModel[] $model Information about the proposed new filing calendar
+     * @return FilingRequestModel[]
+     */
+    public function createFilingRequests($companyId, $model)    {
+        $path = "/api/v2/companies/{$companyId}/filingcalendars/add/request";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Create a company return setting
+     *
+     * This API is available by invitation only and only available for users with Compliance access
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     *
+     * 
+     * @param int $companyId The unique ID of the company that will add the new filing calendar
+     * @param int $filingCalendarId The unique ID of the filing calendar that will add the new filing calendar setting
+     * @param CompanyReturnSettingModel[] $model CompanyReturnSettings that will be added
+     * @return CompanyReturnSettingModel[]
+     */
+    public function createUpdateCompanyReturnSettings($companyId, $filingCalendarId, $model)    {
+        $path = "/api/v2/companies/{$companyId}/filingcalendars/{$filingCalendarId}/settings";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Returns a list of options for adding the specified form.
+     *
+     * This API is available by invitation only.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The unique ID of the company that owns the filing calendar object
+     * @param string $formCode The unique code of the form
+     * @return CycleAddOptionModel[]
+     */
+    public function cycleSafeAdd($companyId, $formCode)    {
+        $path = "/api/v2/companies/{$companyId}/filingcalendars/add/options";
+        $guzzleParams = [
+            'query' => ['formCode' => $formCode],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Indicates when changes are allowed to be made to a filing calendar.
+     *
+     * This API is available by invitation only.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The unique ID of the company that owns the filing calendar object
+     * @param int $id The unique ID of the filing calendar object
+     * @param FilingCalendarEditModel[] $model A list of filing calendar edits to be made
+     * @return CycleEditOptionModel
+     */
+    public function cycleSafeEdit($companyId, $id, $model)    {
+        $path = "/api/v2/companies/{$companyId}/filingcalendars/{$id}/edit/options";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Returns a list of options for expiring a filing calendar
+     *
+     * This API is available by invitation only.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The unique ID of the company that owns the filing calendar object
+     * @param int $id The unique ID of the filing calendar object
+     * @return CycleExpireModel
+     */
+    public function cycleSafeExpiration($companyId, $id)    {
+        $path = "/api/v2/companies/{$companyId}/filingcalendars/{$id}/cancel/options";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
     }
 
     /**
@@ -4843,6 +6299,732 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Delete a single filing calendar.
+     *
+     * This API is available by invitation only.
+     * Mark the existing notice object at this URL as deleted.
+     * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
+     * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this filing calendar.
+     * @param int $id The ID of the filing calendar you wish to delete.
+     * @return ErrorDetail[]
+     */
+    public function deleteFilingCalendar($companyId, $id)    {
+        $path = "/api/v2/companies/{$companyId}/filingcalendars/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single filing calendar
+     *
+     * This API is available by invitation only.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this filing calendar
+     * @param int $id The primary key of this filing calendar
+     * @return FilingCalendarModel
+     */
+    public function getFilingCalendar($companyId, $id)    {
+        $path = "/api/v2/companies/{$companyId}/filingcalendars/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single filing request
+     *
+     * This API is available by invitation only.
+     * A "filing request" represents a request to change an existing filing calendar. Filing requests
+     * are reviewed and validated by Avalara Compliance before being implemented.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this filing calendar
+     * @param int $id The primary key of this filing calendar
+     * @return FilingRequestModel
+     */
+    public function getFilingRequest($companyId, $id)    {
+        $path = "/api/v2/companies/{$companyId}/filingrequests/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all filing calendars for this company
+     *
+     * This API is available by invitation only.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns these batches
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxAuthorityId, taxAuthorityName, taxAuthorityType, settings
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @param string $returnCountry A comma separated list of countries
+     * @param string $returnRegion A comma separated list of regions
+     * @return FilingCalendarModelFetchResult
+     */
+    public function listFilingCalendars($companyId, $filter=null, $top=null, $skip=null, $orderBy=null, $returnCountry, $returnRegion)    {
+        $path = "/api/v2/companies/{$companyId}/filingcalendars";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy, 'returnCountry' => $returnCountry, 'returnRegion' => $returnRegion],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all filing requests for this company
+     *
+     * This API is available by invitation only.
+     * A "filing request" represents a request to change an existing filing calendar. Filing requests
+     * are reviewed and validated by Avalara Compliance before being implemented.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns these batches
+     * @param int $filingCalendarId Specific filing calendar id for the request
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* data
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FilingRequestModelFetchResult
+     */
+    public function listFilingRequests($companyId, $filingCalendarId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/companies/{$companyId}/filingrequests";
+        $guzzleParams = [
+            'query' => ['filingCalendarId' => $filingCalendarId, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * New request for getting for validating customer's login credentials
+     *
+     * This API is available by invitation only.
+     *  
+     * This API verifies that a customer has submitted correct login credentials for a tax authority's online filing system.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param LoginVerificationInputModel $model The model of the login information we are verifying
+     * @return LoginVerificationOutputModel
+     */
+    public function loginVerificationRequest($model)    {
+        $path = "/api/v2/filingcalendars/credentials/verify";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Gets the request status and Login Result
+     *
+     * This API is available by invitation only.
+     *  
+     * This API checks the status of a login verification request. It may only be called by authorized users from the account
+     * that initially requested the login verification.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $jobId The unique ID number of this login request
+     * @return LoginVerificationOutputModel
+     */
+    public function loginVerificationStatus($jobId)    {
+        $path = "/api/v2/filingcalendars/credentials/{$jobId}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all filing calendars
+     *
+     * This API is available by invitation only.
+     *  
+     * This API is deprecated - please use POST `/api/v2/filingrequests/query` API.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxAuthorityId, taxAuthorityName, taxAuthorityType, settings
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @param string $returnCountry If specified, fetches only filing calendars that apply to tax filings in this specific country. Uses ISO 3166 country codes.
+     * @param string $returnRegion If specified, fetches only filing calendars that apply to tax filings in this specific region. Uses ISO 3166 region codes.
+     * @return FilingCalendarModelFetchResult
+     */
+    public function queryFilingCalendars($filter=null, $top=null, $skip=null, $orderBy=null, $returnCountry, $returnRegion)    {
+        $path = "/api/v2/filingcalendars";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy, 'returnCountry' => $returnCountry, 'returnRegion' => $returnRegion],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all filing calendars
+     *
+     * This API is available by invitation only.
+     *  
+     * This API is intended to replace the GET `/api/v2/filingcalendars` API. The fetch request object is posted on the body of the request instead of the URI, so it's not limited by a set number of characters.
+     * The documentation of the GET API shows how filtering, sorting and pagination works.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param string $returnCountry If specified, fetches only filing calendars that apply to tax filings in this specific country. Uses ISO 3166 country codes.
+     * @param string $returnRegion If specified, fetches only filing calendars that apply to tax filings in this specific region. Uses ISO 3166 region codes.
+     * @param QueryRequestModel $model Query object to filter, sort and paginate the filing calendars.
+     * @return FilingCalendarModelFetchResult
+     */
+    public function queryFilingCalendarsPost($returnCountry, $returnRegion, $model)    {
+        $path = "/api/v2/filingcalendars/query";
+        $guzzleParams = [
+            'query' => ['returnCountry' => $returnCountry, 'returnRegion' => $returnRegion],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all filing requests
+     *
+     * This API is available by invitation only.
+     *  
+     * This API is deprecated - please use POST `/api/v2/filingrequests/query` API.
+     *  
+     * A "filing request" represents a request to change an existing filing calendar. Filing requests
+     * are reviewed and validated by Avalara Compliance before being implemented.
+     *  
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $filingCalendarId Specific filing calendar id for the request
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* data
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FilingRequestModelFetchResult
+     */
+    public function queryFilingRequests($filingCalendarId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/filingrequests";
+        $guzzleParams = [
+            'query' => ['filingCalendarId' => $filingCalendarId, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all filing requests
+     *
+     * This API is available by invitation only.
+     *  
+     * This API is intended to replace the GET `/api/v2/filingrequests` API. The fetch request object is posted on the body of the request instead of the URI, so it's not limited by a set number of characters.
+     * The documentation of the GET API shows how filtering, sorting and pagination works.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $filingCalendarId Specific filing calendar id for the request
+     * @param QueryRequestModel $model Query object to filter, sort and paginate the filing calendars.
+     * @return FilingRequestModelFetchResult
+     */
+    public function queryFilingRequestsPost($filingCalendarId, $model)    {
+        $path = "/api/v2/filingrequests/query";
+        $guzzleParams = [
+            'query' => ['filingCalendarId' => $filingCalendarId],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Create a new filing request to edit a filing calendar
+     *
+     * This API is available by invitation only.
+     *  
+     * A "filing request" represents a request to change an existing filing calendar. Filing requests
+     * are reviewed and validated by Avalara Compliance before being implemented.
+     *  
+     * Certain users may not update filing calendars directly. Instead, they may submit an edit request
+     * to modify the value of a filing calendar using this API.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The unique ID of the company that owns the filing calendar object
+     * @param int $id The unique ID number of the filing calendar to edit
+     * @param FilingRequestModel[] $model A list of filing calendar edits to be made
+     * @return FilingRequestModel
+     */
+    public function requestFilingCalendarUpdate($companyId, $id, $model)    {
+        $path = "/api/v2/companies/{$companyId}/filingcalendars/{$id}/edit/request";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Edit existing Filing Calendar
+     *
+     * This API is available by invitation only.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The unique ID of the company that owns the filing calendar object
+     * @param int $id The unique ID of the filing calendar object
+     * @param FilingCalendarModel $model The filing calendar model you are wishing to update with.
+     * @return FilingCalendarModel
+     */
+    public function updateFilingCalendar($companyId, $id, $model)    {
+        $path = "/api/v2/companies/{$companyId}/filingcalendars/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Edit existing Filing Request
+     *
+     * This API is available by invitation only.
+     * A "filing request" represents a request to change an existing filing calendar. Filing requests
+     * are reviewed and validated by Avalara Compliance before being implemented.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The unique ID of the company that owns the filing request object
+     * @param int $id The unique ID of the filing request object
+     * @param FilingRequestModel $model A list of filing calendar edits to be made
+     * @return FilingRequestModel
+     */
+    public function updateFilingRequest($companyId, $id, $model)    {
+        $path = "/api/v2/companies/{$companyId}/filingrequests/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Approve all filings for the specified company in the given filing period.
+     *
+     * This API is available by invitation only.
+     * Approving a return means the customer is ready to let Avalara file that return.
+     * Customer either approves themselves from admin console,
+     * else system auto-approves the night before the filing cycle.
+     * Sometimes Compliance has to manually unapprove and reapprove to modify liability or filing for the customer.
+     * A "filing period" is the year and month of the date of the latest customer transaction allowed to be reported on a filing,
+     * based on filing frequency of filing.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, CSPTester, FirmUser, SSTAdmin, TechnicalSupportAdmin.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $year The year of the filing period to approve.
+     * @param int $month The month of the filing period to approve.
+     * @param ApproveFilingsModel $model The approve request you wish to execute.
+     * @return FilingModel[]
+     */
+    public function approveFilings($companyId, $year, $month, $model)    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/approve";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Approve all filings for the specified company in the given filing period and country.
+     *
+     * This API is available by invitation only.
+     * Approving a return means the customer is ready to let Avalara file that return.
+     * Customer either approves themselves from admin console,
+     * else system auto-approves the night before the filing cycle.
+     * Sometimes Compliance has to manually unapprove and reapprove to modify liability or filing for the customer.
+     * A "filing period" is the year and month of the date of the latest customer transaction allowed to be reported on a filing,
+     * based on filing frequency of filing.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, CSPTester, FirmUser, SSTAdmin, TechnicalSupportAdmin.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $year The year of the filing period to approve.
+     * @param int $month The month of the filing period to approve.
+     * @param string $country The two-character ISO-3166 code for the country.
+     * @param ApproveFilingsModel $model The approve request you wish to execute.
+     * @return FilingModel[]
+     */
+    public function approveFilingsCountry($companyId, $year, $month, $country, $model)    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/{$country}/approve";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Approve all filings for the specified company in the given filing period, country and region.
+     *
+     * This API is available by invitation only.
+     * Approving a return means the customer is ready to let Avalara file that return.
+     * Customer either approves themselves from admin console,
+     * else system auto-approves the night before the filing cycle
+     * Sometimes Compliance has to manually unapprove and reapprove to modify liability or filing for the customer.
+     * A "filing period" is the year and month of the date of the latest customer transaction allowed to be reported on a filing,
+     * based on filing frequency of filing.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, CSPTester, FirmUser, SSTAdmin, TechnicalSupportAdmin.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $year The year of the filing period to approve.
+     * @param int $month The month of the filing period to approve.
+     * @param string $country The two-character ISO-3166 code for the country.
+     * @param string $region The two or three character region code for the region.
+     * @param ApproveFilingsModel $model The approve request you wish to execute.
+     * @return FilingModel[]
+     */
+    public function approveFilingsCountryRegion($companyId, $year, $month, $country, $region, $model)    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/{$country}/{$region}/approve";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Add an adjustment to a given filing.
+     *
+     * This API is available by invitation only.
+     * An "Adjustment" is usually an increase or decrease to customer funding to Avalara,
+     * such as early filer discount amounts that are refunded to the customer, or efile fees from websites.
+     * Sometimes may be a manual change in tax liability similar to an augmentation.
+     * This API creates a new adjustment for an existing tax filing.
+     * This API can only be used when the filing has not yet been approved.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filing being adjusted.
+     * @param int $year The year of the filing's filing period being adjusted.
+     * @param int $month The month of the filing's filing period being adjusted.
+     * @param string $country The two-character ISO-3166 code for the country of the filing being adjusted.
+     * @param string $region The two or three character region code for the region.
+     * @param string $formCode The unique code of the form being adjusted.
+     * @param FilingAdjustmentModel[] $model A list of Adjustments to be created for the specified filing.
+     * @return FilingAdjustmentModel[]
+     */
+    public function createReturnAdjustment($companyId, $year, $month, $country, $region, $formCode, $model)    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/{$country}/{$region}/{$formCode}/adjust";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Add an augmentation for a given filing.
+     *
+     * This API is available by invitation only.
+     * An "Augmentation" is a manually added increase or decrease in tax liability, by either customer or Avalara
+     * usually due to customer wanting to report tax Avatax does not support, e.g. bad debts, rental tax.
+     * This API creates a new augmentation for an existing tax filing.
+     * This API can only be used when the filing has not been approved.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, CSPTester, FirmUser, SSTAdmin, TechnicalSupportAdmin.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filing being changed.
+     * @param int $year The month of the filing's filing period being changed.
+     * @param int $month The month of the filing's filing period being changed.
+     * @param string $country The two-character ISO-3166 code for the country of the filing being changed.
+     * @param string $region The two or three character region code for the region of the filing being changed.
+     * @param string $formCode The unique code of the form being changed.
+     * @param FilingAugmentationModel[] $model A list of augmentations to be created for the specified filing.
+     * @return FilingAugmentationModel[]
+     */
+    public function createReturnAugmentation($companyId, $year, $month, $country, $region, $formCode, $model)    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/{$country}/{$region}/{$formCode}/augment";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Add an payment to a given filing.
+     *
+     * This API is available by invitation only.
+     * An "Payment" is usually an increase or decrease to customer funding to Avalara,
+     * such as early filer discount amounts that are refunded to the customer, or efile fees from websites.
+     * Sometimes may be a manual change in tax liability similar to an augmentation.
+     * This API creates a new payment for an existing tax filing.
+     * This API can only be used when the filing has not yet been approved.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, CSPTester, FirmUser, SSTAdmin, TechnicalSupportAdmin.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filing being adjusted.
+     * @param int $year The year of the filing's filing period being adjusted.
+     * @param int $month The month of the filing's filing period being adjusted.
+     * @param string $country The two-character ISO-3166 code for the country of the filing being adjusted.
+     * @param string $region The two or three character region code for the region.
+     * @param string $formCode The unique code of the form being adjusted.
+     * @param FilingPaymentModel[] $model A list of Payments to be created for the specified filing.
+     * @return FilingPaymentModel[]
+     */
+    public function createReturnPayment($companyId, $year, $month, $country, $region, $formCode, $model)    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/{$country}/{$region}/{$formCode}/payment";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Delete an adjustment for a given filing.
+     *
+     * This API is available by invitation only.
+     * An "Adjustment" is usually an increase or decrease to customer funding to Avalara,
+     * such as early filer discount amounts that are refunded to the customer, or efile fees from websites.
+     * Sometimes may be a manual change in tax liability similar to an augmentation.
+     * This API deletes an adjustment for an existing tax filing.
+     * This API can only be used when the filing has been unapproved.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, CSPTester, FirmUser, SSTAdmin, TechnicalSupportAdmin.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filing being adjusted.
+     * @param int $id The ID of the adjustment being deleted.
+     * @param string $type The type of adjustment that you are trying to delete.
+     * @return ErrorDetail[]
+     */
+    public function deleteReturnAdjustment($companyId, $id, $type)    {
+        $path = "/api/v2/companies/{$companyId}/filings/adjust/{$id}";
+        $guzzleParams = [
+            'query' => ['type' => $type],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Delete an augmentation for a given filing.
+     *
+     * This API is available by invitation only.
+     * An "Augmentation" is a manually added increase or decrease in tax liability, by either customer or Avalara
+     * usually due to customer wanting to report tax Avatax does not support, e.g. bad debts, rental tax.
+     * This API deletes an augmentation for an existing tax filing.
+     * This API can only be used when the filing has been unapproved.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, CSPTester, FirmUser, SSTAdmin, TechnicalSupportAdmin.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filing being changed.
+     * @param int $id The ID of the augmentation being added.
+     * @return ErrorDetail[]
+     */
+    public function deleteReturnAugmentation($companyId, $id)    {
+        $path = "/api/v2/companies/{$companyId}/filings/augment/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Delete an payment for a given filing.
+     *
+     * This API is available by invitation only.
+     * An "Payment" is usually an increase or decrease to customer funding to Avalara,
+     * such as early filer discount amounts that are refunded to the customer, or efile fees from websites.
+     * Sometimes may be a manual change in tax liability similar to an augmentation.
+     * This API deletes an payment for an existing tax filing.
+     * This API can only be used when the filing has been unapproved.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, CSPTester, FirmUser, SSTAdmin, TechnicalSupportAdmin.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filing being adjusted.
+     * @param int $id The ID of the payment being deleted.
+     * @return ErrorDetail[]
+     */
+    public function deleteReturnPayment($companyId, $id)    {
+        $path = "/api/v2/companies/{$companyId}/filings/payment/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Retrieve worksheet checkup report for company and filing period.
+     *
+     * This API is available by invitation only.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $filingsId The unique id of the worksheet.
+     * @param int $companyId The unique ID of the company that owns the worksheet.
+     * @return FilingsCheckupModel
+     */
+    public function filingsCheckupReport($filingsId, $companyId)    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$filingsId}/checkup";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve worksheet checkup report for company and filing period.
+     *
+     * This API is available by invitation only.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The unique ID of the company that owns the worksheets object.
+     * @param int $year The year of the filing period.
+     * @param int $month The month of the filing period.
+     * @return FilingsCheckupModel
+     */
+    public function filingsCheckupReports($companyId, $year, $month)    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/checkup";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * Retrieve a filing containing the return and all its accrual returns.
      *
      * ### Security Policies
@@ -4852,7 +7034,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns these returns
      * @param int $filingReturnId The ID of the filing return
-     * @return FetchResult
+     * @return MultiTaxFilingModelFetchResult
      */
     public function getAccrualFilings($companyId, $filingReturnId)    {
         $path = "/api/v2/companies/{$companyId}/filings/accrual/{$filingReturnId}";
@@ -4882,7 +7064,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $region The region of the return(s) you are trying to retrieve
      * @param int $filingCalendarId The filing calendar id of the return you are trying to retrieve
      * @param string $taxformCode The unique tax form code of the form.
-     * @return FetchResult
+     * @return FiledReturnModelFetchResult
      */
     public function getFiledReturns($companyId, $endPeriodMonth, $endPeriodYear, $frequency, $status, $country, $region, $filingCalendarId, $taxformCode)    {
         $path = "/api/v2/companies/{$companyId}/filings/returns/filed";
@@ -4891,6 +7073,471 @@ class AvaTaxClient extends AvaTaxClientBase
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single attachment for a filing
+     *
+     * This API is available by invitation only.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $filingReturnId The unique id of the worksheet return.
+     * @param int $fileId The unique id of the document you are downloading
+     * @return object
+     */
+    public function getFilingAttachment($companyId, $filingReturnId, $fileId)    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$filingReturnId}/attachment";
+        $guzzleParams = [
+            'query' => ['fileId' => $fileId],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a list of filings for the specified company in the year and month of a given filing period.
+     *
+     * This API is available by invitation only.
+     * A "filing period" is the year and month of the date of the latest customer transaction allowed to be reported on a filing,
+     * based on filing frequency of filing.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $year The year of the filing period.
+     * @param int $month The two digit month of the filing period.
+     * @return object
+     */
+    public function getFilingAttachments($companyId, $year, $month)    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/attachments";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single trace file for a company filing period
+     *
+     * This API is available by invitation only.
+     * A "filing period" is the year and month of the date of the latest customer transaction allowed to be reported on a filing,
+     * based on filing frequency of filing.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $year The year of the filing period.
+     * @param int $month The two digit month of the filing period.
+     * @return object
+     */
+    public function getFilingAttachmentsTraceFile($companyId, $year, $month)    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/attachments/tracefile";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a filing for the specified company and id.
+     *
+     * This API is available by invitation only.
+     * A "filing period" is the year and month of the date of the latest customer transaction allowed to be reported on a filing,
+     * based on filing frequency of filing.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $id The id of the filing return your retrieving
+     * @param boolean $details Indicates if you would like the credit details returned
+     * @return FilingReturnModel
+     */
+    public function getFilingReturn($companyId, $id, $details)    {
+        $path = "/api/v2/companies/{$companyId}/filings/returns/{$id}";
+        $guzzleParams = [
+            'query' => ['details' => $details],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a list of filings for the specified company in the year and month of a given filing period.
+     *
+     * This API is available by invitation only.
+     * A "filing period" is the year and month of the date of the latest customer transaction allowed to be reported on a filing,
+     * based on filing frequency of filing.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $year The year of the filing period.
+     * @param int $month The two digit month of the filing period.
+     * @return FilingModelFetchResult
+     */
+    public function getFilings($companyId, $year, $month)    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a list of filings for the specified company in the given filing period and country.
+     *
+     * This API is available by invitation only.
+     * A "filing period" is the year and month of the date of the latest customer transaction allowed to be reported on a filing,
+     * based on filing frequency of filing.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $year The year of the filing period.
+     * @param int $month The two digit month of the filing period.
+     * @param string $country The two-character ISO-3166 code for the country.
+     * @return FilingModelFetchResult
+     */
+    public function getFilingsByCountry($companyId, $year, $month, $country)    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/{$country}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a list of filings for the specified company in the filing period, country and region.
+     *
+     * This API is available by invitation only.
+     * A "filing period" is the year and month of the date of the latest customer transaction allowed to be reported on a filing,
+     * based on filing frequency of filing.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $year The year of the filing period.
+     * @param int $month The two digit month of the filing period.
+     * @param string $country The two-character ISO-3166 code for the country.
+     * @param string $region The two or three character region code for the region.
+     * @return FilingModelFetchResult
+     */
+    public function getFilingsByCountryRegion($companyId, $year, $month, $country, $region)    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/{$country}/{$region}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a list of filings for the specified company in the given filing period, country, region and form.
+     *
+     * This API is available by invitation only.
+     * A "filing period" is the year and month of the date of the latest customer transaction allowed to be reported on a filing,
+     * based on filing frequency of filing.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $year The year of the filing period.
+     * @param int $month The two digit month of the filing period.
+     * @param string $country The two-character ISO-3166 code for the country.
+     * @param string $region The two or three character region code for the region.
+     * @param string $formCode The unique code of the form.
+     * @return FilingModelFetchResult
+     */
+    public function getFilingsByReturnName($companyId, $year, $month, $country, $region, $formCode)    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/{$country}/{$region}/{$formCode}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a list of filings for the specified company in the year and month of a given filing period.
+     * This gets the basic information from the filings and doesn't include anything extra.
+     *
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns these batches
+     * @param int $endPeriodMonth The month of the period you are trying to retrieve
+     * @param int $endPeriodYear The year of the period you are trying to retrieve
+     * @param string $frequency The frequency of the return you are trying to retrieve (See FilingFrequencyId::* for a list of allowable values)
+     * @param string $status The status of the return(s) you are trying to retrieve (See FilingStatusId::* for a list of allowable values)
+     * @param string $country The country of the return(s) you are trying to retrieve
+     * @param string $region The region of the return(s) you are trying to retrieve
+     * @param int $filingCalendarId The filing calendar id of the return you are trying to retrieve
+     * @param string $taxformCode The unique tax form code of the form.
+     * @return FilingReturnModelBasicFetchResult
+     */
+    public function getFilingsReturns($companyId, $endPeriodMonth, $endPeriodYear, $frequency, $status, $country, $region, $filingCalendarId, $taxformCode)    {
+        $path = "/api/v2/companies/{$companyId}/filings/returns";
+        $guzzleParams = [
+            'query' => ['endPeriodMonth' => $endPeriodMonth, 'endPeriodYear' => $endPeriodYear, 'frequency' => $frequency, 'status' => $status, 'country' => $country, 'region' => $region, 'filingCalendarId' => $filingCalendarId, 'taxformCode' => $taxformCode],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a list of filings for the specified company in the year and month of a given filing period.
+     *
+     * This API is available by invitation only.
+     * A "filing period" is the year and month of the date of the latest customer transaction allowed to be reported on a filing,
+     * based on filing frequency of filing.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $year The year of the filing period.
+     * @param int $month The two digit month of the filing period.
+     * @param string $country The two-character ISO-3166 code for the country.
+     * @param string $region The two or three character region code for the region.
+     * @param string $formCode The unique code of the form.
+     * @return MultiTaxFilingModelFetchResult
+     */
+    public function getTaxFilings($companyId, $year, $month, $country, $region, $formCode)    {
+        $path = "/api/v2/companies/{$companyId}/filings";
+        $guzzleParams = [
+            'query' => ['year' => $year, 'month' => $month, 'country' => $country, 'region' => $region, 'formCode' => $formCode],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Rebuild a set of filings for the specified company in the given filing period.
+     *
+     * This API is available by invitation only.
+     * Rebuilding a return means re-creating or updating the amounts to be filed (worksheet) for a filing.
+     * Rebuilding has to be done whenever a customer adds transactions to a filing.
+     * A "filing period" is the year and month of the date of the latest customer transaction allowed to be reported on a filing,
+     * based on filing frequency of filing.
+     * This API requires filing to be unapproved.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, CSPTester, FirmUser, SSTAdmin, TechnicalSupportAdmin.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $year The year of the filing period to be rebuilt.
+     * @param int $month The month of the filing period to be rebuilt.
+     * @param RebuildFilingsModel $model The rebuild request you wish to execute.
+     * @return FilingModelFetchResult
+     */
+    public function rebuildFilings($companyId, $year, $month, $model)    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/rebuild";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Rebuild a set of filings for the specified company in the given filing period and country.
+     *
+     * This API is available by invitation only.
+     * Rebuilding a return means re-creating or updating the amounts to be filed (worksheet) for a filing.
+     * Rebuilding has to be done whenever a customer adds transactions to a filing.
+     * A "filing period" is the year and month of the date of the latest customer transaction allowed to be reported on a filing,
+     * based on filing frequency of filing.
+     * This API requires filing to be unapproved.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, CSPTester, FirmUser, SSTAdmin, TechnicalSupportAdmin.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $year The year of the filing period to be rebuilt.
+     * @param int $month The month of the filing period to be rebuilt.
+     * @param string $country The two-character ISO-3166 code for the country.
+     * @param RebuildFilingsModel $model The rebuild request you wish to execute.
+     * @return FilingModelFetchResult
+     */
+    public function rebuildFilingsByCountry($companyId, $year, $month, $country, $model)    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/{$country}/rebuild";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Rebuild a set of filings for the specified company in the given filing period, country and region.
+     *
+     * This API is available by invitation only.audit.CheckAuthorizationReturns(null, companyId);
+     * Rebuilding a return means re-creating or updating the amounts to be filed for a filing.
+     * Rebuilding has to be done whenever a customer adds transactions to a filing.
+     * A "filing period" is the year and month of the date of the latest customer transaction allowed to be reported on a filing,
+     * based on filing frequency of filing.
+     * This API requires filing to be unapproved.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, CSPTester, FirmUser, SSTAdmin, TechnicalSupportAdmin.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filings.
+     * @param int $year The year of the filing period to be rebuilt.
+     * @param int $month The month of the filing period to be rebuilt.
+     * @param string $country The two-character ISO-3166 code for the country.
+     * @param string $region The two or three character region code for the region.
+     * @param RebuildFilingsModel $model The rebuild request you wish to execute.
+     * @return FilingModelFetchResult
+     */
+    public function rebuildFilingsByCountryRegion($companyId, $year, $month, $country, $region, $model)    {
+        $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/{$country}/{$region}/rebuild";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Edit an adjustment for a given filing.
+     *
+     * This API is available by invitation only.
+     * An "Adjustment" is usually an increase or decrease to customer funding to Avalara,
+     * such as early filer discount amounts that are refunded to the customer, or efile fees from websites.
+     * Sometimes may be a manual change in tax liability similar to an augmentation.
+     * This API modifies an adjustment for an existing tax filing.
+     * This API can only be used when the filing has not yet been approved.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, CSPTester, FirmUser, SSTAdmin, TechnicalSupportAdmin.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filing being adjusted.
+     * @param int $id The ID of the adjustment being edited.
+     * @param FilingAdjustmentModel $model The updated Adjustment.
+     * @return FilingAdjustmentModel
+     */
+    public function updateReturnAdjustment($companyId, $id, $model)    {
+        $path = "/api/v2/companies/{$companyId}/filings/adjust/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Edit an augmentation for a given filing.
+     *
+     * This API is available by invitation only.
+     * An "Augmentation" is a manually added increase or decrease in tax liability, by either customer or Avalara
+     * usually due to customer wanting to report tax Avatax does not support, e.g. bad debts, rental tax.
+     * This API modifies an augmentation for an existing tax filing.
+     * This API can only be used when the filing has not been approved.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, CSPTester, FirmUser, SSTAdmin, TechnicalSupportAdmin.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filing being changed.
+     * @param int $id The ID of the augmentation being edited.
+     * @param FilingAugmentationModel $model The updated Augmentation.
+     * @return FilingModel
+     */
+    public function updateReturnAugmentation($companyId, $id, $model)    {
+        $path = "/api/v2/companies/{$companyId}/filings/augment/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Edit an payment for a given filing.
+     *
+     * This API is available by invitation only.
+     * An "Payment" is usually an increase or decrease to customer funding to Avalara,
+     * such as early filer discount amounts that are refunded to the customer, or efile fees from websites.
+     * Sometimes may be a manual change in tax liability similar to an augmentation.
+     * This API modifies an payment for an existing tax filing.
+     * This API can only be used when the filing has not yet been approved.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, CSPTester, FirmUser, SSTAdmin, TechnicalSupportAdmin.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns the filing being adjusted.
+     * @param int $id The ID of the payment being edited.
+     * @param FilingPaymentModel $model The updated Payment.
+     * @return FilingPaymentModel
+     */
+    public function updateReturnPayment($companyId, $id, $model)    {
+        $path = "/api/v2/companies/{$companyId}/filings/payment/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
     }
 
     /**
@@ -5023,7 +7670,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* firmAccountName, clientAccountName
-     * @return FetchResult
+     * @return FirmClientLinkageOutputModelFetchResult
      */
     public function listFirmClientLinkage($filter=null)    {
         $path = "/api/v2/firmclientlinkages";
@@ -5641,7 +8288,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return ItemClassificationOutputModelFetchResult
      */
     public function listItemClassifications($companyId, $itemId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/items/{$itemId}/classifications";
@@ -5677,7 +8324,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return ItemParameterModelFetchResult
      */
     public function listItemParameters($companyId, $itemId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/items/{$itemId}/parameters";
@@ -5719,7 +8366,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return ItemModelFetchResult
      */
     public function listItemsByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/items";
@@ -5755,7 +8402,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return ItemModelFetchResult
      */
     public function queryItems($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/items";
@@ -6000,7 +8647,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return JurisdictionOverrideModelFetchResult
      */
     public function listJurisdictionOverridesByAccount($accountId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/accounts/{$accountId}/jurisdictionoverrides";
@@ -6034,7 +8681,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return JurisdictionOverrideModelFetchResult
      */
     public function queryJurisdictionOverrides($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/jurisdictionoverrides";
@@ -6267,7 +8914,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return LocationParameterModelFetchResult
      */
     public function listLocationParameters($companyId, $locationId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/locations/{$locationId}/parameters";
@@ -6305,7 +8952,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return LocationModelFetchResult
      */
     public function listLocationsByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/locations";
@@ -6343,7 +8990,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return LocationModelFetchResult
      */
     public function queryLocations($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/locations";
@@ -6404,6 +9051,37 @@ class AvaTaxClient extends AvaTaxClientBase
      */
     public function updateLocationParameter($companyId, $locationId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/locations/{$locationId}/parameters/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Update a location's remittance
+     *
+     * Use when wanting to change the remittance of a company location of type Marketplace. The new Effective Date should be at least a day later than
+     * the existing Effective Date but no greater than the existing End Date. This API will expire the existing location by
+     * setting end date with the new effective date minus one day. Then create a new location with the same parameters except for the dates
+     * and the remittance type.
+     *  
+     * NOTES: Only to alternate between SellerRemitsTax and MarketPlaceRemitsTax address categories for location with address type MarketPlace.
+     * If new Effective Date is greater than the existing End Date, in other words the new date range isn't overlapping with the existing date range,
+     * please create a new location instead.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPAdmin, CSPTester, FirmAdmin, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this location
+     * @param int $id The primary key of this location
+     * @param UpdateCompanyLocationRemittanceModel $model The new remittance to change the existing location's to, as well as new effective and end date.
+     * @return LocationModel
+     */
+    public function updateLocationRemittance($companyId, $id, $model)    {
+        $path = "/api/v2/companies/{$companyId}/locations/{$id}/remittance";
         $guzzleParams = [
             'query' => [],
             'body' => json_encode($model)
@@ -6655,8 +9333,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * * This API depends on the following active services<br />*Required* (all): AvaTaxPro.
      *
      * 
-     * @param string $code 
-     * @param string $type  (See DocumentType::* for a list of allowable values)
+     * @param string $code The multidocument code to retrieve
+     * @param string $type The transaction type to retrieve (See DocumentType::* for a list of allowable values)
      * @param string $include Specifies objects to include in the response after transaction is created
      * @return MultiDocumentModel
      */
@@ -6763,7 +9441,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return MultiDocumentModelFetchResult
      */
     public function listMultiDocumentTransactions($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/transactions/multidocument";
@@ -7240,7 +9918,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return NexusModelFetchResult
      */
     public function listNexusByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/nexus";
@@ -7275,12 +9953,42 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return NexusParameterDetailModelFetchResult
      */
     public function listNexusParameters($companyId, $nexusId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/nexus/{$nexusId}/parameters";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Summarize nexus by NexusTaxTypeGroup for this company
+     *
+     * Provides a summary of nexus information useful for quickly displaying key information.
+     *  
+     * The concept of Nexus indicates a place where your company is legally obligated to collect and remit transactional
+     * taxes. The legal requirements for nexus may vary per country and per jurisdiction; please seek advice from your
+     * accountant or lawyer prior to declaring nexus.
+     *  
+     * This API produces only basic information about your company's nexus declarations. For example, it will show
+     * the number of nexus declarations of each tax type. To request more information about your company's nexus
+     * declarations, please use `QueryNexus` or `ListNexusByCompany`.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns these nexus objects
+     * @return NexusSummaryModel
+     */
+    public function nexusSummary($companyId)    {
+        $path = "/api/v2/companies/{$companyId}/nexus/summary";
+        $guzzleParams = [
+            'query' => [],
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
@@ -7311,7 +10019,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return NexusModelFetchResult
      */
     public function queryNexus($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/nexus";
@@ -7393,6 +10101,655 @@ class AvaTaxClient extends AvaTaxClientBase
             'body' => json_encode($model)
         ];
         return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Create a new notice comment.
+     *
+     * This API is available by invitation only.
+     * 'Notice comments' are updates by the notice team on the work to be done and that has been done so far on a notice.
+     * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
+     * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Operator, Compliance Root User, Compliance Temp User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this notice.
+     * @param int $id The ID of the tax notice we are adding the comment for.
+     * @param NoticeCommentModel[] $model The notice comments you wish to create.
+     * @return NoticeCommentModel[]
+     */
+    public function createNoticeComment($companyId, $id, $model)    {
+        $path = "/api/v2/companies/{$companyId}/notices/{$id}/comments";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Create a new notice finance details.
+     *
+     * This API is available by invitation only.
+     * 'Notice finance details' is the categorical breakdown of the total charge levied by the tax authority on our customer,
+     * as broken down in our "notice log" found in Workflow. Main examples of the categories are 'Tax Due', 'Interest', 'Penalty', 'Total Abated'.
+     * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
+     * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Operator, Compliance Root User, Compliance Temp User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this notice.
+     * @param int $id The ID of the notice added to the finance details.
+     * @param NoticeFinanceModel[] $model The notice finance details you wish to create.
+     * @return NoticeFinanceModel[]
+     */
+    public function createNoticeFinanceDetails($companyId, $id, $model)    {
+        $path = "/api/v2/companies/{$companyId}/notices/{$id}/financedetails";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Create a new notice responsibility.
+     *
+     * This API is available by invitation only.
+     * 'Notice comments' are updates by the notice team on the work to be done and that has been done so far on a notice.
+     * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
+     * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Operator, Compliance Root User, Compliance Temp User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this notice.
+     * @param int $id The ID of the tax notice we are adding the responsibility for.
+     * @param NoticeResponsibilityDetailModel[] $model The notice responsibilities you wish to create.
+     * @return NoticeResponsibilityDetailModel[]
+     */
+    public function createNoticeResponsibilities($companyId, $id, $model)    {
+        $path = "/api/v2/companies/{$companyId}/notices/{$id}/responsibilities";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Create a new notice root cause.
+     *
+     * This API is available by invitation only.
+     * 'Notice root causes' are are those who are responsible for the notice.
+     * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
+     * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Operator, Compliance Root User, Compliance Temp User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this notice.
+     * @param int $id The ID of the tax notice we are adding the responsibility for.
+     * @param NoticeRootCauseDetailModel[] $model The notice root causes you wish to create.
+     * @return NoticeRootCauseDetailModel[]
+     */
+    public function createNoticeRootCauses($companyId, $id, $model)    {
+        $path = "/api/v2/companies/{$companyId}/notices/{$id}/rootcauses";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Create a new notice.
+     *
+     * This API is available by invitation only.
+     * Create one or more new notice objects.
+     * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
+     * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Operator, Compliance Root User, Compliance Temp User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this notice.
+     * @param NoticeModel[] $model The notice object you wish to create.
+     * @return NoticeModel[]
+     */
+    public function createNotices($companyId, $model)    {
+        $path = "/api/v2/companies/{$companyId}/notices";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Delete a single notice.
+     *
+     * This API is available by invitation only.
+     * 'Notice comments' are updates by the notice team on the work to be done and that has been done so far on a notice.
+     * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
+     * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Operator, Compliance Root User, Compliance Temp User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this notice.
+     * @param int $id The ID of the notice you wish to delete the finance detail from.
+     * @param int $commentDetailsId The ID of the comment you wish to delete.
+     * @return ErrorDetail[]
+     */
+    public function deleteCommentDetails($companyId, $id, $commentDetailsId)    {
+        $path = "/api/v2/companies/{$companyId}/notices/{$id}/commentdetails/{$commentdetailsid}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Delete a single notice.
+     *
+     * This API is available by invitation only.
+     * 'Notice finance details' is the categorical breakdown of the total charge levied by the tax authority on our customer,
+     * as broken down in our "notice log" found in Workflow. Main examples of the categories are 'Tax Due', 'Interest', 'Penalty', 'Total Abated'.
+     * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
+     * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Operator, Compliance Root User, Compliance Temp User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this notice.
+     * @param int $id The ID of the notice you wish to delete the finance detail from.
+     * @param int $financeDetailsId The ID of the finance detail you wish to delete.
+     * @return ErrorDetail[]
+     */
+    public function deleteFinanceDetails($companyId, $id, $financeDetailsId)    {
+        $path = "/api/v2/companies/{$companyId}/notices/{$id}/financedetails/{$financedetailsid}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Delete a single notice.
+     *
+     * This API is available by invitation only.
+     * Mark the existing notice object at this URL as deleted.
+     * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
+     * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Operator, Compliance Root User, Compliance Temp User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this notice.
+     * @param int $id The ID of the notice you wish to delete.
+     * @return ErrorDetail[]
+     */
+    public function deleteNotice($companyId, $id)    {
+        $path = "/api/v2/companies/{$companyId}/notices/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Delete a single responsibility
+     *
+     * This API is available by invitation only.
+     * Mark the existing notice object at this URL as deleted.
+     * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
+     * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Operator, Compliance Root User, Compliance Temp User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this notice.
+     * @param int $noticeId The ID of the notice you wish to delete.
+     * @param int $id The ID of the responsibility you wish to delete.
+     * @return ErrorDetail[]
+     */
+    public function deleteResponsibilities($companyId, $noticeId, $id)    {
+        $path = "/api/v2/companies/{$companyId}/notices/{$noticeId}/responsibilities/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Delete a single root cause.
+     *
+     * This API is available by invitation only.
+     * Mark the existing notice object at this URL as deleted.
+     * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
+     * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Operator, Compliance Root User, Compliance Temp User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this notice.
+     * @param int $noticeId The ID of the notice you wish to delete.
+     * @param int $id The ID of the root cause you wish to delete.
+     * @return ErrorDetail[]
+     */
+    public function deleteRootCauses($companyId, $noticeId, $id)    {
+        $path = "/api/v2/companies/{$companyId}/notices/{$noticeId}/rootcauses/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single attachment
+     *
+     * This API is available by invitation only.
+     * Get the file attachment identified by this URL.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Operator, Compliance Root User, Compliance Temp User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company for this attachment.
+     * @param int $id The ResourceFileId of the attachment to download.
+     * @return object
+     */
+    public function downloadNoticeAttachment($companyId, $id)    {
+        $path = "/api/v2/companies/{$companyId}/notices/files/{$id}/attachment";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single notice.
+     *
+     * This API is available by invitation only.
+     * Get the tax notice object identified by this URL.
+     * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
+     * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Operator, Compliance Root User, Compliance Temp User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company for this notice.
+     * @param int $id The ID of this notice.
+     * @return NoticeModel
+     */
+    public function getNotice($companyId, $id)    {
+        $path = "/api/v2/companies/{$companyId}/notices/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve notice comments for a specific notice.
+     *
+     * This API is available by invitation only.
+     * 'Notice comments' are updates by the notice team on the work to be done and that has been done so far on a notice.
+     * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
+     * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Operator, Compliance Root User, Compliance Temp User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $id The ID of the notice.
+     * @param int $companyId The ID of the company that owns these notices.
+     * @return NoticeCommentModelFetchResult
+     */
+    public function getNoticeComments($id, $companyId)    {
+        $path = "/api/v2/companies/{$companyId}/notices/{$id}/comments";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve notice finance details for a specific notice.
+     *
+     * This API is available by invitation only.
+     * 'Notice finance details' is the categorical breakdown of the total charge levied by the tax authority on our customer,
+     * as broken down in our "notice log" found in Workflow. Main examples of the categories are 'Tax Due', 'Interest', 'Penalty', 'Total Abated'.
+     * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
+     * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Operator, Compliance Root User, Compliance Temp User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $id The ID of the company that owns these notices.
+     * @param int $companyId The ID of the company that owns these notices.
+     * @return NoticeFinanceModelFetchResult
+     */
+    public function getNoticeFinanceDetails($id, $companyId)    {
+        $path = "/api/v2/companies/{$companyId}/notices/{$id}/financedetails";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve notice responsibilities for a specific notice.
+     *
+     * This API is available by invitation only.
+     * 'Notice responsibilities' are are those who are responsible for the notice.
+     * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
+     * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Operator, Compliance Root User, Compliance Temp User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $id The ID of the notice.
+     * @param int $companyId The ID of the company that owns these notices.
+     * @return NoticeResponsibilityDetailModelFetchResult
+     */
+    public function getNoticeResponsibilities($id, $companyId)    {
+        $path = "/api/v2/companies/{$companyId}/notices/{$id}/responsibilities";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve notice root causes for a specific notice.
+     *
+     * This API is available by invitation only.
+     * 'Notice root causes' are are those who are responsible for the notice.
+     * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
+     * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Operator, Compliance Root User, Compliance Temp User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $id The ID of the notice.
+     * @param int $companyId The ID of the company that owns these notices.
+     * @return NoticeRootCauseDetailModelFetchResult
+     */
+    public function getNoticeRootCauses($id, $companyId)    {
+        $path = "/api/v2/companies/{$companyId}/notices/{$id}/rootcauses";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve notices for a company.
+     *
+     * This API is available by invitation only.
+     * List all tax notice objects assigned to this company.
+     * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
+     * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
+     *  
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Operator, Compliance Root User, Compliance Temp User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns these notices.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* status, totalRemit, ticketReferenceNo, ticketReferenceUrl, reason, type, createdByUserName, documentReference, jurisdictionName, jurisdictionType, comments, finances, responsibility, rootCause
+     * @param string $include A comma separated list of additional data to retrieve.
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return NoticeModelFetchResult
+     */
+    public function listNoticesByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/companies/{$companyId}/notices";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all notices.
+     *
+     * This API is available by invitation only.
+     *  
+     * This API is deprecated - please use POST `/api/v2/notices/query` API.
+     *  
+     * Get multiple notice objects across all companies.
+     * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
+     * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
+     *  
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Operator, Compliance Root User, Compliance Temp User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* status, totalRemit, ticketReferenceNo, ticketReferenceUrl, reason, type, createdByUserName, documentReference, jurisdictionName, jurisdictionType, comments, finances, responsibility, rootCause
+     * @param string $include A comma separated list of additional data to retrieve.
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return NoticeModelFetchResult
+     */
+    public function queryNotices($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/notices";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all notices.
+     *
+     * This API is available by invitation only.
+     *  
+     * This API is intended to replace the GET `/api/v2/notices` API. The fetch request object is posted on the body of the request instead of the URI, so it's not limited by a set number of characters.
+     * The documentation of the GET API shows how filtering, sorting and pagination works.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Operator, Compliance Root User, Compliance Temp User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param QueryRequestModel $model Query object to filter, sort and paginate the filing calendars.
+     * @return NoticeModelFetchResult
+     */
+    public function queryNoticesPost($model)    {
+        $path = "/api/v2/notices/query";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Update a single notice finance detail.
+     *
+     * This API is available by invitation only.
+     * All data from the existing object will be replaced with data in the object you PUT.
+     * To set a field's value to null, you may either set its value to null or omit that field from the object you post.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Operator, Compliance Root User, Compliance Temp User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that this notice finance detail belongs to.
+     * @param int $noticeid The ID of the notice finance detail you wish to update.
+     * @param int $financeDetailsId The ID of the finance detail you wish to delete.
+     * @param NoticeFinanceModel $model The notice finance detail object you wish to update.
+     * @return NoticeFinanceModel
+     */
+    public function updateFinanceDetails($companyId, $noticeid, $financeDetailsId, $model)    {
+        $path = "/api/v2/companies/{$companyId}/notices/{$noticeid}/financedetails/{$financedetailsid}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Update a single notice.
+     *
+     * This API is available by invitation only.
+     * Replace the existing notice object at this URL with an updated object.
+     * A 'notice' represents a letter sent to a business by a tax authority regarding tax filing issues. Avalara
+     * Returns customers often receive support and assistance from the Compliance Notices team in handling notices received by taxing authorities.
+     * All data from the existing object will be replaced with data in the object you PUT.
+     * To set a field's value to null, you may either set its value to null or omit that field from the object you post.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Operator, Compliance Root User, Compliance Temp User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that this notice belongs to.
+     * @param int $id The ID of the notice you wish to update.
+     * @param NoticeModel $model The notice object you wish to update.
+     * @return NoticeModel
+     */
+    public function updateNotice($companyId, $id, $model)    {
+        $path = "/api/v2/companies/{$companyId}/notices/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Update a single notice comment.
+     *
+     * This API is available by invitation only.
+     * All data from the existing object will be replaced with data in the object you PUT.
+     * To set a field's value to null, you may either set its value to null or omit that field from the object you post.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Operator, Compliance Root User, Compliance Temp User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that this notice comment belongs to.
+     * @param int $noticeid The ID of the notice you wish to update.
+     * @param int $commentDetailsId The ID of the comment you wish to update.
+     * @param NoticeCommentModel $model The notice comment object you wish to update.
+     * @return NoticeCommentModel
+     */
+    public function updateNoticeComments($companyId, $noticeid, $commentDetailsId, $model)    {
+        $path = "/api/v2/companies/{$companyId}/notices/{$noticeid}/commentdetails/{$commentdetailsid}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Upload a new notice attachment.
+     *
+     * This API is available by invitation only.
+     *  
+     * Uploads a file attachment for a tax notice.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Operator, Compliance Root User, Compliance Temp User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.<br />*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company for this attachment.
+     * @param ResourceFileUploadRequestModel $model The upload request.
+     * @return ResourceFileUploadResultModel
+     */
+    public function uploadAttachment($companyId, $model)    {
+        $path = "/api/v2/companies/{$companyId}/notices/files/attachment";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
     }
 
     /**
@@ -7483,7 +10840,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return NotificationModelFetchResult
      */
     public function listNotifications($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/notifications";
@@ -7553,6 +10910,30 @@ class AvaTaxClient extends AvaTaxClientBase
         $guzzleParams = [
             'query' => [],
             'body' => null
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Bridge API for integration of validated certificates
+     *
+     * # For Registrar Use Only
+     * This API is for use by Avalara Registrar administrative users only.
+     * 
+     * ### Security Policies
+     * 
+     * * This API is available to Avalara system-level (registrar-level) users only.
+     * * This API depends on the following active services<br />*Required* (all): AvaCert.
+     *
+     * 
+     * @param EcmsModel[] $model Either a single exempt certificate or an array of certificates to create
+     * @return EcmsModel[]
+     */
+    public function certCaptureBridge($model)    {
+        $path = "/api/v2/certcapturebridge";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
         ];
         return $this->restCall($path, 'POST', $guzzleParams);
     }
@@ -7969,7 +11350,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $pageKey Provide a page key to retrieve the next page of results.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
-     * @return FetchResult
+     * @return ReportModelFetchResult
      */
     public function listReports($companyId, $pageKey, $skip=null, $top=null)    {
         $path = "/api/v2/reports";
@@ -8104,7 +11485,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return SettingModelFetchResult
      */
     public function listSettingsByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/settings";
@@ -8142,7 +11523,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return SettingModelFetchResult
      */
     public function querySettings($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/settings";
@@ -8235,7 +11616,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return SubscriptionModelFetchResult
      */
     public function listSubscriptionsByAccount($accountId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/accounts/{$accountId}/subscriptions";
@@ -8265,7 +11646,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return SubscriptionModelFetchResult
      */
     public function querySubscriptions($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/subscriptions";
@@ -8376,7 +11757,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return TaxCodeModelFetchResult
      */
     public function listTaxCodesByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/taxcodes";
@@ -8409,7 +11790,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return TaxCodeModelFetchResult
      */
     public function queryTaxCodes($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/taxcodes";
@@ -8448,6 +11829,29 @@ class AvaTaxClient extends AvaTaxClientBase
             'body' => json_encode($model)
         ];
         return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Retrieve send-sale tax content for this company.
+     *
+     * This API is available by invitation only.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Required* (all): SendSalesRateFile.
+     *
+     * 
+     * @param SendSalesRequestModel $model The send sales request model.
+     * @return object
+     */
+    public function buildSendSalesRateFile($model)    {
+        $path = "/api/v2/sendsalescontent/download";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
     }
 
     /**
@@ -8546,6 +11950,33 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Retrieve send-sale tax content for this company.
+     *
+     * This API is available by invitation only.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Required* (all): SendSalesRateFile.
+     *
+     * 
+     * @param string $date The date for which we are fetching tax content.
+     * @param string $taxCode The tax code for which we are fetching tax content.
+     * @param int $companyId The unique ID number of the company which is fetching tax content.
+     * @param string $format Requests a specific data format for this content file. (See SendSalesOutputFileFormat::* for a list of allowable values)
+     * @param string $type Requests a specific encoding for this content file. (See SendSalesFileType::* for a list of allowable values)
+     * @return object
+     */
+    public function downloadSendSalesRateFile($date, $taxCode, $companyId, $format, $type)    {
+        $path = "/api/v2/sendsalescontent/download/{$companyId}/{$taxCode}/{$date}";
+        $guzzleParams = [
+            'query' => ['format' => $format, 'type' => $type],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * Download a file listing tax rates by postal code
      *
      * Download a CSV file containing all five digit postal codes in the United States and their sales
@@ -8605,6 +12036,62 @@ class AvaTaxClient extends AvaTaxClientBase
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Export the tax profile of this company to a backup file
+     *
+     * Exports the tax profile of a company to a file, containing all information that affects tax calculation for this company.
+     *  
+     * A tax profile is a series of decisions and configuration choices that affect your company's tax calculation. These decisions
+     * include your nexus declarations, your item catalog, your custom tax rules, and so on.
+     *  
+     * This API can be used to export a complete zip file containing your company's current tax profile, and you can then restore this
+     * profile to a different company or compare it over time to see if your profile has been changed.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro.
+     *
+     * 
+     * @param int $companyId The unique ID number of the company whose profile you wish to retrieve.
+     * @return object
+     */
+    public function exportTaxProfile($companyId)    {
+        $path = "/api/v2/companies/{$companyId}/taxprofile";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Import a tax profile.
+     *
+     * Imports a tax profile to a new company, along with the option to import account settings.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
+     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro.
+     *
+     * 
+     * @param int $accountId The account id of the account to which the tax profile will be imported.
+     * @param string $newCompanyCode The companyCode to use for the imported company.
+     * @param boolean $replaceAccountSettings Replace the current account settings with the ones in the tax profile.
+     * @param boolean $bypassNexusValidation Enable invalid nexus to be imported.
+     * @param object $taxProfile The taxProfile
+     * @return CompanyModel
+     */
+    public function importTaxProfile($accountId, $newCompanyCode, $replaceAccountSettings, $bypassNexusValidation, $taxProfile)    {
+        $path = "/api/v2/taxprofile";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
     }
 
     /**
@@ -8743,7 +12230,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return TaxRuleModelFetchResult
      */
     public function listTaxRules($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/taxrules";
@@ -8784,7 +12271,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return TaxRuleModelFetchResult
      */
     public function queryTaxRules($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/taxrules";
@@ -9444,6 +12931,44 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Inspects a transaction line and presents the result with a human-readable text providing the reasoning behind
+     * determination like nexus, exemption, product taxability etc.
+     *
+     * Inspects a transaction line and presents the result with a human-readable text providing the reasoning behind
+     * determination like nexus, exemption, product taxability etc.
+     *  
+     * NOTE: In order to avoid ambiguity, DocumentType of 'Any' is invalid for this API as this API is designed to look for a specific line of a given document.
+     *  
+     * NOTE: If your companyCode or transactionCode contains any of these characters /, +, ? or a space please use the following encoding before making a request:
+     * * Replace '/' with '\_-ava2f-\_' For example: document/Code becomes document_-ava2f-_Code
+     * * Replace '+' with '\_-ava2b-\_' For example: document+Code becomes document_-ava2b-_Code
+     * * Replace '?' with '\_-ava3f-\_' For example: document?Code becomes document_-ava3f-_Code
+     * * Replace '%' with '\_-ava25-\_' For example: document%Code becomes document_-ava25-_Code
+     * * Replace '#' with '\_-ava23-\_' For example: document#Code becomes document_-ava23-_Code
+     * * Replace ' ' with '%20' For example: document Code becomes document%20Code
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ProStoresOperator, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * * This API depends on the following active services<br />*Required* (all): AvaTaxPro, BasicReturns.
+     *
+     * 
+     * @param string $companyCode The company code of the company that recorded this transaction
+     * @param string $transactionCode The transaction code of the transaction under line inspection
+     * @param string $lineNo The line number of the transaction that needs to be inspected
+     * @param string $documentType The document type of the transaction, In order to avoid ambiguity, DocumentType of 'Any' is invalid for this API as this API is designed to look for a specific line of a given document. (See DocumentType::* for a list of allowable values)
+     * @return InspectLineResponseModel
+     */
+    public function inspectLine($companyCode, $transactionCode, $lineNo, $documentType)    {
+        $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/lines/{$lineNo}/inspect";
+        $guzzleParams = [
+            'query' => ['documentType' => $documentType],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * Retrieve all transactions
      *
      * List all transactions attached to this company.
@@ -9485,11 +13010,11 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $companyCode The company code of the company that recorded this transaction
      * @param int $dataSourceId Optionally filter transactions to those from a specific data source.
      * @param string $include Specifies objects to include in this fetch call
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* totalDiscount, lines, addresses, locationTypes, summary, taxDetailsByTaxType, parameters, messages, invoiceMessages, isFakeTransaction
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* exchangeRateCurrencyCode, totalDiscount, lines, addresses, locationTypes, summary, taxDetailsByTaxType, parameters, messages, invoiceMessages, isFakeTransaction
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return TransactionModelFetchResult
      */
     public function listTransactionsByCompany($companyCode, $dataSourceId, $include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyCode}/transactions";
@@ -9966,7 +13491,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return UPCModelFetchResult
      */
     public function listUPCsByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/upcs";
@@ -9997,7 +13522,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return UPCModelFetchResult
      */
     public function queryUPCs($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/upcs";
@@ -10216,7 +13741,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return UserModelFetchResult
      */
     public function listUsersByAccount($accountId, $include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/accounts/{$accountId}/users";
@@ -10255,7 +13780,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return UserModelFetchResult
      */
     public function queryUsers($include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/users";
@@ -10331,7 +13856,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * specific features of AvaTax.
      *
      * 
-     * @return FetchResult
+     * @return SubscriptionModelFetchResult
      */
     public function listMySubscriptions()    {
         $path = "/api/v2/utilities/subscriptions";
