@@ -125,36 +125,6 @@ class PointOfSalePartnerId
 /**
  * 
  */
-class StackAggregationOption
-{    const C_NOSTACKAGGREGATION = 0;
-    const C_FULLSTACKAGGREGATION = 1;
-    const C_AGGREGATESTATEANDCOUNTY = 2;
-    const C_AGGREGATECITYANDCOUNTY = 3;
-
-}
-
-/**
- * 
- */
-class SendSalesOutputFileFormat
-{    const C_STANDARD = 1;
-    const C_DMA = 2;
-    const C_DMA_NEW = 3;
-
-}
-
-/**
- * 
- */
-class SendSalesFileType
-{    const C_CSV = 0;
-    const C_JSON = 1;
-
-}
-
-/**
- * 
- */
 class SecurityRoleId
 {    const C_NOACCESS = 0;
     const C_SITEADMIN = 1;
@@ -1238,6 +1208,25 @@ class ReportDateFilter
 class ReportDocType
 {    const C_CONSUMERUSE = 67;
     const C_SALES = 83;
+
+}
+
+/**
+ * 
+ */
+class SendSalesOutputFileFormat
+{    const C_STANDARD = 1;
+    const C_DMA = 2;
+    const C_DMA_NEW = 3;
+
+}
+
+/**
+ * 
+ */
+class SendSalesFileType
+{    const C_CSV = 0;
+    const C_JSON = 1;
 
 }
 
