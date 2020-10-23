@@ -172,11 +172,11 @@ class AccountModel
      */
     public $modifiedUserId;
     /**
-     * @var SubscriptionModel[] Optional: A list of subscriptions granted to this account. To fetch this list, add the query string "?$include=Subscriptions" to your URL.
+     * @var object[] Optional: A list of subscriptions granted to this account. To fetch this list, add the query string "?$include=Subscriptions" to your URL.
      */
     public $subscriptions;
     /**
-     * @var UserModel[] Optional: A list of all the users belonging to this account. To fetch this list, add the query string "?$include=Users" to your URL.
+     * @var object[] Optional: A list of all the users belonging to this account. To fetch this list, add the query string "?$include=Users" to your URL.
      */
     public $users;
 }
@@ -232,7 +232,7 @@ class AccountModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var AccountModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -341,7 +341,7 @@ class NewAccountRequestModel
      */
     public $welcomeEmail;
     /**
-     * @var CompanyAddress Address information of the account being created.
+     * @var object Address information of the account being created.
      */
     public $companyAddress;
     /**
@@ -452,7 +452,7 @@ class FreeTrialRequestModel
      */
     public $campaign;
     /**
-     * @var CompanyAddress The Address information of the account
+     * @var object The Address information of the account
      */
     public $companyAddress;
     /**
@@ -734,7 +734,7 @@ class AuditModel
      */
     public $remoteCallDuration;
     /**
-     * @var AuditEvent[] Reserved for Avalara internal usage.
+     * @var object[] Reserved for Avalara internal usage.
      */
     public $events;
     /**
@@ -754,7 +754,7 @@ class AuditModel
      */
     public $responseBody;
     /**
-     * @var AuditModel[] Reserved for Avalara internal usage.
+     * @var object[] Reserved for Avalara internal usage.
      */
     public $remoteCalls;
 }
@@ -768,7 +768,7 @@ class AuditModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var AuditModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -982,15 +982,15 @@ class AvaTaxMessage
 class AddressResolutionModel
 {
     /**
-     * @var AddressInfo The original address
+     * @var object The original address
      */
     public $address;
     /**
-     * @var ValidatedAddressInfo[] The validated address or addresses
+     * @var object[] The validated address or addresses
      */
     public $validatedAddresses;
     /**
-     * @var CoordinateInfo The geospatial coordinates of this address
+     * @var object The geospatial coordinates of this address
      */
     public $coordinates;
     /**
@@ -998,11 +998,11 @@ class AddressResolutionModel
      */
     public $resolutionQuality;
     /**
-     * @var TaxAuthorityInfo[] List of informational and warning messages regarding this address
+     * @var object[] List of informational and warning messages regarding this address
      */
     public $taxAuthorities;
     /**
-     * @var AvaTaxMessage[] List of informational and warning messages regarding this address
+     * @var object[] List of informational and warning messages regarding this address
      */
     public $messages;
 }
@@ -1098,7 +1098,7 @@ class AdvancedRuleFullDetailsModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var AdvancedRuleFullDetailsModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -1308,11 +1308,11 @@ class ItemModel
      */
     public $modifiedUserId;
     /**
-     * @var ClassificationModel[] List of classifications that belong to this item.  A single classification consits of a productCode and a systemCode for a particular item.
+     * @var object[] List of classifications that belong to this item.  A single classification consits of a productCode and a systemCode for a particular item.
      */
     public $classifications;
     /**
-     * @var ItemParameterModel[] List of item parameters.
+     * @var object[] List of item parameters.
      */
     public $parameters;
 }
@@ -1471,11 +1471,11 @@ class LocationModel
      */
     public $modifiedUserId;
     /**
-     * @var LocationSettingModel[] Extra information required by certain jurisdictions for filing.  For a list of settings recognized by Avalara, query the endpoint "/api/v2/definitions/locationquestions".  To determine the list of settings required for this location, query the endpoint "/api/v2/companies/(id)/locations/(id)/validate".
+     * @var object[] Extra information required by certain jurisdictions for filing.  For a list of settings recognized by Avalara, query the endpoint "/api/v2/definitions/locationquestions".  To determine the list of settings required for this location, query the endpoint "/api/v2/companies/(id)/locations/(id)/validate".
      */
     public $settings;
     /**
-     * @var LocationParameterModel[] List of location parameters.
+     * @var object[] List of location parameters.
      */
     public $parameters;
 }
@@ -1638,7 +1638,7 @@ class NexusModel
      */
     public $taxName;
     /**
-     * @var NexusParameterDetailModel[] List of nexus parameters.
+     * @var object[] List of nexus parameters.
      */
     public $parameters;
 }
@@ -2028,7 +2028,7 @@ class EcmsDetailModel
      */
     public $isTaxCodeListExclusionList;
     /**
-     * @var EcmsDetailTaxCodeModel[] optional: list of tax code associated with this exempt certificate detail
+     * @var object[] optional: list of tax code associated with this exempt certificate detail
      */
     public $taxCodes;
 }
@@ -2154,7 +2154,7 @@ class EcmsModel
      */
     public $exemptCertReviewStatusId;
     /**
-     * @var EcmsDetailModel[] Exempt Cert details
+     * @var object[] Exempt Cert details
      */
     public $details;
 }
@@ -2312,43 +2312,43 @@ class CompanyModel
      */
     public $modifiedUserId;
     /**
-     * @var ContactModel[] Optional: A list of contacts defined for this company. To fetch this list, add the query string `?$include=Contacts` to your URL.     When calling `CreateCompany`, you may provide a list of objects in this element and they will be created alongside the company.  The `UpdateCompany` API does not permit updating nested objects.
+     * @var object[] Optional: A list of contacts defined for this company. To fetch this list, add the query string `?$include=Contacts` to your URL.     When calling `CreateCompany`, you may provide a list of objects in this element and they will be created alongside the company.  The `UpdateCompany` API does not permit updating nested objects.
      */
     public $contacts;
     /**
-     * @var ItemModel[] Optional: A list of items defined for this company. To fetch this list, add the query string `?$include=Items` to your URL.     When calling `CreateCompany`, you may provide a list of objects in this element and they will be created alongside the company.  The `UpdateCompany` API does not permit updating nested objects.
+     * @var object[] Optional: A list of items defined for this company. To fetch this list, add the query string `?$include=Items` to your URL.     When calling `CreateCompany`, you may provide a list of objects in this element and they will be created alongside the company.  The `UpdateCompany` API does not permit updating nested objects.
      */
     public $items;
     /**
-     * @var LocationModel[] Optional: A list of locations defined for this company. To fetch this list, add the query string `?$include=Locations` to your URL.     When calling `CreateCompany`, you may provide a list of objects in this element and they will be created alongside the company.  The `UpdateCompany` API does not permit updating nested objects.
+     * @var object[] Optional: A list of locations defined for this company. To fetch this list, add the query string `?$include=Locations` to your URL.     When calling `CreateCompany`, you may provide a list of objects in this element and they will be created alongside the company.  The `UpdateCompany` API does not permit updating nested objects.
      */
     public $locations;
     /**
-     * @var NexusModel[] Optional: A list of nexus defined for this company. To fetch this list, add the query string `?$include=Nexus` to your URL.     When calling `CreateCompany`, you may provide a list of objects in this element and they will be created alongside the company.  The `UpdateCompany` API does not permit updating nested objects.
+     * @var object[] Optional: A list of nexus defined for this company. To fetch this list, add the query string `?$include=Nexus` to your URL.     When calling `CreateCompany`, you may provide a list of objects in this element and they will be created alongside the company.  The `UpdateCompany` API does not permit updating nested objects.
      */
     public $nexus;
     /**
-     * @var SettingModel[] Optional: A list of settings defined for this company. To fetch this list, add the query string `?$include=Settings` to your URL.     When calling `CreateCompany`, you may provide a list of objects in this element and they will be created alongside the company.  The `UpdateCompany` API does not permit updating nested objects.
+     * @var object[] Optional: A list of settings defined for this company. To fetch this list, add the query string `?$include=Settings` to your URL.     When calling `CreateCompany`, you may provide a list of objects in this element and they will be created alongside the company.  The `UpdateCompany` API does not permit updating nested objects.
      */
     public $settings;
     /**
-     * @var TaxCodeModel[] Optional: A list of tax codes defined for this company. To fetch this list, add the query string `?$include=TaxCodes` to your URL.     When calling `CreateCompany`, you may provide a list of objects in this element and they will be created alongside the company.  The `UpdateCompany` API does not permit updating nested objects.
+     * @var object[] Optional: A list of tax codes defined for this company. To fetch this list, add the query string `?$include=TaxCodes` to your URL.     When calling `CreateCompany`, you may provide a list of objects in this element and they will be created alongside the company.  The `UpdateCompany` API does not permit updating nested objects.
      */
     public $taxCodes;
     /**
-     * @var TaxRuleModel[] Optional: A list of tax rules defined for this company. To fetch this list, add the query string `?$include=TaxRules` to your URL.     When calling `CreateCompany`, you may provide a list of objects in this element and they will be created alongside the company.  The `UpdateCompany` API does not permit updating nested objects.
+     * @var object[] Optional: A list of tax rules defined for this company. To fetch this list, add the query string `?$include=TaxRules` to your URL.     When calling `CreateCompany`, you may provide a list of objects in this element and they will be created alongside the company.  The `UpdateCompany` API does not permit updating nested objects.
      */
     public $taxRules;
     /**
-     * @var UPCModel[] Optional: A list of UPCs defined for this company. To fetch this list, add the query string `?$include=UPCs` to your URL.     When calling `CreateCompany`, you may provide a list of objects in this element and they will be created alongside the company.  The `UpdateCompany` API does not permit updating nested objects.
+     * @var object[] Optional: A list of UPCs defined for this company. To fetch this list, add the query string `?$include=UPCs` to your URL.     When calling `CreateCompany`, you may provide a list of objects in this element and they will be created alongside the company.  The `UpdateCompany` API does not permit updating nested objects.
      */
     public $upcs;
     /**
-     * @var CompanyModel[] Optional: A list of non reporting child companies associated with this company. To fetch this list, add the query string `?$include=NonReportingChildren` to your URL.
+     * @var object[] Optional: A list of non reporting child companies associated with this company. To fetch this list, add the query string `?$include=NonReportingChildren` to your URL.
      */
     public $nonReportingChildCompanies;
     /**
-     * @var EcmsModel[] DEPRECATED - Date: 9/15/2017, Version: 17.10, Message: Please use the `ListCertificates` API.
+     * @var object[] DEPRECATED - Date: 9/15/2017, Version: 17.10, Message: Please use the `ListCertificates` API.
      */
     public $exemptCerts;
     /**
@@ -2360,11 +2360,11 @@ class CompanyModel
      */
     public $mossCountry;
     /**
-     * @var CompanyParameterDetailModel[] The parameters of a company
+     * @var object[] The parameters of a company
      */
     public $parameters;
     /**
-     * @var CustomerSupplierModel[] The customers and suppliers of a company
+     * @var object[] The customers and suppliers of a company
      */
     public $supplierandcustomers;
 }
@@ -2378,7 +2378,7 @@ class CompanyModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var CompanyModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -2474,7 +2474,7 @@ class AdvancedRuleExecutionModel
      */
     public $ruleId;
     /**
-     * @var AdvancedRuleModel Advanced rule to execute
+     * @var object Advanced rule to execute
      */
     public $rule;
     /**
@@ -2496,7 +2496,7 @@ class AdvancedRuleExecutionModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var AdvancedRuleExecutionModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -2596,7 +2596,7 @@ class AdvancedRuleLookupFileModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var AdvancedRuleLookupFileModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -2696,7 +2696,7 @@ class AvaFileFormModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var AvaFileFormModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -2820,7 +2820,7 @@ class BatchModel
      */
     public $modifiedUserId;
     /**
-     * @var BatchFileModel[] The list of files contained in this batch.
+     * @var object[] The list of files contained in this batch.
      */
     public $files;
 }
@@ -2834,7 +2834,7 @@ class BatchModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var BatchModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -2912,31 +2912,31 @@ class AddressLocationInfo
 class AddressesModel
 {
     /**
-     * @var AddressLocationInfo If this transaction occurred at a retail point-of-sale location, provide that single address here and leave  all other address types null.
+     * @var object If this transaction occurred at a retail point-of-sale location, provide that single address here and leave  all other address types null.
      */
     public $singleLocation;
     /**
-     * @var AddressLocationInfo The origination address where the products were shipped from, or from where the services originated.
+     * @var object The origination address where the products were shipped from, or from where the services originated.
      */
     public $shipFrom;
     /**
-     * @var AddressLocationInfo The destination address where the products were shipped to, or where the services were delivered.
+     * @var object The destination address where the products were shipped to, or where the services were delivered.
      */
     public $shipTo;
     /**
-     * @var AddressLocationInfo The place of business where you receive the customer's order. This address type is valid in the United States only  and only applies to tangible personal property.
+     * @var object The place of business where you receive the customer's order. This address type is valid in the United States only  and only applies to tangible personal property.
      */
     public $pointOfOrderOrigin;
     /**
-     * @var AddressLocationInfo The place of business where you accept/approve the customer’s order,  thereby becoming contractually obligated to make the sale. This address type is valid in the United States only  and only applies to tangible personal property.
+     * @var object The place of business where you accept/approve the customer’s order,  thereby becoming contractually obligated to make the sale. This address type is valid in the United States only  and only applies to tangible personal property.
      */
     public $pointOfOrderAcceptance;
     /**
-     * @var AddressLocationInfo The address where the goods are located or where services are rendered.This address type is valid only for VAT transactions.
+     * @var object The address where the goods are located or where services are rendered.This address type is valid only for VAT transactions.
      */
     public $goodsPlaceOrServiceRendered;
     /**
-     * @var AddressLocationInfo The address of the buyer importing a good from another country.This address type is valid only for VAT transactions.
+     * @var object The address of the buyer importing a good from another country.This address type is valid only for VAT transactions.
      */
     public $import;
 }
@@ -2998,7 +2998,7 @@ class LineItemModel
      */
     public $amount;
     /**
-     * @var AddressesModel The addresses to use for this transaction line.     If you set this value to `null`, or if you omit this element from your API call, then instead the transaction  will use the `addresses` from the document level.     If you specify any other value besides `null`, only addresses specified for this line will be used for this line.
+     * @var object The addresses to use for this transaction line.     If you set this value to `null`, or if you omit this element from your API call, then instead the transaction  will use the `addresses` from the document level.     If you specify any other value besides `null`, only addresses specified for this line will be used for this line.
      */
     public $addresses;
     /**
@@ -3050,11 +3050,11 @@ class LineItemModel
      */
     public $businessIdentificationNo;
     /**
-     * @var TaxOverrideModel Specifies a tax override for this line.
+     * @var object Specifies a tax override for this line.
      */
     public $taxOverride;
     /**
-     * @var TransactionLineParameterModel[] Special parameters that apply to this line within this transaction.     To get a full list of available parameters, please use the `ListParameters` API.
+     * @var object[] Special parameters that apply to this line within this transaction.     To get a full list of available parameters, please use the `ListParameters` API.
      */
     public $parameters;
     /**
@@ -3090,7 +3090,7 @@ class CreateTransactionModel
      */
     public $code;
     /**
-     * @var LineItemModel[] A list of line items that will appear on this transaction.
+     * @var object[] A list of line items that will appear on this transaction.
      */
     public $lines;
     /**
@@ -3134,11 +3134,11 @@ class CreateTransactionModel
      */
     public $exemptionNo;
     /**
-     * @var AddressesModel Default addresses for all lines in this document.     These addresses are the default values that will be used for any lines that do not have their own  address information. If you specify addresses for a line, then no default addresses will be loaded  for that line.
+     * @var object Default addresses for all lines in this document.     These addresses are the default values that will be used for any lines that do not have their own  address information. If you specify addresses for a line, then no default addresses will be loaded  for that line.
      */
     public $addresses;
     /**
-     * @var TransactionParameterModel[] Special parameters for this transaction.     To get a full list of available parameters, please use the [ListParameters](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListParameters/) endpoint.
+     * @var object[] Special parameters for this transaction.     To get a full list of available parameters, please use the [ListParameters](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListParameters/) endpoint.
      */
     public $parameters;
     /**
@@ -3158,7 +3158,7 @@ class CreateTransactionModel
      */
     public $batchCode;
     /**
-     * @var TaxOverrideModel Specifies a tax override for the entire document
+     * @var object Specifies a tax override for the entire document
      */
     public $taxOverride;
     /**
@@ -3232,7 +3232,7 @@ class BatchAdjustTransactionModel
      */
     public $adjustmentDescription;
     /**
-     * @var CreateTransactionModel Replace the current transaction with tax data calculated for this new transaction
+     * @var object Replace the current transaction with tax data calculated for this new transaction
      */
     public $newTransaction;
 }
@@ -3265,15 +3265,15 @@ class BatchVoidTransactionModel
 class TransactionBatchItemModel
 {
     /**
-     * @var CreateTransactionModel Represents a transaction to be created.
+     * @var object Represents a transaction to be created.
      */
     public $createTransactionModel;
     /**
-     * @var BatchAdjustTransactionModel Represents an existing transaction to be adjusted.
+     * @var object Represents an existing transaction to be adjusted.
      */
     public $adjustTransactionModel;
     /**
-     * @var BatchVoidTransactionModel Represents an existing transaction to be voided.
+     * @var object Represents an existing transaction to be voided.
      */
     public $voidTransactionModel;
 }
@@ -3287,7 +3287,7 @@ class CreateTransactionBatchRequestModel
      */
     public $name;
     /**
-     * @var TransactionBatchItemModel[] The list of transactions contained in this batch.
+     * @var object[] The list of transactions contained in this batch.
      */
     public $transactions;
 }
@@ -3349,7 +3349,7 @@ class CreateTransactionBatchResponseModel
      */
     public $modifiedUserId;
     /**
-     * @var BatchFileModel[] The list of files contained in this batch.
+     * @var object[] The list of files contained in this batch.
      */
     public $files;
 }
@@ -3534,11 +3534,11 @@ class CertificateModel
      */
     public $exemptionNumber;
     /**
-     * @var ExemptionReasonModel The exemption reason that CertCapture audit/internal logic identifies for created certificate.
+     * @var object The exemption reason that CertCapture audit/internal logic identifies for created certificate.
      */
     public $validatedExemptionReason;
     /**
-     * @var ExemptionReasonModel The exemption reason associated with this certificate. For example, the reason code for exemption  for purposes of resale is `RESALE`.     For a list of exemption reasons, call `ListCertificateExemptReasons`.
+     * @var object The exemption reason associated with this certificate. For example, the reason code for exemption  for purposes of resale is `RESALE`.     For a list of exemption reasons, call `ListCertificateExemptReasons`.
      */
     public $exemptionReason;
     /**
@@ -3566,19 +3566,19 @@ class CertificateModel
      */
     public $pageCount;
     /**
-     * @var CustomerModel[] A list of customers to which this certificate applies. You can fetch this data by specifying  `$include=customers` when calling a certificate fetch API.
+     * @var object[] A list of customers to which this certificate applies. You can fetch this data by specifying  `$include=customers` when calling a certificate fetch API.
      */
     public $customers;
     /**
-     * @var PoNumberModel[] A list of purchase order numbers that are valid for use with this certificate.     If this certificate is applicable for all purchase order numbers, this field will be empty.     You can fetch this data by specifying `$include=po_numbers` when calling a certificate fetch API.
+     * @var object[] A list of purchase order numbers that are valid for use with this certificate.     If this certificate is applicable for all purchase order numbers, this field will be empty.     You can fetch this data by specifying `$include=po_numbers` when calling a certificate fetch API.
      */
     public $poNumbers;
     /**
-     * @var ExposureZoneModel The exposure zone where this certificate is valid.
+     * @var object The exposure zone where this certificate is valid.
      */
     public $exposureZone;
     /**
-     * @var CertificateAttributeModel[] A list of certificate attributes that apply to this certificate.     You can fetch this data by specifying `$include=attributes` when calling a certificate fetch API.
+     * @var object[] A list of certificate attributes that apply to this certificate.     You can fetch this data by specifying `$include=attributes` when calling a certificate fetch API.
      */
     public $attributes;
     /**
@@ -3742,23 +3742,23 @@ class CustomerModel
      */
     public $taxpayerIdNumber;
     /**
-     * @var CertificateModel[] A list of exemption certficates that apply to this customer. You can fetch this data by specifying  `$include=certificates` when calling a customer fetch API.
+     * @var object[] A list of exemption certficates that apply to this customer. You can fetch this data by specifying  `$include=certificates` when calling a customer fetch API.
      */
     public $certificates;
     /**
-     * @var CustomFieldModel[] A list of custom fields defined on this customer.     For more information about custom fields, see the [Avalara Help Center article about custom fields](https://help.avalara.com/0021_Avalara_CertCapture/All_About_CertCapture/Edit_or_Remove_Details_about_Customers).
+     * @var object[] A list of custom fields defined on this customer.     For more information about custom fields, see the [Avalara Help Center article about custom fields](https://help.avalara.com/0021_Avalara_CertCapture/All_About_CertCapture/Edit_or_Remove_Details_about_Customers).
      */
     public $customFields;
     /**
-     * @var ExposureZoneModel[] A list of exposure zones where you do business with this customer.     To keep track of certificates that are needed for each customer, set this value to a list of all exposure zones where you  sell products to this customer. You can find a list of exposure zones by calling `ListExposureZones`.     This field is often called "Ship-To States" or "Ship-To Zones", since it generally refers to locations where you ship products  when this customer makes a purchase.     This field is useful for audit purposes since it helps you ensure you have the necessary certificates for each customer.
+     * @var object[] A list of exposure zones where you do business with this customer.     To keep track of certificates that are needed for each customer, set this value to a list of all exposure zones where you  sell products to this customer. You can find a list of exposure zones by calling `ListExposureZones`.     This field is often called "Ship-To States" or "Ship-To Zones", since it generally refers to locations where you ship products  when this customer makes a purchase.     This field is useful for audit purposes since it helps you ensure you have the necessary certificates for each customer.
      */
     public $exposureZones;
     /**
-     * @var CustomerModel[] A list of ship-to customer records that are connected to this bill-to customer.     Customer records represent businesses or individuals who can provide exemption certificates. Some customers  may have certificates that are linked to their shipping address or their billing address. To group these  customer records together, you may link multiple bill-to and ship-to addresses together to represent a single  entity that has multiple different addresses of different kinds.
+     * @var object[] A list of ship-to customer records that are connected to this bill-to customer.     Customer records represent businesses or individuals who can provide exemption certificates. Some customers  may have certificates that are linked to their shipping address or their billing address. To group these  customer records together, you may link multiple bill-to and ship-to addresses together to represent a single  entity that has multiple different addresses of different kinds.
      */
     public $shipTos;
     /**
-     * @var CustomerAttributeModel[] A list of attributes that apply to this customer.     You can fetch this data by specifying `$include=attributes` when calling a customer fetch API.
+     * @var object[] A list of attributes that apply to this customer.     You can fetch this data by specifying `$include=attributes` when calling a customer fetch API.
      */
     public $attributes;
 }
@@ -3840,11 +3840,11 @@ class CertExpressInvitationModel
      */
     public $customerCode;
     /**
-     * @var CustomerModel The customer who received this invitation.
+     * @var object The customer who received this invitation.
      */
     public $customer;
     /**
-     * @var CoverLetterModel The attached cover letter object to this request.
+     * @var object The attached cover letter object to this request.
      */
     public $coverLetter;
     /**
@@ -3890,7 +3890,7 @@ class CertExpressInvitationStatusModel
      */
     public $status;
     /**
-     * @var CertExpressInvitationModel The CertExpress invitation for the customer. If you specified an email address in the invitation  request, this invitation will be sent via email. Otherwise, you are expected to direct the customer  using a hyperlink directly in your application.
+     * @var object The CertExpress invitation for the customer. If you specified an email address in the invitation  request, this invitation will be sent via email. Otherwise, you are expected to direct the customer  using a hyperlink directly in your application.
      */
     public $invitation;
 }
@@ -3904,7 +3904,7 @@ class CertExpressInvitationModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var CertExpressInvitationModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -3947,7 +3947,7 @@ class CertificateModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var CertificateModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -3979,7 +3979,7 @@ class CustomerModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var CustomerModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -4001,7 +4001,7 @@ class CertificateAttributeModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var CertificateAttributeModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -4069,7 +4069,7 @@ class MrsCompanyModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var MrsCompanyModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -4227,7 +4227,7 @@ class FundingStatusModel
      */
     public $documentName;
     /**
-     * @var FundingESignMethodReturn MethodReturn
+     * @var object MethodReturn
      */
     public $methodReturn;
     /**
@@ -4361,7 +4361,7 @@ class CompanyParameterDetailModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var CompanyParameterDetailModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -4383,7 +4383,7 @@ class CustomerSupplierModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var CustomerSupplierModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -4595,7 +4595,7 @@ class TaxRegionModel
      */
     public $isSst;
     /**
-     * @var DenormalizedJurisModel[] List of jurisdictions associated with this tax region.
+     * @var object[] List of jurisdictions associated with this tax region.
      */
     public $jurisdictions;
 }
@@ -4721,7 +4721,7 @@ class ComplianceJurisdictionModel
      */
     public $taxAuthorityId;
     /**
-     * @var ComplianceAggregatedTaxRateModel[] Optional: A list of rates for this jurisdiction. To fetch this list, add the query string `?$include=TaxRates` to your URL.
+     * @var object[] Optional: A list of rates for this jurisdiction. To fetch this list, add the query string `?$include=TaxRates` to your URL.
      */
     public $rates;
 }
@@ -4807,7 +4807,7 @@ class TransactionReferenceFieldModel
      */
     public $reportingLocationCode;
     /**
-     * @var LineDetailSERCodeModel[] Reference field of the line details
+     * @var object[] Reference field of the line details
      */
     public $lineDetailSerCodes;
 }
@@ -5193,19 +5193,19 @@ class TransactionLineModel
      */
     public $taxIncluded;
     /**
-     * @var TransactionLineDetailModel[] Optional: A list of tax details for this line item.     Tax details represent taxes being charged by various tax authorities. Taxes that appear in the `details` collection are intended to be  displayed to the customer and charged as a 'tax' on the invoice.     To fetch this list, add the query string `?$include=Details` to your URL.
+     * @var object[] Optional: A list of tax details for this line item.     Tax details represent taxes being charged by various tax authorities. Taxes that appear in the `details` collection are intended to be  displayed to the customer and charged as a 'tax' on the invoice.     To fetch this list, add the query string `?$include=Details` to your URL.
      */
     public $details;
     /**
-     * @var TransactionLineDetailModel[] Optional: A list of non-passthrough tax details for this line item.     Tax details represent taxes being charged by various tax authorities. Taxes that appear in the `nonPassthroughDetails` collection are  taxes that must be paid directly by the company and not shown to the customer.
+     * @var object[] Optional: A list of non-passthrough tax details for this line item.     Tax details represent taxes being charged by various tax authorities. Taxes that appear in the `nonPassthroughDetails` collection are  taxes that must be paid directly by the company and not shown to the customer.
      */
     public $nonPassthroughDetails;
     /**
-     * @var TransactionLineLocationTypeModel[] Optional: A list of location types for this line item. To fetch this list, add the query string "?$include=LineLocationTypes" to your URL.
+     * @var object[] Optional: A list of location types for this line item. To fetch this list, add the query string "?$include=LineLocationTypes" to your URL.
      */
     public $lineLocationTypes;
     /**
-     * @var TransactionLineParameterModel[] Contains a list of extra parameters that were set when the transaction was created.
+     * @var object[] Contains a list of extra parameters that were set when the transaction was created.
      */
     public $parameters;
     /**
@@ -5439,7 +5439,7 @@ class TaxDetailsByTaxType
      */
     public $totalTax;
     /**
-     * @var TaxDetailsByTaxSubType[] Tax subtype details
+     * @var object[] Tax subtype details
      */
     public $taxSubTypeDetails;
 }
@@ -5655,35 +5655,35 @@ class TransactionModel
      */
     public $taxDate;
     /**
-     * @var TransactionLineModel[] A list of line items in this transaction. To fetch this list, add the query string `?$include=Lines` or `?$include=Details` to your URL.
+     * @var object[] A list of line items in this transaction. To fetch this list, add the query string `?$include=Lines` or `?$include=Details` to your URL.
      */
     public $lines;
     /**
-     * @var TransactionAddressModel[] A list of line items in this transaction. To fetch this list, add the query string `?$include=Addresses` to your URL.     For more information about transaction addresses, please see [Using Address Types](https://developer.avalara.com/avatax/dev-guide/customizing-transaction/address-types/)  in the AvaTax Developer Guide.
+     * @var object[] A list of line items in this transaction. To fetch this list, add the query string `?$include=Addresses` to your URL.     For more information about transaction addresses, please see [Using Address Types](https://developer.avalara.com/avatax/dev-guide/customizing-transaction/address-types/)  in the AvaTax Developer Guide.
      */
     public $addresses;
     /**
-     * @var TransactionLocationTypeModel[] A list of location types in this transaction. To fetch this list, add the query string `?$include=Addresses` to your URL.
+     * @var object[] A list of location types in this transaction. To fetch this list, add the query string `?$include=Addresses` to your URL.
      */
     public $locationTypes;
     /**
-     * @var TransactionSummary[] Contains a summary of tax on this transaction.
+     * @var object[] Contains a summary of tax on this transaction.
      */
     public $summary;
     /**
-     * @var TaxDetailsByTaxType[] Contains the tax details per tax type
+     * @var object[] Contains the tax details per tax type
      */
     public $taxDetailsByTaxType;
     /**
-     * @var TransactionParameterModel[] Contains a list of extra parameters that were set when the transaction was created.
+     * @var object[] Contains a list of extra parameters that were set when the transaction was created.
      */
     public $parameters;
     /**
-     * @var AvaTaxMessage[] List of informational and warning messages regarding this API call. These messages are only relevant to the current API call.
+     * @var object[] List of informational and warning messages regarding this API call. These messages are only relevant to the current API call.
      */
     public $messages;
     /**
-     * @var InvoiceMessageModel[] Invoice messages associated with this document. Currently, this stores legally-required VAT messages.
+     * @var object[] Invoice messages associated with this document. Currently, this stores legally-required VAT messages.
      */
     public $invoiceMessages;
 }
@@ -5697,7 +5697,7 @@ class TransactionModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var TransactionModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -5719,7 +5719,7 @@ class ContactModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var ContactModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -5751,7 +5751,7 @@ class ExemptionStatusModel
      */
     public $status;
     /**
-     * @var CertificateModel Certificate if the customer is exempted
+     * @var object Certificate if the customer is exempted
      */
     public $certificate;
 }
@@ -5765,7 +5765,7 @@ class CustomerAttributeModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var CustomerAttributeModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -5857,7 +5857,7 @@ class DataSourceModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var DataSourceModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -5879,7 +5879,7 @@ class NexusModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var NexusModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -5905,11 +5905,11 @@ class NexusByTaxFormModel
      */
     public $companyId;
     /**
-     * @var NexusModel[] A list of all Avalara-defined nexus that are relevant to this tax form
+     * @var object[] A list of all Avalara-defined nexus that are relevant to this tax form
      */
     public $nexusDefinitions;
     /**
-     * @var NexusModel[] A list of all currently-defined company nexus that are related to this tax form
+     * @var object[] A list of all currently-defined company nexus that are related to this tax form
      */
     public $companyNexus;
 }
@@ -5923,7 +5923,7 @@ class TaxCodeModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var TaxCodeModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -5970,7 +5970,7 @@ class SubscriptionTypeModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var SubscriptionTypeModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -6006,7 +6006,7 @@ class SecurityRoleModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var SecurityRoleModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -6050,7 +6050,7 @@ class TaxAuthorityModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var TaxAuthorityModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -6086,7 +6086,7 @@ class TaxAuthorityFormModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var TaxAuthorityFormModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -6174,7 +6174,7 @@ class ParameterUsageModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var ParameterUsageModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -6254,7 +6254,7 @@ class ParameterModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var ParameterModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -6342,7 +6342,7 @@ class LocationQuestionModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var LocationQuestionModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -6395,7 +6395,7 @@ class IsoCountryModel
      */
     public $isEuropeanUnion;
     /**
-     * @var IsoLocalizedName[] A list of localized names in a variety of languages.     This list is maintained by the International Standards Organization.
+     * @var object[] A list of localized names in a variety of languages.     This list is maintained by the International Standards Organization.
      */
     public $localizedNames;
     /**
@@ -6413,7 +6413,7 @@ class IsoCountryModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var IsoCountryModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -6451,7 +6451,7 @@ class IsoRegionModel
      */
     public $streamlinedSalesTax;
     /**
-     * @var IsoLocalizedName[] A list of localized names in a variety of languages.     This list is maintained by the International Standards Organization.
+     * @var object[] A list of localized names in a variety of languages.     This list is maintained by the International Standards Organization.
      */
     public $localizedNames;
 }
@@ -6465,7 +6465,7 @@ class IsoRegionModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var IsoRegionModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -6509,7 +6509,7 @@ class EntityUseCodeModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var EntityUseCodeModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -6565,7 +6565,7 @@ class PreferredProgramModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var PreferredProgramModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -6605,7 +6605,7 @@ class CurrencyModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var CurrencyModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -6665,7 +6665,7 @@ class ProductClassificationSystemModel
      */
     public $customsValue;
     /**
-     * @var ProductSystemCountryModel[] List of all countries that belong to the system including
+     * @var object[] List of all countries that belong to the system including
      */
     public $countries;
 }
@@ -6679,7 +6679,7 @@ class ProductClassificationSystemModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var ProductClassificationSystemModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -6719,7 +6719,7 @@ class TaxAuthorityTypeModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var TaxAuthorityTypeModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -6763,7 +6763,7 @@ class NoticeStatusModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var NoticeStatusModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -6807,7 +6807,7 @@ class NoticeCustomerTypeModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var NoticeCustomerTypeModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -6851,7 +6851,7 @@ class NoticeReasonModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var NoticeReasonModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -6887,7 +6887,7 @@ class FilingFrequencyModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var FilingFrequencyModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -6931,7 +6931,7 @@ class NoticeFilingTypeModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var NoticeFilingTypeModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -6975,7 +6975,7 @@ class NoticeTypeModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var NoticeTypeModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -7019,7 +7019,7 @@ class NoticeCustomerFundingOptionModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var NoticeCustomerFundingOptionModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -7063,7 +7063,7 @@ class NoticePriorityModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var NoticePriorityModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -7107,7 +7107,7 @@ class NoticeResponsibilityModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var NoticeResponsibilityModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -7151,7 +7151,7 @@ class NoticeRootCauseModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var NoticeRootCauseModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -7211,7 +7211,7 @@ class SkyscraperStatusModel
      */
     public $message;
     /**
-     * @var requiredFilingCalendarDataFieldModel[] A list of required fields to file
+     * @var object[] A list of required fields to file
      */
     public $requiredFilingCalendarDataFields;
 }
@@ -7225,7 +7225,7 @@ class SkyscraperStatusModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var SkyscraperStatusModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -7380,7 +7380,7 @@ class JurisdictionOverrideModel
      */
     public $modifiedUserId;
     /**
-     * @var JurisdictionModel[] A list of the tax jurisdictions that will be assigned to this overridden address.
+     * @var object[] A list of the tax jurisdictions that will be assigned to this overridden address.
      */
     public $jurisdictions;
     /**
@@ -7406,7 +7406,7 @@ class JurisdictionOverrideModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var JurisdictionOverrideModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -7428,7 +7428,7 @@ class JurisdictionModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var JurisdictionModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -7464,7 +7464,7 @@ class ResourceFileTypeModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var ResourceFileTypeModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -7504,7 +7504,7 @@ class RateTypeModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var RateTypeModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -7940,7 +7940,7 @@ class FormMasterModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var FormMasterModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -8000,7 +8000,7 @@ class TaxTypeGroupModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var TaxTypeGroupModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -8044,7 +8044,7 @@ class TaxSubTypeModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var TaxSubTypeModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -8100,7 +8100,7 @@ class NexusTaxTypeGroupModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var NexusTaxTypeGroupModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -8152,7 +8152,7 @@ class CommunicationsTSPairModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var CommunicationsTSPairModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -8188,7 +8188,7 @@ class CommunicationsTransactionTypeModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var CommunicationsTransactionTypeModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -8210,7 +8210,7 @@ class ExposureZoneModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var ExposureZoneModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -8232,7 +8232,7 @@ class CoverLetterModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var CoverLetterModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -8254,7 +8254,7 @@ class ExemptionReasonModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var ExemptionReasonModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -8320,7 +8320,7 @@ class UomModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var UomModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -8390,7 +8390,7 @@ class HsCodeModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var HsCodeModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -8442,7 +8442,7 @@ class PostalCodeModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var PostalCodeModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -8510,7 +8510,7 @@ class MarketplaceLocationModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var MarketplaceLocationModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -8586,7 +8586,7 @@ class CompanyDistanceThresholdModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var CompanyDistanceThresholdModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -8608,7 +8608,7 @@ class EcmsModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var EcmsModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -8662,7 +8662,7 @@ class ECommerceTokenOutputModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var ECommerceTokenOutputModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -8756,7 +8756,7 @@ class ErrorTransactionOutputModelCappedFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var ErrorTransactionOutputModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -8788,7 +8788,7 @@ class ErrorTransactionModelBase
 class DeleteErrorTransactionsRequestModel
 {
     /**
-     * @var ErrorTransactionModelBase[] List of error transactions to be deleted
+     * @var object[] List of error transactions to be deleted
      */
     public $models;
 }
@@ -8816,7 +8816,7 @@ class DeleteErrorTransactionResponseModel
 class DeleteErrorTransactionsResponseModel
 {
     /**
-     * @var DeleteErrorTransactionResponseModel[] The individual result of each error transaction in the request batch
+     * @var object[] The individual result of each error transaction in the request batch
      */
     public $results;
 }
@@ -8848,7 +8848,7 @@ class ErrorCodeOutputModelCappedFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var ErrorCodeOutputModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -9153,7 +9153,7 @@ class FilingCalendarModel
      */
     public $bulkAccountValidationStatus;
     /**
-     * @var CompanyReturnSettingModel[] CompanyReturn settings for complext filing calendar
+     * @var object[] CompanyReturn settings for complext filing calendar
      */
     public $settings;
 }
@@ -9167,7 +9167,7 @@ class FilingCalendarModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var FilingCalendarModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -9287,7 +9287,7 @@ class CycleExpireModel
      */
     public $message;
     /**
-     * @var CycleExpireOptionModel[] A list of options for expiring the filing calendar.
+     * @var object[] A list of options for expiring the filing calendar.
      */
     public $cycleExpirationOptions;
 }
@@ -9428,7 +9428,7 @@ class FilingRequestDataModel
      */
     public $taxAuthorityName;
     /**
-     * @var FilingAnswerModel[] Filing question answers
+     * @var object[] Filing question answers
      */
     public $answers;
 }
@@ -9451,7 +9451,7 @@ class FilingRequestModel
      */
     public $filingRequestStatusId;
     /**
-     * @var FilingRequestDataModel The data model object of the request
+     * @var object The data model object of the request
      */
     public $data;
     /**
@@ -9481,7 +9481,7 @@ class FilingRequestModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var FilingRequestModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -9609,7 +9609,7 @@ class PowerOfAttorneyCheckModel
      */
     public $expirationDate;
     /**
-     * @var ResourceFileDownloadResult POA download
+     * @var object POA download
      */
     public $availablePoa;
 }
@@ -9761,7 +9761,7 @@ class FilingReturnModelBasic
      */
     public $accrualType;
     /**
-     * @var FilingAttachmentModel[] The attachments for this return.
+     * @var object[] The attachments for this return.
      */
     public $attachments;
     /**
@@ -9787,7 +9787,7 @@ class FilingReturnModelBasicFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var FilingReturnModelBasic[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -9831,7 +9831,7 @@ class FiledReturnModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var FiledReturnModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -10041,7 +10041,7 @@ class WorksheetDocumentLine
      */
     public $taxAmount;
     /**
-     * @var Message[] 
+     * @var object[] 
      */
     public $messages;
     /**
@@ -10079,11 +10079,11 @@ class WorksheetDocument
      */
     public $totalTax;
     /**
-     * @var WorksheetDocumentLine[] 
+     * @var object[] 
      */
     public $lines;
     /**
-     * @var Message[] 
+     * @var object[] 
      */
     public $messages;
     /**
@@ -10117,7 +10117,7 @@ class FilingReturnCreditModel
      */
     public $totalTax;
     /**
-     * @var WorksheetDocument[] The excluded carry over credit documents
+     * @var object[] The excluded carry over credit documents
      */
     public $transactionDetails;
 }
@@ -10299,7 +10299,7 @@ class FilingReturnModel
      */
     public $consumerUseNonTaxableAccrualAmount;
     /**
-     * @var FilingAdjustmentModel[] The Adjustments for this return.
+     * @var object[] The Adjustments for this return.
      */
     public $adjustments;
     /**
@@ -10307,7 +10307,7 @@ class FilingReturnModel
      */
     public $totalAugmentations;
     /**
-     * @var FilingAugmentationModel[] The Augmentations for this return.
+     * @var object[] The Augmentations for this return.
      */
     public $augmentations;
     /**
@@ -10315,7 +10315,7 @@ class FilingReturnModel
      */
     public $totalPayments;
     /**
-     * @var FilingPaymentModel[] The payments for this return.
+     * @var object[] The payments for this return.
      */
     public $payments;
     /**
@@ -10331,15 +10331,15 @@ class FilingReturnModel
      */
     public $year;
     /**
-     * @var FilingAttachmentModel[] The attachments for this return.
+     * @var object[] The attachments for this return.
      */
     public $attachments;
     /**
-     * @var FilingReturnCreditModel The excluded carry over credit documents
+     * @var object The excluded carry over credit documents
      */
     public $excludedCarryOverCredits;
     /**
-     * @var FilingReturnCreditModel The applied carry over credit documents
+     * @var object The applied carry over credit documents
      */
     public $appliedCarryOverCredits;
     /**
@@ -10463,11 +10463,11 @@ class FilingRegionModel
      */
     public $status;
     /**
-     * @var FilingReturnModel[] A list of tax returns in this region.
+     * @var object[] A list of tax returns in this region.
      */
     public $returns;
     /**
-     * @var FilingsCheckupSuggestedFormModel[] A list of tax returns in this region.
+     * @var object[] A list of tax returns in this region.
      */
     public $suggestReturns;
     /**
@@ -10529,7 +10529,7 @@ class FilingModel
      */
     public $modifiedUserId;
     /**
-     * @var FilingRegionModel[] A listing of regional tax filings within this time period.
+     * @var object[] A listing of regional tax filings within this time period.
      */
     public $filingRegions;
 }
@@ -10543,7 +10543,7 @@ class FilingModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var FilingModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -10701,19 +10701,19 @@ class MultiTaxFilingReturnModel
      */
     public $endPeriod;
     /**
-     * @var FilingsTaxSummaryModel A summary of all taxes compbined for this period
+     * @var object A summary of all taxes compbined for this period
      */
     public $returnTaxSummary;
     /**
-     * @var FilingsTaxDetailsModel[] A detailed breakdown of the taxes in this filing
+     * @var object[] A detailed breakdown of the taxes in this filing
      */
     public $returnTaxDetails;
     /**
-     * @var FilingReturnCreditModel The excluded carry over credit documents
+     * @var object The excluded carry over credit documents
      */
     public $excludedCarryOverCredits;
     /**
-     * @var FilingReturnCreditModel The applied carry over credit documents
+     * @var object The applied carry over credit documents
      */
     public $appliedCarryOverCredits;
     /**
@@ -10721,7 +10721,7 @@ class MultiTaxFilingReturnModel
      */
     public $totalAdjustments;
     /**
-     * @var FilingAdjustmentModel[] The Adjustments for this return.
+     * @var object[] The Adjustments for this return.
      */
     public $adjustments;
     /**
@@ -10729,7 +10729,7 @@ class MultiTaxFilingReturnModel
      */
     public $totalAugmentations;
     /**
-     * @var FilingAugmentationModel[] The Augmentations for this return.
+     * @var object[] The Augmentations for this return.
      */
     public $augmentations;
     /**
@@ -10737,11 +10737,11 @@ class MultiTaxFilingReturnModel
      */
     public $totalPayments;
     /**
-     * @var FilingPaymentModel[] The payments for this return.
+     * @var object[] The payments for this return.
      */
     public $payments;
     /**
-     * @var FilingAttachmentModel[] The attachments for this return.
+     * @var object[] The attachments for this return.
      */
     public $attachments;
 }
@@ -10767,19 +10767,19 @@ class MultiTaxFilingRegionModel
      */
     public $status;
     /**
-     * @var FilingsTaxSummaryModel A summary of all taxes compbined for this period
+     * @var object A summary of all taxes compbined for this period
      */
     public $regionTaxSummary;
     /**
-     * @var FilingsTaxDetailsModel[] A detailed breakdown of the taxes in this filing
+     * @var object[] A detailed breakdown of the taxes in this filing
      */
     public $regionTaxDetails;
     /**
-     * @var FilingsCheckupSuggestedFormModel[] A list of tax returns in this region.
+     * @var object[] A list of tax returns in this region.
      */
     public $suggestReturns;
     /**
-     * @var MultiTaxFilingReturnModel[] A list of tax returns in this region.
+     * @var object[] A list of tax returns in this region.
      */
     public $returns;
 }
@@ -10809,15 +10809,15 @@ class MultiTaxFilingModel
      */
     public $type;
     /**
-     * @var FilingsTaxSummaryModel A summary of all taxes combined for this period
+     * @var object A summary of all taxes combined for this period
      */
     public $taxSummary;
     /**
-     * @var FilingsTaxDetailsModel[] A detailed breakdown of the taxes in this filing
+     * @var object[] A detailed breakdown of the taxes in this filing
      */
     public $taxDetails;
     /**
-     * @var MultiTaxFilingRegionModel[] A listing of regional tax filings within this time period.
+     * @var object[] A listing of regional tax filings within this time period.
      */
     public $filingRegions;
 }
@@ -10831,7 +10831,7 @@ class MultiTaxFilingModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var MultiTaxFilingModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -10897,7 +10897,7 @@ class FilingsCheckupAuthorityModel
      */
     public $taxTypeId;
     /**
-     * @var FilingsCheckupSuggestedFormModel[] Suggested forms to file due to tax collected
+     * @var object[] Suggested forms to file due to tax collected
      */
     public $suggestedForms;
 }
@@ -10907,7 +10907,7 @@ class FilingsCheckupAuthorityModel
 class FilingsCheckupModel
 {
     /**
-     * @var FilingsCheckupAuthorityModel[] A collection of authorities in the report
+     * @var object[] A collection of authorities in the report
      */
     public $authorities;
 }
@@ -10979,7 +10979,7 @@ class FirmClientLinkageOutputModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var FirmClientLinkageOutputModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -11039,7 +11039,7 @@ class NewFirmClientAccountRequestModel
      */
     public $companyCode;
     /**
-     * @var CompanyAddress Address information of the account being created.
+     * @var object Address information of the account being created.
      */
     public $companyAddress;
     /**
@@ -11101,7 +11101,7 @@ class ItemClassificationOutputModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var ItemClassificationOutputModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -11123,7 +11123,7 @@ class ItemParameterModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var ItemParameterModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -11145,7 +11145,7 @@ class ItemModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var ItemModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -11185,7 +11185,7 @@ class ItemSyncModel
 class SyncItemsRequestModel
 {
     /**
-     * @var ItemSyncModel[] A list of items to sync with AvaTax.
+     * @var object[] A list of items to sync with AvaTax.
      */
     public $items;
 }
@@ -11209,7 +11209,7 @@ class LocationParameterModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var LocationParameterModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -11231,7 +11231,7 @@ class LocationModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var LocationModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -11253,7 +11253,7 @@ class LocationValidationModel
      */
     public $settingsValidated;
     /**
-     * @var LocationQuestionModel[] A list of settings that must be defined for this location
+     * @var object[] A list of settings that must be defined for this location
      */
     public $requiredSettings;
 }
@@ -11336,7 +11336,7 @@ class MultiDocumentModel
      */
     public $modifiedUserId;
     /**
-     * @var TransactionModel[] A separate document will exist for each unique combination of buyer and seller in this MultiDocument transaction.
+     * @var object[] A separate document will exist for each unique combination of buyer and seller in this MultiDocument transaction.
      */
     public $documents;
 }
@@ -11396,7 +11396,7 @@ class MultiDocumentLineItemModel
      */
     public $amount;
     /**
-     * @var AddressesModel The addresses to use for this transaction line.     If you set this value to `null`, or if you omit this element from your API call, then instead the transaction  will use the `addresses` from the document level.     If you specify any other value besides `null`, only addresses specified for this line will be used for this line.
+     * @var object The addresses to use for this transaction line.     If you set this value to `null`, or if you omit this element from your API call, then instead the transaction  will use the `addresses` from the document level.     If you specify any other value besides `null`, only addresses specified for this line will be used for this line.
      */
     public $addresses;
     /**
@@ -11448,11 +11448,11 @@ class MultiDocumentLineItemModel
      */
     public $businessIdentificationNo;
     /**
-     * @var TaxOverrideModel Specifies a tax override for this line.
+     * @var object Specifies a tax override for this line.
      */
     public $taxOverride;
     /**
-     * @var TransactionLineParameterModel[] Special parameters that apply to this line within this transaction.     To get a full list of available parameters, please use the `ListParameters` API.
+     * @var object[] Special parameters that apply to this line within this transaction.     To get a full list of available parameters, please use the `ListParameters` API.
      */
     public $parameters;
     /**
@@ -11475,7 +11475,7 @@ class CreateMultiDocumentModel
      */
     public $code;
     /**
-     * @var MultiDocumentLineItemModel[] Lines that will appear on the invoice.     For a MultiDocument transaction, each line may represent a different company or reporting location code. AvaTax  will separate this MultiDocument transaction object into many different transactions, one for each pair of legal  entities, so that each legal entity can file their transactional taxes correctly.
+     * @var object[] Lines that will appear on the invoice.     For a MultiDocument transaction, each line may represent a different company or reporting location code. AvaTax  will separate this MultiDocument transaction object into many different transactions, one for each pair of legal  entities, so that each legal entity can file their transactional taxes correctly.
      */
     public $lines;
     /**
@@ -11523,11 +11523,11 @@ class CreateMultiDocumentModel
      */
     public $exemptionNo;
     /**
-     * @var AddressesModel Default addresses for all lines in this document.     These addresses are the default values that will be used for any lines that do not have their own  address information. If you specify addresses for a line, then no default addresses will be loaded  for that line.
+     * @var object Default addresses for all lines in this document.     These addresses are the default values that will be used for any lines that do not have their own  address information. If you specify addresses for a line, then no default addresses will be loaded  for that line.
      */
     public $addresses;
     /**
-     * @var TransactionParameterModel[] Special parameters for this transaction.     To get a full list of available parameters, please use the [ListParameters](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListParameters/) endpoint.
+     * @var object[] Special parameters for this transaction.     To get a full list of available parameters, please use the [ListParameters](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListParameters/) endpoint.
      */
     public $parameters;
     /**
@@ -11547,7 +11547,7 @@ class CreateMultiDocumentModel
      */
     public $batchCode;
     /**
-     * @var TaxOverrideModel Specifies a tax override for the entire document
+     * @var object Specifies a tax override for the entire document
      */
     public $taxOverride;
     /**
@@ -11605,7 +11605,7 @@ class MultiDocumentModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var MultiDocumentModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -11631,7 +11631,7 @@ class AdjustMultiDocumentModel
      */
     public $adjustDescription;
     /**
-     * @var CreateMultiDocumentModel Replace the current MultiDocument transaction with tax data calculated for this new MultiDocument transaction
+     * @var object Replace the current MultiDocument transaction with tax data calculated for this new MultiDocument transaction
      */
     public $newTransaction;
 }
@@ -11652,7 +11652,7 @@ class VoidTransactionModel
 class ReconstructedMultiDocumentModel
 {
     /**
-     * @var CreateMultiDocumentModel The original request that was used to create a MultiDocument object.
+     * @var object The original request that was used to create a MultiDocument object.
      */
     public $request;
 }
@@ -11662,11 +11662,11 @@ class ReconstructedMultiDocumentModel
 class OriginalApiRequestResponseModel
 {
     /**
-     * @var CreateTransactionModel API request
+     * @var object API request
      */
     public $request;
     /**
-     * @var TransactionModel API response
+     * @var object API response
      */
     public $response;
 }
@@ -11676,7 +11676,7 @@ class OriginalApiRequestResponseModel
 class AuditMultiDocumentModel
 {
     /**
-     * @var ReconstructedMultiDocumentModel Reconstructed API request/response pair that can be used to adjust or re-create this MultiDocument transaction.
+     * @var object Reconstructed API request/response pair that can be used to adjust or re-create this MultiDocument transaction.
      */
     public $reconstructed;
     /**
@@ -11700,7 +11700,7 @@ class AuditMultiDocumentModel
      */
     public $apiCallStatus;
     /**
-     * @var OriginalApiRequestResponseModel Original API request/response
+     * @var object Original API request/response
      */
     public $original;
 }
@@ -11759,7 +11759,7 @@ class NexusSummaryModel
      */
     public $companyId;
     /**
-     * @var NexusTaxTypeGroupCountModel[] Nexus summary for this company
+     * @var object[] Nexus summary for this company
      */
     public $nexusSummary;
 }
@@ -11828,11 +11828,11 @@ class DeclareNexusByAddressModel
 class NexusByAddressModel
 {
     /**
-     * @var DeclareNexusByAddressModel The address that was provided by the user in the call to `DeclareNexusByAddress`
+     * @var object The address that was provided by the user in the call to `DeclareNexusByAddress`
      */
     public $address;
     /**
-     * @var NexusModel[] List of all nexus objects that were affected by declaring nexus at the address specified  by `address`.
+     * @var object[] List of all nexus objects that were affected by declaring nexus at the address specified  by `address`.
      */
     public $declaredNexus;
 }
@@ -11846,7 +11846,7 @@ class NexusParameterDetailModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var NexusParameterDetailModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -11950,7 +11950,7 @@ class NoticeCommentModel
      */
     public $modifiedUserId;
     /**
-     * @var ResourceFileUploadRequestModel An attachment to the detail
+     * @var object An attachment to the detail
      */
     public $attachmentUploadRequest;
 }
@@ -12036,7 +12036,7 @@ class NoticeFinanceModel
      */
     public $modifiedUserId;
     /**
-     * @var ResourceFileUploadRequestModel An attachment to the finance detail
+     * @var object An attachment to the finance detail
      */
     public $attachmentUploadRequest;
 }
@@ -12248,19 +12248,19 @@ class NoticeModel
      */
     public $jurisdictionType;
     /**
-     * @var NoticeCommentModel[] Additional comments on the notice
+     * @var object[] Additional comments on the notice
      */
     public $comments;
     /**
-     * @var NoticeFinanceModel[] Finance details of the notice
+     * @var object[] Finance details of the notice
      */
     public $finances;
     /**
-     * @var NoticeResponsibilityDetailModel[] Notice Responsibility Details
+     * @var object[] Notice Responsibility Details
      */
     public $responsibility;
     /**
-     * @var NoticeRootCauseDetailModel[] Notice Root Cause Details
+     * @var object[] Notice Root Cause Details
      */
     public $rootCause;
     /**
@@ -12290,7 +12290,7 @@ class NoticeModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var NoticeModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -12312,7 +12312,7 @@ class NoticeCommentModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var NoticeCommentModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -12334,7 +12334,7 @@ class NoticeFinanceModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var NoticeFinanceModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -12356,7 +12356,7 @@ class NoticeResponsibilityDetailModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var NoticeResponsibilityDetailModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -12378,7 +12378,7 @@ class NoticeRootCauseDetailModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var NoticeRootCauseDetailModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -12515,7 +12515,7 @@ class NotificationModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var NotificationModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -12661,7 +12661,7 @@ class ReportModel
      */
     public $reportType;
     /**
-     * @var ReportParametersModel The parametes used to build the report
+     * @var object The parametes used to build the report
      */
     public $parameters;
     /**
@@ -12707,7 +12707,7 @@ class ReportModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var ReportModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -12729,7 +12729,7 @@ class SettingModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var SettingModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -12751,7 +12751,7 @@ class SubscriptionModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var SubscriptionModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -12866,7 +12866,7 @@ class TaxRateModel
      */
     public $totalRate;
     /**
-     * @var RateModel[] The list of individual rate elements for general tangible personal property sold at a retail  point of presence in this jurisdiction on this date.
+     * @var object[] The list of individual rate elements for general tangible personal property sold at a retail  point of presence in this jurisdiction on this date.
      */
     public $rates;
 }
@@ -12880,7 +12880,7 @@ class TaxRuleModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var TaxRuleModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -12906,7 +12906,7 @@ class AdjustTransactionModel
      */
     public $adjustmentDescription;
     /**
-     * @var CreateTransactionModel Replace the current transaction with tax data calculated for this new transaction
+     * @var object Replace the current transaction with tax data calculated for this new transaction
      */
     public $newTransaction;
 }
@@ -12963,15 +12963,15 @@ class CommitTransactionModel
 class SettleTransactionModel
 {
     /**
-     * @var VerifyTransactionModel To verify this transaction, you may provide information in this field.     If you leave this field null, the transaction will not be verified.
+     * @var object To verify this transaction, you may provide information in this field.     If you leave this field null, the transaction will not be verified.
      */
     public $verify;
     /**
-     * @var ChangeTransactionCodeModel To change the code for this transaction, you may provide information in this field.     If you leave this field null, the transaction's code will not be changed.
+     * @var object To change the code for this transaction, you may provide information in this field.     If you leave this field null, the transaction's code will not be changed.
      */
     public $changeCode;
     /**
-     * @var CommitTransactionModel To commit this transaction so that it can be reported on a tax filing, you may provide information in this field.     If you leave this field null, the transaction's commit status will not be changed.     If you use Avalara's Managed Returns Service, committing a transaction will allow that transaction to be filed.
+     * @var object To commit this transaction so that it can be reported on a tax filing, you may provide information in this field.     If you leave this field null, the transaction's commit status will not be changed.     If you use Avalara's Managed Returns Service, committing a transaction will allow that transaction to be filed.
      */
     public $commit;
 }
@@ -13023,7 +13023,7 @@ class CreateOrAdjustTransactionModel
      */
     public $adjustmentDescription;
     /**
-     * @var CreateTransactionModel The create transaction model to be created or updated.     If the transaction does not exist, create transaction.  If the transaction exists, adjust the existing transaction.
+     * @var object The create transaction model to be created or updated.     If the transaction does not exist, create transaction.  If the transaction exists, adjust the existing transaction.
      */
     public $createTransactionModel;
 }
@@ -13037,7 +13037,7 @@ class CreateOrAdjustTransactionModel
 class ReconstructedApiRequestResponseModel
 {
     /**
-     * @var CreateTransactionModel API request
+     * @var object API request
      */
     public $request;
 }
@@ -13051,7 +13051,7 @@ class AuditTransactionModel
      */
     public $companyId;
     /**
-     * @var ReconstructedApiRequestResponseModel Reconstructed API request/response
+     * @var object Reconstructed API request/response
      */
     public $reconstructed;
     /**
@@ -13067,7 +13067,7 @@ class AuditTransactionModel
      */
     public $apiCallStatus;
     /**
-     * @var OriginalApiRequestResponseModel Original API request/response
+     * @var object Original API request/response
      */
     public $original;
 }
@@ -13089,7 +13089,7 @@ class AddTransactionLineModel
      */
     public $documentType;
     /**
-     * @var LineItemModel[] List of lines to be added
+     * @var object[] List of lines to be added
      */
     public $lines;
     /**
@@ -13143,7 +13143,7 @@ class DeterminationFactorModel
 class InspectLineResponseModel
 {
     /**
-     * @var DeterminationFactorModel[] A list of determination factors for a line that is being inspected through the InspectLine API.
+     * @var object[] A list of determination factors for a line that is being inspected through the InspectLine API.
      */
     public $determinationFactors;
 }
@@ -13157,7 +13157,7 @@ class UPCModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var UPCModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -13179,7 +13179,7 @@ class UserModelFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var UserModel[] 
+     * @var object[] 
      */
     public $value;
     /**
