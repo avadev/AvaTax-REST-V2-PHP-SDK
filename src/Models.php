@@ -223,28 +223,6 @@ class ErrorDetail
     public $severity;
 }
 /**
- * 
- */
-class AccountModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var AccountModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
  * Company Address Information
  */
 class CompanyAddress
@@ -759,28 +737,6 @@ class AuditModel
     public $remoteCalls;
 }
 /**
- * 
- */
-class AuditModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var AuditModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
  * TextCase info for input address
  */
 class AddressValidationInfo
@@ -1087,28 +1043,6 @@ class AdvancedRuleFullDetailsModel
      * @var string Execution position. Both, Before or After
      */
     public $executionPosition;
-}
-/**
- * 
- */
-class AdvancedRuleFullDetailsModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var AdvancedRuleFullDetailsModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
 }
 /**
  * Model for retrieving customer data schema
@@ -2369,28 +2303,6 @@ class CompanyModel
     public $supplierandcustomers;
 }
 /**
- * 
- */
-class CompanyModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var CompanyModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
  * Model for changing the approved status of an advanced rule
  */
 class ApproveAdvancedRuleModel
@@ -2487,28 +2399,6 @@ class AdvancedRuleExecutionModel
     public $customerDataId;
 }
 /**
- * 
- */
-class AdvancedRuleExecutionModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var AdvancedRuleExecutionModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
  * Model for updating rule execution order
  */
 class AdvancedRuleExecutionOrderModel
@@ -2517,28 +2407,6 @@ class AdvancedRuleExecutionOrderModel
      * @var string[] The rule execution Ids in the desired order
      */
     public $ruleExecutionIds;
-}
-/**
- * 
- */
-class StringFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var string[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
 }
 /**
  * Model representing a lookup file for a company
@@ -2585,28 +2453,6 @@ class AdvancedRuleLookupFileModel
      * @var string Lookup file ModifiedDate
      */
     public $modifiedDate;
-}
-/**
- * 
- */
-class AdvancedRuleLookupFileModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var AdvancedRuleLookupFileModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
 }
 /**
  * Represents information about a tax form known to Avalara
@@ -2685,28 +2531,6 @@ class AvaFileFormModel
      * @var string The outlet type of the form (See OutletTypeId::* for a list of allowable values)
      */
     public $outletTypeId;
-}
-/**
- * 
- */
-class AvaFileFormModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var AvaFileFormModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
 }
 /**
  * Represents one file in a batch upload.
@@ -2823,28 +2647,6 @@ class BatchModel
      * @var BatchFileModel[] The list of files contained in this batch.
      */
     public $files;
-}
-/**
- * 
- */
-class BatchModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var BatchModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
 }
 /**
  * Represents an address to resolve.
@@ -3895,28 +3697,6 @@ class CertExpressInvitationStatusModel
     public $invitation;
 }
 /**
- * 
- */
-class CertExpressInvitationModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var CertExpressInvitationModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
  * Contains information about a company's exemption certificate status.
  *  
  * This model can be used to determine if your company is able to use the Customers, Certificates, and
@@ -3938,28 +3718,6 @@ class ProvisionStatusModel
     public $companyId;
 }
 /**
- * 
- */
-class CertificateModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var CertificateModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
  * Represents a customer to whom you sell products and/or services.
  */
 class LinkCustomersModel
@@ -3968,50 +3726,6 @@ class LinkCustomersModel
      * @var string[] An array of customerCodes that are exempted by this certificate
      */
     public $customers;
-}
-/**
- * 
- */
-class CustomerModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var CustomerModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
- * 
- */
-class CertificateAttributeModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var CertificateAttributeModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
 }
 /**
  * A company and account
@@ -4058,28 +3772,6 @@ class MrsCompanyModel
      * @var int The user ID of the user who last modified this record.
      */
     public $modifiedUserId;
-}
-/**
- * 
- */
-class MrsCompanyModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var MrsCompanyModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
 }
 /**
  * Company Initialization Model
@@ -4350,50 +4042,6 @@ class FilingStatusChangeModel
      * @var string Indicates the filing status you are requesting for this company (See CompanyFilingStatus::* for a list of allowable values)
      */
     public $requestedStatus;
-}
-/**
- * 
- */
-class CompanyParameterDetailModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var CompanyParameterDetailModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
- * 
- */
-class CustomerSupplierModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var CustomerSupplierModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
 }
 /**
  * Represents a parameter associated with a company.
@@ -5688,50 +5336,6 @@ class TransactionModel
     public $invoiceMessages;
 }
 /**
- * 
- */
-class TransactionModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var TransactionModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
- * 
- */
-class ContactModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var ContactModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
  * Represents a customer to whom you sell products and/or services.
  */
 class LinkCertificatesModel
@@ -5754,28 +5358,6 @@ class ExemptionStatusModel
      * @var CertificateModel Certificate if the customer is exempted
      */
     public $certificate;
-}
-/**
- * 
- */
-class CustomerAttributeModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var CustomerAttributeModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
 }
 /**
  * Data source object
@@ -5848,50 +5430,6 @@ class DataSourceModel
     public $externalState;
 }
 /**
- * 
- */
-class DataSourceModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var DataSourceModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
- * 
- */
-class NexusModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var NexusModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
  * Identifies all nexus that match a particular tax form
  */
 class NexusByTaxFormModel
@@ -5912,28 +5450,6 @@ class NexusByTaxFormModel
      * @var NexusModel[] A list of all currently-defined company nexus that are related to this tax form
      */
     public $companyNexus;
-}
-/**
- * 
- */
-class TaxCodeModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var TaxCodeModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
 }
 /**
  * Information about Avalara-defined tax code types.
@@ -5961,28 +5477,6 @@ class SubscriptionTypeModel
     public $description;
 }
 /**
- * 
- */
-class SubscriptionTypeModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var SubscriptionTypeModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
  * Represents a single security role.
  */
 class SecurityRoleModel
@@ -5995,28 +5489,6 @@ class SecurityRoleModel
      * @var string A description of this security role
      */
     public $description;
-}
-/**
- * 
- */
-class SecurityRoleModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var SecurityRoleModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
 }
 /**
  * Tax Authority Model
@@ -6041,28 +5513,6 @@ class TaxAuthorityModel
     public $jurisdictionId;
 }
 /**
- * 
- */
-class TaxAuthorityModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var TaxAuthorityModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
  * Represents a form that can be filed with a tax authority.
  */
 class TaxAuthorityFormModel
@@ -6075,28 +5525,6 @@ class TaxAuthorityFormModel
      * @var string The form name of the form for this tax authority.
      */
     public $formName;
-}
-/**
- * 
- */
-class TaxAuthorityFormModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var TaxAuthorityFormModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
 }
 /**
  * usage of system defined parameters.
@@ -6165,28 +5593,6 @@ class ParameterUsageModel
     public $measurementType;
 }
 /**
- * 
- */
-class ParameterUsageModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var ParameterUsageModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
  * An extra property that can change the behavior of tax transactions.
  */
 class ParameterModel
@@ -6243,28 +5649,6 @@ class ParameterModel
      * @var string The unit of measurement type of the parameter
      */
     public $measurementType;
-}
-/**
- * 
- */
-class ParameterModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var ParameterModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
 }
 /**
  * Information about questions that the local jurisdictions require for each location
@@ -6333,28 +5717,6 @@ class LocationQuestionModel
     public $unique;
 }
 /**
- * 
- */
-class LocationQuestionModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var LocationQuestionModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
  * Represents a language-specific localized name of a particular geographic entity such
  * as a country or a region.
  */
@@ -6404,28 +5766,6 @@ class IsoCountryModel
     public $addressesRequireRegion;
 }
 /**
- * 
- */
-class IsoCountryModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var IsoCountryModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
  * Represents a region, province, or state within a country
  */
 class IsoRegionModel
@@ -6456,28 +5796,6 @@ class IsoRegionModel
     public $localizedNames;
 }
 /**
- * 
- */
-class IsoRegionModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var IsoRegionModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
  * Represents a code describing the intended use for a product that may affect its taxability
  */
 class EntityUseCodeModel
@@ -6498,28 +5816,6 @@ class EntityUseCodeModel
      * @var string[] A list of countries where this use code is valid
      */
     public $validCountries;
-}
-/**
- * 
- */
-class EntityUseCodeModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var EntityUseCodeModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
 }
 /**
  * A preferred program is a customs and/or duty program that can be used to handle cross-border transactions.
@@ -6556,28 +5852,6 @@ class PreferredProgramModel
     public $endDate;
 }
 /**
- * 
- */
-class PreferredProgramModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var PreferredProgramModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
  * Represents an ISO 4217 currency code used for designating the currency of a transaction.
  */
 class CurrencyModel
@@ -6594,28 +5868,6 @@ class CurrencyModel
      * @var int The number of decimal digits to use when formatting a currency value for display.
      */
     public $decimalDigits;
-}
-/**
- * 
- */
-class CurrencyModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var CurrencyModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
 }
 /**
  * Represents a System Country.
@@ -6670,28 +5922,6 @@ class ProductClassificationSystemModel
     public $countries;
 }
 /**
- * 
- */
-class ProductClassificationSystemModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var ProductClassificationSystemModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
  * Tax Authority Type Model
  */
 class TaxAuthorityTypeModel
@@ -6708,28 +5938,6 @@ class TaxAuthorityTypeModel
      * @var string Tax Authority Group
      */
     public $taxAuthorityGroup;
-}
-/**
- * 
- */
-class TaxAuthorityTypeModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var TaxAuthorityTypeModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
 }
 /**
  * Tax Notice Status Model
@@ -6754,28 +5962,6 @@ class NoticeStatusModel
     public $sortOrder;
 }
 /**
- * 
- */
-class NoticeStatusModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var NoticeStatusModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
  * Tax Authority Model
  */
 class NoticeCustomerTypeModel
@@ -6796,28 +5982,6 @@ class NoticeCustomerTypeModel
      * @var int sort order of the types
      */
     public $sortOrder;
-}
-/**
- * 
- */
-class NoticeCustomerTypeModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var NoticeCustomerTypeModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
 }
 /**
  * Tax Notice Reason Model
@@ -6842,28 +6006,6 @@ class NoticeReasonModel
     public $sortOrder;
 }
 /**
- * 
- */
-class NoticeReasonModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var NoticeReasonModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
  * FilingFrequency Model
  */
 class FilingFrequencyModel
@@ -6876,28 +6018,6 @@ class FilingFrequencyModel
      * @var string The description name of this filing frequency
      */
     public $description;
-}
-/**
- * 
- */
-class FilingFrequencyModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var FilingFrequencyModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
 }
 /**
  * Tax Notice FilingType Model
@@ -6922,28 +6042,6 @@ class NoticeFilingTypeModel
     public $sortOrder;
 }
 /**
- * 
- */
-class NoticeFilingTypeModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var NoticeFilingTypeModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
  * Tax Notice Type Model
  */
 class NoticeTypeModel
@@ -6964,28 +6062,6 @@ class NoticeTypeModel
      * @var int sort order of the types
      */
     public $sortOrder;
-}
-/**
- * 
- */
-class NoticeTypeModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var NoticeTypeModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
 }
 /**
  * Tax Authority Model
@@ -7010,28 +6086,6 @@ class NoticeCustomerFundingOptionModel
     public $sortOrder;
 }
 /**
- * 
- */
-class NoticeCustomerFundingOptionModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var NoticeCustomerFundingOptionModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
  * Tax Notice Priority Model
  */
 class NoticePriorityModel
@@ -7052,28 +6106,6 @@ class NoticePriorityModel
      * @var int sort order of the Prioritys
      */
     public $sortOrder;
-}
-/**
- * 
- */
-class NoticePriorityModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var NoticePriorityModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
 }
 /**
  * NoticeResponsibility Model
@@ -7098,28 +6130,6 @@ class NoticeResponsibilityModel
     public $sortOrder;
 }
 /**
- * 
- */
-class NoticeResponsibilityModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var NoticeResponsibilityModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
  * NoticeRootCause Model
  */
 class NoticeRootCauseModel
@@ -7140,28 +6150,6 @@ class NoticeRootCauseModel
      * @var int The sort order of this RootCause
      */
     public $sortOrder;
-}
-/**
- * 
- */
-class NoticeRootCauseModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var NoticeRootCauseModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
 }
 /**
  * Represents a verification request using Skyscraper for a company
@@ -7214,28 +6202,6 @@ class SkyscraperStatusModel
      * @var requiredFilingCalendarDataFieldModel[] A list of required fields to file
      */
     public $requiredFilingCalendarDataFields;
-}
-/**
- * 
- */
-class SkyscraperStatusModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var SkyscraperStatusModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
 }
 /**
  * Represents information about a single legal taxing jurisdiction
@@ -7397,50 +6363,6 @@ class JurisdictionOverrideModel
     public $isDefault;
 }
 /**
- * 
- */
-class JurisdictionOverrideModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var JurisdictionOverrideModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
- * 
- */
-class JurisdictionModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var JurisdictionModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
  * Resource File Type Model
  */
 class ResourceFileTypeModel
@@ -7453,28 +6375,6 @@ class ResourceFileTypeModel
      * @var string The name of the file type
      */
     public $name;
-}
-/**
- * 
- */
-class ResourceFileTypeModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var ResourceFileTypeModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
 }
 /**
  * Rate type Model
@@ -7493,28 +6393,6 @@ class RateTypeModel
      * @var string Country code for this rate type
      */
     public $country;
-}
-/**
- * 
- */
-class RateTypeModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var RateTypeModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
 }
 /**
  * Represents information about a tax form known to Avalara
@@ -7931,28 +6809,6 @@ class FormMasterModel
     public $aliasForFormMasterId;
 }
 /**
- * 
- */
-class FormMasterModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var FormMasterModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
  * Represents a tax type group
  */
 class TaxTypeGroupModel
@@ -7991,28 +6847,6 @@ class TaxTypeGroupModel
     public $displaySequence;
 }
 /**
- * 
- */
-class TaxTypeGroupModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var TaxTypeGroupModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
  * Represents a tax subtype
  */
 class TaxSubTypeModel
@@ -8033,28 +6867,6 @@ class TaxSubTypeModel
      * @var string The upper level group of tax types.
      */
     public $taxTypeGroup;
-}
-/**
- * 
- */
-class TaxSubTypeModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var TaxSubTypeModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
 }
 /**
  * Represents a group of tax types
@@ -8091,28 +6903,6 @@ class NexusTaxTypeGroupModel
     public $showColumn;
 }
 /**
- * 
- */
-class NexusTaxTypeGroupModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var NexusTaxTypeGroupModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
  * Represents a transaction/service type pair for telecommunications tax
  */
 class CommunicationsTSPairModel
@@ -8143,28 +6933,6 @@ class CommunicationsTSPairModel
     public $requiredParameters;
 }
 /**
- * 
- */
-class CommunicationsTSPairModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var CommunicationsTSPairModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
  * Represents information about a type of telecommunications transaction
  */
 class CommunicationsTransactionTypeModel
@@ -8177,94 +6945,6 @@ class CommunicationsTransactionTypeModel
      * @var string The name of the transaction type.
      */
     public $AvaTax_Communications_TransactionType;
-}
-/**
- * 
- */
-class CommunicationsTransactionTypeModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var CommunicationsTransactionTypeModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
- * 
- */
-class ExposureZoneModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var ExposureZoneModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
- * 
- */
-class CoverLetterModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var CoverLetterModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
- * 
- */
-class ExemptionReasonModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var ExemptionReasonModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
 }
 /**
  * The "Unit of Measurement" model captures information about a type of measurement. Types of measurement refer to
@@ -8309,28 +6989,6 @@ class UomModel
      * @var boolean True if this measurement is an International System of Units (abbreviated SI) defined standard.
      */
     public $isSiUom;
-}
-/**
- * 
- */
-class UomModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var UomModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
 }
 /**
  * Describes an element in the harmonized tariff system.
@@ -8381,28 +7039,6 @@ class HsCodeModel
     public $endDate;
 }
 /**
- * 
- */
-class HsCodeModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var HsCodeModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
  * Represents a PostalCode and its associated data like: country, region, effective dates, etc.
  */
 class PostalCodeModel
@@ -8431,28 +7067,6 @@ class PostalCodeModel
      * @var string The postalCode
      */
     public $postalCode;
-}
-/**
- * 
- */
-class PostalCodeModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var PostalCodeModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
 }
 /**
  * Marketplace Location Output model
@@ -8499,28 +7113,6 @@ class MarketplaceLocationModel
      * @var string Marketplace Location Modified Date
      */
     public $modifiedDate;
-}
-/**
- * 
- */
-class MarketplaceLocationModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var MarketplaceLocationModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
 }
 /**
  * A company-distance-threshold model indicates the distance between a company
@@ -8577,50 +7169,6 @@ class CompanyDistanceThresholdModel
     public $type;
 }
 /**
- * 
- */
-class CompanyDistanceThresholdModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var CompanyDistanceThresholdModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
- * 
- */
-class EcmsModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var EcmsModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
  * A model used to initialize a new CertCapture eCommerce token.
  */
 class CreateECommerceTokenInputModel
@@ -8651,28 +7199,6 @@ class ECommerceTokenOutputModel
      * @var string The date that the token will expire.
      */
     public $expirationDate;
-}
-/**
- * 
- */
-class ECommerceTokenOutputModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var ECommerceTokenOutputModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
 }
 /**
  * A model used to request the refresh of a CertCapture eCommerce token.
@@ -8745,7 +7271,7 @@ class ErrorTransactionOutputModel
 /**
  * 
  */
-class ErrorTransactionOutputModelCappedFetchResult
+class CappedFetchResult
 {
     /**
      * @var boolean 
@@ -8756,7 +7282,7 @@ class ErrorTransactionOutputModelCappedFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var ErrorTransactionOutputModel[] 
+     * @var object[] 
      */
     public $value;
     /**
@@ -8833,32 +7359,6 @@ class ErrorCodeOutputModel
      * @var int Number of error code recorded
      */
     public $count;
-}
-/**
- * 
- */
-class ErrorCodeOutputModelCappedFetchResult
-{
-    /**
-     * @var boolean 
-     */
-    public $_isRecordsetCountCapped;
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var ErrorCodeOutputModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
 }
 /**
  * 
@@ -9158,28 +7658,6 @@ class FilingCalendarModel
     public $settings;
 }
 /**
- * 
- */
-class FilingCalendarModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var FilingCalendarModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
  * Represents a complex query request to parse using query filter guidelines from Microsoft REST standards
  */
 class QueryRequestModel
@@ -9472,28 +7950,6 @@ class FilingRequestModel
     public $modifiedUserId;
 }
 /**
- * 
- */
-class FilingRequestModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var FilingRequestModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
  * This is the output model coming from skyscraper services
  */
 class LoginVerificationOutputModel
@@ -9778,28 +8234,6 @@ class FilingReturnModelBasic
     public $modifiedDate;
 }
 /**
- * 
- */
-class FilingReturnModelBasicFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var FilingReturnModelBasic[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
  * Filing Returns Model
  */
 class FiledReturnModel
@@ -9820,28 +8254,6 @@ class FiledReturnModel
      * @var string The unique code of the form.
      */
     public $taxformCode;
-}
-/**
- * 
- */
-class FiledReturnModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var FiledReturnModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
 }
 /**
  * A model for return adjustments.
@@ -10534,28 +8946,6 @@ class FilingModel
     public $filingRegions;
 }
 /**
- * 
- */
-class FilingModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var FilingModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
  * Represents a listing of all tax calculation data for filings and for accruing to future filings.
  */
 class FilingsTaxSummaryModel
@@ -10822,28 +9212,6 @@ class MultiTaxFilingModel
     public $filingRegions;
 }
 /**
- * 
- */
-class MultiTaxFilingModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var MultiTaxFilingModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
  * Rebuild a set of filings.
  */
 class RebuildFilingsModel
@@ -10970,28 +9338,6 @@ class FirmClientLinkageOutputModel
     public $firmContactEmail;
 }
 /**
- * 
- */
-class FirmClientLinkageOutputModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var FirmClientLinkageOutputModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
  * Account Linkage Input model
  */
 class FirmClientLinkageInputModel
@@ -11092,72 +9438,6 @@ class ItemClassificationOutputModel
     public $systemCode;
 }
 /**
- * 
- */
-class ItemClassificationOutputModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var ItemClassificationOutputModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
- * 
- */
-class ItemParameterModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var ItemParameterModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
- * 
- */
-class ItemModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var ItemModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
  * An abridged item model used for syncing product catalogs with AvaTax.
  */
 class ItemSyncModel
@@ -11198,50 +9478,6 @@ class SyncItemsResponseModel
      * @var string The status of the request
      */
     public $status;
-}
-/**
- * 
- */
-class LocationParameterModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var LocationParameterModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
- * 
- */
-class LocationModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var LocationModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
 }
 /**
  * Tells you whether this location object has been correctly set up to the local jurisdiction's standards
@@ -11596,28 +9832,6 @@ class CreateMultiDocumentModel
     public $debugLevel;
 }
 /**
- * 
- */
-class MultiDocumentModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var MultiDocumentModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
  * Replace an existing MultiDocument transaction recorded in AvaTax with a new one.
  */
 class AdjustMultiDocumentModel
@@ -11835,28 +10049,6 @@ class NexusByAddressModel
      * @var NexusModel[] List of all nexus objects that were affected by declaring nexus at the address specified  by `address`.
      */
     public $declaredNexus;
-}
-/**
- * 
- */
-class NexusParameterDetailModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var NexusParameterDetailModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
 }
 /**
  * A request to upload a file to Resource Files
@@ -12281,116 +10473,6 @@ class NoticeModel
     public $modifiedUserId;
 }
 /**
- * 
- */
-class NoticeModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var NoticeModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
- * 
- */
-class NoticeCommentModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var NoticeCommentModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
- * 
- */
-class NoticeFinanceModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var NoticeFinanceModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
- * 
- */
-class NoticeResponsibilityDetailModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var NoticeResponsibilityDetailModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
- * 
- */
-class NoticeRootCauseDetailModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var NoticeRootCauseDetailModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
  * Encapsulates the result of uploading a file to the resource system
  */
 class ResourceFileUploadResultModel
@@ -12504,28 +10586,6 @@ class NotificationModel
      * @var string The UTC timestamp of the time when this notification was last modified.
      */
     public $modifiedDate;
-}
-/**
- * 
- */
-class NotificationModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var NotificationModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
 }
 /**
  * Password Change Model
@@ -12698,72 +10758,6 @@ class ReportModel
     public $completedDate;
 }
 /**
- * 
- */
-class ReportModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var ReportModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
- * 
- */
-class SettingModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var SettingModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
- * 
- */
-class SubscriptionModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var SubscriptionModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
  * Point-of-Sale Data Request Model
  */
 class PointOfSaleDataRequestModel
@@ -12869,28 +10863,6 @@ class TaxRateModel
      * @var RateModel[] The list of individual rate elements for general tangible personal property sold at a retail  point of presence in this jurisdiction on this date.
      */
     public $rates;
-}
-/**
- * 
- */
-class TaxRuleModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var TaxRuleModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
 }
 /**
  * Replace an existing transaction recorded in AvaTax with a new one.
@@ -13146,50 +11118,6 @@ class InspectLineResponseModel
      * @var DeterminationFactorModel[] A list of determination factors for a line that is being inspected through the InspectLine API.
      */
     public $determinationFactors;
-}
-/**
- * 
- */
-class UPCModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var UPCModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
-}
-/**
- * 
- */
-class UserModelFetchResult
-{
-    /**
-     * @var int 
-     */
-    public $_recordsetCount;
-    /**
-     * @var UserModel[] 
-     */
-    public $value;
-    /**
-     * @var string 
-     */
-    public $_nextLink;
-    /**
-     * @var string 
-     */
-    public $pageKey;
 }
 /**
  * User Entitlement Model
