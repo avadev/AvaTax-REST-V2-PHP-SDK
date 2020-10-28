@@ -116,7 +116,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $end The end datetime of audit history you with to retrieve, e.g. "2018-06-08T17:15:00Z. Defaults to the current time. Maximum of an hour after the start time.
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
-     * @return AuditModelFetchResult
+     * @return object
      */
     public function auditAccount($id, $start, $end, $top=null, $skip=null)    {
         $path = "/api/v2/accounts/{$id}/audit";
@@ -315,7 +315,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return AccountModelFetchResult
+     * @return object
      */
     public function queryAccounts($include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/accounts";
@@ -626,7 +626,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param boolean $fullDetails Retrieve detailed advanced rule properties (limited to tech support level)
      * @param boolean $includeTest Include test rules
      * @param boolean $includeSystemRules Include rules used to retrieve enumerated values
-     * @return AdvancedRuleFullDetailsModelFetchResult
+     * @return object
      */
     public function getAdvancedRules($fullDetails, $includeTest, $includeSystemRules)    {
         $path = "/api/v2/advancedrules/rules";
@@ -664,7 +664,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * 
      * @param string $ruleId he ID of the advance rule for which companies are requested
-     * @return CompanyModelFetchResult
+     * @return object
      */
     public function getCompaniesUsingAdvancedRule($ruleId)    {
         $path = "/api/v2/advancedrules/rules/{$ruleId}/companies";
@@ -683,7 +683,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $accountId The account ID for the company
      * @param int $companyId The ID of the company for which to retrieve lookup files
-     * @return AdvancedRuleLookupFileModelFetchResult
+     * @return object
      */
     public function getCompanyLookupFiles($accountId, $companyId)    {
         $path = "/api/v2/advancedrules/accounts/{$accountId}/companies/{$companyId}/lookupFiles";
@@ -703,7 +703,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $accountId The account ID for the company
      * @param int $companyId The ID of the company for which to retrieve rule executions
      * @param string $effectiveDate Optional date which the rule executions should be effective
-     * @return AdvancedRuleExecutionModelFetchResult
+     * @return object
      */
     public function getCompanyRuleExecutions($accountId, $companyId, $effectiveDate)    {
         $path = "/api/v2/advancedrules/accounts/{$accountId}/companies/{$companyId}/executions";
@@ -818,7 +818,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $accountId The ID of the account for the company the rule execution is for
      * @param int $companyId The ID of the company for which the rule execution order is being modified
      * @param AdvancedRuleExecutionOrderModel $model A list of rule execution IDs for the company indicating the new execution order
-     * @return StringFetchResult
+     * @return object
      */
     public function updateCompanyRuleExecutionOrder($accountId, $companyId, $model)    {
         $path = "/api/v2/advancedrules/accounts/{$accountId}/companies/{$companyId}/executions/order";
@@ -955,7 +955,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return AvaFileFormModelFetchResult
+     * @return object
      */
     public function queryAvaFileForms($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/avafileforms";
@@ -1234,7 +1234,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return BatchModelFetchResult
+     * @return object
      */
     public function listBatchesByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/batches";
@@ -1277,7 +1277,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return BatchModelFetchResult
+     * @return object
      */
     public function queryBatches($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/batches";
@@ -1398,7 +1398,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return CertExpressInvitationModelFetchResult
+     * @return object
      */
     public function listCertExpressInvitations($companyId, $include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/certexpressinvites";
@@ -1626,7 +1626,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The unique ID number of the company that recorded this certificate
      * @param int $id The unique ID number of this certificate
      * @param CertificateAttributeModel[] $model The list of attributes to link to this certificate.
-     * @return CertificateAttributeModelFetchResult
+     * @return object
      */
     public function linkAttributesToCertificate($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/certificates/{$id}/attributes/link";
@@ -1665,7 +1665,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The unique ID number of the company that recorded this certificate
      * @param int $id The unique ID number of this certificate
      * @param LinkCustomersModel $model The list of customers needed be added to the Certificate for exemption
-     * @return CustomerModelFetchResult
+     * @return object
      */
     public function linkCustomersToCertificate($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/certificates/{$id}/customers/link";
@@ -1702,7 +1702,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The unique ID number of the company that recorded this certificate
      * @param int $id The unique ID number of this certificate
-     * @return CertificateAttributeModelFetchResult
+     * @return object
      */
     public function listAttributesForCertificate($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/certificates/{$id}/attributes";
@@ -1740,7 +1740,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The unique ID number of the company that recorded this certificate
      * @param int $id The unique ID number of this certificate
      * @param string $include OPTIONAL: A comma separated list of special fetch options.   No options are currently available when fetching customers.
-     * @return CustomerModelFetchResult
+     * @return object
      */
     public function listCustomersForCertificate($companyId, $id, $include=null)    {
         $path = "/api/v2/companies/{$companyId}/certificates/{$id}/customers";
@@ -1784,7 +1784,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return CertificateModelFetchResult
+     * @return object
      */
     public function queryCertificates($companyId, $include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/certificates";
@@ -1853,7 +1853,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The unique ID number of the company that recorded this certificate
      * @param int $id The unique ID number of this certificate
      * @param CertificateAttributeModel[] $model The list of attributes to unlink from this certificate.
-     * @return CertificateAttributeModelFetchResult
+     * @return object
      */
     public function unlinkAttributesFromCertificate($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/certificates/{$id}/attributes/unlink";
@@ -1893,7 +1893,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The unique ID number of the company that recorded this certificate
      * @param int $id The unique ID number of this certificate
      * @param LinkCustomersModel $model The list of customers to unlink from this certificate
-     * @return CustomerModelFetchResult
+     * @return object
      */
     public function unlinkCustomersFromCertificate($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/certificates/{$id}/customers/unlink";
@@ -2723,7 +2723,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return CompanyParameterDetailModelFetchResult
+     * @return object
      */
     public function listCompanyParameterDetails($companyId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/parameters";
@@ -2749,7 +2749,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return CustomerSupplierModelFetchResult
+     * @return object
      */
     public function listCustomers($companyId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/supplierandcustomers/customers";
@@ -2798,7 +2798,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      *
      * 
-     * @return MrsCompanyModelFetchResult
+     * @return object
      */
     public function listMrsCompanies()    {
         $path = "/api/v2/companies/mrs";
@@ -2824,7 +2824,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return CustomerSupplierModelFetchResult
+     * @return object
      */
     public function listSuppliers($companyId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/supplierandcustomers/suppliers";
@@ -2866,7 +2866,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return CompanyModelFetchResult
+     * @return object
      */
     public function queryCompanies($include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies";
@@ -3263,7 +3263,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId 
      * @param TransactionReferenceFieldModel[] $model 
-     * @return TransactionModelFetchResult
+     * @return object
      */
     public function tagTransaction($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/transactions/tag";
@@ -3365,7 +3365,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return ContactModelFetchResult
+     * @return object
      */
     public function listContactsByCompany($companyId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/contacts";
@@ -3395,7 +3395,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return ContactModelFetchResult
+     * @return object
      */
     public function queryContacts($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/contacts";
@@ -3577,7 +3577,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The unique ID number of the company that recorded the provided customer
      * @param string $customerCode The unique code representing the current customer
      * @param CustomerAttributeModel[] $model The list of attributes to link to the customer.
-     * @return CustomerAttributeModelFetchResult
+     * @return object
      */
     public function linkAttributesToCustomer($companyId, $customerCode, $model)    {
         $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/attributes/link";
@@ -3613,7 +3613,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The unique ID number of the company that recorded this customer
      * @param string $customerCode The unique code representing this customer
      * @param LinkCertificatesModel $model The list of certificates to link to this customer
-     * @return CertificateModelFetchResult
+     * @return object
      */
     public function linkCertificatesToCustomer($companyId, $customerCode, $model)    {
         $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/certificates/link";
@@ -3688,7 +3688,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The unique ID number of the company that recorded the provided customer
      * @param string $customerCode The unique code representing the current customer
-     * @return CustomerAttributeModelFetchResult
+     * @return object
      */
     public function listAttributesForCustomer($companyId, $customerCode)    {
         $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/attributes";
@@ -3728,7 +3728,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return CertificateModelFetchResult
+     * @return object
      */
     public function listCertificatesForCustomer($companyId, $customerCode, $include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/certificates";
@@ -3812,7 +3812,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return CustomerModelFetchResult
+     * @return object
      */
     public function queryCustomers($companyId, $include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/customers";
@@ -3851,7 +3851,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The unique ID number of the company that recorded the customer
      * @param string $customerCode The unique code representing the current customer
      * @param CustomerAttributeModel[] $model The list of attributes to unlink from the customer.
-     * @return CustomerAttributeModelFetchResult
+     * @return object
      */
     public function unlinkAttributesFromCustomer($companyId, $customerCode, $model)    {
         $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/attributes/unlink";
@@ -3887,7 +3887,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The unique ID number of the company that recorded this customer
      * @param string $customerCode The unique code representing this customer
      * @param LinkCertificatesModel $model The list of certificates to link to this customer
-     * @return CertificateModelFetchResult
+     * @return object
      */
     public function unlinkCertificatesFromCustomer($companyId, $customerCode, $model)    {
         $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/certificates/unlink";
@@ -4022,7 +4022,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return DataSourceModelFetchResult
+     * @return object
      */
     public function listDataSources($companyId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/datasources";
@@ -4051,7 +4051,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return DataSourceModelFetchResult
+     * @return object
      */
     public function queryDataSources($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/datasources";
@@ -4108,7 +4108,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param string $country The name or code of the destination country.
      * @param string $hsCode The partial or full HS Code for which you would like to view all of the parents.
-     * @return HsCodeModelFetchResult
+     * @return object
      */
     public function getCrossBorderCode($country, $hsCode)    {
         $path = "/api/v2/definitions/crossborder/{$country}/{$hsCode}/hierarchy";
@@ -4131,7 +4131,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return SkyscraperStatusModelFetchResult
+     * @return object
      */
     public function getLoginVerifierByForm($form, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/filingcalendars/loginverifiers/{$form}";
@@ -4157,7 +4157,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return AvaFileFormModelFetchResult
+     * @return object
      */
     public function listAvaFileForms($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/avafileforms";
@@ -4185,7 +4185,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return CertificateAttributeModelFetchResult
+     * @return object
      */
     public function listCertificateAttributes($companyid, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/certificateattributes";
@@ -4212,7 +4212,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return ExemptionReasonModelFetchResult
+     * @return object
      */
     public function listCertificateExemptReasons($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/certificateexemptreasons";
@@ -4239,7 +4239,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return ExposureZoneModelFetchResult
+     * @return object
      */
     public function listCertificateExposureZones($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/certificateexposurezones";
@@ -4261,7 +4261,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return CommunicationsTSPairModelFetchResult
+     * @return object
      */
     public function listCommunicationsServiceTypes($id, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/communications/transactiontypes/{$id}/servicetypes";
@@ -4283,7 +4283,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return CommunicationsTransactionTypeModelFetchResult
+     * @return object
      */
     public function listCommunicationsTransactionTypes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/communications/transactiontypes";
@@ -4305,7 +4305,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return CommunicationsTSPairModelFetchResult
+     * @return object
      */
     public function listCommunicationsTSPairs($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/communications/tspairs";
@@ -4328,7 +4328,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return IsoCountryModelFetchResult
+     * @return object
      */
     public function listCountries($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/countries";
@@ -4356,7 +4356,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return CoverLetterModelFetchResult
+     * @return object
      */
     public function listCoverLetters($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/coverletters";
@@ -4390,7 +4390,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return HsCodeModelFetchResult
+     * @return object
      */
     public function listCrossBorderCodes($country, $hsCode, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/crossborder/{$country}/{$hsCode}";
@@ -4416,7 +4416,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * * This API depends on the following active services<br />*Required* (all): AvaTaxGlobal.
      *
      * 
-     * @return HsCodeModelFetchResult
+     * @return object
      */
     public function listCrossBorderSections()    {
         $path = "/api/v2/definitions/crossborder/sections";
@@ -4440,7 +4440,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return CurrencyModelFetchResult
+     * @return object
      */
     public function listCurrencies($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/currencies";
@@ -4465,7 +4465,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return EntityUseCodeModelFetchResult
+     * @return object
      */
     public function listEntityUseCodes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/entityusecodes";
@@ -4487,7 +4487,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FilingFrequencyModelFetchResult
+     * @return object
      */
     public function listFilingFrequencies($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/filingfrequencies";
@@ -4513,7 +4513,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return JurisdictionModelFetchResult
+     * @return object
      */
     public function listJurisdictions($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/jurisdictions";
@@ -4547,7 +4547,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return JurisdictionOverrideModelFetchResult
+     * @return object
      */
     public function listJurisdictionsByAddress($line1, $line2, $line3, $city, $region, $postalCode, $country, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/jurisdictionsnearaddress";
@@ -4582,7 +4582,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return LocationQuestionModelFetchResult
+     * @return object
      */
     public function listLocationQuestionsByAddress($line1, $line2, $line3, $city, $region, $postalCode, $country, $latitude, $longitude, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/locationquestions";
@@ -4605,7 +4605,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return SkyscraperStatusModelFetchResult
+     * @return object
      */
     public function listLoginVerifiers($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/filingcalendars/loginverifiers";
@@ -4626,7 +4626,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return MarketplaceLocationModelFetchResult
+     * @return object
      */
     public function listMarketplaceLocations($marketplaceId, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/marketplacelocations";
@@ -4649,7 +4649,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return NexusModelFetchResult
+     * @return object
      */
     public function listNexus($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/nexus";
@@ -4681,7 +4681,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return NexusModelFetchResult
+     * @return object
      */
     public function listNexusByAddress($line1, $line2, $line3, $city, $region, $postalCode, $country, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/nexus/byaddress";
@@ -4705,7 +4705,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return NexusModelFetchResult
+     * @return object
      */
     public function listNexusByCountry($country, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/nexus/{$country}";
@@ -4730,7 +4730,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return NexusModelFetchResult
+     * @return object
      */
     public function listNexusByCountryAndRegion($country, $region, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/nexus/{$country}/{$region}";
@@ -4786,7 +4786,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return NexusModelFetchResult
+     * @return object
      */
     public function listNexusByTaxTypeGroup($taxTypeGroup, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/nexus/bytaxtypegroup/{$taxTypeGroup}";
@@ -4808,7 +4808,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return NexusTaxTypeGroupModelFetchResult
+     * @return object
      */
     public function listNexusTaxTypeGroups($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/nexustaxtypegroups";
@@ -4830,7 +4830,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return NoticeCustomerFundingOptionModelFetchResult
+     * @return object
      */
     public function listNoticeCustomerFundingOptions($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/noticecustomerfundingoptions";
@@ -4852,7 +4852,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return NoticeCustomerTypeModelFetchResult
+     * @return object
      */
     public function listNoticeCustomerTypes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/noticecustomertypes";
@@ -4874,7 +4874,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return NoticeFilingTypeModelFetchResult
+     * @return object
      */
     public function listNoticeFilingtypes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/noticefilingtypes";
@@ -4896,7 +4896,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return NoticePriorityModelFetchResult
+     * @return object
      */
     public function listNoticePriorities($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/noticepriorities";
@@ -4918,7 +4918,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return NoticeReasonModelFetchResult
+     * @return object
      */
     public function listNoticeReasons($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/noticereasons";
@@ -4940,7 +4940,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return NoticeResponsibilityModelFetchResult
+     * @return object
      */
     public function listNoticeResponsibilities($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/noticeresponsibilities";
@@ -4962,7 +4962,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return NoticeRootCauseModelFetchResult
+     * @return object
      */
     public function listNoticeRootCauses($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/noticerootcauses";
@@ -4984,7 +4984,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return NoticeStatusModelFetchResult
+     * @return object
      */
     public function listNoticeStatuses($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/noticestatuses";
@@ -5006,7 +5006,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return NoticeTypeModelFetchResult
+     * @return object
      */
     public function listNoticeTypes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/noticetypes";
@@ -5029,7 +5029,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return ParameterModelFetchResult
+     * @return object
      */
     public function listParameters($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/parameters";
@@ -5056,7 +5056,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return ParameterModelFetchResult
+     * @return object
      */
     public function listParametersByItem($companyCode, $itemCode, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/parameters/byitem/{$companyCode}/{$itemCode}";
@@ -5079,7 +5079,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return ParameterUsageModelFetchResult
+     * @return object
      */
     public function listParametersUsage($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/parametersusage";
@@ -5099,7 +5099,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
-     * @return StringFetchResult
+     * @return object
      */
     public function listPermissions($top=null, $skip=null)    {
         $path = "/api/v2/definitions/permissions";
@@ -5120,7 +5120,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return PostalCodeModelFetchResult
+     * @return object
      */
     public function listPostalCodes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/postalcodes";
@@ -5149,7 +5149,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return PreferredProgramModelFetchResult
+     * @return object
      */
     public function listPreferredPrograms($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/preferredprograms";
@@ -5174,7 +5174,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @param string $countryCode If not null, return all records with this code.
-     * @return ProductClassificationSystemModelFetchResult
+     * @return object
      */
     public function listProductClassificationSystems($filter=null, $top=null, $skip=null, $orderBy=null, $countryCode)    {
         $path = "/api/v2/definitions/productclassificationsystems";
@@ -5200,7 +5200,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @param string $countryCode If not null, return all records with this code.
-     * @return ProductClassificationSystemModelFetchResult
+     * @return object
      */
     public function listProductClassificationSystemsByCompany($companyCode, $filter=null, $top=null, $skip=null, $orderBy=null, $countryCode)    {
         $path = "/api/v2/definitions/productclassificationsystems/bycompany/{$companyCode}";
@@ -5223,7 +5223,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return RateTypeModelFetchResult
+     * @return object
      */
     public function listRateTypesByCountry($country, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/countries/{$country}/ratetypes";
@@ -5246,7 +5246,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return IsoRegionModelFetchResult
+     * @return object
      */
     public function listRegions($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/regions";
@@ -5270,7 +5270,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return IsoRegionModelFetchResult
+     * @return object
      */
     public function listRegionsByCountry($country, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/countries/{$country}/regions";
@@ -5292,7 +5292,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return ResourceFileTypeModelFetchResult
+     * @return object
      */
     public function listResourceFileTypes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/resourcefiletypes";
@@ -5315,7 +5315,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return SecurityRoleModelFetchResult
+     * @return object
      */
     public function listSecurityRoles($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/securityroles";
@@ -5339,7 +5339,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return SubscriptionTypeModelFetchResult
+     * @return object
      */
     public function listSubscriptionTypes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/subscriptiontypes";
@@ -5361,7 +5361,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return TaxAuthorityModelFetchResult
+     * @return object
      */
     public function listTaxAuthorities($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/taxauthorities";
@@ -5385,7 +5385,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return TaxAuthorityFormModelFetchResult
+     * @return object
      */
     public function listTaxAuthorityForms($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/taxauthorityforms";
@@ -5407,7 +5407,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return TaxAuthorityTypeModelFetchResult
+     * @return object
      */
     public function listTaxAuthorityTypes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/taxauthoritytypes";
@@ -5436,7 +5436,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return TaxCodeModelFetchResult
+     * @return object
      */
     public function listTaxCodes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/taxcodes";
@@ -5479,7 +5479,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FormMasterModelFetchResult
+     * @return object
      */
     public function listTaxForms($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/taxforms";
@@ -5501,7 +5501,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return TaxSubTypeModelFetchResult
+     * @return object
      */
     public function listTaxSubTypes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/taxsubtypes";
@@ -5525,7 +5525,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return TaxSubTypeModelFetchResult
+     * @return object
      */
     public function listTaxSubTypesByJurisdictionAndRegion($jurisdictionCode, $region, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/taxsubtypes/{$jurisdictionCode}/{$region}";
@@ -5547,7 +5547,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return TaxTypeGroupModelFetchResult
+     * @return object
      */
     public function listTaxTypeGroups($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/taxtypegroups";
@@ -5570,7 +5570,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return UomModelFetchResult
+     * @return object
      */
     public function listUnitOfMeasurement($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/unitofmeasurements";
@@ -5598,7 +5598,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return CustomerAttributeModelFetchResult
+     * @return object
      */
     public function queryCompanyCustomerAttributes($companyid, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/customerattributes";
@@ -5710,7 +5710,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return CompanyDistanceThresholdModelFetchResult
+     * @return object
      */
     public function listDistanceThresholds($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/distancethresholds";
@@ -5743,7 +5743,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return CompanyDistanceThresholdModelFetchResult
+     * @return object
      */
     public function queryDistanceThresholds($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/distancethresholds";
@@ -5837,7 +5837,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return EcmsModelFetchResult
+     * @return object
      */
     public function listECMSByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/ecms";
@@ -5871,7 +5871,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return EcmsModelFetchResult
+     * @return object
      */
     public function queryECMS($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/ecms";
@@ -5896,7 +5896,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The company ID that will be issued this certificate.
      * @param CreateECommerceTokenInputModel $model 
-     * @return ECommerceTokenOutputModelFetchResult
+     * @return object
      */
     public function createECommerceToken($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/ecommercetokens";
@@ -5921,7 +5921,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The company ID that the refreshed certificate belongs to.
      * @param RefreshECommerceTokenInputModel $model 
-     * @return ECommerceTokenOutputModelFetchResult
+     * @return object
      */
     public function refreshECommerceToken($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/ecommercetokens";
@@ -5974,7 +5974,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId ID number of the company to query from.
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
-     * @return ErrorCodeOutputModelCappedFetchResult
+     * @return object
      */
     public function listErrorCodes($companyId, $top=null, $skip=null)    {
         $path = "/api/v2/companies/{$companyId}/errortransactions/errorcodes";
@@ -6006,7 +6006,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return ErrorTransactionOutputModelCappedFetchResult
+     * @return object
      */
     public function listErrorTransactions($companyId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/errortransactions";
@@ -6393,7 +6393,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @param string $returnCountry A comma separated list of countries
      * @param string $returnRegion A comma separated list of regions
-     * @return FilingCalendarModelFetchResult
+     * @return object
      */
     public function listFilingCalendars($companyId, $filter=null, $top=null, $skip=null, $orderBy=null, $returnCountry, $returnRegion)    {
         $path = "/api/v2/companies/{$companyId}/filingcalendars";
@@ -6423,7 +6423,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FilingRequestModelFetchResult
+     * @return object
      */
     public function listFilingRequests($companyId, $filingCalendarId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/filingrequests";
@@ -6504,7 +6504,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @param string $returnCountry If specified, fetches only filing calendars that apply to tax filings in this specific country. Uses ISO 3166 country codes.
      * @param string $returnRegion If specified, fetches only filing calendars that apply to tax filings in this specific region. Uses ISO 3166 region codes.
-     * @return FilingCalendarModelFetchResult
+     * @return object
      */
     public function queryFilingCalendars($filter=null, $top=null, $skip=null, $orderBy=null, $returnCountry, $returnRegion)    {
         $path = "/api/v2/filingcalendars";
@@ -6532,7 +6532,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $returnCountry If specified, fetches only filing calendars that apply to tax filings in this specific country. Uses ISO 3166 country codes.
      * @param string $returnRegion If specified, fetches only filing calendars that apply to tax filings in this specific region. Uses ISO 3166 region codes.
      * @param QueryRequestModel $model Query object to filter, sort and paginate the filing calendars.
-     * @return FilingCalendarModelFetchResult
+     * @return object
      */
     public function queryFilingCalendarsPost($returnCountry, $returnRegion, $model)    {
         $path = "/api/v2/filingcalendars/query";
@@ -6567,7 +6567,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FilingRequestModelFetchResult
+     * @return object
      */
     public function queryFilingRequests($filingCalendarId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/filingrequests";
@@ -6594,7 +6594,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $filingCalendarId Specific filing calendar id for the request
      * @param QueryRequestModel $model Query object to filter, sort and paginate the filing calendars.
-     * @return FilingRequestModelFetchResult
+     * @return object
      */
     public function queryFilingRequestsPost($filingCalendarId, $model)    {
         $path = "/api/v2/filingrequests/query";
@@ -7034,7 +7034,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns these returns
      * @param int $filingReturnId The ID of the filing return
-     * @return MultiTaxFilingModelFetchResult
+     * @return object
      */
     public function getAccrualFilings($companyId, $filingReturnId)    {
         $path = "/api/v2/companies/{$companyId}/filings/accrual/{$filingReturnId}";
@@ -7064,7 +7064,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $region The region of the return(s) you are trying to retrieve
      * @param int $filingCalendarId The filing calendar id of the return you are trying to retrieve
      * @param string $taxformCode The unique tax form code of the form.
-     * @return FiledReturnModelFetchResult
+     * @return object
      */
     public function getFiledReturns($companyId, $endPeriodMonth, $endPeriodYear, $frequency, $status, $country, $region, $filingCalendarId, $taxformCode)    {
         $path = "/api/v2/companies/{$companyId}/filings/returns/filed";
@@ -7197,7 +7197,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The ID of the company that owns the filings.
      * @param int $year The year of the filing period.
      * @param int $month The two digit month of the filing period.
-     * @return FilingModelFetchResult
+     * @return object
      */
     public function getFilings($companyId, $year, $month)    {
         $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}";
@@ -7225,7 +7225,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $year The year of the filing period.
      * @param int $month The two digit month of the filing period.
      * @param string $country The two-character ISO-3166 code for the country.
-     * @return FilingModelFetchResult
+     * @return object
      */
     public function getFilingsByCountry($companyId, $year, $month, $country)    {
         $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/{$country}";
@@ -7254,7 +7254,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $month The two digit month of the filing period.
      * @param string $country The two-character ISO-3166 code for the country.
      * @param string $region The two or three character region code for the region.
-     * @return FilingModelFetchResult
+     * @return object
      */
     public function getFilingsByCountryRegion($companyId, $year, $month, $country, $region)    {
         $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/{$country}/{$region}";
@@ -7284,7 +7284,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $country The two-character ISO-3166 code for the country.
      * @param string $region The two or three character region code for the region.
      * @param string $formCode The unique code of the form.
-     * @return FilingModelFetchResult
+     * @return object
      */
     public function getFilingsByReturnName($companyId, $year, $month, $country, $region, $formCode)    {
         $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/{$country}/{$region}/{$formCode}";
@@ -7314,7 +7314,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $region The region of the return(s) you are trying to retrieve
      * @param int $filingCalendarId The filing calendar id of the return you are trying to retrieve
      * @param string $taxformCode The unique tax form code of the form.
-     * @return FilingReturnModelBasicFetchResult
+     * @return object
      */
     public function getFilingsReturns($companyId, $endPeriodMonth, $endPeriodYear, $frequency, $status, $country, $region, $filingCalendarId, $taxformCode)    {
         $path = "/api/v2/companies/{$companyId}/filings/returns";
@@ -7344,7 +7344,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $country The two-character ISO-3166 code for the country.
      * @param string $region The two or three character region code for the region.
      * @param string $formCode The unique code of the form.
-     * @return MultiTaxFilingModelFetchResult
+     * @return object
      */
     public function getTaxFilings($companyId, $year, $month, $country, $region, $formCode)    {
         $path = "/api/v2/companies/{$companyId}/filings";
@@ -7375,7 +7375,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $year The year of the filing period to be rebuilt.
      * @param int $month The month of the filing period to be rebuilt.
      * @param RebuildFilingsModel $model The rebuild request you wish to execute.
-     * @return FilingModelFetchResult
+     * @return object
      */
     public function rebuildFilings($companyId, $year, $month, $model)    {
         $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/rebuild";
@@ -7407,7 +7407,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $month The month of the filing period to be rebuilt.
      * @param string $country The two-character ISO-3166 code for the country.
      * @param RebuildFilingsModel $model The rebuild request you wish to execute.
-     * @return FilingModelFetchResult
+     * @return object
      */
     public function rebuildFilingsByCountry($companyId, $year, $month, $country, $model)    {
         $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/{$country}/rebuild";
@@ -7440,7 +7440,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $country The two-character ISO-3166 code for the country.
      * @param string $region The two or three character region code for the region.
      * @param RebuildFilingsModel $model The rebuild request you wish to execute.
-     * @return FilingModelFetchResult
+     * @return object
      */
     public function rebuildFilingsByCountryRegion($companyId, $year, $month, $country, $region, $model)    {
         $path = "/api/v2/companies/{$companyId}/filings/{$year}/{$month}/{$country}/{$region}/rebuild";
@@ -7670,7 +7670,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* firmAccountName, clientAccountName
-     * @return FirmClientLinkageOutputModelFetchResult
+     * @return object
      */
     public function listFirmClientLinkage($filter=null)    {
         $path = "/api/v2/firmclientlinkages";
@@ -8288,7 +8288,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return ItemClassificationOutputModelFetchResult
+     * @return object
      */
     public function listItemClassifications($companyId, $itemId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/items/{$itemId}/classifications";
@@ -8324,7 +8324,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return ItemParameterModelFetchResult
+     * @return object
      */
     public function listItemParameters($companyId, $itemId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/items/{$itemId}/parameters";
@@ -8366,7 +8366,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return ItemModelFetchResult
+     * @return object
      */
     public function listItemsByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/items";
@@ -8402,7 +8402,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return ItemModelFetchResult
+     * @return object
      */
     public function queryItems($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/items";
@@ -8647,7 +8647,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return JurisdictionOverrideModelFetchResult
+     * @return object
      */
     public function listJurisdictionOverridesByAccount($accountId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/accounts/{$accountId}/jurisdictionoverrides";
@@ -8681,7 +8681,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return JurisdictionOverrideModelFetchResult
+     * @return object
      */
     public function queryJurisdictionOverrides($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/jurisdictionoverrides";
@@ -8914,7 +8914,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return LocationParameterModelFetchResult
+     * @return object
      */
     public function listLocationParameters($companyId, $locationId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/locations/{$locationId}/parameters";
@@ -8952,7 +8952,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return LocationModelFetchResult
+     * @return object
      */
     public function listLocationsByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/locations";
@@ -8990,7 +8990,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return LocationModelFetchResult
+     * @return object
      */
     public function queryLocations($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/locations";
@@ -9441,7 +9441,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return MultiDocumentModelFetchResult
+     * @return object
      */
     public function listMultiDocumentTransactions($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/transactions/multidocument";
@@ -9918,7 +9918,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return NexusModelFetchResult
+     * @return object
      */
     public function listNexusByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/nexus";
@@ -9953,7 +9953,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return NexusParameterDetailModelFetchResult
+     * @return object
      */
     public function listNexusParameters($companyId, $nexusId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/nexus/{$nexusId}/parameters";
@@ -10019,7 +10019,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return NexusModelFetchResult
+     * @return object
      */
     public function queryNexus($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/nexus";
@@ -10451,7 +10451,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $id The ID of the notice.
      * @param int $companyId The ID of the company that owns these notices.
-     * @return NoticeCommentModelFetchResult
+     * @return object
      */
     public function getNoticeComments($id, $companyId)    {
         $path = "/api/v2/companies/{$companyId}/notices/{$id}/comments";
@@ -10479,7 +10479,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $id The ID of the company that owns these notices.
      * @param int $companyId The ID of the company that owns these notices.
-     * @return NoticeFinanceModelFetchResult
+     * @return object
      */
     public function getNoticeFinanceDetails($id, $companyId)    {
         $path = "/api/v2/companies/{$companyId}/notices/{$id}/financedetails";
@@ -10506,7 +10506,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $id The ID of the notice.
      * @param int $companyId The ID of the company that owns these notices.
-     * @return NoticeResponsibilityDetailModelFetchResult
+     * @return object
      */
     public function getNoticeResponsibilities($id, $companyId)    {
         $path = "/api/v2/companies/{$companyId}/notices/{$id}/responsibilities";
@@ -10533,7 +10533,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $id The ID of the notice.
      * @param int $companyId The ID of the company that owns these notices.
-     * @return NoticeRootCauseDetailModelFetchResult
+     * @return object
      */
     public function getNoticeRootCauses($id, $companyId)    {
         $path = "/api/v2/companies/{$companyId}/notices/{$id}/rootcauses";
@@ -10567,7 +10567,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return NoticeModelFetchResult
+     * @return object
      */
     public function listNoticesByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/notices";
@@ -10603,7 +10603,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return NoticeModelFetchResult
+     * @return object
      */
     public function queryNotices($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/notices";
@@ -10629,7 +10629,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * 
      * @param QueryRequestModel $model Query object to filter, sort and paginate the filing calendars.
-     * @return NoticeModelFetchResult
+     * @return object
      */
     public function queryNoticesPost($model)    {
         $path = "/api/v2/notices/query";
@@ -10840,7 +10840,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return NotificationModelFetchResult
+     * @return object
      */
     public function listNotifications($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/notifications";
@@ -11350,7 +11350,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $pageKey Provide a page key to retrieve the next page of results.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
-     * @return ReportModelFetchResult
+     * @return object
      */
     public function listReports($companyId, $pageKey, $skip=null, $top=null)    {
         $path = "/api/v2/reports";
@@ -11485,7 +11485,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return SettingModelFetchResult
+     * @return object
      */
     public function listSettingsByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/settings";
@@ -11523,7 +11523,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return SettingModelFetchResult
+     * @return object
      */
     public function querySettings($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/settings";
@@ -11616,7 +11616,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return SubscriptionModelFetchResult
+     * @return object
      */
     public function listSubscriptionsByAccount($accountId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/accounts/{$accountId}/subscriptions";
@@ -11646,7 +11646,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return SubscriptionModelFetchResult
+     * @return object
      */
     public function querySubscriptions($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/subscriptions";
@@ -11757,7 +11757,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return TaxCodeModelFetchResult
+     * @return object
      */
     public function listTaxCodesByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/taxcodes";
@@ -11790,7 +11790,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return TaxCodeModelFetchResult
+     * @return object
      */
     public function queryTaxCodes($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/taxcodes";
@@ -12230,7 +12230,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return TaxRuleModelFetchResult
+     * @return object
      */
     public function listTaxRules($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/taxrules";
@@ -12271,7 +12271,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return TaxRuleModelFetchResult
+     * @return object
      */
     public function queryTaxRules($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/taxrules";
@@ -13014,7 +13014,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return TransactionModelFetchResult
+     * @return object
      */
     public function listTransactionsByCompany($companyCode, $dataSourceId, $include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyCode}/transactions";
@@ -13491,7 +13491,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return UPCModelFetchResult
+     * @return object
      */
     public function listUPCsByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/upcs";
@@ -13522,7 +13522,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return UPCModelFetchResult
+     * @return object
      */
     public function queryUPCs($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/upcs";
@@ -13741,7 +13741,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return UserModelFetchResult
+     * @return object
      */
     public function listUsersByAccount($accountId, $include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/accounts/{$accountId}/users";
@@ -13780,7 +13780,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return UserModelFetchResult
+     * @return object
      */
     public function queryUsers($include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/users";
@@ -13856,7 +13856,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * specific features of AvaTax.
      *
      * 
-     * @return SubscriptionModelFetchResult
+     * @return object
      */
     public function listMySubscriptions()    {
         $path = "/api/v2/utilities/subscriptions";
