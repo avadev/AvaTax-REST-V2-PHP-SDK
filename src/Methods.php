@@ -1792,6 +1792,39 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Add parameters to a company.
+     *
+     * Add parameters to a company.
+     *  
+     * Some companies can be taxed and reported differently depending on the properties of the company, such as IsPrimaryAddress. In AvaTax, these tax-affecting properties are called "parameters".
+     *  
+     * A parameter added to a company will be used by default in tax calculation but will not show on the transaction line referencing the company.
+     *  
+     * A company location parameter specified on a transaction line will override a company parameter if they share the same parameter name.
+     *  
+     * To see available parameters for this company, call `/api/v2/definitions/parameters?$filter=attributeType eq Company`
+     *  
+     * Some parameters are only available for use if you have subscribed to specific AvaTax services. To see which parameters you are able to use, add the query parameter "$showSubscribed=true" to the parameter definition call above.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this company parameter.
+     * @param CompanyParameterDetailModel[] $model The company parameters you wish to create.
+     * @return CompanyParameterDetailModel[]
+     */
+    public function createCompanyParameters($companyId, $model)    {
+        $path = "/api/v2/companies/{$companyId}/parameters";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
      * Request managed returns funding setup for a company
      *
      * This API is available by invitation only.
@@ -1839,6 +1872,34 @@ class AvaTaxClient extends AvaTaxClientBase
      */
     public function deleteCompany($id)    {
         $path = "/api/v2/companies/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Delete a single company parameter
+     *
+     * Delete a parameter of a company.
+     * Some companies can be taxed and reported differently depending on the properties of the company, such as IsPrimaryAddress. In AvaTax, these tax-affecting properties are called "parameters".
+     *  
+     * A parameter added to a company will be used by default in tax calculation but will not show on the transaction line referencing the company.
+     *  
+     * A company location parameter specified on a transaction line will override a company parameter if they share the same parameter name.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, SSTAdmin, TechnicalSupportAdmin.
+     *
+     * 
+     * @param int $companyId The company id
+     * @param int $id The parameter id
+     * @return ErrorDetail[]
+     */
+    public function deleteCompanyParameter($companyId, $id)    {
+        $path = "/api/v2/companies/{$companyId}/parameters/{$id}";
         $guzzleParams = [
             'query' => [],
             'body' => null
@@ -1968,6 +2029,35 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Retrieve a single company parameter
+     *
+     * Retrieves a single parameter of a company.
+     *  
+     * Some companies can be taxed and reported differently depending on the properties of the company, such as IsPrimaryAddress. In AvaTax, these tax-affecting properties are called "parameters".
+     *  
+     * A parameter added to a company will be used by default in tax calculation but will not show on the transaction line referencing the company.
+     *  
+     * A company location parameter specified on a transaction line will override a company parameter if they share the same parameter name.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     *
+     * 
+     * @param int $companyId 
+     * @param int $id 
+     * @return CompanyParameterDetailModel
+     */
+    public function getCompanyParameterDetail($companyId, $id)    {
+        $path = "/api/v2/companies/{$companyId}/parameters/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * Get this company's filing status
      *
      * Retrieve the current filing status of this company.
@@ -1996,6 +2086,41 @@ class AvaTaxClient extends AvaTaxClientBase
         $path = "/api/v2/companies/{$id}/filingstatus";
         $guzzleParams = [
             'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve parameters for a company
+     *
+     * Retrieve all parameters of a company.
+     *  
+     * Some companies can be taxed and reported differently depending on the properties of the company, such as IsPrimaryAddress. In AvaTax, these tax-affecting properties are called "parameters".
+     *  
+     * A parameter added to a company will be used by default in tax calculation but will not show on the transaction line referencing the company.
+     *  
+     * A company location parameter specified on a transaction line will override a company parameter if they share the same parameter name.
+     *  
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     *
+     * 
+     * @param int $companyId The company id
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* name, unit
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listCompanyParameterDetails($companyId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/companies/{$companyId}/parameters";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
@@ -2152,6 +2277,36 @@ class AvaTaxClient extends AvaTaxClientBase
      */
     public function updateCompany($id, $model)    {
         $path = "/api/v2/companies/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Update a company parameter
+     *
+     * Update a parameter of a company.
+     *  
+     * Some companies can be taxed and reported differently depending on the properties of the company, such as IsPrimaryAddress. In AvaTax, these tax-affecting properties are called "parameters".
+     *  
+     * A parameter added to a company will be used by default in tax calculation but will not show on the transaction line referencing the company.
+     *  
+     * A company location parameter specified on a transaction line will override a company parameter if they share the same parameter name.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
+     *
+     * 
+     * @param int $companyId The company id.
+     * @param int $id The company parameter id
+     * @param CompanyParameterDetailModel $model The company parameter object you wish to update.
+     * @return CompanyParameterDetailModel
+     */
+    public function updateCompanyParameterDetail($companyId, $id, $model)    {
+        $path = "/api/v2/companies/{$companyId}/parameters/{$id}";
         $guzzleParams = [
             'query' => [],
             'body' => json_encode($model)
@@ -3408,7 +3563,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Returns a list of all Avalara-supported taxing jurisdictions.
      *  
      * This API allows you to examine all Avalara-supported jurisdictions. You can filter your search by supplying
-     * SQL-like query for fetching only the ones you concerned about. For example: effectiveDate &gt; '2016-01-01'
+     * SQL-like query for fetching only the ones you concerned about. For example: effectiveDate > '2016-01-01'
      *  
      * The rate, salesRate, and useRate fields are not available on the JurisdictionModels returned by this API.
      *
@@ -4614,6 +4769,56 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Create a new eCommerce token.
+     *
+     * Creates a new eCommerce token.
+     *  
+     * This API is used to create a new eCommerce token. An eCommerce token is required in order to launch the CertCapture eCommerce plugin. Create a token for each of your CertCapture customers.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     *
+     * 
+     * @param int $companyId The company ID that will be issued this certificate.
+     * @param CreateECommerceTokenInputModel $model 
+     * @return FetchResult
+     */
+    public function createECommerceToken($companyId, $model)    {
+        $path = "/api/v2/companies/{$companyId}/ecommercetokens";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Refresh an eCommerce token.
+     *
+     * Refresh an eCommerce token.
+     *  
+     * CertCapture eCommerce tokens expire after one hour. This API is used to refresh an eCommerce token that is about to expire. This API can only be used with active tokens. If your token has expired, you must generate a new one.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     *
+     * 
+     * @param int $companyId The company ID that the refreshed certificate belongs to.
+     * @param RefreshECommerceTokenInputModel $model 
+     * @return FetchResult
+     */
+    public function refreshECommerceToken($companyId, $model)    {
+        $path = "/api/v2/companies/{$companyId}/ecommercetokens";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
      * Delete a company return setting
      *
      * This API is available by invitation only and only available for users with Compliance access
@@ -4635,6 +4840,27 @@ class AvaTaxClient extends AvaTaxClientBase
             'body' => null
         ];
         return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a filing containing the return and all its accrual returns.
+     *
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns these returns
+     * @param int $filingReturnId The ID of the filing return
+     * @return FetchResult
+     */
+    public function getAccrualFilings($companyId, $filingReturnId)    {
+        $path = "/api/v2/companies/{$companyId}/filings/accrual/{$filingReturnId}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
     }
 
     /**
@@ -5844,6 +6070,40 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Add parameters to a location.
+     *
+     * Add parameters to a location.
+     *  
+     * Some locations can be taxed differently depending on the properties of that location. In AvaTax, these tax-affecting properties are called "parameters".
+     *  
+     * A parameter added to a location will be used by default in tax calculation but will not show on the transaction line referencing the location.
+     *  
+     * A parameter specified on a transaction line will override a location parameter if they share the same parameter name.
+     *  
+     * To see available parameters for this location, call `/api/v2/definitions/parameters?$filter=attributeType eq Company`
+     *  
+     * Some parameters are only available for use if you have subscribed to specific AvaTax services. To see which parameters you are able to use, add the query parameter "$showSubscribed=true" to the parameter definition call above.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPAdmin, CSPTester, FirmAdmin, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this location parameter.
+     * @param int $locationId The location id.
+     * @param LocationParameterModel[] $model The location parameters you wish to create.
+     * @return LocationParameterModel[]
+     */
+    public function createLocationParameters($companyId, $locationId, $model)    {
+        $path = "/api/v2/companies/{$companyId}/locations/{$locationId}/parameters";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
      * Create a new location
      *
      * Create one or more new location objects attached to this company.
@@ -5890,6 +6150,36 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Delete a single location parameter
+     *
+     * Delete a single location parameter.
+     *  
+     * Some locations can be taxed differently depending on the properties of that location. In AvaTax, these tax-affecting properties are called "parameters".
+     *  
+     * A parameter added to a location will be used by default in tax calculation but will not show on the transaction line referencing the location.
+     *  
+     * A parameter specified on a transaction line will override a location parameter if they share the same parameter name.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPAdmin, CSPTester, FirmAdmin, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
+     *
+     * 
+     * @param int $companyId The company id
+     * @param int $locationId The location id
+     * @param int $id The parameter id
+     * @return ErrorDetail[]
+     */
+    public function deleteLocationParameter($companyId, $locationId, $id)    {
+        $path = "/api/v2/companies/{$companyId}/locations/{$locationId}/parameters/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
      * Retrieve a single location
      *
      * Get the location object identified by this URL.
@@ -5905,7 +6195,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, FirmAdmin, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      *
      * 
      * @param int $companyId The ID of the company that owns this location
@@ -5917,6 +6207,72 @@ class AvaTaxClient extends AvaTaxClientBase
         $path = "/api/v2/companies/{$companyId}/locations/{$id}";
         $guzzleParams = [
             'query' => ['$include' => $include],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve a single company location parameter
+     *
+     * Retrieve a single location parameter.
+     *  
+     * Some locations can be taxed differently depending on the properties of that location. In AvaTax, these tax-affecting properties are called "parameters".
+     *  
+     * A parameter added to a location will be used by default in tax calculation but will not show on the transaction line referencing the location.
+     *  
+     * A parameter specified on a transaction line will override a location parameter if they share the same parameter name.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     *
+     * 
+     * @param int $companyId The company id
+     * @param int $locationId The location id
+     * @param int $id The parameter id
+     * @return LocationParameterModel
+     */
+    public function getLocationParameter($companyId, $locationId, $id)    {
+        $path = "/api/v2/companies/{$companyId}/locations/{$locationId}/parameters/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve parameters for a location
+     *
+     * List parameters for a location.
+     *  
+     * Some locations can be taxed differently depending on the properties of that location. In AvaTax, these tax-affecting properties are called "parameters".
+     *  
+     * A parameter added to a location will be used by default in tax calculation but will not show on the transaction line referencing the location.
+     *  
+     * A parameter specified on a transaction line will override a location parameter if they share the same parameter name.
+     *  
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     *
+     * 
+     * @param int $companyId The company id
+     * @param int $locationId The ID of the location
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* name, unit
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listLocationParameters($companyId, $locationId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/companies/{$companyId}/locations/{$locationId}/parameters";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
@@ -5940,7 +6296,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, FirmAdmin, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      *
      * 
      * @param int $companyId The ID of the company that owns these locations
@@ -5979,7 +6335,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, FirmAdmin, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      *
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* settings, parameters
@@ -6025,6 +6381,37 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Update a location parameter
+     *
+     * Update a location parameter.
+     *  
+     * Some locations can be taxed differently depending on the properties of that location. In AvaTax, these tax-affecting properties are called "parameters".
+     *  
+     * A parameter added to a location will be used by default in tax calculation but will not show on the transaction line referencing the location.
+     *  
+     * A parameter specified on a transaction line will override a location parameter if they share the same parameter name.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPAdmin, CSPTester, FirmAdmin, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
+     *
+     * 
+     * @param int $companyId The company id.
+     * @param int $locationId The location id
+     * @param int $id The location parameter id
+     * @param LocationParameterModel $model The location parameter object you wish to update.
+     * @return LocationParameterModel
+     */
+    public function updateLocationParameter($companyId, $locationId, $id, $model)    {
+        $path = "/api/v2/companies/{$companyId}/locations/{$locationId}/parameters/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
      * Validate the location against local requirements
      *
      * Returns validation information for this location.
@@ -6033,7 +6420,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, FirmAdmin, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      *
      * 
      * @param int $companyId The ID of the company that owns this location
@@ -6575,6 +6962,39 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Add parameters to a nexus.
+     *
+     * Add parameters to the nexus.
+     * Some tax calculation and reporting are different depending on the properties of the nexus, such as isRemoteSeller. In AvaTax, these tax-affecting properties are called "parameters".
+     *  
+     * A parameter added to an nexus will be used by default in tax calculation but will not show on the transaction line referencing the nexus.
+     *  
+     * A parameter specified on a transaction line will override an nexus parameter if they share the same parameter name.
+     *  
+     * To see available parameters for this item, call `/api/v2/definitions/parameters?$filter=attributeType eq Nexus`
+     *  
+     * Some parameters are only available for use if you have subscribed to specific AvaTax services. To see which parameters you are able to use, add the query parameter "$showSubscribed=true" to the parameter definition call above.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this nexus parameter.
+     * @param int $nexusId The nexus id.
+     * @param NexusParameterDetailModel[] $model The nexus parameters you wish to create.
+     * @return NexusParameterDetailModel[]
+     */
+    public function createNexusParameters($companyId, $nexusId, $model)    {
+        $path = "/api/v2/companies/{$companyId}/nexus/{$nexusId}/parameters";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
      * Creates nexus for a list of addresses.
      *
      * This call is intended to simplify adding all applicable nexus to a company, for an address or addresses. Calling this
@@ -6637,6 +7057,63 @@ class AvaTaxClient extends AvaTaxClientBase
         $path = "/api/v2/companies/{$companyId}/nexus/{$id}";
         $guzzleParams = [
             'query' => ['cascadeDelete' => $cascadeDelete],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Delete a single nexus parameter
+     *
+     * Delete a single nexus parameter.
+     * Some tax calculation and reporting are different depending on the properties of the nexus, such as isRemoteSeller. In AvaTax, these tax-affecting properties are called "parameters".
+     *  
+     * A parameter added to an nexus will be used by default in tax calculation but will not show on the transaction line referencing the nexus.
+     *  
+     * A parameter specified on a transaction line will override an nexus parameter if they share the same parameter name.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
+     *
+     * 
+     * @param int $companyId The company id
+     * @param int $nexusId The nexus id
+     * @param int $id The parameter id
+     * @return ErrorDetail[]
+     */
+    public function deleteNexusParameter($companyId, $nexusId, $id)    {
+        $path = "/api/v2/companies/{$companyId}/nexus/{$nexusId}/parameters/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Delete all parameters for an nexus
+     *
+     * Delete all the parameters for a given nexus.
+     * Some tax calculation and reporting are different depending on the properties of the nexus, such as isRemoteSeller. In AvaTax, these tax-affecting properties are called "parameters".
+     *  
+     * A parameter added to an nexus will be used by default in tax calculation but will not show on the transaction line referencing the nexus.
+     *  
+     * A parameter specified on a transaction line will override an nexus parameter if they share the same parameter name.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this nexus.
+     * @param int $nexusId The ID of the nexus you wish to delete the parameters.
+     * @return ErrorDetail[]
+     */
+    public function deleteNexusParameters($companyId, $nexusId)    {
+        $path = "/api/v2/companies/{$companyId}/nexus/{$nexusId}/parameters";
+        $guzzleParams = [
+            'query' => [],
             'body' => null
         ];
         return $this->restCall($path, 'DELETE', $guzzleParams);
@@ -6709,6 +7186,35 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Retrieve a single nexus parameter
+     *
+     * Retrieve a single nexus parameter.
+     * Some tax calculation and reporting are different depending on the properties of the nexus, such as isRemoteSeller.In AvaTax, these tax-affecting properties are called "parameters".
+     *  
+     * A parameter added to an nexus will be used by default in tax calculation but will not show on the transaction line referencing the nexus.
+     *  
+     * A parameter specified on a transaction line will override an nexus parameter if they share the same parameter name.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $companyId The company id
+     * @param int $nexusId The nexus id
+     * @param int $id The parameter id
+     * @return NexusParameterDetailModel
+     */
+    public function getNexusParameter($companyId, $nexusId, $id)    {
+        $path = "/api/v2/companies/{$companyId}/nexus/{$nexusId}/parameters/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * Retrieve nexus for this company
      *
      * List all nexus objects defined for this company.
@@ -6740,6 +7246,41 @@ class AvaTaxClient extends AvaTaxClientBase
         $path = "/api/v2/companies/{$companyId}/nexus";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve parameters for a nexus
+     *
+     * List parameters for a nexus.
+     * Some tax calculation and reporting are different depending on the properties of the nexus, such as isRemoteSeller. In AvaTax, these tax-affecting properties are called "parameters".
+     *  
+     * A parameter added to an nexus will be used by default in tax calculation but will not show on the transaction line referencing the nexus.
+     *  
+     * A parameter specified on a transaction line will override an nexus parameter if they share the same parameter name. 
+     *  
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $companyId The company id
+     * @param int $nexusId The nexus id
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* name, unit
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listNexusParameters($companyId, $nexusId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/companies/{$companyId}/nexus/{$nexusId}/parameters";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
@@ -6816,6 +7357,37 @@ class AvaTaxClient extends AvaTaxClientBase
      */
     public function updateNexus($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/nexus/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams);
+    }
+
+    /**
+     * Update an nexus parameter
+     *
+     * Update an nexus parameter.
+     *  
+     * Some tax calculation and reporting are different depending on the properties of the nexus, such as isRemoteSeller. In AvaTax, these tax-affecting properties are called "parameters".
+     *  
+     * A parameter added to a nexus will be used in tax calculation based on the locationcode and parameter value the transaction state line might have lines added.
+     *  
+     * A parameter specified on a transaction line will override an item parameter if they share the same parameter name.????? I dont know about this?
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
+     *
+     * 
+     * @param int $companyId The company id.
+     * @param int $nexusId The nexus id
+     * @param int $id The nexus parameter id
+     * @param NexusParameterDetailModel $model The nexus object you wish to update.
+     * @return NexusParameterDetailModel
+     */
+    public function updateNexusParameter($companyId, $nexusId, $id, $model)    {
+        $path = "/api/v2/companies/{$companyId}/nexus/{$nexusId}/parameters/{$id}";
         $guzzleParams = [
             'query' => [],
             'body' => json_encode($model)

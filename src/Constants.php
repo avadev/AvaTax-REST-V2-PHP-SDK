@@ -49,6 +49,8 @@ class DocumentType
     const C_INVENTORYTRANSFERINVOICE = 7;
     const C_REVERSECHARGEORDER = 8;
     const C_REVERSECHARGEINVOICE = 9;
+    const C_CUSTOMSINVOICE = 10;
+    const C_CUSTOMSORDER = 11;
     const C_ANY = -1;
 
 }
@@ -123,27 +125,6 @@ class PointOfSalePartnerId
 /**
  * 
  */
-class AccountStatusId
-{    const C_INACTIVE = 0;
-    const C_ACTIVE = 1;
-    const C_TEST = 2;
-    const C_NEW = 3;
-
-}
-
-/**
- * 
- */
-class AccountTypeId
-{    const C_REGULAR = 1;
-    const C_FIRM = 2;
-    const C_FIRMCLIENT = 3;
-
-}
-
-/**
- * 
- */
 class SecurityRoleId
 {    const C_NOACCESS = 0;
     const C_SITEADMIN = 1;
@@ -180,6 +161,27 @@ class PasswordStatusId
 {    const C_USERCANNOTCHANGE = 0;
     const C_USERCANCHANGE = 1;
     const C_USERMUSTCHANGE = 2;
+
+}
+
+/**
+ * 
+ */
+class AccountStatusId
+{    const C_INACTIVE = 0;
+    const C_ACTIVE = 1;
+    const C_TEST = 2;
+    const C_NEW = 3;
+
+}
+
+/**
+ * 
+ */
+class AccountTypeId
+{    const C_REGULAR = 1;
+    const C_FIRM = 2;
+    const C_FIRMCLIENT = 3;
 
 }
 
@@ -523,6 +525,18 @@ class SeverityLevel
 /**
  * 
  */
+class JurisdictionType
+{    const C_COUNTRY = 0;
+    const C_STATE = 1;
+    const C_COUNTY = 2;
+    const C_CITY = 3;
+    const C_SPECIAL = 4;
+
+}
+
+/**
+ * 
+ */
 class ResolutionQuality
 {    const C_NOTCODED = 0;
     const C_EXTERNAL = 1;
@@ -536,38 +550,6 @@ class ResolutionQuality
     const C_INTERPOLATED = 9;
     const C_ROOFTOP = 10;
     const C_CONSTANT = 11;
-
-}
-
-/**
- * 
- */
-class JurisdictionType
-{    const C_COUNTRY = 0;
-    const C_STATE = 1;
-    const C_COUNTY = 2;
-    const C_CITY = 3;
-    const C_SPECIAL = 4;
-
-}
-
-/**
- * 
- */
-class RoundingLevelId
-{    const C_LINE = 0;
-    const C_DOCUMENT = 1;
-
-}
-
-/**
- * 
- */
-class TaxDependencyLevelId
-{    const C_DOCUMENT = 0;
-    const C_STATE = 1;
-    const C_TAXREGION = 2;
-    const C_ADDRESS = 3;
 
 }
 
@@ -656,6 +638,7 @@ class MatchingTaxType
     const C_FEE = 70;
     const C_VATINPUTTAX = 73;
     const C_LIGHTBULBS = 76;
+    const C_MEALS = 77;
     const C_VATNONRECOVERABLEINPUTTAX = 78;
     const C_VATOUTPUTTAX = 79;
     const C_RENTAL = 82;
@@ -681,7 +664,8 @@ class RateType
     const C_SUPERREDUCED = 81;
     const C_REDUCEDR = 82;
     const C_STANDARD = 83;
-    const C_LEASING = 85;
+    const C_LEASING = 84;
+    const C_LEASINGLOW = 85;
     const C_SERVICES = 88;
     const C_ZERO = 90;
 
@@ -727,6 +711,26 @@ class ExemptCertReviewStatusId
 {    const C_PENDING = 0;
     const C_ACCEPTED = 1;
     const C_REJECTED = 2;
+
+}
+
+/**
+ * 
+ */
+class RoundingLevelId
+{    const C_LINE = 0;
+    const C_DOCUMENT = 1;
+
+}
+
+/**
+ * 
+ */
+class TaxDependencyLevelId
+{    const C_DOCUMENT = 0;
+    const C_STATE = 1;
+    const C_TAXREGION = 2;
+    const C_ADDRESS = 3;
 
 }
 
@@ -828,6 +832,20 @@ class BatchStatus
 /**
  * 
  */
+class TaxOverrideType
+{    const C_NONE = 0;
+    const C_TAXAMOUNT = 1;
+    const C_EXEMPTION = 2;
+    const C_TAXDATE = 3;
+    const C_ACCRUEDTAXAMOUNT = 4;
+    const C_DERIVETAXABLE = 5;
+    const C_OUTOFHARBOR = 6;
+
+}
+
+/**
+ * 
+ */
 class ServiceMode
 {    const C_AUTOMATIC = 0;
     const C_LOCAL = 1;
@@ -876,20 +894,6 @@ class VoidReasonCode
 /**
  * 
  */
-class TaxOverrideType
-{    const C_NONE = 0;
-    const C_TAXAMOUNT = 1;
-    const C_EXEMPTION = 2;
-    const C_TAXDATE = 3;
-    const C_ACCRUEDTAXAMOUNT = 4;
-    const C_DERIVETAXABLE = 5;
-    const C_OUTOFHARBOR = 6;
-
-}
-
-/**
- * 
- */
 class CertificateRequestDeliveryMethod
 {    const C_EMAIL = 1;
     const C_FAX = 2;
@@ -932,6 +936,16 @@ class CompanyFilingStatus
 /**
  * 
  */
+class BoundaryLevel
+{    const C_ADDRESS = 0;
+    const C_ZIP9 = 1;
+    const C_ZIP5 = 2;
+
+}
+
+/**
+ * 
+ */
 class DocumentStatus
 {    const C_TEMPORARY = 0;
     const C_SAVED = 1;
@@ -942,16 +956,6 @@ class DocumentStatus
     const C_QUEUED = 6;
     const C_PENDINGAPPROVAL = 7;
     const C_ANY = -1;
-
-}
-
-/**
- * 
- */
-class BoundaryLevel
-{    const C_ADDRESS = 0;
-    const C_ZIP9 = 1;
-    const C_ZIP5 = 2;
 
 }
 
@@ -1025,16 +1029,6 @@ class AccrualType
 /**
  * 
  */
-class WorksheetTypeId
-{    const C_ORIGINAL = 0;
-    const C_AMENDED = 1;
-    const C_TEST = 2;
-
-}
-
-/**
- * 
- */
 class AdjustmentPeriodTypeId
 {    const C_NONE = 0;
     const C_CURRENTPERIOD = 1;
@@ -1067,6 +1061,16 @@ class PaymentType
 /**
  * 
  */
+class WorksheetTypeId
+{    const C_ORIGINAL = 0;
+    const C_AMENDED = 1;
+    const C_TEST = 2;
+
+}
+
+/**
+ * 
+ */
 class FirmClientLinkageStatus
 {    const C_REQUESTED = 1;
     const C_APPROVED = 2;
@@ -1093,6 +1097,17 @@ class ApiCallStatus
 {    const C_ORIGINALAPICALLAVAILABLE = 0;
     const C_RECONSTRUCTEDAPICALLAVAILABLE = 1;
     const C_ANY = -1;
+
+}
+
+/**
+ * 
+ */
+class CommentType
+{    const C_INTERNAL = 1;
+    const C_CUSTOMER = 2;
+    const C_POAATTACHMENT = 3;
+    const C_NOTICEVOUCHER = 4;
 
 }
 
@@ -1144,17 +1159,6 @@ class NoticePriorityId
     const C_HIGH = 2;
     const C_NORMAL = 3;
     const C_LOW = 4;
-
-}
-
-/**
- * 
- */
-class CommentType
-{    const C_INTERNAL = 1;
-    const C_CUSTOMER = 2;
-    const C_POAATTACHMENT = 3;
-    const C_NOTICEVOUCHER = 4;
 
 }
 
