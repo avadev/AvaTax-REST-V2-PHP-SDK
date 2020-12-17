@@ -1325,6 +1325,10 @@ class LocationModel
      */
     public $addressCategoryId;
     /**
+     * @var boolean Indicates whether the Marketplace is outside or in USA
+     */
+    public $isMarketplaceOutsideUsa;
+    /**
      * @var string The first line of the physical address of this location.
      */
     public $line1;
@@ -2119,6 +2123,24 @@ class CompanyParameterDetailModel
     public $unit;
 }
 /**
+ * Represents a parameter associated with a company.
+ */
+class CustomerSupplierModel
+{
+    /**
+     * @var int Identifier for company parameter
+     */
+    public $id;
+    /**
+     * @var int CompanyId associated with the parameter
+     */
+    public $companyId;
+    /**
+     * @var string CustomerCode
+     */
+    public $customerCode;
+}
+/**
  * A company or business entity.
  */
 class CompanyModel
@@ -2279,6 +2301,10 @@ class CompanyModel
      * @var CompanyParameterDetailModel[] The parameters of a company
      */
     public $parameters;
+    /**
+     * @var CustomerSupplierModel[] The customers and suppliers of a company
+     */
+    public $supplierandcustomers;
 }
 /**
  * Model for changing the approved status of an advanced rule
@@ -2404,7 +2430,7 @@ class AdvancedRuleLookupFileModel
      */
     public $name;
     /**
-     * @var int Content of the lookup file.
+     * @var string Content of the lookup file. (This value is encoded as a Base64 string)
      */
     public $content;
     /**
@@ -2958,6 +2984,10 @@ class CreateTransactionModel
      */
     public $exchangeRateEffectiveDate;
     /**
+     * @var string Optional three-character ISO 4217 reporting exchange rate currency code for this transaction. The default value is USD.
+     */
+    public $exchangeRateCurrencyCode;
+    /**
      * @var string Sets the Point of Sale Lane Code sent by the User for this document.
      */
     public $posLaneCode;
@@ -3329,6 +3359,14 @@ class CertificateModel
      * @var string The date/time when this record was last modified.
      */
     public $modifiedDate;
+    /**
+     * @var string The tax number type for the certificate. For example, `FEIN`, `Social Security Number`, or `Employer Identification Number`.
+     */
+    public $taxNumberType;
+    /**
+     * @var string Description of business for the certificate. For example, `Retail trade`, `Professional services`, or `Construction`.
+     */
+    public $businessNumberType;
     /**
      * @var int Number of pages contained within this certificate.
      */
@@ -4010,6 +4048,44 @@ class FilingStatusChangeModel
     public $requestedStatus;
 }
 /**
+ * Represents a parameter associated with a company.
+ */
+class CustomerSupplierCountryParamModel
+{
+    /**
+     * @var int Identifier for company parameter
+     */
+    public $id;
+    /**
+     * @var int CompanyId associated with the parameter
+     */
+    public $companyId;
+    /**
+     * @var int Identifier for company parameter
+     */
+    public $customerId;
+    /**
+     * @var string 
+     */
+    public $customerCode;
+    /**
+     * @var string 
+     */
+    public $country;
+    /**
+     * @var boolean 
+     */
+    public $isEstablished;
+    /**
+     * @var string 
+     */
+    public $businessIdentificationNo;
+    /**
+     * @var boolean 
+     */
+    public $isRegisteredThroughFiscalRep;
+}
+/**
  * The tax rate model.
  */
 class ComplianceTaxRateModel
@@ -4568,6 +4644,30 @@ class TransactionLineDetailModel
      * @var boolean The Taxes/Fee component. True if the fee is applied.
      */
     public $isFee;
+    /**
+     * @var float Number of units in this line item that were calculated to be taxable according to this rate detail in the reporting currency.
+     */
+    public $reportingTaxableUnits;
+    /**
+     * @var float Number of units in this line item that were calculated to be nontaxable according to this rate detail in the reporting currency.
+     */
+    public $reportingNonTaxableUnits;
+    /**
+     * @var float Number of units in this line item that were calculated to be exempt according to this rate detail in the reporting currency.
+     */
+    public $reportingExemptUnits;
+    /**
+     * @var float The amount of tax for this tax detail in the reporting currency.
+     */
+    public $reportingTax;
+    /**
+     * @var float The amount of tax that AvaTax calculated in the reporting currency.  If an override for tax amount is used, there may be a difference between the tax  field which applies your override, and the this amount that is calculated without override.
+     */
+    public $reportingTaxCalculated;
+    /**
+     * @var string LiabilityType identifies the party liable to file the tax. This field is used to filter taxes from reports and tax filings as appropriate. (See LiabilityType::* for a list of allowable values)
+     */
+    public $liabilityType;
 }
 /**
  * Represents information about location types stored in a line
@@ -5050,6 +5150,10 @@ class TransactionModel
      * @var string The three-character ISO 4217 currency code that was used for payment for this transaction.
      */
     public $currencyCode;
+    /**
+     * @var string The three-character ISO 4217 exchange rate currency code that was used for payment for this transaction.
+     */
+    public $exchangeRateCurrencyCode;
     /**
      * @var string DEPRECATED - Date: 10/16/2017, Version: 17.11, Message: Please use entityUseCode instead.  The customer usage type for this transaction. Customer usage types often affect exemption or taxability rules.
      */
@@ -5591,6 +5695,30 @@ class LocationQuestionModel
      * @var string Indicates the state, region, or province that this jurisdiction belongs to
      */
     public $jurisdictionRegion;
+    /**
+     * @var string Help and guidance for this specific question
+     */
+    public $helpText;
+    /**
+     * @var int Maximum length of the answer string
+     */
+    public $maxLength;
+    /**
+     * @var boolean True if this question must be answered for this filing calendar
+     */
+    public $required;
+    /**
+     * @var string Data type of the answer
+     */
+    public $dataType;
+    /**
+     * @var string 
+     */
+    public $staticOptions;
+    /**
+     * @var boolean 
+     */
+    public $unique;
 }
 /**
  * Represents a language-specific localized name of a particular geographic entity such
@@ -7698,6 +7826,128 @@ class CycleEditOptionModel
     public $expiredCalendarEndDate;
 }
 /**
+ * Filing Calendar Edit
+ */
+class CycleSafeFilingCalendarEditModel
+{
+    /**
+     * @var string Field To Edit
+     */
+    public $fieldName;
+    /**
+     * @var string Destination is used to identify filing questions' type Other or Settings.
+     */
+    public $destination;
+    /**
+     * @var int Question
+     */
+    public $questionId;
+    /**
+     * @var string The filing question code.
+     */
+    public $questionCode;
+    /**
+     * @var object Old Value
+     */
+    public $oldValue;
+    /**
+     * @var object New Value
+     */
+    public $newValue;
+}
+/**
+ * Options for expiring a filing calendar.
+ */
+class CycleSafeEditRequestModel
+{
+    /**
+     * @var int Company Identifier
+     */
+    public $companyId;
+    /**
+     * @var string Tax Form Code
+     */
+    public $taxFormCode;
+    /**
+     * @var int Filing Calendar Identifier
+     */
+    public $filingCalendarId;
+    /**
+     * @var CycleSafeFilingCalendarEditModel[] Filing calendar edits
+     */
+    public $edits;
+}
+/**
+ * Available Cycle object
+ */
+class AvailableCycleModel
+{
+    /**
+     * @var string Transactional Period Start
+     */
+    public $transactionalPeriodStart;
+    /**
+     * @var string Transactional Period End
+     */
+    public $transactionalPeriodEnd;
+    /**
+     * @var string Filing Due Date
+     */
+    public $filingDueDate;
+    /**
+     * @var string Cycle Name
+     */
+    public $cycleName;
+}
+/**
+ * Frequency Available object
+ */
+class FrequencyAvailableModel
+{
+    /**
+     * @var string Frequency Code
+     */
+    public $frequencyCode;
+    /**
+     * @var string Frequency Name
+     */
+    public $frequencyName;
+    /**
+     * @var string Reason
+     */
+    public $reason;
+    /**
+     * @var AvailableCycleModel[] Expired Calendar End Date
+     */
+    public $availableCycles;
+}
+/**
+ * CycleSafe Option Result
+ */
+class CycleSafeOptionResultModel
+{
+    /**
+     * @var string Tax Form Code
+     */
+    public $taxFormCode;
+    /**
+     * @var boolean Boolean if the Filing Calendar must be cloned
+     */
+    public $mustCloneFilingCalendar;
+    /**
+     * @var string Cloned Calendar Effective Date
+     */
+    public $clonedCalendarEffDate;
+    /**
+     * @var string Expired Calendar End Date
+     */
+    public $expiredCalendarEndDate;
+    /**
+     * @var FrequencyAvailableModel[] Frequencies Available
+     */
+    public $frequenciesAvailable;
+}
+/**
  * 
  */
 class FilingAnswerModel
@@ -7899,7 +8149,7 @@ class ResourceFileDownloadResult
      */
     public $success;
     /**
-     * @var int Bytes of the file
+     * @var string Bytes of the file (This value is encoded as a Base64 string)
      */
     public $bytes;
     /**
@@ -9678,6 +9928,10 @@ class CreateMultiDocumentModel
      * @var string Effective date of the exchange rate.
      */
     public $exchangeRateEffectiveDate;
+    /**
+     * @var string Optional three-character ISO 4217 reporting exchange rate currency code for this transaction. The default value is USD.
+     */
+    public $exchangeRateCurrencyCode;
     /**
      * @var string Sets the Point of Sale Lane Code sent by the User for this document.
      */

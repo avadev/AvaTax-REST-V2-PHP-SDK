@@ -463,6 +463,9 @@ class ErrorCodeId
     const C_UPDATELOCATIONREMITTANCECHECKEXISTINGENDDATEERROR = 1721;
     const C_ERRORCOUNTLIMITEXCEEDEDERROR = 1722;
     const C_RATELIMITEXCEEDEDERROR = 1723;
+    const C_TAXCODEANDTAXCODEIDMISSING = 1724;
+    const C_NEXUSALREADYEXISTS = 1725;
+    const C_INVALIDADDRESSTYPEANDMARKETPLACEOUSIDEUSAFLAG = 1726;
     const C_UNSUPPORTEDFILEFORMAT = 1800;
     const C_UNSUPPORTEDOUTPUTFILETYPE = 1801;
     const C_TAXPROFILENOTPROVIDED = 1900;
@@ -660,6 +663,7 @@ class RateType
     const C_INCREASEDSTANDARD = 73;
     const C_LINENRENTAL = 76;
     const C_MEDICAL = 77;
+    const C_CONSTRUCTION = 78;
     const C_PARKING = 80;
     const C_SUPERREDUCED = 81;
     const C_REDUCEDR = 82;
@@ -810,6 +814,7 @@ class BatchType
     const C_TRANSACTIONIMPORT = 10;
     const C_UPCBULKIMPORT = 11;
     const C_UPCVALIDATIONIMPORT = 12;
+    const C_CUSTOMERSUPPLIERIMPORT = 13;
 
 }
 
@@ -930,6 +935,15 @@ class CompanyFilingStatus
     const C_FIRSTFILING = 3;
     const C_ACTIVE = 4;
     const C_NOTCONFIGUREDFORCOMPLIANCE = 5;
+
+}
+
+/**
+ * 
+ */
+class LiabilityType
+{    const C_SELLER = 0;
+    const C_BUYERSAGENT = 1;
 
 }
 
