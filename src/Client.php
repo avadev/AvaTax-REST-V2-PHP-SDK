@@ -168,13 +168,21 @@ class AvaTaxClientBase
             }
             $guzzleParams['headers'] = [
                 'Accept' => 'application/json',
+<<<<<<< HEAD
                 'X-Avalara-Client' => "{$this->appName}; {$this->appVersion}; PhpRestClient; 21.1.1; {$this->machineName}"
+=======
+                'X-Avalara-Client' => "{$this->appName}; {$this->appVersion}; PhpRestClient; 21.1.1; {$this->machineName}"
+>>>>>>> bf2f65121d8f1e73485b10ebfe121e58eb8c23e2
             ];
         } else {
             $guzzleParams['headers'] = [
                 'Accept' => 'application/json',
                 'Authorization' => 'Bearer '.$this->auth[0],
+<<<<<<< HEAD
                 'X-Avalara-Client' => "{$this->appName}; {$this->appVersion}; PhpRestClient; 21.1.1; {$this->machineName}"
+=======
+                'X-Avalara-Client' => "{$this->appName}; {$this->appVersion}; PhpRestClient; 21.1.1; {$this->machineName}"
+>>>>>>> bf2f65121d8f1e73485b10ebfe121e58eb8c23e2
             ];
         }
         // timeout for 1200s (20 min)
