@@ -468,6 +468,26 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Get audit records by account id and date range.
+     *
+     * 
+     *
+     * 
+     * @param int $accountId The ID of the account
+     * @param string $fromDate Date
+     * @param string $toDate Date
+     * @return AdvancedRuleLookupFileModel
+     */
+    public function getAuditRecords($accountId, $fromDate, $toDate)    {
+        $path = "/api/v2/advancedrules/audits/accounts/{$accountId}/from/{$fromDate}/to/{$toDate}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * Get the lookup files for a company
      *
      * 
@@ -3684,7 +3704,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * This API is intended to be useful if your user interface needs to display a selectable list of nexus.
      *
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* streamlinedSalesTax, isSSTActive, taxAuthorityId, taxName, parameters, taxableNexus
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* streamlinedSalesTax, isSSTActive, taxAuthorityId, taxName, parameters
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -3716,7 +3736,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $region Name or ISO 3166 code identifying the region portion of the address.      This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions      For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
      * @param string $postalCode The postal code or zip code portion of this address.
      * @param string $country Name or ISO 3166 code identifying the country portion of this address.      This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries      For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* streamlinedSalesTax, isSSTActive, taxAuthorityId, taxName, parameters, taxableNexus
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* streamlinedSalesTax, isSSTActive, taxAuthorityId, taxName, parameters
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -3740,7 +3760,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * 
      * @param string $country The country in which you want to fetch the system nexus
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* streamlinedSalesTax, isSSTActive, taxAuthorityId, taxName, parameters, taxableNexus
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* streamlinedSalesTax, isSSTActive, taxAuthorityId, taxName, parameters
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -3765,7 +3785,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param string $country The two-character ISO-3166 code for the country.
      * @param string $region The two or three character region code for the region.
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* streamlinedSalesTax, isSSTActive, taxAuthorityId, taxName, parameters, taxableNexus
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* streamlinedSalesTax, isSSTActive, taxAuthorityId, taxName, parameters
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -5134,6 +5154,99 @@ class AvaTaxClient extends AvaTaxClientBase
             'body' => json_encode($model)
         ];
         return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * FREE API - Sales tax rates for a specified address
+     *
+     * # Free-To-Use
+     *  
+     * The TaxRates API is a free-to-use, no cost option for estimating sales tax rates.
+     * Any customer can request a free AvaTax account and make use of the TaxRates API.
+     *  
+     * Usage of this API is subject to rate limits. Users who exceed the rate limit will receive HTTP
+     * response code 429 - `Too Many Requests`.
+     *  
+     * This API assumes that you are selling general tangible personal property at a retail point-of-sale
+     * location in the United States only.
+     *  
+     * For more powerful tax calculation, please consider upgrading to the `CreateTransaction` API,
+     * which supports features including, but not limited to:
+     *  
+     * * Nexus declarations
+     * * Taxability based on product/service type
+     * * Sourcing rules affecting origin/destination states
+     * * Customers who are exempt from certain taxes
+     * * States that have dollar value thresholds for tax amounts
+     * * Refunds for products purchased on a different date
+     * * Detailed jurisdiction names and state assigned codes
+     * * And more!
+     *  
+     * Please see [Estimating Tax with REST v2](http://developer.avalara.com/blog/2016/11/04/estimating-tax-with-rest-v2/)
+     * for information on how to upgrade to the full AvaTax CreateTransaction API.
+     *
+     * 
+     * @param string $line1 The street address of the location.
+     * @param string $line2 The street address of the location.
+     * @param string $line3 The street address of the location.
+     * @param string $city The city name of the location.
+     * @param string $region Name or ISO 3166 code identifying the region within the country.     This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions     For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
+     * @param string $postalCode The postal code of the location.
+     * @param string $country Name or ISO 3166 code identifying the country.     This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries     For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
+     * @return TaxRateModel
+     */
+    public function taxRatesByAddress($line1, $line2, $line3, $city, $region, $postalCode, $country)    {
+        $path = "/api/v2/taxrates/byaddress";
+        $guzzleParams = [
+            'query' => ['line1' => $line1, 'line2' => $line2, 'line3' => $line3, 'city' => $city, 'region' => $region, 'postalCode' => $postalCode, 'country' => $country],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * FREE API - Sales tax rates for a specified country and postal code. This API is only available for US postal codes.
+     *
+     * # Free-To-Use
+     *  
+     * This API is only available for a US postal codes.
+     *  
+     * The TaxRates API is a free-to-use, no cost option for estimating sales tax rates.
+     * Any customer can request a free AvaTax account and make use of the TaxRates API.
+     *  
+     * Usage of this API is subject to rate limits. Users who exceed the rate limit will receive HTTP
+     * response code 429 - `Too Many Requests`.
+     *  
+     * This API assumes that you are selling general tangible personal property at a retail point-of-sale
+     * location in the United States only.
+     *  
+     * For more powerful tax calculation, please consider upgrading to the `CreateTransaction` API,
+     * which supports features including, but not limited to:
+     *  
+     * * Nexus declarations
+     * * Taxability based on product/service type
+     * * Sourcing rules affecting origin/destination states
+     * * Customers who are exempt from certain taxes
+     * * States that have dollar value thresholds for tax amounts
+     * * Refunds for products purchased on a different date
+     * * Detailed jurisdiction names and state assigned codes
+     * * And more!
+     *  
+     * Please see [Estimating Tax with REST v2](http://developer.avalara.com/blog/2016/11/04/estimating-tax-with-rest-v2/)
+     * for information on how to upgrade to the full AvaTax CreateTransaction API.
+     *
+     * 
+     * @param string $country Name or ISO 3166 code identifying the country.     This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries     For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
+     * @param string $postalCode The postal code of the location.
+     * @return TaxRateModel
+     */
+    public function taxRatesByPostalCode($country, $postalCode)    {
+        $path = "/api/v2/taxrates/bypostalcode";
+        $guzzleParams = [
+            'query' => ['country' => $country, 'postalCode' => $postalCode],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
     }
 
     /**
@@ -7147,7 +7260,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * 
      * @param int $companyId The ID of the company that owns these nexus objects
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* streamlinedSalesTax, isSSTActive, taxAuthorityId, taxName, parameters, taxableNexus
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* streamlinedSalesTax, isSSTActive, taxAuthorityId, taxName, parameters
      * @param string $include A comma separated list of additional data to retrieve.
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
@@ -7218,7 +7331,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      *
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* streamlinedSalesTax, isSSTActive, taxAuthorityId, taxName, parameters, taxableNexus
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* streamlinedSalesTax, isSSTActive, taxAuthorityId, taxName, parameters
      * @param string $include A comma separated list of additional data to retrieve.
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
@@ -7838,15 +7951,6 @@ class AvaTaxClient extends AvaTaxClientBase
      * * When a report's status is `Completed`, call `DownloadReport` to retrieve the file.
      *  
      * The `ExportDocumentLine` report produces information about invoice lines recorded within your account.
-     *  
-     * To split large reports into multiple smaller partitions, use the numberOfPartitions and partition properties on ExportDocumentLineModel.
-     *  
-     * Example - split a report into three partitions
-     *  
-     * * Follow the steps above with numberOfPartitions = 3 and partition = 0
-     * * Follow the steps above with numberOfPartitions = 3 and partition = 1
-     * * Follow the steps above with numberOfPartitions = 3 and partition = 2
-     * * Once all three reports are downloaded merge the files on the client side.
      * 
      * ### Security Policies
      * 
@@ -8523,89 +8627,6 @@ class AvaTaxClient extends AvaTaxClientBase
         $path = "/api/v2/taxratesbyzipcode/download/{$date}";
         $guzzleParams = [
             'query' => ['region' => $region],
-            'body' => null
-        ];
-        return $this->restCall($path, 'GET', $guzzleParams);
-    }
-
-    /**
-     * Sales tax rates for a specified address
-     *
-     * Usage of this API is subject to rate limits. Users who exceed the rate limit will receive HTTP
-     * response code 429 - `Too Many Requests`.
-     *  
-     * This API assumes that you are selling general tangible personal property at a retail point-of-sale
-     * location in the United States only.
-     *  
-     * For more powerful tax calculation, please consider upgrading to the `CreateTransaction` API,
-     * which supports features including, but not limited to:
-     *  
-     * * Nexus declarations
-     * * Taxability based on product/service type
-     * * Sourcing rules affecting origin/destination states
-     * * Customers who are exempt from certain taxes
-     * * States that have dollar value thresholds for tax amounts
-     * * Refunds for products purchased on a different date
-     * * Detailed jurisdiction names and state assigned codes
-     * * And more!
-     *  
-     * Please see [Estimating Tax with REST v2](http://developer.avalara.com/blog/2016/11/04/estimating-tax-with-rest-v2/)
-     * for information on how to upgrade to the full AvaTax CreateTransaction API.
-     *
-     * 
-     * @param string $line1 The street address of the location.
-     * @param string $line2 The street address of the location.
-     * @param string $line3 The street address of the location.
-     * @param string $city The city name of the location.
-     * @param string $region Name or ISO 3166 code identifying the region within the country.     This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions     For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
-     * @param string $postalCode The postal code of the location.
-     * @param string $country Name or ISO 3166 code identifying the country.     This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries     For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
-     * @return TaxRateModel
-     */
-    public function taxRatesByAddress($line1, $line2, $line3, $city, $region, $postalCode, $country)    {
-        $path = "/api/v2/taxrates/byaddress";
-        $guzzleParams = [
-            'query' => ['line1' => $line1, 'line2' => $line2, 'line3' => $line3, 'city' => $city, 'region' => $region, 'postalCode' => $postalCode, 'country' => $country],
-            'body' => null
-        ];
-        return $this->restCall($path, 'GET', $guzzleParams);
-    }
-
-    /**
-     * Sales tax rates for a specified country and postal code. This API is only available for US postal codes.
-     *
-     * This API is only available for a US postal codes.
-     *  
-     * Usage of this API is subject to rate limits. Users who exceed the rate limit will receive HTTP
-     * response code 429 - `Too Many Requests`.
-     *  
-     * This API assumes that you are selling general tangible personal property at a retail point-of-sale
-     * location in the United States only.
-     *  
-     * For more powerful tax calculation, please consider upgrading to the `CreateTransaction` API,
-     * which supports features including, but not limited to:
-     *  
-     * * Nexus declarations
-     * * Taxability based on product/service type
-     * * Sourcing rules affecting origin/destination states
-     * * Customers who are exempt from certain taxes
-     * * States that have dollar value thresholds for tax amounts
-     * * Refunds for products purchased on a different date
-     * * Detailed jurisdiction names and state assigned codes
-     * * And more!
-     *  
-     * Please see [Estimating Tax with REST v2](http://developer.avalara.com/blog/2016/11/04/estimating-tax-with-rest-v2/)
-     * for information on how to upgrade to the full AvaTax CreateTransaction API.
-     *
-     * 
-     * @param string $country Name or ISO 3166 code identifying the country.     This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries     For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
-     * @param string $postalCode The postal code of the location.
-     * @return TaxRateModel
-     */
-    public function taxRatesByPostalCode($country, $postalCode)    {
-        $path = "/api/v2/taxrates/bypostalcode";
-        $guzzleParams = [
-            'query' => ['country' => $country, 'postalCode' => $postalCode],
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
