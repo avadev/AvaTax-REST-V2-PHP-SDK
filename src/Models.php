@@ -181,44 +181,44 @@ class AccountModel
     public $users;
 }
 /**
- * Message object
+ * 
  */
 class ErrorDetail
 {
     /**
-     * @var string Name of the error or message. (See ErrorCodeId::* for a list of allowable values)
+     * @var string  (See ErrorCodeId::* for a list of allowable values)
      */
     public $code;
     /**
-     * @var int Unique ID number referring to this error or message.
+     * @var int 
      */
     public $number;
     /**
-     * @var string Concise summary of the message, suitable for display in the caption of an alert box.
+     * @var string 
      */
     public $message;
     /**
-     * @var string A more detailed description of the problem referenced by this error message, suitable for display in the contents area of an alert box.
+     * @var string 
      */
     public $description;
     /**
-     * @var string Indicates the SOAP Fault code, if this was related to an error that corresponded to AvaTax SOAP v1 behavior.
+     * @var string 
      */
     public $faultCode;
     /**
-     * @var string If this is an error from a downstream system (such as Calc) faultSubCode can be used to represent the fault code from that system.
+     * @var string 
      */
     public $faultSubCode;
     /**
-     * @var string URL to help for this message
+     * @var string 
      */
     public $helpLink;
     /**
-     * @var string Item the message refers to, if applicable. This is used to indicate a missing or incorrect value.
+     * @var string 
      */
     public $refersTo;
     /**
-     * @var string Severity of the message (See SeverityLevel::* for a list of allowable values)
+     * @var string  (See SeverityLevel::* for a list of allowable values)
      */
     public $severity;
 }
@@ -1579,6 +1579,10 @@ class NexusModel
      * @var NexusParameterDetailModel[] List of nexus parameters.
      */
     public $parameters;
+    /**
+     * @var boolean Shows if system nexus records are associated with tax collection
+     */
+    public $taxableNexus;
 }
 /**
  * This object is used to keep track of custom information about a company.
@@ -2747,6 +2751,20 @@ class AddressesModel
     public $import;
 }
 /**
+ * Represents a transaction parameter.
+ */
+class TransactionLineTaxAmountByTaxTypeModel
+{
+    /**
+     * @var string The name of the TaxType.
+     */
+    public $taxTypeId;
+    /**
+     * @var float The value of the TaxOverrideAmount.
+     */
+    public $taxAmount;
+}
+/**
  * Represents a tax override for a transaction
  */
 class TaxOverrideModel
@@ -2767,6 +2785,10 @@ class TaxOverrideModel
      * @var string This provides the reason for a tax override for audit purposes. It is required for types 2-4.     Typical reasons include:  "Return"  "Layaway"
      */
     public $reason;
+    /**
+     * @var TransactionLineTaxAmountByTaxTypeModel[] Indicates a total override of the calculated tax on the line with TaxType.  AvaTax will distribute the override across all the line details for that TaxType.     TaxAmountByTaxType can be used only at the Line level.
+     */
+    public $taxAmountByTaxTypes;
 }
 /**
  * Represents a transaction parameter.
@@ -2867,6 +2889,22 @@ class LineItemModel
      * @var string The Item code for Custom Duty / Global Import tax determination  Harmonized Tariff System code for this transaction.     For a list of harmonized tariff codes, see the Definitions API for harmonized tariff codes.
      */
     public $hsCode;
+    /**
+     * @var int ID of the merchant selling on the Marketplace. This field must be populated by Marketplace.
+     */
+    public $merchantSellerId;
+    /**
+     * @var string This field will identify who is remitting Marketplace or Seller. This field must be populated by Marketplace. (See MarketplaceLiabilityType::* for a list of allowable values)
+     */
+    public $marketplaceLiabilityType;
+    /**
+     * @var string The transaction's original ID in its origination system
+     */
+    public $originationDocumentId;
+    /**
+     * @var string Synonym of Marketplace Origination. Name of the Marketplace where the transaction originated from.
+     */
+    public $originationSite;
 }
 /**
  * Represents a transaction parameter.
@@ -4845,6 +4883,22 @@ class TransactionLineModel
      */
     public $taxIncluded;
     /**
+     * @var int ID of the merchant selling on the Marketplace. This field must be populated by Marketplace.
+     */
+    public $merchantSellerId;
+    /**
+     * @var string This field will identify who is remitting Marketplace or Seller. This field must be populated by Marketplace. (See MarketplaceLiabilityType::* for a list of allowable values)
+     */
+    public $marketplaceLiabilityType;
+    /**
+     * @var string The transaction's original ID in its origination system
+     */
+    public $originationDocumentId;
+    /**
+     * @var string Synonym of Marketplace Origination. Name of the Marketplace where the transaction originated from.
+     */
+    public $originationSite;
+    /**
      * @var TransactionLineDetailModel[] Optional: A list of tax details for this line item.     Tax details represent taxes being charged by various tax authorities. Taxes that appear in the `details` collection are intended to be  displayed to the customer and charged as a 'tax' on the invoice.     To fetch this list, add the query string `?$include=Details` to your URL.
      */
     public $details;
@@ -4876,6 +4930,10 @@ class TransactionLineModel
      * @var int Indicates the VAT number type for this line item.
      */
     public $vatNumberTypeId;
+    /**
+     * @var TransactionLineTaxAmountByTaxTypeModel[] Contains a list of TaxType that are to be overridden with their respective TaxOverrideAmount.
+     */
+    public $taxAmountByTaxTypes;
 }
 /**
  * An address used within this transaction.
@@ -9821,6 +9879,22 @@ class MultiDocumentLineItemModel
      * @var string The Item code for Custom Duty / Global Import tax determination  Harmonized Tariff System code for this transaction.     For a list of harmonized tariff codes, see the Definitions API for harmonized tariff codes.
      */
     public $hsCode;
+    /**
+     * @var int ID of the merchant selling on the Marketplace. This field must be populated by Marketplace.
+     */
+    public $merchantSellerId;
+    /**
+     * @var string This field will identify who is remitting Marketplace or Seller. This field must be populated by Marketplace. (See MarketplaceLiabilityType::* for a list of allowable values)
+     */
+    public $marketplaceLiabilityType;
+    /**
+     * @var string The transaction's original ID in its origination system
+     */
+    public $originationDocumentId;
+    /**
+     * @var string Synonym of Marketplace Origination. Name of the Marketplace where the transaction originated from.
+     */
+    public $originationSite;
 }
 /**
  * A MultiDocument transaction represents a sale or purchase that occurred between more than two companies.
@@ -10782,6 +10856,22 @@ class ExportDocumentLineModel
      * @var string The currency your report is displayed in. Example: "USD"
      */
     public $currencyCode;
+    /**
+     * @var int Number of partitions (2 - 250) to split the report into.  If a value is provided for this property, a value must also be provided for the partition property.
+     */
+    public $numberOfPartitions;
+    /**
+     * @var int The zero-based partition number to retrieve in this export request.  If a value is provided for this property, a value must also be provided for the numberOfPartitions property.
+     */
+    public $partition;
+    /**
+     * @var boolean If true, include only documents that are locked.  If false, include only documents that are not locked.  Defaults to false if not specified.
+     */
+    public $isLocked;
+    /**
+     * @var int If set, include only documents associated with this merchantSellerId.
+     */
+    public $merchantSellerId;
 }
 /**
  * The output model for report parameter definitions
@@ -10824,6 +10914,22 @@ class ReportParametersModel
      * @var string The currency code used for your report
      */
     public $currencyCode;
+    /**
+     * @var int Number of partitions to split the report into.
+     */
+    public $numberOfPartitions;
+    /**
+     * @var int The zero-based partition number to retrieve in this export request.
+     */
+    public $partition;
+    /**
+     * @var boolean If true, include only documents that are locked.  If false, include only documents that are not locked.  Defaults to false if not specified.
+     */
+    public $isLocked;
+    /**
+     * @var int If set, include only documents associated with this merchantSellerId.
+     */
+    public $merchantSellerId;
 }
 /**
  * A model for displaying report task metadata
