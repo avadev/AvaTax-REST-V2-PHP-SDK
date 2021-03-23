@@ -3049,6 +3049,14 @@ class CreateTransactionModel
      * @var string If the user wishes to request additional debug information from this transaction, specify a level higher than `normal`. (See TaxDebugLevel::* for a list of allowable values)
      */
     public $debugLevel;
+    /**
+     * @var string The name of the supplier / exporter / seller.  For sales doctype enter the name of your own company for which you are reporting.  For purchases doctype enter the name of the supplier you have purchased from.
+     */
+    public $customerSupplierName;
+    /**
+     * @var int The Id of the datasource from which this transaction originated.  This value will be overridden by the system to take the datasource Id from the call header.
+     */
+    public $dataSourceId;
 }
 /**
  * Replace an existing transaction recorded in AvaTax with a new one.
@@ -4934,6 +4942,10 @@ class TransactionLineModel
      * @var TransactionLineTaxAmountByTaxTypeModel[] Contains a list of TaxType that are to be overridden with their respective TaxOverrideAmount.
      */
     public $taxAmountByTaxTypes;
+    /**
+     * @var string Deemed Supplier field indicates which party on the marketplace transaction is liable for collecting and reporting the VAT. This is based on the 2021 E-commerce legislative reforms in EU and UK. This field will not be used until after July 1, 2021. (See DeemedSellerType::* for a list of allowable values)
+     */
+    public $deemedSupplier;
 }
 /**
  * An address used within this transaction.
@@ -5396,6 +5408,14 @@ class TransactionModel
      * @var InvoiceMessageModel[] Invoice messages associated with this document. Currently, this stores legally-required VAT messages.
      */
     public $invoiceMessages;
+    /**
+     * @var string The name of the supplier / exporter / seller.  For sales doctype this will be the name of your own company for which you are reporting.  For purchases doctype this will be the name of the supplier you have purchased from.
+     */
+    public $customerSupplierName;
+    /**
+     * @var int The Id of the datasource from which this transaction originated.  This value will be overridden by the system to take the datasource Id from the call header.
+     */
+    public $dataSourceId;
 }
 /**
  * Represents a customer to whom you sell products and/or services.
@@ -5856,6 +5876,10 @@ class IsoRegionModel
      * @var IsoLocalizedName[] A list of localized names in a variety of languages.     This list is maintained by the International Standards Organization.
      */
     public $localizedNames;
+    /**
+     * @var boolean Whether the region collects tax or not. This field will be populated for US country only and will be null for all the other countries.
+     */
+    public $isRegionTaxable;
 }
 /**
  * Represents a code describing the intended use for a product that may affect its taxability
@@ -10030,6 +10054,14 @@ class CreateMultiDocumentModel
      * @var string If the user wishes to request additional debug information from this transaction, specify a level higher than `normal`. (See TaxDebugLevel::* for a list of allowable values)
      */
     public $debugLevel;
+    /**
+     * @var string The name of the supplier / exporter / seller.  For sales doctype enter the name of your own company for which you are reporting.  For purchases doctype enter the name of the supplier you have purchased from.
+     */
+    public $customerSupplierName;
+    /**
+     * @var int The Id of the datasource from which this transaction originated.  This value will be overridden by the system to take the datasource Id from the call header.
+     */
+    public $dataSourceId;
 }
 /**
  * Replace an existing MultiDocument transaction recorded in AvaTax with a new one.
@@ -11340,11 +11372,23 @@ class DeterminationFactorModel
      * @var string Determination reason description.
      */
     public $description;
+    /**
+     * @var string[] The ids of any applied determination factor.
+     */
+    public $ids;
+    /**
+     * @var string[] The name of any applied determination factor.
+     */
+    public $names;
+    /**
+     * @var string The name of the user who created the determination factor.
+     */
+    public $createdBy;
 }
 /**
  * Response model used as output for InspectLine API.
  */
-class InspectLineResponseModel
+class InspectResponseModel
 {
     /**
      * @var DeterminationFactorModel[] A list of determination factors for a line that is being inspected through the InspectLine API.
