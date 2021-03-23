@@ -968,6 +968,15 @@ class LiabilityType
 /**
  * 
  */
+class DeemedSellerType
+{    const C_MARKETPLACE = 1;
+    const C_MERCHANT = 2;
+
+}
+
+/**
+ * 
+ */
 class BoundaryLevel
 {    const C_ADDRESS = 0;
     const C_ZIP9 = 1;
