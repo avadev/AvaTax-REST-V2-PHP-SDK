@@ -2053,6 +2053,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * * `FilingRequested` - The company has requested to begin filing tax returns, but Avalara's compliance team has not yet begun filing.
      * * `FirstFiling` - The company has recently filing tax returns and is in a new status.
      * * `Active` - The company is currently active and is filing tax returns via Avalara Managed Returns.
+     * * `Inactive` - The company is currently inactive.
      * 
      * ### Security Policies
      * 
