@@ -514,6 +514,7 @@ class ErrorCodeId
     const C_BATCHCANNOTBECANCELLEDSTATUSERROR = 2504;
     const C_BATCHCANNOTBECANCELLEDFORMATERROR = 2505;
     const C_INVALIDPARAMETERDATATYPE = 2600;
+    const C_CANNOTDOWNLOADREPORT = 2700;
 
 }
 
@@ -947,12 +948,13 @@ class CertCaptureProvisionStatus
  * 
  */
 class CompanyFilingStatus
-{    const C_NOREPORTING = 0;
+{    const C_NOTCONFIGUREDFORCOMPLIANCE = 0;
     const C_NOTYETFILING = 1;
     const C_FILINGREQUESTED = 2;
     const C_FIRSTFILING = 3;
     const C_ACTIVE = 4;
-    const C_NOTCONFIGUREDFORCOMPLIANCE = 5;
+    const C_NOREPORTING = 5;
+    const C_INACTIVE = 6;
 
 }
 
