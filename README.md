@@ -77,3 +77,9 @@ echo('<pre>' . json_encode($t, JSON_PRETTY_PRINT) . '</pre>');
 
 ?>
 ```
+
+# Running the Tests
+
+Update the `tests/phpunit.xml` set the <env> `SANDBOX_USERNAME` and the `SANDBOX_PASSWORD` to your username and password.
+
+You can then run the tests using phpunit with the following command: `phpunit -c tests/phpunit.xml`
