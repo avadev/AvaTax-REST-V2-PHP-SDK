@@ -254,6 +254,8 @@ class ErrorCodeId
     const C_INVALIDCOMPANYLOCATIONSETTING = 85;
     const C_INVALIDADJUSTMENTTYPE = 99;
     const C_DELETEINFORMATION = 100;
+    const C_DISABLEAUTHENTICATIONFORSAMLBASEDACCOUNTS = 101;
+    const C_DISABLERESETPASSWORDFORSAMLBASEDACCOUNTS = 102;
     const C_OUTOFRANGE = 118;
     const C_UNSPECIFIEDTIMEZONE = 119;
     const C_CANNOTCREATEDELETEDOBJECTS = 120;
@@ -468,6 +470,12 @@ class ErrorCodeId
     const C_TAXCODEANDTAXCODEIDMISSING = 1724;
     const C_NEXUSALREADYEXISTS = 1725;
     const C_INVALIDADDRESSTYPEANDMARKETPLACEOUSIDEUSAFLAG = 1726;
+    const C_INVALIDSETTINGSET = 1727;
+    const C_INVALIDSETTINGNAME = 1728;
+    const C_INVALIDSETTINGVALUE = 1729;
+    const C_TOOMANYUSERDEFINEDFIELDS = 1730;
+    const C_DUPLICATEUSERDEFINEDFIELDSFOUND = 1731;
+    const C_INVALIDNAMEFORUSERDEFINEDFIELD = 1732;
     const C_UNSUPPORTEDFILEFORMAT = 1800;
     const C_UNSUPPORTEDOUTPUTFILETYPE = 1801;
     const C_TAXPROFILENOTPROVIDED = 1900;
@@ -514,6 +522,9 @@ class ErrorCodeId
     const C_BATCHCANNOTBECANCELLEDSTATUSERROR = 2504;
     const C_BATCHCANNOTBECANCELLEDFORMATERROR = 2505;
     const C_INVALIDPARAMETERDATATYPE = 2600;
+    const C_TAGDOESNOTEXIST = 2620;
+    const C_OBJECTDELETED = 2660;
+    const C_ASSOCIATEDOBJECTSDELETED = 2661;
     const C_CANNOTDOWNLOADREPORT = 2700;
 
 }
@@ -840,6 +851,7 @@ class BatchStatus
     const C_ERRORS = 6;
     const C_PAUSED = 7;
     const C_PROCESSING = 8;
+    const C_CANCELLING = 9;
 
 }
 
@@ -883,6 +895,15 @@ class ServiceMode
 class TaxDebugLevel
 {    const C_NORMAL = 0;
     const C_DIAGNOSTIC = 1;
+
+}
+
+/**
+ * 
+ */
+class DeliveryTerms
+{    const C_DAP = 1;
+    const C_DDP = 2;
 
 }
 
@@ -961,18 +982,20 @@ class CompanyFilingStatus
 /**
  * 
  */
-class LiabilityType
-{    const C_SELLER = 0;
-    const C_BUYERSAGENT = 1;
+class Visibility
+{    const C_REQUIRED = 0;
+    const C_RECOMMENDED = 1;
+    const C_OPTIONAL = 2;
+    const C_CONDITIONAL = 3;
 
 }
 
 /**
  * 
  */
-class DeemedSellerType
-{    const C_MARKETPLACE = 1;
-    const C_MERCHANT = 2;
+class ScraperType
+{    const C_LOGIN = 1;
+    const C_CUSTOMERDORDATA = 2;
 
 }
 
@@ -983,31 +1006,6 @@ class BoundaryLevel
 {    const C_ADDRESS = 0;
     const C_ZIP9 = 1;
     const C_ZIP5 = 2;
-
-}
-
-/**
- * 
- */
-class DocumentStatus
-{    const C_TEMPORARY = 0;
-    const C_SAVED = 1;
-    const C_POSTED = 2;
-    const C_COMMITTED = 3;
-    const C_CANCELLED = 4;
-    const C_ADJUSTED = 5;
-    const C_QUEUED = 6;
-    const C_PENDINGAPPROVAL = 7;
-    const C_ANY = -1;
-
-}
-
-/**
- * 
- */
-class ScraperType
-{    const C_LOGIN = 1;
-    const C_CUSTOMERDORDATA = 2;
 
 }
 
@@ -1119,6 +1117,40 @@ class FirmClientLinkageStatus
     const C_APPROVED = 2;
     const C_REJECTED = 3;
     const C_REVOKED = 4;
+
+}
+
+/**
+ * 
+ */
+class LiabilityType
+{    const C_SELLER = 0;
+    const C_BUYERSAGENT = 1;
+
+}
+
+/**
+ * 
+ */
+class DeemedSellerType
+{    const C_MARKETPLACE = 1;
+    const C_MERCHANT = 2;
+
+}
+
+/**
+ * 
+ */
+class DocumentStatus
+{    const C_TEMPORARY = 0;
+    const C_SAVED = 1;
+    const C_POSTED = 2;
+    const C_COMMITTED = 3;
+    const C_CANCELLED = 4;
+    const C_ADJUSTED = 5;
+    const C_QUEUED = 6;
+    const C_PENDINGAPPROVAL = 7;
+    const C_ANY = -1;
 
 }
 
