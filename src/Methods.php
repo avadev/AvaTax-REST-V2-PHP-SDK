@@ -4205,7 +4205,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $countryCode If not null, return all records with this code.
      * @return FetchResult
      */
-    public function listProductClassificationSystems($filter=null, $top=null, $skip=null, $orderBy=null, $countryCode)    {
+    public function listProductClassificationSystems($filter=null, $top=null, $skip=null, $orderBy=null, $countryCode=null)    {
         $path = "/api/v2/definitions/productclassificationsystems";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy, '$countryCode' => $countryCode],
@@ -4239,7 +4239,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $countryCode If not null, return all records with this code.
      * @return FetchResult
      */
-    public function listProductClassificationSystemsByCompany($companyCode, $filter=null, $top=null, $skip=null, $orderBy=null, $countryCode)    {
+    public function listProductClassificationSystemsByCompany($companyCode, $filter=null, $top=null, $skip=null, $orderBy=null, $countryCode=null)    {
         $path = "/api/v2/definitions/productclassificationsystems/bycompany/{$companyCode}";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy, '$countryCode' => $countryCode],
@@ -6622,7 +6622,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param AdjustMultiDocumentModel $model The adjust request you wish to execute
      * @return MultiDocumentModel
      */
-    public function adjustMultiDocumentTransaction($code, $type, $include=null, $model)    {
+    public function adjustMultiDocumentTransaction($code, $type, $include=null, $model=null)    {
         $path = "/api/v2/transactions/multidocument/{$code}/type/{$type}/adjust";
         $guzzleParams = [
             'query' => ['include' => $include],
@@ -6768,7 +6768,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param CreateMultiDocumentModel $model the multi document transaction model
      * @return MultiDocumentModel
      */
-    public function createMultiDocumentTransaction($include=null, $model)    {
+    public function createMultiDocumentTransaction($include=null, $model=null)    {
         $path = "/api/v2/transactions/multidocument";
         $guzzleParams = [
             'query' => ['$include' => $include],
@@ -6986,7 +6986,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param RefundTransactionModel $model Information about the refund to create
      * @return MultiDocumentModel
      */
-    public function refundMultiDocumentTransaction($code, $type, $include=null, $model)    {
+    public function refundMultiDocumentTransaction($code, $type, $include=null, $model=null)    {
         $path = "/api/v2/transactions/multidocument/{$code}/type/{$type}/refund";
         $guzzleParams = [
             'query' => ['$include' => $include],
@@ -9204,7 +9204,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param AddTransactionLineModel $model information about the transaction and lines to be added
      * @return TransactionModel
      */
-    public function addLines($include=null, $model)    {
+    public function addLines($include=null, $model=null)    {
         $path = "/api/v2/companies/transactions/lines/add";
         $guzzleParams = [
             'query' => ['$include' => $include],
@@ -9259,7 +9259,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param AdjustTransactionModel $model The adjustment you wish to make
      * @return TransactionModel
      */
-    public function adjustTransaction($companyCode, $transactionCode, $documentType, $include=null, $model)    {
+    public function adjustTransaction($companyCode, $transactionCode, $documentType, $include=null, $model=null)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/adjust";
         $guzzleParams = [
             'query' => ['documentType' => $documentType, '$include' => $include],
@@ -9436,7 +9436,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param ChangeTransactionCodeModel $model The code change request you wish to execute
      * @return TransactionModel
      */
-    public function changeTransactionCode($companyCode, $transactionCode, $documentType, $include=null, $model)    {
+    public function changeTransactionCode($companyCode, $transactionCode, $documentType, $include=null, $model=null)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/changecode";
         $guzzleParams = [
             'query' => ['documentType' => $documentType, '$include' => $include],
@@ -9489,7 +9489,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param CommitTransactionModel $model The commit request you wish to execute
      * @return TransactionModel
      */
-    public function commitTransaction($companyCode, $transactionCode, $documentType, $include=null, $model)    {
+    public function commitTransaction($companyCode, $transactionCode, $documentType, $include=null, $model=null)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/commit";
         $guzzleParams = [
             'query' => ['documentType' => $documentType, '$include' => $include],
@@ -9545,7 +9545,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param CreateOrAdjustTransactionModel $model The transaction you wish to create or adjust
      * @return TransactionModel
      */
-    public function createOrAdjustTransaction($include=null, $model)    {
+    public function createOrAdjustTransaction($include=null, $model=null)    {
         $path = "/api/v2/transactions/createoradjust";
         $guzzleParams = [
             'query' => ['$include' => $include],
@@ -9608,7 +9608,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param CreateTransactionModel $model The transaction you wish to create
      * @return TransactionModel
      */
-    public function createTransaction($include=null, $model)    {
+    public function createTransaction($include=null, $model=null)    {
         $path = "/api/v2/transactions/create";
         $guzzleParams = [
             'query' => ['$include' => $include],
@@ -9648,7 +9648,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param RemoveTransactionLineModel $model information about the transaction and lines to be removed
      * @return TransactionModel
      */
-    public function deleteLines($include=null, $model)    {
+    public function deleteLines($include=null, $model=null)    {
         $path = "/api/v2/companies/transactions/lines/delete";
         $guzzleParams = [
             'query' => ['$include' => $include],
@@ -9885,7 +9885,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param LockTransactionModel $model The lock request you wish to execute
      * @return TransactionModel
      */
-    public function lockTransaction($companyCode, $transactionCode, $documentType, $include=null, $model)    {
+    public function lockTransaction($companyCode, $transactionCode, $documentType, $include=null, $model=null)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/lock";
         $guzzleParams = [
             'query' => ['documentType' => $documentType, '$include' => $include],
@@ -9951,7 +9951,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param RefundTransactionModel $model Information about the refund to create
      * @return TransactionModel
      */
-    public function refundTransaction($companyCode, $transactionCode, $include=null, $documentType, $useTaxDateOverride, $model)    {
+    public function refundTransaction($companyCode, $transactionCode, $include=null, $documentType=null, $useTaxDateOverride=null, $model=null)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/refund";
         $guzzleParams = [
             'query' => ['$include' => $include, 'documentType' => $documentType, 'useTaxDateOverride' => $useTaxDateOverride],
@@ -10004,7 +10004,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param SettleTransactionModel $model The data from an external system to reconcile against AvaTax
      * @return TransactionModel
      */
-    public function settleTransaction($companyCode, $transactionCode, $documentType, $include=null, $model)    {
+    public function settleTransaction($companyCode, $transactionCode, $documentType, $include=null, $model=null)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/settle";
         $guzzleParams = [
             'query' => ['documentType' => $documentType, '$include' => $include],
@@ -10147,7 +10147,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param VerifyTransactionModel $model The data from an external system to reconcile against AvaTax
      * @return TransactionModel
      */
-    public function verifyTransaction($companyCode, $transactionCode, $documentType, $include=null, $model)    {
+    public function verifyTransaction($companyCode, $transactionCode, $documentType, $include=null, $model=null)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/verify";
         $guzzleParams = [
             'query' => ['documentType' => $documentType, '$include' => $include],
@@ -10201,7 +10201,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param VoidTransactionModel $model The void request you wish to execute. To void a transaction the code must be set to 'DocVoided'
      * @return TransactionModel
      */
-    public function voidTransaction($companyCode, $transactionCode, $documentType, $include=null, $model)    {
+    public function voidTransaction($companyCode, $transactionCode, $documentType, $include=null, $model=null)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/void";
         $guzzleParams = [
             'query' => ['documentType' => $documentType, '$include' => $include],
