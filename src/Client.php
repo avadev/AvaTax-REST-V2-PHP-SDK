@@ -168,13 +168,13 @@ class AvaTaxClientBase
             }
             $guzzleParams['headers'] = [
                 'Accept' => 'application/json',
-                'X-Avalara-Client' => "{$this->appName}; {$this->appVersion}; PhpRestClient; 21.3.1; {$this->machineName}"
+                'X-Avalara-Client' => "{$this->appName}; {$this->appVersion}; PhpRestClient; 21.6.0; {$this->machineName}"
             ];
         } else {
             $guzzleParams['headers'] = [
                 'Accept' => 'application/json',
                 'Authorization' => 'Bearer '.$this->auth[0],
-                'X-Avalara-Client' => "{$this->appName}; {$this->appVersion}; PhpRestClient; 21.3.1; {$this->machineName}"
+                'X-Avalara-Client' => "{$this->appName}; {$this->appVersion}; PhpRestClient; 21.6.0; {$this->machineName}"
             ];
         }
         // timeout for 1200s (20 min)
@@ -183,10 +183,14 @@ class AvaTaxClientBase
         // Contact the server
         try {
             $response = $this->client->request($verb, $apiUrl, $guzzleParams);
+
             $body = $response->getBody();
 
             $JsonBody = json_decode($body);
             if (is_null($JsonBody)) {
+			  if (json_last_error() === JSON_ERROR_SYNTAX) {
+				  throw new \Exception('The response is in unexpected format. The response is: ' . $JsonBody);
+			  }
               return $body;
             } else {
               return $JsonBody;

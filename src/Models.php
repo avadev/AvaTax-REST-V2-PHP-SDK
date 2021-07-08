@@ -121,6 +121,10 @@ class UserModel
      * @var string Matches the subjectId of corresponding user record in AI.
      */
     public $subjectId;
+    /**
+     * @var boolean Suppress new user email
+     */
+    public $suppressNewUserEmail;
 }
 /**
  * An AvaTax account.
@@ -179,6 +183,10 @@ class AccountModel
      * @var UserModel[] Optional: A list of all the users belonging to this account. To fetch this list, add the query string "?$include=Users" to your URL.
      */
     public $users;
+    /**
+     * @var boolean Is Saml based authentication used by this account for user to login via AI.
+     */
+    public $isSamlEnabled;
 }
 /**
  * 
@@ -1191,6 +1199,44 @@ class ItemParameterModel
      * @var int The item id
      */
     public $itemId;
+    /**
+     * @var boolean This field identifies if parameter is needed for calculation
+     */
+    public $isNeededForCalculation;
+    /**
+     * @var boolean This field identifies if parameter is needed for returns
+     */
+    public $isNeededForReturns;
+    /**
+     * @var boolean This field identifies if parameter is needed for classification
+     */
+    public $isNeededForClassification;
+}
+/**
+ * Represents a tag for an item in your company's product catalog.
+ */
+class ItemTagDetailModel
+{
+    /**
+     * @var int The unique ID number of the item-tag relation.
+     */
+    public $itemTagDetailId;
+    /**
+     * @var int The unique tag Id for the tags.
+     */
+    public $tagId;
+    /**
+     * @var string The tag name.
+     */
+    public $tagName;
+    /**
+     * @var int The unique ID number of this item.
+     */
+    public $itemId;
+    /**
+     * @var int The unique ID number of the company that owns this item.
+     */
+    public $companyId;
 }
 /**
  * Represents an item in your company's product catalog.
@@ -1226,6 +1272,10 @@ class ItemModel
      */
     public $itemGroup;
     /**
+     * @var string A category of product
+     */
+    public $category;
+    /**
      * @var string The date when this record was created.
      */
     public $createdDate;
@@ -1249,6 +1299,10 @@ class ItemModel
      * @var ItemParameterModel[] List of item parameters.
      */
     public $parameters;
+    /**
+     * @var ItemTagDetailModel[] List of item tags.
+     */
+    public $tags;
 }
 /**
  * Represents the answer to one local jurisdiction question for a location.
@@ -1618,6 +1672,14 @@ class SettingModel
      * @var string The value of this name-value pair.
      */
     public $value;
+    /**
+     * @var string The value when the entry was last modified.
+     */
+    public $modifiedDate;
+    /**
+     * @var int The value identifying who last modified the entry.
+     */
+    public $modifiedUserId;
 }
 /**
  * Represents a tax code that can be applied to items on a transaction.
@@ -2809,6 +2871,20 @@ class TransactionLineParameterModel
     public $unit;
 }
 /**
+ * User Defined fields/Flex Fields at Transaction Line level.
+ */
+class TransactionLineUserDefinedFieldModel
+{
+    /**
+     * @var string The name of the user defined field.
+     */
+    public $name;
+    /**
+     * @var string The value of the user defined field.
+     */
+    public $value;
+}
+/**
  * Represents one line item in a transaction
  */
 class LineItemModel
@@ -2886,13 +2962,21 @@ class LineItemModel
      */
     public $parameters;
     /**
+     * @var TransactionLineUserDefinedFieldModel[] Custom user fields/flex fields for this line.
+     */
+    public $userDefinedFields;
+    /**
      * @var string The Item code for Custom Duty / Global Import tax determination  Harmonized Tariff System code for this transaction.     For a list of harmonized tariff codes, see the Definitions API for harmonized tariff codes.
      */
     public $hsCode;
     /**
-     * @var int ID of the merchant selling on the Marketplace. This field must be populated by Marketplace.
+     * @var int DEPRECATED - Date: 04/15/2021, Version: 21.4, Message: Please use merchantSellerIdentifier instead.  ID of the merchant selling on the Marketplace. This field must be populated by Marketplace.
      */
     public $merchantSellerId;
+    /**
+     * @var string ID of the merchant selling on the Marketplace. This field must be populated by Marketplace.
+     */
+    public $merchantSellerIdentifier;
     /**
      * @var string This field will identify who is remitting Marketplace or Seller. This field must be populated by Marketplace. (See MarketplaceLiabilityType::* for a list of allowable values)
      */
@@ -2905,6 +2989,14 @@ class LineItemModel
      * @var string Synonym of Marketplace Origination. Name of the Marketplace where the transaction originated from.
      */
     public $originationSite;
+    /**
+     * @var string Product category breadcrumbs. This is the full path to the category where item is included. Categories should be separated by “ > “. Multiple category paths per item are accepted. In this case, category paths should be separated by “;”.
+     */
+    public $category;
+    /**
+     * @var string A long description of the product.
+     */
+    public $summary;
 }
 /**
  * Represents a transaction parameter.
@@ -2923,6 +3015,20 @@ class TransactionParameterModel
      * @var string The unit of measure of the parameter value.
      */
     public $unit;
+}
+/**
+ * User Defined fields/Flex Fields at Transaction level.
+ */
+class TransactionUserDefinedFieldModel
+{
+    /**
+     * @var string The name of the user defined field.
+     */
+    public $name;
+    /**
+     * @var string The value of the user defined field.
+     */
+    public $value;
 }
 /**
  * Create a transaction
@@ -2985,6 +3091,10 @@ class CreateTransactionModel
      * @var TransactionParameterModel[] Special parameters for this transaction.     To get a full list of available parameters, please use the [ListParameters](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListParameters/) endpoint.
      */
     public $parameters;
+    /**
+     * @var TransactionUserDefinedFieldModel[] Custom user fields/flex fields for this transaction.
+     */
+    public $userDefinedFields;
     /**
      * @var string Customer-provided Reference Code with information about this transaction.     This field could be used to reference the original document for a return invoice, or for any other  reference purpose.
      */
@@ -3057,6 +3167,10 @@ class CreateTransactionModel
      * @var int The Id of the datasource from which this transaction originated.  This value will be overridden by the system to take the datasource Id from the call header.
      */
     public $dataSourceId;
+    /**
+     * @var string The Delivery Terms is a field used in conjunction with Importer of Record to influence whether AvaTax includes Import Duty and Tax values in the transaction totals or not.  Delivered at Place (DAP) and Delivered Duty Paid (DDP) are two delivery terms that indicate that Import Duty and Tax should be included in the transaction total.  This field is also used for reports.  This field is used for future feature support. This field is not currently in use. (See DeliveryTerms::* for a list of allowable values)
+     */
+    public $deliveryTerms;
 }
 /**
  * Replace an existing transaction recorded in AvaTax with a new one.
@@ -4478,946 +4592,6 @@ class ComplianceJurisdictionRateModel
     public $taxAuthorityId;
 }
 /**
- * SER code fixup
- */
-class LineDetailSERCodeModel
-{
-    /**
-     * @var int Transaction line detail Id
-     */
-    public $transactionLineDetailId;
-    /**
-     * @var string Updated SER code
-     */
-    public $serCode;
-}
-/**
- * Represents a fixup change
- */
-class TransactionReferenceFieldModel
-{
-    /**
-     * @var int The id of the transaction
-     */
-    public $documentId;
-    /**
-     * @var string Sets the sale location code (Outlet ID) for reporting this document to the tax authority.     This value is used by Avalara Managed Returns to group documents together by reporting locations  for tax authorities that require location-based reporting.
-     */
-    public $reportingLocationCode;
-    /**
-     * @var LineDetailSERCodeModel[] Reference field of the line details
-     */
-    public $lineDetailSerCodes;
-}
-/**
- * An individual tax detail element. Represents the amount of tax calculated for a particular jurisdiction, for a particular line in an invoice.
- */
-class TransactionLineDetailModel
-{
-    /**
-     * @var int The unique ID number of this tax detail.
-     */
-    public $id;
-    /**
-     * @var int The unique ID number of the line within this transaction.
-     */
-    public $transactionLineId;
-    /**
-     * @var int The unique ID number of this transaction.
-     */
-    public $transactionId;
-    /**
-     * @var int The unique ID number of the address used for this tax detail.
-     */
-    public $addressId;
-    /**
-     * @var string The two character ISO 3166 country code of the country where this tax detail is assigned.
-     */
-    public $country;
-    /**
-     * @var string The two-or-three character ISO region code for the region where this tax detail is assigned.
-     */
-    public $region;
-    /**
-     * @var string For U.S. transactions, the Federal Information Processing Standard (FIPS) code for the county where this tax detail is assigned.
-     */
-    public $countyFIPS;
-    /**
-     * @var string For U.S. transactions, the Federal Information Processing Standard (FIPS) code for the state where this tax detail is assigned.
-     */
-    public $stateFIPS;
-    /**
-     * @var float The amount of this line that was considered exempt in this tax detail.
-     */
-    public $exemptAmount;
-    /**
-     * @var int The unique ID number of the exemption reason for this tax detail.
-     */
-    public $exemptReasonId;
-    /**
-     * @var boolean True if this detail element represented an in-state transaction.
-     */
-    public $inState;
-    /**
-     * @var string The code of the jurisdiction to which this tax detail applies.
-     */
-    public $jurisCode;
-    /**
-     * @var string The name of the jurisdiction to which this tax detail applies.
-     */
-    public $jurisName;
-    /**
-     * @var int The unique ID number of the jurisdiction to which this tax detail applies.
-     */
-    public $jurisdictionId;
-    /**
-     * @var string The Avalara-specified signature code of the jurisdiction to which this tax detail applies.
-     */
-    public $signatureCode;
-    /**
-     * @var string The state assigned number of the jurisdiction to which this tax detail applies.
-     */
-    public $stateAssignedNo;
-    /**
-     * @var string DEPRECATED - Date: 12/20/2017, Version: 18.1, Message: Use jurisdictionTypeId instead.  The type of the jurisdiction to which this tax detail applies. (See JurisTypeId::* for a list of allowable values)
-     */
-    public $jurisType;
-    /**
-     * @var string The type of the jurisdiction in which this tax detail applies. (See JurisdictionType::* for a list of allowable values)
-     */
-    public $jurisdictionType;
-    /**
-     * @var float The amount of this line item that was considered nontaxable in this tax detail.
-     */
-    public $nonTaxableAmount;
-    /**
-     * @var int The rule according to which portion of this detail was considered nontaxable.
-     */
-    public $nonTaxableRuleId;
-    /**
-     * @var string The type of nontaxability that was applied to this tax detail. (See TaxRuleTypeId::* for a list of allowable values)
-     */
-    public $nonTaxableType;
-    /**
-     * @var float The rate at which this tax detail was calculated.
-     */
-    public $rate;
-    /**
-     * @var int The unique ID number of the rule according to which this tax detail was calculated.
-     */
-    public $rateRuleId;
-    /**
-     * @var int The unique ID number of the source of the rate according to which this tax detail was calculated.
-     */
-    public $rateSourceId;
-    /**
-     * @var string For Streamlined Sales Tax customers, the SST Electronic Return code under which this tax detail should be applied.
-     */
-    public $serCode;
-    /**
-     * @var string Indicates whether this tax detail applies to the origin or destination of the transaction. (See Sourcing::* for a list of allowable values)
-     */
-    public $sourcing;
-    /**
-     * @var float The amount of tax for this tax detail.
-     */
-    public $tax;
-    /**
-     * @var float The taxable amount of this tax detail.
-     */
-    public $taxableAmount;
-    /**
-     * @var string The type of tax that was calculated. Depends on the company's nexus settings as well as the jurisdiction's tax laws.
-     */
-    public $taxType;
-    /**
-     * @var string The id of the tax subtype.
-     */
-    public $taxSubTypeId;
-    /**
-     * @var string The id of the tax type group.
-     */
-    public $taxTypeGroupId;
-    /**
-     * @var string The name of the tax against which this tax amount was calculated.
-     */
-    public $taxName;
-    /**
-     * @var int The type of the tax authority to which this tax will be remitted.
-     */
-    public $taxAuthorityTypeId;
-    /**
-     * @var int The unique ID number of the tax region.
-     */
-    public $taxRegionId;
-    /**
-     * @var float The amount of tax that AvaTax calculated.  If an override for tax amount is used, there may be a difference between the tax  field which applies your override, and the this amount that is calculated without override.
-     */
-    public $taxCalculated;
-    /**
-     * @var float The amount of tax override that was specified for this tax line.
-     */
-    public $taxOverride;
-    /**
-     * @var string DEPRECATED - Date: 12/20/2017, Version: 18.1, Message: Please use rateTypeCode instead.  The rate type for this tax detail. (See RateType::* for a list of allowable values)
-     */
-    public $rateType;
-    /**
-     * @var string Indicates the code of the rate type that was used to calculate this tax detail. Use [ListRateTypesByCountry](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListRateTypesByCountry/) API for a full list of rate type codes.
-     */
-    public $rateTypeCode;
-    /**
-     * @var float Number of units in this line item that were calculated to be taxable according to this rate detail.
-     */
-    public $taxableUnits;
-    /**
-     * @var float Number of units in this line item that were calculated to be nontaxable according to this rate detail.
-     */
-    public $nonTaxableUnits;
-    /**
-     * @var float Number of units in this line item that were calculated to be exempt according to this rate detail.
-     */
-    public $exemptUnits;
-    /**
-     * @var string When calculating units, what basis of measurement did we use for calculating the units?
-     */
-    public $unitOfBasis;
-    /**
-     * @var boolean True if this value is a non-passthrough tax.     A non-passthrough tax is a tax that may not be charged to a customer; it must be paid directly by the company.
-     */
-    public $isNonPassThru;
-    /**
-     * @var boolean The Taxes/Fee component. True if the fee is applied.
-     */
-    public $isFee;
-    /**
-     * @var float Number of units in this line item that were calculated to be taxable according to this rate detail in the reporting currency.
-     */
-    public $reportingTaxableUnits;
-    /**
-     * @var float Number of units in this line item that were calculated to be nontaxable according to this rate detail in the reporting currency.
-     */
-    public $reportingNonTaxableUnits;
-    /**
-     * @var float Number of units in this line item that were calculated to be exempt according to this rate detail in the reporting currency.
-     */
-    public $reportingExemptUnits;
-    /**
-     * @var float The amount of tax for this tax detail in the reporting currency.
-     */
-    public $reportingTax;
-    /**
-     * @var float The amount of tax that AvaTax calculated in the reporting currency.  If an override for tax amount is used, there may be a difference between the tax  field which applies your override, and the this amount that is calculated without override.
-     */
-    public $reportingTaxCalculated;
-    /**
-     * @var string LiabilityType identifies the party liable to file the tax. This field is used to filter taxes from reports and tax filings as appropriate. (See LiabilityType::* for a list of allowable values)
-     */
-    public $liabilityType;
-}
-/**
- * Represents information about location types stored in a line
- */
-class TransactionLineLocationTypeModel
-{
-    /**
-     * @var int The unique ID number of this line location address model
-     */
-    public $documentLineLocationTypeId;
-    /**
-     * @var int The unique ID number of the document line associated with this line location address model
-     */
-    public $documentLineId;
-    /**
-     * @var int The address ID corresponding to this model
-     */
-    public $documentAddressId;
-    /**
-     * @var string The location type code corresponding to this model
-     */
-    public $locationTypeCode;
-}
-/**
- * One line item on this transaction.
- */
-class TransactionLineModel
-{
-    /**
-     * @var int The unique ID number of this transaction line item.
-     */
-    public $id;
-    /**
-     * @var int The unique ID number of the transaction to which this line item belongs.
-     */
-    public $transactionId;
-    /**
-     * @var string The line number or code indicating the line on this invoice or receipt or document.
-     */
-    public $lineNumber;
-    /**
-     * @var int The unique ID number of the boundary override applied to this line item.
-     */
-    public $boundaryOverrideId;
-    /**
-     * @var string DEPRECATED - Date: 10/16/2017, Version: 17.11, Message: Please use entityUseCode instead.  The customer usage type for this line item. Usage type often affects taxability rules.
-     */
-    public $customerUsageType;
-    /**
-     * @var string The entity use code for this line item. Usage type often affects taxability rules.
-     */
-    public $entityUseCode;
-    /**
-     * @var string A description of the item or service represented by this line.
-     */
-    public $description;
-    /**
-     * @var int The unique ID number of the destination address where this line was delivered or sold.  In the case of a point-of-sale transaction, the destination address and origin address will be the same.  In the case of a shipped transaction, they will be different.
-     */
-    public $destinationAddressId;
-    /**
-     * @var int The unique ID number of the origin address where this line was delivered or sold.  In the case of a point-of-sale transaction, the origin address and destination address will be the same.  In the case of a shipped transaction, they will be different.
-     */
-    public $originAddressId;
-    /**
-     * @var float The amount of discount that was applied to this line item. This represents the difference between list price and sale price of the item.  In general, a discount represents money that did not change hands; tax is calculated on only the amount of money that changed hands.
-     */
-    public $discountAmount;
-    /**
-     * @var int The type of discount, if any, that was applied to this line item.
-     */
-    public $discountTypeId;
-    /**
-     * @var float The amount of this line item that was exempt.
-     */
-    public $exemptAmount;
-    /**
-     * @var int The unique ID number of the exemption certificate that applied to this line item. It is the calc_id associated with a certificate in CertCapture.
-     */
-    public $exemptCertId;
-    /**
-     * @var string The CertCapture Certificate ID
-     */
-    public $certificateId;
-    /**
-     * @var string The customer Tax Id Number (tax_number) associated with a certificate - Sales tax calculation requests first determine if there is an applicable  ECMS entry available, and will utilize it for exemption processing. If no applicable ECMS entry is available, the AvaTax service  will determine if an Exemption Number field is populated or an Entity/Use Code is included in the sales tax calculation request,  and will perform exemption processing using either of those two options.
-     */
-    public $exemptNo;
-    /**
-     * @var boolean True if this item is taxable.
-     */
-    public $isItemTaxable;
-    /**
-     * @var boolean True if this item is a Streamlined Sales Tax line item.
-     */
-    public $isSSTP;
-    /**
-     * @var string The code string of the item represented by this line item.
-     */
-    public $itemCode;
-    /**
-     * @var float The total amount of the transaction, including both taxable and exempt. This is the total price for all items.  To determine the individual item price, divide this by quantity.
-     */
-    public $lineAmount;
-    /**
-     * @var float The quantity of products sold on this line item.
-     */
-    public $quantity;
-    /**
-     * @var string A user-defined reference identifier for this transaction line item.
-     */
-    public $ref1;
-    /**
-     * @var string A user-defined reference identifier for this transaction line item.
-     */
-    public $ref2;
-    /**
-     * @var string The date when this transaction should be reported. By default, all transactions are reported on the date when the actual transaction took place.  In some cases, line items may be reported later due to delayed shipments or other business reasons.
-     */
-    public $reportingDate;
-    /**
-     * @var string The revenue account number for this line item.
-     */
-    public $revAccount;
-    /**
-     * @var string Indicates whether this line item was taxed according to the origin or destination. (See Sourcing::* for a list of allowable values)
-     */
-    public $sourcing;
-    /**
-     * @var float The tax for this line in this transaction.     If you used a `taxOverride` of type `taxAmount` for this line, this value  will represent the amount of your override. AvaTax will still attempt to calculate the correct tax  for this line and will store that calculated value in the `taxCalculated` field.     You can compare the `tax` and `taxCalculated` fields to check for any discrepancies  between an external tax calculation provider and the calculation performed by AvaTax.
-     */
-    public $tax;
-    /**
-     * @var float The taxable amount of this line item.
-     */
-    public $taxableAmount;
-    /**
-     * @var float The amount of tax that AvaTax calculated for the transaction.     If you used a `taxOverride` of type `taxAmount`, there may be a difference between  the `tax` field which applies your override, and the `taxCalculated` field which  represents the amount of tax that AvaTax calculated without the override.     You can compare the `tax` and `taxCalculated` fields to check for any discrepancies  between an external tax calculation provider and the calculation performed by AvaTax.
-     */
-    public $taxCalculated;
-    /**
-     * @var string The code string for the tax code that was used to calculate this line item.
-     */
-    public $taxCode;
-    /**
-     * @var int The unique ID number for the tax code that was used to calculate this line item.
-     */
-    public $taxCodeId;
-    /**
-     * @var string The date that was used for calculating tax amounts for this line item. By default, this date should be the same as the document date.  In some cases, for example when a consumer returns a product purchased previously, line items may be calculated using a tax date in the past  so that the consumer can receive a refund for the correct tax amount that was charged when the item was originally purchased.
-     */
-    public $taxDate;
-    /**
-     * @var string The tax engine identifier that was used to calculate this line item.
-     */
-    public $taxEngine;
-    /**
-     * @var string If a tax override was specified, this indicates the type of tax override. (See TaxOverrideType::* for a list of allowable values)
-     */
-    public $taxOverrideType;
-    /**
-     * @var string VAT business identification number used for this transaction.
-     */
-    public $businessIdentificationNo;
-    /**
-     * @var float If a tax override was specified, this indicates the amount of tax that was requested.
-     */
-    public $taxOverrideAmount;
-    /**
-     * @var string If a tax override was specified, represents the reason for the tax override.
-     */
-    public $taxOverrideReason;
-    /**
-     * @var boolean Indicates whether the `amount` for this line already includes tax.     If this value is `true`, the final price of this line including tax will equal the value in `amount`.     If this value is `null` or `false`, the final price will equal `amount` plus whatever taxes apply to this line.
-     */
-    public $taxIncluded;
-    /**
-     * @var int ID of the merchant selling on the Marketplace. This field must be populated by Marketplace.
-     */
-    public $merchantSellerId;
-    /**
-     * @var string This field will identify who is remitting Marketplace or Seller. This field must be populated by Marketplace. (See MarketplaceLiabilityType::* for a list of allowable values)
-     */
-    public $marketplaceLiabilityType;
-    /**
-     * @var string The transaction's original ID in its origination system
-     */
-    public $originationDocumentId;
-    /**
-     * @var string Synonym of Marketplace Origination. Name of the Marketplace where the transaction originated from.
-     */
-    public $originationSite;
-    /**
-     * @var TransactionLineDetailModel[] Optional: A list of tax details for this line item.     Tax details represent taxes being charged by various tax authorities. Taxes that appear in the `details` collection are intended to be  displayed to the customer and charged as a 'tax' on the invoice.     To fetch this list, add the query string `?$include=Details` to your URL.
-     */
-    public $details;
-    /**
-     * @var TransactionLineDetailModel[] Optional: A list of non-passthrough tax details for this line item.     Tax details represent taxes being charged by various tax authorities. Taxes that appear in the `nonPassthroughDetails` collection are  taxes that must be paid directly by the company and not shown to the customer.
-     */
-    public $nonPassthroughDetails;
-    /**
-     * @var TransactionLineLocationTypeModel[] Optional: A list of location types for this line item. To fetch this list, add the query string "?$include=LineLocationTypes" to your URL.
-     */
-    public $lineLocationTypes;
-    /**
-     * @var TransactionLineParameterModel[] Contains a list of extra parameters that were set when the transaction was created.
-     */
-    public $parameters;
-    /**
-     * @var string The cross-border harmonized system code (HSCode) used to calculate tariffs and duties for this line item.  For a full list of HS codes, see `ListCrossBorderCodes()`.
-     */
-    public $hsCode;
-    /**
-     * @var float Indicates the cost of insurance and freight for this line.
-     */
-    public $costInsuranceFreight;
-    /**
-     * @var string Indicates the VAT code for this line item.
-     */
-    public $vatCode;
-    /**
-     * @var int Indicates the VAT number type for this line item.
-     */
-    public $vatNumberTypeId;
-    /**
-     * @var TransactionLineTaxAmountByTaxTypeModel[] Contains a list of TaxType that are to be overridden with their respective TaxOverrideAmount.
-     */
-    public $taxAmountByTaxTypes;
-    /**
-     * @var string Deemed Supplier field indicates which party on the marketplace transaction is liable for collecting and reporting the VAT. This is based on the 2021 E-commerce legislative reforms in EU and UK. This field will not be used until after July 1, 2021. (See DeemedSellerType::* for a list of allowable values)
-     */
-    public $deemedSupplier;
-}
-/**
- * An address used within this transaction.
- */
-class TransactionAddressModel
-{
-    /**
-     * @var int The unique ID number of this address.
-     */
-    public $id;
-    /**
-     * @var int The unique ID number of the document to which this address belongs.
-     */
-    public $transactionId;
-    /**
-     * @var string The boundary level at which this address was validated. (See BoundaryLevel::* for a list of allowable values)
-     */
-    public $boundaryLevel;
-    /**
-     * @var string The first line of the address.
-     */
-    public $line1;
-    /**
-     * @var string The second line of the address.
-     */
-    public $line2;
-    /**
-     * @var string The third line of the address.
-     */
-    public $line3;
-    /**
-     * @var string The city for the address.
-     */
-    public $city;
-    /**
-     * @var string The ISO 3166 region code. E.g., the second part of ISO 3166-2.
-     */
-    public $region;
-    /**
-     * @var string The postal code or zip code for the address.
-     */
-    public $postalCode;
-    /**
-     * @var string The ISO 3166 country code
-     */
-    public $country;
-    /**
-     * @var int The unique ID number of the tax region for this address.
-     */
-    public $taxRegionId;
-    /**
-     * @var string Latitude for this address
-     */
-    public $latitude;
-    /**
-     * @var string Longitude for this address
-     */
-    public $longitude;
-}
-/**
- * Information about a location type
- */
-class TransactionLocationTypeModel
-{
-    /**
-     * @var int Location type ID for this location type in transaction
-     */
-    public $documentLocationTypeId;
-    /**
-     * @var int Transaction ID
-     */
-    public $documentId;
-    /**
-     * @var int Address ID for the transaction
-     */
-    public $documentAddressId;
-    /**
-     * @var string Location type code
-     */
-    public $locationTypeCode;
-}
-/**
- * Summary information about an overall transaction.
- */
-class TransactionSummary
-{
-    /**
-     * @var string Two character ISO-3166 country code.
-     */
-    public $country;
-    /**
-     * @var string Two or three character ISO region, state or province code, if applicable.
-     */
-    public $region;
-    /**
-     * @var string The type of jurisdiction that collects this tax. (See JurisdictionType::* for a list of allowable values)
-     */
-    public $jurisType;
-    /**
-     * @var string Jurisdiction Code for the taxing jurisdiction
-     */
-    public $jurisCode;
-    /**
-     * @var string The name of the jurisdiction that collects this tax.
-     */
-    public $jurisName;
-    /**
-     * @var int The unique ID of the Tax Authority Type that collects this tax.
-     */
-    public $taxAuthorityType;
-    /**
-     * @var string The state assigned number of the jurisdiction that collects this tax.
-     */
-    public $stateAssignedNo;
-    /**
-     * @var string The tax type of this tax.
-     */
-    public $taxType;
-    /**
-     * @var string The tax subtype of this tax.
-     */
-    public $taxSubType;
-    /**
-     * @var string The name of the tax.
-     */
-    public $taxName;
-    /**
-     * @var string Group code when special grouping is enabled.
-     */
-    public $taxGroup;
-    /**
-     * @var string DEPRECATED - Date: 3/1/2018, Version: 18.3, Message: Please use rateTypeCode instead.  Indicates the tax rate type. (See RateType::* for a list of allowable values)
-     */
-    public $rateType;
-    /**
-     * @var string Indicates the code of the rate type. Use [ListRateTypesByCountry](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListRateTypesByCountry/) API for a full list of rate type codes.
-     */
-    public $rateTypeCode;
-    /**
-     * @var float Tax Base - The adjusted taxable amount.
-     */
-    public $taxable;
-    /**
-     * @var float Tax Rate - The rate of taxation, as a fraction of the amount.
-     */
-    public $rate;
-    /**
-     * @var float Tax amount - The calculated tax (Base * Rate).
-     */
-    public $tax;
-    /**
-     * @var float The amount of tax that AvaTax calculated for the transaction.     If you used a `taxOverride` of type `taxAmount`, there may be a difference between  the `tax` field which applies your override, and the `TaxCalculated` field which  represents the amount of tax that AvaTax calculated for this transaction without override.     You can use this for comparison.
-     */
-    public $taxCalculated;
-    /**
-     * @var float The amount of the transaction that was non-taxable.
-     */
-    public $nonTaxable;
-    /**
-     * @var float The amount of the transaction that was exempt.
-     */
-    public $exemption;
-}
-/**
- * Tax Details by Tax subtype
- */
-class TaxDetailsByTaxSubType
-{
-    /**
-     * @var string Tax subtype
-     */
-    public $taxSubType;
-    /**
-     * @var float Total taxable amount by tax type
-     */
-    public $totalTaxable;
-    /**
-     * @var float Total exempt by tax type
-     */
-    public $totalExempt;
-    /**
-     * @var float Total non taxable by tax type
-     */
-    public $totalNonTaxable;
-    /**
-     * @var float Total tax by tax type
-     */
-    public $totalTax;
-}
-/**
- * Tax Details by Tax Type
- */
-class TaxDetailsByTaxType
-{
-    /**
-     * @var string Tax Type
-     */
-    public $taxType;
-    /**
-     * @var float Total taxable amount by tax type
-     */
-    public $totalTaxable;
-    /**
-     * @var float Total exempt by tax type
-     */
-    public $totalExempt;
-    /**
-     * @var float Total non taxable by tax type
-     */
-    public $totalNonTaxable;
-    /**
-     * @var float Total tax by tax type
-     */
-    public $totalTax;
-    /**
-     * @var TaxDetailsByTaxSubType[] Tax subtype details
-     */
-    public $taxSubTypeDetails;
-}
-/**
- * Represents a message to be displayed on an invoice.
- */
-class InvoiceMessageModel
-{
-    /**
-     * @var string The content of the invoice message.
-     */
-    public $content;
-    /**
-     * @var string[] The applicable tax line numbers and codes.
-     */
-    public $lineNumbers;
-}
-/**
- * This object represents a single transaction; for example, a sales invoice or purchase order.
- */
-class TransactionModel
-{
-    /**
-     * @var int The unique ID number of this transaction.
-     */
-    public $id;
-    /**
-     * @var string A unique customer-provided code identifying this transaction.
-     */
-    public $code;
-    /**
-     * @var int The unique ID number of the company that recorded this transaction.
-     */
-    public $companyId;
-    /**
-     * @var string The date on which this transaction occurred.
-     */
-    public $date;
-    /**
-     * @var string DEPRECATED - Date: 07/25/2018, Version: 18.7, Message: This field is deprecated and will return null till its removed.  The date when payment was made on this transaction. By default, this should be the same as the date of the transaction.
-     */
-    public $paymentDate;
-    /**
-     * @var string The status of the transaction. (See DocumentStatus::* for a list of allowable values)
-     */
-    public $status;
-    /**
-     * @var string The type of the transaction.     Transactions of type `SalesOrder`, `ReturnOrder`, and so on are temporary estimates and will not be saved.     Transactions of type `SalesInvoice, `ReturnInvoice`, and so on are permanent transactions that can be reported to tax authorities  if they are in status `Committed`.     A sales transaction represents a sale from the company to a customer. A purchase transaction represents a purchase made by the company.  A return transaction represents a customer who decided to request a refund after purchasing a product from the company. An inventory  transfer transaction represents goods that were moved from one location of the company to another location without changing ownership. (See DocumentType::* for a list of allowable values)
-     */
-    public $type;
-    /**
-     * @var string If this transaction was created as part of a batch, this code indicates which batch.
-     */
-    public $batchCode;
-    /**
-     * @var string The three-character ISO 4217 currency code that was used for payment for this transaction.
-     */
-    public $currencyCode;
-    /**
-     * @var string The three-character ISO 4217 exchange rate currency code that was used for payment for this transaction.
-     */
-    public $exchangeRateCurrencyCode;
-    /**
-     * @var string DEPRECATED - Date: 10/16/2017, Version: 17.11, Message: Please use entityUseCode instead.  The customer usage type for this transaction. Customer usage types often affect exemption or taxability rules.
-     */
-    public $customerUsageType;
-    /**
-     * @var string The entity use code for this transaction. Entity use codes often affect exemption or taxability rules.
-     */
-    public $entityUseCode;
-    /**
-     * @var string DEPRECATED - Date: 3/1/2018, Version: 18.3, Message: Please use `customerCode`  This field has been renamed to `customerCode` to match documentation for other APIs related to exemption customers.
-     */
-    public $customerVendorCode;
-    /**
-     * @var string Unique code identifying the customer that requested this transaction.     When you specify a `customerCode`, AvaTax will look to see if a customer exists with this code in the exemption certificate system.  If that customer exists, and if that customer has uploaded an exemption certificate that applies to this transaction, the relevant  parts of this transaction that can use the exemption certificate will be treated as exempt.
-     */
-    public $customerCode;
-    /**
-     * @var string The customer Tax Id Number (tax_number) associated with a certificate - Sales tax calculation requests first determine if there is an applicable  ECMS entry available, and will utilize it for exemption processing. If no applicable ECMS entry is available, the AvaTax service  will determine if an Exemption Number field is populated or an Entity/Use Code is included in the sales tax calculation request,  and will perform exemption processing using either of those two options.
-     */
-    public $exemptNo;
-    /**
-     * @var boolean If this transaction has been reconciled against the company's ledger, this value is set to true.
-     */
-    public $reconciled;
-    /**
-     * @var string DEPRECATED - Date: 3/1/2018, Version: 18.3, Message: In order to ensure consistency of field names, Please use reportingLocationCode instead.  This field has been replaced by the reportingLocationCode field
-     */
-    public $locationCode;
-    /**
-     * @var string For customers who use [location-based tax reporting](https://developer.avalara.com/avatax/dev-guide/locations/location-based-reporting),  this field controls how this transaction will be filed for multi-location tax filings.     If you specify a non-null value for this field, AvaTax will ensure that this transaction is reported on the tax return associated  with the [LocationModel](https://developer.avalara.com/api-reference/avatax/rest/v2/models/LocationModel/) identified by this code.     This field does not affect any addresses for the transaction. It only controls the tax filing behavior of this transaction.     If you are looking for information about how to set up addresses for a transaction, please see [Using Address Types](https://developer.avalara.com/avatax/dev-guide/customizing-transaction/address-types/)  in the AvaTax Developer Guide.
-     */
-    public $reportingLocationCode;
-    /**
-     * @var string The customer-supplied purchase order number of this transaction.
-     */
-    public $purchaseOrderNo;
-    /**
-     * @var string A user-defined reference code for this transaction.
-     */
-    public $referenceCode;
-    /**
-     * @var string The salesperson who provided this transaction. Not required.
-     */
-    public $salespersonCode;
-    /**
-     * @var string If a tax override was applied to this transaction, indicates what type of tax override was applied. (See TaxOverrideType::* for a list of allowable values)
-     */
-    public $taxOverrideType;
-    /**
-     * @var float If a tax override was applied to this transaction, indicates the amount of tax that was requested by the customer.
-     */
-    public $taxOverrideAmount;
-    /**
-     * @var string If a tax override was applied to this transaction, indicates the reason for the tax override.
-     */
-    public $taxOverrideReason;
-    /**
-     * @var float The total amount of this transaction.
-     */
-    public $totalAmount;
-    /**
-     * @var float The amount of this transaction that was exempt.
-     */
-    public $totalExempt;
-    /**
-     * @var float The total amount of discounts applied to all lines within this transaction.
-     */
-    public $totalDiscount;
-    /**
-     * @var float The total tax for all lines in this transaction.     If you used a `taxOverride` of type `taxAmount` for any lines in this transaction, this value  may be different than the amount of tax calculated by AvaTax. The amount of tax calculated by  AvaTax will be stored in the `totalTaxCalculated` field, whereas this field will contain the  total tax that was charged on the transaction.     You can compare the `totalTax` and `totalTaxCalculated` fields to check for any discrepancies  between an external tax calculation provider and the calculation performed by AvaTax.
-     */
-    public $totalTax;
-    /**
-     * @var float The portion of the total amount of this transaction that was taxable.
-     */
-    public $totalTaxable;
-    /**
-     * @var float The amount of tax that AvaTax calculated for the transaction.     If you used a `taxOverride` of type `taxAmount` for any lines in this transaction, this value  will represent the amount that AvaTax calculated for this transaction without applying the override.  The field `totalTax` will be the total amount of tax after all overrides are applied.     You can compare the `totalTax` and `totalTaxCalculated` fields to check for any discrepancies  between an external tax calculation provider and the calculation performed by AvaTax.
-     */
-    public $totalTaxCalculated;
-    /**
-     * @var string If this transaction was adjusted, indicates the unique ID number of the reason why the transaction was adjusted. (See AdjustmentReason::* for a list of allowable values)
-     */
-    public $adjustmentReason;
-    /**
-     * @var string If this transaction was adjusted, indicates a description of the reason why the transaction was adjusted.
-     */
-    public $adjustmentDescription;
-    /**
-     * @var boolean If this transaction has been reported to a tax authority, this transaction is considered locked and may not be adjusted after reporting.
-     */
-    public $locked;
-    /**
-     * @var string The two-or-three character ISO region code of the region for this transaction.
-     */
-    public $region;
-    /**
-     * @var string The two-character ISO 3166 code of the country for this transaction.
-     */
-    public $country;
-    /**
-     * @var int If this transaction was adjusted, this indicates the version number of this transaction. Incremented each time the transaction  is adjusted.
-     */
-    public $version;
-    /**
-     * @var string The software version used to calculate this transaction.
-     */
-    public $softwareVersion;
-    /**
-     * @var int The unique ID number of the origin address for this transaction.
-     */
-    public $originAddressId;
-    /**
-     * @var int The unique ID number of the destination address for this transaction.
-     */
-    public $destinationAddressId;
-    /**
-     * @var string If this transaction included foreign currency exchange, this is the date as of which the exchange rate was calculated.
-     */
-    public $exchangeRateEffectiveDate;
-    /**
-     * @var float If this transaction included foreign currency exchange, this is the exchange rate that was used.
-     */
-    public $exchangeRate;
-    /**
-     * @var boolean By default, the value is null, when the value is null, the value can be set at nexus level and used.  If the value is not null, it will override the value at nexus level.     If true, this seller was considered the importer of record of a product shipped internationally.     If this transaction is not an international transaction, this field may be left blank.     The "importer of record" is liable to pay customs and import duties for products shipped internationally. If  you specify that the seller is the importer of record, then estimates of customs and import duties will be added  as tax details to the transaction. Otherwise, the buyer is considered the importer of record, and customs  and import duties will not be added to the tax details for this transaction.
-     */
-    public $isSellerImporterOfRecord;
-    /**
-     * @var string Description of this transaction. Field permits unicode values.
-     */
-    public $description;
-    /**
-     * @var string Email address associated with this transaction.
-     */
-    public $email;
-    /**
-     * @var string VAT business identification number used for this transaction.
-     */
-    public $businessIdentificationNo;
-    /**
-     * @var string The date/time when this record was last modified.
-     */
-    public $modifiedDate;
-    /**
-     * @var int The user ID of the user who last modified this record.
-     */
-    public $modifiedUserId;
-    /**
-     * @var string Tax date for this transaction
-     */
-    public $taxDate;
-    /**
-     * @var TransactionLineModel[] A list of line items in this transaction. To fetch this list, add the query string `?$include=Lines` or `?$include=Details` to your URL.
-     */
-    public $lines;
-    /**
-     * @var TransactionAddressModel[] A list of line items in this transaction. To fetch this list, add the query string `?$include=Addresses` to your URL.     For more information about transaction addresses, please see [Using Address Types](https://developer.avalara.com/avatax/dev-guide/customizing-transaction/address-types/)  in the AvaTax Developer Guide.
-     */
-    public $addresses;
-    /**
-     * @var TransactionLocationTypeModel[] A list of location types in this transaction. To fetch this list, add the query string `?$include=Addresses` to your URL.
-     */
-    public $locationTypes;
-    /**
-     * @var TransactionSummary[] Contains a summary of tax on this transaction.
-     */
-    public $summary;
-    /**
-     * @var TaxDetailsByTaxType[] Contains the tax details per tax type
-     */
-    public $taxDetailsByTaxType;
-    /**
-     * @var TransactionParameterModel[] Contains a list of extra parameters that were set when the transaction was created.
-     */
-    public $parameters;
-    /**
-     * @var AvaTaxMessage[] List of informational and warning messages regarding this API call. These messages are only relevant to the current API call.
-     */
-    public $messages;
-    /**
-     * @var InvoiceMessageModel[] Invoice messages associated with this document. Currently, this stores legally-required VAT messages.
-     */
-    public $invoiceMessages;
-    /**
-     * @var string The name of the supplier / exporter / seller.  For sales doctype this will be the name of your own company for which you are reporting.  For purchases doctype this will be the name of the supplier you have purchased from.
-     */
-    public $customerSupplierName;
-    /**
-     * @var int The Id of the datasource from which this transaction originated.  This value will be overridden by the system to take the datasource Id from the call header.
-     */
-    public $dataSourceId;
-}
-/**
  * Represents a customer to whom you sell products and/or services.
  */
 class LinkCertificatesModel
@@ -5675,6 +4849,114 @@ class ParameterUsageModel
     public $measurementType;
 }
 /**
+ * usage of system defined parameters.
+ */
+class ClassificationParameterUsageMapModel
+{
+    /**
+     * @var int The unique ID number of this property.
+     */
+    public $id;
+    /**
+     * @var int The id of the parameter.
+     */
+    public $parameterId;
+    /**
+     * @var string tax type group id for the classification parameter usage item.
+     */
+    public $taxTypeGroupId;
+    /**
+     * @var string This defines if the parameter is recommeded ,optional or mandatory (See Visibility::* for a list of allowable values)
+     */
+    public $visibility;
+    /**
+     * @var string The type of parameter as determined by its application, e.g. Product, Transaction, Calculated
+     */
+    public $attributeType;
+    /**
+     * @var string The name of the property. To use this property, add a field on the `parameters` object of a [CreateTransaction](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Transactions/CreateTransaction/) call.
+     */
+    public $name;
+    /**
+     * @var string The data type of the property.
+     */
+    public $dataType;
+    /**
+     * @var string Help text to be shown to the user when they are filling out this parameter. Help text may include HTML links to additional  content with more information about a parameter.
+     */
+    public $helpText;
+    /**
+     * @var string Label that helps the user to identify a parameter
+     */
+    public $label;
+    /**
+     * @var string A help url that provides more information about the parameter
+     */
+    public $helpUrl;
+    /**
+     * @var string[] If the parameter is of enumeration data type, then this list will be populated with all of the possible enumeration values.
+     */
+    public $values;
+    /**
+     * @var string The unit of measurement type of the parameter
+     */
+    public $measurementType;
+}
+/**
+ * usage of system defined parameters for returns.
+ */
+class ReturnsParameterUsageModel
+{
+    /**
+     * @var int The unique ID number of this property.
+     */
+    public $id;
+    /**
+     * @var int The id of the parameter.
+     */
+    public $parameterId;
+    /**
+     * @var string Product code for the return parameter usage item.
+     */
+    public $productCode;
+    /**
+     * @var string tax type for the returns parameter usage item.
+     */
+    public $taxTypeId;
+    /**
+     * @var string The type of parameter as determined by its application, e.g. Product, Transaction, Calculated
+     */
+    public $attributeType;
+    /**
+     * @var string The name of the property. To use this property, add a field on the `parameters` object of a [CreateTransaction](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Transactions/CreateTransaction/) call.
+     */
+    public $name;
+    /**
+     * @var string The data type of the property.
+     */
+    public $dataType;
+    /**
+     * @var string Help text to be shown to the user when they are filling out this parameter. Help text may include HTML links to additional  content with more information about a parameter.
+     */
+    public $helpText;
+    /**
+     * @var string Label that helps the user to identify a parameter
+     */
+    public $label;
+    /**
+     * @var string A help url that provides more information about the parameter
+     */
+    public $helpUrl;
+    /**
+     * @var string[] If the parameter is of enumeration data type, then this list will be populated with all of the possible enumeration values.
+     */
+    public $values;
+    /**
+     * @var string The unit of measurement type of the parameter
+     */
+    public $measurementType;
+}
+/**
  * An extra property that can change the behavior of tax transactions.
  */
 class ParameterModel
@@ -5731,6 +5013,18 @@ class ParameterModel
      * @var string The unit of measurement type of the parameter
      */
     public $measurementType;
+    /**
+     * @var boolean This field identifies if parameter is needed for calculation
+     */
+    public $isNeededForCalculation;
+    /**
+     * @var boolean This field identifies if parameter is needed for returns
+     */
+    public $isNeededForReturns;
+    /**
+     * @var boolean This field identifies if parameter is needed for classification
+     */
+    public $isNeededForClassification;
 }
 /**
  * Information about questions that the local jurisdictions require for each location
@@ -7199,6 +6493,20 @@ class MarketplaceLocationModel
      * @var string Marketplace Location Modified Date
      */
     public $modifiedDate;
+}
+/**
+ * Represents a tag for an item in your company's product catalog.
+ */
+class TagsModel
+{
+    /**
+     * @var int The unique ID number of the tag.
+     */
+    public $id;
+    /**
+     * @var string The tag name.
+     */
+    public $tagName;
 }
 /**
  * A company-distance-threshold model indicates the distance between a company
@@ -9688,6 +8996,48 @@ class SyncItemsResponseModel
     public $status;
 }
 /**
+ * Represents a bulk upload input model.
+ */
+class ItemBulkUploadInputModel
+{
+    /**
+     * @var ItemModel[] List of items
+     */
+    public $items;
+}
+/**
+ * Represents a item upload error model.
+ */
+class ItemUploadErrorModel
+{
+    /**
+     * @var int Row index of an item
+     */
+    public $rowIndex;
+    /**
+     * @var string Item code
+     */
+    public $itemCode;
+    /**
+     * @var string[] List of errors for against given item code
+     */
+    public $errors;
+}
+/**
+ * Represents a bulk upload response model.
+ */
+class ItemBulkUploadOutputModel
+{
+    /**
+     * @var int Count of processed objects
+     */
+    public $total;
+    /**
+     * @var ItemUploadErrorModel[] Dictionary of object and respective list of errors
+     */
+    public $failed;
+}
+/**
  * Tells you whether this location object has been correctly set up to the local jurisdiction's standards
  */
 class LocationValidationModel
@@ -9736,6 +9086,942 @@ class CommitMultiDocumentModel
      * @var boolean Set this value to be `true` to commit this transaction.     Committing a transaction allows it to be reported on a tax filing. Uncommitted transactions will not be reported.
      */
     public $commit;
+}
+/**
+ * An individual tax detail element. Represents the amount of tax calculated for a particular jurisdiction, for a particular line in an invoice.
+ */
+class TransactionLineDetailModel
+{
+    /**
+     * @var int The unique ID number of this tax detail.
+     */
+    public $id;
+    /**
+     * @var int The unique ID number of the line within this transaction.
+     */
+    public $transactionLineId;
+    /**
+     * @var int The unique ID number of this transaction.
+     */
+    public $transactionId;
+    /**
+     * @var int The unique ID number of the address used for this tax detail.
+     */
+    public $addressId;
+    /**
+     * @var string The two character ISO 3166 country code of the country where this tax detail is assigned.
+     */
+    public $country;
+    /**
+     * @var string The two-or-three character ISO region code for the region where this tax detail is assigned.
+     */
+    public $region;
+    /**
+     * @var string For U.S. transactions, the Federal Information Processing Standard (FIPS) code for the county where this tax detail is assigned.
+     */
+    public $countyFIPS;
+    /**
+     * @var string For U.S. transactions, the Federal Information Processing Standard (FIPS) code for the state where this tax detail is assigned.
+     */
+    public $stateFIPS;
+    /**
+     * @var float The amount of this line that was considered exempt in this tax detail.
+     */
+    public $exemptAmount;
+    /**
+     * @var int The unique ID number of the exemption reason for this tax detail.
+     */
+    public $exemptReasonId;
+    /**
+     * @var boolean True if this detail element represented an in-state transaction.
+     */
+    public $inState;
+    /**
+     * @var string The code of the jurisdiction to which this tax detail applies.
+     */
+    public $jurisCode;
+    /**
+     * @var string The name of the jurisdiction to which this tax detail applies.
+     */
+    public $jurisName;
+    /**
+     * @var int The unique ID number of the jurisdiction to which this tax detail applies.
+     */
+    public $jurisdictionId;
+    /**
+     * @var string The Avalara-specified signature code of the jurisdiction to which this tax detail applies.
+     */
+    public $signatureCode;
+    /**
+     * @var string The state assigned number of the jurisdiction to which this tax detail applies.
+     */
+    public $stateAssignedNo;
+    /**
+     * @var string DEPRECATED - Date: 12/20/2017, Version: 18.1, Message: Use jurisdictionTypeId instead.  The type of the jurisdiction to which this tax detail applies. (See JurisTypeId::* for a list of allowable values)
+     */
+    public $jurisType;
+    /**
+     * @var string The type of the jurisdiction in which this tax detail applies. (See JurisdictionType::* for a list of allowable values)
+     */
+    public $jurisdictionType;
+    /**
+     * @var float The amount of this line item that was considered nontaxable in this tax detail.
+     */
+    public $nonTaxableAmount;
+    /**
+     * @var int The rule according to which portion of this detail was considered nontaxable.
+     */
+    public $nonTaxableRuleId;
+    /**
+     * @var string The type of nontaxability that was applied to this tax detail. (See TaxRuleTypeId::* for a list of allowable values)
+     */
+    public $nonTaxableType;
+    /**
+     * @var float The rate at which this tax detail was calculated.
+     */
+    public $rate;
+    /**
+     * @var int The unique ID number of the rule according to which this tax detail was calculated.
+     */
+    public $rateRuleId;
+    /**
+     * @var int The unique ID number of the source of the rate according to which this tax detail was calculated.
+     */
+    public $rateSourceId;
+    /**
+     * @var string For Streamlined Sales Tax customers, the SST Electronic Return code under which this tax detail should be applied.
+     */
+    public $serCode;
+    /**
+     * @var string Indicates whether this tax detail applies to the origin or destination of the transaction. (See Sourcing::* for a list of allowable values)
+     */
+    public $sourcing;
+    /**
+     * @var float The amount of tax for this tax detail.
+     */
+    public $tax;
+    /**
+     * @var float The taxable amount of this tax detail.
+     */
+    public $taxableAmount;
+    /**
+     * @var string The type of tax that was calculated. Depends on the company's nexus settings as well as the jurisdiction's tax laws.
+     */
+    public $taxType;
+    /**
+     * @var string The id of the tax subtype.
+     */
+    public $taxSubTypeId;
+    /**
+     * @var string The id of the tax type group.
+     */
+    public $taxTypeGroupId;
+    /**
+     * @var string The name of the tax against which this tax amount was calculated.
+     */
+    public $taxName;
+    /**
+     * @var int The type of the tax authority to which this tax will be remitted.
+     */
+    public $taxAuthorityTypeId;
+    /**
+     * @var int The unique ID number of the tax region.
+     */
+    public $taxRegionId;
+    /**
+     * @var float The amount of tax that AvaTax calculated.  If an override for tax amount is used, there may be a difference between the tax  field which applies your override, and the this amount that is calculated without override.
+     */
+    public $taxCalculated;
+    /**
+     * @var float The amount of tax override that was specified for this tax line.
+     */
+    public $taxOverride;
+    /**
+     * @var string DEPRECATED - Date: 12/20/2017, Version: 18.1, Message: Please use rateTypeCode instead.  The rate type for this tax detail. (See RateType::* for a list of allowable values)
+     */
+    public $rateType;
+    /**
+     * @var string Indicates the code of the rate type that was used to calculate this tax detail. Use [ListRateTypesByCountry](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListRateTypesByCountry/) API for a full list of rate type codes.
+     */
+    public $rateTypeCode;
+    /**
+     * @var float Number of units in this line item that were calculated to be taxable according to this rate detail.
+     */
+    public $taxableUnits;
+    /**
+     * @var float Number of units in this line item that were calculated to be nontaxable according to this rate detail.
+     */
+    public $nonTaxableUnits;
+    /**
+     * @var float Number of units in this line item that were calculated to be exempt according to this rate detail.
+     */
+    public $exemptUnits;
+    /**
+     * @var string When calculating units, what basis of measurement did we use for calculating the units?
+     */
+    public $unitOfBasis;
+    /**
+     * @var boolean True if this value is a non-passthrough tax.     A non-passthrough tax is a tax that may not be charged to a customer; it must be paid directly by the company.
+     */
+    public $isNonPassThru;
+    /**
+     * @var boolean The Taxes/Fee component. True if the fee is applied.
+     */
+    public $isFee;
+    /**
+     * @var float Number of units in this line item that were calculated to be taxable according to this rate detail in the reporting currency.
+     */
+    public $reportingTaxableUnits;
+    /**
+     * @var float Number of units in this line item that were calculated to be nontaxable according to this rate detail in the reporting currency.
+     */
+    public $reportingNonTaxableUnits;
+    /**
+     * @var float Number of units in this line item that were calculated to be exempt according to this rate detail in the reporting currency.
+     */
+    public $reportingExemptUnits;
+    /**
+     * @var float The amount of tax for this tax detail in the reporting currency.
+     */
+    public $reportingTax;
+    /**
+     * @var float The amount of tax that AvaTax calculated in the reporting currency.  If an override for tax amount is used, there may be a difference between the tax  field which applies your override, and the this amount that is calculated without override.
+     */
+    public $reportingTaxCalculated;
+    /**
+     * @var string LiabilityType identifies the party liable to file the tax. This field is used to filter taxes from reports and tax filings as appropriate. (See LiabilityType::* for a list of allowable values)
+     */
+    public $liabilityType;
+}
+/**
+ * Represents information about location types stored in a line
+ */
+class TransactionLineLocationTypeModel
+{
+    /**
+     * @var int The unique ID number of this line location address model
+     */
+    public $documentLineLocationTypeId;
+    /**
+     * @var int The unique ID number of the document line associated with this line location address model
+     */
+    public $documentLineId;
+    /**
+     * @var int The address ID corresponding to this model
+     */
+    public $documentAddressId;
+    /**
+     * @var string The location type code corresponding to this model
+     */
+    public $locationTypeCode;
+}
+/**
+ * One line item on this transaction.
+ */
+class TransactionLineModel
+{
+    /**
+     * @var int The unique ID number of this transaction line item.
+     */
+    public $id;
+    /**
+     * @var int The unique ID number of the transaction to which this line item belongs.
+     */
+    public $transactionId;
+    /**
+     * @var string The line number or code indicating the line on this invoice or receipt or document.
+     */
+    public $lineNumber;
+    /**
+     * @var int The unique ID number of the boundary override applied to this line item.
+     */
+    public $boundaryOverrideId;
+    /**
+     * @var string DEPRECATED - Date: 10/16/2017, Version: 17.11, Message: Please use entityUseCode instead.  The customer usage type for this line item. Usage type often affects taxability rules.
+     */
+    public $customerUsageType;
+    /**
+     * @var string The entity use code for this line item. Usage type often affects taxability rules.
+     */
+    public $entityUseCode;
+    /**
+     * @var string A description of the item or service represented by this line.
+     */
+    public $description;
+    /**
+     * @var int The unique ID number of the destination address where this line was delivered or sold.  In the case of a point-of-sale transaction, the destination address and origin address will be the same.  In the case of a shipped transaction, they will be different.
+     */
+    public $destinationAddressId;
+    /**
+     * @var int The unique ID number of the origin address where this line was delivered or sold.  In the case of a point-of-sale transaction, the origin address and destination address will be the same.  In the case of a shipped transaction, they will be different.
+     */
+    public $originAddressId;
+    /**
+     * @var float The amount of discount that was applied to this line item. This represents the difference between list price and sale price of the item.  In general, a discount represents money that did not change hands; tax is calculated on only the amount of money that changed hands.
+     */
+    public $discountAmount;
+    /**
+     * @var int The type of discount, if any, that was applied to this line item.
+     */
+    public $discountTypeId;
+    /**
+     * @var float The amount of this line item that was exempt.
+     */
+    public $exemptAmount;
+    /**
+     * @var int The unique ID number of the exemption certificate that applied to this line item. It is the calc_id associated with a certificate in CertCapture.
+     */
+    public $exemptCertId;
+    /**
+     * @var string The CertCapture Certificate ID
+     */
+    public $certificateId;
+    /**
+     * @var string The customer Tax Id Number (tax_number) associated with a certificate - Sales tax calculation requests first determine if there is an applicable  ECMS entry available, and will utilize it for exemption processing. If no applicable ECMS entry is available, the AvaTax service  will determine if an Exemption Number field is populated or an Entity/Use Code is included in the sales tax calculation request,  and will perform exemption processing using either of those two options.
+     */
+    public $exemptNo;
+    /**
+     * @var boolean True if this item is taxable.
+     */
+    public $isItemTaxable;
+    /**
+     * @var boolean True if this item is a Streamlined Sales Tax line item.
+     */
+    public $isSSTP;
+    /**
+     * @var string The code string of the item represented by this line item.
+     */
+    public $itemCode;
+    /**
+     * @var float The total amount of the transaction, including both taxable and exempt. This is the total price for all items.  To determine the individual item price, divide this by quantity.
+     */
+    public $lineAmount;
+    /**
+     * @var float The quantity of products sold on this line item.
+     */
+    public $quantity;
+    /**
+     * @var string A user-defined reference identifier for this transaction line item.
+     */
+    public $ref1;
+    /**
+     * @var string A user-defined reference identifier for this transaction line item.
+     */
+    public $ref2;
+    /**
+     * @var string The date when this transaction should be reported. By default, all transactions are reported on the date when the actual transaction took place.  In some cases, line items may be reported later due to delayed shipments or other business reasons.
+     */
+    public $reportingDate;
+    /**
+     * @var string The revenue account number for this line item.
+     */
+    public $revAccount;
+    /**
+     * @var string Indicates whether this line item was taxed according to the origin or destination. (See Sourcing::* for a list of allowable values)
+     */
+    public $sourcing;
+    /**
+     * @var float The tax for this line in this transaction.     If you used a `taxOverride` of type `taxAmount` for this line, this value  will represent the amount of your override. AvaTax will still attempt to calculate the correct tax  for this line and will store that calculated value in the `taxCalculated` field.     You can compare the `tax` and `taxCalculated` fields to check for any discrepancies  between an external tax calculation provider and the calculation performed by AvaTax.
+     */
+    public $tax;
+    /**
+     * @var float The taxable amount of this line item.
+     */
+    public $taxableAmount;
+    /**
+     * @var float The amount of tax that AvaTax calculated for the transaction.     If you used a `taxOverride` of type `taxAmount`, there may be a difference between  the `tax` field which applies your override, and the `taxCalculated` field which  represents the amount of tax that AvaTax calculated without the override.     You can compare the `tax` and `taxCalculated` fields to check for any discrepancies  between an external tax calculation provider and the calculation performed by AvaTax.
+     */
+    public $taxCalculated;
+    /**
+     * @var string The code string for the tax code that was used to calculate this line item.
+     */
+    public $taxCode;
+    /**
+     * @var int The unique ID number for the tax code that was used to calculate this line item.
+     */
+    public $taxCodeId;
+    /**
+     * @var string The date that was used for calculating tax amounts for this line item. By default, this date should be the same as the document date.  In some cases, for example when a consumer returns a product purchased previously, line items may be calculated using a tax date in the past  so that the consumer can receive a refund for the correct tax amount that was charged when the item was originally purchased.
+     */
+    public $taxDate;
+    /**
+     * @var string The tax engine identifier that was used to calculate this line item.
+     */
+    public $taxEngine;
+    /**
+     * @var string If a tax override was specified, this indicates the type of tax override. (See TaxOverrideType::* for a list of allowable values)
+     */
+    public $taxOverrideType;
+    /**
+     * @var string VAT business identification number used for this transaction.
+     */
+    public $businessIdentificationNo;
+    /**
+     * @var float If a tax override was specified, this indicates the amount of tax that was requested.
+     */
+    public $taxOverrideAmount;
+    /**
+     * @var string If a tax override was specified, represents the reason for the tax override.
+     */
+    public $taxOverrideReason;
+    /**
+     * @var boolean Indicates whether the `amount` for this line already includes tax.     If this value is `true`, the final price of this line including tax will equal the value in `amount`.     If this value is `null` or `false`, the final price will equal `amount` plus whatever taxes apply to this line.
+     */
+    public $taxIncluded;
+    /**
+     * @var int DEPRECATED - Date: 04/15/2021, Version: 21.4, Message: Please use merchantSellerIdentifier instead.  ID of the merchant selling on the Marketplace. This field must be populated by Marketplace.
+     */
+    public $merchantSellerId;
+    /**
+     * @var string ID of the merchant selling on the Marketplace. This field must be populated by Marketplace.
+     */
+    public $merchantSellerIdentifier;
+    /**
+     * @var string This field will identify who is remitting Marketplace or Seller. This field must be populated by Marketplace. (See MarketplaceLiabilityType::* for a list of allowable values)
+     */
+    public $marketplaceLiabilityType;
+    /**
+     * @var string The transaction's original ID in its origination system
+     */
+    public $originationDocumentId;
+    /**
+     * @var string Synonym of Marketplace Origination. Name of the Marketplace where the transaction originated from.
+     */
+    public $originationSite;
+    /**
+     * @var TransactionLineDetailModel[] Optional: A list of tax details for this line item.     Tax details represent taxes being charged by various tax authorities. Taxes that appear in the `details` collection are intended to be  displayed to the customer and charged as a 'tax' on the invoice.     To fetch this list, add the query string `?$include=Details` to your URL.
+     */
+    public $details;
+    /**
+     * @var TransactionLineDetailModel[] Optional: A list of non-passthrough tax details for this line item.     Tax details represent taxes being charged by various tax authorities. Taxes that appear in the `nonPassthroughDetails` collection are  taxes that must be paid directly by the company and not shown to the customer.
+     */
+    public $nonPassthroughDetails;
+    /**
+     * @var TransactionLineLocationTypeModel[] Optional: A list of location types for this line item. To fetch this list, add the query string "?$include=LineLocationTypes" to your URL.
+     */
+    public $lineLocationTypes;
+    /**
+     * @var TransactionLineParameterModel[] Contains a list of extra parameters that were set when the transaction was created.
+     */
+    public $parameters;
+    /**
+     * @var TransactionLineUserDefinedFieldModel[] Custom user fields/flex fields for this transaction.
+     */
+    public $userDefinedFields;
+    /**
+     * @var string The cross-border harmonized system code (HSCode) used to calculate tariffs and duties for this line item.  For a full list of HS codes, see `ListCrossBorderCodes()`.
+     */
+    public $hsCode;
+    /**
+     * @var float Indicates the cost of insurance and freight for this line.
+     */
+    public $costInsuranceFreight;
+    /**
+     * @var string Indicates the VAT code for this line item.
+     */
+    public $vatCode;
+    /**
+     * @var int Indicates the VAT number type for this line item.
+     */
+    public $vatNumberTypeId;
+    /**
+     * @var TransactionLineTaxAmountByTaxTypeModel[] Contains a list of TaxType that are to be overridden with their respective TaxOverrideAmount.
+     */
+    public $taxAmountByTaxTypes;
+    /**
+     * @var string Deemed Supplier field indicates which party on the marketplace transaction is liable for collecting and reporting the VAT. This is based on the 2021 E-commerce legislative reforms in EU and UK. This field will not be used until after July 1, 2021. (See DeemedSellerType::* for a list of allowable values)
+     */
+    public $deemedSupplier;
+    /**
+     * @var string Product category breadcrumbs. This is the full path to the category where item is included. Categories should be separated by “ > “. Multiple category paths per item are accepted. In this case, category paths should be separated by “;”.
+     */
+    public $category;
+    /**
+     * @var string A long description of the product.
+     */
+    public $summary;
+}
+/**
+ * An address used within this transaction.
+ */
+class TransactionAddressModel
+{
+    /**
+     * @var int The unique ID number of this address.
+     */
+    public $id;
+    /**
+     * @var int The unique ID number of the document to which this address belongs.
+     */
+    public $transactionId;
+    /**
+     * @var string The boundary level at which this address was validated. (See BoundaryLevel::* for a list of allowable values)
+     */
+    public $boundaryLevel;
+    /**
+     * @var string The first line of the address.
+     */
+    public $line1;
+    /**
+     * @var string The second line of the address.
+     */
+    public $line2;
+    /**
+     * @var string The third line of the address.
+     */
+    public $line3;
+    /**
+     * @var string The city for the address.
+     */
+    public $city;
+    /**
+     * @var string The ISO 3166 region code. E.g., the second part of ISO 3166-2.
+     */
+    public $region;
+    /**
+     * @var string The postal code or zip code for the address.
+     */
+    public $postalCode;
+    /**
+     * @var string The ISO 3166 country code
+     */
+    public $country;
+    /**
+     * @var int The unique ID number of the tax region for this address.
+     */
+    public $taxRegionId;
+    /**
+     * @var string Latitude for this address
+     */
+    public $latitude;
+    /**
+     * @var string Longitude for this address
+     */
+    public $longitude;
+    /**
+     * @var JurisdictionModel[] List of all the qualified jurisdictions for the TaxRegionId.
+     */
+    public $jurisdictions;
+}
+/**
+ * Information about a location type
+ */
+class TransactionLocationTypeModel
+{
+    /**
+     * @var int Location type ID for this location type in transaction
+     */
+    public $documentLocationTypeId;
+    /**
+     * @var int Transaction ID
+     */
+    public $documentId;
+    /**
+     * @var int Address ID for the transaction
+     */
+    public $documentAddressId;
+    /**
+     * @var string Location type code
+     */
+    public $locationTypeCode;
+}
+/**
+ * Summary information about an overall transaction.
+ */
+class TransactionSummary
+{
+    /**
+     * @var string Two character ISO-3166 country code.
+     */
+    public $country;
+    /**
+     * @var string Two or three character ISO region, state or province code, if applicable.
+     */
+    public $region;
+    /**
+     * @var string The type of jurisdiction that collects this tax. (See JurisdictionType::* for a list of allowable values)
+     */
+    public $jurisType;
+    /**
+     * @var string Jurisdiction Code for the taxing jurisdiction
+     */
+    public $jurisCode;
+    /**
+     * @var string The name of the jurisdiction that collects this tax.
+     */
+    public $jurisName;
+    /**
+     * @var int The unique ID of the Tax Authority Type that collects this tax.
+     */
+    public $taxAuthorityType;
+    /**
+     * @var string The state assigned number of the jurisdiction that collects this tax.
+     */
+    public $stateAssignedNo;
+    /**
+     * @var string The tax type of this tax.
+     */
+    public $taxType;
+    /**
+     * @var string The tax subtype of this tax.
+     */
+    public $taxSubType;
+    /**
+     * @var string The name of the tax.
+     */
+    public $taxName;
+    /**
+     * @var string Group code when special grouping is enabled.
+     */
+    public $taxGroup;
+    /**
+     * @var string DEPRECATED - Date: 3/1/2018, Version: 18.3, Message: Please use rateTypeCode instead.  Indicates the tax rate type. (See RateType::* for a list of allowable values)
+     */
+    public $rateType;
+    /**
+     * @var string Indicates the code of the rate type. Use [ListRateTypesByCountry](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListRateTypesByCountry/) API for a full list of rate type codes.
+     */
+    public $rateTypeCode;
+    /**
+     * @var float Tax Base - The adjusted taxable amount.
+     */
+    public $taxable;
+    /**
+     * @var float Tax Rate - The rate of taxation, as a fraction of the amount.
+     */
+    public $rate;
+    /**
+     * @var float Tax amount - The calculated tax (Base * Rate).
+     */
+    public $tax;
+    /**
+     * @var float The amount of tax that AvaTax calculated for the transaction.     If you used a `taxOverride` of type `taxAmount`, there may be a difference between  the `tax` field which applies your override, and the `TaxCalculated` field which  represents the amount of tax that AvaTax calculated for this transaction without override.     You can use this for comparison.
+     */
+    public $taxCalculated;
+    /**
+     * @var float The amount of the transaction that was non-taxable.
+     */
+    public $nonTaxable;
+    /**
+     * @var float The amount of the transaction that was exempt.
+     */
+    public $exemption;
+}
+/**
+ * Tax Details by Tax subtype
+ */
+class TaxDetailsByTaxSubType
+{
+    /**
+     * @var string Tax subtype
+     */
+    public $taxSubType;
+    /**
+     * @var float Total taxable amount by tax type
+     */
+    public $totalTaxable;
+    /**
+     * @var float Total exempt by tax type
+     */
+    public $totalExempt;
+    /**
+     * @var float Total non taxable by tax type
+     */
+    public $totalNonTaxable;
+    /**
+     * @var float Total tax by tax type
+     */
+    public $totalTax;
+}
+/**
+ * Tax Details by Tax Type
+ */
+class TaxDetailsByTaxType
+{
+    /**
+     * @var string Tax Type
+     */
+    public $taxType;
+    /**
+     * @var float Total taxable amount by tax type
+     */
+    public $totalTaxable;
+    /**
+     * @var float Total exempt by tax type
+     */
+    public $totalExempt;
+    /**
+     * @var float Total non taxable by tax type
+     */
+    public $totalNonTaxable;
+    /**
+     * @var float Total tax by tax type
+     */
+    public $totalTax;
+    /**
+     * @var TaxDetailsByTaxSubType[] Tax subtype details
+     */
+    public $taxSubTypeDetails;
+}
+/**
+ * Represents a message to be displayed on an invoice.
+ */
+class InvoiceMessageModel
+{
+    /**
+     * @var string The content of the invoice message.
+     */
+    public $content;
+    /**
+     * @var string[] The applicable tax line numbers and codes.
+     */
+    public $lineNumbers;
+}
+/**
+ * This object represents a single transaction; for example, a sales invoice or purchase order.
+ */
+class TransactionModel
+{
+    /**
+     * @var int The unique ID number of this transaction.
+     */
+    public $id;
+    /**
+     * @var string A unique customer-provided code identifying this transaction.
+     */
+    public $code;
+    /**
+     * @var int The unique ID number of the company that recorded this transaction.
+     */
+    public $companyId;
+    /**
+     * @var string The date on which this transaction occurred.
+     */
+    public $date;
+    /**
+     * @var string DEPRECATED - Date: 07/25/2018, Version: 18.7, Message: This field is deprecated and will return null till its removed.  The date when payment was made on this transaction. By default, this should be the same as the date of the transaction.
+     */
+    public $paymentDate;
+    /**
+     * @var string The status of the transaction. (See DocumentStatus::* for a list of allowable values)
+     */
+    public $status;
+    /**
+     * @var string The type of the transaction.     Transactions of type `SalesOrder`, `ReturnOrder`, and so on are temporary estimates and will not be saved.     Transactions of type `SalesInvoice, `ReturnInvoice`, and so on are permanent transactions that can be reported to tax authorities  if they are in status `Committed`.     A sales transaction represents a sale from the company to a customer. A purchase transaction represents a purchase made by the company.  A return transaction represents a customer who decided to request a refund after purchasing a product from the company. An inventory  transfer transaction represents goods that were moved from one location of the company to another location without changing ownership. (See DocumentType::* for a list of allowable values)
+     */
+    public $type;
+    /**
+     * @var string If this transaction was created as part of a batch, this code indicates which batch.
+     */
+    public $batchCode;
+    /**
+     * @var string The three-character ISO 4217 currency code that was used for payment for this transaction.
+     */
+    public $currencyCode;
+    /**
+     * @var string The three-character ISO 4217 exchange rate currency code that was used for payment for this transaction.
+     */
+    public $exchangeRateCurrencyCode;
+    /**
+     * @var string DEPRECATED - Date: 10/16/2017, Version: 17.11, Message: Please use entityUseCode instead.  The customer usage type for this transaction. Customer usage types often affect exemption or taxability rules.
+     */
+    public $customerUsageType;
+    /**
+     * @var string The entity use code for this transaction. Entity use codes often affect exemption or taxability rules.
+     */
+    public $entityUseCode;
+    /**
+     * @var string DEPRECATED - Date: 3/1/2018, Version: 18.3, Message: Please use `customerCode`  This field has been renamed to `customerCode` to match documentation for other APIs related to exemption customers.
+     */
+    public $customerVendorCode;
+    /**
+     * @var string Unique code identifying the customer that requested this transaction.     When you specify a `customerCode`, AvaTax will look to see if a customer exists with this code in the exemption certificate system.  If that customer exists, and if that customer has uploaded an exemption certificate that applies to this transaction, the relevant  parts of this transaction that can use the exemption certificate will be treated as exempt.
+     */
+    public $customerCode;
+    /**
+     * @var string The customer Tax Id Number (tax_number) associated with a certificate - Sales tax calculation requests first determine if there is an applicable  ECMS entry available, and will utilize it for exemption processing. If no applicable ECMS entry is available, the AvaTax service  will determine if an Exemption Number field is populated or an Entity/Use Code is included in the sales tax calculation request,  and will perform exemption processing using either of those two options.
+     */
+    public $exemptNo;
+    /**
+     * @var boolean If this transaction has been reconciled against the company's ledger, this value is set to true.
+     */
+    public $reconciled;
+    /**
+     * @var string DEPRECATED - Date: 3/1/2018, Version: 18.3, Message: In order to ensure consistency of field names, Please use reportingLocationCode instead.  This field has been replaced by the reportingLocationCode field
+     */
+    public $locationCode;
+    /**
+     * @var string For customers who use [location-based tax reporting](https://developer.avalara.com/avatax/dev-guide/locations/location-based-reporting),  this field controls how this transaction will be filed for multi-location tax filings.     If you specify a non-null value for this field, AvaTax will ensure that this transaction is reported on the tax return associated  with the [LocationModel](https://developer.avalara.com/api-reference/avatax/rest/v2/models/LocationModel/) identified by this code.     This field does not affect any addresses for the transaction. It only controls the tax filing behavior of this transaction.     If you are looking for information about how to set up addresses for a transaction, please see [Using Address Types](https://developer.avalara.com/avatax/dev-guide/customizing-transaction/address-types/)  in the AvaTax Developer Guide.
+     */
+    public $reportingLocationCode;
+    /**
+     * @var string The customer-supplied purchase order number of this transaction.
+     */
+    public $purchaseOrderNo;
+    /**
+     * @var string A user-defined reference code for this transaction.
+     */
+    public $referenceCode;
+    /**
+     * @var string The salesperson who provided this transaction. Not required.
+     */
+    public $salespersonCode;
+    /**
+     * @var string If a tax override was applied to this transaction, indicates what type of tax override was applied. (See TaxOverrideType::* for a list of allowable values)
+     */
+    public $taxOverrideType;
+    /**
+     * @var float If a tax override was applied to this transaction, indicates the amount of tax that was requested by the customer.
+     */
+    public $taxOverrideAmount;
+    /**
+     * @var string If a tax override was applied to this transaction, indicates the reason for the tax override.
+     */
+    public $taxOverrideReason;
+    /**
+     * @var float The total amount of this transaction.
+     */
+    public $totalAmount;
+    /**
+     * @var float The amount of this transaction that was exempt.
+     */
+    public $totalExempt;
+    /**
+     * @var float The total amount of discounts applied to all lines within this transaction.
+     */
+    public $totalDiscount;
+    /**
+     * @var float The total tax for all lines in this transaction.     If you used a `taxOverride` of type `taxAmount` for any lines in this transaction, this value  may be different than the amount of tax calculated by AvaTax. The amount of tax calculated by  AvaTax will be stored in the `totalTaxCalculated` field, whereas this field will contain the  total tax that was charged on the transaction.     You can compare the `totalTax` and `totalTaxCalculated` fields to check for any discrepancies  between an external tax calculation provider and the calculation performed by AvaTax.
+     */
+    public $totalTax;
+    /**
+     * @var float The portion of the total amount of this transaction that was taxable.
+     */
+    public $totalTaxable;
+    /**
+     * @var float The amount of tax that AvaTax calculated for the transaction.     If you used a `taxOverride` of type `taxAmount` for any lines in this transaction, this value  will represent the amount that AvaTax calculated for this transaction without applying the override.  The field `totalTax` will be the total amount of tax after all overrides are applied.     You can compare the `totalTax` and `totalTaxCalculated` fields to check for any discrepancies  between an external tax calculation provider and the calculation performed by AvaTax.
+     */
+    public $totalTaxCalculated;
+    /**
+     * @var string If this transaction was adjusted, indicates the unique ID number of the reason why the transaction was adjusted. (See AdjustmentReason::* for a list of allowable values)
+     */
+    public $adjustmentReason;
+    /**
+     * @var string If this transaction was adjusted, indicates a description of the reason why the transaction was adjusted.
+     */
+    public $adjustmentDescription;
+    /**
+     * @var boolean If this transaction has been reported to a tax authority, this transaction is considered locked and may not be adjusted after reporting.
+     */
+    public $locked;
+    /**
+     * @var string The two-or-three character ISO region code of the region for this transaction.
+     */
+    public $region;
+    /**
+     * @var string The two-character ISO 3166 code of the country for this transaction.
+     */
+    public $country;
+    /**
+     * @var int If this transaction was adjusted, this indicates the version number of this transaction. Incremented each time the transaction  is adjusted.
+     */
+    public $version;
+    /**
+     * @var string The software version used to calculate this transaction.
+     */
+    public $softwareVersion;
+    /**
+     * @var int The unique ID number of the origin address for this transaction.
+     */
+    public $originAddressId;
+    /**
+     * @var int The unique ID number of the destination address for this transaction.
+     */
+    public $destinationAddressId;
+    /**
+     * @var string If this transaction included foreign currency exchange, this is the date as of which the exchange rate was calculated.
+     */
+    public $exchangeRateEffectiveDate;
+    /**
+     * @var float If this transaction included foreign currency exchange, this is the exchange rate that was used.
+     */
+    public $exchangeRate;
+    /**
+     * @var boolean By default, the value is null, when the value is null, the value can be set at nexus level and used.  If the value is not null, it will override the value at nexus level.     If true, this seller was considered the importer of record of a product shipped internationally.     If this transaction is not an international transaction, this field may be left blank.     The "importer of record" is liable to pay customs and import duties for products shipped internationally. If  you specify that the seller is the importer of record, then estimates of customs and import duties will be added  as tax details to the transaction. Otherwise, the buyer is considered the importer of record, and customs  and import duties will not be added to the tax details for this transaction.
+     */
+    public $isSellerImporterOfRecord;
+    /**
+     * @var string Description of this transaction. Field permits unicode values.
+     */
+    public $description;
+    /**
+     * @var string Email address associated with this transaction.
+     */
+    public $email;
+    /**
+     * @var string VAT business identification number used for this transaction.
+     */
+    public $businessIdentificationNo;
+    /**
+     * @var string The date/time when this record was last modified.
+     */
+    public $modifiedDate;
+    /**
+     * @var int The user ID of the user who last modified this record.
+     */
+    public $modifiedUserId;
+    /**
+     * @var string Tax date for this transaction
+     */
+    public $taxDate;
+    /**
+     * @var TransactionLineModel[] A list of line items in this transaction. To fetch this list, add the query string `?$include=Lines` or `?$include=Details` to your URL.
+     */
+    public $lines;
+    /**
+     * @var TransactionAddressModel[] A list of line items in this transaction. To fetch this list, add the query string `?$include=Addresses` to your URL.     For more information about transaction addresses, please see [Using Address Types](https://developer.avalara.com/avatax/dev-guide/customizing-transaction/address-types/)  in the AvaTax Developer Guide.
+     */
+    public $addresses;
+    /**
+     * @var TransactionLocationTypeModel[] A list of location types in this transaction. To fetch this list, add the query string `?$include=Addresses` to your URL.
+     */
+    public $locationTypes;
+    /**
+     * @var TransactionSummary[] Contains a summary of tax on this transaction.
+     */
+    public $summary;
+    /**
+     * @var TaxDetailsByTaxType[] Contains the tax details per tax type
+     */
+    public $taxDetailsByTaxType;
+    /**
+     * @var TransactionParameterModel[] Contains a list of extra parameters that were set when the transaction was created.
+     */
+    public $parameters;
+    /**
+     * @var TransactionUserDefinedFieldModel[] Custom user fields/flex fields for this transaction.
+     */
+    public $userDefinedFields;
+    /**
+     * @var AvaTaxMessage[] List of informational and warning messages regarding this API call. These messages are only relevant to the current API call.
+     */
+    public $messages;
+    /**
+     * @var InvoiceMessageModel[] Invoice messages associated with this document. Currently, this stores legally-required VAT messages.
+     */
+    public $invoiceMessages;
+    /**
+     * @var string The name of the supplier / exporter / seller.  For sales doctype this will be the name of your own company for which you are reporting.  For purchases doctype this will be the name of the supplier you have purchased from.
+     */
+    public $customerSupplierName;
+    /**
+     * @var int The Id of the datasource from which this transaction originated.  This value will be overridden by the system to take the datasource Id from the call header.
+     */
+    public $dataSourceId;
+    /**
+     * @var string The Delivery Terms is a field used in conjunction with Importer of Record to influence whether AvaTax includes Import Duty and Tax values in the transaction totals or not.  Delivered at Place (DAP) and Delivered Duty Paid (DDP) are two delivery terms that indicate that Import Duty and Tax should be included in the transaction total.  This field is also used for reports.  This field is used for future feature support. This field is not currently in use. (See DeliveryTerms::* for a list of allowable values)
+     */
+    public $deliveryTerms;
 }
 /**
  * A MultiDocument transaction represents a sale or purchase that occurred between more than two companies.
@@ -9900,13 +10186,21 @@ class MultiDocumentLineItemModel
      */
     public $parameters;
     /**
+     * @var TransactionLineUserDefinedFieldModel[] Custom user fields/flex fields for this line.
+     */
+    public $userDefinedFields;
+    /**
      * @var string The Item code for Custom Duty / Global Import tax determination  Harmonized Tariff System code for this transaction.     For a list of harmonized tariff codes, see the Definitions API for harmonized tariff codes.
      */
     public $hsCode;
     /**
-     * @var int ID of the merchant selling on the Marketplace. This field must be populated by Marketplace.
+     * @var int DEPRECATED - Date: 04/15/2021, Version: 21.4, Message: Please use merchantSellerIdentifier instead.  ID of the merchant selling on the Marketplace. This field must be populated by Marketplace.
      */
     public $merchantSellerId;
+    /**
+     * @var string ID of the merchant selling on the Marketplace. This field must be populated by Marketplace.
+     */
+    public $merchantSellerIdentifier;
     /**
      * @var string This field will identify who is remitting Marketplace or Seller. This field must be populated by Marketplace. (See MarketplaceLiabilityType::* for a list of allowable values)
      */
@@ -9919,6 +10213,14 @@ class MultiDocumentLineItemModel
      * @var string Synonym of Marketplace Origination. Name of the Marketplace where the transaction originated from.
      */
     public $originationSite;
+    /**
+     * @var string Product category breadcrumbs. This is the full path to the category where item is included. Categories should be separated by “ > “. Multiple category paths per item are accepted. In this case, category paths should be separated by “;”.
+     */
+    public $category;
+    /**
+     * @var string A long description of the product.
+     */
+    public $summary;
 }
 /**
  * A MultiDocument transaction represents a sale or purchase that occurred between more than two companies.
@@ -9991,6 +10293,10 @@ class CreateMultiDocumentModel
      */
     public $parameters;
     /**
+     * @var TransactionUserDefinedFieldModel[] Custom user fields/flex fields for this transaction.
+     */
+    public $userDefinedFields;
+    /**
      * @var string Customer-provided Reference Code with information about this transaction.     This field could be used to reference the original document for a return invoice, or for any other  reference purpose.
      */
     public $referenceCode;
@@ -10062,6 +10368,10 @@ class CreateMultiDocumentModel
      * @var int The Id of the datasource from which this transaction originated.  This value will be overridden by the system to take the datasource Id from the call header.
      */
     public $dataSourceId;
+    /**
+     * @var string The Delivery Terms is a field used in conjunction with Importer of Record to influence whether AvaTax includes Import Duty and Tax values in the transaction totals or not.  Delivered at Place (DAP) and Delivered Duty Paid (DDP) are two delivery terms that indicate that Import Duty and Tax should be included in the transaction total.  This field is also used for reports.  This field is used for future feature support. This field is not currently in use. (See DeliveryTerms::* for a list of allowable values)
+     */
+    public $deliveryTerms;
 }
 /**
  * Replace an existing MultiDocument transaction recorded in AvaTax with a new one.
@@ -10705,6 +11015,42 @@ class NoticeModel
     public $modifiedUserId;
 }
 /**
+ * Model to create a new tax notice responsibility type.
+ */
+class CreateNoticeResponsibilityTypeModel
+{
+    /**
+     * @var string The description name of this notice responsibility
+     */
+    public $description;
+    /**
+     * @var boolean Defines if the responsibility is active
+     */
+    public $isActive;
+    /**
+     * @var int The sort order of this responsibility
+     */
+    public $sortOrder;
+}
+/**
+ * Model to create a new tax notice root cause type.
+ */
+class CreateNoticeRootCauseTypeModel
+{
+    /**
+     * @var string The description name of this notice RootCause
+     */
+    public $description;
+    /**
+     * @var boolean Defines if the RootCause is active
+     */
+    public $isActive;
+    /**
+     * @var int The sort order of this RootCause
+     */
+    public $sortOrder;
+}
+/**
  * Encapsulates the result of uploading a file to the resource system
  */
 class ResourceFileUploadResultModel
@@ -10877,14 +11223,6 @@ class ExportDocumentLineModel
      */
     public $docType;
     /**
-     * @var string Format of dates in your rendered report. Example: "MM/dd/yyyy"
-     */
-    public $dateFormat;
-    /**
-     * @var string In which culture your report is produced with. Example: "en-US"
-     */
-    public $culture;
-    /**
      * @var string The currency your report is displayed in. Example: "USD"
      */
     public $currencyCode;
@@ -10901,9 +11239,9 @@ class ExportDocumentLineModel
      */
     public $isLocked;
     /**
-     * @var int If set, include only documents associated with this merchantSellerId.
+     * @var string If set, include only documents associated with this merchantSellerId.
      */
-    public $merchantSellerId;
+    public $merchantSellerIdentifier;
 }
 /**
  * The output model for report parameter definitions
@@ -10959,7 +11297,7 @@ class ReportParametersModel
      */
     public $isLocked;
     /**
-     * @var int If set, include only documents associated with this merchantSellerId.
+     * @var string If set, include only documents associated with this merchantSellerId.
      */
     public $merchantSellerId;
 }

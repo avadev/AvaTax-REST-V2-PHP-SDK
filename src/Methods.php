@@ -2296,25 +2296,6 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
-     * API to modify the reference fields at the document and the line level.
-     *
-     * 
-     *
-     * 
-     * @param int $companyId 
-     * @param TransactionReferenceFieldModel[] $model 
-     * @return FetchResult
-     */
-    public function tagTransaction($companyId, $model)    {
-        $path = "/api/v2/companies/{$companyId}/transactions/tag";
-        $guzzleParams = [
-            'query' => [],
-            'body' => json_encode($model)
-        ];
-        return $this->restCall($path, 'PUT', $guzzleParams);
-    }
-
-    /**
      * Create a new contact
      *
      * Create one or more new contact objects.
@@ -3291,6 +3272,29 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Retrieve the full list of Avalara-supported usage of extra parameters for classification of a item.
+     *
+     * Returns the full list of Avalara-supported usage of extra parameters for item classification.
+     * The list of parameters is available for use with Item Classification.
+     * Some parameters are only available for use if you have subscribed to certain features of AvaTax.
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* values
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listClassificationParametersUsage($filter=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/definitions/classification/parametersusage";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * Retrieve the full list of communications service types
      *
      * Returns full list of service types for a given transaction type ID.
@@ -4059,7 +4063,16 @@ class AvaTaxClient extends AvaTaxClientBase
     /**
      * Retrieve the parameters by companyCode and itemCode.
      *
-     * Returns the list of parameters based on the company country and state jurisdiction and the item code.
+     * Returns the list of parameters based on the company's service types and the item code.
+     * Ignores nexus if a service type is configured in the 'IgnoreNexusForServiceTypes' configuration section.
+     * Ignores nexus for the AvaAlcohol service type.
+     *  
+     * NOTE: If your company code or item code contains any of these characters /, +, ? or a space, please use the following encoding before making a request:
+     * * Replace '/' with '\_-ava2f-\_' For example: 'Company/Code' becomes 'Company_-ava2f-_Code'
+     * * Replace '+' with '\_-ava2b-\_' For example: 'Company+Code' becomes 'Company_-ava2b-_Code'
+     * * Replace '?' with '\_-ava3f-\_' For example: 'Company?Code' becomes 'Company_-ava3f-_Code'
+     * * Replace '%' with '\_-ava25-\_' For example: 'Company%Code' becomes 'Company_-ava25-_Code'
+     * * Replace '#' with '\_-ava23-\_' For example: 'Company#Code' becomes 'Company_-ava23-_Code'
      * 
      * ### Security Policies
      * 
@@ -4208,6 +4221,14 @@ class AvaTaxClient extends AvaTaxClientBase
      *  
      * Tax authorities use product classification systems as a way to identify products and associate them with a tax rate.
      * More than one tax authority might use the same product classification system, but they might charge different tax rates for products.
+     *  
+     *  
+     * NOTE: If your company code contains any of these characters /, +, ? or a space, please use the following encoding before making a request:
+     * * Replace '/' with '\_-ava2f-\_' For example: 'Company/Code' becomes 'Company_-ava2f-_Code'
+     * * Replace '+' with '\_-ava2b-\_' For example: 'Company+Code' becomes 'Company_-ava2b-_Code'
+     * * Replace '?' with '\_-ava3f-\_' For example: 'Company?Code' becomes 'Company_-ava3f-_Code'
+     * * Replace '%' with '\_-ava25-\_' For example: 'Company%Code' becomes 'Company_-ava25-_Code'
+     * * Replace '#' with '\_-ava23-\_' For example: 'Company#Code' becomes 'Company_-ava23-_Code'
      *
      * 
      * @param string $companyCode The company code.
@@ -4320,6 +4341,29 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Retrieve the full list of Avalara-supported usage of parameters used for returns.
+     *
+     * Returns the full list of Avalara-supported usage of extra parameters for the returns.
+     * This list of parameters is available for use with Returns.
+     * Some parameters are only available for use if you have subscribed to certain features of AvaTax.
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* values
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listReturnsParametersUsage($filter=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/definitions/returns/parametersusage";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * Retrieve the full list of Avalara-supported permissions
      *
      * Returns the full list of Avalara-supported permission types.
@@ -4359,6 +4403,27 @@ class AvaTaxClient extends AvaTaxClientBase
      */
     public function listSubscriptionTypes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/subscriptiontypes";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve the list all tags supported by avalara
+     *
+     * Retrieves the list of suggested locations for a marketplace.
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listTags($filter=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/definitions/tags";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
@@ -5260,6 +5325,37 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Bulk upload items from a product catalog
+     *
+     * Create/Update one or more item objects attached to this company.
+     *  
+     * Items are a way of separating your tax calculation process from your tax configuration details. If you choose, you
+     * can provide `itemCode` values for each `CreateTransaction()` API call rather than specifying tax codes, parameters, descriptions,
+     * and other data fields. AvaTax will automatically look up each `itemCode` and apply the correct tax codes and parameters
+     * from the item table instead. This allows your CreateTransaction call to be as simple as possible, and your tax compliance
+     * team can manage your item catalog and adjust the tax behavior of items without having to modify your software.
+     *  
+     * The tax code takes precedence over the tax code id if both are provided.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns this items.
+     * @param ItemBulkUploadInputModel $model The items you wish to upload.
+     * @return ItemBulkUploadOutputModel
+     */
+    public function bulkUploadItems($companyId, $model)    {
+        $path = "/api/v2/companies/{$companyId}/items/upload";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
      * Add classifications to an item.
      *
      * Add classifications to an item.
@@ -5347,6 +5443,32 @@ class AvaTaxClient extends AvaTaxClientBase
      */
     public function createItems($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/items";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Create tags for a item
+     *
+     * Creates one or more new `Tag` objects attached to this Item.
+     *  
+     * Item tags puts multiple labels for an item. So that item can be easily grouped by these tags.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
+     *
+     * 
+     * @param int $companyId The ID of the company that defined these items
+     * @param int $itemId The ID of the item as defined by the company that owns this tag.
+     * @param ItemTagDetailModel[] $model Tags you wish to associate with the Item
+     * @return ItemTagDetailModel[]
+     */
+    public function createItemTags($companyId, $itemId, $model)    {
+        $path = "/api/v2/companies/{$companyId}/items/{$itemId}/tags";
         $guzzleParams = [
             'query' => [],
             'body' => json_encode($model)
@@ -5444,6 +5566,57 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Delete item tag by id
+     *
+     * Deletes the `Tag` object of an Item at this URL.
+     *  
+     * Item tags puts multiple labels for an item. So that item can be easily grouped by these tags.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
+     *
+     * 
+     * @param int $companyId The ID of the company that defined these items
+     * @param int $itemId The ID of the item as defined by the company that owns this tag.
+     * @param int $itemTagDetailId The ID of the item tag detail you wish to delete.
+     * @return ErrorDetail[]
+     */
+    public function deleteItemTag($companyId, $itemId, $itemTagDetailId)    {
+        $path = "/api/v2/companies/{$companyId}/items/{$itemId}/tags/{$itemTagDetailId}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Delete all item tags
+     *
+     * Deletes all `Tags` objects of an Item at this URL.
+     *  
+     * Item tags puts multiple labels for an item. So that item can be easily grouped by these tags.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
+     *
+     * 
+     * @param int $companyId The ID of the company that defined these items.
+     * @param int $itemId The ID of the item as defined by the company that owns this tag.
+     * @return ErrorDetail[]
+     */
+    public function deleteItemTags($companyId, $itemId)    {
+        $path = "/api/v2/companies/{$companyId}/items/{$itemId}/tags";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
      * Retrieve a single item
      *
      * Get the `Item` object identified by this URL.
@@ -5532,6 +5705,34 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Retrieve tags for an item
+     *
+     * Get the `Tag` objects of an Item identified by this URL.
+     *  
+     * Item tags puts multiple labels for an item. So that item can be easily grouped by these tags.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $companyId The ID of the company that defined these items
+     * @param int $itemId The ID of the item as defined by the company that owns this tag.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* tagName
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @return FetchResult
+     */
+    public function getItemTags($companyId, $itemId, $filter=null, $top=null, $skip=null)    {
+        $path = "/api/v2/companies/{$companyId}/items/{$itemId}/tags";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * Retrieve classifications for an item.
      *
      * List classifications for an item.
@@ -5586,7 +5787,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The company id
      * @param int $itemId The item id
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* name, unit
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* name, unit, isNeededForCalculation, isNeededForReturns, isNeededForClassification
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -5627,7 +5828,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * 
      * @param int $companyId The ID of the company that defined these items
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxCode, classifications, parameters
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxCode, classifications, parameters, tags
      * @param string $include A comma separated list of additional data to retrieve.
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
@@ -5663,7 +5864,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      *
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxCode, classifications, parameters
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxCode, classifications, parameters, tags
      * @param string $include A comma separated list of additional data to retrieve.
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
@@ -5672,6 +5873,44 @@ class AvaTaxClient extends AvaTaxClientBase
      */
     public function queryItems($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/items";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all items associated with given tag
+     *
+     * Get multiple item objects associated with given tag.
+     *  
+     * Items are a way of separating your tax calculation process from your tax configuration details. If you choose, you
+     * can provide `itemCode` values for each `CreateTransaction()` API call rather than specifying tax codes, parameters, descriptions,
+     * and other data fields. AvaTax will automatically look up each `itemCode` and apply the correct tax codes and parameters
+     * from the item table instead. This allows your CreateTransaction call to be as simple as possible, and your tax compliance
+     * team can manage your item catalog and adjust the tax behavior of items without having to modify your software.
+     *  
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     *  
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $companyId The ID of the company that defined these items.
+     * @param string $tag The master tag to be associated with item.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxCode, classifications, parameters, tags
+     * @param string $include A comma separated list of additional data to retrieve.
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function queryItemsByTag($companyId, $tag, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/companies/{$companyId}/items/bytags/{$tag}";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
@@ -7309,6 +7548,96 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Creates a new tax notice responsibility type.
+     *
+     * This API is available by invitation only and only available for users with Compliance admin access.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services:*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param CreateNoticeResponsibilityTypeModel $model The responsibility type to create
+     * @return NoticeResponsibilityModel
+     */
+    public function createNoticeResponsibilityType($model)    {
+        $path = "/api/v2/notices/responsibilities";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Creates a new tax notice root cause type.
+     *
+     * This API is available by invitation only and only available for users with Compliance admin access.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services:*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param CreateNoticeRootCauseTypeModel $model The root cause type to create
+     * @return NoticeRootCauseModel
+     */
+    public function createNoticeRootCauseType($model)    {
+        $path = "/api/v2/notices/rootcauses";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams);
+    }
+
+    /**
+     * Delete a tax notice responsibility type.
+     *
+     * This API is available by invitation only and only available for users with Compliance admin access.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     *
+     * 
+     * @param int $responsibilityId The unique ID of the responsibility type
+     * @return ErrorDetail[]
+     */
+    public function deleteNoticeResponsibilityType($responsibilityId)    {
+        $path = "/api/v2/notices/responsibilities/{$responsibilityId}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Delete a tax notice root cause type.
+     *
+     * This API is available by invitation only and only available for users with Compliance admin access.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     *
+     * 
+     * @param int $rootCauseId The unique ID of the root cause type
+     * @return ErrorDetail[]
+     */
+    public function deleteNoticeRootCauseType($rootCauseId)    {
+        $path = "/api/v2/notices/rootcauses/{$rootCauseId}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
      * Mark a single notification as dismissed.
      *
      * Marks the notification identified by this URL as dismissed.
@@ -7778,7 +8107,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Check the status of a report by calling `GetReport` and passing in the report's `id` value.
      * * When a report's status is `Completed`, call `DownloadReport` to retrieve the file.
      *  
-     * This API works for all report types.
+     * * We throttle this API. You can only call this API up to 5 times in a minute.
      * 
      * ### Security Policies
      * 
@@ -7915,6 +8244,11 @@ class AvaTaxClient extends AvaTaxClientBase
      * A setting can refer to any type of data you need to remember about this company object.
      * When creating this object, you may define your own `set`, `name`, and `value` parameters.
      * To define your own values, please choose a `set` name that begins with `X-` to indicate an extension.
+     *  
+     * Use Set = Transactions, Name = TaxCodePrioritization/HSCodePrioritization and Value = Transaction/ItemMaster for prioritizing which TaxCodes/HsCodes should be used for calculating taxes.
+     *  
+     * Example: To prioritize TaxCodes passed in a Transaction over values stored with Items when calculating tax, use
+     * Set = Transactions, Name = TaxCodePrioritization, Value = Transaction
      * 
      * ### Security Policies
      * 
@@ -8021,7 +8355,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * 
      * @param int $companyId The ID of the company that owns these settings
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* modifiedDate, ModifiedUserId
      * @param string $include A comma separated list of additional data to retrieve.
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
@@ -8059,7 +8393,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      *
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* modifiedDate, ModifiedUserId
      * @param string $include A comma separated list of additional data to retrieve.
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
@@ -9490,7 +9824,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $companyCode The company code of the company that recorded this transaction
      * @param int $dataSourceId Optionally filter transactions to those from a specific data source.
      * @param string $include Specifies objects to include in this fetch call
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* exchangeRateCurrencyCode, totalDiscount, lines, addresses, locationTypes, summary, taxDetailsByTaxType, parameters, messages, invoiceMessages, isFakeTransaction
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* exchangeRateCurrencyCode, totalDiscount, lines, addresses, locationTypes, summary, taxDetailsByTaxType, parameters, userDefinedFields, messages, invoiceMessages, isFakeTransaction, deliveryTerms
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -10217,7 +10551,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $accountId The accountID of the user you wish to list.
      * @param string $include Optional fetch commands.
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* SuppressNewUserEmail
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -10256,7 +10590,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * 
      * @param string $include Optional fetch commands.
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* SuppressNewUserEmail
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
