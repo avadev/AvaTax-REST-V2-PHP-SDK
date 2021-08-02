@@ -29,6 +29,18 @@ class TransactionAddressType
 /**
  * 
  */
+class TssAccountMigrationId
+{    const C_BOTHWITHOUTROLLBACKREADFROMSQL = 0;
+    const C_BOTHWITHROLLBACKREADFROMTSS = 1;
+    const C_SQLONLY = 2;
+    const C_TSSONLY = 3;
+    const C_READONLY = 4;
+
+}
+
+/**
+ * 
+ */
 class TextCase
 {    const C_UPPER = 0;
     const C_MIXED = 1;
@@ -1197,6 +1209,7 @@ class NoticeCustomerType
     const C_TRUSTFILE = 5;
     const C_PWC = 6;
     const C_HUDSONGROUP = 7;
+    const C_MRA = 8;
 
 }
 

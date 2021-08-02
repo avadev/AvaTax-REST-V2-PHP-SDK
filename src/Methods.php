@@ -3164,6 +3164,27 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * List all market place locations.
+     *
+     * List all market place locations.
+     *
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listAllMarketplaceLocations($filter=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/definitions/listallmarketplacelocations";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * Retrieve the full list of the AvaFile Forms available
      *
      * This API is deprecated.
@@ -5821,6 +5842,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *  
      * * Parameters
      * * Classifications
+     * * Tags
      * 
      * ### Security Policies
      * 
@@ -7969,6 +7991,26 @@ class AvaTaxClient extends AvaTaxClientBase
             'body' => null
         ];
         return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Retrieve List of Accounts by Account Migration Status
+     *
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
+     *
+     * 
+     * @param string $writeMode  (See TssAccountMigrationId::* for a list of allowable values)
+     * @return AccountMigrationStatusModel
+     */
+    public function listAccountsByTssWriteMode($writeMode)    {
+        $path = "/api/v2/accounts/ListAccountsByTssWriteMode/{$writeMode}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
     }
 
     /**
