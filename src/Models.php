@@ -231,6 +231,32 @@ class ErrorDetail
     public $severity;
 }
 /**
+ * An AvaTax account.
+ */
+class AccountMigrationStatusModel
+{
+    /**
+     * @var int The unique ID number assigned to this account.
+     */
+    public $accountId;
+    /**
+     * @var string The name of this account.
+     */
+    public $accountName;
+    /**
+     * @var string The date/time when this record was last modified.
+     */
+    public $modifiedDate;
+    /**
+     * @var int The user ID of the user who last modified this record.
+     */
+    public $modifiedUserId;
+    /**
+     * @var int The Tss Read Write Mode.
+     */
+    public $accountMigrationStatusId;
+}
+/**
  * Company Address Information
  */
 class CompanyAddress
@@ -6495,6 +6521,20 @@ class MarketplaceLocationModel
     public $modifiedDate;
 }
 /**
+ * Marketplace Location Output model
+ */
+class MarketplaceModel
+{
+    /**
+     * @var string Marketplace Location Id
+     */
+    public $marketplaceId;
+    /**
+     * @var string Marketplace Location
+     */
+    public $marketplace;
+}
+/**
  * Represents a tag for an item in your company's product catalog.
  */
 class TagsModel
@@ -8259,6 +8299,10 @@ class FilingReturnModel
      */
     public $year;
     /**
+     * @var string The FilingTaskType for this return.
+     */
+    public $type;
+    /**
      * @var FilingAttachmentModel[] The attachments for this return.
      */
     public $attachments;
@@ -8606,6 +8650,10 @@ class MultiTaxFilingReturnModel
      * @var string The end date of this return
      */
     public $endPeriod;
+    /**
+     * @var string The FilingTaskType for this return.
+     */
+    public $type;
     /**
      * @var FilingsTaxSummaryModel A summary of all taxes compbined for this period
      */
