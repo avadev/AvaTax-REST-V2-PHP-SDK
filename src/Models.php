@@ -1263,6 +1263,10 @@ class ItemTagDetailModel
      * @var int The unique ID number of the company that owns this item.
      */
     public $companyId;
+    /**
+     * @var string The date when this record was created.
+     */
+    public $createdDate;
 }
 /**
  * Represents an item in your company's product catalog.
@@ -1639,6 +1643,10 @@ class NexusModel
      * @var int The user ID of the user who last modified this record.     This field is defined automatically when you declare nexus. You do not need to provide a value for this field.
      */
     public $modifiedUserId;
+    /**
+     * @var string The type group of nexus that this company is declaring  Use [ListTaxTypeGroups](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListTaxTypeGroups/) API for a list of nexus tax type groups.     This field is defined by Avalara. All Avalara-defined fields must match an Avalara-defined nexus object found by calling `ListNexus`.  NOTE: This optional field will trigger nexus subtype lookup when populated. When using make sure TaxTypeGroup matches corresponding NexusTaxTypeGroup
+     */
+    public $taxTypeGroup;
     /**
      * @var string The type of nexus that this company is declaring.Replaces NexusTypeId.  Use [ListNexusTaxTypeGroups](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListNexusTaxTypeGroups/) API for a list of nexus tax type groups.     This field is defined by Avalara. All Avalara-defined fields must match an Avalara-defined nexus object found by calling `ListNexus`.
      */
@@ -3229,6 +3237,24 @@ class BatchAdjustTransactionModel
     public $newTransaction;
 }
 /**
+ * Create or adjust transaction model
+ */
+class CreateOrAdjustTransactionModel
+{
+    /**
+     * @var string A reason code indicating why this adjustment was made (See AdjustmentReason::* for a list of allowable values)
+     */
+    public $adjustmentReason;
+    /**
+     * @var string If the AdjustmentReason is "Other", specify the reason here.     This is required when the AdjustmentReason is 8 (Other).
+     */
+    public $adjustmentDescription;
+    /**
+     * @var CreateTransactionModel The create transaction model to be created or updated.     If the transaction does not exist, create transaction.  If the transaction exists, adjust the existing transaction.
+     */
+    public $createTransactionModel;
+}
+/**
  * A request to void a previously created transaction.
  */
 class BatchVoidTransactionModel
@@ -3257,6 +3283,10 @@ class BatchVoidTransactionModel
 class TransactionBatchItemModel
 {
     /**
+     * @var string Represents a transaction memo.
+     */
+    public $memo;
+    /**
      * @var CreateTransactionModel Represents a transaction to be created.
      */
     public $createTransactionModel;
@@ -3264,6 +3294,10 @@ class TransactionBatchItemModel
      * @var BatchAdjustTransactionModel Represents an existing transaction to be adjusted.
      */
     public $adjustTransactionModel;
+    /**
+     * @var CreateOrAdjustTransactionModel Represents a transaction to be created or to be adjusted if exists.
+     */
+    public $createOrAdjustTransactionModel;
     /**
      * @var BatchVoidTransactionModel Represents an existing transaction to be voided.
      */
@@ -11632,24 +11666,6 @@ class BulkLockTransactionResult
     public $numberOfRecords;
 }
 /**
- * Create or adjust transaction model
- */
-class CreateOrAdjustTransactionModel
-{
-    /**
-     * @var string A reason code indicating why this adjustment was made (See AdjustmentReason::* for a list of allowable values)
-     */
-    public $adjustmentReason;
-    /**
-     * @var string If the AdjustmentReason is "Other", specify the reason here.     This is required when the AdjustmentReason is 8 (Other).
-     */
-    public $adjustmentDescription;
-    /**
-     * @var CreateTransactionModel The create transaction model to be created or updated.     If the transaction does not exist, create transaction.  If the transaction exists, adjust the existing transaction.
-     */
-    public $createTransactionModel;
-}
-/**
  * This model contains a reconstructed CreateTransaction request object that could potentially be used
  * to recreate this transaction.
  *  
@@ -11737,7 +11753,7 @@ class RemoveTransactionLineModel
      */
     public $documentType;
     /**
-     * @var string[] List of lines to be added
+     * @var string[] List of line numbers to be removed
      */
     public $lines;
     /**
