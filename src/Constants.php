@@ -540,6 +540,16 @@ class ErrorCodeId
     const C_OBJECTDELETED = 2660;
     const C_ASSOCIATEDOBJECTSDELETED = 2661;
     const C_CANNOTDOWNLOADREPORT = 2700;
+    const C_INVALIDUNITOFBASIS = 2800;
+    const C_NOTAPPLICABLEUNITOFBASIS = 2801;
+    const C_INVALIDRATETYPETAXTYPEMAPPING = 2802;
+    const C_INVALIDTAXTYPEGROUP = 2803;
+    const C_INVALIDTAXSUBTYPE = 2804;
+    const C_INVALIDPRODUCTTYPEID = 2805;
+    const C_INVALIDTAXRULETYPE = 2806;
+    const C_INVALIDHSCODE = 2807;
+    const C_NOTAPPLICABLETAXTYPE = 2808;
+    const C_INVALIDTAXTYPECODE = 2809;
 
 }
 
@@ -662,6 +672,19 @@ class MatchingTaxType
     const C_LODGING = 6;
     const C_BOTTLE = 7;
     const C_RENTTOOWN = 8;
+    const C_BIKETAX = 11;
+    const C_LANDEDCOST = 12;
+    const C_CHECKOUTBAG = 13;
+    const C_ALCOHOL = 17;
+    const C_AMUSEMENT = 20;
+    const C_HOSPITALITY = 21;
+    const C_RENTALLEASING = 23;
+    const C_GROSSRECEIPTS = 24;
+    const C_MATTRESS = 25;
+    const C_LUMBER = 27;
+    const C_PAINT = 28;
+    const C_TIRES = 29;
+    const C_EI = 30;
     const C_ALL = 65;
     const C_BOTHSALESANDUSETAX = 66;
     const C_CONSUMERUSETAX = 67;
@@ -1276,6 +1299,7 @@ class ReportFormat
  */
 class ReportDateFilter
 {    const C_DOCUMENTDATE = 68;
+    const C_MODIFIEDDATE = 77;
     const C_PAYMENTDATE = 80;
     const C_REPORTINGDATE = 82;
     const C_TAXDATE = 84;
