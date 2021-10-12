@@ -3624,6 +3624,37 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * List jurisdictions based on the TaxType, TaxSubType and RateType provided
+     *
+     * Returns a list of all Avalara-supported taxing jurisdictions filtered by TaxType, TaxSubType and RateType.
+     *  
+     * This API allows you to examine all Avalara-supported jurisdictions. You can filter your search by supplying
+     * SQL-like query for fetching only the ones you concerned about. For example: effectiveDate > '2016-01-01'
+     *  
+     * The jurisdictionType, effectiveDate, and endDate are filterable fields available on the JurisdictionRateTypeTaxTypeMappingModels returned by this API.
+     *
+     * 
+     * @param string $country The country for which you want to retrieve the jurisdiction information
+     * @param string $region The region for which you want to retrieve the jurisdiction information
+     * @param string $taxTypeId The taxtype for which you want to retrieve the jurisdiction information
+     * @param string $taxSubTypeId The taxsubtype for which you want to retrieve the jurisdiction information
+     * @param string $rateTypeId The ratetype for which you want to retrieve the jurisdiction information
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* id, country, state, jurisdictionCode, longName, taxTypeId, taxSubTypeId, taxTypeGroupId, rateTypeId
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listJurisdictionsByRateTypeTaxTypeMapping($country, $region, $taxTypeId, $taxSubTypeId, $rateTypeId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/definitions/jurisdictions/countries/{$country}/regions/{$region}/taxtypes/{$taxTypeId}/taxsubtypes/{$taxSubTypeId}";
+        $guzzleParams = [
+            'query' => ['rateTypeId' => $rateTypeId, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * Retrieve the list of questions that are required for a tax location
      *
      * Returns the list of additional questions you must answer when declaring a location in certain taxing jurisdictions.
@@ -3833,6 +3864,30 @@ class AvaTaxClient extends AvaTaxClientBase
         $path = "/api/v2/definitions/nexus/byform/{$formCode}";
         $guzzleParams = [
             'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve the full list of Avalara-supported nexus for a tax type group.
+     *
+     * Returns all Avalara-supported nexus for the specified specified tax type group.
+     *  
+     * This API is intended to be useful if your user interface needs to display a selectable list of nexus filtered by tax type group.
+     *
+     * 
+     * @param string $taxTypeGroup The tax type group to fetch the supporting system nexus for.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* streamlinedSalesTax, isSSTActive, taxTypeGroup, taxAuthorityId, taxName, parameters, taxableNexus
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listNexusByTaxTypeGroup($taxTypeGroup, $filter=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/definitions/nexus/bytaxtypegroup/{$taxTypeGroup}";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
@@ -4293,6 +4348,31 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Retrieve the list of rate types by country, TaxType and by TaxSubType
+     *
+     * Returns the list of Avalara-supported rate type file types
+     * This API is intended to be useful to identify all the different rate types.
+     *
+     * 
+     * @param string $country The country to examine for rate types
+     * @param string $taxTypeId The taxType for the country to examine for rate types
+     * @param string $taxSubTypeId The taxSubType for the country and taxType to examine for rate types
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* id, rateType, description
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listRateTypesByCountryTaxTypeTaxSubType($country, $taxTypeId, $taxSubTypeId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/definitions/countries/{$country}/taxtypes/{$taxTypeId}/taxsubtypes/{$taxSubTypeId}/ratetypes";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * List all ISO 3166 regions
      *
      * Returns a list of all ISO 3166 region codes and their US English friendly names.
@@ -4615,6 +4695,54 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Retrieve the full list of tax sub types by Country and TaxType
+     *
+     * Returns the full list of Avalara-supported tax sub-types
+     * This API is intended to be useful to identify all the different tax sub-types for given country and TaxType.
+     *
+     * 
+     * @param string $country The country to examine for taxsubtype
+     * @param string $taxTypeId The taxType for the country to examine for taxsubtype
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listTaxSubTypesByCountryAndTaxType($country, $taxTypeId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/definitions/taxsubtypes/countries/{$country}/taxtypes/{$taxTypeId}";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve the full list of tax sub types by jurisdiction code and region
+     *
+     * Returns the full list of Avalara-supported tax sub-types by jurisdiction and region
+     * This API is intended to be useful to identify all the different tax sub-types.
+     *
+     * 
+     * @param string $jurisdictionCode The jurisdiction code of the tax sub type.
+     * @param string $region The region of the tax sub type.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listTaxSubTypesByJurisdictionAndRegion($jurisdictionCode, $region, $filter=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/definitions/taxsubtypes/{$jurisdictionCode}/{$region}";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * Retrieve the full list of tax type groups
      *
      * Returns the full list of Avalara-supported tax type groups
@@ -4631,6 +4759,52 @@ class AvaTaxClient extends AvaTaxClientBase
         $path = "/api/v2/definitions/taxtypegroups";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve the list of applicable TaxTypes
+     *
+     * Retrieves the list of applicable TaxTypes based on Nexus of the company.
+     *
+     * 
+     * @param string $country The country for which you want to retrieve the unitofbasis information
+     * @param int $companyId Your companyId to retrieve the applicable taxtypes
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listTaxTypesByNexusAndCountry($country, $companyId, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/definitions/taxtypes/countries/{$country}";
+        $guzzleParams = [
+            'query' => ['companyId' => $companyId, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
+     * Retrieve the list of applicable UnitOfBasis
+     *
+     * Retrieves the list of applicable UnitOfBasis
+     *
+     * 
+     * @param string $country The country for which you want to retrieve the unitofbasis information
+     * @param string $taxTypeId The taxtype for which you want to retrieve the unitofbasis information
+     * @param string $taxSubTypeId The taxsubtype for which you want to retrieve the unitofbasis information
+     * @param string $rateTypeId The ratetype for which you want to retrieve the unitofbasis information
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listUnitOfBasisByCountryAndTaxTypeAndTaxSubTypeAndRateType($country, $taxTypeId, $taxSubTypeId, $rateTypeId, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/definitions/unitofbasis/countries/{$country}/taxtypes/{$taxTypeId}/taxsubtypes/{$taxSubTypeId}";
+        $guzzleParams = [
+            'query' => ['rateTypeId' => $rateTypeId, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams);
@@ -4932,6 +5106,35 @@ class AvaTaxClient extends AvaTaxClientBase
             'body' => null
         ];
         return $this->restCall($path, 'DELETE', $guzzleParams);
+    }
+
+    /**
+     * Retrieve all legacy filing calendars for this company
+     *
+     * This API is available by invitation only.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services:*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns these batches
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxAuthorityId, taxAuthorityName, taxAuthorityType, settings
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @param string $returnCountry A comma separated list of countries
+     * @param string $returnRegion A comma separated list of regions
+     * @return FetchResult
+     */
+    public function legacyFilingCalendars($companyId, $filter=null, $top=null, $skip=null, $orderBy=null, $returnCountry, $returnRegion)    {
+        $path = "/api/v2/companies/{$companyId}/filingcalendars/Legacy";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy, 'returnCountry' => $returnCountry, 'returnRegion' => $returnRegion],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
     }
 
     /**
@@ -7429,6 +7632,44 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Retrieve nexus for this company By TaxTypeGroup
+     *
+     * List all nexus objects defined for this company filtered by TaxTypeGroup.
+     *  
+     * The concept of Nexus indicates a place where your company is legally obligated to collect and remit transactional
+     * taxes. The legal requirements for nexus may vary per country and per jurisdiction; please seek advice from your
+     * accountant or lawyer prior to declaring nexus.
+     *  
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     * You may specify one or more of the following values in the '$include' parameter to fetch additional nested data, using commas to separate multiple values:
+     *  
+     *  * Parameters
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     *
+     * 
+     * @param int $companyId The ID of the company that owns these nexus objects
+     * @param string $taxTypeGroup Name of TaxTypeGroup to filter by
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* streamlinedSalesTax, isSSTActive, taxTypeGroup, taxAuthorityId, taxName, parameters, taxableNexus
+     * @param string $include A comma separated list of additional data to retrieve.
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return FetchResult
+     */
+    public function listNexusByCompanyAndTaxTypeGroup($companyId, $taxTypeGroup, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/companies/{$companyId}/nexus/byTaxTypeGroup/{$taxTypeGroup}";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams);
+    }
+
+    /**
      * Retrieve parameters for a nexus
      *
      * List parameters for a nexus.
@@ -9122,7 +9363,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * 
      * @param int $companyId The ID of the company that owns these tax rules
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxCode, rateTypeCode, taxTypeGroup, taxSubType
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxCode, taxTypeCode, taxRuleProductDetail, rateTypeCode, taxTypeGroup, taxSubType, unitOfBasis
      * @param string $include A comma separated list of additional data to retrieve.
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
@@ -9163,7 +9404,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      *
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxCode, rateTypeCode, taxTypeGroup, taxSubType
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxCode, taxTypeCode, taxRuleProductDetail, rateTypeCode, taxTypeGroup, taxSubType, unitOfBasis
      * @param string $include A comma separated list of additional data to retrieve.
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
