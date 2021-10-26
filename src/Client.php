@@ -177,8 +177,24 @@ class AvaTaxClientBase
                 'X-Avalara-Client' => "{$this->appName}; {$this->appVersion}; PhpRestClient; 21.9.0; {$this->machineName}"
             ];
         }
-        // timeout for 1200s (20 min)
-        $guzzleParams['timeout'] = 1200;
+
+        // Check the client config, if set - update guzzleParams['timeout'] 
+        if (isset($this->client->getConfig()['timeout']) ) {
+            $guzzleParams['timeout'] = $this->client->getConfig()['timeout'];
+        }
+        // Set default 1200 second timeout, if guzzleParams['timeout'] is not set
+        if (!isset($guzzleParams['timeout'])) {
+            $guzzleParams['timeout'] = 1200;
+        }
+
+        // Check the client config, if set - update guzzleParams['connect_timeout'] 
+        if (isset($this->client->getConfig()['connect_timeout'])) {
+            $guzzleParams['connect_timeout'] = $this->client->getConfig()['connect_timeout'];
+        }
+        // Set default 1200 second timeout, if guzzleParams['connect_timeout'] is not set
+        if (!isset($guzzleParams['connect_timeout'])) {
+            $guzzleParams['connect_timeout'] = 1200;
+        }
         
         // Contact the server
         try {
