@@ -1881,7 +1881,7 @@ class TaxRuleModel
      */
     public $entityUseCode;
     /**
-     * @var string DEPRECATED - Date: , Version: , Message: Please use `taxTypeCode`  Some tax type groups contain multiple different types of tax. To create a rule that affects only one  type of tax within a tax type group, set this value to the code matching the specific tax type within  that group. The custom tax rule will then only apply to taxes calculated for that specific type.     For rules that affect all tax types, use the value `A` to match `All` tax types within that group. (See MatchingTaxType::* for a list of allowable values)
+     * @var string DEPRECATED - Date: 09/30/2021, Version: 21.9.0, Message: Please use `taxTypeCode` instead.  Some tax type groups contain multiple different types of tax. To create a rule that affects only one  type of tax within a tax type group, set this value to the code matching the specific tax type within  that group. The custom tax rule will then only apply to taxes calculated for that specific type.     For rules that affect all tax types, use the value `A` to match `All` tax types within that group. (See MatchingTaxType::* for a list of allowable values)
      */
     public $taxTypeId;
     /**
@@ -4461,6 +4461,14 @@ class DenormalizedJurisModel
      * @var string The jurisdiction's city.  This should exist on the TaxRegion, but in practice often doesn't.
      */
     public $city;
+    /**
+     * @var boolean Is Acm flag
+     */
+    public $isAcm;
+    /**
+     * @var boolean Is Sst flag
+     */
+    public $isSst;
 }
 /**
  * The tax region model.
