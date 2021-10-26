@@ -178,13 +178,21 @@ class AvaTaxClientBase
             ];
         }
 
-        // Set a default 1200 second timeout if it's not set in the client or directly passed in
-        if (!isset($this->client->getConfig()['timeout']) && !isset($guzzleParams['timeout'])) {
+        // Check the client config, if set - update guzzleParams['timeout'] 
+        if (isset($this->client->getConfig()['timeout']) ) {
+            $guzzleParams['timeout'] = $this->client->getConfig()['timeout'];
+        }
+        // Set default 1200 second timeout, if guzzleParams['timeout'] is not set
+        if (!isset($guzzleParams['timeout'])) {
             $guzzleParams['timeout'] = 1200;
         }
 
-        // Set a default 1200 second connect_timeout if it's not set in the client or directly passed in
-        if (!isset($this->client->getConfig()['connect_timeout']) && !isset($guzzleParams['connect_timeout'])) {
+        // Check the client config, if set - update guzzleParams['connect_timeout'] 
+        if (isset($this->client->getConfig()['connect_timeout'])) {
+            $guzzleParams['connect_timeout'] = $this->client->getConfig()['connect_timeout'];
+        }
+        // Set default 1200 second timeout, if guzzleParams['connect_timeout'] is not set
+        if (!isset($guzzleParams['connect_timeout'])) {
             $guzzleParams['connect_timeout'] = 1200;
         }
         
