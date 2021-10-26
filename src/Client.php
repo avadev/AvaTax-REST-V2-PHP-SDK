@@ -177,13 +177,13 @@ class AvaTaxClientBase
                 'X-Avalara-Client' => "{$this->appName}; {$this->appVersion}; PhpRestClient; 21.9.0; {$this->machineName}"
             ];
         }
-        
-        // Set a default 30 second timeout if it's not set in the client or directly passed in
+
+        // Set a default 1200 second timeout if it's not set in the client or directly passed in
         if (!isset($this->client->getConfig()['timeout']) && !isset($guzzleParams['timeout'])) {
             $guzzleParams['timeout'] = 1200;
         }
 
-        // Set a default 30 second connect_timeout if it's not set in the client or directly passed in
+        // Set a default 1200 second connect_timeout if it's not set in the client or directly passed in
         if (!isset($this->client->getConfig()['connect_timeout']) && !isset($guzzleParams['connect_timeout'])) {
             $guzzleParams['connect_timeout'] = 1200;
         }
