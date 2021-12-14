@@ -228,7 +228,6 @@ class AvaTaxClientBase
             }
 
         } catch (\Exception $e) {
-            echo "in excpetion";
             if (!$this->catchExceptions) {
                 throw $e;
             }
