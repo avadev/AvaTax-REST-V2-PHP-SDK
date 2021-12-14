@@ -27,6 +27,7 @@ class TransactionAddressType
 
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class TssAccountMigrationId
@@ -39,6 +40,7 @@ class TssAccountMigrationId
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class TextCase
@@ -48,6 +50,7 @@ class TextCase
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class DocumentType
@@ -68,6 +71,7 @@ class DocumentType
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class CertificatePreviewType
@@ -77,6 +81,7 @@ class CertificatePreviewType
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class FilingFrequencyId
@@ -92,6 +97,7 @@ class FilingFrequencyId
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class FilingStatusId
@@ -116,6 +122,7 @@ class FilingStatusId
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class PointOfSaleFileType
@@ -126,6 +133,7 @@ class PointOfSaleFileType
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class PointOfSalePartnerId
@@ -135,6 +143,17 @@ class PointOfSalePartnerId
 }
 
 /**
+ * Swagger Name: AvaTaxClient
+ * 
+ */
+class UserDefinedFieldType
+{    const C_DOCUMENT = 1;
+    const C_LINE = 2;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class SecurityRoleId
@@ -167,6 +186,7 @@ class SecurityRoleId
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class PasswordStatusId
@@ -177,6 +197,7 @@ class PasswordStatusId
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class AccountStatusId
@@ -188,6 +209,7 @@ class AccountStatusId
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class AccountTypeId
@@ -198,6 +220,7 @@ class AccountTypeId
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class ErrorCodeId
@@ -557,6 +580,7 @@ class ErrorCodeId
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class SeverityLevel
@@ -568,6 +592,7 @@ class SeverityLevel
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class JurisdictionType
@@ -580,6 +605,7 @@ class JurisdictionType
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class ResolutionQuality
@@ -599,6 +625,7 @@ class ResolutionQuality
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class AddressTypeId
@@ -609,6 +636,7 @@ class AddressTypeId
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class AddressCategoryId
@@ -624,6 +652,7 @@ class AddressCategoryId
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class JurisTypeId
@@ -636,6 +665,7 @@ class JurisTypeId
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class NexusTypeId
@@ -648,6 +678,7 @@ class NexusTypeId
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class Sourcing
@@ -658,6 +689,7 @@ class Sourcing
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class LocalNexusTypeId
@@ -668,6 +700,7 @@ class LocalNexusTypeId
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class MatchingTaxType
@@ -709,6 +742,7 @@ class MatchingTaxType
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class RateType
@@ -732,6 +766,7 @@ class RateType
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class TaxRuleTypeId
@@ -749,6 +784,7 @@ class TaxRuleTypeId
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class ExemptCertTypeId
@@ -758,6 +794,7 @@ class ExemptCertTypeId
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class ExemptCertStatusId
@@ -769,6 +806,7 @@ class ExemptCertStatusId
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class ExemptCertReviewStatusId
@@ -779,6 +817,7 @@ class ExemptCertReviewStatusId
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class RoundingLevelId
@@ -788,6 +827,7 @@ class RoundingLevelId
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class TaxDependencyLevelId
@@ -799,6 +839,7 @@ class TaxDependencyLevelId
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class FormTypeId
@@ -816,6 +857,7 @@ class FormTypeId
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class FilingOptionTypeId
@@ -826,6 +868,7 @@ class FilingOptionTypeId
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class DueDateTypeId
@@ -836,6 +879,7 @@ class DueDateTypeId
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class RoundingTypeId
@@ -847,6 +891,7 @@ class RoundingTypeId
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class OutletTypeId
@@ -858,6 +903,7 @@ class OutletTypeId
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class BatchType
@@ -879,6 +925,7 @@ class BatchType
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class BatchStatus
@@ -896,6 +943,7 @@ class BatchStatus
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class TaxOverrideType
@@ -911,6 +959,7 @@ class TaxOverrideType
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class MarketplaceLiabilityType
@@ -920,6 +969,7 @@ class MarketplaceLiabilityType
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class ServiceMode
@@ -930,6 +980,7 @@ class ServiceMode
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class TaxDebugLevel
@@ -939,6 +990,7 @@ class TaxDebugLevel
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class DeliveryTerms
@@ -948,6 +1000,7 @@ class DeliveryTerms
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class AdjustmentReason
@@ -965,6 +1018,7 @@ class AdjustmentReason
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class VoidReasonCode
@@ -977,6 +1031,7 @@ class VoidReasonCode
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class CertificateRequestDeliveryMethod
@@ -987,6 +1042,7 @@ class CertificateRequestDeliveryMethod
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class CertExpressInvitationStatus
@@ -996,6 +1052,7 @@ class CertExpressInvitationStatus
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class CertCaptureProvisionStatus
@@ -1006,6 +1063,7 @@ class CertCaptureProvisionStatus
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class CompanyFilingStatus
@@ -1020,6 +1078,7 @@ class CompanyFilingStatus
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class Visibility
@@ -1031,6 +1090,7 @@ class Visibility
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class ScraperType
@@ -1040,6 +1100,7 @@ class ScraperType
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class BoundaryLevel
@@ -1050,6 +1111,7 @@ class BoundaryLevel
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class AvataxDeleteErrorTransactionStatus
@@ -1059,6 +1121,7 @@ class AvataxDeleteErrorTransactionStatus
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class FilingTypeId
@@ -1073,6 +1136,7 @@ class FilingTypeId
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class BulkAccountValidationStatus
@@ -1083,6 +1147,7 @@ class BulkAccountValidationStatus
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class FilingRequestStatus
@@ -1099,6 +1164,7 @@ class FilingRequestStatus
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class AccrualType
@@ -1108,6 +1174,7 @@ class AccrualType
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class AdjustmentPeriodTypeId
@@ -1118,6 +1185,7 @@ class AdjustmentPeriodTypeId
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class PaymentAccountTypeId
@@ -1129,6 +1197,7 @@ class PaymentAccountTypeId
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class PaymentType
@@ -1140,6 +1209,7 @@ class PaymentType
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class WorksheetTypeId
@@ -1150,6 +1220,7 @@ class WorksheetTypeId
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class FirmClientLinkageStatus
@@ -1161,6 +1232,7 @@ class FirmClientLinkageStatus
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class LiabilityType
@@ -1170,6 +1242,7 @@ class LiabilityType
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class DeemedSellerType
@@ -1179,6 +1252,7 @@ class DeemedSellerType
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class DocumentStatus
@@ -1195,6 +1269,7 @@ class DocumentStatus
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class RefundType
@@ -1206,6 +1281,7 @@ class RefundType
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class ApiCallStatus
@@ -1216,6 +1292,7 @@ class ApiCallStatus
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class CommentType
@@ -1227,6 +1304,7 @@ class CommentType
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class NoticeCustomerType
@@ -1243,6 +1321,7 @@ class NoticeCustomerType
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class TaxNoticeFilingTypeId
@@ -1260,6 +1339,7 @@ class TaxNoticeFilingTypeId
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class FundingOption
@@ -1269,6 +1349,7 @@ class FundingOption
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class NoticePriorityId
@@ -1280,6 +1361,7 @@ class NoticePriorityId
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class NotificationSeverityLevel
@@ -1291,6 +1373,7 @@ class NotificationSeverityLevel
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class ReportFormat
@@ -1299,6 +1382,7 @@ class ReportFormat
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class ReportDateFilter
@@ -1311,6 +1395,7 @@ class ReportDateFilter
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class ReportDocType
@@ -1320,6 +1405,7 @@ class ReportDocType
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class SendSalesOutputFileFormat
@@ -1330,6 +1416,7 @@ class SendSalesOutputFileFormat
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class SendSalesFileType
@@ -1339,6 +1426,19 @@ class SendSalesFileType
 }
 
 /**
+ * Swagger Name: AvaTaxClient
+ * 
+ */
+class UserDefinedFieldDataType
+{    const C_STRING = 0;
+    const C_NUMBER = 1;
+    const C_DATE = 2;
+    const C_BOOLEAN = 3;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class CompanyAccessLevel
@@ -1351,6 +1451,7 @@ class CompanyAccessLevel
 }
 
 /**
+ * Swagger Name: AvaTaxClient
  * 
  */
 class AuthenticationTypeId
@@ -1358,6 +1459,20 @@ class AuthenticationTypeId
     const C_USERNAMEPASSWORD = 1;
     const C_ACCOUNTIDLICENSEKEY = 2;
     const C_OPENIDBEARERTOKEN = 3;
+
+}
+
+/**
+ * Swagger Name: AvaTaxBeverageClient
+ * 
+ */
+class AgeVerifyFailureCode
+{    const C_NOT_FOUND = 0;
+    const C_DOB_UNVERIFIABLE = 1;
+    const C_UNDER_AGE = 2;
+    const C_SUSPECTED_FRAUD = 3;
+    const C_DECEASED = 4;
+    const C_UNKNOWN_ERROR = 5;
 
 }
 ?>
