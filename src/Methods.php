@@ -41,7 +41,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the account you wish to update.
      * @param ResetLicenseKeyModel $model A request confirming that you wish to reset the license key of this account.
@@ -53,7 +53,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -73,7 +73,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the account to activate
      * @param ActivateAccountModel $model The activation request
@@ -85,7 +85,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -109,7 +109,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the account you wish to audit.
      * @param string $start The start datetime of audit history you with to retrieve, e.g. "2018-06-08T17:00:00Z". Defaults to the past 15 minutes.
@@ -124,7 +124,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['start' => $start, 'end' => $end, '$top' => $top, '$skip' => $skip],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -144,7 +144,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the account you wish to update.
      * @param AccountLicenseKeyModel $model 
@@ -156,7 +156,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -171,7 +171,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the account you wish to update.
      * @param string $licensekeyname The license key name you wish to update.
@@ -183,7 +183,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams);
+        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -198,7 +198,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the account to retrieve
      * @param string $include A comma separated list of special fetch options
@@ -210,7 +210,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -232,7 +232,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id 
      * @return AccountConfigurationModel[]
@@ -243,7 +243,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -252,7 +252,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the account to retrieve
      * @param string $licensekeyname The ID of the account to retrieve
@@ -264,7 +264,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -275,7 +275,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the account to retrieve
      * @return AccountLicenseKeyModel[]
@@ -286,7 +286,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -308,7 +308,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $include A comma separated list of objects to fetch underneath this account. Any object with a URL path underneath this account can be fetched by specifying its name.
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* subscriptions, users
@@ -323,7 +323,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -345,7 +345,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id 
      * @param AccountConfigurationModel[] $model 
@@ -357,7 +357,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -379,7 +379,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AutoAddress.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $line1 Line 1
      * @param string $line2 Line 2
@@ -397,7 +397,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['line1' => $line1, 'line2' => $line2, 'line3' => $line3, 'city' => $city, 'region' => $region, 'postalCode' => $postalCode, 'country' => $country, 'textCase' => $textCase],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -414,7 +414,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AutoAddress.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param AddressValidationInfo $model The address to resolve
      * @return AddressResolutionModel
@@ -425,14 +425,14 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
      * Create a lookup file for a company
      *
      * 
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $accountId The ID of the account for the company
      * @param int $companyId The ID of the company for which the lookup file is to be created
@@ -445,14 +445,14 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
      * Delete a lookup file
      *
      * 
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $accountId The ID of the account for the company the lookup file is for
      * @param string $id The unique ID/GUID for the company lookup file to be deleted
@@ -464,14 +464,14 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams);
+        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
     }
 
     /**
      * Get the lookup files for a company
      *
      * 
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $accountId The account ID for the company
      * @param int $companyId The ID of the company for which to retrieve lookup files
@@ -483,14 +483,14 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
      * Get a lookup file for an accountId and companyLookupFileId
      *
      * 
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $accountId The ID of the account for the lookup file
      * @param string $id The unique ID/GUID of the company lookup file to return
@@ -502,14 +502,14 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
      * Update a lookup file
      *
      * 
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $accountId The ID of the account for the company the lookup file is for
      * @param string $id The unique ID/GUID of the company lookup file to be updated
@@ -522,7 +522,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams);
+        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -535,7 +535,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires the user role Compliance Root User.
      * * This API depends on the following active services:*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param AvaFileFormModel[] $model The AvaFileForm you wish to create.
      * @return AvaFileFormModel[]
@@ -546,7 +546,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -558,7 +558,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: Compliance Root User, ComplianceUser, FirmAdmin.
      * * This API depends on the following active services:*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the AvaFileForm you wish to delete.
      * @return ErrorDetail[]
@@ -569,7 +569,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams);
+        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -581,7 +581,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, CompanyAdmin, CompanyUser, Compliance Root User, Compliance Temp User, ComplianceAdmin, ComplianceUser, FirmAdmin, FirmUser, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin.
      * * This API depends on the following active services:*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id The primary key of this AvaFileForm
      * @return AvaFileFormModel
@@ -592,7 +592,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -605,7 +605,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, CompanyAdmin, CompanyUser, Compliance Root User, Compliance Temp User, ComplianceAdmin, ComplianceUser, FirmAdmin, FirmUser, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin.
      * * This API depends on the following active services:*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* outletTypeId
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -619,7 +619,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -632,7 +632,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires the user role Compliance Root User.
      * * This API depends on the following active services:*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the AvaFileForm you wish to update
      * @param AvaFileFormModel $model The AvaFileForm model you wish to update.
@@ -644,7 +644,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams);
+        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -666,7 +666,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, CompanyAdmin, CSPTester, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this batch.
      * @param int $id The ID of the batch to cancel.
@@ -678,7 +678,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -707,7 +707,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, CompanyAdmin, CSPTester, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this batch.
      * @param BatchModel[] $model The batch you wish to create.
@@ -719,7 +719,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -746,7 +746,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, CompanyAdmin, CSPTester, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this batch.
      * @param CreateTransactionBatchRequestModel $model The transaction batch you wish to create.
@@ -758,7 +758,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -778,7 +778,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: CSPAdmin, CSPTester, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this batch.
      * @param int $id The ID of the batch to delete.
@@ -790,7 +790,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams);
+        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -801,7 +801,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this batch
      * @param int $batchId The ID of the batch object
@@ -814,7 +814,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -839,7 +839,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this batch
      * @param int $id The primary key of this batch
@@ -851,7 +851,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -882,7 +882,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns these batches
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* files
@@ -898,7 +898,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -926,7 +926,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* files
      * @param string $include A comma separated list of additional data to retrieve.
@@ -941,7 +941,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -967,7 +967,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that will record certificates
      * @param string $customerCode The number of the customer where the request is sent to
@@ -980,7 +980,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -1006,7 +1006,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that issued this invitation
      * @param string $customerCode The number of the customer where the request is sent to
@@ -1020,7 +1020,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -1046,7 +1046,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that issued this invitation
      * @param string $include OPTIONAL: A comma separated list of special fetch options.      No options are defined at this time.
@@ -1062,7 +1062,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -1094,7 +1094,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID number of the company recording this certificate
      * @param boolean $preValidatedExemptionReason If set to true, the certificate will bypass the human verification process.
@@ -1107,7 +1107,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$preValidatedExemptionReason' => $preValidatedExemptionReason],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -1131,7 +1131,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded this certificate
      * @param int $id The unique ID number of this certificate
@@ -1143,7 +1143,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams);
+        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -1168,7 +1168,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded this certificate
      * @param int $id The unique ID number of this certificate
@@ -1182,7 +1182,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$page' => $page, '$type' => $type],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -1210,7 +1210,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID number of the company that recorded this certificate
      * @param int $id The unique ID number of this certificate
@@ -1223,7 +1223,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -1241,7 +1241,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The company ID to check
      * @return ProvisionStatusModel
@@ -1252,7 +1252,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -1277,7 +1277,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded this certificate
      * @param int $id The unique ID number of this certificate
@@ -1290,7 +1290,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -1316,7 +1316,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded this certificate
      * @param int $id The unique ID number of this certificate
@@ -1329,7 +1329,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -1354,7 +1354,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded this certificate
      * @param int $id The unique ID number of this certificate
@@ -1366,7 +1366,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -1391,7 +1391,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded this certificate
      * @param int $id The unique ID number of this certificate
@@ -1404,7 +1404,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -1432,7 +1432,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID number of the company to search
      * @param string $include OPTIONAL: A comma separated list of special fetch options. You can specify one or more of the following:      * customers - Retrieves the list of customers linked to the certificate.   * po_numbers - Retrieves all PO numbers tied to the certificate.   * attributes - Retrieves all attributes applied to the certificate.
@@ -1448,7 +1448,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -1468,7 +1468,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId 
      * @return ProvisionStatusModel
@@ -1479,7 +1479,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -1504,7 +1504,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded this certificate
      * @param int $id The unique ID number of this certificate
@@ -1517,7 +1517,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -1544,7 +1544,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded this certificate
      * @param int $id The unique ID number of this certificate
@@ -1557,7 +1557,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -1579,7 +1579,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID number of the company that recorded this certificate
      * @param int $id The unique ID number of this certificate
@@ -1592,7 +1592,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams);
+        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -1617,7 +1617,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded this certificate
      * @param int $id The unique ID number of this certificate
@@ -1630,7 +1630,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -1663,7 +1663,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the company to check if its integration is certified.
      * @return string
@@ -1674,7 +1674,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -1697,7 +1697,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id 
      * @param FilingStatusChangeModel $model 
@@ -1709,7 +1709,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -1731,7 +1731,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param CompanyInitializationModel $model Information about the company you wish to create.
      * @return CompanyModel
@@ -1742,7 +1742,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -1757,7 +1757,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param CompanyModel[] $model Either a single company object or an array of companies to create
      * @return CompanyModel[]
@@ -1768,7 +1768,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -1789,7 +1789,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this company parameter.
      * @param CompanyParameterDetailModel[] $model The company parameters you wish to create.
@@ -1801,7 +1801,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -1822,7 +1822,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API depends on the following active services:*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id The unique identifier of the company
      * @param FundingInitiateModel $model The funding initialization request
@@ -1834,7 +1834,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -1845,7 +1845,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the company you wish to delete.
      * @return ErrorDetail[]
@@ -1856,7 +1856,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams);
+        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -1872,7 +1872,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The company id
      * @param int $id The parameter id
@@ -1884,7 +1884,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams);
+        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -1899,7 +1899,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * * This API depends on the following active services:*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique identifier of the company
      * @return FundingConfigurationModel
@@ -1910,7 +1910,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -1925,7 +1925,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * * This API depends on the following active services:*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique identifier of the company
      * @param string $currency The currency of the funding. USD and CAD are the only valid currencies
@@ -1937,7 +1937,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['currency' => $currency],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -1960,7 +1960,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the company to retrieve.
      * @param string $include OPTIONAL: A comma separated list of special fetch options.      * Child objects - Specify one or more of the following to retrieve objects related to each company: "Contacts", "FilingCalendars", "Items", "Locations", "Nexus", "TaxCodes", "NonReportingChildren" or "TaxRules".   * Deleted objects - Specify "FetchDeleted" to retrieve information about previously deleted objects.
@@ -1972,7 +1972,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -1994,7 +1994,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id 
      * @return CompanyConfigurationModel[]
@@ -2005,7 +2005,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -2022,7 +2022,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId 
      * @param int $id 
@@ -2034,7 +2034,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -2058,7 +2058,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id 
      * @return string
@@ -2069,7 +2069,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -2089,7 +2089,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The company id
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* name, unit
@@ -2104,7 +2104,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -2119,7 +2119,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API depends on the following active services:*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id The unique identifier of the company
      * @return FundingStatusModel[]
@@ -2130,7 +2130,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -2143,7 +2143,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @return FetchResult
      */
@@ -2153,7 +2153,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -2180,7 +2180,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $include A comma separated list of objects to fetch underneath this company. Any object with a URL path underneath this company can be fetched by specifying its name.
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* IsFein, contacts, items, locations, nexus, settings, taxCodes, taxRules, upcs, nonReportingChildCompanies, exemptCerts, parameters, supplierandcustomers
@@ -2195,7 +2195,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -2217,7 +2217,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id 
      * @param CompanyConfigurationModel[] $model 
@@ -2229,7 +2229,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -2250,7 +2250,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the company you wish to update.
      * @param CompanyModel $model The company object you wish to update.
@@ -2262,7 +2262,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams);
+        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -2279,7 +2279,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The company id.
      * @param int $id The company parameter id
@@ -2292,7 +2292,36 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams);
+        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
+    }
+
+    /**
+     * Retrieve jurisdiction rate information for tax authority
+     *
+     * This API is available by invitation only.
+     * 
+     * ### Security Policies
+     * 
+     * * This API depends on the following active services:*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $taxAuthorityId Used to limit the jurisdictions returned.
+     * @param string $effectiveDate Used to limit the jurisdictions returned.
+     * @param string $endDate Used to limit the jurisdictions returned.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
+     * @param string $include A comma separated list of objects to fetch underneath this jurisdiction.
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return ComplianceJurisdictionRateModel
+     */
+    public function queryTaxAuthorityJurisdictionRates($taxAuthorityId, $effectiveDate, $endDate, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/compliance/taxauthorityjurisdictionrates";
+        $guzzleParams = [
+            'query' => ['taxAuthorityId' => $taxAuthorityId, 'effectiveDate' => $effectiveDate, 'endDate' => $endDate, '$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -2305,7 +2334,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this contact.
      * @param ContactModel[] $model The contacts you wish to create.
@@ -2317,7 +2346,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -2328,7 +2357,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this contact.
      * @param int $id The ID of the contact you wish to delete.
@@ -2340,7 +2369,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams);
+        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -2353,7 +2382,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, FirmAdmin, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company for this contact
      * @param int $id The primary key of this contact
@@ -2365,7 +2394,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -2379,7 +2408,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, FirmAdmin, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns these contacts
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
@@ -2394,7 +2423,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -2410,7 +2439,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, FirmAdmin, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -2424,7 +2453,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -2439,7 +2468,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that this contact belongs to.
      * @param int $id The ID of the contact you wish to update
@@ -2452,7 +2481,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams);
+        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -2478,7 +2507,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
      * @param CustomerModel[] $model The list of customer objects to be created
@@ -2490,7 +2519,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -2513,7 +2542,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
      * @param string $customerCode The unique code representing this customer
@@ -2525,7 +2554,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams);
+        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -2554,7 +2583,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
      * @param string $customerCode The unique code representing this customer
@@ -2567,7 +2596,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -2593,7 +2622,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded the provided customer
      * @param string $customerCode The unique code representing the current customer
@@ -2606,7 +2635,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams);
+        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -2629,7 +2658,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
      * @param string $customerCode The unique code representing this customer
@@ -2642,7 +2671,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -2666,7 +2695,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company defining customers.
      * @param string $code The code of the bill-to customer to link.
@@ -2679,7 +2708,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -2705,7 +2734,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded the provided customer
      * @param string $customerCode The unique code representing the current customer
@@ -2717,7 +2746,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -2740,7 +2769,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
      * @param string $customerCode The unique code representing this customer
@@ -2757,7 +2786,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -2783,7 +2812,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
      * @param string $customerCode The unique code representing this customer
@@ -2797,7 +2826,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -2825,7 +2854,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
      * @param string $include OPTIONAL - You can specify the value `certificates` to fetch information about certificates linked to the customer.
@@ -2841,7 +2870,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -2867,7 +2896,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded the customer
      * @param string $customerCode The unique code representing the current customer
@@ -2880,7 +2909,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams);
+        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -2903,7 +2932,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
      * @param string $customerCode The unique code representing this customer
@@ -2916,7 +2945,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -2939,7 +2968,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
      * @param string $customerCode The unique code representing this customer
@@ -2952,7 +2981,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams);
+        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -2964,7 +2993,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro, BasicReturns.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The id of the company you which to create the datasources
      * @param DataSourceModel[] $model 
@@ -2976,7 +3005,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -2988,7 +3017,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro, BasicReturns.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The id of the company the datasource belongs to.
      * @param int $id The id of the datasource you wish to delete.
@@ -3000,7 +3029,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams);
+        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -3012,7 +3041,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro, BasicReturns.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId 
      * @param int $id data source id
@@ -3024,7 +3053,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -3036,7 +3065,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro, BasicReturns.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The id of the company you wish to retrieve the datasources.
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* isEnabled, isSynced, isAuthorized, name, externalState
@@ -3051,7 +3080,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -3066,7 +3095,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro, BasicReturns.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* isEnabled, isSynced, isAuthorized, name, externalState
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -3080,7 +3109,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -3092,7 +3121,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro, BasicReturns.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The id of the company the datasource belongs to.
      * @param int $id The id of the datasource you wish to delete.
@@ -3105,7 +3134,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams);
+        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -3125,7 +3154,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API depends on the following active services:*Required* (all): AvaTaxGlobal.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $country The name or code of the destination country.
      * @param string $hsCode The partial or full HS Code for which you would like to view all of the parents.
@@ -3137,7 +3166,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -3145,7 +3174,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * This API is intended to be useful to identify whether the user should be allowed
      * to automatically verify their login and password. This API will provide a result only if the form supports automatic online login verification.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $form The name of the form you would like to verify. This is the tax form code
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxFormCodes, scraperType, expectedResponseTime, requiredFilingCalendarDataFields
@@ -3160,14 +3189,14 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
      * List all market place locations.
      *
      * List all market place locations.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -3181,7 +3210,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -3193,7 +3222,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *  
      * Returns the full list of Avalara-supported AvaFile Forms
      * This API is intended to be useful to identify all the different AvaFile Forms
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* outletTypeId
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -3207,7 +3236,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -3220,7 +3249,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *  
      * If you see the 'CertCaptureNotConfiguredError', please use CheckProvision and RequestProvision endpoints to
      * check and provision account.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyid Id of the company the user wish to fetch the certificates' attributes from. If not specified the API will use user's default company.
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
@@ -3235,7 +3264,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['companyid' => $companyid, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -3248,7 +3277,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *  
      * If you see the 'CertCaptureNotConfiguredError', please use CheckProvision and RequestProvision endpoints to
      * check and provision account.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -3262,7 +3291,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -3275,7 +3304,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *  
      * If you see the 'CertCaptureNotConfiguredError', please use CheckProvision and RequestProvision endpoints to
      * check and provision account.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* id, companyId, name, tag, description, created, modified, region, country
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -3289,7 +3318,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -3298,7 +3327,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Returns the full list of Avalara-supported usage of extra parameters for item classification.
      * The list of parameters is available for use with Item Classification.
      * Some parameters are only available for use if you have subscribed to certain features of AvaTax.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* values
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -3312,14 +3341,14 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
      * Retrieve the full list of communications service types
      *
      * Returns full list of service types for a given transaction type ID.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id The transaction type ID to examine
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* requiredParameters
@@ -3334,7 +3363,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -3342,7 +3371,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * Returns full list of communications transaction types which
      * are accepted in communication tax calculation requests.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -3356,7 +3385,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -3364,7 +3393,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * Returns full list of communications transaction/service type pairs which
      * are accepted in communication tax calculation requests.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* requiredParameters
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -3378,7 +3407,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -3387,7 +3416,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Returns a list of all ISO 3166 country codes, and their US English friendly names.
      * This API is intended to be useful when presenting a dropdown box in your website to allow customers to select a country for
      * a shipping address.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* alpha3Code, isEuropeanUnion, localizedNames, addressesRequireRegion
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -3401,7 +3430,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -3415,7 +3444,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *  
      * If you see the 'CertCaptureNotConfiguredError', please use CheckProvision and RequestProvision endpoints to
      * check and provision account.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* id, companyId, subject, description, createdDate, modifiedDate, pageCount, templateFilename, version
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -3429,7 +3458,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -3447,7 +3476,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API depends on the following active services:*Required* (all): AvaTaxGlobal.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $country The name or code of the destination country.
      * @param string $hsCode The Section or partial HS Code for which you would like to view the next level of HS Code detail, if more detail is available.
@@ -3463,7 +3492,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -3479,7 +3508,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API depends on the following active services:*Required* (all): AvaTaxGlobal.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @return FetchResult
      */
@@ -3489,7 +3518,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -3499,7 +3528,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *  
      * This API produces a list of currency codes that can be used when calling AvaTax. The values from this API can be used to fill out the
      * `currencyCode` field in a `CreateTransactionModel`.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -3513,7 +3542,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -3524,7 +3553,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * is occurring. This information is generally used to determine taxability of the product.
      * In order to facilitate correct reporting of your taxes, you are encouraged to select the proper entity use codes for
      * all transactions that are exempt.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* validCountries
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -3538,7 +3567,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -3546,7 +3575,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * Returns the full list of Avalara-supported filing frequencies.
      * This API is intended to be useful to identify all the different filing frequencies that can be used in notices.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -3560,7 +3589,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -3572,7 +3601,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * SQL-like query for fetching only the ones you concerned about. For example: effectiveDate > '2016-01-01'
      *  
      * The rate, salesRate, and useRate fields are not available on the JurisdictionModels returned by this API.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* rate, salesRate, signatureCode, useRate
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -3586,7 +3615,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -3599,7 +3628,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * jurisdiction in AvaTax.
      *  
      * The results of this API call can be passed to the `CreateJurisdictionOverride` API call.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $line1 The first address line portion of this address.
      * @param string $line2 The second address line portion of this address.
@@ -3620,7 +3649,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['line1' => $line1, 'line2' => $line2, 'line3' => $line3, 'city' => $city, 'region' => $region, 'postalCode' => $postalCode, 'country' => $country, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -3632,7 +3661,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * SQL-like query for fetching only the ones you concerned about. For example: effectiveDate > '2016-01-01'
      *  
      * The jurisdictionType, effectiveDate, and endDate are filterable fields available on the JurisdictionRateTypeTaxTypeMappingModels returned by this API.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $country The country for which you want to retrieve the jurisdiction information
      * @param string $region The region for which you want to retrieve the jurisdiction information
@@ -3651,7 +3680,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['rateTypeId' => $rateTypeId, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -3663,7 +3692,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * This information is not usually required in order to calculate tax correctly, but is almost always required to file your tax correctly.
      * You can call this API call for any address and obtain information about what questions must be answered in order to properly
      * file tax in that location.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $line1 The first line of this location's address.
      * @param string $line2 The second line of this location's address.
@@ -3686,7 +3715,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['line1' => $line1, 'line2' => $line2, 'line3' => $line3, 'city' => $city, 'region' => $region, 'postalCode' => $postalCode, 'country' => $country, 'latitude' => $latitude, 'longitude' => $longitude, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -3695,7 +3724,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * List all forms where logins can be verified automatically.
      * This API is intended to be useful to identify whether the user should be allowed
      * to automatically verify their login and password.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxFormCodes, scraperType, expectedResponseTime, requiredFilingCalendarDataFields
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -3709,14 +3738,14 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
      * Retrieve the list of locations for a marketplace.
      *
      * Retrieves the list of suggested locations for a marketplace.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $marketplaceId MarketplaceId of a marketplace
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -3730,7 +3759,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['marketplaceId' => $marketplaceId, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -3739,7 +3768,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Returns the full list of all Avalara-supported nexus for all countries and regions.
      *  
      * This API is intended to be useful if your user interface needs to display a selectable list of nexus.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* streamlinedSalesTax, isSSTActive, taxTypeGroup, taxAuthorityId, taxName, parameters, taxableNexus
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -3753,7 +3782,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -3764,7 +3793,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * In general, it is usually expected that a company will declare nexus in all the jurisdictions that apply to each physical address
      * where the company does business.
      * The results of this API call can be passed to the 'Create Nexus' API call to declare nexus for this address.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $line1 The first address line portion of this address.
      * @param string $line2 The first address line portion of this address.
@@ -3785,7 +3814,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['line1' => $line1, 'line2' => $line2, 'line3' => $line3, 'city' => $city, 'region' => $region, 'postalCode' => $postalCode, 'country' => $country, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -3794,7 +3823,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Returns all Avalara-supported nexus for the specified country.
      *  
      * This API is intended to be useful if your user interface needs to display a selectable list of nexus filtered by country.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $country The country in which you want to fetch the system nexus
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* streamlinedSalesTax, isSSTActive, taxTypeGroup, taxAuthorityId, taxName, parameters, taxableNexus
@@ -3809,7 +3838,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -3818,7 +3847,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Returns all Avalara-supported nexus for the specified country and region.
      *  
      * This API is intended to be useful if your user interface needs to display a selectable list of nexus filtered by country and region.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $country The two-character ISO-3166 code for the country.
      * @param string $region The two or three character region code for the region.
@@ -3834,7 +3863,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -3855,7 +3884,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $formCode The form code that we are looking up the nexus for
      * @return NexusByTaxFormModel
@@ -3866,7 +3895,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -3875,7 +3904,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Returns all Avalara-supported nexus for the specified specified tax type group.
      *  
      * This API is intended to be useful if your user interface needs to display a selectable list of nexus filtered by tax type group.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $taxTypeGroup The tax type group to fetch the supporting system nexus for.
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* streamlinedSalesTax, isSSTActive, taxTypeGroup, taxAuthorityId, taxName, parameters, taxableNexus
@@ -3890,7 +3919,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -3898,7 +3927,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * Returns the full list of Avalara-supported nexus tax type groups
      * This API is intended to be useful to identify all the different tax sub-types.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* subscriptionTypeId, subscriptionDescription, tabName, showColumn
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -3912,7 +3941,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -3920,7 +3949,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * Returns the full list of Avalara-supported tax notice customer funding options.
      * This API is intended to be useful to identify all the different notice customer funding options that can be used in notices.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* activeFlag, sortOrder
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -3934,7 +3963,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -3942,7 +3971,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * Returns the full list of Avalara-supported tax notice customer types.
      * This API is intended to be useful to identify all the different notice customer types.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* activeFlag, sortOrder
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -3956,7 +3985,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -3964,7 +3993,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * Returns the full list of Avalara-supported tax notice filing types.
      * This API is intended to be useful to identify all the different notice filing types that can be used in notices.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* description, activeFlag, sortOrder
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -3978,7 +4007,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -3986,7 +4015,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * Returns the full list of Avalara-supported tax notice priorities.
      * This API is intended to be useful to identify all the different notice priorities that can be used in notices.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* activeFlag, sortOrder
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -4000,7 +4029,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -4008,7 +4037,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * Returns the full list of Avalara-supported tax notice reasons.
      * This API is intended to be useful to identify all the different tax notice reasons.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* description, activeFlag, sortOrder
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -4022,7 +4051,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -4030,7 +4059,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * Returns the full list of Avalara-supported tax notice responsibility ids
      * This API is intended to be useful to identify all the different tax notice responsibilities.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* sortOrder
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -4044,7 +4073,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -4052,7 +4081,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * Returns the full list of Avalara-supported tax notice root causes
      * This API is intended to be useful to identify all the different tax notice root causes.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* sortOrder
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -4066,7 +4095,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -4074,7 +4103,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * Returns the full list of Avalara-supported tax notice statuses.
      * This API is intended to be useful to identify all the different tax notice statuses.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* isOpen, sortOrder
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -4088,7 +4117,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -4096,7 +4125,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * Returns the full list of Avalara-supported tax notice types.
      * This API is intended to be useful to identify all the different notice types that can be used in notices.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* activeFlag, sortOrder
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -4110,7 +4139,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -4119,7 +4148,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Returns the full list of Avalara-supported extra parameters for the 'Create Transaction' API call.
      * This list of parameters is available for use when configuring your transaction.
      * Some parameters are only available for use if you have subscribed to certain features of AvaTax.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* serviceTypes, regularExpression, values
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -4133,7 +4162,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -4153,7 +4182,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $companyCode Company code.
      * @param string $itemCode Item code.
@@ -4169,7 +4198,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -4178,7 +4207,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Returns the full list of Avalara-supported usage of extra parameters for the 'Create Transaction' API call.
      * This list of parameters is available for use when configuring your transaction.
      * Some parameters are only available for use if you have subscribed to certain features of AvaTax.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* values
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -4192,7 +4221,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -4200,7 +4229,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * Returns the full list of Avalara-supported permission types.
      * This API is intended to be useful to identify the capabilities of a particular user logon.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
@@ -4212,14 +4241,14 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$top' => $top, '$skip' => $skip],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
      * Retrieve the full list of Avalara-supported postal codes.
      *
      * Retrieves the list of Avalara-supported postal codes.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -4233,7 +4262,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -4248,7 +4277,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * To select a preferred program for calculating customs and duty rates, call this API to find the appropriate code for your
      * preferred program. Next, set the parameter `AvaTax.LC.PreferredProgram` in your `CreateTransaction` call to the code of
      * the program.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* effectiveDate, endDate
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -4262,7 +4291,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -4272,7 +4301,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *  
      * Tax authorities use product classification systems as a way to identify products and associate them with a tax rate.
      * More than one tax authority might use the same product classification system, but they might charge different tax rates for products.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* countries
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -4287,7 +4316,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy, '$countryCode' => $countryCode],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -4305,7 +4334,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Replace '?' with '\_-ava3f-\_' For example: 'Company?Code' becomes 'Company_-ava3f-_Code'
      * * Replace '%' with '\_-ava25-\_' For example: 'Company%Code' becomes 'Company_-ava25-_Code'
      * * Replace '#' with '\_-ava23-\_' For example: 'Company#Code' becomes 'Company_-ava23-_Code'
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $companyCode The company code.
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* countries
@@ -4321,7 +4350,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy, '$countryCode' => $countryCode],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -4329,7 +4358,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * Returns the full list of Avalara-supported rate type file types
      * This API is intended to be useful to identify all the different rate types.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $country The country to examine for rate types
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
@@ -4344,7 +4373,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -4352,7 +4381,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * Returns the list of Avalara-supported rate type file types
      * This API is intended to be useful to identify all the different rate types.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $country The country to examine for rate types
      * @param string $taxTypeId The taxType for the country to examine for rate types
@@ -4369,7 +4398,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -4378,7 +4407,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Returns a list of all ISO 3166 region codes and their US English friendly names.
      * This API is intended to be useful when presenting a dropdown box in your website to allow customers to select a region
      * within the country for a shipping addresses.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* localizedNames
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -4392,7 +4421,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -4401,7 +4430,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Returns a list of all ISO 3166 region codes for a specific country code, and their US English friendly names.
      * This API is intended to be useful when presenting a dropdown box in your website to allow customers to select a region
      * within the country for a shipping addresses.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $country The country of which you want to fetch ISO 3166 regions
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* localizedNames
@@ -4416,7 +4445,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -4424,7 +4453,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * Returns the full list of Avalara-supported resource file types
      * This API is intended to be useful to identify all the different resource file types.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -4438,7 +4467,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -4447,7 +4476,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Returns the full list of Avalara-supported usage of extra parameters for the returns.
      * This list of parameters is available for use with Returns.
      * Some parameters are only available for use if you have subscribed to certain features of AvaTax.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* values
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -4461,7 +4490,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -4470,7 +4499,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Returns the full list of Avalara-supported permission types.
      * This API is intended to be useful when designing a user interface for selecting the security role of a user account.
      * Some security roles are restricted for Avalara internal use.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -4484,7 +4513,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -4494,7 +4523,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * This API is intended to be useful for identifying which features you have added to your account.
      * You may always contact Avalara's sales department for information on available products or services.
      * You cannot change your subscriptions directly through the API.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -4508,14 +4537,14 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
      * Retrieve the list all tags supported by avalara
      *
      * Retrieves the list of suggested locations for a marketplace.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -4529,7 +4558,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -4537,7 +4566,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * Returns the full list of Avalara-supported tax authorities.
      * This API is intended to be useful to identify all the different authorities that receive tax.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -4551,7 +4580,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -4561,7 +4590,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * This list represents tax forms that Avalara recognizes.
      * Customers who subscribe to Avalara Managed Returns Service can request these forms to be filed automatically
      * based on the customer's AvaTax data.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -4575,7 +4604,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -4583,7 +4612,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * Returns the full list of Avalara-supported tax authority types.
      * This API is intended to be useful to identify all the different authority types.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -4597,7 +4626,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -4612,7 +4641,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -4626,7 +4655,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -4635,7 +4664,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Returns the full list of recognized tax code types.
      * A 'Tax Code Type' represents a broad category of tax codes, and is less detailed than a single TaxCode.
      * This API is intended to be useful for broadly searching for tax codes by tax code type.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
@@ -4647,7 +4676,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$top' => $top, '$skip' => $skip],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -4655,7 +4684,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * Returns the full list of Avalara-supported Tax Forms
      * This API is intended to be useful to identify all the different Tax Forms
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -4669,7 +4698,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -4677,7 +4706,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * Returns the full list of Avalara-supported tax sub-types
      * This API is intended to be useful to identify all the different tax sub-types.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -4691,7 +4720,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -4699,7 +4728,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * Returns the full list of Avalara-supported tax sub-types
      * This API is intended to be useful to identify all the different tax sub-types for given country and TaxType.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $country The country to examine for taxsubtype
      * @param string $taxTypeId The taxType for the country to examine for taxsubtype
@@ -4715,7 +4744,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -4723,7 +4752,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * Returns the full list of Avalara-supported tax sub-types by jurisdiction and region
      * This API is intended to be useful to identify all the different tax sub-types.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $jurisdictionCode The jurisdiction code of the tax sub type.
      * @param string $region The region of the tax sub type.
@@ -4739,7 +4768,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -4747,7 +4776,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * Returns the full list of Avalara-supported tax type groups
      * This API is intended to be useful to identify all the different tax type groups.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* subscriptionTypeId, subscriptionDescription, tabName, showColumn, displaySequence
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -4761,14 +4790,14 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
      * Retrieve the list of applicable TaxTypes
      *
      * Retrieves the list of applicable TaxTypes based on Nexus of the company.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $country The country for which you want to retrieve the unitofbasis information
      * @param int $companyId Your companyId to retrieve the applicable taxtypes
@@ -4783,14 +4812,14 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['companyId' => $companyId, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
      * Retrieve the list of applicable UnitOfBasis
      *
      * Retrieves the list of applicable UnitOfBasis
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $country The country for which you want to retrieve the unitofbasis information
      * @param string $taxTypeId The taxtype for which you want to retrieve the unitofbasis information
@@ -4807,7 +4836,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['rateTypeId' => $rateTypeId, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -4816,7 +4845,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * List all units of measurement systems defined by Avalara.
      *  
      * A unit of measurement system is a method of measuring a quantity, such as distance, mass, or others.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* id
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -4830,7 +4859,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -4845,7 +4874,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that owns this DistanceThreshold
      * @param CompanyDistanceThresholdModel[] $model The DistanceThreshold object or objects you wish to create.
@@ -4857,7 +4886,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -4872,7 +4901,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that owns this DistanceThreshold
      * @param int $id The unique ID number of the DistanceThreshold object you wish to delete.
@@ -4884,7 +4913,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams);
+        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -4899,7 +4928,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this DistanceThreshold object
      * @param int $id The unique ID number referring to this DistanceThreshold object
@@ -4911,7 +4940,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -4926,7 +4955,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company whose DistanceThreshold objects you wish to list.
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
@@ -4942,7 +4971,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -4960,7 +4989,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
      * @param string $include A comma separated list of additional data to retrieve.
@@ -4975,7 +5004,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -4993,7 +5022,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that owns this DistanceThreshold object.
      * @param int $id The unique ID number of the DistanceThreshold object to replace.
@@ -5006,7 +5035,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams);
+        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -5019,7 +5048,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The company ID that will be issued this certificate.
      * @param CreateECommerceTokenInputModel $model 
@@ -5031,7 +5060,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -5044,7 +5073,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The company ID that the refreshed certificate belongs to.
      * @param RefreshECommerceTokenInputModel $model 
@@ -5056,7 +5085,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams);
+        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -5070,7 +5099,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires openId bearer token for authentication
      * * This API depends on the following active services:*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID of the company that owns the filing calendar object
      * @param CycleSafeEditRequestModel $model Cycle Safe Options Request
@@ -5082,7 +5111,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -5094,7 +5123,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires openId bearer token for authentication
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID of the company
      * @param int $filingCalendarId The unique ID of the filing calendar that will remove setting
@@ -5107,7 +5136,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams);
+        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -5119,10 +5148,10 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * * This API depends on the following active services:*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns these batches
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxAuthorityId, taxAuthorityName, taxAuthorityType, settings
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxTypes, taxAuthorityId, taxAuthorityName, taxAuthorityType, settings
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -5136,7 +5165,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy, 'returnCountry' => $returnCountry, 'returnRegion' => $returnRegion],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -5146,7 +5175,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires openId bearer token for authentication
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns these returns
      * @param int $filingReturnId The ID of the filing return
@@ -5158,7 +5187,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -5170,7 +5199,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * * This API is available by invitation only.*Exempt security roles*: ComplianceRootUser, ComplianceAdmin, ComplianceUser, TechnicalSupportAdmin, TechnicalSupportUser, CompanyUser, AccountUser, CompanyAdmin, AccountAdmin.
      * * This API depends on the following active services:*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns these batches
      * @param int $endPeriodMonth The month of the period you are trying to retrieve
@@ -5189,7 +5218,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['endPeriodMonth' => $endPeriodMonth, 'endPeriodYear' => $endPeriodYear, 'frequency' => $frequency, 'status' => $status, 'country' => $country, 'region' => $region, 'filingCalendarId' => $filingCalendarId, 'taxformCode' => $taxformCode],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -5200,7 +5229,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id 
      * @return FirmClientLinkageOutputModel
@@ -5211,7 +5240,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -5231,7 +5260,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: FirmAdmin, Registrar, SiteAdmin, SystemAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param NewFirmClientAccountRequestModel $model Information about the account you wish to create.
      * @return FirmClientLinkageOutputModel
@@ -5242,7 +5271,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -5253,7 +5282,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param FirmClientLinkageInputModel $model FirmClientLinkageInputModel
      * @return FirmClientLinkageOutputModel
@@ -5264,7 +5293,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -5275,7 +5304,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id 
      * @return ErrorDetail[]
@@ -5286,7 +5315,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams);
+        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -5297,7 +5326,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id 
      * @return FirmClientLinkageOutputModel
@@ -5308,7 +5337,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -5319,7 +5348,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* firmAccountName, clientAccountName
      * @return FetchResult
@@ -5330,7 +5359,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -5341,7 +5370,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id 
      * @return FirmClientLinkageOutputModel
@@ -5352,7 +5381,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -5363,7 +5392,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id 
      * @return FirmClientLinkageOutputModel
@@ -5374,7 +5403,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -5385,7 +5414,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id 
      * @return FirmClientLinkageOutputModel
@@ -5396,7 +5425,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -5416,7 +5445,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API may be called without providing authentication credentials.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param FreeTrialRequestModel $model Required information to provision a free trial account.
      * @return NewAccountModel
@@ -5427,7 +5456,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -5450,7 +5479,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * * This API depends on the following active services:*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id The unique ID number of this funding request
      * @return FundingStatusModel
@@ -5461,7 +5490,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -5482,7 +5511,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
      * * This API depends on the following active services:*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id The unique ID number of this funding request
      * @return FundingStatusModel
@@ -5493,7 +5522,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -5508,7 +5537,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this item.
      * @param int $itemId The ID of the item you wish to delete the classifications.
@@ -5520,7 +5549,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams);
+        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -5537,7 +5566,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this item.
      * @param int $itemId The ID of the item you wish to delete the parameters.
@@ -5549,7 +5578,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams);
+        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -5568,7 +5597,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this items.
      * @param ItemBulkUploadInputModel $model The items you wish to upload.
@@ -5580,7 +5609,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -5597,7 +5626,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The company id.
      * @param int $itemId The item id.
@@ -5610,7 +5639,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -5631,7 +5660,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this item parameter.
      * @param int $itemId The item id.
@@ -5644,7 +5673,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -5663,7 +5692,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this item.
      * @param ItemModel[] $model The item you wish to create.
@@ -5675,7 +5704,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -5688,7 +5717,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that defined these items
      * @param int $itemId The ID of the item as defined by the company that owns this tag.
@@ -5701,7 +5730,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -5720,7 +5749,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this item.
      * @param int $id The ID of the item you wish to delete.
@@ -5732,7 +5761,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams);
+        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -5747,7 +5776,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The company id.
      * @param int $itemId The item id.
@@ -5760,7 +5789,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams);
+        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -5777,7 +5806,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The company id
      * @param int $itemId The item id
@@ -5790,7 +5819,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams);
+        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -5803,7 +5832,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that defined these items
      * @param int $itemId The ID of the item as defined by the company that owns this tag.
@@ -5816,7 +5845,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams);
+        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -5829,7 +5858,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that defined these items.
      * @param int $itemId The ID of the item as defined by the company that owns this tag.
@@ -5841,7 +5870,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams);
+        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -5858,7 +5887,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this item object
      * @param int $id The primary key of this item
@@ -5871,7 +5900,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -5886,7 +5915,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The company id.
      * @param int $itemId The item id.
@@ -5899,7 +5928,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -5916,7 +5945,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The company id
      * @param int $itemId The item id
@@ -5929,7 +5958,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -5942,7 +5971,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that defined these items
      * @param int $itemId The ID of the item as defined by the company that owns this tag.
@@ -5957,7 +5986,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -5975,7 +6004,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The company id.
      * @param int $itemId The item id.
@@ -5991,7 +6020,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -6011,7 +6040,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The company id
      * @param int $itemId The item id
@@ -6027,7 +6056,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -6056,7 +6085,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that defined these items
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxCode, classifications, parameters, tags
@@ -6073,7 +6102,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy, 'tagName' => $tagName],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -6094,7 +6123,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxCode, classifications, parameters, tags
      * @param string $include A comma separated list of additional data to retrieve.
@@ -6109,7 +6138,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -6130,7 +6159,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that defined these items.
      * @param string $tag The master tag to be associated with item.
@@ -6147,7 +6176,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -6169,7 +6198,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this item.
      * @param SyncItemsRequestModel $model The request object.
@@ -6181,7 +6210,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -6203,7 +6232,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that this item belongs to.
      * @param int $id The ID of the item you wish to update
@@ -6216,7 +6245,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams);
+        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -6233,7 +6262,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The company id.
      * @param int $itemId The item id.
@@ -6247,7 +6276,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams);
+        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -6264,7 +6293,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The company id.
      * @param int $itemId The item id
@@ -6278,7 +6307,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams);
+        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -6294,7 +6323,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $accountId The ID of the account that owns this override
      * @param JurisdictionOverrideModel[] $model The jurisdiction override objects to create
@@ -6306,7 +6335,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -6317,7 +6346,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $accountId The ID of the account that owns this override
      * @param int $id The ID of the override you wish to delete
@@ -6329,7 +6358,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams);
+        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -6345,7 +6374,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $accountId The ID of the account that owns this override
      * @param int $id The primary key of this override
@@ -6357,7 +6386,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -6376,7 +6405,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $accountId The ID of the account that owns this override
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* country, Jurisdictions
@@ -6392,7 +6421,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -6411,7 +6440,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* country, Jurisdictions
      * @param string $include A comma separated list of additional data to retrieve.
@@ -6426,7 +6455,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -6437,7 +6466,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $accountId The ID of the account that this jurisdictionoverride belongs to.
      * @param int $id The ID of the jurisdictionoverride you wish to update
@@ -6450,7 +6479,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams);
+        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -6471,7 +6500,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPAdmin, CSPTester, FirmAdmin, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this location parameter.
      * @param int $locationId The location id.
@@ -6484,7 +6513,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -6495,7 +6524,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPAdmin, CSPTester, FirmAdmin, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this location.
      * @param LocationModel[] $model The location you wish to create.
@@ -6507,7 +6536,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -6518,7 +6547,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPAdmin, CSPTester, FirmAdmin, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this location.
      * @param int $id The ID of the location you wish to delete.
@@ -6530,7 +6559,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams);
+        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -6547,7 +6576,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPAdmin, CSPTester, FirmAdmin, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The company id
      * @param int $locationId The location id
@@ -6560,7 +6589,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams);
+        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -6580,7 +6609,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this location
      * @param int $id The primary key of this location
@@ -6593,7 +6622,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -6610,7 +6639,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The company id
      * @param int $locationId The location id
@@ -6623,7 +6652,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -6643,7 +6672,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The company id
      * @param int $locationId The ID of the location
@@ -6659,7 +6688,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -6681,7 +6710,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns these locations
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* isMarketplaceOutsideUsa, settings, parameters
@@ -6697,7 +6726,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -6720,7 +6749,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* isMarketplaceOutsideUsa, settings, parameters
      * @param string $include A comma separated list of additional data to retrieve. You may specify `LocationSettings` to retrieve location settings.
@@ -6735,7 +6764,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -6748,7 +6777,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPAdmin, CSPTester, FirmAdmin, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that this location belongs to.
      * @param int $id The ID of the location you wish to update
@@ -6761,7 +6790,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams);
+        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -6778,7 +6807,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPAdmin, CSPTester, FirmAdmin, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The company id.
      * @param int $locationId The location id
@@ -6792,7 +6821,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams);
+        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -6805,7 +6834,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this location
      * @param int $id The primary key of this location
@@ -6817,7 +6846,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -6846,7 +6875,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $code The transaction code for this MultiDocument transaction
      * @param string $type The transaction type for this MultiDocument transaction (See DocumentType::* for a list of allowable values)
@@ -6860,7 +6889,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -6893,7 +6922,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ProStoresOperator, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $code The transaction code for this MultiDocument transaction
      * @param string $type The transaction type for this MultiDocument transaction (See DocumentType::* for a list of allowable values)
@@ -6905,7 +6934,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -6932,7 +6961,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, ProStoresOperator, SSTAdmin, TechnicalSupportAdmin.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param CommitMultiDocumentModel $model The commit request you wish to execute
      * @return MultiDocumentModel
@@ -6943,7 +6972,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -6994,7 +7023,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $include Specifies objects to include in the response after transaction is created
      * @param CreateMultiDocumentModel $model the multi document transaction model
@@ -7006,7 +7035,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -7037,7 +7066,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ProStoresOperator, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $code The multidocument code to retrieve
      * @param string $type The transaction type to retrieve (See DocumentType::* for a list of allowable values)
@@ -7050,7 +7079,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -7090,7 +7119,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ProStoresOperator, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id The unique ID number of the MultiDocument transaction to retrieve
      * @param string $include Specifies objects to include in the response after transaction is created
@@ -7102,7 +7131,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -7140,7 +7169,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ProStoresOperator, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* documents
      * @param string $include Specifies objects to include in the response after transaction is created
@@ -7155,7 +7184,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -7210,7 +7239,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $code The code of this MultiDocument transaction
      * @param string $type The type of this MultiDocument transaction (See DocumentType::* for a list of allowable values)
@@ -7224,7 +7253,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -7249,7 +7278,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ProStoresOperator, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param VerifyMultiDocumentModel $model Information from your accounting system to verify against this MultiDocument transaction as it is stored in AvaTax
      * @return MultiDocumentModel
@@ -7260,7 +7289,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -7288,7 +7317,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, CompanyAdmin, CSPTester, ProStoresOperator, SSTAdmin, TechnicalSupportAdmin.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $code The transaction code for this MultiDocument transaction
      * @param string $type The transaction type for this MultiDocument transaction (See DocumentType::* for a list of allowable values)
@@ -7301,7 +7330,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -7330,7 +7359,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this nexus.
      * @param NexusModel[] $model The nexus you wish to create.
@@ -7342,7 +7371,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -7362,7 +7391,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this nexus parameter.
      * @param int $nexusId The nexus id.
@@ -7375,7 +7404,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -7400,7 +7429,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that will own this nexus.
      * @param DeclareNexusByAddressModel[] $model The nexus you wish to create.
@@ -7412,7 +7441,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -7430,7 +7459,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this nexus.
      * @param int $id The ID of the nexus you wish to delete.
@@ -7443,7 +7472,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['cascadeDelete' => $cascadeDelete],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams);
+        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -7459,7 +7488,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The company id
      * @param int $nexusId The nexus id
@@ -7472,7 +7501,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams);
+        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -7488,7 +7517,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this nexus.
      * @param int $nexusId The ID of the nexus you wish to delete the parameters.
@@ -7500,7 +7529,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams);
+        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -7518,7 +7547,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this nexus object
      * @param int $id The primary key of this nexus
@@ -7531,7 +7560,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -7553,7 +7582,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this nexus object
      * @param string $formCode The form code that we are looking up the nexus for
@@ -7566,7 +7595,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -7582,7 +7611,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The company id
      * @param int $nexusId The nexus id
@@ -7595,7 +7624,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -7616,7 +7645,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns these nexus objects
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* streamlinedSalesTax, isSSTActive, taxTypeGroup, taxAuthorityId, taxName, parameters, taxableNexus
@@ -7632,7 +7661,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -7653,7 +7682,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns these nexus objects
      * @param string $taxTypeGroup Name of TaxTypeGroup to filter by
@@ -7670,7 +7699,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -7689,7 +7718,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The company id
      * @param int $nexusId The nexus id
@@ -7705,7 +7734,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -7726,7 +7755,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* streamlinedSalesTax, isSSTActive, taxTypeGroup, taxAuthorityId, taxName, parameters, taxableNexus
      * @param string $include A comma separated list of additional data to retrieve.
@@ -7741,7 +7770,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -7770,7 +7799,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that this nexus belongs to.
      * @param int $id The ID of the nexus you wish to update
@@ -7783,7 +7812,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams);
+        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -7800,7 +7829,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The company id.
      * @param int $nexusId The nexus id
@@ -7814,7 +7843,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams);
+        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -7826,7 +7855,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * * This API depends on the following active services:*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param CreateNoticeResponsibilityTypeModel $model The responsibility type to create
      * @return NoticeResponsibilityModel
@@ -7837,7 +7866,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -7849,7 +7878,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * * This API depends on the following active services:*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param CreateNoticeRootCauseTypeModel $model The root cause type to create
      * @return NoticeRootCauseModel
@@ -7860,7 +7889,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -7871,7 +7900,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $responsibilityId The unique ID of the responsibility type
      * @return ErrorDetail[]
@@ -7882,7 +7911,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams);
+        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -7893,7 +7922,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $rootCauseId The unique ID of the root cause type
      * @return ErrorDetail[]
@@ -7904,7 +7933,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams);
+        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -7928,7 +7957,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id The id of the notification you wish to mark as dismissed.
      * @return NotificationModel
@@ -7939,7 +7968,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams);
+        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -7957,7 +7986,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id The id of the notification to retrieve.
      * @return NotificationModel
@@ -7968,7 +7997,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -7989,7 +8018,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -8003,7 +8032,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -8029,7 +8058,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
      * * This API is available by invitation only.
      * * This API is available by invitation only. To request access to this feature, please speak to a business development manager and request access to [Provisioning:RequestNewAccount].
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param NewAccountRequestModel $model Information about the account you wish to create and the selected product offerings.
      * @return NewAccountModel
@@ -8040,7 +8069,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -8054,7 +8083,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
      * * This API is available by invitation only.
      * * This API is available by invitation only. To request access to this feature, please speak to a business development manager and request access to [Provisioning:RequestNewAccount].
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id The avatax account id of the customer
      * @param string $offer The offer to be added to an already existing customer
@@ -8066,7 +8095,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -8081,7 +8110,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param AccountModel $model The account you wish to create.
      * @return AccountModel[]
@@ -8092,7 +8121,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -8116,7 +8145,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
      * * This API is available by invitation only. To request access to this feature, please speak to a business development manager and request access to [NotificationsAPI:Create].
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param NotificationModel[] $model The notifications you wish to create.
      * @return NotificationModel[]
@@ -8127,7 +8156,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -8142,7 +8171,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $accountId The ID of the account that owns this subscription.
      * @param SubscriptionModel[] $model The subscription you wish to create.
@@ -8154,7 +8183,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -8169,7 +8198,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires the user role SystemAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the account you wish to delete.
      * @return ErrorDetail[]
@@ -8180,7 +8209,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams);
+        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -8201,7 +8230,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
      * * This API is available by invitation only. To request access to this feature, please speak to a business development manager and request access to [NotificationsAPI:Create].
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id The id of the notification you wish to delete.
      * @return ErrorDetail[]
@@ -8212,7 +8241,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams);
+        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -8226,7 +8255,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $accountId The ID of the account that owns this subscription.
      * @param int $id The ID of the subscription you wish to delete.
@@ -8238,7 +8267,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams);
+        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -8247,7 +8276,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $writeMode  (See TssAccountMigrationId::* for a list of allowable values)
      * @return AccountMigrationStatusModel
@@ -8258,7 +8287,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -8275,7 +8304,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * * This API is available to Avalara system-level (registrar-level) users only.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $userId The unique ID of the user whose password will be changed
      * @param boolean $unmigrateFromAi If user's password was migrated to AI, undo this.
@@ -8288,7 +8317,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['unmigrateFromAi' => $unmigrateFromAi],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -8302,7 +8331,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the account you wish to update.
      * @param AccountModel $model The account object you wish to update.
@@ -8314,7 +8343,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams);
+        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -8335,7 +8364,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
      * * This API is available by invitation only. To request access to this feature, please speak to a business development manager and request access to [NotificationsAPI:Create].
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id The id of the notification you wish to update.
      * @param NotificationModel $model The notification object you wish to update.
@@ -8347,7 +8376,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams);
+        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -8365,7 +8394,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $accountId The ID of the account that this subscription belongs to.
      * @param int $id The ID of the subscription you wish to update
@@ -8378,7 +8407,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams);
+        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -8402,7 +8431,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ProStoresOperator, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id The unique ID number of this report
      * @return object
@@ -8413,7 +8442,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -8430,7 +8459,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * * When a report's status is `Completed`, call `DownloadReport` to retrieve the file.
      *  
      * This API call returns information about any report type.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id The unique ID number of the report to retrieve
      * @return ReportModel
@@ -8441,7 +8470,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -8471,7 +8500,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company to report on.
      * @param ExportDocumentLineModel $model Options that may be configured to customize the report.
@@ -8483,7 +8512,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -8504,7 +8533,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ProStoresOperator, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The id of the company for which to get reports.
      * @param string $pageKey Provide a page key to retrieve the next page of results.
@@ -8518,7 +8547,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['companyId' => $companyId, 'pageKey' => $pageKey, '$skip' => $skip, '$top' => $top],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -8543,7 +8572,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this setting.
      * @param SettingModel[] $model The setting you wish to create.
@@ -8555,7 +8584,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -8575,7 +8604,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this setting.
      * @param int $id The ID of the setting you wish to delete.
@@ -8587,7 +8616,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams);
+        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -8607,7 +8636,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this setting
      * @param int $id The primary key of this setting
@@ -8619,7 +8648,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -8642,7 +8671,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns these settings
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* modifiedDate, ModifiedUserId
@@ -8658,7 +8687,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -8681,7 +8710,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* modifiedDate, ModifiedUserId
      * @param string $include A comma separated list of additional data to retrieve.
@@ -8696,7 +8725,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -8720,7 +8749,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that this setting belongs to.
      * @param int $id The ID of the setting you wish to update
@@ -8733,7 +8762,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams);
+        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -8746,7 +8775,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $accountId The ID of the account that owns this subscription
      * @param int $id The primary key of this subscription
@@ -8758,7 +8787,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -8774,7 +8803,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $accountId The ID of the account that owns these subscriptions
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* subscriptionDescription
@@ -8789,7 +8818,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -8805,7 +8834,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* subscriptionDescription
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -8819,7 +8848,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -8834,7 +8863,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this tax code.
      * @param TaxCodeModel[] $model The tax code you wish to create.
@@ -8846,7 +8875,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -8857,7 +8886,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this tax code.
      * @param int $id The ID of the tax code you wish to delete.
@@ -8869,7 +8898,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams);
+        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -8884,7 +8913,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this tax code
      * @param int $id The primary key of this tax code
@@ -8896,7 +8925,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -8914,7 +8943,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns these tax codes
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
@@ -8930,7 +8959,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -8948,7 +8977,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
      * @param string $include A comma separated list of additional data to retrieve.
@@ -8963,7 +8992,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -8980,7 +9009,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that this tax code belongs to.
      * @param int $id The ID of the tax code you wish to update
@@ -8993,7 +9022,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams);
+        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -9027,7 +9056,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param PointOfSaleDataRequestModel $model Parameters about the desired file format and report format, specifying which company, locations and TaxCodes to include.
      * @return object
@@ -9038,7 +9067,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -9072,7 +9101,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID number of the company that owns this location.
      * @param int $id The ID number of the location to retrieve point-of-sale data.
@@ -9088,7 +9117,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['date' => $date, 'format' => $format, 'partnerId' => $partnerId, 'includeJurisCodes' => $includeJurisCodes],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -9138,7 +9167,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $date The date for which point-of-sale data would be calculated (today by default). Example input: 2016-12-31
      * @param string $region A two character region code which limits results to a specific region.
@@ -9150,7 +9179,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['region' => $region],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -9176,7 +9205,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *  
      * Please see [Estimating Tax with REST v2](http://developer.avalara.com/blog/2016/11/04/estimating-tax-with-rest-v2/)
      * for information on how to upgrade to the full AvaTax CreateTransaction API.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $line1 The street address of the location.
      * @param string $line2 The street address of the location.
@@ -9193,7 +9222,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['line1' => $line1, 'line2' => $line2, 'line3' => $line3, 'city' => $city, 'region' => $region, 'postalCode' => $postalCode, 'country' => $country],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -9221,7 +9250,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *  
      * Please see [Estimating Tax with REST v2](http://developer.avalara.com/blog/2016/11/04/estimating-tax-with-rest-v2/)
      * for information on how to upgrade to the full AvaTax CreateTransaction API.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $country Name or ISO 3166 code identifying the country.     This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries     For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
      * @param string $postalCode The postal code of the location.
@@ -9233,7 +9262,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['country' => $country, 'postalCode' => $postalCode],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -9256,7 +9285,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this tax rule.
      * @param TaxRuleModel[] $model The tax rule you wish to create.
@@ -9268,7 +9297,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -9291,7 +9320,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this tax rule.
      * @param int $id The ID of the tax rule you wish to delete.
@@ -9303,7 +9332,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams);
+        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -9326,7 +9355,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this tax rule
      * @param int $id The primary key of this tax rule
@@ -9338,7 +9367,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -9364,7 +9393,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns these tax rules
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxCode, taxTypeCode, taxRuleProductDetail, rateTypeCode, taxTypeGroup, taxSubType, unitOfBasis
@@ -9380,7 +9409,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -9406,7 +9435,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxCode, taxTypeCode, taxRuleProductDetail, rateTypeCode, taxTypeGroup, taxSubType, unitOfBasis
      * @param string $include A comma separated list of additional data to retrieve.
@@ -9421,7 +9450,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -9444,7 +9473,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that this tax rule belongs to.
      * @param int $id The ID of the tax rule you wish to update
@@ -9457,7 +9486,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams);
+        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -9488,7 +9517,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro, BasicReturns.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $include Specifies objects to include in the response after transaction is created
      * @param AddTransactionLineModel $model information about the transaction and lines to be added
@@ -9500,7 +9529,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -9540,7 +9569,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro, BasicReturns.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $companyCode The company code of the company that recorded this transaction
      * @param string $transactionCode The transaction code to adjust
@@ -9555,7 +9584,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['documentType' => $documentType, '$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -9589,7 +9618,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ProStoresOperator, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro, BasicReturns.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $companyCode The code identifying the company that owns this transaction
      * @param string $transactionCode The code identifying the transaction
@@ -9601,7 +9630,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -9635,7 +9664,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ProStoresOperator, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro, BasicReturns.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $companyCode The code identifying the company that owns this transaction
      * @param string $transactionCode The code identifying the transaction
@@ -9648,7 +9677,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -9666,7 +9695,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires the user role Compliance Root User.
      * * This API depends on the following active services:*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param BulkLockTransactionModel $model bulk lock request
      * @return BulkLockTransactionResult
@@ -9677,7 +9706,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -9717,7 +9746,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, ProStoresOperator, SSTAdmin, TechnicalSupportAdmin.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro, BasicReturns.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $companyCode The company code of the company that recorded this transaction
      * @param string $transactionCode The transaction code to change
@@ -9732,7 +9761,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['documentType' => $documentType, '$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -9770,7 +9799,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, ProStoresOperator, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $companyCode The company code of the company that recorded this transaction
      * @param string $transactionCode The transaction code to commit
@@ -9785,7 +9814,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['documentType' => $documentType, '$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -9829,7 +9858,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro, BasicReturns.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $include Specifies objects to include in the response after transaction is created
      * @param CreateOrAdjustTransactionModel $model The transaction you wish to create or adjust
@@ -9841,7 +9870,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -9892,7 +9921,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro, BasicReturns.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $include Specifies objects to include in the response after transaction is created
      * @param CreateTransactionModel $model The transaction you wish to create
@@ -9904,7 +9933,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -9932,7 +9961,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro, BasicReturns.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $include Specifies objects to include in the response after transaction is created
      * @param RemoveTransactionLineModel $model information about the transaction and lines to be removed
@@ -9944,7 +9973,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -9981,7 +10010,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ProStoresOperator, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro, BasicReturns.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $companyCode The company code of the company that recorded this transaction
      * @param string $transactionCode The transaction code to retrieve
@@ -9995,7 +10024,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['documentType' => $documentType, '$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -10015,7 +10044,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ProStoresOperator, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro, BasicReturns.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $companyCode The company code of the company that recorded this transaction
      * @param string $transactionCode The transaction code to retrieve
@@ -10029,7 +10058,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -10057,7 +10086,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ProStoresOperator, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro, BasicReturns.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id The unique ID number of the transaction to retrieve
      * @param string $include Specifies objects to include in this fetch call
@@ -10069,7 +10098,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -10109,7 +10138,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ProStoresOperator, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro, BasicReturns.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $companyCode The company code of the company that recorded this transaction
      * @param int $dataSourceId Optionally filter transactions to those from a specific data source.
@@ -10126,7 +10155,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['dataSourceId' => $dataSourceId, '$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -10166,7 +10195,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $companyCode The company code of the company that recorded this transaction
      * @param string $transactionCode The transaction code to lock
@@ -10181,7 +10210,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['documentType' => $documentType, '$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -10231,7 +10260,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro, BasicReturns.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $companyCode The code of the company that made the original sale
      * @param string $transactionCode The transaction code of the original sale
@@ -10247,7 +10276,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include, 'documentType' => $documentType, 'useTaxDateOverride' => $useTaxDateOverride],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -10285,7 +10314,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, ProStoresOperator, SSTAdmin, TechnicalSupportAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $companyCode The company code of the company that recorded this transaction
      * @param string $transactionCode The transaction code to settle
@@ -10300,7 +10329,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['documentType' => $documentType, '$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -10333,7 +10362,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro, BasicReturns.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $companyCode The company code of the company that recorded this transaction
      * @param string $transactionCode The transaction code to Uncommit
@@ -10347,7 +10376,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['documentType' => $documentType, '$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -10377,7 +10406,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro, BasicReturns.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $companyCode The company code of the company that recorded this transaction
      * @param string $transactionCode The transaction code to commit
@@ -10391,7 +10420,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['documentType' => $documentType, '$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -10428,7 +10457,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, CSPTester, ProStoresOperator, SSTAdmin, TechnicalSupportAdmin.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro, BasicReturns.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $companyCode The company code of the company that recorded this transaction
      * @param string $transactionCode The transaction code to settle
@@ -10443,7 +10472,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['documentType' => $documentType, '$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -10482,7 +10511,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, CompanyAdmin, CSPTester, ProStoresOperator, SSTAdmin, TechnicalSupportAdmin.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro, BasicReturns.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $companyCode The company code of the company that recorded this transaction
      * @param string $transactionCode The transaction code to void
@@ -10497,7 +10526,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['documentType' => $documentType, '$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -10510,7 +10539,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
      * * This API depends on the following active services:*Required* (all): AvaUpc.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this UPC.
      * @param UPCModel[] $model The UPC you wish to create.
@@ -10522,7 +10551,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -10534,7 +10563,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
      * * This API depends on the following active services:*Required* (all): AvaUpc.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this UPC.
      * @param int $id The ID of the UPC you wish to delete.
@@ -10546,7 +10575,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams);
+        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -10559,7 +10588,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AvaUpc.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this UPC
      * @param int $id The primary key of this UPC
@@ -10571,7 +10600,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -10587,7 +10616,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AvaUpc.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns these UPCs
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
@@ -10603,7 +10632,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -10619,7 +10648,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * * This API depends on the following active services:*Required* (all): AvaUpc.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
      * @param string $include A comma separated list of additional data to retrieve.
@@ -10634,7 +10663,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -10649,7 +10678,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
      * * This API depends on the following active services:*Required* (all): AvaUpc.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that this UPC belongs to.
      * @param int $id The ID of the UPC you wish to update
@@ -10662,7 +10691,79 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams);
+        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
+    }
+
+    /**
+     * Delete a User Defined Field by User Defined Field id for a company.
+     *
+     * Marks the existing user defined field for a company as deleted.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, BasicReturns.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The id of the company the User Defined Field belongs to.
+     * @param int $id The id of the User Defined Field you wish to delete.
+     * @return ErrorDetail[]
+     */
+    public function deleteUserDefinedField($companyId, $id)    {
+        $path = "/api/v2/companies/{$companyId}/userdefinedfields/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
+    }
+
+    /**
+     * 
+     *
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, BasicReturns.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId 
+     * @param string $udfType Document or Line level UDF (See UserDefinedFieldType::* for a list of allowable values)
+     * @param boolean $allowDefaults If true this will add defaulted UDFs to the list that are not named yet
+     * @return FetchResult
+     */
+    public function listUserDefinedFieldsByCompanyId($companyId, $udfType, $allowDefaults)    {
+        $path = "/api/v2/companies/{$companyId}/userdefinedfields";
+        $guzzleParams = [
+            'query' => ['udfType' => $udfType, 'allowDefaults' => $allowDefaults],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+    }
+
+    /**
+     * Update a User Defined Field identified by id for a company
+     *
+     * Updates a User Defined Field for a company.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, CSPTester, FirmAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, BasicReturns.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The id of the company the user defined field belongs to.
+     * @param int $id 
+     * @param CompanyUserDefinedFieldModel $model 
+     * @return CompanyUserDefinedFieldModel
+     */
+    public function updateUserDefinedField($companyId, $id, $model)    {
+        $path = "/api/v2/companies/{$companyId}/userdefinedfields";
+        $guzzleParams = [
+            'query' => ['id' => $id],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -10679,7 +10780,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param PasswordChangeModel $model An object containing your current password and the new password.
      * @return string
@@ -10690,7 +10791,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams);
+        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -10709,7 +10810,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $accountId The unique ID number of the account where these users will be created.
      * @param UserModel[] $model The user or array of users you wish to create.
@@ -10721,7 +10822,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams);
+        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -10737,7 +10838,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, CompanyAdmin, Compliance Root User, CSPTester, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TreasuryAdmin.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the user you wish to delete.
      * @param int $accountId The accountID of the user you wish to delete.
@@ -10749,7 +10850,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams);
+        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -10765,7 +10866,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the user to retrieve.
      * @param int $accountId The accountID of the user you wish to get.
@@ -10778,7 +10879,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -10803,7 +10904,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the user to retrieve.
      * @param int $accountId The accountID of the user you wish to get.
@@ -10815,7 +10916,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -10837,7 +10938,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $accountId The accountID of the user you wish to list.
      * @param string $include Optional fetch commands.
@@ -10853,7 +10954,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -10877,7 +10978,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $include Optional fetch commands.
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* SuppressNewUserEmail
@@ -10892,7 +10993,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -10906,7 +11007,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the user you wish to update.
      * @param int $accountId The accountID of the user you wish to update.
@@ -10919,7 +11020,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams);
+        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -10933,7 +11034,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * within AvaTax. You can examine the subscriptions returned from this API call to look for a particular product
      * or subscription to provide useful information to the current user as to whether they are entitled to use
      * specific features of AvaTax.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @param string $serviceTypeId The service to check
      * @return SubscriptionModel
@@ -10944,7 +11045,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -10958,7 +11059,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * within AvaTax. You can examine the subscriptions returned from this API call to look for a particular product
      * or subscription to provide useful information to the current user as to whether they are entitled to use
      * specific features of AvaTax.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @return FetchResult
      */
@@ -10968,7 +11069,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
     }
 
     /**
@@ -10994,7 +11095,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API may be called without providing authentication credentials.
-     *
+     * Swagger Name: AvaTaxClient
      * 
      * @return PingResultModel
      */
@@ -11004,7 +11105,133 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams);
+        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+    }
+
+    /**
+     * Determines whether an individual meets or exceeds the minimum legal drinking age.
+     *
+     * The request must meet the following criteria in order to be evaluated:
+     * * *firstName*, *lastName*, and *address* are required fields.
+     * * One of the following sets of attributes are required for the *address*:
+     *  * *line1, city, region*
+     *  * *line1, postalCode*
+     * 
+     * Optionally, the transaction and its lines may use the following parameters:
+     * * A *DOB* (Date of Birth) field. The value should be ISO-8601 compliant (e.g. 2020-07-21).
+     * * Beyond the required *address* fields above, a *country* field is permitted
+     *  * The valid values for this attribute are [*US, USA*]
+     * 
+     * **Security Policies**
+     * This API depends on the active subscription *AgeVerification*
+     * Swagger Name: AvaTaxBeverageClient
+     * 
+     * @param string $simulatedFailureCode (Optional) The failure code included in the simulated response of the endpoint. Note that this endpoint is only available in Sandbox for testing purposes.
+     * @param AgeVerifyRequest $model Information about the individual whose age is being verified.
+     * @return AgeVerifyResult
+     */
+    public function verifyAge($simulatedFailureCode, $model)    {
+        $path = "/api/v2/ageverification/verify";
+        $guzzleParams = [
+            'query' => ['simulatedFailureCode' => $simulatedFailureCode],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams,'' );
+    }
+
+    /**
+     * Removes the transaction from consideration when evaluating regulations that span multiple transactions.
+     *
+     * 
+     * Swagger Name: AvaTaxBeverageClient
+     * 
+     * @param string $companyCode The company code of the company that recorded the transaction
+     * @param string $transactionCode The transaction code to retrieve
+     * @param string $documentType (Optional): The document type of the transaction to operate on. If omitted, defaults to "SalesInvoice"
+     * @return 
+     */
+    public function deregisterShipment($companyCode, $transactionCode, $documentType)    {
+        $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/shipment/registration";
+        $guzzleParams = [
+            'query' => ['documentType' => $documentType],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams,'' );
+    }
+
+    /**
+     * Registers the transaction so that it may be included when evaluating regulations that span multiple transactions.
+     *
+     * 
+     * Swagger Name: AvaTaxBeverageClient
+     * 
+     * @param string $companyCode The company code of the company that recorded the transaction
+     * @param string $transactionCode The transaction code to retrieve
+     * @param string $documentType (Optional): The document type of the transaction to operate on. If omitted, defaults to "SalesInvoice"
+     * @return 
+     */
+    public function registerShipment($companyCode, $transactionCode, $documentType)    {
+        $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/shipment/registration";
+        $guzzleParams = [
+            'query' => ['documentType' => $documentType],
+            'body' => null
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams,'' );
+    }
+
+    /**
+     * Evaluates a transaction against a set of direct-to-consumer shipping regulations and, if compliant, registers the transaction so that it may be included when evaluating regulations that span multiple transactions.
+     *
+     * 
+     * Swagger Name: AvaTaxBeverageClient
+     * 
+     * @param string $companyCode The company code of the company that recorded the transaction
+     * @param string $transactionCode The transaction code to retrieve
+     * @param string $documentType (Optional): The document type of the transaction to operate on. If omitted, defaults to "SalesInvoice"
+     * @return ShippingVerifyResult
+     */
+    public function registerShipmentIfCompliant($companyCode, $transactionCode, $documentType)    {
+        $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/shipment/registerIfCompliant";
+        $guzzleParams = [
+            'query' => ['documentType' => $documentType],
+            'body' => null
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams,'' );
+    }
+
+    /**
+     * Evaluates a transaction against a set of direct-to-consumer shipping regulations.
+     *
+     * The transaction and its lines must meet the following criteria in order to be evaluated:
+     * * The transaction must be recorded. Using a type of *SalesInvoice* is recommended.
+     * * A parameter with the name *AlcoholRouteType* must be specified and the value must be one of the following: '*DTC*', '*Retailer DTC*'
+     * * A parameter with the name *RecipientName* must be specified and the value must be the name of the recipient.
+     * * Each alcohol line must include a *ContainerSize* parameter that describes the volume of a single container. Use the *unit* field to specify one of the following units: '*Litre*', '*Millilitre*', '*gallon (US fluid)*', '*quart (US fluid)*', '*ounce (fluid US customary)*'
+     * * Each alcohol line must include a *PackSize* parameter that describes the number of containers in a pack. Specify *Count* in the *unit* field.
+     * 
+     * Optionally, the transaction and its lines may use the following parameters:
+     * * The *ShipDate* parameter may be used if the date of shipment is different than the date of the transaction. The value should be ISO-8601 compliant (e.g. 2020-07-21).
+     * * The *RecipientDOB* parameter may be used to evaluate age restrictions. The value should be ISO-8601 compliant (e.g. 2020-07-21).
+     * * The *PurchaserDOB* parameter may be used to evaluate age restrictions. The value should be ISO-8601 compliant (e.g. 2020-07-21).
+     * * The *SalesLocation* parameter may be used to describe whether the sale was made *OnSite* or *OffSite*. *OffSite* is the default value.
+     * * The *AlcoholContent* parameter may be used to describe the alcohol percentage by volume of the item. Specify *Percentage* in the *unit* field.
+     * 
+     * **Security Policies**
+     * This API depends on all of the following active subscriptions: *AvaAlcohol, AutoAddress, AvaTaxPro*
+     * Swagger Name: AvaTaxBeverageClient
+     * 
+     * @param string $companyCode The company code of the company that recorded the transaction
+     * @param string $transactionCode The transaction code to retrieve
+     * @param string $documentType (Optional): The document type of the transaction to operate on. If omitted, defaults to "SalesInvoice"
+     * @return ShippingVerifyResult
+     */
+    public function verifyShipment($companyCode, $transactionCode, $documentType)    {
+        $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/shipment/verify";
+        $guzzleParams = [
+            'query' => ['documentType' => $documentType],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams,'' );
     }
 
 }

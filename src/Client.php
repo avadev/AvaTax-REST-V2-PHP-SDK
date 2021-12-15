@@ -155,11 +155,11 @@ class AvaTaxClientBase
      * @param string $apiUrl           The relative path of the API on the server
      * @param string $verb             The HTTP verb being used in this request
      * @param string $guzzleParams     The Guzzle parameters for this request, including query string and body parameters
-     *
+     * @param string $apiversion       API Version of the request
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Exception
      */
-    protected function restCall($apiUrl, $verb, $guzzleParams)
+    protected function restCall($apiUrl, $verb, $guzzleParams, $apiversion='')
     {
         // Set authentication on the parameters
         if (count($this->auth) == 2) {
@@ -168,16 +168,16 @@ class AvaTaxClientBase
             }
             $guzzleParams['headers'] = [
                 'Accept' => 'application/json',
-                'X-Avalara-Client' => "{$this->appName}; {$this->appVersion}; PhpRestClient; 21.10.0; {$this->machineName}"
+                'X-Avalara-Client' => "{$this->appName}; {$this->appVersion}; PhpRestClient; {$apiversion}; {$this->machineName}"
             ];
         } else {
             $guzzleParams['headers'] = [
                 'Accept' => 'application/json',
                 'Authorization' => 'Bearer '.$this->auth[0],
-                'X-Avalara-Client' => "{$this->appName}; {$this->appVersion}; PhpRestClient; 21.10.0; {$this->machineName}"
+                'X-Avalara-Client' => "{$this->appName}; {$this->appVersion}; PhpRestClient; {$apiversion}; {$this->machineName}"
             ];
         }
-
+        
         // Check the client config, if set - update guzzleParams['timeout'] 
         if (isset($this->client->getConfig()['timeout']) ) {
             $guzzleParams['timeout'] = $this->client->getConfig()['timeout'];
@@ -186,7 +186,7 @@ class AvaTaxClientBase
         if (!isset($guzzleParams['timeout'])) {
             $guzzleParams['timeout'] = 1200;
         }
-
+        
         // Check the client config, if set - update guzzleParams['connect_timeout'] 
         if (isset($this->client->getConfig()['connect_timeout'])) {
             $guzzleParams['connect_timeout'] = $this->client->getConfig()['connect_timeout'];
@@ -199,14 +199,29 @@ class AvaTaxClientBase
         // Contact the server
         try {
             $response = $this->client->request($verb, $apiUrl, $guzzleParams);
-
             $body = $response->getBody();
 
+            $length = 0;
+            
+            $contentLength =$response->getHeader('Content-Length');
+            if ($contentLength!=null)
+            {
+                $length=$contentLength[0];
+            } 
+            $code=$response->getStatusCode();
+            $contentTypes =  $response->getHeader('Content-Type');
+            
+            if ( in_array ("application/json",$contentTypes))
+            {
+                if ($length ==0 and intdiv($code , 100) ==2 ){
+                        return null;                
+                }
+            }
             $JsonBody = json_decode($body);
             if (is_null($JsonBody)) {
-			  if (json_last_error() === JSON_ERROR_SYNTAX) {
-				  throw new \Exception('The response is in unexpected format. The response is: ' . $JsonBody);
-			  }
+                if (json_last_error() === JSON_ERROR_SYNTAX) {
+				     throw new \Exception('The response is in unexpected format. The response is: ' . $JsonBody);
+			     }
               return $body;
             } else {
               return $JsonBody;

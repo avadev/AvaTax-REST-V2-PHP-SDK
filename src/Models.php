@@ -16,6 +16,7 @@ use GuzzleHttp\Client;
 
 /**
  * Represents a service that this account has subscribed to.
+ * Swagger Name: AvaTaxClient
  */
 class SubscriptionModel
 {
@@ -62,6 +63,7 @@ class SubscriptionModel
 }
 /**
  * An account user who is permitted to use AvaTax.
+ * Swagger Name: AvaTaxClient
  */
 class UserModel
 {
@@ -128,6 +130,7 @@ class UserModel
 }
 /**
  * An AvaTax account.
+ * Swagger Name: AvaTaxClient
  */
 class AccountModel
 {
@@ -190,6 +193,7 @@ class AccountModel
 }
 /**
  * 
+ * Swagger Name: AvaTaxClient
  */
 class ErrorDetail
 {
@@ -232,6 +236,7 @@ class ErrorDetail
 }
 /**
  * An AvaTax account.
+ * Swagger Name: AvaTaxClient
  */
 class AccountMigrationStatusModel
 {
@@ -258,6 +263,7 @@ class AccountMigrationStatusModel
 }
 /**
  * Company Address Information
+ * Swagger Name: AvaTaxClient
  */
 class CompanyAddress
 {
@@ -285,6 +291,7 @@ class CompanyAddress
 /**
  * Represents a request for a new account with Avalara for a new subscriber.
  * Contains information about the account requested and the rate plan selected.
+ * Swagger Name: AvaTaxClient
  */
 class NewAccountRequestModel
 {
@@ -357,7 +364,7 @@ class NewAccountRequestModel
      */
     public $welcomeEmail;
     /**
-     * @var CompanyAddress Address information of the account being created.
+     * @var CompanyAddress 
      */
     public $companyAddress;
     /**
@@ -391,6 +398,7 @@ class NewAccountRequestModel
 }
 /**
  * Represents information about a newly created account
+ * Swagger Name: AvaTaxClient
  */
 class NewAccountModel
 {
@@ -425,6 +433,7 @@ class NewAccountModel
 }
 /**
  * Gets the response for the offer request
+ * Swagger Name: AvaTaxClient
  */
 class OfferModel
 {
@@ -440,6 +449,7 @@ class OfferModel
 /**
  * Represents a request for a free trial account for AvaTax.
  * Free trial accounts are only available on the Sandbox environment.
+ * Swagger Name: AvaTaxClient
  */
 class FreeTrialRequestModel
 {
@@ -468,7 +478,7 @@ class FreeTrialRequestModel
      */
     public $campaign;
     /**
-     * @var CompanyAddress The Address information of the account
+     * @var CompanyAddress 
      */
     public $companyAddress;
     /**
@@ -486,6 +496,7 @@ class FreeTrialRequestModel
 }
 /**
  * Represents a license key reset request.
+ * Swagger Name: AvaTaxClient
  */
 class ResetLicenseKeyModel
 {
@@ -500,6 +511,7 @@ class ResetLicenseKeyModel
 }
 /**
  * Represents a license key for this account.
+ * Swagger Name: AvaTaxClient
  */
 class LicenseKeyModel
 {
@@ -518,6 +530,7 @@ class LicenseKeyModel
 }
 /**
  * An account user who is permitted to use AvaTax.
+ * Swagger Name: AvaTaxClient
  */
 class AccountLicenseKeyModel
 {
@@ -548,6 +561,7 @@ class AccountLicenseKeyModel
 }
 /**
  * Represents a request to activate an account by reading and accepting its terms and conditions.
+ * Swagger Name: AvaTaxClient
  */
 class ActivateAccountModel
 {
@@ -562,6 +576,7 @@ class ActivateAccountModel
 }
 /**
  * Represents one configuration setting for this account
+ * Swagger Name: AvaTaxClient
  */
 class AccountConfigurationModel
 {
@@ -600,6 +615,7 @@ class AccountConfigurationModel
 }
 /**
  * 
+ * Swagger Name: AvaTaxClient
  */
 class AuditEvent
 {
@@ -638,6 +654,7 @@ class AuditEvent
  * The information on this record was captured by AvaTax when your API call was made. If you are unsure why you
  * received an error, you can fetch these audit objects and examine the `RequestUrl`, `RequestBody`, and `ErrorMessage`
  * fields to determine root cause for the error.
+ * Swagger Name: AvaTaxClient
  */
 class AuditModel
 {
@@ -776,6 +793,7 @@ class AuditModel
 }
 /**
  * TextCase info for input address
+ * Swagger Name: AvaTaxClient
  */
 class AddressValidationInfo
 {
@@ -822,6 +840,7 @@ class AddressValidationInfo
 }
 /**
  * Represents a base address element.
+ * Swagger Name: AvaTaxClient
  */
 class AddressInfo
 {
@@ -864,6 +883,7 @@ class AddressInfo
 }
 /**
  * Represents a validated address
+ * Swagger Name: AvaTaxClient
  */
 class ValidatedAddressInfo
 {
@@ -910,6 +930,7 @@ class ValidatedAddressInfo
 }
 /**
  * Coordinate Info
+ * Swagger Name: AvaTaxClient
  */
 class CoordinateInfo
 {
@@ -924,6 +945,7 @@ class CoordinateInfo
 }
 /**
  * Information about a tax authority relevant for an address.
+ * Swagger Name: AvaTaxClient
  */
 class TaxAuthorityInfo
 {
@@ -946,6 +968,7 @@ class TaxAuthorityInfo
 }
 /**
  * Informational or warning messages returned by AvaTax with a transaction
+ * Swagger Name: AvaTaxClient
  */
 class AvaTaxMessage
 {
@@ -972,11 +995,12 @@ class AvaTaxMessage
 }
 /**
  * Address Resolution Model
+ * Swagger Name: AvaTaxClient
  */
 class AddressResolutionModel
 {
     /**
-     * @var AddressInfo The original address
+     * @var AddressInfo 
      */
     public $address;
     /**
@@ -984,7 +1008,7 @@ class AddressResolutionModel
      */
     public $validatedAddresses;
     /**
-     * @var CoordinateInfo The geospatial coordinates of this address
+     * @var CoordinateInfo 
      */
     public $coordinates;
     /**
@@ -1002,6 +1026,7 @@ class AddressResolutionModel
 }
 /**
  * Model for Advanced Rules when full details are requested
+ * Swagger Name: AvaTaxClient
  */
 class AdvancedRuleFullDetailsModel
 {
@@ -1084,6 +1109,7 @@ class AdvancedRuleFullDetailsModel
 }
 /**
  * Model for retrieving customer data schema
+ * Swagger Name: AvaTaxClient
  */
 class AdvancedRuleCustomerDataSchemaModel
 {
@@ -1098,6 +1124,7 @@ class AdvancedRuleCustomerDataSchemaModel
 }
 /**
  * A contact person for a company.
+ * Swagger Name: AvaTaxClient
  */
 class ContactModel
 {
@@ -1192,6 +1219,7 @@ class ContactModel
 }
 /**
  * Represents a classification for a given item.
+ * Swagger Name: AvaTaxClient
  */
 class ClassificationModel
 {
@@ -1206,6 +1234,7 @@ class ClassificationModel
 }
 /**
  * Represents a parameter associated with an item.
+ * Swagger Name: AvaTaxClient
  */
 class ItemParameterModel
 {
@@ -1244,6 +1273,7 @@ class ItemParameterModel
 }
 /**
  * Represents a tag for an item in your company's product catalog.
+ * Swagger Name: AvaTaxClient
  */
 class ItemTagDetailModel
 {
@@ -1274,6 +1304,7 @@ class ItemTagDetailModel
 }
 /**
  * Represents an item in your company's product catalog.
+ * Swagger Name: AvaTaxClient
  */
 class ItemModel
 {
@@ -1340,6 +1371,7 @@ class ItemModel
 }
 /**
  * Represents the answer to one local jurisdiction question for a location.
+ * Swagger Name: AvaTaxClient
  */
 class LocationSettingModel
 {
@@ -1358,6 +1390,7 @@ class LocationSettingModel
 }
 /**
  * The parameter associated with a company location.
+ * Swagger Name: AvaTaxClient
  */
 class LocationParameterModel
 {
@@ -1385,6 +1418,7 @@ class LocationParameterModel
 /**
  * A location where this company does business.
  * Some jurisdictions may require you to list all locations where your company does business.
+ * Swagger Name: AvaTaxClient
  */
 class LocationModel
 {
@@ -1507,6 +1541,7 @@ class LocationModel
 }
 /**
  * Represents a parameter associated with a nexus.
+ * Swagger Name: AvaTaxClient
  */
 class NexusParameterDetailModel
 {
@@ -1544,6 +1579,7 @@ class NexusParameterDetailModel
  * When calling `CreateNexus` or `UpdateNexus`, all values in your nexus object except for the user-selectable fields
  * must match an Avalara-defined system nexus object. You can retrieve a list of Avalara-defined system nexus objects
  * by calling `ListNexus`. If any data does not match, AvaTax may not recognize your nexus declaration.
+ * Swagger Name: AvaTaxClient
  */
 class NexusModel
 {
@@ -1687,6 +1723,7 @@ class NexusModel
  * A setting can refer to any type of data you need to remember about this company object.
  * When creating this object, you may define your own `set`, `name`, and `value` parameters.
  * To define your own values, please choose a `set` name that begins with `X-` to indicate an extension.
+ * Swagger Name: AvaTaxClient
  */
 class SettingModel
 {
@@ -1722,6 +1759,7 @@ class SettingModel
 /**
  * Represents a tax code that can be applied to items on a transaction.
  * A tax code can have specific rules for specific jurisdictions that change the tax calculation behavior.
+ * Swagger Name: AvaTaxClient
  */
 class TaxCodeModel
 {
@@ -1795,6 +1833,7 @@ class TaxCodeModel
  * Because different types of tax rules have different behavior, some fields may change their behavior based on
  * the type of tax rule selected. Please read the documentation for each field carefully and ensure that
  * the value you send is appropriate for the type of tax rule.
+ * Swagger Name: AvaTaxClient
  */
 class TaxRuleProductDetailModel
 {
@@ -1833,6 +1872,7 @@ class TaxRuleProductDetailModel
  * Because different types of tax rules have different behavior, some fields may change their behavior based on
  * the type of tax rule selected. Please read the documentation for each field carefully and ensure that
  * the value you send is appropriate for the type of tax rule.
+ * Swagger Name: AvaTaxClient
  */
 class TaxRuleModel
 {
@@ -2003,6 +2043,7 @@ class TaxRuleModel
 }
 /**
  * One Universal Product Code object as defined for your company.
+ * Swagger Name: AvaTaxClient
  */
 class UPCModel
 {
@@ -2061,6 +2102,7 @@ class UPCModel
 }
 /**
  * 
+ * Swagger Name: AvaTaxClient
  */
 class EcmsDetailTaxCodeModel
 {
@@ -2079,6 +2121,7 @@ class EcmsDetailTaxCodeModel
 }
 /**
  * Represents an ECMS record, used internally by AvaTax to track information about exemptions.
+ * Swagger Name: AvaTaxClient
  */
 class EcmsDetailModel
 {
@@ -2125,6 +2168,7 @@ class EcmsDetailModel
 }
 /**
  * Exempt certificate
+ * Swagger Name: AvaTaxClient
  */
 class EcmsModel
 {
@@ -2251,6 +2295,7 @@ class EcmsModel
 }
 /**
  * Represents a parameter associated with a company.
+ * Swagger Name: AvaTaxClient
  */
 class CompanyParameterDetailModel
 {
@@ -2277,6 +2322,7 @@ class CompanyParameterDetailModel
 }
 /**
  * Represents a parameter associated with a company.
+ * Swagger Name: AvaTaxClient
  */
 class CustomerSupplierModel
 {
@@ -2295,6 +2341,7 @@ class CustomerSupplierModel
 }
 /**
  * A company or business entity.
+ * Swagger Name: AvaTaxClient
  */
 class CompanyModel
 {
@@ -2461,6 +2508,7 @@ class CompanyModel
 }
 /**
  * Model for changing the approved status of an advanced rule
+ * Swagger Name: AvaTaxClient
  */
 class ApproveAdvancedRuleModel
 {
@@ -2471,6 +2519,7 @@ class ApproveAdvancedRuleModel
 }
 /**
  * Model for toggling visibility of an advanced rule for an account
+ * Swagger Name: AvaTaxClient
  */
 class AdvancedRuleVisibilityModel
 {
@@ -2485,6 +2534,7 @@ class AdvancedRuleVisibilityModel
 }
 /**
  * A generic global advanced rule encapsulating a script
+ * Swagger Name: AvaTaxClient
  */
 class AdvancedRuleModel
 {
@@ -2511,6 +2561,7 @@ class AdvancedRuleModel
 }
 /**
  * Model representing an execution of an advanced rule for a company
+ * Swagger Name: AvaTaxClient
  */
 class AdvancedRuleExecutionModel
 {
@@ -2543,7 +2594,7 @@ class AdvancedRuleExecutionModel
      */
     public $ruleId;
     /**
-     * @var AdvancedRuleModel Advanced rule to execute
+     * @var AdvancedRuleModel 
      */
     public $rule;
     /**
@@ -2557,6 +2608,7 @@ class AdvancedRuleExecutionModel
 }
 /**
  * Model for updating rule execution order
+ * Swagger Name: AvaTaxClient
  */
 class AdvancedRuleExecutionOrderModel
 {
@@ -2567,6 +2619,7 @@ class AdvancedRuleExecutionOrderModel
 }
 /**
  * Model representing a lookup file for a company
+ * Swagger Name: AvaTaxClient
  */
 class AdvancedRuleLookupFileModel
 {
@@ -2613,6 +2666,7 @@ class AdvancedRuleLookupFileModel
 }
 /**
  * Represents information about a tax form known to Avalara
+ * Swagger Name: AvaTaxClient
  */
 class AvaFileFormModel
 {
@@ -2691,6 +2745,7 @@ class AvaFileFormModel
 }
 /**
  * Represents one file in a batch upload.
+ * Swagger Name: AvaTaxClient
  */
 class BatchFileModel
 {
@@ -2733,6 +2788,7 @@ class BatchFileModel
 }
 /**
  * Represents a batch of uploaded documents.
+ * Swagger Name: AvaTaxClient
  */
 class BatchModel
 {
@@ -2807,6 +2863,7 @@ class BatchModel
 }
 /**
  * Represents an address to resolve.
+ * Swagger Name: AvaTaxClient
  */
 class AddressLocationInfo
 {
@@ -2867,40 +2924,46 @@ class AddressLocationInfo
  * we will be using only latitude and longitude and will discard line, city, region, country and postal code information for the transaction.
  * Please ensure that you have the correct latitude/longitude information for the addresses prior to using the API.
  * If you provide either latitude or longitude information but not both, we will be using the line, city, region, country and postal code information for the addresses.
+ * Swagger Name: AvaTaxClient
  */
 class AddressesModel
 {
     /**
-     * @var AddressLocationInfo If this transaction occurred at a retail point-of-sale location, provide that single address here and leave  all other address types null.
+     * @var AddressLocationInfo 
      */
     public $singleLocation;
     /**
-     * @var AddressLocationInfo The origination address where the products were shipped from, or from where the services originated.
+     * @var AddressLocationInfo 
      */
     public $shipFrom;
     /**
-     * @var AddressLocationInfo The destination address where the products were shipped to, or where the services were delivered.
+     * @var AddressLocationInfo 
      */
     public $shipTo;
     /**
-     * @var AddressLocationInfo The place of business where you receive the customer's order. This address type is valid in the United States only  and only applies to tangible personal property.
+     * @var AddressLocationInfo 
      */
     public $pointOfOrderOrigin;
     /**
-     * @var AddressLocationInfo The place of business where you accept/approve the customer’s order,  thereby becoming contractually obligated to make the sale. This address type is valid in the United States only  and only applies to tangible personal property.
+     * @var AddressLocationInfo 
      */
     public $pointOfOrderAcceptance;
     /**
-     * @var AddressLocationInfo The address where the goods are located or where services are rendered.This address type is valid only for VAT transactions.
+     * @var AddressLocationInfo 
      */
     public $goodsPlaceOrServiceRendered;
     /**
-     * @var AddressLocationInfo The address of the buyer importing a good from another country.This address type is valid only for VAT transactions.
+     * @var AddressLocationInfo 
      */
     public $import;
+    /**
+     * @var AddressLocationInfo 
+     */
+    public $billTo;
 }
 /**
  * Represents a transaction parameter.
+ * Swagger Name: AvaTaxClient
  */
 class TransactionLineTaxAmountByTaxTypeModel
 {
@@ -2915,6 +2978,7 @@ class TransactionLineTaxAmountByTaxTypeModel
 }
 /**
  * Represents a tax override for a transaction
+ * Swagger Name: AvaTaxClient
  */
 class TaxOverrideModel
 {
@@ -2941,6 +3005,7 @@ class TaxOverrideModel
 }
 /**
  * Represents a transaction parameter.
+ * Swagger Name: AvaTaxClient
  */
 class TransactionLineParameterModel
 {
@@ -2959,6 +3024,7 @@ class TransactionLineParameterModel
 }
 /**
  * User Defined fields/Flex Fields at Transaction Line level.
+ * Swagger Name: AvaTaxClient
  */
 class TransactionLineUserDefinedFieldModel
 {
@@ -2973,6 +3039,7 @@ class TransactionLineUserDefinedFieldModel
 }
 /**
  * Represents one line item in a transaction
+ * Swagger Name: AvaTaxClient
  */
 class LineItemModel
 {
@@ -2989,7 +3056,7 @@ class LineItemModel
      */
     public $amount;
     /**
-     * @var AddressesModel The addresses to use for this transaction line.     If you set this value to `null`, or if you omit this element from your API call, then instead the transaction  will use the `addresses` from the document level.     If you specify any other value besides `null`, only addresses specified for this line will be used for this line.
+     * @var AddressesModel 
      */
     public $addresses;
     /**
@@ -3041,7 +3108,7 @@ class LineItemModel
      */
     public $businessIdentificationNo;
     /**
-     * @var TaxOverrideModel Specifies a tax override for this line.
+     * @var TaxOverrideModel 
      */
     public $taxOverride;
     /**
@@ -3087,6 +3154,7 @@ class LineItemModel
 }
 /**
  * Represents a transaction parameter.
+ * Swagger Name: AvaTaxClient
  */
 class TransactionParameterModel
 {
@@ -3105,6 +3173,7 @@ class TransactionParameterModel
 }
 /**
  * User Defined fields/Flex Fields at Transaction level.
+ * Swagger Name: AvaTaxClient
  */
 class TransactionUserDefinedFieldModel
 {
@@ -3119,6 +3188,7 @@ class TransactionUserDefinedFieldModel
 }
 /**
  * Create a transaction
+ * Swagger Name: AvaTaxClient
  */
 class CreateTransactionModel
 {
@@ -3171,7 +3241,7 @@ class CreateTransactionModel
      */
     public $exemptionNo;
     /**
-     * @var AddressesModel Default addresses for all lines in this document.     These addresses are the default values that will be used for any lines that do not have their own  address information. If you specify addresses for a line, then no default addresses will be loaded  for that line.
+     * @var AddressesModel 
      */
     public $addresses;
     /**
@@ -3199,7 +3269,7 @@ class CreateTransactionModel
      */
     public $batchCode;
     /**
-     * @var TaxOverrideModel Specifies a tax override for the entire document
+     * @var TaxOverrideModel 
      */
     public $taxOverride;
     /**
@@ -3261,6 +3331,7 @@ class CreateTransactionModel
 }
 /**
  * Replace an existing transaction recorded in AvaTax with a new one.
+ * Swagger Name: AvaTaxClient
  */
 class BatchAdjustTransactionModel
 {
@@ -3285,12 +3356,13 @@ class BatchAdjustTransactionModel
      */
     public $adjustmentDescription;
     /**
-     * @var CreateTransactionModel Replace the current transaction with tax data calculated for this new transaction
+     * @var CreateTransactionModel 
      */
     public $newTransaction;
 }
 /**
  * Create or adjust transaction model
+ * Swagger Name: AvaTaxClient
  */
 class CreateOrAdjustTransactionModel
 {
@@ -3303,12 +3375,13 @@ class CreateOrAdjustTransactionModel
      */
     public $adjustmentDescription;
     /**
-     * @var CreateTransactionModel The create transaction model to be created or updated.     If the transaction does not exist, create transaction.  If the transaction exists, adjust the existing transaction.
+     * @var CreateTransactionModel 
      */
     public $createTransactionModel;
 }
 /**
  * A request to void a previously created transaction.
+ * Swagger Name: AvaTaxClient
  */
 class BatchVoidTransactionModel
 {
@@ -3332,6 +3405,7 @@ class BatchVoidTransactionModel
 /**
  * Represents a transaction batch item.
  * Only one child transaction model should contain data.
+ * Swagger Name: AvaTaxClient
  */
 class TransactionBatchItemModel
 {
@@ -3340,24 +3414,25 @@ class TransactionBatchItemModel
      */
     public $memo;
     /**
-     * @var CreateTransactionModel Represents a transaction to be created.
+     * @var CreateTransactionModel 
      */
     public $createTransactionModel;
     /**
-     * @var BatchAdjustTransactionModel Represents an existing transaction to be adjusted.
+     * @var BatchAdjustTransactionModel 
      */
     public $adjustTransactionModel;
     /**
-     * @var CreateOrAdjustTransactionModel Represents a transaction to be created or to be adjusted if exists.
+     * @var CreateOrAdjustTransactionModel 
      */
     public $createOrAdjustTransactionModel;
     /**
-     * @var BatchVoidTransactionModel Represents an existing transaction to be voided.
+     * @var BatchVoidTransactionModel 
      */
     public $voidTransactionModel;
 }
 /**
  * Represents a create transaction batch request model.
+ * Swagger Name: AvaTaxClient
  */
 class CreateTransactionBatchRequestModel
 {
@@ -3372,6 +3447,7 @@ class CreateTransactionBatchRequestModel
 }
 /**
  * Represents a create transaction batch response model.
+ * Swagger Name: AvaTaxClient
  */
 class CreateTransactionBatchResponseModel
 {
@@ -3438,6 +3514,7 @@ class CreateTransactionBatchResponseModel
  * directly in your connector. Your customer will be redirected to https://app.certexpress.com/ where
  * they can follow a step-by-step guide to enter information about their exemption certificates. The
  * certificates entered will be recorded and automatically linked to their customer record.
+ * Swagger Name: AvaTaxClient
  */
 class CreateCertExpressInvitationModel
 {
@@ -3466,6 +3543,7 @@ class CreateCertExpressInvitationModel
  * An exemption reason defines why a certificate allows a customer to be exempt
  * for purposes of tax calculation. For a full list of defined exemption reasons,
  * please call the `ListCertificateExemptionReasons` API.
+ * Swagger Name: AvaTaxClient
  */
 class ExemptionReasonModel
 {
@@ -3480,6 +3558,7 @@ class ExemptionReasonModel
 }
 /**
  * Represents a purchase order number for a transaction
+ * Swagger Name: AvaTaxClient
  */
 class PoNumberModel
 {
@@ -3496,6 +3575,7 @@ class PoNumberModel
  * Information about a physical area or zone in which a certificate can apply.
  * An exposure zone for an exemption certificate will generally be a tax authority such
  * as a state, country, or local government entity.
+ * Swagger Name: AvaTaxClient
  */
 class ExposureZoneModel
 {
@@ -3540,6 +3620,7 @@ class ExposureZoneModel
  * A certificate attribute can be thought of as a feature or flag that is applied to a certificate.
  * A single certificate can be linked to zero, one, or many certificate attributes. The full list of
  * attributes can be obtained by calling the `ListCertificateAttributes` API.
+ * Swagger Name: AvaTaxClient
  */
 class CertificateAttributeModel
 {
@@ -3565,6 +3646,7 @@ class CertificateAttributeModel
  * can contain information about a customer's eligibility for exemption from sales or use taxes based on
  * criteria you specify when you store the certificate. To view or manage your certificates directly, please
  * log onto the administrative website for the product you purchased.
+ * Swagger Name: AvaTaxClient
  */
 class CertificateModel
 {
@@ -3613,11 +3695,11 @@ class CertificateModel
      */
     public $exemptionNumber;
     /**
-     * @var ExemptionReasonModel The exemption reason that CertCapture audit/internal logic identifies for created certificate.
+     * @var ExemptionReasonModel 
      */
     public $validatedExemptionReason;
     /**
-     * @var ExemptionReasonModel The exemption reason associated with this certificate. For example, the reason code for exemption  for purposes of resale is `RESALE`.     For a list of exemption reasons, call `ListCertificateExemptReasons`.
+     * @var ExemptionReasonModel 
      */
     public $exemptionReason;
     /**
@@ -3653,7 +3735,7 @@ class CertificateModel
      */
     public $poNumbers;
     /**
-     * @var ExposureZoneModel The exposure zone where this certificate is valid.
+     * @var ExposureZoneModel 
      */
     public $exposureZone;
     /**
@@ -3684,6 +3766,7 @@ class CertificateModel
  * support additional use cases beyond that supported directly by Avalara's exemption certificate software.
  *  
  * For more information about custom fields, see the [Avalara Help Center article about custom fields](https://help.avalara.com/0021_Avalara_CertCapture/All_About_CertCapture/Edit_or_Remove_Details_about_Customers).
+ * Swagger Name: AvaTaxClient
  */
 class CustomFieldModel
 {
@@ -3699,6 +3782,7 @@ class CustomFieldModel
 /**
  * A Customer's linked attribute denoting what features applied to the customer. A customer can
  * be linked to multiple customer attributes and vice versa.
+ * Swagger Name: AvaTaxClient
  */
 class CustomerAttributeModel
 {
@@ -3729,6 +3813,7 @@ class CustomerAttributeModel
 }
 /**
  * Represents a customer to whom you sell products and/or services.
+ * Swagger Name: AvaTaxClient
  */
 class CustomerModel
 {
@@ -3845,6 +3930,7 @@ class CustomerModel
  * The CoverLetter model represents a message sent along with an invitation to use CertExpress to
  * upload certificates. An invitation allows customers to use CertExpress to upload their exemption
  * certificates directly; this cover letter explains why the invitation was sent.
+ * Swagger Name: AvaTaxClient
  */
 class CoverLetterModel
 {
@@ -3899,6 +3985,7 @@ class CoverLetterModel
  * directly in your connector. Your customer will be redirected to https://app.certexpress.com/ where
  * they can follow a step-by-step guide to enter information about their exemption certificates. The
  * certificates entered will be recorded and automatically linked to their customer record.
+ * Swagger Name: AvaTaxClient
  */
 class CertExpressInvitationModel
 {
@@ -3919,11 +4006,11 @@ class CertExpressInvitationModel
      */
     public $customerCode;
     /**
-     * @var CustomerModel The customer who received this invitation.
+     * @var CustomerModel 
      */
     public $customer;
     /**
-     * @var CoverLetterModel The attached cover letter object to this request.
+     * @var CoverLetterModel 
      */
     public $coverLetter;
     /**
@@ -3961,6 +4048,7 @@ class CertExpressInvitationModel
 }
 /**
  * Represent what is the current status of certificate request
+ * Swagger Name: AvaTaxClient
  */
 class CertExpressInvitationStatusModel
 {
@@ -3969,7 +4057,7 @@ class CertExpressInvitationStatusModel
      */
     public $status;
     /**
-     * @var CertExpressInvitationModel The CertExpress invitation for the customer. If you specified an email address in the invitation  request, this invitation will be sent via email. Otherwise, you are expected to direct the customer  using a hyperlink directly in your application.
+     * @var CertExpressInvitationModel 
      */
     public $invitation;
 }
@@ -3978,6 +4066,7 @@ class CertExpressInvitationStatusModel
  *  
  * This model can be used to determine if your company is able to use the Customers, Certificates, and
  * CertExpressInvites APIs within AvaTax.
+ * Swagger Name: AvaTaxClient
  */
 class ProvisionStatusModel
 {
@@ -3996,6 +4085,7 @@ class ProvisionStatusModel
 }
 /**
  * Represents a customer to whom you sell products and/or services.
+ * Swagger Name: AvaTaxClient
  */
 class LinkCustomersModel
 {
@@ -4006,6 +4096,7 @@ class LinkCustomersModel
 }
 /**
  * A company and account
+ * Swagger Name: AvaTaxClient
  */
 class MrsCompanyModel
 {
@@ -4052,6 +4143,7 @@ class MrsCompanyModel
 }
 /**
  * Company Initialization Model
+ * Swagger Name: AvaTaxClient
  */
 class CompanyInitializationModel
 {
@@ -4138,6 +4230,7 @@ class CompanyInitializationModel
 }
 /**
  * Represents the current status of a funding ESign method
+ * Swagger Name: AvaTaxClient
  */
 class FundingESignMethodReturn
 {
@@ -4156,6 +4249,7 @@ class FundingESignMethodReturn
 }
 /**
  * Status of an Avalara Managed Returns funding configuration for a company
+ * Swagger Name: AvaTaxClient
  */
 class FundingStatusModel
 {
@@ -4196,7 +4290,7 @@ class FundingStatusModel
      */
     public $documentName;
     /**
-     * @var FundingESignMethodReturn MethodReturn
+     * @var FundingESignMethodReturn 
      */
     public $methodReturn;
     /**
@@ -4226,6 +4320,7 @@ class FundingStatusModel
 }
 /**
  * Status of an Avalara Managed Returns funding configuration for a company
+ * Swagger Name: AvaTaxClient
  */
 class FundingConfigurationModel
 {
@@ -4256,6 +4351,7 @@ class FundingConfigurationModel
 }
 /**
  * 
+ * Swagger Name: AvaTaxClient
  */
 class FundingInitiateModel
 {
@@ -4274,6 +4370,7 @@ class FundingInitiateModel
 }
 /**
  * Represents one configuration setting for this company
+ * Swagger Name: AvaTaxClient
  */
 class CompanyConfigurationModel
 {
@@ -4312,6 +4409,7 @@ class CompanyConfigurationModel
 }
 /**
  * Represents a change request for filing status for a company
+ * Swagger Name: AvaTaxClient
  */
 class FilingStatusChangeModel
 {
@@ -4322,6 +4420,7 @@ class FilingStatusChangeModel
 }
 /**
  * Represents a parameter associated with a company.
+ * Swagger Name: AvaTaxClient
  */
 class CustomerSupplierCountryParamModel
 {
@@ -4360,6 +4459,7 @@ class CustomerSupplierCountryParamModel
 }
 /**
  * The tax rate model.
+ * Swagger Name: AvaTaxClient
  */
 class ComplianceTaxRateModel
 {
@@ -4410,6 +4510,7 @@ class ComplianceTaxRateModel
 }
 /**
  * Represents information about a single legal taxing jurisdiction within a specific Avalara tax region.
+ * Swagger Name: AvaTaxClient
  */
 class DenormalizedJurisModel
 {
@@ -4472,6 +4573,7 @@ class DenormalizedJurisModel
 }
 /**
  * The tax region model.
+ * Swagger Name: AvaTaxClient
  */
 class TaxRegionModel
 {
@@ -4534,6 +4636,7 @@ class TaxRegionModel
 }
 /**
  * The tax region jurisdiction model.
+ * Swagger Name: AvaTaxClient
  */
 class TaxRegionJurisdictionModel
 {
@@ -4580,6 +4683,7 @@ class TaxRegionJurisdictionModel
 }
 /**
  * A model for aggregated rates.
+ * Swagger Name: AvaTaxClient
  */
 class ComplianceAggregatedTaxRateModel
 {
@@ -4610,6 +4714,7 @@ class ComplianceAggregatedTaxRateModel
 }
 /**
  * Model for distinct jurisdictions.
+ * Swagger Name: AvaTaxClient
  */
 class ComplianceJurisdictionModel
 {
@@ -4660,6 +4765,7 @@ class ComplianceJurisdictionModel
 }
 /**
  * A flattened model for jurisdictions and rates.
+ * Swagger Name: AvaTaxClient
  */
 class ComplianceJurisdictionRateModel
 {
@@ -4714,6 +4820,7 @@ class ComplianceJurisdictionRateModel
 }
 /**
  * Represents a customer to whom you sell products and/or services.
+ * Swagger Name: AvaTaxClient
  */
 class LinkCertificatesModel
 {
@@ -4724,6 +4831,7 @@ class LinkCertificatesModel
 }
 /**
  * Indicates the customer's exemption status in a specific country and region.
+ * Swagger Name: AvaTaxClient
  */
 class ExemptionStatusModel
 {
@@ -4732,12 +4840,13 @@ class ExemptionStatusModel
      */
     public $status;
     /**
-     * @var CertificateModel Certificate if the customer is exempted
+     * @var CertificateModel 
      */
     public $certificate;
 }
 /**
  * Data source object
+ * Swagger Name: AvaTaxClient
  */
 class DataSourceModel
 {
@@ -4808,6 +4917,7 @@ class DataSourceModel
 }
 /**
  * Identifies all nexus that match a particular tax form
+ * Swagger Name: AvaTaxClient
  */
 class NexusByTaxFormModel
 {
@@ -4831,6 +4941,7 @@ class NexusByTaxFormModel
 /**
  * Information about Avalara-defined tax code types.
  * This list is used when creating tax codes and tax rules.
+ * Swagger Name: AvaTaxClient
  */
 class TaxCodeTypesModel
 {
@@ -4841,6 +4952,7 @@ class TaxCodeTypesModel
 }
 /**
  * Represents a service or a subscription type.
+ * Swagger Name: AvaTaxClient
  */
 class SubscriptionTypeModel
 {
@@ -4855,6 +4967,7 @@ class SubscriptionTypeModel
 }
 /**
  * Represents a single security role.
+ * Swagger Name: AvaTaxClient
  */
 class SecurityRoleModel
 {
@@ -4869,6 +4982,7 @@ class SecurityRoleModel
 }
 /**
  * Tax Authority Model
+ * Swagger Name: AvaTaxClient
  */
 class TaxAuthorityModel
 {
@@ -4891,6 +5005,7 @@ class TaxAuthorityModel
 }
 /**
  * Represents a form that can be filed with a tax authority.
+ * Swagger Name: AvaTaxClient
  */
 class TaxAuthorityFormModel
 {
@@ -4905,6 +5020,7 @@ class TaxAuthorityFormModel
 }
 /**
  * usage of system defined parameters.
+ * Swagger Name: AvaTaxClient
  */
 class ParameterUsageModel
 {
@@ -4971,6 +5087,7 @@ class ParameterUsageModel
 }
 /**
  * usage of system defined parameters.
+ * Swagger Name: AvaTaxClient
  */
 class ClassificationParameterUsageMapModel
 {
@@ -5025,6 +5142,7 @@ class ClassificationParameterUsageMapModel
 }
 /**
  * usage of system defined parameters for returns.
+ * Swagger Name: AvaTaxClient
  */
 class ReturnsParameterUsageModel
 {
@@ -5079,6 +5197,7 @@ class ReturnsParameterUsageModel
 }
 /**
  * An extra property that can change the behavior of tax transactions.
+ * Swagger Name: AvaTaxClient
  */
 class ParameterModel
 {
@@ -5149,6 +5268,7 @@ class ParameterModel
 }
 /**
  * Information about questions that the local jurisdictions require for each location
+ * Swagger Name: AvaTaxClient
  */
 class LocationQuestionModel
 {
@@ -5216,6 +5336,7 @@ class LocationQuestionModel
 /**
  * Represents a language-specific localized name of a particular geographic entity such
  * as a country or a region.
+ * Swagger Name: AvaTaxClient
  */
 class IsoLocalizedName
 {
@@ -5234,6 +5355,7 @@ class IsoLocalizedName
 }
 /**
  * Represents an ISO 3166 recognized country
+ * Swagger Name: AvaTaxClient
  */
 class IsoCountryModel
 {
@@ -5264,6 +5386,7 @@ class IsoCountryModel
 }
 /**
  * Represents a region, province, or state within a country
+ * Swagger Name: AvaTaxClient
  */
 class IsoRegionModel
 {
@@ -5298,6 +5421,7 @@ class IsoRegionModel
 }
 /**
  * Represents a code describing the intended use for a product that may affect its taxability
+ * Swagger Name: AvaTaxClient
  */
 class EntityUseCodeModel
 {
@@ -5324,6 +5448,7 @@ class EntityUseCodeModel
  *  
  * To indicate that your company has signed up for a preferred program, specify the `code` value from this
  * object as the value for the `AvaTax.LC.PreferredProgram` parameter in your transaction.
+ * Swagger Name: AvaTaxClient
  */
 class PreferredProgramModel
 {
@@ -5354,6 +5479,7 @@ class PreferredProgramModel
 }
 /**
  * Represents an ISO 4217 currency code used for designating the currency of a transaction.
+ * Swagger Name: AvaTaxClient
  */
 class CurrencyModel
 {
@@ -5372,6 +5498,7 @@ class CurrencyModel
 }
 /**
  * Represents a System Country.
+ * Swagger Name: AvaTaxClient
  */
 class ProductSystemCountryModel
 {
@@ -5398,6 +5525,7 @@ class ProductSystemCountryModel
 }
 /**
  * Represents a product classification system.
+ * Swagger Name: AvaTaxClient
  */
 class ProductClassificationSystemModel
 {
@@ -5424,6 +5552,7 @@ class ProductClassificationSystemModel
 }
 /**
  * Tax Authority Type Model
+ * Swagger Name: AvaTaxClient
  */
 class TaxAuthorityTypeModel
 {
@@ -5442,6 +5571,7 @@ class TaxAuthorityTypeModel
 }
 /**
  * Tax Notice Status Model
+ * Swagger Name: AvaTaxClient
  */
 class NoticeStatusModel
 {
@@ -5464,6 +5594,7 @@ class NoticeStatusModel
 }
 /**
  * Tax Authority Model
+ * Swagger Name: AvaTaxClient
  */
 class NoticeCustomerTypeModel
 {
@@ -5486,6 +5617,7 @@ class NoticeCustomerTypeModel
 }
 /**
  * Tax Notice Reason Model
+ * Swagger Name: AvaTaxClient
  */
 class NoticeReasonModel
 {
@@ -5508,6 +5640,7 @@ class NoticeReasonModel
 }
 /**
  * FilingFrequency Model
+ * Swagger Name: AvaTaxClient
  */
 class FilingFrequencyModel
 {
@@ -5522,6 +5655,7 @@ class FilingFrequencyModel
 }
 /**
  * Tax Notice FilingType Model
+ * Swagger Name: AvaTaxClient
  */
 class NoticeFilingTypeModel
 {
@@ -5544,6 +5678,7 @@ class NoticeFilingTypeModel
 }
 /**
  * Tax Notice Type Model
+ * Swagger Name: AvaTaxClient
  */
 class NoticeTypeModel
 {
@@ -5566,6 +5701,7 @@ class NoticeTypeModel
 }
 /**
  * Tax Authority Model
+ * Swagger Name: AvaTaxClient
  */
 class NoticeCustomerFundingOptionModel
 {
@@ -5588,6 +5724,7 @@ class NoticeCustomerFundingOptionModel
 }
 /**
  * Tax Notice Priority Model
+ * Swagger Name: AvaTaxClient
  */
 class NoticePriorityModel
 {
@@ -5610,6 +5747,7 @@ class NoticePriorityModel
 }
 /**
  * NoticeResponsibility Model
+ * Swagger Name: AvaTaxClient
  */
 class NoticeResponsibilityModel
 {
@@ -5632,6 +5770,7 @@ class NoticeResponsibilityModel
 }
 /**
  * NoticeRootCause Model
+ * Swagger Name: AvaTaxClient
  */
 class NoticeRootCauseModel
 {
@@ -5654,6 +5793,7 @@ class NoticeRootCauseModel
 }
 /**
  * Represents a verification request using Skyscraper for a company
+ * Swagger Name: AvaTaxClient
  */
 class requiredFilingCalendarDataFieldModel
 {
@@ -5668,6 +5808,7 @@ class requiredFilingCalendarDataFieldModel
 }
 /**
  * Represents a list of statuses of returns available in skyscraper
+ * Swagger Name: AvaTaxClient
  */
 class SkyscraperStatusModel
 {
@@ -5706,6 +5847,7 @@ class SkyscraperStatusModel
 }
 /**
  * Represents information about a single legal taxing jurisdiction
+ * Swagger Name: AvaTaxClient
  */
 class JurisdictionModel
 {
@@ -5787,6 +5929,7 @@ class JurisdictionModel
  *  
  * During the time period represented by EffDate through EndDate, all tax decisions for addresses matching
  * this override object will be assigned to the list of jurisdictions designated in this object.
+ * Swagger Name: AvaTaxClient
  */
 class JurisdictionOverrideModel
 {
@@ -5865,6 +6008,7 @@ class JurisdictionOverrideModel
 }
 /**
  * Represents a Jurisdiction with applicable TaxType, TaxSubType and RateType.
+ * Swagger Name: AvaTaxClient
  */
 class JurisdictionRateTypeTaxTypeMappingModel
 {
@@ -5919,6 +6063,7 @@ class JurisdictionRateTypeTaxTypeMappingModel
 }
 /**
  * Resource File Type Model
+ * Swagger Name: AvaTaxClient
  */
 class ResourceFileTypeModel
 {
@@ -5933,6 +6078,7 @@ class ResourceFileTypeModel
 }
 /**
  * Rate type Model
+ * Swagger Name: AvaTaxClient
  */
 class RateTypeModel
 {
@@ -5951,6 +6097,7 @@ class RateTypeModel
 }
 /**
  * Rate types Model
+ * Swagger Name: AvaTaxClient
  */
 class RateTypesModel
 {
@@ -5969,6 +6116,7 @@ class RateTypesModel
 }
 /**
  * Represents information about a tax form known to Avalara
+ * Swagger Name: AvaTaxClient
  */
 class FormMasterModel
 {
@@ -6383,6 +6531,7 @@ class FormMasterModel
 }
 /**
  * Represents a tax type group
+ * Swagger Name: AvaTaxClient
  */
 class TaxTypeGroupModel
 {
@@ -6421,6 +6570,7 @@ class TaxTypeGroupModel
 }
 /**
  * Represents a tax subtype
+ * Swagger Name: AvaTaxClient
  */
 class TaxSubTypeModel
 {
@@ -6443,6 +6593,7 @@ class TaxSubTypeModel
 }
 /**
  * Represents a group of tax types
+ * Swagger Name: AvaTaxClient
  */
 class NexusTaxTypeGroupModel
 {
@@ -6477,6 +6628,7 @@ class NexusTaxTypeGroupModel
 }
 /**
  * Represents a transaction/service type pair for telecommunications tax
+ * Swagger Name: AvaTaxClient
  */
 class CommunicationsTSPairModel
 {
@@ -6507,6 +6659,7 @@ class CommunicationsTSPairModel
 }
 /**
  * Represents information about a type of telecommunications transaction
+ * Swagger Name: AvaTaxClient
  */
 class CommunicationsTransactionTypeModel
 {
@@ -6523,6 +6676,7 @@ class CommunicationsTransactionTypeModel
  * The "Unit of Measurement" model captures information about a type of measurement. Types of measurement refer to
  * different scales for the same dimension. For example, measurements of type "Distance" may include units of measurement
  * such as meters, feet, inches, and miles.
+ * Swagger Name: AvaTaxClient
  */
 class UomModel
 {
@@ -6575,6 +6729,7 @@ class UomModel
  *  
  * Within AvaTax, the `HsCodeModel` object can refer to sections, chapters, headings, subheadings, or articles. Each object represents one
  * classification. Many of these objects have child objects underneath them; these child objects are more specific than their parent objects.
+ * Swagger Name: AvaTaxClient
  */
 class HsCodeModel
 {
@@ -6613,6 +6768,7 @@ class HsCodeModel
 }
 /**
  * Represents a PostalCode and its associated data like: country, region, effective dates, etc.
+ * Swagger Name: AvaTaxClient
  */
 class PostalCodeModel
 {
@@ -6643,6 +6799,7 @@ class PostalCodeModel
 }
 /**
  * Marketplace Location Output model
+ * Swagger Name: AvaTaxClient
  */
 class MarketplaceLocationModel
 {
@@ -6689,6 +6846,7 @@ class MarketplaceLocationModel
 }
 /**
  * Marketplace Location Output model
+ * Swagger Name: AvaTaxClient
  */
 class MarketplaceModel
 {
@@ -6703,6 +6861,7 @@ class MarketplaceModel
 }
 /**
  * Represents a tag for an item in your company's product catalog.
+ * Swagger Name: AvaTaxClient
  */
 class TagsModel
 {
@@ -6717,6 +6876,7 @@ class TagsModel
 }
 /**
  * Represents a tax type
+ * Swagger Name: AvaTaxClient
  */
 class TaxTypeModel
 {
@@ -6735,6 +6895,7 @@ class TaxTypeModel
 }
 /**
  * 
+ * Swagger Name: AvaTaxClient
  */
 class UnitOfBasisModel
 {
@@ -6765,6 +6926,7 @@ class UnitOfBasisModel
  *  
  * By default, you are considered to have exceeded tax thresholds. If you wish to change this default, you can create
  * a company-distance-threshold object to select the correct behavior for this origin/destination tax calculation process.
+ * Swagger Name: AvaTaxClient
  */
 class CompanyDistanceThresholdModel
 {
@@ -6803,6 +6965,7 @@ class CompanyDistanceThresholdModel
 }
 /**
  * A model used to initialize a new CertCapture eCommerce token.
+ * Swagger Name: AvaTaxClient
  */
 class CreateECommerceTokenInputModel
 {
@@ -6813,6 +6976,7 @@ class CreateECommerceTokenInputModel
 }
 /**
  * The resource model returned by the ECommerceTokenController's endpoints.
+ * Swagger Name: AvaTaxClient
  */
 class ECommerceTokenOutputModel
 {
@@ -6835,6 +6999,7 @@ class ECommerceTokenOutputModel
 }
 /**
  * A model used to request the refresh of a CertCapture eCommerce token.
+ * Swagger Name: AvaTaxClient
  */
 class RefreshECommerceTokenInputModel
 {
@@ -6845,6 +7010,7 @@ class RefreshECommerceTokenInputModel
 }
 /**
  * Error Transaction Model
+ * Swagger Name: AvaTaxClient
  */
 class ErrorTransactionOutputModel
 {
@@ -6903,6 +7069,7 @@ class ErrorTransactionOutputModel
 }
 /**
  * 
+ * Swagger Name: AvaTaxClient
  */
 class CappedFetchResult
 {
@@ -6929,6 +7096,7 @@ class CappedFetchResult
 }
 /**
  * Base model class for single error transaction delete request
+ * Swagger Name: AvaTaxClient
  */
 class ErrorTransactionModelBase
 {
@@ -6943,6 +7111,7 @@ class ErrorTransactionModelBase
 }
 /**
  * Request model for when a user is deleting multiple error transaction
+ * Swagger Name: AvaTaxClient
  */
 class DeleteErrorTransactionsRequestModel
 {
@@ -6953,6 +7122,7 @@ class DeleteErrorTransactionsRequestModel
 }
 /**
  * Response model of a single error transaction delete
+ * Swagger Name: AvaTaxClient
  */
 class DeleteErrorTransactionResponseModel
 {
@@ -6971,6 +7141,7 @@ class DeleteErrorTransactionResponseModel
 }
 /**
  * Response model of error transaction batch delete
+ * Swagger Name: AvaTaxClient
  */
 class DeleteErrorTransactionsResponseModel
 {
@@ -6981,6 +7152,7 @@ class DeleteErrorTransactionsResponseModel
 }
 /**
  * Model that has the matching count for an errorcode
+ * Swagger Name: AvaTaxClient
  */
 class ErrorCodeOutputModel
 {
@@ -6995,6 +7167,7 @@ class ErrorCodeOutputModel
 }
 /**
  * 
+ * Swagger Name: AvaTaxClient
  */
 class CompanyReturnSettingModel
 {
@@ -7038,6 +7211,7 @@ class CompanyReturnSettingModel
 /**
  * Represents a commitment to file a tax return on a recurring basis.
  * Only used if you subscribe to Avalara Returns.
+ * Swagger Name: AvaTaxClient
  */
 class FilingCalendarModel
 {
@@ -7194,9 +7368,13 @@ class FilingCalendarModel
      */
     public $fixedPrepaymentAmount;
     /**
-     * @var string The type of tax to report on this return. (See MatchingTaxType::* for a list of allowable values)
+     * @var string DEPRECATED - Date: , Version: , Message: The 'taxTypes' list field should be used going forward.  The type of tax to report on this return. (See MatchingTaxType::* for a list of allowable values)
      */
     public $taxTypeId;
+    /**
+     * @var string[] The list of tax types to report on this return.
+     */
+    public $taxTypes;
     /**
      * @var string DEPRECATED - Date: 9/17/2021, Version: 21.9.0, Message: Field will be no longer be available after the 21.9.0 release.  Internal filing notes.
      */
@@ -7292,6 +7470,7 @@ class FilingCalendarModel
 }
 /**
  * Represents a complex query request to parse using query filter guidelines from Microsoft REST standards
+ * Swagger Name: AvaTaxClient
  */
 class QueryRequestModel
 {
@@ -7318,6 +7497,7 @@ class QueryRequestModel
 }
 /**
  * Model with options for adding a new filing calendar
+ * Swagger Name: AvaTaxClient
  */
 class CycleAddOptionModel
 {
@@ -7364,6 +7544,7 @@ class CycleAddOptionModel
 }
 /**
  * Options for expiring a filing calendar.
+ * Swagger Name: AvaTaxClient
  */
 class CycleExpireOptionModel
 {
@@ -7386,6 +7567,7 @@ class CycleExpireOptionModel
 }
 /**
  * Cycle Safe Expiration results.
+ * Swagger Name: AvaTaxClient
  */
 class CycleExpireModel
 {
@@ -7404,6 +7586,7 @@ class CycleExpireModel
 }
 /**
  * An edit to be made on a filing calendar.
+ * Swagger Name: AvaTaxClient
  */
 class FilingCalendarEditModel
 {
@@ -7426,6 +7609,7 @@ class FilingCalendarEditModel
 }
 /**
  * Model with options for actual filing calendar output based on user edits to filing calendar.
+ * Swagger Name: AvaTaxClient
  */
 class CycleEditOptionModel
 {
@@ -7456,6 +7640,7 @@ class CycleEditOptionModel
 }
 /**
  * Filing Calendar Edit
+ * Swagger Name: AvaTaxClient
  */
 class CycleSafeFilingCalendarEditModel
 {
@@ -7486,6 +7671,7 @@ class CycleSafeFilingCalendarEditModel
 }
 /**
  * Options for expiring a filing calendar.
+ * Swagger Name: AvaTaxClient
  */
 class CycleSafeEditRequestModel
 {
@@ -7508,6 +7694,7 @@ class CycleSafeEditRequestModel
 }
 /**
  * Available Cycle object
+ * Swagger Name: AvaTaxClient
  */
 class AvailableCycleModel
 {
@@ -7530,6 +7717,7 @@ class AvailableCycleModel
 }
 /**
  * Frequency Available object
+ * Swagger Name: AvaTaxClient
  */
 class FrequencyAvailableModel
 {
@@ -7552,6 +7740,7 @@ class FrequencyAvailableModel
 }
 /**
  * CycleSafe Option Result
+ * Swagger Name: AvaTaxClient
  */
 class CycleSafeOptionResultModel
 {
@@ -7578,6 +7767,7 @@ class CycleSafeOptionResultModel
 }
 /**
  * 
+ * Swagger Name: AvaTaxClient
  */
 class FilingAnswerModel
 {
@@ -7593,6 +7783,7 @@ class FilingAnswerModel
 /**
  * Represents a commitment to file a tax return on a recurring basis.
  * Only used if you subscribe to Avalara Returns.
+ * Swagger Name: AvaTaxClient
  */
 class FilingRequestDataModel
 {
@@ -7668,6 +7859,7 @@ class FilingRequestDataModel
 /**
  * Represents a commitment to file a tax return on a recurring basis.
  * Only used if you subscribe to Avalara Returns.
+ * Swagger Name: AvaTaxClient
  */
 class FilingRequestModel
 {
@@ -7684,7 +7876,7 @@ class FilingRequestModel
      */
     public $filingRequestStatusId;
     /**
-     * @var FilingRequestDataModel The data model object of the request
+     * @var FilingRequestDataModel 
      */
     public $data;
     /**
@@ -7706,6 +7898,7 @@ class FilingRequestModel
 }
 /**
  * This is the output model coming from skyscraper services
+ * Swagger Name: AvaTaxClient
  */
 class LoginVerificationOutputModel
 {
@@ -7728,6 +7921,7 @@ class LoginVerificationOutputModel
 }
 /**
  * Represents a verification request using Skyscraper for a company
+ * Swagger Name: AvaTaxClient
  */
 class LoginVerificationInputModel
 {
@@ -7770,6 +7964,7 @@ class LoginVerificationInputModel
 }
 /**
  * Represents everything downloaded from resource files
+ * Swagger Name: AvaTaxClient
  */
 class ResourceFileDownloadResult
 {
@@ -7792,6 +7987,7 @@ class ResourceFileDownloadResult
 }
 /**
  * Response when checking if a company has a POA on file with Avalara
+ * Swagger Name: AvaTaxClient
  */
 class PowerOfAttorneyCheckModel
 {
@@ -7820,12 +8016,13 @@ class PowerOfAttorneyCheckModel
      */
     public $expirationDate;
     /**
-     * @var ResourceFileDownloadResult POA download
+     * @var ResourceFileDownloadResult 
      */
     public $availablePoa;
 }
 /**
  * An attachment associated with a filing return
+ * Swagger Name: AvaTaxClient
  */
 class FilingAttachmentModel
 {
@@ -7840,6 +8037,7 @@ class FilingAttachmentModel
 }
 /**
  * Filing Returns Model
+ * Swagger Name: AvaTaxClient
  */
 class FilingReturnModelBasic
 {
@@ -7990,6 +8188,7 @@ class FilingReturnModelBasic
 }
 /**
  * Filing Returns Model
+ * Swagger Name: AvaTaxClient
  */
 class FiledReturnModel
 {
@@ -8012,6 +8211,7 @@ class FiledReturnModel
 }
 /**
  * A model for return adjustments.
+ * Swagger Name: AvaTaxClient
  */
 class FilingAdjustmentModel
 {
@@ -8066,6 +8266,7 @@ class FilingAdjustmentModel
 }
 /**
  * A model for return augmentations.
+ * Swagger Name: AvaTaxClient
  */
 class FilingAugmentationModel
 {
@@ -8104,6 +8305,7 @@ class FilingAugmentationModel
 }
 /**
  * A model for return payments.
+ * Swagger Name: AvaTaxClient
  */
 class FilingPaymentModel
 {
@@ -8146,6 +8348,7 @@ class FilingPaymentModel
 }
 /**
  * 
+ * Swagger Name: AvaTaxClient
  */
 class Message
 {
@@ -8180,6 +8383,7 @@ class Message
 }
 /**
  * 
+ * Swagger Name: AvaTaxClient
  */
 class WorksheetDocumentLine
 {
@@ -8222,6 +8426,7 @@ class WorksheetDocumentLine
 }
 /**
  * 
+ * Swagger Name: AvaTaxClient
  */
 class WorksheetDocument
 {
@@ -8264,6 +8469,7 @@ class WorksheetDocument
 }
 /**
  * An attachment associated with a filing return
+ * Swagger Name: AvaTaxClient
  */
 class FilingReturnCreditModel
 {
@@ -8290,6 +8496,7 @@ class FilingReturnCreditModel
 }
 /**
  * Filing Returns Model
+ * Swagger Name: AvaTaxClient
  */
 class FilingReturnModel
 {
@@ -8506,11 +8713,11 @@ class FilingReturnModel
      */
     public $attachments;
     /**
-     * @var FilingReturnCreditModel The excluded carry over credit documents
+     * @var FilingReturnCreditModel 
      */
     public $excludedCarryOverCredits;
     /**
-     * @var FilingReturnCreditModel The applied carry over credit documents
+     * @var FilingReturnCreditModel 
      */
     public $appliedCarryOverCredits;
     /**
@@ -8528,6 +8735,7 @@ class FilingReturnModel
 }
 /**
  * Worksheet Checkup Report Suggested Form Model
+ * Swagger Name: AvaTaxClient
  */
 class FilingsCheckupSuggestedFormModel
 {
@@ -8554,6 +8762,7 @@ class FilingsCheckupSuggestedFormModel
 }
 /**
  * Regions
+ * Swagger Name: AvaTaxClient
  */
 class FilingRegionModel
 {
@@ -8660,6 +8869,7 @@ class FilingRegionModel
 }
 /**
  * Represents a listing of all tax calculation data for filings and for accruing to future filings.
+ * Swagger Name: AvaTaxClient
  */
 class FilingModel
 {
@@ -8706,6 +8916,7 @@ class FilingModel
 }
 /**
  * Represents a listing of all tax calculation data for filings and for accruing to future filings.
+ * Swagger Name: AvaTaxClient
  */
 class FilingsTaxSummaryModel
 {
@@ -8768,6 +8979,7 @@ class FilingsTaxSummaryModel
 }
 /**
  * Represents a listing of all tax calculation data for filings and for accruing to future filings.
+ * Swagger Name: AvaTaxClient
  */
 class FilingsTaxDetailsModel
 {
@@ -8794,6 +9006,7 @@ class FilingsTaxDetailsModel
 }
 /**
  * Filing Returns Model
+ * Swagger Name: AvaTaxClient
  */
 class MultiTaxFilingReturnModel
 {
@@ -8854,7 +9067,7 @@ class MultiTaxFilingReturnModel
      */
     public $type;
     /**
-     * @var FilingsTaxSummaryModel A summary of all taxes compbined for this period
+     * @var FilingsTaxSummaryModel 
      */
     public $returnTaxSummary;
     /**
@@ -8862,11 +9075,11 @@ class MultiTaxFilingReturnModel
      */
     public $returnTaxDetails;
     /**
-     * @var FilingReturnCreditModel The excluded carry over credit documents
+     * @var FilingReturnCreditModel 
      */
     public $excludedCarryOverCredits;
     /**
-     * @var FilingReturnCreditModel The applied carry over credit documents
+     * @var FilingReturnCreditModel 
      */
     public $appliedCarryOverCredits;
     /**
@@ -8900,6 +9113,7 @@ class MultiTaxFilingReturnModel
 }
 /**
  * Regions
+ * Swagger Name: AvaTaxClient
  */
 class MultiTaxFilingRegionModel
 {
@@ -8920,7 +9134,7 @@ class MultiTaxFilingRegionModel
      */
     public $status;
     /**
-     * @var FilingsTaxSummaryModel A summary of all taxes compbined for this period
+     * @var FilingsTaxSummaryModel 
      */
     public $regionTaxSummary;
     /**
@@ -8938,6 +9152,7 @@ class MultiTaxFilingRegionModel
 }
 /**
  * Represents a listing of all tax calculation data for filings and for accruing to future filings.
+ * Swagger Name: AvaTaxClient
  */
 class MultiTaxFilingModel
 {
@@ -8962,7 +9177,7 @@ class MultiTaxFilingModel
      */
     public $type;
     /**
-     * @var FilingsTaxSummaryModel A summary of all taxes combined for this period
+     * @var FilingsTaxSummaryModel 
      */
     public $taxSummary;
     /**
@@ -8976,6 +9191,7 @@ class MultiTaxFilingModel
 }
 /**
  * Rebuild a set of filings.
+ * Swagger Name: AvaTaxClient
  */
 class RebuildFilingsModel
 {
@@ -8986,6 +9202,7 @@ class RebuildFilingsModel
 }
 /**
  * Approve a set of filings.
+ * Swagger Name: AvaTaxClient
  */
 class ApproveFilingsModel
 {
@@ -8996,6 +9213,7 @@ class ApproveFilingsModel
 }
 /**
  * Cycle Safe Expiration results.
+ * Swagger Name: AvaTaxClient
  */
 class FilingsCheckupAuthorityModel
 {
@@ -9034,6 +9252,7 @@ class FilingsCheckupAuthorityModel
 }
 /**
  * Results of the Worksheet Checkup report
+ * Swagger Name: AvaTaxClient
  */
 class FilingsCheckupModel
 {
@@ -9044,6 +9263,7 @@ class FilingsCheckupModel
 }
 /**
  * Account Linkage output model
+ * Swagger Name: AvaTaxClient
  */
 class FirmClientLinkageOutputModel
 {
@@ -9102,6 +9322,7 @@ class FirmClientLinkageOutputModel
 }
 /**
  * Account Linkage Input model
+ * Swagger Name: AvaTaxClient
  */
 class FirmClientLinkageInputModel
 {
@@ -9116,6 +9337,7 @@ class FirmClientLinkageInputModel
 }
 /**
  * Represents a request for a new account with Avalara for a new Firm client.
+ * Swagger Name: AvaTaxClient
  */
 class NewFirmClientAccountRequestModel
 {
@@ -9148,7 +9370,7 @@ class NewFirmClientAccountRequestModel
      */
     public $companyCode;
     /**
-     * @var CompanyAddress Address information of the account being created.
+     * @var CompanyAddress 
      */
     public $companyAddress;
     /**
@@ -9162,6 +9384,7 @@ class NewFirmClientAccountRequestModel
 }
 /**
  * Product classification input model.
+ * Swagger Name: AvaTaxClient
  */
 class ItemClassificationInputModel
 {
@@ -9176,6 +9399,7 @@ class ItemClassificationInputModel
 }
 /**
  * Product classification output model.
+ * Swagger Name: AvaTaxClient
  */
 class ItemClassificationOutputModel
 {
@@ -9202,6 +9426,7 @@ class ItemClassificationOutputModel
 }
 /**
  * An abridged item model used for syncing product catalogs with AvaTax.
+ * Swagger Name: AvaTaxClient
  */
 class ItemSyncModel
 {
@@ -9224,6 +9449,7 @@ class ItemSyncModel
 }
 /**
  * Represents a request to sync items.
+ * Swagger Name: AvaTaxClient
  */
 class SyncItemsRequestModel
 {
@@ -9234,6 +9460,7 @@ class SyncItemsRequestModel
 }
 /**
  * The response returned after an item sync was requested.
+ * Swagger Name: AvaTaxClient
  */
 class SyncItemsResponseModel
 {
@@ -9244,6 +9471,7 @@ class SyncItemsResponseModel
 }
 /**
  * Represents a bulk upload input model.
+ * Swagger Name: AvaTaxClient
  */
 class ItemBulkUploadInputModel
 {
@@ -9254,6 +9482,7 @@ class ItemBulkUploadInputModel
 }
 /**
  * Represents a item upload error model.
+ * Swagger Name: AvaTaxClient
  */
 class ItemUploadErrorModel
 {
@@ -9272,6 +9501,7 @@ class ItemUploadErrorModel
 }
 /**
  * Represents a bulk upload response model.
+ * Swagger Name: AvaTaxClient
  */
 class ItemBulkUploadOutputModel
 {
@@ -9286,6 +9516,7 @@ class ItemBulkUploadOutputModel
 }
 /**
  * Tells you whether this location object has been correctly set up to the local jurisdiction's standards
+ * Swagger Name: AvaTaxClient
  */
 class LocationValidationModel
 {
@@ -9300,6 +9531,7 @@ class LocationValidationModel
 }
 /**
  * Expire a location without restriction then update with new remittance and dates.
+ * Swagger Name: AvaTaxClient
  */
 class UpdateCompanyLocationRemittanceModel
 {
@@ -9318,6 +9550,7 @@ class UpdateCompanyLocationRemittanceModel
 }
 /**
  * Commit this MultiDocument object so that all transactions within it can be reported on a tax filing.
+ * Swagger Name: AvaTaxClient
  */
 class CommitMultiDocumentModel
 {
@@ -9336,6 +9569,7 @@ class CommitMultiDocumentModel
 }
 /**
  * An individual tax detail element. Represents the amount of tax calculated for a particular jurisdiction, for a particular line in an invoice.
+ * Swagger Name: AvaTaxClient
  */
 class TransactionLineDetailModel
 {
@@ -9542,6 +9776,7 @@ class TransactionLineDetailModel
 }
 /**
  * Represents information about location types stored in a line
+ * Swagger Name: AvaTaxClient
  */
 class TransactionLineLocationTypeModel
 {
@@ -9564,6 +9799,7 @@ class TransactionLineLocationTypeModel
 }
 /**
  * One line item on this transaction.
+ * Swagger Name: AvaTaxClient
  */
 class TransactionLineModel
 {
@@ -9790,6 +10026,7 @@ class TransactionLineModel
 }
 /**
  * An address used within this transaction.
+ * Swagger Name: AvaTaxClient
  */
 class TransactionAddressModel
 {
@@ -9852,6 +10089,7 @@ class TransactionAddressModel
 }
 /**
  * Information about a location type
+ * Swagger Name: AvaTaxClient
  */
 class TransactionLocationTypeModel
 {
@@ -9874,6 +10112,7 @@ class TransactionLocationTypeModel
 }
 /**
  * Summary information about an overall transaction.
+ * Swagger Name: AvaTaxClient
  */
 class TransactionSummary
 {
@@ -9956,6 +10195,7 @@ class TransactionSummary
 }
 /**
  * Tax Details by Tax subtype
+ * Swagger Name: AvaTaxClient
  */
 class TaxDetailsByTaxSubType
 {
@@ -9982,6 +10222,7 @@ class TaxDetailsByTaxSubType
 }
 /**
  * Tax Details by Tax Type
+ * Swagger Name: AvaTaxClient
  */
 class TaxDetailsByTaxType
 {
@@ -10012,6 +10253,7 @@ class TaxDetailsByTaxType
 }
 /**
  * Represents a message to be displayed on an invoice.
+ * Swagger Name: AvaTaxClient
  */
 class InvoiceMessageModel
 {
@@ -10026,6 +10268,7 @@ class InvoiceMessageModel
 }
 /**
  * This object represents a single transaction; for example, a sales invoice or purchase order.
+ * Swagger Name: AvaTaxClient
  */
 class TransactionModel
 {
@@ -10277,6 +10520,7 @@ class TransactionModel
  * involve a marketplace of vendors, each of which contributes some portion of the final transaction. Within
  * a MultiDocument transaction, each individual buyer and seller pair are matched up and converted to a separate
  * document. This separation of documents allows each seller to file their taxes separately.
+ * Swagger Name: AvaTaxClient
  */
 class MultiDocumentModel
 {
@@ -10319,6 +10563,7 @@ class MultiDocumentModel
 }
 /**
  * Refund a committed transaction
+ * Swagger Name: AvaTaxClient
  */
 class RefundTransactionModel
 {
@@ -10349,6 +10594,7 @@ class RefundTransactionModel
 }
 /**
  * Represents one line item in a MultiDocument transaction
+ * Swagger Name: AvaTaxClient
  */
 class MultiDocumentLineItemModel
 {
@@ -10373,7 +10619,7 @@ class MultiDocumentLineItemModel
      */
     public $amount;
     /**
-     * @var AddressesModel The addresses to use for this transaction line.     If you set this value to `null`, or if you omit this element from your API call, then instead the transaction  will use the `addresses` from the document level.     If you specify any other value besides `null`, only addresses specified for this line will be used for this line.
+     * @var AddressesModel 
      */
     public $addresses;
     /**
@@ -10425,7 +10671,7 @@ class MultiDocumentLineItemModel
      */
     public $businessIdentificationNo;
     /**
-     * @var TaxOverrideModel Specifies a tax override for this line.
+     * @var TaxOverrideModel 
      */
     public $taxOverride;
     /**
@@ -10476,6 +10722,7 @@ class MultiDocumentLineItemModel
  * involve a marketplace of vendors, each of which contributes some portion of the final transaction. Within
  * a MultiDocument transaction, each individual buyer and seller pair are matched up and converted to a separate
  * document. This separation of documents allows each seller to file their taxes separately.
+ * Swagger Name: AvaTaxClient
  */
 class CreateMultiDocumentModel
 {
@@ -10532,7 +10779,7 @@ class CreateMultiDocumentModel
      */
     public $exemptionNo;
     /**
-     * @var AddressesModel Default addresses for all lines in this document.     These addresses are the default values that will be used for any lines that do not have their own  address information. If you specify addresses for a line, then no default addresses will be loaded  for that line.
+     * @var AddressesModel 
      */
     public $addresses;
     /**
@@ -10560,7 +10807,7 @@ class CreateMultiDocumentModel
      */
     public $batchCode;
     /**
-     * @var TaxOverrideModel Specifies a tax override for the entire document
+     * @var TaxOverrideModel 
      */
     public $taxOverride;
     /**
@@ -10622,6 +10869,7 @@ class CreateMultiDocumentModel
 }
 /**
  * Replace an existing MultiDocument transaction recorded in AvaTax with a new one.
+ * Swagger Name: AvaTaxClient
  */
 class AdjustMultiDocumentModel
 {
@@ -10634,12 +10882,13 @@ class AdjustMultiDocumentModel
      */
     public $adjustDescription;
     /**
-     * @var CreateMultiDocumentModel Replace the current MultiDocument transaction with tax data calculated for this new MultiDocument transaction
+     * @var CreateMultiDocumentModel 
      */
     public $newTransaction;
 }
 /**
  * A request to void a previously created transaction
+ * Swagger Name: AvaTaxClient
  */
 class VoidTransactionModel
 {
@@ -10651,35 +10900,38 @@ class VoidTransactionModel
 /**
  * Contains information about the original API request and response that created
  * a MultiDocument object.
+ * Swagger Name: AvaTaxClient
  */
 class ReconstructedMultiDocumentModel
 {
     /**
-     * @var CreateMultiDocumentModel The original request that was used to create a MultiDocument object.
+     * @var CreateMultiDocumentModel 
      */
     public $request;
 }
 /**
  * Represents the exact API request and response from the original transaction API call, if available
+ * Swagger Name: AvaTaxClient
  */
 class OriginalApiRequestResponseModel
 {
     /**
-     * @var CreateTransactionModel API request
+     * @var CreateTransactionModel 
      */
     public $request;
     /**
-     * @var TransactionModel API response
+     * @var TransactionModel 
      */
     public $response;
 }
 /**
  * Information about a previously created MultiDocument transaction
+ * Swagger Name: AvaTaxClient
  */
 class AuditMultiDocumentModel
 {
     /**
-     * @var ReconstructedMultiDocumentModel Reconstructed API request/response pair that can be used to adjust or re-create this MultiDocument transaction.
+     * @var ReconstructedMultiDocumentModel 
      */
     public $reconstructed;
     /**
@@ -10703,7 +10955,7 @@ class AuditMultiDocumentModel
      */
     public $apiCallStatus;
     /**
-     * @var OriginalApiRequestResponseModel Original API request/response
+     * @var OriginalApiRequestResponseModel 
      */
     public $original;
 }
@@ -10714,6 +10966,7 @@ class AuditMultiDocumentModel
  * MultiDocument object will be moved to the document status `Posted`.
  *  
  * For more information on document status, see [DocumentStatus](https://developer.avalara.com/api-reference/avatax/rest/v2/models/enums/DocumentStatus/).
+ * Swagger Name: AvaTaxClient
  */
 class VerifyMultiDocumentModel
 {
@@ -10740,6 +10993,7 @@ class VerifyMultiDocumentModel
 }
 /**
  * Nexus tax type groupe with count
+ * Swagger Name: AvaTaxClient
  */
 class NexusTaxTypeGroupCountModel
 {
@@ -10754,6 +11008,7 @@ class NexusTaxTypeGroupCountModel
 }
 /**
  * Nexus summary model
+ * Swagger Name: AvaTaxClient
  */
 class NexusSummaryModel
 {
@@ -10770,6 +11025,7 @@ class NexusSummaryModel
  * Use this object to provide an address and date range where your company does business.
  * This address will be used to determine what jurisdictions you should declare nexus and
  * calculate tax.
+ * Swagger Name: AvaTaxClient
  */
 class DeclareNexusByAddressModel
 {
@@ -10827,11 +11083,12 @@ class DeclareNexusByAddressModel
  * as a result of a call to `DeclareNexusByAddress`. For each address,
  * this object model contains a list of the nexus objects that were declared
  * according to the geocoding that corresponds to this address.
+ * Swagger Name: AvaTaxClient
  */
 class NexusByAddressModel
 {
     /**
-     * @var DeclareNexusByAddressModel The address that was provided by the user in the call to `DeclareNexusByAddress`
+     * @var DeclareNexusByAddressModel 
      */
     public $address;
     /**
@@ -10841,6 +11098,7 @@ class NexusByAddressModel
 }
 /**
  * A request to upload a file to Resource Files
+ * Swagger Name: AvaTaxClient
  */
 class ResourceFileUploadRequestModel
 {
@@ -10875,6 +11133,7 @@ class ResourceFileUploadRequestModel
 }
 /**
  * Represents communication between Avalara and the company regarding the processing of a tax notice.
+ * Swagger Name: AvaTaxClient
  */
 class NoticeCommentModel
 {
@@ -10931,12 +11190,13 @@ class NoticeCommentModel
      */
     public $modifiedUserId;
     /**
-     * @var ResourceFileUploadRequestModel An attachment to the detail
+     * @var ResourceFileUploadRequestModel 
      */
     public $attachmentUploadRequest;
 }
 /**
  * Represents estimated financial results from responding to a tax notice.
+ * Swagger Name: AvaTaxClient
  */
 class NoticeFinanceModel
 {
@@ -11017,12 +11277,13 @@ class NoticeFinanceModel
      */
     public $modifiedUserId;
     /**
-     * @var ResourceFileUploadRequestModel An attachment to the finance detail
+     * @var ResourceFileUploadRequestModel 
      */
     public $attachmentUploadRequest;
 }
 /**
  * NoticeResponsibility Model
+ * Swagger Name: AvaTaxClient
  */
 class NoticeResponsibilityDetailModel
 {
@@ -11045,6 +11306,7 @@ class NoticeResponsibilityDetailModel
 }
 /**
  * NoticeRootCause Model
+ * Swagger Name: AvaTaxClient
  */
 class NoticeRootCauseDetailModel
 {
@@ -11069,6 +11331,7 @@ class NoticeRootCauseDetailModel
  * Represents a letter received from a tax authority regarding tax filing.
  * These letters often have the warning "Notice" printed at the top, which is why
  * they are called "Notices".
+ * Swagger Name: AvaTaxClient
  */
 class NoticeModel
 {
@@ -11263,6 +11526,7 @@ class NoticeModel
 }
 /**
  * Model to create a new tax notice responsibility type.
+ * Swagger Name: AvaTaxClient
  */
 class CreateNoticeResponsibilityTypeModel
 {
@@ -11281,6 +11545,7 @@ class CreateNoticeResponsibilityTypeModel
 }
 /**
  * Model to create a new tax notice root cause type.
+ * Swagger Name: AvaTaxClient
  */
 class CreateNoticeRootCauseTypeModel
 {
@@ -11299,6 +11564,7 @@ class CreateNoticeRootCauseTypeModel
 }
 /**
  * Encapsulates the result of uploading a file to the resource system
+ * Swagger Name: AvaTaxClient
  */
 class ResourceFileUploadResultModel
 {
@@ -11324,6 +11590,7 @@ class ResourceFileUploadResultModel
  *  
  * An example of a notification would be a message about new software, or a change to AvaTax that may
  * affect you, or a potential issue with your company's tax profile.
+ * Swagger Name: AvaTaxClient
  */
 class NotificationModel
 {
@@ -11414,6 +11681,7 @@ class NotificationModel
 }
 /**
  * Password Change Model
+ * Swagger Name: AvaTaxClient
  */
 class PasswordChangeModel
 {
@@ -11428,6 +11696,7 @@ class PasswordChangeModel
 }
 /**
  * Set Password Model
+ * Swagger Name: AvaTaxClient
  */
 class SetPasswordModel
 {
@@ -11438,6 +11707,7 @@ class SetPasswordModel
 }
 /**
  * An input model for executing a report detailed to the document line level
+ * Swagger Name: AvaTaxClient
  */
 class ExportDocumentLineModel
 {
@@ -11486,7 +11756,7 @@ class ExportDocumentLineModel
      */
     public $isLocked;
     /**
-     * @var string If set, include only documents associated with this merchantSellerId.
+     * @var string If set, include only documents associated with these merchantSellerIds.Multiple merchantSellerIds should be sent by comma separated values.
      */
     public $merchantSellerIdentifier;
     /**
@@ -11497,9 +11767,30 @@ class ExportDocumentLineModel
      * @var boolean Use this parameter when dateFilter = ModifiedDate.  For dateFilter = DocumentDate, PaymentDate, TaxDate or ReportingDate, the isModifiedDateSameAsDocumentDate parameter is ignored.  Set this parameter to true when you would like to get Documents which have the Document Date same as Modified Date.  Defaults to false if not specified.
      */
     public $isModifiedDateSameAsDocumentDate;
+    /**
+     * @var string TaxGroup is required to support Sales tax (Sales + SellersUse) and VAT (Input+ Output).  TaxTypes, such as Lodging, Bottle, LandedCost, Ewaste, BevAlc, etc
+     */
+    public $taxGroup;
+    /**
+     * @var string The description of the tax
+     */
+    public $taxName;
+    /**
+     * @var string The AvaTax tax code or customer tax code associated with the item or SKU in the transaction
+     */
+    public $taxCode;
+    /**
+     * @var string The code your business application uses to identify a customer or vendor
+     */
+    public $customerVendorCode;
+    /**
+     * @var string Defines the individual taxes associated with a TaxType category, such as Lodging TaxType which supports numerous TaxSubTypes, including Hotel, Occupancy, ConventionCenter, Accommotations, etc.
+     */
+    public $taxSubType;
 }
 /**
  * The output model for report parameter definitions
+ * Swagger Name: AvaTaxClient
  */
 class ReportParametersModel
 {
@@ -11559,9 +11850,30 @@ class ReportParametersModel
      * @var boolean If true, modified date will be same as document date  If false, modified date will not be same as document date  Defaults to false if not specified.
      */
     public $isModifiedDateSameAsDocumentDate;
+    /**
+     * @var string TaxGroup is required to support Sales tax (Sales + SellersUse) and VAT (Input+ Output).  TaxTypes, such as Lodging, Bottle, LandedCost, Ewaste, BevAlc, etc
+     */
+    public $taxGroup;
+    /**
+     * @var string The description of the tax
+     */
+    public $taxName;
+    /**
+     * @var string The AvaTax tax code or customer tax code associated with the item or SKU in the transaction
+     */
+    public $taxCode;
+    /**
+     * @var string The code your business application uses to identify a customer or vendor
+     */
+    public $customerVendorCode;
+    /**
+     * @var string Defines the individual taxes associated with a TaxType category, such as Lodging TaxType which supports numerous TaxSubTypes, including Hotel, Occupancy, ConventionCenter, Accommotations, etc.
+     */
+    public $taxSubType;
 }
 /**
  * A model for displaying report task metadata
+ * Swagger Name: AvaTaxClient
  */
 class ReportModel
 {
@@ -11582,7 +11894,7 @@ class ReportModel
      */
     public $reportType;
     /**
-     * @var ReportParametersModel The parametes used to build the report
+     * @var ReportParametersModel 
      */
     public $parameters;
     /**
@@ -11620,6 +11932,7 @@ class ReportModel
 }
 /**
  * Point-of-Sale Data Request Model
+ * Swagger Name: AvaTaxClient
  */
 class PointOfSaleDataRequestModel
 {
@@ -11658,6 +11971,7 @@ class PointOfSaleDataRequestModel
 }
 /**
  * SendSales Request Model.
+ * Swagger Name: AvaTaxClient
  */
 class SendSalesRequestModel
 {
@@ -11684,6 +11998,7 @@ class SendSalesRequestModel
 }
 /**
  * Indicates one element of a sales tax rate.
+ * Swagger Name: AvaTaxClient
  */
 class RateModel
 {
@@ -11713,6 +12028,7 @@ class RateModel
  *  
  * To upgrade to a fully-featured and accurate tax process that handles these scenarios correctly, please
  * contact Avalara to upgrade to AvaTax!
+ * Swagger Name: AvaTaxClient
  */
 class TaxRateModel
 {
@@ -11727,6 +12043,7 @@ class TaxRateModel
 }
 /**
  * Replace an existing transaction recorded in AvaTax with a new one.
+ * Swagger Name: AvaTaxClient
  */
 class AdjustTransactionModel
 {
@@ -11739,7 +12056,7 @@ class AdjustTransactionModel
      */
     public $adjustmentDescription;
     /**
-     * @var CreateTransactionModel Replace the current transaction with tax data calculated for this new transaction
+     * @var CreateTransactionModel 
      */
     public $newTransaction;
 }
@@ -11749,6 +12066,7 @@ class AdjustTransactionModel
  * You may specify one or more of the following fields to verify: `date`, `totalAmount`, or `totalTax`.
  * This call will report an error if there is any difference between the data stored in AvaTax and
  * the data stored in your accounting system.
+ * Swagger Name: AvaTaxClient
  */
 class VerifyTransactionModel
 {
@@ -11769,6 +12087,7 @@ class VerifyTransactionModel
  * Settle this transaction with your ledger by verifying its amounts.
  * If the transaction is not yet committed, you may specify the "commit" value to commit it to the ledger and allow it to be reported.
  * You may also optionally change the transaction's code by specifying the "newTransactionCode" value.
+ * Swagger Name: AvaTaxClient
  */
 class ChangeTransactionCodeModel
 {
@@ -11779,6 +12098,7 @@ class ChangeTransactionCodeModel
 }
 /**
  * Commit this transaction as permanent so that it can be reported on a tax filing.
+ * Swagger Name: AvaTaxClient
  */
 class CommitTransactionModel
 {
@@ -11792,24 +12112,26 @@ class CommitTransactionModel
  *  
  * You may use this endpoint to verify the transaction, change the transaction's code, and commit the transaction for reporting purposes.
  * This endpoint may be used to execute any or all of these actions at once.
+ * Swagger Name: AvaTaxClient
  */
 class SettleTransactionModel
 {
     /**
-     * @var VerifyTransactionModel To verify this transaction, you may provide information in this field.     If you leave this field null, the transaction will not be verified.
+     * @var VerifyTransactionModel 
      */
     public $verify;
     /**
-     * @var ChangeTransactionCodeModel To change the code for this transaction, you may provide information in this field.     If you leave this field null, the transaction's code will not be changed.
+     * @var ChangeTransactionCodeModel 
      */
     public $changeCode;
     /**
-     * @var CommitTransactionModel To commit this transaction so that it can be reported on a tax filing, you may provide information in this field.     If you leave this field null, the transaction's commit status will not be changed.     If you use Avalara's Managed Returns Service, committing a transaction will allow that transaction to be filed.
+     * @var CommitTransactionModel 
      */
     public $commit;
 }
 /**
  * Commit this transaction as permanent
+ * Swagger Name: AvaTaxClient
  */
 class LockTransactionModel
 {
@@ -11820,6 +12142,7 @@ class LockTransactionModel
 }
 /**
  * Bulk lock documents model
+ * Swagger Name: AvaTaxClient
  */
 class BulkLockTransactionModel
 {
@@ -11834,6 +12157,7 @@ class BulkLockTransactionModel
 }
 /**
  * Returns information about transactions that were locked
+ * Swagger Name: AvaTaxClient
  */
 class BulkLockTransactionResult
 {
@@ -11848,16 +12172,18 @@ class BulkLockTransactionResult
  *  
  * Note that the API changes over time, and this reconstructed model is likely different from the exact request
  * that was originally used to create this transaction.
+ * Swagger Name: AvaTaxClient
  */
 class ReconstructedApiRequestResponseModel
 {
     /**
-     * @var CreateTransactionModel API request
+     * @var CreateTransactionModel 
      */
     public $request;
 }
 /**
  * Information about a previously created transaction
+ * Swagger Name: AvaTaxClient
  */
 class AuditTransactionModel
 {
@@ -11866,7 +12192,7 @@ class AuditTransactionModel
      */
     public $companyId;
     /**
-     * @var ReconstructedApiRequestResponseModel Reconstructed API request/response
+     * @var ReconstructedApiRequestResponseModel 
      */
     public $reconstructed;
     /**
@@ -11882,12 +12208,13 @@ class AuditTransactionModel
      */
     public $apiCallStatus;
     /**
-     * @var OriginalApiRequestResponseModel Original API request/response
+     * @var OriginalApiRequestResponseModel 
      */
     public $original;
 }
 /**
  * Model to add specific lines to exising transaction
+ * Swagger Name: AvaTaxClient
  */
 class AddTransactionLineModel
 {
@@ -11914,6 +12241,7 @@ class AddTransactionLineModel
 }
 /**
  * Model to specify lines to be removed
+ * Swagger Name: AvaTaxClient
  */
 class RemoveTransactionLineModel
 {
@@ -11940,6 +12268,7 @@ class RemoveTransactionLineModel
 }
 /**
  * This object represents a single determination factor for a line that is being inspected through the InspectLine API.
+ * Swagger Name: AvaTaxClient
  */
 class DeterminationFactorModel
 {
@@ -11966,6 +12295,7 @@ class DeterminationFactorModel
 }
 /**
  * Response model used as output for InspectLine API.
+ * Swagger Name: AvaTaxClient
  */
 class InspectResponseModel
 {
@@ -11975,7 +12305,55 @@ class InspectResponseModel
     public $determinationFactors;
 }
 /**
+ * 
+ * Swagger Name: AvaTaxClient
+ */
+class CompanyUserDefinedFieldModel
+{
+    /**
+     * @var int The id of the datasource.
+     */
+    public $id;
+    /**
+     * @var int The id of the company to which the datasource belongs to.
+     */
+    public $companyId;
+    /**
+     * @var string The extractor/connector id.
+     */
+    public $name;
+    /**
+     * @var string The unique ID number of this connection.
+     */
+    public $friendlyName;
+    /**
+     * @var string The unique ID number of this connection. (See UserDefinedFieldDataType::* for a list of allowable values)
+     */
+    public $dataType;
+    /**
+     * @var string The category of user defined type For Example: Document level or Line level UDF. (See UserDefinedFieldType::* for a list of allowable values)
+     */
+    public $userDefinedFieldType;
+    /**
+     * @var int The User ID of the user who created this record.
+     */
+    public $createdUserId;
+    /**
+     * @var string The date when this record was created.
+     */
+    public $createdDate;
+    /**
+     * @var int The user ID of the user who last modified this record.
+     */
+    public $modifiedUserId;
+    /**
+     * @var string The date/time when this record was last modified.
+     */
+    public $modifiedDate;
+}
+/**
  * User Entitlement Model
+ * Swagger Name: AvaTaxClient
  */
 class UserEntitlementModel
 {
@@ -11994,6 +12372,7 @@ class UserEntitlementModel
 }
 /**
  * Ping Result Model
+ * Swagger Name: AvaTaxClient
  */
 class PingResultModel
 {
@@ -12029,4 +12408,88 @@ class PingResultModel
      * @var string The connected Salesforce account.
      */
     public $crmid;
+}
+/**
+ * The Response of the /shippingverify endpoint. Describes the result of checking all applicable shipping rules against each line in the transaction.
+ * Swagger Name: AvaTaxBeverageClient
+ */
+class ShippingVerifyResult
+{
+    /**
+     * @var boolean Whether every line in the transaction is compliant.
+     */
+    public $compliant;
+    /**
+     * @var string A short description of the result of the compliance check.
+     */
+    public $message;
+    /**
+     * @var string A detailed description of the result of each of the passed checks made against this transaction, separated by line.
+     */
+    public $successMessages;
+    /**
+     * @var string A detailed description of the result of each of the failed checks made against this transaction, separated by line.
+     */
+    public $failureMessages;
+    /**
+     * @var string[] An enumeration of all the failure codes received across all lines.
+     */
+    public $failureCodes;
+    /**
+     * @var string[] An enumeration of all the warning codes received across all lines that a determination could not be made for.
+     */
+    public $warningCodes;
+    /**
+     * @var object[] Describes the results of the checks made for each line in the transaction.
+     */
+    public $lines;
+}
+/**
+ * Message Object
+ * Swagger Name: AvaTaxBeverageClient
+ */
+class ErrorDetails
+{
+    /**
+     * @var object An object holding details about the error.
+     */
+    public $error;
+}
+/**
+ * The Request for the /ageVerification/verify endpoint. Describes information about the person whose age is being verified.
+ * Swagger Name: AvaTaxBeverageClient
+ */
+class AgeVerifyRequest
+{
+    /**
+     * @var string 
+     */
+    public $firstName;
+    /**
+     * @var string 
+     */
+    public $lastName;
+    /**
+     * @var object 
+     */
+    public $address;
+    /**
+     * @var string The value should be ISO-8601 compliant (e.g. 2020-07-21).
+     */
+    public $DOB;
+}
+/**
+ * The Result of a call to the /ageVerification/verify endpoint.
+ * Swagger Name: AvaTaxBeverageClient
+ */
+class AgeVerifyResult
+{
+    /**
+     * @var boolean Describes whether the individual meets or exceeds the minimum legal drinking age.
+     */
+    public $isOfAge;
+    /**
+     * @var AgeVerifyResult[] A list of failure codes describing why a *false* age determination was made.
+     */
+    public $failureCodes;
 }?>
