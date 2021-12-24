@@ -18,7 +18,7 @@ class ClientExtensionExample extends AvaTaxClient
      * @param string $environment  Indicates which server to use; acceptable values are "sandbox" or "production", or the full URL of your AvaTax instance.
      * @param array $guzzleParams  Extra parameters to pass to the guzzle HTTP client (http://docs.guzzlephp.org/en/latest/request-options.html)
      */
-    public function __construct($appName, $appVersion, $machineName="", $environment, $guzzleParams = [], $clientConfig = null)
+    public function __construct($appName, $appVersion, $machineName="", $environment=null, $guzzleParams = [], $clientConfig = null)
     {
         parent::__construct($appName, $appVersion, $machineName, $environment, $guzzleParams);
         $this->clientConfig = $clientConfig;
