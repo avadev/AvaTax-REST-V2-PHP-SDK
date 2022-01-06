@@ -213,7 +213,7 @@ class AvaTaxClientBase
             
             if ( in_array ("application/json",$contentTypes))
             {
-                if ($length ==0 and intdiv($code , 100) ==2 ){
+                if ($contentLength!=null and $length ==0 and intdiv($code , 100) ==2 ){
                         return null;                
                 }
             }
