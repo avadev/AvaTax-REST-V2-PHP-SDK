@@ -4369,6 +4369,45 @@ class FundingInitiateModel
     public $requestWidget;
 }
 /**
+ * An edit to be made on a filing calendar.
+ * Swagger Name: AvaTaxClient
+ */
+class ACHEntryDetailModel
+{
+    /**
+     * @var int Company Id
+     */
+    public $companyId;
+    /**
+     * @var string Company Name
+     */
+    public $companyName;
+    /**
+     * @var string State
+     */
+    public $state;
+    /**
+     * @var string State Region
+     */
+    public $stateRegion;
+    /**
+     * @var string Individual Id
+     */
+    public $individualId;
+    /**
+     * @var string IndividualName
+     */
+    public $individualName;
+    /**
+     * @var float Amount
+     */
+    public $amount;
+    /**
+     * @var string TraceNumber
+     */
+    public $traceNumber;
+}
+/**
  * Represents one configuration setting for this company
  * Swagger Name: AvaTaxClient
  */
@@ -11037,6 +11076,14 @@ class DeclareNexusByAddressModel
      * @var string The date on which your company stopped doing business at this address, or empty if  your company has no plans to stop doing business at this address.
      */
     public $endDate;
+    /**
+     * @var string The type group of nexus that this company is declaring  Use [ListTaxTypeGroups](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListTaxTypeGroups/) API for a list of nexus tax type groups.     This field is defined by Avalara. All Avalara-defined fields must match an Avalara-defined nexus object found by calling `ListNexus`.  NOTE: This optional field will trigger nexus subtype lookup when populated. When using make sure TaxTypeGroup matches corresponding NexusTaxTypeGroup
+     */
+    public $taxTypeGroup;
+    /**
+     * @var string The type of nexus that this company is declaring.Replaces NexusTypeId.  Use [ListNexusTaxTypeGroups](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListNexusTaxTypeGroups/) API for a list of nexus tax type groups.     This field is defined by Avalara. All Avalara-defined fields must match an Avalara-defined nexus object found by calling `ListNexus`.
+     */
+    public $nexusTaxTypeGroup;
     /**
      * @var string First line of the street address
      */
