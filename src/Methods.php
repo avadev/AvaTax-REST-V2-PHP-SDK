@@ -53,7 +53,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -85,7 +85,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -124,7 +124,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['start' => $start, 'end' => $end, '$top' => $top, '$skip' => $skip],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -156,7 +156,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -183,7 +183,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -210,7 +210,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -243,7 +243,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -264,7 +264,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -286,7 +286,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -323,7 +323,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -357,7 +357,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -397,7 +397,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['line1' => $line1, 'line2' => $line2, 'line3' => $line3, 'city' => $city, 'region' => $region, 'postalCode' => $postalCode, 'country' => $country, 'textCase' => $textCase],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -425,7 +425,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -445,7 +445,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -464,7 +464,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -483,7 +483,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -502,7 +502,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -522,7 +522,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -546,7 +546,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -569,7 +569,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -592,7 +592,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -619,7 +619,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -644,7 +644,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -678,7 +678,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -719,7 +719,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -758,7 +758,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -790,7 +790,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -814,7 +814,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -851,7 +851,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -898,7 +898,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -941,7 +941,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -980,7 +980,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -1020,7 +1020,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -1062,7 +1062,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -1107,7 +1107,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$preValidatedExemptionReason' => $preValidatedExemptionReason],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -1143,7 +1143,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -1182,7 +1182,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$page' => $page, '$type' => $type],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -1223,7 +1223,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -1252,7 +1252,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -1290,7 +1290,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -1329,7 +1329,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -1366,7 +1366,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -1404,7 +1404,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -1448,7 +1448,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -1479,7 +1479,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -1517,7 +1517,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -1557,7 +1557,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -1592,7 +1592,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -1630,7 +1630,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -1674,7 +1674,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -1709,7 +1709,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -1742,7 +1742,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -1768,7 +1768,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -1801,7 +1801,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -1834,7 +1834,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -1856,7 +1856,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -1884,7 +1884,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -1910,7 +1910,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -1937,7 +1937,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['currency' => $currency],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -1972,7 +1972,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -2005,7 +2005,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -2034,7 +2034,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -2069,7 +2069,35 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
+    }
+
+    /**
+     * Get ACH entry detail report for company and period
+     *
+     * This API is available by invitation only.
+     * Requires a subscription to Avalara Managed Returns or SST Certified Service Provider.
+     * Returns a list of ACH entry details for the given company and period.
+     * Each object in the result is an ach entry trace record for a payment made on behalf of this company.
+     * 
+     * ### Security Policies
+     * 
+     * * This API depends on the following active services:*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $id The unique identifier of the company
+     * @param int $periodyear The period year
+     * @param int $periodmonth The period month
+     * @return ACHEntryDetailModel[]
+     */
+    public function listACHEntryDetailsForCompany($id, $periodyear, $periodmonth)    {
+        $path = "/api/v2/companies/{$id}/paymentdetails/{$periodyear}/{$periodmonth}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -2104,7 +2132,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -2130,7 +2158,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -2153,7 +2181,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -2195,7 +2223,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -2229,7 +2257,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -2262,7 +2290,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -2292,7 +2320,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -2321,7 +2349,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['taxAuthorityId' => $taxAuthorityId, 'effectiveDate' => $effectiveDate, 'endDate' => $endDate, '$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -2346,7 +2374,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -2369,7 +2397,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -2394,7 +2422,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -2423,7 +2451,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -2453,7 +2481,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -2481,7 +2509,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -2519,7 +2547,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -2554,7 +2582,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -2596,7 +2624,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -2635,7 +2663,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -2671,7 +2699,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -2708,7 +2736,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -2746,7 +2774,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -2786,7 +2814,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -2826,7 +2854,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -2870,7 +2898,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -2909,7 +2937,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -2945,7 +2973,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -2981,7 +3009,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -3005,7 +3033,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -3029,7 +3057,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -3053,7 +3081,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -3080,7 +3108,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -3109,7 +3137,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -3134,7 +3162,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -3166,7 +3194,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -3189,7 +3217,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -3210,7 +3238,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -3236,7 +3264,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -3264,7 +3292,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['companyid' => $companyid, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -3291,7 +3319,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -3318,7 +3346,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -3341,7 +3369,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -3363,7 +3391,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -3385,7 +3413,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -3407,7 +3435,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -3430,7 +3458,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -3458,7 +3486,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -3492,7 +3520,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -3518,7 +3546,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -3542,7 +3570,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -3567,7 +3595,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -3589,7 +3617,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -3615,7 +3643,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -3649,7 +3677,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['line1' => $line1, 'line2' => $line2, 'line3' => $line3, 'city' => $city, 'region' => $region, 'postalCode' => $postalCode, 'country' => $country, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -3680,7 +3708,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['rateTypeId' => $rateTypeId, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -3715,7 +3743,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['line1' => $line1, 'line2' => $line2, 'line3' => $line3, 'city' => $city, 'region' => $region, 'postalCode' => $postalCode, 'country' => $country, 'latitude' => $latitude, 'longitude' => $longitude, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -3738,7 +3766,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -3759,7 +3787,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['marketplaceId' => $marketplaceId, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -3782,7 +3810,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -3814,7 +3842,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['line1' => $line1, 'line2' => $line2, 'line3' => $line3, 'city' => $city, 'region' => $region, 'postalCode' => $postalCode, 'country' => $country, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -3838,7 +3866,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -3863,7 +3891,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -3895,7 +3923,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -3919,7 +3947,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -3941,7 +3969,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -3963,7 +3991,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -3985,7 +4013,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -4007,7 +4035,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -4029,7 +4057,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -4051,7 +4079,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -4073,7 +4101,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -4095,7 +4123,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -4117,7 +4145,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -4139,7 +4167,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -4162,7 +4190,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -4198,7 +4226,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -4221,7 +4249,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -4241,7 +4269,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$top' => $top, '$skip' => $skip],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -4262,7 +4290,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -4291,7 +4319,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -4316,7 +4344,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy, '$countryCode' => $countryCode],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -4350,7 +4378,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy, '$countryCode' => $countryCode],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -4373,7 +4401,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -4398,7 +4426,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -4421,7 +4449,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -4445,7 +4473,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -4467,7 +4495,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -4490,7 +4518,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -4513,7 +4541,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -4537,7 +4565,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -4558,7 +4586,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -4580,7 +4608,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -4604,7 +4632,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -4626,7 +4654,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -4655,7 +4683,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -4676,7 +4704,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$top' => $top, '$skip' => $skip],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -4698,7 +4726,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -4720,7 +4748,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -4744,7 +4772,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -4768,7 +4796,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -4790,7 +4818,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -4812,7 +4840,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['companyId' => $companyId, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -4836,7 +4864,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['rateTypeId' => $rateTypeId, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -4859,7 +4887,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -4886,7 +4914,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -4913,7 +4941,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -4940,7 +4968,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -4971,7 +4999,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -5004,7 +5032,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -5035,7 +5063,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -5060,7 +5088,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -5085,7 +5113,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -5111,7 +5139,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -5136,7 +5164,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -5165,7 +5193,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy, 'returnCountry' => $returnCountry, 'returnRegion' => $returnRegion],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -5187,7 +5215,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -5218,7 +5246,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['endPeriodMonth' => $endPeriodMonth, 'endPeriodYear' => $endPeriodYear, 'frequency' => $frequency, 'status' => $status, 'country' => $country, 'region' => $region, 'filingCalendarId' => $filingCalendarId, 'taxformCode' => $taxformCode],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -5240,7 +5268,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -5271,7 +5299,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -5293,7 +5321,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -5315,7 +5343,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -5337,7 +5365,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -5359,7 +5387,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -5381,7 +5409,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -5403,7 +5431,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -5425,7 +5453,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -5456,7 +5484,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -5490,7 +5518,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -5522,7 +5550,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -5549,7 +5577,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -5578,7 +5606,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -5609,7 +5637,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -5639,7 +5667,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -5673,7 +5701,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -5704,7 +5732,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -5730,7 +5758,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -5761,7 +5789,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -5789,7 +5817,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -5819,7 +5847,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -5845,7 +5873,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -5870,7 +5898,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -5900,7 +5928,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -5928,7 +5956,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -5958,7 +5986,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -5986,7 +6014,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -6020,7 +6048,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -6056,7 +6084,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -6102,7 +6130,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy, 'tagName' => $tagName],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -6138,7 +6166,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -6176,7 +6204,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -6210,7 +6238,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -6245,7 +6273,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -6276,7 +6304,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -6307,7 +6335,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -6335,7 +6363,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -6358,7 +6386,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -6386,7 +6414,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -6421,7 +6449,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -6455,7 +6483,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -6479,7 +6507,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -6513,7 +6541,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -6536,7 +6564,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -6559,7 +6587,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -6589,7 +6617,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -6622,7 +6650,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -6652,7 +6680,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -6688,7 +6716,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -6726,7 +6754,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -6764,7 +6792,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -6790,7 +6818,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -6821,7 +6849,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -6846,7 +6874,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -6889,7 +6917,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -6934,7 +6962,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -6972,7 +7000,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -7035,7 +7063,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -7079,7 +7107,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -7131,7 +7159,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -7184,7 +7212,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -7253,7 +7281,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -7289,7 +7317,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -7330,7 +7358,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -7371,7 +7399,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -7404,7 +7432,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -7441,7 +7469,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -7472,7 +7500,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['cascadeDelete' => $cascadeDelete],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -7501,7 +7529,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -7529,7 +7557,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -7560,7 +7588,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -7595,7 +7623,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -7624,7 +7652,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -7661,7 +7689,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -7699,7 +7727,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -7734,7 +7762,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -7770,7 +7798,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -7812,7 +7840,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -7843,7 +7871,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -7866,7 +7894,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -7889,7 +7917,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -7911,7 +7939,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -7933,7 +7961,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -7968,7 +7996,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -7997,7 +8025,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -8032,7 +8060,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -8069,7 +8097,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -8095,7 +8123,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -8121,7 +8149,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -8156,7 +8184,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -8183,7 +8211,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -8209,7 +8237,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -8241,7 +8269,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -8267,7 +8295,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -8287,7 +8315,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -8317,7 +8345,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['unmigrateFromAi' => $unmigrateFromAi],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -8343,7 +8371,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -8376,7 +8404,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -8407,7 +8435,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -8442,7 +8470,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -8470,7 +8498,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -8512,7 +8540,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -8547,7 +8575,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['companyId' => $companyId, 'pageKey' => $pageKey, '$skip' => $skip, '$top' => $top],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -8584,7 +8612,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -8616,7 +8644,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -8648,7 +8676,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -8687,7 +8715,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -8725,7 +8753,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -8762,7 +8790,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -8787,7 +8815,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -8818,7 +8846,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -8848,7 +8876,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -8875,7 +8903,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -8898,7 +8926,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -8925,7 +8953,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -8959,7 +8987,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -8992,7 +9020,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -9022,7 +9050,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -9067,7 +9095,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -9117,7 +9145,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['date' => $date, 'format' => $format, 'partnerId' => $partnerId, 'includeJurisCodes' => $includeJurisCodes],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -9179,7 +9207,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['region' => $region],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -9222,7 +9250,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['line1' => $line1, 'line2' => $line2, 'line3' => $line3, 'city' => $city, 'region' => $region, 'postalCode' => $postalCode, 'country' => $country],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -9262,7 +9290,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['country' => $country, 'postalCode' => $postalCode],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -9297,7 +9325,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -9332,7 +9360,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -9367,7 +9395,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -9409,7 +9437,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -9450,7 +9478,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -9486,7 +9514,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -9529,7 +9557,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -9584,7 +9612,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['documentType' => $documentType, '$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -9630,7 +9658,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -9677,7 +9705,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -9706,7 +9734,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -9761,7 +9789,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['documentType' => $documentType, '$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -9814,7 +9842,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['documentType' => $documentType, '$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -9870,7 +9898,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -9933,7 +9961,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -9973,7 +10001,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -10024,7 +10052,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['documentType' => $documentType, '$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -10058,7 +10086,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -10098,7 +10126,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -10155,7 +10183,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['dataSourceId' => $dataSourceId, '$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -10210,7 +10238,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['documentType' => $documentType, '$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -10276,7 +10304,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include, 'documentType' => $documentType, 'useTaxDateOverride' => $useTaxDateOverride],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -10329,7 +10357,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['documentType' => $documentType, '$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -10376,7 +10404,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['documentType' => $documentType, '$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -10420,7 +10448,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['documentType' => $documentType, '$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -10472,7 +10500,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['documentType' => $documentType, '$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -10526,7 +10554,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['documentType' => $documentType, '$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -10551,7 +10579,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -10575,7 +10603,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -10600,7 +10628,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -10632,7 +10660,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -10663,7 +10691,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -10691,7 +10719,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -10715,7 +10743,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -10738,7 +10766,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['udfType' => $udfType, 'allowDefaults' => $allowDefaults],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -10763,7 +10791,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['id' => $id],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -10791,7 +10819,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -10822,7 +10850,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -10850,7 +10878,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -10879,7 +10907,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -10916,7 +10944,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -10954,7 +10982,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -10993,7 +11021,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -11020,7 +11048,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -11045,7 +11073,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -11069,7 +11097,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
@@ -11105,7 +11133,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'21.12.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'22.2.0' );
     }
 
     /**
