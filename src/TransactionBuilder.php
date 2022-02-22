@@ -212,6 +212,19 @@ class TransactionBuilder
     }
 
     /**
+     * Specific a exchange rate currency code for this transaction
+     *
+     * @param   string              $exchangeRateCurrencyCode Specific the three-character ISO 4217 code that is being used for exchange rate for this transaction (optional)
+     * @return  TransactionBuilder
+     */
+    public function withExchangeRateCurrencyCode($exchangeRateCurrencyCode)
+    {
+        $this->_model['exchangeRateCurrencyCode'] = $exchangeRateCurrencyCode;
+
+        return $this;
+    }
+
+    /**
      * Add a parameter at the document level
      *
      * @param   string              name
