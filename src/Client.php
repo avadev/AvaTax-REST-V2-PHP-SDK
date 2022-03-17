@@ -159,7 +159,7 @@ class AvaTaxClientBase
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Exception
      */
-    protected function restCall($apiUrl, $verb, $guzzleParams, $apiversion='')
+    protected function restCall($apiUrl, $verb, $guzzleParams, $apiversion='',$headerParams=null)
     {
         // Set authentication on the parameters
         if (count($this->auth) == 2) {
@@ -177,7 +177,10 @@ class AvaTaxClientBase
                 'X-Avalara-Client' => "{$this->appName}; {$this->appVersion}; PhpRestClient; {$apiversion}; {$this->machineName}"
             ];
         }
-        
+        if (isset($headerParams) )
+        {
+            $guzzleParams['headers']= $guzzleParams['headers']+$headerParams;
+        }
         // Check the client config, if set - update guzzleParams['timeout'] 
         if (isset($this->client->getConfig()['timeout']) ) {
             $guzzleParams['timeout'] = $this->client->getConfig()['timeout'];
