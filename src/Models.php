@@ -262,6 +262,25 @@ class AccountMigrationStatusModel
     public $accountMigrationStatusId;
 }
 /**
+ * Used for Enabling an Autit Trail.
+ * Swagger Name: AvaTaxClient
+ */
+class AuditServiceConfigModel
+{
+    /**
+     * @var int The unique ID number assigned to this account.
+     */
+    public $accountId;
+    /**
+     * @var string Date and Time to start Auditing in UTC. If left blank, default to current time
+     */
+    public $effectiveDate;
+    /**
+     * @var int Duration of Audit in hours
+     */
+    public $duration;
+}
+/**
  * Company Address Information
  * Swagger Name: AvaTaxClient
  */
@@ -1356,6 +1375,14 @@ class ItemModel
      * @var int The user ID of the user who last modified this record.
      */
     public $modifiedUserId;
+    /**
+     * @var string Source of creation of this item
+     */
+    public $source;
+    /**
+     * @var string Universal unique code for item
+     */
+    public $upc;
     /**
      * @var ClassificationModel[] List of classifications that belong to this item.  A single classification consits of a productCode and a systemCode for a particular item.
      */
@@ -9554,6 +9581,320 @@ class ItemBulkUploadOutputModel
     public $failed;
 }
 /**
+ * Represents an item in your company's product catalog.
+ * Swagger Name: AvaTaxClient
+ */
+class ItemCatalogueInputModel
+{
+    /**
+     * @var string A unique code representing this item.
+     */
+    public $itemCode;
+    /**
+     * @var string A friendly description of this item in your product catalog.
+     */
+    public $description;
+    /**
+     * @var string A summary for selection of the tax code.
+     */
+    public $summary;
+    /**
+     * @var int The account ID that owns this item.
+     */
+    public $accountId;
+    /**
+     * @var int The unique ID of the company that owns this item.
+     */
+    public $companyId;
+    /**
+     * @var string The tax code of the item.
+     */
+    public $taxCode;
+    /**
+     * @var string The universal product code of the item.
+     */
+    public $upc;
+    /**
+     * @var string A way to group similar items.
+     */
+    public $itemGroup;
+    /**
+     * @var string A path to the category where item is included.
+     */
+    public $category;
+    /**
+     * @var string[] The AvaTax category to identify the product.
+     */
+    public $productCategories;
+    /**
+     * @var string The source of creation of this item.
+     */
+    public $source;
+    /**
+     * @var object Additional key-description of the product.
+     */
+    public $properties;
+}
+/**
+ * Item Catalogue output model.
+ * Swagger Name: AvaTaxClient
+ */
+class ItemCatalogueOutputModel
+{
+    /**
+     * @var int Total number of items processed.
+     */
+    public $total;
+    /**
+     * @var ItemUploadErrorModel[] List of the items that failed during creation because of an error.
+     */
+    public $failed;
+}
+/**
+ * Represents a parameter associated with an item.
+ * Swagger Name: AvaTaxClient
+ */
+class ItemRestrictionOutputModel
+{
+    /**
+     * @var string 
+     */
+    public $id;
+    /**
+     * @var string The Country Of Import for which this restriction is there
+     */
+    public $countryOfImport;
+    /**
+     * @var string The Country Of Export for which this restriction is there
+     */
+    public $countryOfExport;
+    /**
+     * @var string The Country Of Manufacture for which this restriction is there
+     */
+    public $countryOfManufacture;
+    /**
+     * @var string The HsCode for which this restriction is getting created
+     */
+    public $hsCode;
+    /**
+     * @var string Item for which this restrictions exists
+     */
+    public $itemCode;
+    /**
+     * @var int CompanyId associated with the item
+     */
+    public $companyId;
+    /**
+     * @var string Restriction Type of the Item
+     */
+    public $restrictionType;
+    /**
+     * @var string Regulation of the Item
+     */
+    public $regulation;
+    /**
+     * @var string Government agency which is related for this restriction
+     */
+    public $governmentAgency;
+    /**
+     * @var string Message
+     */
+    public $complianceMessage;
+    /**
+     * @var string The date when this record was created.
+     */
+    public $createdDate;
+    /**
+     * @var int The user which created the record
+     */
+    public $createdUserId;
+}
+/**
+ * Represents a parameter associated with an item.
+ * Swagger Name: AvaTaxClient
+ */
+class ItemRestrictionInputModel
+{
+    /**
+     * @var string Item for which this restrictions exists
+     */
+    public $itemCode;
+    /**
+     * @var int CompanyId associated with the item
+     */
+    public $companyId;
+    /**
+     * @var string The HsCode for which this restriction is getting created
+     */
+    public $hsCode;
+    /**
+     * @var string The Country Of Import for which this restriction is getting created
+     */
+    public $countryOfImport;
+    /**
+     * @var string The Country Of Export for which this restriction is getting create
+     */
+    public $countryOfExport;
+    /**
+     * @var string The Country Of Manufacture for which this restriction is getting create
+     */
+    public $countryOfManufacture;
+    /**
+     * @var string Restriction Type of the Item
+     */
+    public $restrictionType;
+    /**
+     * @var string Regulation of the Item
+     */
+    public $regulation;
+    /**
+     * @var string Government agency which is related for this restriction
+     */
+    public $governmentAgency;
+    /**
+     * @var string Message
+     */
+    public $complianceMessage;
+}
+/**
+ * Represents a tax code classification request input model
+ * Swagger Name: AvaTaxClient
+ */
+class ItemTaxCodeClassificationRequestInputModel
+{
+    /**
+     * @var boolean Determines if classification has to be initiated for all items of a company
+     */
+    public $classifyAllItems;
+    /**
+     * @var int[] Item ids for which classification has to be initiated
+     */
+    public $itemIds;
+    /**
+     * @var string[] Product categories of items
+     */
+    public $productCategories;
+}
+/**
+ * Represents a tax code classification request output model
+ * Swagger Name: AvaTaxClient
+ */
+class ItemTaxCodeClassificationRequestOutputModel
+{
+    /**
+     * @var int The unique ID of the classification request
+     */
+    public $requestId;
+    /**
+     * @var int The unique ID of the company that created the classification request.
+     */
+    public $companyId;
+    /**
+     * @var string The classification request
+     */
+    public $request;
+    /**
+     * @var string The status of the classification request
+     */
+    public $status;
+    /**
+     * @var string The request type of the classification request
+     */
+    public $requestType;
+    /**
+     * @var int The User ID of the user who created this classification request.
+     */
+    public $createdUserId;
+    /**
+     * @var string The date/time when this request was created.
+     */
+    public $createdDate;
+    /**
+     * @var string The date/time when this record was last modified.
+     */
+    public $modifiedDate;
+}
+/**
+ * Represents classification details model
+ * Swagger Name: AvaTaxClient
+ */
+class ClassificationDetailsModel
+{
+    /**
+     * @var int The number of items which are classified
+     */
+    public $classified;
+    /**
+     * @var int The number of items which are in progress state
+     */
+    public $inProgress;
+    /**
+     * @var int The number of items which are not classified
+     */
+    public $notClassified;
+}
+/**
+ * Represents a tax code classification request status output model
+ * Swagger Name: AvaTaxClient
+ */
+class ItemTaxCodeClassificationRequestStatusOutputModel
+{
+    /**
+     * @var int The unique Request Id of classification request
+     */
+    public $requestId;
+    /**
+     * @var ClassificationDetailsModel 
+     */
+    public $classificationDetails;
+    /**
+     * @var int The total number of items for which classification is initiated in request
+     */
+    public $totalItems;
+    /**
+     * @var string The status of classification request
+     */
+    public $status;
+    /**
+     * @var string The date/time when this request was created.
+     */
+    public $createdDate;
+}
+/**
+ * Represents item tax code model
+ * Swagger Name: AvaTaxClient
+ */
+class ItemTaxCodeModel
+{
+    /**
+     * @var string Suggested tax code
+     */
+    public $taxCode;
+    /**
+     * @var string Suggested tax code description
+     */
+    public $description;
+}
+/**
+ * Represents item tax code recommendations model
+ * Swagger Name: AvaTaxClient
+ */
+class ItemTaxCodeRecommendationsOutputModel
+{
+    /**
+     * @var string A unique code representing this item.
+     */
+    public $itemCode;
+    /**
+     * @var ItemTaxCodeModel[] Item tax code recommendations
+     */
+    public $recommendations;
+    /**
+     * @var string Url
+     */
+    public $url;
+}
+/**
  * Tells you whether this location object has been correctly set up to the local jurisdiction's standards
  * Swagger Name: AvaTaxClient
  */
@@ -12479,7 +12820,7 @@ class ShippingVerifyResult
      */
     public $failureMessages;
     /**
-     * @var string[] An enumeration of all the failure codes received across all lines.
+     * @var string[] An enumeration of all the failure codes received across all lines. Note: AlcoholContentLimitExceeded is included in API versions 2.2 and later.
      */
     public $failureCodes;
     /**

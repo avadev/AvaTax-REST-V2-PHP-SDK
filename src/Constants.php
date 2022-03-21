@@ -30,19 +30,6 @@ class TransactionAddressType
  * Swagger Name: AvaTaxClient
  * 
  */
-class TssAccountMigrationId
-{    const C_BOTHWITHOUTROLLBACKREADFROMSQL = 0;
-    const C_BOTHWITHROLLBACKREADFROMTSS = 1;
-    const C_SQLONLY = 2;
-    const C_TSSONLY = 3;
-    const C_READONLY = 4;
-
-}
-
-/**
- * Swagger Name: AvaTaxClient
- * 
- */
 class TextCase
 {    const C_UPPER = 0;
     const C_MIXED = 1;
@@ -516,6 +503,8 @@ class ErrorCodeId
     const C_TOOMANYUSERDEFINEDFIELDS = 1730;
     const C_DUPLICATEUSERDEFINEDFIELDSFOUND = 1731;
     const C_INVALIDNAMEFORUSERDEFINEDFIELD = 1732;
+    const C_INVALIDRESTRICTIONTYPE = 1733;
+    const C_INVALIDPARAMETER = 1734;
     const C_UNSUPPORTEDFILEFORMAT = 1800;
     const C_UNSUPPORTEDOUTPUTFILETYPE = 1801;
     const C_TAXPROFILENOTPROVIDED = 1900;
@@ -561,6 +550,7 @@ class ErrorCodeId
     const C_BATCHCOMPANYIDANDCOMPANYCODEMISMATCH = 2503;
     const C_BATCHCANNOTBECANCELLEDSTATUSERROR = 2504;
     const C_BATCHCANNOTBECANCELLEDFORMATERROR = 2505;
+    const C_BATCHTYPENOTSUPPORTED = 2506;
     const C_INVALIDPARAMETERDATATYPE = 2600;
     const C_TAGDOESNOTEXIST = 2620;
     const C_OBJECTDELETED = 2660;
@@ -1461,6 +1451,34 @@ class AuthenticationTypeId
     const C_USERNAMEPASSWORD = 1;
     const C_ACCOUNTIDLICENSEKEY = 2;
     const C_OPENIDBEARERTOKEN = 3;
+
+}
+
+/**
+ * Swagger Name: AvaTaxBeverageClient
+ * 
+ */
+class ApiVersionSchema
+{    const C_2_1 = 0;
+    const C_2_2 = 1;
+
+}
+
+/**
+ * Swagger Name: AvaTaxBeverageClient
+ * 
+ */
+class FailureCodes
+{    const C_BELOWLEGALDRINKINGAGE = 0;
+    const C_SHIPPINGPROHIBITEDTOADDRESS = 1;
+    const C_MISSINGREQUIREDLICENSE = 2;
+    const C_VOLUMELIMITEXCEEDED = 3;
+    const C_INVALIDFIELDVALUE = 4;
+    const C_MISSINGREQUIREDFIELD = 5;
+    const C_INVALIDFIELDTYPE = 6;
+    const C_INVALIDFORMAT = 7;
+    const C_INVALIDDATE = 8;
+    const C_ALCOHOLCONTENTLIMITEXCEEDED = 9;
 
 }
 
