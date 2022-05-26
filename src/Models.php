@@ -9491,6 +9491,60 @@ class ItemClassificationOutputModel
     public $systemCode;
 }
 /**
+ * Represents a Premium Classification output model associated with an item's SystemCode..
+ * Swagger Name: AvaTaxClient
+ */
+class ItemPremiumClassificationOutputModel
+{
+    /**
+     * @var string ItemPremiumClassificationDetailId
+     */
+    public $id;
+    /**
+     * @var string Item associated with this premium classification.
+     */
+    public $itemCode;
+    /**
+     * @var int CompanyId with which the Item is associated.
+     */
+    public $companyId;
+    /**
+     * @var string The HS code associated with this item's premium classification.
+     */
+    public $hsCode;
+    /**
+     * @var string SystemCode associated with this premium classificaitons.
+     */
+    public $systemCode;
+    /**
+     * @var string Justification why this HsCode is attached to this item.
+     */
+    public $justification;
+    /**
+     * @var string The date when this record was created.
+     */
+    public $createdDate;
+    /**
+     * @var int The user who created the record.
+     */
+    public $createdUserId;
+}
+/**
+ * Represents a premium classification associated with an item's HS code for a system code.
+ * Swagger Name: AvaTaxClient
+ */
+class ItemPremiumClassificationInputModel
+{
+    /**
+     * @var string The HsCode for which this premium classification is being created.
+     */
+    public $hsCode;
+    /**
+     * @var string Justification why this HsCode is attached to this item.
+     */
+    public $justification;
+}
+/**
  * An abridged item model used for syncing product catalogs with AvaTax.
  * Swagger Name: AvaTaxClient
  */
@@ -9599,14 +9653,6 @@ class ItemCatalogueInputModel
      */
     public $summary;
     /**
-     * @var int The account ID that owns this item.
-     */
-    public $accountId;
-    /**
-     * @var int The unique ID of the company that owns this item.
-     */
-    public $companyId;
-    /**
      * @var string The tax code of the item.
      */
     public $taxCode;
@@ -9622,10 +9668,6 @@ class ItemCatalogueInputModel
      * @var string A path to the category where item is included.
      */
     public $category;
-    /**
-     * @var string[] The AvaTax category to identify the product.
-     */
-    public $productCategories;
     /**
      * @var string The source of creation of this item.
      */
@@ -9832,6 +9874,14 @@ class ClassificationDetailsModel
      * @var int The number of items which are not classified
      */
     public $notClassified;
+    /**
+     * @var int The number of items which are failed because of some error
+     */
+    public $failed;
+    /**
+     * @var int The number of items which are not found as they may be deleted
+     */
+    public $notFound;
 }
 /**
  * Represents a tax code classification request status output model
@@ -11911,6 +11961,10 @@ class NoticeModel
      * @var int The user ID of the user who last modified this record.
      */
     public $modifiedUserId;
+    /**
+     * @var string The registration id of the notice
+     */
+    public $registrationId;
 }
 /**
  * Model to create a new tax notice responsibility type.
@@ -12092,6 +12146,10 @@ class SetPasswordModel
      * @var string New Password
      */
     public $newPassword;
+    /**
+     * @var boolean SuppressResetPasswordEmail
+     */
+    public $suppressResetPasswordEmail;
 }
 /**
  * An input model for executing a report detailed to the document line level
@@ -12175,6 +12233,10 @@ class ExportDocumentLineModel
      * @var string Defines the individual taxes associated with a TaxType category, such as Lodging TaxType which supports numerous TaxSubTypes, including Hotel, Occupancy, ConventionCenter, Accommotations, etc.
      */
     public $taxSubType;
+    /**
+     * @var string Defines report source. (See ReportSource::* for a list of allowable values)
+     */
+    public $reportSource;
 }
 /**
  * The output model for report parameter definitions
@@ -12877,7 +12939,7 @@ class AgeVerifyResult
      */
     public $isOfAge;
     /**
-     * @var AgeVerifyResult[] A list of failure codes describing why a *false* age determination was made.
+     * @var string[] A list of failure codes describing why a *false* age determination was made.
      */
     public $failureCodes;
 }?>

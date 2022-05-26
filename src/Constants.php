@@ -71,47 +71,6 @@ class CertificatePreviewType
  * Swagger Name: AvaTaxClient
  * 
  */
-class FilingFrequencyId
-{    const C_MONTHLY = 1;
-    const C_QUARTERLY = 2;
-    const C_SEMIANNUALLY = 3;
-    const C_ANNUALLY = 4;
-    const C_BIMONTHLY = 5;
-    const C_OCCASIONAL = 6;
-    const C_INVERSEQUARTERLY = 7;
-    const C_WEEKLY = 8;
-
-}
-
-/**
- * Swagger Name: AvaTaxClient
- * 
- */
-class FilingStatusId
-{    const C_PENDINGAPPROVAL = 0;
-    const C_DIRTY = 1;
-    const C_APPROVEDTOFILE = 2;
-    const C_PENDINGFILING = 3;
-    const C_PENDINGFILINGONBEHALF = 4;
-    const C_FILED = 5;
-    const C_FILEDONBEHALF = 6;
-    const C_RETURNACCEPTED = 7;
-    const C_RETURNACCEPTEDONBEHALF = 8;
-    const C_PAYMENTREMITTED = 9;
-    const C_VOIDED = 10;
-    const C_PENDINGRETURN = 11;
-    const C_PENDINGRETURNONBEHALF = 12;
-    const C_DONOTFILE = 13;
-    const C_RETURNREJECTED = 14;
-    const C_RETURNREJECTEDONBEHALF = 15;
-    const C_APPROVEDTOFILEONBEHALF = 16;
-
-}
-
-/**
- * Swagger Name: AvaTaxClient
- * 
- */
 class PointOfSaleFileType
 {    const C_JSON = 0;
     const C_CSV = 1;
@@ -505,6 +464,7 @@ class ErrorCodeId
     const C_INVALIDNAMEFORUSERDEFINEDFIELD = 1732;
     const C_INVALIDRESTRICTIONTYPE = 1733;
     const C_INVALIDPARAMETER = 1734;
+    const C_INVALIDSYSTEMCODE = 1735;
     const C_UNSUPPORTEDFILEFORMAT = 1800;
     const C_UNSUPPORTEDOUTPUTFILETYPE = 1801;
     const C_TAXPROFILENOTPROVIDED = 1900;
@@ -1116,6 +1076,22 @@ class AvataxDeleteErrorTransactionStatus
  * Swagger Name: AvaTaxClient
  * 
  */
+class FilingFrequencyId
+{    const C_MONTHLY = 1;
+    const C_QUARTERLY = 2;
+    const C_SEMIANNUALLY = 3;
+    const C_ANNUALLY = 4;
+    const C_BIMONTHLY = 5;
+    const C_OCCASIONAL = 6;
+    const C_INVERSEQUARTERLY = 7;
+    const C_WEEKLY = 8;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * 
+ */
 class FilingTypeId
 {    const C_PAPERRETURN = 0;
     const C_ELECTRONICRETURN = 1;
@@ -1152,6 +1128,32 @@ class FilingRequestStatus
     const C_CHANGEREQUEST = 7;
     const C_REQUESTAPPROVED = 8;
     const C_REQUESTDENIED = 9;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * 
+ */
+class FilingStatusId
+{    const C_PENDINGAPPROVAL = 0;
+    const C_DIRTY = 1;
+    const C_APPROVEDTOFILE = 2;
+    const C_PENDINGFILING = 3;
+    const C_PENDINGFILINGONBEHALF = 4;
+    const C_FILED = 5;
+    const C_FILEDONBEHALF = 6;
+    const C_RETURNACCEPTED = 7;
+    const C_RETURNACCEPTEDONBEHALF = 8;
+    const C_PAYMENTREMITTED = 9;
+    const C_VOIDED = 10;
+    const C_PENDINGRETURN = 11;
+    const C_PENDINGRETURNONBEHALF = 12;
+    const C_DONOTFILE = 13;
+    const C_RETURNREJECTED = 14;
+    const C_RETURNREJECTEDONBEHALF = 15;
+    const C_APPROVEDTOFILEONBEHALF = 16;
+    const C_FILEDBYCUSTOMER = 17;
 
 }
 
@@ -1393,6 +1395,16 @@ class ReportDateFilter
 class ReportDocType
 {    const C_CONSUMERUSE = 67;
     const C_SALES = 83;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * 
+ */
+class ReportSource
+{    const C_SNOWFLAKE = 0;
+    const C_MONGODB = 1;
 
 }
 
