@@ -811,6 +811,50 @@ class AuditModel
     public $remoteCalls;
 }
 /**
+ * Descibes a record of an account granting TSA accounts write access.
+ * See AVT-25316
+ * Swagger Name: AvaTaxClient
+ */
+class AccountTsaAccessModel
+{
+    /**
+     * @var int The id of the account to which the TSA access entry belongs to.
+     */
+    public $accountId;
+    /**
+     * @var int The user ID of the user who last modified this record.
+     */
+    public $modifiedUserId;
+    /**
+     * @var string The date/time when this record was last modified.
+     */
+    public $modifiedDate;
+    /**
+     * @var string The date/time when this TSA access record expires.
+     */
+    public $endDate;
+}
+/**
+ * Specifies a duration for which to grant TSA accounts write access.
+ * See AVT-25316
+ * Swagger Name: AvaTaxClient
+ */
+class AccountTsaAccessDurationModel
+{
+    /**
+     * @var int Number of minutes
+     */
+    public $minutes;
+    /**
+     * @var int Number of hours
+     */
+    public $hours;
+    /**
+     * @var int Number of days
+     */
+    public $days;
+}
+/**
  * TextCase info for input address
  * Swagger Name: AvaTaxClient
  */
@@ -8579,6 +8623,10 @@ class FilingReturnModel
      */
     public $filingCalendarId;
     /**
+     * @var string The registration ID from the return's filing calendar.
+     */
+    public $registrationId;
+    /**
      * @var int The resourceFileId of the return. Will be null if not available.
      */
     public $resourceFileId;
@@ -9084,6 +9132,10 @@ class MultiTaxFilingReturnModel
      * @var int The unique ID number of the filing calendar associated with this return.
      */
     public $filingCalendarId;
+    /**
+     * @var string The registration ID from the return's filing calendar.
+     */
+    public $registrationId;
     /**
      * @var string The current status of the filing return. (See FilingStatusId::* for a list of allowable values)
      */
