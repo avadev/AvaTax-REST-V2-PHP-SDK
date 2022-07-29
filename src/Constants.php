@@ -102,6 +102,31 @@ class UserDefinedFieldType
  * Swagger Name: AvaTaxClient
  * 
  */
+class POABusinessUnit
+{    const C_RETURNS = 0;
+    const C_LODGING = 1;
+    const C_TELECOM = 2;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * 
+ */
+class POASubscriptionType
+{    const C_MRS = 0;
+    const C_AVACOMMS = 1;
+    const C_AVAHOSPITALITY = 2;
+    const C_AVALODGING = 3;
+    const C_MRSCOMPLIANCEMANAGER = 4;
+    const C_AMRA = 5;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * 
+ */
 class SecurityRoleId
 {    const C_NOACCESS = 0;
     const C_SITEADMIN = 1;
