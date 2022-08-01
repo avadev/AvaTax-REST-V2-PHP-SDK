@@ -214,7 +214,11 @@ class AvaTaxClientBase
             $code=$response->getStatusCode();
             $contentTypes =  $response->getHeader('Content-Type');
             
-            if ( in_array ("application/json",$contentTypes))
+            if ( in_array ("text/csv", $contentTypes)) {
+                return $body;
+            }
+
+            if ( in_array ("application/json", $contentTypes))
             {
                 if ($contentLength!=null and $length ==0 and intdiv($code , 100) ==2 ){
                         return null;                
