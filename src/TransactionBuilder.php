@@ -255,6 +255,29 @@ class TransactionBuilder
         return $this;
     }
 
+        /**
+     * Add a parameter to the current line when unit is specified
+     *
+     * @param   string              name
+     * @param   string              value
+     * @param   string              unit
+     * @return  TransactionBuilder
+     */
+    public function withLineParameterAndUnit($name, $value, $unit)
+    {
+        $li = $this->getMostRecentLineIndex();
+        if (empty($this->_model['lines'][$li]['parameters'])) {
+            $this->_model['lines'][$li]['parameters'] = [];
+        }
+        $l = [
+            'name' => $name,
+            'value' => $value,
+            'unit' => $unit
+        ];
+        $this->_model['lines'][$li]['parameters'][] = $l;
+        return $this;
+    }
+
     /**
      * Add an address to this transaction
      *
