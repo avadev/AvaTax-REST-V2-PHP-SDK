@@ -9305,10 +9305,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $region A two character region code which limits results to a specific region.
      * @return object
      */
-    public function downloadTaxRatesByZipCode($date = null, $region = null)    {
-        if(is_null($date)) {
-            $date = date("Y-m-d"); 
-        }
+    public function downloadTaxRatesByZipCode($date, $region = null)    {
         $path = "/api/v2/taxratesbyzipcode/download/{$date}";
         $guzzleParams = [
             'query' => ['region' => $region],
@@ -10064,6 +10061,7 @@ class AvaTaxClient extends AvaTaxClientBase
      */
     public function createTransaction($include=null, $model=null)    {
         $path = "/api/v2/transactions/create";
+        echo json_encode($model);
         $guzzleParams = [
             'query' => ['$include' => $include],
             'body' => json_encode($model)
