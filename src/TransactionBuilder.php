@@ -330,6 +330,19 @@ class TransactionBuilder
     }
 
     /**
+     * Add a merchant seller ID to this line
+     *
+     * @param   string              merchantSellerIdentifier        ID of merchant seller
+     * @return  TransactionBuilder
+     */
+    public function withLineMerchantSeller($merchantSellerIdentifier)
+    {
+        $li = $this->getMostRecentLineIndex();
+        $this->_model['lines'][$li]['merchantSellerIdentifier'] = $merchantSellerIdentifier;
+        return $this;
+    }
+
+    /**
      * Add a document-level Tax Override to the transaction.
      *  - A TaxDate override requires a valid DateTime object to be passed.
      * TODO: Verify Tax Override constraints and add exceptions.
