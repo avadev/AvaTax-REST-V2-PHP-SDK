@@ -206,7 +206,7 @@ class AvaTaxClientBase
 
             $length = 0;
             
-            $contentLength =$response->getHeader('Content-Length');
+            $contentLength = $response->getHeader('Content-Length');
             if ($contentLength!=null)
             {
                 $length=$contentLength[0];
@@ -220,7 +220,7 @@ class AvaTaxClientBase
 
             if ( in_array ("application/json", $contentTypes))
             {
-                if ($contentLength!=null and $length ==0 and intdiv($code , 100) ==2 ){
+                if (($contentLength != null and $length == 0 and intdiv($code , 100) == 2) || $code == 204 ){
                         return null;                
                 }
             }
