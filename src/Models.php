@@ -651,6 +651,14 @@ class AuditEvent
      */
     public $transactionId;
     /**
+     * @var string 
+     */
+    public $correlationId;
+    /**
+     * @var string 
+     */
+    public $avalaraUid;
+    /**
      * @var int 
      */
     public $auditEventLevelId;
@@ -4135,6 +4143,37 @@ class CertExpressInvitationStatusModel
      * @var CertExpressInvitationModel 
      */
     public $invitation;
+}
+/**
+ * 
+ * Swagger Name: AvaTaxClient
+ */
+class ProblemDetails
+{
+    /**
+     * @var string 
+     */
+    public $type;
+    /**
+     * @var string 
+     */
+    public $title;
+    /**
+     * @var int 
+     */
+    public $status;
+    /**
+     * @var string 
+     */
+    public $detail;
+    /**
+     * @var string 
+     */
+    public $instance;
+    /**
+     * @var object 
+     */
+    public $extensions;
 }
 /**
  * Contains information about a company's exemption certificate status.
@@ -10259,6 +10298,10 @@ class TransactionLineDetailModel
      * @var string LiabilityType identifies the party liable to file the tax. This field is used to filter taxes from reports and tax filings as appropriate. (See LiabilityType::* for a list of allowable values)
      */
     public $liabilityType;
+    /**
+     * @var string ID of the AvaTax user creating the transaction. This field will be calculated by AvaTax based on the Company settings and the transaction details.
+     */
+    public $avtUserBIN;
 }
 /**
  * Represents information about location types stored in a line
