@@ -234,11 +234,11 @@ class AvaTaxClientBase
               return $JsonBody;
             }
 
-        } catch (\Exception $e) {
+        } catch (\GuzzleHttp\Exception\ClientException $e) {
             if (!$this->catchExceptions) {
                 throw $e;
             }
-            return $e->getMessage();
+            return $e->getResponse()->getBody()->getContents();
         }
     }
 }
