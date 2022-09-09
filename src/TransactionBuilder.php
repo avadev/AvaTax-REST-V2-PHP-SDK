@@ -475,7 +475,10 @@ class TransactionBuilder
      * @param   float  $amount      Value of the item.
      * @param   float  $quantity    Quantity of the item.
      * @param   string $itemCode
-     * @param   string $taxCode     Tax Code of the item. If left blank, the default item (P0000000) is assumed.
+     * @param   string $taxCode     Tax Code of the item.
+        - If itemCode is blank and taxCode is left blank, the default item (P0000000) is assumed.
+        - If itemCode is mapped to a taxCode in AvaTax Management System then the mapped taxCode
+          takes precedence, even if left blank or provided with any other value.
      * @param   string $lineNumber  Custom Line number, defaults to auto-incremented number if null
      * @return  TransactionBuilder
      */
