@@ -7224,7 +7224,7 @@ class ErrorTransactionOutputModel
  * 
  * Swagger Name: AvaTaxClient
  */
-class CappedFetchResult
+class CappedFetchResult[ErrorTransactionOutputModel]
 {
     /**
      * @var boolean 
@@ -7235,7 +7235,7 @@ class CappedFetchResult
      */
     public $_recordsetCount;
     /**
-     * @var object[] 
+     * @var ErrorTransactionOutputModel[] 
      */
     public $value;
     /**
@@ -7317,6 +7317,33 @@ class ErrorCodeOutputModel
      * @var int Number of error code recorded
      */
     public $count;
+}
+/**
+ * 
+ * Swagger Name: AvaTaxClient
+ */
+class CappedFetchResult[ErrorCodeOutputModel]
+{
+    /**
+     * @var boolean 
+     */
+    public $_isRecordsetCountCapped;
+    /**
+     * @var int 
+     */
+    public $_recordsetCount;
+    /**
+     * @var ErrorCodeOutputModel[] 
+     */
+    public $value;
+    /**
+     * @var string 
+     */
+    public $_nextLink;
+    /**
+     * @var string 
+     */
+    public $pageKey;
 }
 /**
  * 
@@ -11793,6 +11820,10 @@ class NoticeFinanceModel
      * @var string The name of the file attached to the finance detail
      */
     public $fileName;
+    /**
+     * @var string The payment method on the notice
+     */
+    public $paymentMethod;
     /**
      * @var int The ResourceFileId of the finance detail attachment
      */
