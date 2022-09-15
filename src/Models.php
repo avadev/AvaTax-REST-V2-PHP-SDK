@@ -11794,6 +11794,10 @@ class NoticeFinanceModel
      */
     public $fileName;
     /**
+     * @var string The payment method on the notice
+     */
+    public $paymentMethod;
+    /**
      * @var int The ResourceFileId of the finance detail attachment
      */
     public $resourceFileId;
