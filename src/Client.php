@@ -200,8 +200,8 @@ class AvaTaxClientBase
         }
         
         //Set TLS version to 1.2 because Avartax is discontinuing support TLS 1.0 & 1.1
-        if(empty($guzzleParams['version'])){
-            $guzzleParams['version'] = '1.2';
+        if (version_compare(PHP_VERSION, '5.6.3', '>=')) {
+            $guzzleParams['curl'][CURLOPT_SSLVERSION] = CURL_SSLVERSION_TLSv1_2;
         }
         
         // Contact the server
