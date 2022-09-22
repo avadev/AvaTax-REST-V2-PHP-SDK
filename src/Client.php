@@ -199,6 +199,11 @@ class AvaTaxClientBase
             $guzzleParams['connect_timeout'] = 1200;
         }
         
+        //Set TLS version to 1.2 because Avartax is discontinuing support TLS 1.0 & 1.1
+        if(empty($guzzleParams['version'])){
+            $guzzleParams['version'] = '1.2';
+        }
+        
         // Contact the server
         try {
             $response = $this->client->request($verb, $apiUrl, $guzzleParams);
