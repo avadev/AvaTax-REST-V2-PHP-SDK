@@ -45,6 +45,7 @@ class LogInformation
     {
         $this-> populateCommonResponseInfo($response);
         $this-> exceptionMessage = $errorMessage;
+        $this-> statusCode = 500;
     }
 
     public function populateErrorInfo($e)
