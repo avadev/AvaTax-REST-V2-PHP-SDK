@@ -1,6 +1,7 @@
 <?php
 namespace Avalara;
 use GuzzleHttp\Client;
+use Psr\Log\LoggerInterface;
 
 /**
  * Base AvaTaxClient object that handles connectivity to the AvaTax v2 API server.
@@ -44,6 +45,16 @@ class AvaTaxClientBase
     protected $catchExceptions;
 
     /**
+     * @var LoggerInterface The logger instance which is intended to be used for logging puposes      
+     */
+    protected $logger;
+
+    /**
+     * @var bool        The setting for whether the request and response body should be logged or not
+     */
+    protected $includeReqResInLogging;
+
+    /**
      * Construct a new AvaTaxClient
      *
      * @param string $appName      Specify the name of your application here.  Should not contain any semicolons.
@@ -54,7 +65,7 @@ class AvaTaxClientBase
      *
      * @throws \Exception
      */
-    public function __construct($appName, $appVersion, $machineName="", $environment="", $guzzleParams = [])
+    public function __construct($appName, $appVersion, $machineName="", $environment="", $guzzleParams = [], LoggerInterface $logger = null, $includeReqResInLogging = false)
     {
         // app name and app version are mandatory fields.
         if ($appName == "" || $appName == null || $appVersion == "" || $appVersion == null) {
@@ -86,6 +97,8 @@ class AvaTaxClientBase
 
         // Configure the HTTP client
         $this->client = new Client($guzzleParams);
+        $this->logger = $logger;
+        $this->includeReqResInLogging = $includeReqResInLogging;
     }
 
     /**
@@ -161,6 +174,10 @@ class AvaTaxClientBase
      */
     protected function restCall($apiUrl, $verb, $guzzleParams, $apiversion='',$headerParams=null)
     {
+        // Populate the log object with request details
+        $logModel = new LogInformation();
+        $logModel-> populateRequestInfo($verb, $apiUrl, $guzzleParams, $this->includeReqResInLogging);
+        
         // Set authentication on the parameters
         if (count($this->auth) == 2) {
             if (!isset($guzzleParams['auth'])) {
@@ -201,6 +218,7 @@ class AvaTaxClientBase
         
         // Contact the server
         try {
+            $logModel-> setStartTime(microtime(true));
             $response = $this->client->request($verb, $apiUrl, $guzzleParams);
             $body = $response->getBody();
 
@@ -227,18 +245,33 @@ class AvaTaxClientBase
             $JsonBody = json_decode($body);
             if (is_null($JsonBody)) {
                 if (json_last_error() === JSON_ERROR_SYNTAX) {
-				     throw new \Exception('The response is in unexpected format. The response is: ' . $JsonBody);
-			     }
-              return $body;
+                    $errorMsg = 'The response is in unexpected format. The response is: ';
+                    // populate exception details in log object
+                    $logModel-> populateErrorInfoWithMessageAndBody($errorMsg, $response);
+				    throw new \Exception($errorMsg . $JsonBody);
+			    }
+                $logModel-> populateResponseInfo($body, $response);
+                return $body;
             } else {
-              return $JsonBody;
+                $logModel-> populateResponseInfo($JsonBody, $response);
+                return $JsonBody;
             }
 
         } catch (\GuzzleHttp\Exception\ClientException $e) {
+            // populate exception details in log object
+            $logModel-> populateErrorInfo($e);
             if (!$this->catchExceptions) {
                 throw $e;
             }
             return $e->getResponse()->getBody()->getContents();
+        } finally {
+            // log the error / info details
+            if(!is_null($logModel-> statusCode) && $logModel-> statusCode < 400) {
+                $this-> logger-> info(json_encode($logModel));
+            } else {
+                $this-> logger-> error(json_encode($logModel));
+            }
+
         }
     }
 }
