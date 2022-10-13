@@ -77,3 +77,40 @@ echo('<pre>' . json_encode($t, JSON_PRETTY_PRINT) . '</pre>');
 
 ?>
 ```
+# How to enable logging in the PHP SDK
+Logging could be enabled on client side by adding logging library like Monolog. This could be done by adding dependency and version in composer.json
+```
+"require": {
+        ....
+        ....
+        "monolog/monolog": "^3.2"
+    },
+``` 
+By just adding the above configuration, the logging framework will recognise the binding. Now, we will have to provide logging object as contructor parameter to AvaTaxClient. This could be done as below:
+```
+// Include the packages/classes we would need to create the logger object
+
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+use Monolog\Formatter\JsonFormatter;
+use Monolog\Processor\PsrLogMessageProcessor;
+```
+
+The following example shows how we can add configuration to display logs at console (stdout)
+```
+$stream_handler = new StreamHandler("php://stdout");
+
+$stream_handler->setFormatter(new JsonFormatter());
+
+// Follow PSR-3 specificaiton.
+$psrProcessor = new PsrLogMessageProcessor();
+
+$logger = new Logger('appLogger', [$stream_handler], [
+    $psrProcessor,
+  ]);
+
+// Create a new client
+$client = new Avalara\AvaTaxClient('phpTestApp', '1.0', 'localhost', 'sandbox',[], $logger, true);
+```
+
+This should add logging to SDK and the logs would be displayed on console. If we want to use other configurations where we want logs to be stored in files etc then the handler(StreamHandler in above case) would require changes accordingly.
