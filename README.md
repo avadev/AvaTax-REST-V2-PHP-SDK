@@ -78,6 +78,14 @@ echo('<pre>' . json_encode($t, JSON_PRETTY_PRINT) . '</pre>');
 ?>
 ```
 # How to enable logging in the PHP SDK
+* SDK uses PSR-3, a common interface used for logging capabilities in PHP.
+* Client would implement the binding on their end like Monolog, Analog etc to enable logging.
+* By default there is no logging enabled.
+* All the attributes which are part of log message are in **LogObject.php**
+* To enable or disable logging of request and response object, there is a boolean variable **includeReqResInLogging** passed as constructor argument. Default is set to **FALSE**
+* Output of logging is in **JSON** format.
+
+
 Logging could be enabled on client side by adding logging library like Monolog. This could be done by adding dependency and version in composer.json
 ```
 "require": {
