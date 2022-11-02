@@ -4,7 +4,7 @@ namespace Avalara;
 class LogInformation
 {
     private $startTime;
-    private $includeReqResInLogging;
+    private $logRequestAndResponseBody;
     public $httpMethod;
     public $headerCorrelationId;
     public $requestDetails;
@@ -20,13 +20,13 @@ class LogInformation
         $this-> startTime = $startTime;
     }
 
-    public function populateRequestInfo($verb, $apiUrl, $guzzleParams, $includeReqResInLogging)
+    public function populateRequestInfo($verb, $apiUrl, $guzzleParams, $logRequestAndResponseBody)
     {
         $this-> timestamp = gmdate("Y/m/d H:i:s");
         $this-> httpMethod = $verb;
         $this-> requestURI = $apiUrl;
-        $this-> includeReqResInLogging = $includeReqResInLogging;
-        if($this-> includeReqResInLogging)
+        $this-> logRequestAndResponseBody = $logRequestAndResponseBody;
+        if($this-> logRequestAndResponseBody)
         {
             $this-> requestDetails = $guzzleParams['body'];
         }
@@ -35,7 +35,7 @@ class LogInformation
     public function populateResponseInfo($jsonBody, $response)
     {
         $this-> populateCommonResponseInfo($response);
-        if($this-> includeReqResInLogging)
+        if($this-> logRequestAndResponseBody)
         {
             $this-> responseDetails = $jsonBody;
         }

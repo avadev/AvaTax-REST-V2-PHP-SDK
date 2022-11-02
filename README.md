@@ -82,7 +82,7 @@ echo('<pre>' . json_encode($t, JSON_PRETTY_PRINT) . '</pre>');
 * Client would implement the binding on their end like Monolog, Analog etc to enable logging.
 * By default there is no logging enabled.
 * All the attributes which are part of log message are in **LogObject.php**
-* To enable or disable logging of request and response object, there is a boolean variable **includeReqResInLogging** passed as constructor argument. Default is set to **FALSE**
+* To enable or disable logging of request and response object, there is a boolean variable **logRequestAndResponseBody** passed as constructor argument. Default is set to **FALSE**
 * Output of logging is in **JSON** format.
 
 
