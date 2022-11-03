@@ -1347,19 +1347,11 @@ class ItemParameterModel
     public $isNeededForClassification;
 }
 /**
- * Represents a tag for an item in your company's product catalog.
+ * 
  * Swagger Name: AvaTaxClient
  */
-class ItemTagDetailModel
+class ItemTagDetailInputModel
 {
-    /**
-     * @var int The unique ID number of the item-tag relation.
-     */
-    public $itemTagDetailId;
-    /**
-     * @var int The unique tag Id for the tags.
-     */
-    public $tagId;
     /**
      * @var string The tag name.
      */
@@ -1372,10 +1364,6 @@ class ItemTagDetailModel
      * @var int The unique ID number of the company that owns this item.
      */
     public $companyId;
-    /**
-     * @var string The date when this record was created.
-     */
-    public $createdDate;
 }
 /**
  * Represents an item in your company's product catalog.
@@ -1448,7 +1436,7 @@ class ItemModel
      */
     public $parameters;
     /**
-     * @var ItemTagDetailModel[] List of item tags.
+     * @var ItemTagDetailInputModel[] List of item tags.
      */
     public $tags;
 }
@@ -9894,6 +9882,37 @@ class ItemRestrictionInputModel
     public $complianceMessage;
 }
 /**
+ * Represents a tag for an item in your company's product catalog.
+ * Swagger Name: AvaTaxClient
+ */
+class ItemTagDetailOutputModel
+{
+    /**
+     * @var string The tag name.
+     */
+    public $tagName;
+    /**
+     * @var int The unique ID number of this item.
+     */
+    public $itemId;
+    /**
+     * @var int The unique ID number of the company that owns this item.
+     */
+    public $companyId;
+    /**
+     * @var int The unique ID number of the item-tag relation.
+     */
+    public $itemTagDetailId;
+    /**
+     * @var int The unique tag Id for the tags.
+     */
+    public $tagId;
+    /**
+     * @var string The date when this record was created.
+     */
+    public $createdDate;
+}
+/**
  * Represents a tax code classification request input model
  * Swagger Name: AvaTaxClient
  */
@@ -12861,6 +12880,266 @@ class InspectResponseModel
  * 
  * Swagger Name: AvaTaxClient
  */
+class VarianceUnit
+{
+    /**
+     * @var float 
+     */
+    public $amount;
+    /**
+     * @var string 
+     */
+    public $currency;
+}
+/**
+ * 
+ * Swagger Name: AvaTaxClient
+ */
+class VarianceDetail
+{
+    /**
+     * @var string 
+     */
+    public $taxSubType;
+    /**
+     * @var float 
+     */
+    public $amount;
+    /**
+     * @var string 
+     */
+    public $currency;
+}
+/**
+ * 
+ * Swagger Name: AvaTaxClient
+ */
+class VarianceLine
+{
+    /**
+     * @var string 
+     */
+    public $lineNo;
+    /**
+     * @var string 
+     */
+    public $hsCode;
+    /**
+     * @var float 
+     */
+    public $dutyRate;
+    /**
+     * @var float 
+     */
+    public $taxRate;
+    /**
+     * @var VarianceUnit 
+     */
+    public $amount;
+    /**
+     * @var VarianceUnit 
+     */
+    public $taxableAmount;
+    /**
+     * @var VarianceUnit 
+     */
+    public $dutyPaid;
+    /**
+     * @var VarianceUnit 
+     */
+    public $taxPaid;
+    /**
+     * @var VarianceUnit 
+     */
+    public $totalTaxPaid;
+    /**
+     * @var VarianceDetail[] 
+     */
+    public $details;
+}
+/**
+ * Request model used as input for Variance API.
+ * Swagger Name: AvaTaxClient
+ */
+class VarianceRequestModel
+{
+    /**
+     * @var int 
+     */
+    public $documentId;
+    /**
+     * @var string 
+     */
+    public $documentCode;
+    /**
+     * @var string 
+     */
+    public $purchaseOrderNo;
+    /**
+     * @var string 
+     */
+    public $referenceNo;
+    /**
+     * @var float 
+     */
+    public $exchangeRate;
+    /**
+     * @var VarianceLine[] 
+     */
+    public $lines;
+    /**
+     * @var VarianceUnit 
+     */
+    public $amount;
+    /**
+     * @var VarianceUnit 
+     */
+    public $taxableAmount;
+    /**
+     * @var VarianceUnit 
+     */
+    public $dutyPaid;
+    /**
+     * @var VarianceUnit 
+     */
+    public $taxPaid;
+    /**
+     * @var VarianceUnit 
+     */
+    public $totalTaxPaid;
+    /**
+     * @var VarianceDetail[] 
+     */
+    public $details;
+}
+/**
+ * 
+ * Swagger Name: AvaTaxClient
+ */
+class HsCode
+{
+    /**
+     * @var string 
+     */
+    public $original;
+    /**
+     * @var string 
+     */
+    public $modified;
+}
+/**
+ * 
+ * Swagger Name: AvaTaxClient
+ */
+class VarianceResponseLine
+{
+    /**
+     * @var string 
+     */
+    public $lineNo;
+    /**
+     * @var HsCode 
+     */
+    public $hsCodeVariance;
+    /**
+     * @var string 
+     */
+    public $dutyRateVariance;
+    /**
+     * @var float 
+     */
+    public $taxableVariance;
+    /**
+     * @var float 
+     */
+    public $dutyVariance;
+    /**
+     * @var float 
+     */
+    public $taxVariance;
+    /**
+     * @var float 
+     */
+    public $totalTaxVariance;
+    /**
+     * @var VarianceDetail[] 
+     */
+    public $unMappedDetails;
+}
+/**
+ * 
+ * Swagger Name: AvaTaxClient
+ */
+class VarianceResponseEntity
+{
+    /**
+     * @var int 
+     */
+    public $documentId;
+    /**
+     * @var string 
+     */
+    public $documentCode;
+    /**
+     * @var int 
+     */
+    public $customInvoiceId;
+    /**
+     * @var int 
+     */
+    public $varianceId;
+    /**
+     * @var string 
+     */
+    public $status;
+    /**
+     * @var string 
+     */
+    public $errorMessage;
+    /**
+     * @var float 
+     */
+    public $taxableVariance;
+    /**
+     * @var float 
+     */
+    public $dutyVariance;
+    /**
+     * @var float 
+     */
+    public $taxVariance;
+    /**
+     * @var float 
+     */
+    public $totalTaxVariance;
+    /**
+     * @var VarianceDetail[] 
+     */
+    public $unMappedDetails;
+    /**
+     * @var VarianceResponseLine[] 
+     */
+    public $varianceLines;
+}
+/**
+ * 
+ * Swagger Name: AvaTaxClient
+ */
+class VarianceResponseModel
+{
+    /**
+     * @var int 
+     */
+    public $totalRequest;
+    /**
+     * @var VarianceResponseEntity[] 
+     */
+    public $varianceResponses;
+}
+/**
+ * 
+ * Swagger Name: AvaTaxClient
+ */
 class CompanyUserDefinedFieldModel
 {
     /**
@@ -13045,4 +13324,42 @@ class AgeVerifyResult
      * @var string[] A list of failure codes describing why a *false* age determination was made.
      */
     public $failureCodes;
+}
+/**
+ * The Result of a call to the /ageVerification/store/identity/storeIfVerified endpoint.
+ * Swagger Name: AvaTaxBeverageClient
+ */
+class StoreIfVerifiedResult
+{
+    /**
+     * @var boolean Describes whether the individual meets or exceeds the minimum legal drinking age.
+     */
+    public $isOfAge;
+    /**
+     * @var string[] A list of failure codes describing why a *false* age determination was made.
+     */
+    public $failureCodes;
+    /**
+     * @var boolean true if response originated from internal store, false if new age verification check was performed
+     */
+    public $fromStore;
+    /**
+     * @var string a UTC timestamp of when record was written to our store. Only included when fromStore = true
+     */
+    public $createdUtc;
+}
+/**
+ * The Request for the /ageverification/store/identity endpoint. Describes information about the person whose age has been verified and the verification result.
+ * Swagger Name: AvaTaxBeverageClient
+ */
+class StoreAgeVerifyRequest
+{
+    /**
+     * @var AgeVerifyRequest 
+     */
+    public $request;
+    /**
+     * @var AgeVerifyResult 
+     */
+    public $response;
 }?>
