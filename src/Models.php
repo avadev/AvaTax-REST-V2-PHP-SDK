@@ -4852,6 +4852,10 @@ class FilingCalendarModel
      * @var CompanyReturnSettingModel[] CompanyReturn settings for complext filing calendar
      */
     public $settings;
+    /**
+     * @var int Auto Lock Override Day
+     */
+    public $autoLockOverrideDay;
 }
 /**
  * FilingFrequency Model
@@ -5120,6 +5124,10 @@ class FilingRequestDataModel
      * @var boolean Flag if the request is a clone of a current filing calendar
      */
     public $isClone;
+    /**
+     * @var int Auto Lock Override Day
+     */
+    public $autoLockOverrideDay;
     /**
      * @var string The two character ISO 3166 country code of the country that issued the tax form for this filing calendar.
      */
@@ -6725,6 +6733,10 @@ class ItemCatalogueInputModel
      */
     public $source;
     /**
+     * @var string The Id of this item at the source
+     */
+    public $sourceEntityId;
+    /**
      * @var object Additional key-description of the product.
      */
     public $properties;
@@ -6766,6 +6778,10 @@ class ItemCatalogueResultModel
      * @var string A unique code representing this item.
      */
     public $itemCode;
+    /**
+     * @var string The Id of this item at the source
+     */
+    public $sourceEntityId;
     /**
      * @var string A CRUD event for item db operations (See ItemCatalogueResultEvent::* for a list of allowable values)
      */
@@ -6875,6 +6891,10 @@ class ItemModel
      * @var string Source of creation of this item
      */
     public $source;
+    /**
+     * @var string The Id of this item at the source
+     */
+    public $sourceEntityId;
     /**
      * @var string Universal unique code for item
      */
@@ -7267,6 +7287,10 @@ class ItemTaxCodeModel
      * @var string Suggested tax code description
      */
     public $description;
+    /**
+     * @var int Priority of Suggested tax code description
+     */
+    public $rank;
 }
 /**
  * Represents item tax code recommendations model
