@@ -53,7 +53,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -85,7 +85,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -108,7 +108,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the account you wish to audit.
@@ -124,7 +124,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['start' => $start, 'end' => $end, '$top' => $top, '$skip' => $skip],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -156,7 +156,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -183,7 +183,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -197,7 +197,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the account to retrieve
@@ -210,7 +210,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -231,7 +231,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ECMUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id 
@@ -243,7 +243,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -251,7 +251,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the account to retrieve
@@ -264,7 +264,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -274,7 +274,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the account to retrieve
@@ -286,7 +286,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -307,7 +307,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param string $include A comma separated list of objects to fetch underneath this account. Any object with a URL path underneath this account can be fetched by specifying its name.
@@ -323,7 +323,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -357,7 +357,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -397,7 +397,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['line1' => $line1, 'line2' => $line2, 'line3' => $line3, 'city' => $city, 'region' => $region, 'postalCode' => $postalCode, 'country' => $country, 'textCase' => $textCase],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -425,7 +425,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -445,7 +445,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -464,7 +464,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -483,7 +483,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -502,7 +502,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -522,7 +522,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -546,7 +546,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -569,7 +569,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -592,7 +592,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -619,7 +619,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -644,7 +644,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -678,7 +678,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -719,7 +719,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -758,7 +758,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -790,7 +790,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -814,7 +814,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -851,7 +851,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -898,7 +898,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -941,7 +941,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -980,7 +980,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -1020,7 +1020,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -1062,7 +1062,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -1107,7 +1107,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$preValidatedExemptionReason' => null === $preValidatedExemptionReason ? null : json_encode($preValidatedExemptionReason)],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -1143,7 +1143,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -1182,7 +1182,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$page' => $page, '$type' => $type],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -1223,7 +1223,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -1252,7 +1252,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -1290,7 +1290,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -1329,7 +1329,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -1366,7 +1366,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -1404,7 +1404,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -1448,7 +1448,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -1479,7 +1479,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -1517,7 +1517,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -1557,7 +1557,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -1592,7 +1592,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -1630,7 +1630,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -1662,7 +1662,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the company to check if its integration is certified.
@@ -1674,7 +1674,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -1696,7 +1696,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id 
@@ -1709,7 +1709,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -1742,7 +1742,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -1768,7 +1768,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -1801,7 +1801,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -1821,7 +1821,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API depends on the following active services:*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id The unique identifier of the company
@@ -1836,7 +1836,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['businessUnit' => $businessUnit, 'subscriptionType' => $subscriptionType],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -1858,7 +1858,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -1886,7 +1886,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -1899,7 +1899,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * * This API depends on the following active services:*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
      * Swagger Name: AvaTaxClient
      * 
@@ -1912,7 +1912,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -1925,7 +1925,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * * This API depends on the following active services:*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
      * Swagger Name: AvaTaxClient
      * 
@@ -1939,7 +1939,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['currency' => $currency],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -1961,7 +1961,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the company to retrieve.
@@ -1974,7 +1974,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -1995,7 +1995,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ECMUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id 
@@ -2007,7 +2007,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -2023,7 +2023,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId 
@@ -2036,7 +2036,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -2059,7 +2059,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id 
@@ -2071,7 +2071,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -2085,7 +2085,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API depends on the following active services:*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id The unique identifier of the company
@@ -2099,7 +2099,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -2118,7 +2118,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The company id
@@ -2134,7 +2134,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -2148,7 +2148,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API depends on the following active services:*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id The unique identifier of the company
@@ -2160,7 +2160,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -2172,7 +2172,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @return FetchResult
@@ -2183,7 +2183,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -2209,7 +2209,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param string $include A comma separated list of objects to fetch underneath this company. Any object with a URL path underneath this company can be fetched by specifying its name.
@@ -2225,7 +2225,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -2259,7 +2259,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -2292,7 +2292,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -2322,7 +2322,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -2351,7 +2351,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['taxAuthorityId' => $taxAuthorityId, 'effectiveDate' => $effectiveDate, 'endDate' => $endDate, '$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -2376,7 +2376,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -2399,7 +2399,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -2424,7 +2424,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -2453,7 +2453,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -2483,7 +2483,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -2511,7 +2511,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -2549,7 +2549,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -2584,7 +2584,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -2626,7 +2626,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -2665,7 +2665,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -2701,7 +2701,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -2738,7 +2738,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -2776,7 +2776,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -2816,7 +2816,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -2856,7 +2856,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -2900,7 +2900,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -2939,7 +2939,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -2975,7 +2975,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -3011,7 +3011,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -3035,7 +3035,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -3059,7 +3059,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -3069,7 +3069,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro, BasicReturns.
      * Swagger Name: AvaTaxClient
      * 
@@ -3083,7 +3083,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -3093,7 +3093,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro, BasicReturns.
      * Swagger Name: AvaTaxClient
      * 
@@ -3110,7 +3110,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -3123,7 +3123,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro, BasicReturns.
      * Swagger Name: AvaTaxClient
      * 
@@ -3139,7 +3139,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -3164,7 +3164,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -3196,7 +3196,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -3219,7 +3219,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -3240,7 +3240,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -3266,7 +3266,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -3294,7 +3294,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['companyid' => $companyid, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -3321,7 +3321,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -3348,7 +3348,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -3371,7 +3371,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -3393,7 +3393,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -3415,7 +3415,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -3437,7 +3437,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -3460,7 +3460,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -3488,7 +3488,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -3522,7 +3522,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -3548,7 +3548,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -3572,7 +3572,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -3597,7 +3597,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -3619,7 +3619,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -3645,7 +3645,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -3679,7 +3679,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['line1' => $line1, 'line2' => $line2, 'line3' => $line3, 'city' => $city, 'region' => $region, 'postalCode' => $postalCode, 'country' => $country, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -3712,7 +3712,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['rateTypeId' => $rateTypeId, 'region' => $region, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -3733,7 +3733,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['rateTypeId' => $rateTypeId],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -3768,7 +3768,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['line1' => $line1, 'line2' => $line2, 'line3' => $line3, 'city' => $city, 'region' => $region, 'postalCode' => $postalCode, 'country' => $country, 'latitude' => $latitude, 'longitude' => $longitude, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -3791,7 +3791,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -3812,7 +3812,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['marketplaceId' => $marketplaceId, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -3835,7 +3835,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -3867,7 +3867,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['line1' => $line1, 'line2' => $line2, 'line3' => $line3, 'city' => $city, 'region' => $region, 'postalCode' => $postalCode, 'country' => $country, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -3891,7 +3891,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -3916,7 +3916,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -3948,7 +3948,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -3972,7 +3972,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -3994,7 +3994,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4016,7 +4016,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4038,7 +4038,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4060,7 +4060,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4082,7 +4082,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4104,7 +4104,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4126,7 +4126,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4148,7 +4148,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4170,7 +4170,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4192,7 +4192,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4215,7 +4215,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4255,7 +4255,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4278,7 +4278,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4298,7 +4298,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$top' => $top, '$skip' => $skip],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4319,7 +4319,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4348,7 +4348,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4373,7 +4373,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy, '$countryCode' => $countryCode],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4407,7 +4407,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy, '$countryCode' => $countryCode],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4430,7 +4430,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4455,7 +4455,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4478,7 +4478,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4502,7 +4502,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4530,7 +4530,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4552,7 +4552,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4575,7 +4575,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4598,7 +4598,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4622,7 +4622,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4643,7 +4643,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4665,7 +4665,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4689,7 +4689,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4711,7 +4711,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4740,7 +4740,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4761,7 +4761,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$top' => $top, '$skip' => $skip],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4783,7 +4783,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4805,7 +4805,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4830,7 +4830,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['companyId' => $companyId, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4854,7 +4854,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4876,7 +4876,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4898,7 +4898,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['companyId' => $companyId, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4922,7 +4922,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['rateTypeId' => $rateTypeId, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4945,7 +4945,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4972,7 +4972,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -4999,7 +4999,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -5026,7 +5026,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -5057,7 +5057,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -5090,7 +5090,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -5121,7 +5121,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -5133,7 +5133,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The company ID that will be issued this certificate.
@@ -5146,7 +5146,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -5158,7 +5158,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The company ID that the refreshed certificate belongs to.
@@ -5171,7 +5171,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -5193,7 +5193,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -5224,7 +5224,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -5246,7 +5246,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -5268,7 +5268,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -5278,7 +5278,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id 
@@ -5290,7 +5290,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -5300,7 +5300,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* firmAccountName, clientAccountName
@@ -5312,7 +5312,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -5334,7 +5334,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -5356,7 +5356,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -5378,7 +5378,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -5409,7 +5409,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -5430,7 +5430,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * * This API depends on the following active services:*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
      * Swagger Name: AvaTaxClient
      * 
@@ -5445,7 +5445,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['businessUnit' => $businessUnit, 'subscriptionType' => $subscriptionType],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -5479,7 +5479,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['businessUnit' => $businessUnit, 'subscriptionType' => $subscriptionType],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -5506,7 +5506,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -5535,7 +5535,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -5566,7 +5566,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -5596,7 +5596,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -5630,7 +5630,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -5661,7 +5661,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -5687,7 +5687,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -5714,7 +5714,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -5751,7 +5751,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -5782,7 +5782,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -5810,7 +5810,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -5840,7 +5840,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -5866,7 +5866,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -5891,7 +5891,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -5924,7 +5924,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$includeClassificationDetails' => null === $includeClassificationDetails ? null : json_encode($includeClassificationDetails), '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -5954,7 +5954,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -5982,7 +5982,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -6012,7 +6012,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -6040,7 +6040,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -6073,7 +6073,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -6104,7 +6104,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -6140,7 +6140,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -6174,7 +6174,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -6210,7 +6210,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -6257,7 +6257,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy, 'tagName' => $tagName],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -6293,7 +6293,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -6331,7 +6331,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -6360,7 +6360,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -6394,7 +6394,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -6429,7 +6429,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -6460,7 +6460,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -6491,7 +6491,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -6519,7 +6519,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -6542,7 +6542,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -6570,7 +6570,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -6605,7 +6605,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -6639,7 +6639,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -6663,7 +6663,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -6697,7 +6697,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -6720,7 +6720,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -6743,7 +6743,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -6773,7 +6773,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -6792,7 +6792,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this location
@@ -6806,7 +6806,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -6822,7 +6822,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The company id
@@ -6836,7 +6836,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -6855,7 +6855,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The company id
@@ -6872,7 +6872,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -6893,7 +6893,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns these locations
@@ -6910,7 +6910,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -6932,7 +6932,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* isMarketplaceOutsideUsa, settings, parameters
@@ -6948,7 +6948,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -6974,7 +6974,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -7005,7 +7005,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -7017,7 +7017,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this location
@@ -7030,7 +7030,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -7073,7 +7073,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -7118,7 +7118,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -7156,7 +7156,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -7219,7 +7219,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -7263,7 +7263,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -7315,7 +7315,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -7368,7 +7368,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -7437,7 +7437,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -7473,7 +7473,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -7514,7 +7514,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -7555,7 +7555,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -7588,7 +7588,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -7625,7 +7625,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -7656,7 +7656,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['cascadeDelete' => null === $cascadeDelete ? null : json_encode($cascadeDelete)],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -7685,7 +7685,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -7713,7 +7713,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -7744,7 +7744,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -7779,7 +7779,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -7808,7 +7808,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -7845,7 +7845,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -7883,7 +7883,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -7918,7 +7918,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -7954,7 +7954,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -7996,7 +7996,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -8027,7 +8027,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -8050,7 +8050,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -8073,7 +8073,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -8095,7 +8095,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -8117,7 +8117,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -8140,7 +8140,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id The id of the notification you wish to mark as dismissed.
@@ -8152,7 +8152,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -8169,7 +8169,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id The id of the notification to retrieve.
@@ -8181,7 +8181,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -8201,7 +8201,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
@@ -8216,7 +8216,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -8253,7 +8253,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -8279,7 +8279,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -8305,7 +8305,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -8340,7 +8340,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -8369,7 +8369,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -8396,7 +8396,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -8422,7 +8422,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -8454,7 +8454,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -8480,7 +8480,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -8506,7 +8506,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -8537,7 +8537,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -8567,7 +8567,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['isUndoMigrateRequest' => null === $isUndoMigrateRequest ? null : json_encode($isUndoMigrateRequest)],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -8593,7 +8593,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -8626,7 +8626,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -8654,7 +8654,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -8685,7 +8685,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -8720,7 +8720,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -8748,7 +8748,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -8790,7 +8790,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -8825,7 +8825,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['companyId' => $companyId, 'pageKey' => $pageKey, '$skip' => $skip, '$top' => $top],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -8862,7 +8862,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -8894,7 +8894,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -8913,7 +8913,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this setting
@@ -8926,7 +8926,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -8948,7 +8948,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns these settings
@@ -8965,7 +8965,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -8987,7 +8987,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* modifiedDate, ModifiedUserId
@@ -9003,7 +9003,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -9040,7 +9040,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -9065,7 +9065,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -9096,7 +9096,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -9126,7 +9126,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -9153,7 +9153,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -9176,7 +9176,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -9203,7 +9203,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -9237,7 +9237,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -9270,7 +9270,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -9300,7 +9300,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -9332,7 +9332,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
      * Swagger Name: AvaTaxClient
      * 
@@ -9345,7 +9345,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -9377,7 +9377,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
      * Swagger Name: AvaTaxClient
      * 
@@ -9395,7 +9395,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['date' => $date, 'format' => $format, 'partnerId' => $partnerId, 'includeJurisCodes' => null === $includeJurisCodes ? null : json_encode($includeJurisCodes)],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -9444,7 +9444,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param string $date The date for which point-of-sale data would be calculated (today by default). Example input: 2016-12-31
@@ -9457,7 +9457,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['region' => $region],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -9500,7 +9500,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['line1' => $line1, 'line2' => $line2, 'line3' => $line3, 'city' => $city, 'region' => $region, 'postalCode' => $postalCode, 'country' => $country],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -9540,7 +9540,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['country' => $country, 'postalCode' => $postalCode],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -9575,7 +9575,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -9610,7 +9610,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -9645,7 +9645,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -9687,7 +9687,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -9728,7 +9728,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -9764,7 +9764,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -9807,7 +9807,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -9862,7 +9862,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['documentType' => $documentType, '$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -9908,7 +9908,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -9955,7 +9955,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -9984,7 +9984,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -10039,7 +10039,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['documentType' => $documentType, '$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -10092,7 +10092,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['documentType' => $documentType, '$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -10148,7 +10148,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -10211,7 +10211,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -10251,7 +10251,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -10272,7 +10272,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -10323,7 +10323,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['documentType' => $documentType, '$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -10357,7 +10357,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -10396,7 +10396,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -10418,7 +10418,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -10475,7 +10475,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['dataSourceId' => $dataSourceId, '$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -10530,7 +10530,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['documentType' => $documentType, '$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -10596,7 +10596,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include, 'documentType' => $documentType, 'useTaxDateOverride' => null === $useTaxDateOverride ? null : json_encode($useTaxDateOverride)],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -10649,7 +10649,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['documentType' => $documentType, '$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -10696,7 +10696,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['documentType' => $documentType, '$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -10740,7 +10740,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['documentType' => $documentType, '$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -10762,7 +10762,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -10814,7 +10814,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['documentType' => $documentType, '$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -10868,7 +10868,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['documentType' => $documentType, '$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -10893,7 +10893,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -10917,7 +10917,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -10942,7 +10942,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -10974,7 +10974,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -11005,7 +11005,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -11033,7 +11033,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -11057,7 +11057,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -11065,7 +11065,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro, BasicReturns.
      * Swagger Name: AvaTaxClient
      * 
@@ -11080,7 +11080,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['udfType' => $udfType, 'allowDefaults' => null === $allowDefaults ? null : json_encode($allowDefaults)],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -11105,7 +11105,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['id' => $id],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -11133,7 +11133,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -11164,7 +11164,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'POST', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -11192,7 +11192,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -11207,7 +11207,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the user to retrieve.
@@ -11221,7 +11221,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -11245,7 +11245,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the user to retrieve.
@@ -11258,7 +11258,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -11279,7 +11279,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $accountId The accountID of the user you wish to list.
@@ -11296,7 +11296,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -11319,7 +11319,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param string $include Optional fetch commands.
@@ -11335,7 +11335,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -11362,7 +11362,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -11387,7 +11387,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -11411,7 +11411,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
@@ -11447,7 +11447,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.2.0' );
+        return $this->restCall($path, 'GET', $guzzleParams,'23.3.0' );
     }
 
     /**
