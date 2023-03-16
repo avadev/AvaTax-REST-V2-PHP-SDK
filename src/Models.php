@@ -1759,6 +1759,25 @@ class ClassificationParameterUsageMapModel
     public $measurementType;
 }
 /**
+ * An AvaTax account.
+ * Swagger Name: AvaTaxClient
+ */
+class CombinedHSTConfigModel
+{
+    /**
+     * @var int The unique ID number assigned to this account.
+     */
+    public $accountId;
+    /**
+     * @var string[] Company Codes to Exclude from change.
+     */
+    public $excludedCompanyCodes;
+    /**
+     * @var string 
+     */
+    public $endDate;
+}
+/**
  * Commit this MultiDocument object so that all transactions within it can be reported on a tax filing.
  * Swagger Name: AvaTaxClient
  */
@@ -4377,6 +4396,10 @@ class ExportDocumentLineModel
      * @var string Defines report source. (See ReportSource::* for a list of allowable values)
      */
     public $reportSource;
+    /**
+     * @var string Defines the compression mode of the result file  For compression, the accepted values are: NONE, GZIP (See Compression::* for a list of allowable values)
+     */
+    public $compression;
 }
 /**
  * Information about a physical area or zone in which a certificate can apply.
@@ -10526,6 +10549,10 @@ class ReportParametersModel
      * @var string Defines the individual taxes associated with a TaxType category, such as Lodging TaxType which supports numerous TaxSubTypes, including Hotel, Occupancy, ConventionCenter, Accommotations, etc.
      */
     public $taxSubType;
+    /**
+     * @var string Defines the compression mode of the result file  For compression, the accepted values are: NONE, GZIP (See Compression::* for a list of allowable values)
+     */
+    public $compression;
 }
 /**
  * Represents a license key reset request.
@@ -11926,6 +11953,10 @@ class TransactionLineDetailModel
      * @var string LiabilityType identifies the party liable to file the tax. This field is used to filter taxes from reports and tax filings as appropriate. (See LiabilityType::* for a list of allowable values)
      */
     public $liabilityType;
+    /**
+     * @var string ChargedTo identifies the party responsible for covering the tax. This field is used to filter taxes from reports and tax filings as appropriate. (See ChargedTo::* for a list of allowable values)
+     */
+    public $chargedTo;
     /**
      * @var string ID of the AvaTax user creating the transaction. This field will be calculated by AvaTax based on the Company settings and the transaction details.
      */
