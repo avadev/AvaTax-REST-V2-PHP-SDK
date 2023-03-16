@@ -1759,6 +1759,25 @@ class ClassificationParameterUsageMapModel
     public $measurementType;
 }
 /**
+ * An AvaTax account.
+ * Swagger Name: AvaTaxClient
+ */
+class CombinedHSTConfigModel
+{
+    /**
+     * @var int The unique ID number assigned to this account.
+     */
+    public $accountId;
+    /**
+     * @var string[] Company Codes to Exclude from change.
+     */
+    public $excludedCompanyCodes;
+    /**
+     * @var string 
+     */
+    public $endDate;
+}
+/**
  * Commit this MultiDocument object so that all transactions within it can be reported on a tax filing.
  * Swagger Name: AvaTaxClient
  */

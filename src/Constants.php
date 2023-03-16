@@ -3346,6 +3346,11 @@ class SecurityRoleId
      */
     const C_BATCHSERVICEADMIN = 25;
 
+    /**
+     * ECMUser
+     */
+    const C_ECMUSER = 26;
+
 }
 
 /**
