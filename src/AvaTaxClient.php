@@ -28,6 +28,8 @@ use GuzzleHttp\Client;
  *                                                                           *
  *****************************************************************************/
 
+require_once 'LogObject.php';
+
 require_once 'Client.php';
     
 require_once 'Methods.php';
