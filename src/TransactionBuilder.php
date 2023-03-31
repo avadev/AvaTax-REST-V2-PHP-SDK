@@ -306,6 +306,26 @@ class TransactionBuilder
         $this->_model['addresses'][$type] = $ai;
         return $this;
     }
+    
+    /**
+     * Add an address to this transaction using an existing company location code.
+     * 
+     * AvaTax will search for a company location whose code matches the `locationCode` parameter and use the address
+     * of that location.
+     *
+     * @param   string              type          Address Type (See AddressType::* for a list of allowable values)
+     * @param   string              locationCode  The location code of the address
+     * @return  TransactionBuilder
+     */
+    public function WithAddressLocationCode($type, $locationCode)
+    {
+        if (empty($this->_model['addresses'])) $this->_model['addresses'] = [];
+        $ai = [
+            'locationCode' => $locationCode
+        ];
+        $this->_model['addresses'][$type] = $ai;
+        return $this;
+    }
 
     /**
      * Add a lat/long coordinate to this transaction
