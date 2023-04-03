@@ -1561,6 +1561,7 @@ class ErrorCodeId
     const C_INVALIDPARAMETER = 1734;
     const C_INVALIDSYSTEMCODE = 1735;
     const C_NOITEMSFORCLASSIFICATION = 1736;
+    const C_INVALIDFILENAME = 1737;
 
     /**
      * SendSales API errors
@@ -1899,10 +1900,23 @@ class ReportSource
      */
     const C_MONGODB = 1;
 
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * Defines compression
+ */
+class Compression
+{
     /**
-     * snowflake dld
+     * none
      */
-    const C_SNOWFLAKE_DLD = 2;
+    const C_NONE = 0;
+
+    /**
+     * gzip
+     */
+    const C_GZIP = 1;
 
 }
 
@@ -3164,6 +3178,29 @@ class LiabilityType
      * ThirdParty
      */
     const C_THIRDPARTY = 3;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * Charged To
+ */
+class ChargedTo
+{
+    /**
+     * Buyer
+     */
+    const C_BUYER = 0;
+
+    /**
+     * Seller
+     */
+    const C_SELLER = 1;
+
+    /**
+     * ThirdParty
+     */
+    const C_THIRDPARTY = 2;
 
 }
 
