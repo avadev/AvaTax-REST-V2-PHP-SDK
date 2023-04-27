@@ -4400,6 +4400,10 @@ class ExportDocumentLineModel
      * @var string Defines the compression mode of the result file  For compression, the accepted values are: NONE, GZIP (See Compression::* for a list of allowable values)
      */
     public $compression;
+    /**
+     * @var boolean If true, include document line details in the generated report.  If false, include only document line in the generated report.  Defaults to false if not specified.
+     */
+    public $includeDocumentLineDetails;
 }
 /**
  * Information about a physical area or zone in which a certificate can apply.
@@ -7431,6 +7435,14 @@ class JurisdictionModel
      * @var string The date this jurisdiction stops to take effect on tax calculations
      */
     public $endDate;
+    /**
+     * @var boolean The isAcm specific to this jurisdiction.
+     */
+    public $isAcm;
+    /**
+     * @var boolean The isSst specific to this jurisdiction.
+     */
+    public $isSst;
 }
 /**
  * Represents an override of tax jurisdictions for a specific address.
@@ -10553,6 +10565,10 @@ class ReportParametersModel
      * @var string Defines the compression mode of the result file  For compression, the accepted values are: NONE, GZIP (See Compression::* for a list of allowable values)
      */
     public $compression;
+    /**
+     * @var boolean If true, include document line details in the generated report.  If false, include only document line in the generated report.  Defaults to false if not specified.
+     */
+    public $includeDocumentLineDetails;
 }
 /**
  * Represents a license key reset request.
@@ -10939,6 +10955,10 @@ class SubscriptionTypeModel
      * @var string The friendly name of the service this subscription type represents.
      */
     public $description;
+    /**
+     * @var int TaxTypeGroupIdSK to be associated with ServiceType
+     */
+    public $taxTypeGroupIdSK;
 }
 /**
  * Represents a request to sync items.

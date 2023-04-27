@@ -45,7 +45,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $id The ID of the account you wish to update.
      * @param ResetLicenseKeyModel $model A request confirming that you wish to reset the license key of this account.
-     * @return LicenseKeyModel
+     * @return \stdClass
      */
     public function accountResetLicenseKey($id, $model)    {
         $path = "/api/v2/accounts/{$id}/resetlicensekey";
@@ -53,7 +53,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -77,7 +77,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $id The ID of the account to activate
      * @param ActivateAccountModel $model The activation request
-     * @return AccountModel
+     * @return \stdClass
      */
     public function activateAccount($id, $model)    {
         $path = "/api/v2/accounts/{$id}/activate";
@@ -85,7 +85,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -108,7 +108,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the account you wish to audit.
@@ -116,7 +116,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $end The end datetime of audit history you with to retrieve, e.g. "2018-06-08T17:15:00Z. Defaults to the current time. Maximum of an hour after the start time.
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function auditAccount($id, $start, $end, $top=null, $skip=null)    {
         $path = "/api/v2/accounts/{$id}/audit";
@@ -124,7 +124,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['start' => $start, 'end' => $end, '$top' => $top, '$skip' => $skip],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -148,7 +148,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $id The ID of the account you wish to update.
      * @param AccountLicenseKeyModel $model 
-     * @return LicenseKeyModel
+     * @return \stdClass
      */
     public function createLicenseKey($id, $model)    {
         $path = "/api/v2/accounts/{$id}/licensekey";
@@ -156,7 +156,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -175,7 +175,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $id The ID of the account you wish to update.
      * @param string $licensekeyname The license key name you wish to update.
-     * @return ErrorDetail[]
+     * @return \stdClass
      */
     public function deleteLicenseKey($id, $licensekeyname)    {
         $path = "/api/v2/accounts/{$id}/licensekey/{$licensekeyname}";
@@ -183,7 +183,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -197,12 +197,12 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the account to retrieve
      * @param string $include A comma separated list of special fetch options
-     * @return AccountModel
+     * @return \stdClass
      */
     public function getAccount($id, $include=null)    {
         $path = "/api/v2/accounts/{$id}";
@@ -210,7 +210,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -231,11 +231,11 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ECMUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id 
-     * @return AccountConfigurationModel[]
+     * @return \stdClass
      */
     public function getAccountConfiguration($id)    {
         $path = "/api/v2/accounts/{$id}/configuration";
@@ -243,7 +243,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -251,12 +251,12 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the account to retrieve
      * @param string $licensekeyname The ID of the account to retrieve
-     * @return AccountLicenseKeyModel
+     * @return \stdClass
      */
     public function getLicenseKey($id, $licensekeyname)    {
         $path = "/api/v2/accounts/{$id}/licensekey/{$licensekeyname}";
@@ -264,7 +264,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -274,11 +274,11 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the account to retrieve
-     * @return AccountLicenseKeyModel[]
+     * @return \stdClass
      */
     public function getLicenseKeys($id)    {
         $path = "/api/v2/accounts/{$id}/licensekeys";
@@ -286,7 +286,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -307,7 +307,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param string $include A comma separated list of objects to fetch underneath this account. Any object with a URL path underneath this account can be fetched by specifying its name.
@@ -315,7 +315,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function queryAccounts($include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/accounts";
@@ -323,7 +323,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -349,7 +349,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $id 
      * @param AccountConfigurationModel[] $model 
-     * @return AccountConfigurationModel[]
+     * @return \stdClass
      */
     public function setAccountConfiguration($id, $model)    {
         $path = "/api/v2/accounts/{$id}/configuration";
@@ -357,7 +357,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -389,7 +389,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $postalCode Postal Code / Zip Code
      * @param string $country Two character ISO 3166 Country Code (see /api/v2/definitions/countries for a full list)
      * @param string $textCase selectable text case for address validation (See TextCase::* for a list of allowable values)
-     * @return AddressResolutionModel
+     * @return \stdClass
      */
     public function resolveAddress($line1, $line2, $line3, $city, $region, $postalCode, $country, $textCase)    {
         $path = "/api/v2/addresses/resolve";
@@ -397,7 +397,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['line1' => $line1, 'line2' => $line2, 'line3' => $line3, 'city' => $city, 'region' => $region, 'postalCode' => $postalCode, 'country' => $country, 'textCase' => $textCase],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -417,7 +417,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param AddressValidationInfo $model The address to resolve
-     * @return AddressResolutionModel
+     * @return \stdClass
      */
     public function resolveAddressPost($model)    {
         $path = "/api/v2/addresses/resolve";
@@ -425,7 +425,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -437,7 +437,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $accountId The ID of the account for the company
      * @param int $companyId The ID of the company for which the lookup file is to be created
      * @param AdvancedRuleLookupFileModel $model The lookup file you wish to create
-     * @return AdvancedRuleLookupFileModel
+     * @return \stdClass
      */
     public function createCompanyLookupFile($accountId, $companyId, $model)    {
         $path = "/api/v2/advancedrules/accounts/{$accountId}/companies/{$companyId}/lookupFiles";
@@ -445,7 +445,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -456,7 +456,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $accountId The ID of the account for the company the lookup file is for
      * @param string $id The unique ID/GUID for the company lookup file to be deleted
-     * @return ErrorDetail[]
+     * @return \stdClass
      */
     public function deleteLookupFile($accountId, $id)    {
         $path = "/api/v2/advancedrules/accounts/{$accountId}/lookupFiles/{$id}";
@@ -464,7 +464,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -475,7 +475,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $accountId The account ID for the company
      * @param int $companyId The ID of the company for which to retrieve lookup files
-     * @return FetchResult
+     * @return \stdClass
      */
     public function getCompanyLookupFiles($accountId, $companyId)    {
         $path = "/api/v2/advancedrules/accounts/{$accountId}/companies/{$companyId}/lookupFiles";
@@ -483,7 +483,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -494,7 +494,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $accountId The ID of the account for the lookup file
      * @param string $id The unique ID/GUID of the company lookup file to return
-     * @return AdvancedRuleLookupFileModel
+     * @return \stdClass
      */
     public function getLookupFile($accountId, $id)    {
         $path = "/api/v2/advancedrules/accounts/{$accountId}/lookupFiles/{$id}";
@@ -502,7 +502,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -514,7 +514,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $accountId The ID of the account for the company the lookup file is for
      * @param string $id The unique ID/GUID of the company lookup file to be updated
      * @param AdvancedRuleLookupFileModel $model The new values to update the lookup file
-     * @return AdvancedRuleLookupFileModel
+     * @return \stdClass
      */
     public function updateLookupFile($accountId, $id, $model)    {
         $path = "/api/v2/advancedrules/accounts/{$accountId}/lookupFiles/{$id}";
@@ -522,7 +522,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -538,7 +538,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param AvaFileFormModel[] $model The AvaFileForm you wish to create.
-     * @return AvaFileFormModel[]
+     * @return \stdClass
      */
     public function createAvaFileForms($model)    {
         $path = "/api/v2/avafileforms";
@@ -546,7 +546,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -561,7 +561,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the AvaFileForm you wish to delete.
-     * @return ErrorDetail[]
+     * @return \stdClass
      */
     public function deleteAvaFileForm($id)    {
         $path = "/api/v2/avafileforms/{$id}";
@@ -569,7 +569,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -584,7 +584,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id The primary key of this AvaFileForm
-     * @return AvaFileFormModel
+     * @return \stdClass
      */
     public function getAvaFileForm($id)    {
         $path = "/api/v2/avafileforms/{$id}";
@@ -592,7 +592,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -611,7 +611,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function queryAvaFileForms($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/avafileforms";
@@ -619,7 +619,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -636,7 +636,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $id The ID of the AvaFileForm you wish to update
      * @param AvaFileFormModel $model The AvaFileForm model you wish to update.
-     * @return AvaFileFormModel
+     * @return \stdClass
      */
     public function updateAvaFileForm($id, $model)    {
         $path = "/api/v2/avafileforms/{$id}";
@@ -644,7 +644,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -670,7 +670,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns this batch.
      * @param int $id The ID of the batch to cancel.
-     * @return BatchModel
+     * @return \stdClass
      */
     public function cancelBatch($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/batches/{$id}/cancel";
@@ -678,7 +678,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -711,7 +711,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns this batch.
      * @param BatchModel[] $model The batch you wish to create.
-     * @return BatchModel[]
+     * @return \stdClass
      */
     public function createBatches($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/batches";
@@ -719,7 +719,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -750,7 +750,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns this batch.
      * @param CreateTransactionBatchRequestModel $model The transaction batch you wish to create.
-     * @return CreateTransactionBatchResponseModel
+     * @return \stdClass
      */
     public function createTransactionBatch($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/batches/transactions";
@@ -758,7 +758,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -782,7 +782,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns this batch.
      * @param int $id The ID of the batch to delete.
-     * @return ErrorDetail[]
+     * @return \stdClass
      */
     public function deleteBatch($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/batches/{$id}";
@@ -790,7 +790,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -806,7 +806,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The ID of the company that owns this batch
      * @param int $batchId The ID of the batch object
      * @param int $id The primary key of this batch file object
-     * @return object
+     * @return \stdClass
      */
     public function downloadBatch($companyId, $batchId, $id)    {
         $path = "/api/v2/companies/{$companyId}/batches/{$batchId}/files/{$id}/attachment";
@@ -814,7 +814,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -843,7 +843,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns this batch
      * @param int $id The primary key of this batch
-     * @return BatchModel
+     * @return \stdClass
      */
     public function getBatch($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/batches/{$id}";
@@ -851,7 +851,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -890,7 +890,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listBatchesByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/batches";
@@ -898,7 +898,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -933,7 +933,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function queryBatches($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/batches";
@@ -941,7 +941,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -972,7 +972,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The unique ID number of the company that will record certificates
      * @param string $customerCode The number of the customer where the request is sent to
      * @param CreateCertExpressInvitationModel[] $model the requests to send out to customers
-     * @return CertExpressInvitationStatusModel[]
+     * @return \stdClass
      */
     public function createCertExpressInvitation($companyId, $customerCode, $model)    {
         $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/certexpressinvites";
@@ -980,7 +980,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -1012,7 +1012,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $customerCode The number of the customer where the request is sent to
      * @param int $id The unique ID number of this CertExpress invitation
      * @param string $include OPTIONAL: A comma separated list of special fetch options. No options are defined at this time.
-     * @return CertExpressInvitationModel
+     * @return \stdClass
      */
     public function getCertExpressInvitation($companyId, $customerCode, $id, $include=null)    {
         $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/certexpressinvites/{$id}";
@@ -1020,7 +1020,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -1054,7 +1054,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listCertExpressInvitations($companyId, $include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/certexpressinvites";
@@ -1062,7 +1062,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -1099,7 +1099,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The ID number of the company recording this certificate
      * @param boolean $preValidatedExemptionReason If set to true, the certificate will bypass the human verification process.
      * @param CertificateModel[] $model Certificates to be created
-     * @return CertificateModel[]
+     * @return \stdClass
      */
     public function createCertificates($companyId, $preValidatedExemptionReason, $model)    {
         $path = "/api/v2/companies/{$companyId}/certificates";
@@ -1107,7 +1107,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$preValidatedExemptionReason' => null === $preValidatedExemptionReason ? null : json_encode($preValidatedExemptionReason)],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -1135,7 +1135,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The unique ID number of the company that recorded this certificate
      * @param int $id The unique ID number of this certificate
-     * @return ErrorDetail[]
+     * @return \stdClass
      */
     public function deleteCertificate($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/certificates/{$id}";
@@ -1143,7 +1143,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -1174,7 +1174,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The unique ID number of this certificate
      * @param int $page If you choose `$type`=`Jpeg`, you must specify which page number to retrieve.
      * @param string $type The data format in which to retrieve the certificate image (See CertificatePreviewType::* for a list of allowable values)
-     * @return object
+     * @return \stdClass
      */
     public function downloadCertificateImage($companyId, $id, $page, $type)    {
         $path = "/api/v2/companies/{$companyId}/certificates/{$id}/attachment";
@@ -1182,7 +1182,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$page' => $page, '$type' => $type],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -1215,7 +1215,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The ID number of the company that recorded this certificate
      * @param int $id The unique ID number of this certificate
      * @param string $include OPTIONAL: A comma separated list of special fetch options. You can specify one or more of the following:      * customers - Retrieves the list of customers linked to the certificate.   * po_numbers - Retrieves all PO numbers tied to the certificate.   * attributes - Retrieves all attributes applied to the certificate.
-     * @return CertificateModel
+     * @return \stdClass
      */
     public function getCertificate($companyId, $id, $include=null)    {
         $path = "/api/v2/companies/{$companyId}/certificates/{$id}";
@@ -1223,7 +1223,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -1244,7 +1244,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The company ID to check
-     * @return ProvisionStatusModel
+     * @return \stdClass
      */
     public function getCertificateSetup($companyId)    {
         $path = "/api/v2/companies/{$companyId}/certificates/setup";
@@ -1252,7 +1252,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -1282,7 +1282,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The unique ID number of the company that recorded this certificate
      * @param int $id The unique ID number of this certificate
      * @param CertificateAttributeModel[] $model The list of attributes to link to this certificate.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function linkAttributesToCertificate($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/certificates/{$id}/attributes/link";
@@ -1290,7 +1290,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -1321,7 +1321,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The unique ID number of the company that recorded this certificate
      * @param int $id The unique ID number of this certificate
      * @param LinkCustomersModel $model The list of customers needed be added to the Certificate for exemption
-     * @return FetchResult
+     * @return \stdClass
      */
     public function linkCustomersToCertificate($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/certificates/{$id}/customers/link";
@@ -1329,7 +1329,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -1358,7 +1358,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The unique ID number of the company that recorded this certificate
      * @param int $id The unique ID number of this certificate
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listAttributesForCertificate($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/certificates/{$id}/attributes";
@@ -1366,7 +1366,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -1396,7 +1396,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The unique ID number of the company that recorded this certificate
      * @param int $id The unique ID number of this certificate
      * @param string $include OPTIONAL: A comma separated list of special fetch options.   No options are currently available when fetching customers.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listCustomersForCertificate($companyId, $id, $include=null)    {
         $path = "/api/v2/companies/{$companyId}/certificates/{$id}/customers";
@@ -1404,7 +1404,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -1440,7 +1440,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function queryCertificates($companyId, $include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/certificates";
@@ -1448,7 +1448,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -1471,7 +1471,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId 
-     * @return ProvisionStatusModel
+     * @return \stdClass
      */
     public function requestCertificateSetup($companyId)    {
         $path = "/api/v2/companies/{$companyId}/certificates/setup";
@@ -1479,7 +1479,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -1509,7 +1509,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The unique ID number of the company that recorded this certificate
      * @param int $id The unique ID number of this certificate
      * @param CertificateAttributeModel[] $model The list of attributes to unlink from this certificate.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function unlinkAttributesFromCertificate($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/certificates/{$id}/attributes/unlink";
@@ -1517,7 +1517,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -1549,7 +1549,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The unique ID number of the company that recorded this certificate
      * @param int $id The unique ID number of this certificate
      * @param LinkCustomersModel $model The list of customers to unlink from this certificate
-     * @return FetchResult
+     * @return \stdClass
      */
     public function unlinkCustomersFromCertificate($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/certificates/{$id}/customers/unlink";
@@ -1557,7 +1557,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -1584,7 +1584,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The ID number of the company that recorded this certificate
      * @param int $id The unique ID number of this certificate
      * @param CertificateModel $model The new certificate object that will replace the existing one
-     * @return CertificateModel
+     * @return \stdClass
      */
     public function updateCertificate($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/certificates/{$id}";
@@ -1592,7 +1592,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -1622,7 +1622,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The unique ID number of the company that recorded this certificate
      * @param int $id The unique ID number of this certificate
      * @param object $file The exemption certificate file you wanted to upload. Accepted formats are: PDF, JPEG, TIFF, PNG.
-     * @return string
+     * @return \stdClass
      */
     public function uploadCertificateImage($companyId, $id, $file)    {
         $path = "/api/v2/companies/{$companyId}/certificates/{$id}/attachment";
@@ -1630,7 +1630,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -1662,11 +1662,11 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the company to check if its integration is certified.
-     * @return string
+     * @return \stdClass
      */
     public function certifyIntegration($id)    {
         $path = "/api/v2/companies/{$id}/certify";
@@ -1674,7 +1674,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -1696,12 +1696,12 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id 
      * @param FilingStatusChangeModel $model 
-     * @return string
+     * @return \stdClass
      */
     public function changeFilingStatus($id, $model)    {
         $path = "/api/v2/companies/{$id}/filingstatus";
@@ -1709,7 +1709,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -1734,7 +1734,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param CompanyInitializationModel $model Information about the company you wish to create.
-     * @return CompanyModel
+     * @return \stdClass
      */
     public function companyInitialize($model)    {
         $path = "/api/v2/companies/initialize";
@@ -1742,7 +1742,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -1760,7 +1760,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param CompanyModel[] $model Either a single company object or an array of companies to create
-     * @return CompanyModel[]
+     * @return \stdClass
      */
     public function createCompanies($model)    {
         $path = "/api/v2/companies";
@@ -1768,7 +1768,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -1793,7 +1793,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns this company parameter.
      * @param CompanyParameterDetailModel[] $model The company parameters you wish to create.
-     * @return CompanyParameterDetailModel[]
+     * @return \stdClass
      */
     public function createCompanyParameters($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/parameters";
@@ -1801,7 +1801,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -1821,14 +1821,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API depends on the following active services:*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id The unique identifier of the company
      * @param string $businessUnit The company's business unit (See POABusinessUnit::* for a list of allowable values)
      * @param string $subscriptionType The company's subscription type (See POASubscriptionType::* for a list of allowable values)
      * @param FundingInitiateModel $model The funding initialization request
-     * @return FundingStatusModel
+     * @return \stdClass
      */
     public function createFundingRequest($id, $businessUnit, $subscriptionType, $model)    {
         $path = "/api/v2/companies/{$id}/funding/setup";
@@ -1836,7 +1836,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['businessUnit' => $businessUnit, 'subscriptionType' => $subscriptionType],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -1850,7 +1850,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the company you wish to delete.
-     * @return ErrorDetail[]
+     * @return \stdClass
      */
     public function deleteCompany($id)    {
         $path = "/api/v2/companies/{$id}";
@@ -1858,7 +1858,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -1878,7 +1878,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The company id
      * @param int $id The parameter id
-     * @return ErrorDetail[]
+     * @return \stdClass
      */
     public function deleteCompanyParameter($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/parameters/{$id}";
@@ -1886,7 +1886,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -1899,12 +1899,12 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * * This API depends on the following active services:*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique identifier of the company
-     * @return FundingConfigurationModel
+     * @return \stdClass
      */
     public function fundingConfigurationByCompany($companyId)    {
         $path = "/api/v2/companies/{$companyId}/funding/configuration";
@@ -1912,7 +1912,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -1925,13 +1925,13 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * * This API depends on the following active services:*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique identifier of the company
      * @param string $currency The currency of the funding. USD and CAD are the only valid currencies
-     * @return FundingConfigurationModel[]
+     * @return \stdClass
      */
     public function fundingConfigurationsByCompanyAndCurrency($companyId, $currency)    {
         $path = "/api/v2/companies/{$companyId}/funding/configurations";
@@ -1939,7 +1939,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['currency' => $currency],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -1961,12 +1961,12 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the company to retrieve.
      * @param string $include OPTIONAL: A comma separated list of special fetch options.      * Child objects - Specify one or more of the following to retrieve objects related to each company: "Contacts", "FilingCalendars", "Items", "Locations", "Nexus", "TaxCodes", "NonReportingChildren" or "TaxRules".   * Deleted objects - Specify "FetchDeleted" to retrieve information about previously deleted objects.
-     * @return CompanyModel
+     * @return \stdClass
      */
     public function getCompany($id, $include=null)    {
         $path = "/api/v2/companies/{$id}";
@@ -1974,7 +1974,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -1995,11 +1995,11 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ECMUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id 
-     * @return CompanyConfigurationModel[]
+     * @return \stdClass
      */
     public function getCompanyConfiguration($id)    {
         $path = "/api/v2/companies/{$id}/configuration";
@@ -2007,7 +2007,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -2023,12 +2023,12 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId 
      * @param int $id 
-     * @return CompanyParameterDetailModel
+     * @return \stdClass
      */
     public function getCompanyParameterDetail($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/parameters/{$id}";
@@ -2036,7 +2036,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -2059,11 +2059,11 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id 
-     * @return string
+     * @return \stdClass
      */
     public function getFilingStatus($id)    {
         $path = "/api/v2/companies/{$id}/filingstatus";
@@ -2071,7 +2071,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -2085,13 +2085,13 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API depends on the following active services:*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id The unique identifier of the company
      * @param int $periodyear The period year
      * @param int $periodmonth The period month
-     * @return ACHEntryDetailModel[]
+     * @return \stdClass
      */
     public function listACHEntryDetailsForCompany($id, $periodyear, $periodmonth)    {
         $path = "/api/v2/companies/{$id}/paymentdetails/{$periodyear}/{$periodmonth}";
@@ -2099,7 +2099,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -2118,7 +2118,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The company id
@@ -2126,7 +2126,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listCompanyParameterDetails($companyId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/parameters";
@@ -2134,7 +2134,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -2148,11 +2148,11 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API depends on the following active services:*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id The unique identifier of the company
-     * @return FundingStatusModel[]
+     * @return \stdClass
      */
     public function listFundingRequestsByCompany($id)    {
         $path = "/api/v2/companies/{$id}/funding";
@@ -2160,7 +2160,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -2172,10 +2172,10 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listMrsCompanies()    {
         $path = "/api/v2/companies/mrs";
@@ -2183,7 +2183,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -2209,7 +2209,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param string $include A comma separated list of objects to fetch underneath this company. Any object with a URL path underneath this company can be fetched by specifying its name.
@@ -2217,7 +2217,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function queryCompanies($include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies";
@@ -2225,7 +2225,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -2251,7 +2251,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $id 
      * @param CompanyConfigurationModel[] $model 
-     * @return CompanyConfigurationModel[]
+     * @return \stdClass
      */
     public function setCompanyConfiguration($id, $model)    {
         $path = "/api/v2/companies/{$id}/configuration";
@@ -2259,7 +2259,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -2284,7 +2284,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $id The ID of the company you wish to update.
      * @param CompanyModel $model The company object you wish to update.
-     * @return CompanyModel
+     * @return \stdClass
      */
     public function updateCompany($id, $model)    {
         $path = "/api/v2/companies/{$id}";
@@ -2292,7 +2292,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -2314,7 +2314,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The company id.
      * @param int $id The company parameter id
      * @param CompanyParameterDetailModel $model The company parameter object you wish to update.
-     * @return CompanyParameterDetailModel
+     * @return \stdClass
      */
     public function updateCompanyParameterDetail($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/parameters/{$id}";
@@ -2322,36 +2322,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.1' );
-    }
-
-    /**
-     * Retrieve jurisdiction rate information for tax authority
-     *
-     * This API is available by invitation only.
-     * 
-     * ### Security Policies
-     * 
-     * * This API depends on the following active services:*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
-     * Swagger Name: AvaTaxClient
-     * 
-     * @param int $taxAuthorityId Used to limit the jurisdictions returned.
-     * @param string $effectiveDate Used to limit the jurisdictions returned.
-     * @param string $endDate Used to limit the jurisdictions returned.
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
-     * @param string $include A comma separated list of objects to fetch underneath this jurisdiction.
-     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
-     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
-     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return ComplianceJurisdictionRateModel
-     */
-    public function queryTaxAuthorityJurisdictionRates($taxAuthorityId, $effectiveDate, $endDate, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
-        $path = "/api/v2/compliance/taxauthorityjurisdictionrates";
-        $guzzleParams = [
-            'query' => ['taxAuthorityId' => $taxAuthorityId, 'effectiveDate' => $effectiveDate, 'endDate' => $endDate, '$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
-            'body' => null
-        ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -2368,7 +2339,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns this contact.
      * @param ContactModel[] $model The contacts you wish to create.
-     * @return ContactModel[]
+     * @return \stdClass
      */
     public function createContacts($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/contacts";
@@ -2376,7 +2347,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -2391,7 +2362,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns this contact.
      * @param int $id The ID of the contact you wish to delete.
-     * @return ErrorDetail[]
+     * @return \stdClass
      */
     public function deleteContact($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/contacts/{$id}";
@@ -2399,7 +2370,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -2416,7 +2387,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company for this contact
      * @param int $id The primary key of this contact
-     * @return ContactModel
+     * @return \stdClass
      */
     public function getContact($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/contacts/{$id}";
@@ -2424,7 +2395,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -2445,7 +2416,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listContactsByCompany($companyId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/contacts";
@@ -2453,7 +2424,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -2475,7 +2446,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function queryContacts($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/contacts";
@@ -2483,7 +2454,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -2503,7 +2474,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The ID of the company that this contact belongs to.
      * @param int $id The ID of the contact you wish to update
      * @param ContactModel $model The contact you wish to update.
-     * @return ContactModel
+     * @return \stdClass
      */
     public function updateContact($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/contacts/{$id}";
@@ -2511,7 +2482,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -2541,7 +2512,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
      * @param CustomerModel[] $model The list of customer objects to be created
-     * @return CustomerModel[]
+     * @return \stdClass
      */
     public function createCustomers($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/customers";
@@ -2549,7 +2520,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -2576,7 +2547,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
      * @param string $customerCode The unique code representing this customer
-     * @return CustomerModel
+     * @return \stdClass
      */
     public function deleteCustomer($companyId, $customerCode)    {
         $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}";
@@ -2584,7 +2555,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -2618,7 +2589,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The unique ID number of the company that recorded this customer
      * @param string $customerCode The unique code representing this customer
      * @param string $include Specify optional additional objects to include in this fetch request
-     * @return CustomerModel
+     * @return \stdClass
      */
     public function getCustomer($companyId, $customerCode, $include=null)    {
         $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}";
@@ -2626,7 +2597,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -2657,7 +2628,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The unique ID number of the company that recorded the provided customer
      * @param string $customerCode The unique code representing the current customer
      * @param CustomerAttributeModel[] $model The list of attributes to link to the customer.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function linkAttributesToCustomer($companyId, $customerCode, $model)    {
         $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/attributes/link";
@@ -2665,7 +2636,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -2693,7 +2664,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The unique ID number of the company that recorded this customer
      * @param string $customerCode The unique code representing this customer
      * @param LinkCertificatesModel $model The list of certificates to link to this customer
-     * @return FetchResult
+     * @return \stdClass
      */
     public function linkCertificatesToCustomer($companyId, $customerCode, $model)    {
         $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/certificates/link";
@@ -2701,7 +2672,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -2730,7 +2701,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The unique ID number of the company defining customers.
      * @param string $code The code of the bill-to customer to link.
      * @param LinkCustomersModel $model A list of information about ship-to customers to link to this bill-to customer.
-     * @return CustomerModel
+     * @return \stdClass
      */
     public function linkShipToCustomersToBillCustomer($companyId, $code, $model)    {
         $path = "/api/v2/companies/{$companyId}/customers/billto/{$code}/shipto/link";
@@ -2738,7 +2709,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -2768,7 +2739,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The unique ID number of the company that recorded the provided customer
      * @param string $customerCode The unique code representing the current customer
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listAttributesForCustomer($companyId, $customerCode)    {
         $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/attributes";
@@ -2776,7 +2747,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -2808,7 +2779,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listCertificatesForCustomer($companyId, $customerCode, $include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/certificates";
@@ -2816,7 +2787,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -2848,7 +2819,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $customerCode The unique code representing this customer
      * @param string $country Search for certificates matching this country. Uses the ISO 3166 two character country code.
      * @param string $region Search for certificates matching this region. Uses the ISO 3166 two or three character state, region, or province code.
-     * @return ExemptionStatusModel
+     * @return \stdClass
      */
     public function listValidCertificatesForCustomer($companyId, $customerCode, $country, $region)    {
         $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/certificates/{$country}/{$region}";
@@ -2856,7 +2827,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -2892,7 +2863,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function queryCustomers($companyId, $include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/customers";
@@ -2900,7 +2871,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -2931,7 +2902,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The unique ID number of the company that recorded the customer
      * @param string $customerCode The unique code representing the current customer
      * @param CustomerAttributeModel[] $model The list of attributes to unlink from the customer.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function unlinkAttributesFromCustomer($companyId, $customerCode, $model)    {
         $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/attributes/unlink";
@@ -2939,7 +2910,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -2967,7 +2938,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The unique ID number of the company that recorded this customer
      * @param string $customerCode The unique code representing this customer
      * @param LinkCertificatesModel $model The list of certificates to link to this customer
-     * @return FetchResult
+     * @return \stdClass
      */
     public function unlinkCertificatesFromCustomer($companyId, $customerCode, $model)    {
         $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/certificates/unlink";
@@ -2975,7 +2946,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -3003,7 +2974,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The unique ID number of the company that recorded this customer
      * @param string $customerCode The unique code representing this customer
      * @param CustomerModel $model The new customer model that will replace the existing record at this URL
-     * @return CustomerModel
+     * @return \stdClass
      */
     public function updateCustomer($companyId, $customerCode, $model)    {
         $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}";
@@ -3011,7 +2982,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -3027,7 +2998,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The id of the company you which to create the datasources
      * @param DataSourceModel[] $model 
-     * @return DataSourceModel[]
+     * @return \stdClass
      */
     public function createDataSources($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/datasources";
@@ -3035,7 +3006,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -3051,7 +3022,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The id of the company the datasource belongs to.
      * @param int $id The id of the datasource you wish to delete.
-     * @return ErrorDetail[]
+     * @return \stdClass
      */
     public function deleteDataSource($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/datasources/{$id}";
@@ -3059,7 +3030,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -3069,13 +3040,13 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro, BasicReturns.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId 
      * @param int $id data source id
-     * @return DataSourceModel
+     * @return \stdClass
      */
     public function getDataSourceById($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/datasources/{$id}";
@@ -3083,7 +3054,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -3093,7 +3064,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro, BasicReturns.
      * Swagger Name: AvaTaxClient
      * 
@@ -3102,7 +3073,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listDataSources($companyId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/datasources";
@@ -3110,7 +3081,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -3123,7 +3094,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro, BasicReturns.
      * Swagger Name: AvaTaxClient
      * 
@@ -3131,7 +3102,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function queryDataSources($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/datasources";
@@ -3139,7 +3110,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -3156,7 +3127,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The id of the company the datasource belongs to.
      * @param int $id The id of the datasource you wish to delete.
      * @param DataSourceModel $model 
-     * @return DataSourceModel
+     * @return \stdClass
      */
     public function updateDataSource($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/datasources/{$id}";
@@ -3164,7 +3135,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -3188,7 +3159,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param string $country The name or code of the destination country.
      * @param string $hsCode The partial or full HS Code for which you would like to view all of the parents.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function getCrossBorderCode($country, $hsCode)    {
         $path = "/api/v2/definitions/crossborder/{$country}/{$hsCode}/hierarchy";
@@ -3196,7 +3167,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -3211,7 +3182,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function getLoginVerifierByForm($form, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/filingcalendars/loginverifiers/{$form}";
@@ -3219,7 +3190,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -3232,7 +3203,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listAllMarketplaceLocations($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/listallmarketplacelocations";
@@ -3240,7 +3211,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -3258,7 +3229,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listAvaFileForms($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/avafileforms";
@@ -3266,7 +3237,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -3286,7 +3257,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listCertificateAttributes($companyid, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/certificateattributes";
@@ -3294,7 +3265,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['companyid' => $companyid, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -3313,7 +3284,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listCertificateExemptReasons($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/certificateexemptreasons";
@@ -3321,7 +3292,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -3340,7 +3311,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listCertificateExposureZones($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/certificateexposurezones";
@@ -3348,7 +3319,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -3363,7 +3334,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listClassificationParametersUsage($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/classification/parametersusage";
@@ -3371,7 +3342,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -3385,7 +3356,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listCommunicationsServiceTypes($id, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/communications/transactiontypes/{$id}/servicetypes";
@@ -3393,7 +3364,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -3407,7 +3378,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listCommunicationsTransactionTypes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/communications/transactiontypes";
@@ -3415,7 +3386,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -3429,7 +3400,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listCommunicationsTSPairs($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/communications/tspairs";
@@ -3437,7 +3408,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -3452,7 +3423,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listCountries($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/countries";
@@ -3460,7 +3431,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -3480,7 +3451,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listCoverLetters($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/coverletters";
@@ -3488,7 +3459,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -3514,7 +3485,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listCrossBorderCodes($country, $hsCode, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/crossborder/{$country}/{$hsCode}";
@@ -3522,7 +3493,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -3540,7 +3511,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * * This API depends on the following active services:*Required* (all): AvaTaxGlobal.
      * Swagger Name: AvaTaxClient
      * 
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listCrossBorderSections()    {
         $path = "/api/v2/definitions/crossborder/sections";
@@ -3548,7 +3519,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -3564,7 +3535,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listCurrencies($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/currencies";
@@ -3572,7 +3543,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -3589,7 +3560,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listEntityUseCodes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/entityusecodes";
@@ -3597,7 +3568,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -3611,7 +3582,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listFilingFrequencies($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/filingfrequencies";
@@ -3619,7 +3590,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -3633,11 +3604,11 @@ class AvaTaxClient extends AvaTaxClientBase
      * The rate, salesRate, and useRate fields are not available on the JurisdictionModels returned by this API.
      * Swagger Name: AvaTaxClient
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* rate, salesRate, signatureCode, useRate
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* rate, salesRate, signatureCode, useRate, isAcm, isSst
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listJurisdictions($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/jurisdictions";
@@ -3645,7 +3616,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -3671,7 +3642,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listJurisdictionsByAddress($line1, $line2, $line3, $city, $region, $postalCode, $country, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/jurisdictionsnearaddress";
@@ -3679,7 +3650,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['line1' => $line1, 'line2' => $line2, 'line3' => $line3, 'city' => $city, 'region' => $region, 'postalCode' => $postalCode, 'country' => $country, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -3704,7 +3675,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listJurisdictionsByRateTypeTaxTypeMapping($country, $taxTypeId, $taxSubTypeId, $rateTypeId, $region, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/jurisdictions/countries/{$country}/taxtypes/{$taxTypeId}/taxsubtypes/{$taxSubTypeId}";
@@ -3712,7 +3683,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['rateTypeId' => $rateTypeId, 'region' => $region, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -3725,7 +3696,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $taxTypeId The taxtype for which you want to retrieve the jurisdiction information
      * @param string $taxSubTypeId The taxsubtype for which you want to retrieve the jurisdiction information
      * @param string $rateTypeId The ratetype for which you want to retrieve the jurisdiction information
-     * @return string[]
+     * @return \stdClass
      */
     public function listJurisdictionTypesByRateTypeTaxTypeMapping($country, $taxTypeId, $taxSubTypeId, $rateTypeId)    {
         $path = "/api/v2/definitions/jurisdictionTypes/countries/{$country}/taxtypes/{$taxTypeId}/taxsubtypes/{$taxSubTypeId}";
@@ -3733,7 +3704,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['rateTypeId' => $rateTypeId],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -3760,7 +3731,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listLocationQuestionsByAddress($line1, $line2, $line3, $city, $region, $postalCode, $country, $latitude, $longitude, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/locationquestions";
@@ -3768,7 +3739,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['line1' => $line1, 'line2' => $line2, 'line3' => $line3, 'city' => $city, 'region' => $region, 'postalCode' => $postalCode, 'country' => $country, 'latitude' => $latitude, 'longitude' => $longitude, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -3783,7 +3754,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listLoginVerifiers($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/filingcalendars/loginverifiers";
@@ -3791,7 +3762,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -3804,7 +3775,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listMarketplaceLocations($marketplaceId, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/marketplacelocations";
@@ -3812,7 +3783,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['marketplaceId' => $marketplaceId, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -3827,7 +3798,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listNexus($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/nexus";
@@ -3835,7 +3806,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -3859,7 +3830,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listNexusByAddress($line1, $line2, $line3, $city, $region, $postalCode, $country, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/nexus/byaddress";
@@ -3867,7 +3838,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['line1' => $line1, 'line2' => $line2, 'line3' => $line3, 'city' => $city, 'region' => $region, 'postalCode' => $postalCode, 'country' => $country, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -3883,7 +3854,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listNexusByCountry($country, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/nexus/{$country}";
@@ -3891,7 +3862,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -3908,7 +3879,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listNexusByCountryAndRegion($country, $region, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/nexus/{$country}/{$region}";
@@ -3916,7 +3887,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -3940,7 +3911,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param string $formCode The form code that we are looking up the nexus for
-     * @return NexusByTaxFormModel
+     * @return \stdClass
      */
     public function listNexusByFormCode($formCode)    {
         $path = "/api/v2/definitions/nexus/byform/{$formCode}";
@@ -3948,7 +3919,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -3964,7 +3935,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listNexusByTaxTypeGroup($taxTypeGroup, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/nexus/bytaxtypegroup/{$taxTypeGroup}";
@@ -3972,7 +3943,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -3986,7 +3957,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listNexusTaxTypeGroups($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/nexustaxtypegroups";
@@ -3994,7 +3965,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4008,7 +3979,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listNoticeCustomerFundingOptions($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/noticecustomerfundingoptions";
@@ -4016,7 +3987,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4030,7 +4001,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listNoticeCustomerTypes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/noticecustomertypes";
@@ -4038,7 +4009,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4052,7 +4023,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listNoticeFilingtypes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/noticefilingtypes";
@@ -4060,7 +4031,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4074,7 +4045,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listNoticePriorities($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/noticepriorities";
@@ -4082,7 +4053,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4096,7 +4067,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listNoticeReasons($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/noticereasons";
@@ -4104,7 +4075,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4118,7 +4089,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listNoticeResponsibilities($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/noticeresponsibilities";
@@ -4126,7 +4097,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4140,7 +4111,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listNoticeRootCauses($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/noticerootcauses";
@@ -4148,7 +4119,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4162,7 +4133,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listNoticeStatuses($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/noticestatuses";
@@ -4170,7 +4141,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4184,7 +4155,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listNoticeTypes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/noticetypes";
@@ -4192,7 +4163,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4207,7 +4178,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listParameters($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/parameters";
@@ -4215,7 +4186,29 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Retrieve the list of Avalara-supported parameters based on account subscriptions.
+     *
+     * Returns the list of Avalara-supported parameters based on account subscriptions.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $accountId The ID of the account to retrieve the parameters.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* serviceTypes, regularExpression, values
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return \stdClass
+     */
+    public function listParametersByAccount($accountId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/definitions/accounts/{$accountId}/parameters";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4247,7 +4240,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listParametersByItem($companyCode, $itemCode, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/parameters/byitem/{$companyCode}/{$itemCode}";
@@ -4255,7 +4248,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4270,7 +4263,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listParametersUsage($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/parametersusage";
@@ -4278,7 +4271,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4290,7 +4283,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listPermissions($top=null, $skip=null)    {
         $path = "/api/v2/definitions/permissions";
@@ -4298,7 +4291,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$top' => $top, '$skip' => $skip],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4311,7 +4304,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listPostalCodes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/postalcodes";
@@ -4319,7 +4312,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4340,7 +4333,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listPreferredPrograms($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/preferredprograms";
@@ -4348,7 +4341,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4365,7 +4358,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @param string $countryCode If not null, return all records with this code.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listProductClassificationSystems($filter=null, $top=null, $skip=null, $orderBy=null, $countryCode=null)    {
         $path = "/api/v2/definitions/productclassificationsystems";
@@ -4373,7 +4366,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy, '$countryCode' => $countryCode],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4399,7 +4392,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @param string $countryCode If not null, return all records with this code.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listProductClassificationSystemsByCompany($companyCode, $filter=null, $top=null, $skip=null, $orderBy=null, $countryCode=null)    {
         $path = "/api/v2/definitions/productclassificationsystems/bycompany/{$companyCode}";
@@ -4407,7 +4400,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy, '$countryCode' => $countryCode],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4422,7 +4415,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listRateTypesByCountry($country, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/countries/{$country}/ratetypes";
@@ -4430,7 +4423,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4447,7 +4440,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listRateTypesByCountryTaxTypeTaxSubType($country, $taxTypeId, $taxSubTypeId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/countries/{$country}/taxtypes/{$taxTypeId}/taxsubtypes/{$taxSubTypeId}/ratetypes";
@@ -4455,7 +4448,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4470,7 +4463,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listRegions($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/regions";
@@ -4478,7 +4471,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4494,7 +4487,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listRegionsByCountry($country, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/countries/{$country}/regions";
@@ -4502,7 +4495,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4522,7 +4515,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listRegionsByCountryAndTaxTypeAndTaxSubTypeAndRateType($companyId, $country, $taxTypeId, $taxSubTypeId, $rateTypeId, $jurisdictionTypeId, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/companies/{$companyId}/countries/{$country}/regions/taxtypes/{$taxTypeId}/taxsubtypes/{$taxSubTypeId}/rateTypeId/{$rateTypeId}/jurisdictionTypeId/{$jurisdictionTypeId}";
@@ -4530,7 +4523,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4544,7 +4537,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listResourceFileTypes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/resourcefiletypes";
@@ -4552,7 +4545,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4567,7 +4560,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listReturnsParametersUsage($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/returns/parametersusage";
@@ -4575,7 +4568,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4590,7 +4583,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listSecurityRoles($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/securityroles";
@@ -4598,7 +4591,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4610,11 +4603,11 @@ class AvaTaxClient extends AvaTaxClientBase
      * You cannot change your subscriptions directly through the API.
      * Swagger Name: AvaTaxClient
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxTypeGroupIdSK
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listSubscriptionTypes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/subscriptiontypes";
@@ -4622,7 +4615,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4635,7 +4628,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listTags($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/tags";
@@ -4643,7 +4636,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4657,7 +4650,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listTaxAuthorities($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/taxauthorities";
@@ -4665,7 +4658,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4681,7 +4674,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listTaxAuthorityForms($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/taxauthorityforms";
@@ -4689,7 +4682,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4703,7 +4696,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listTaxAuthorityTypes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/taxauthoritytypes";
@@ -4711,7 +4704,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4725,14 +4718,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ECMAccountUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listTaxCodes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/taxcodes";
@@ -4740,7 +4733,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4753,7 +4746,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
-     * @return TaxCodeTypesModel
+     * @return \stdClass
      */
     public function listTaxCodeTypes($top=null, $skip=null)    {
         $path = "/api/v2/definitions/taxcodetypes";
@@ -4761,7 +4754,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$top' => $top, '$skip' => $skip],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4775,7 +4768,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listTaxForms($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/taxforms";
@@ -4783,7 +4776,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4797,7 +4790,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listTaxSubTypes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/taxsubtypes";
@@ -4805,7 +4798,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4822,7 +4815,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listTaxSubTypesByCountryAndTaxType($country, $taxTypeId, $companyId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/taxsubtypes/countries/{$country}/taxtypes/{$taxTypeId}";
@@ -4830,7 +4823,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['companyId' => $companyId, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4846,7 +4839,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listTaxSubTypesByJurisdictionAndRegion($jurisdictionCode, $region, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/taxsubtypes/{$jurisdictionCode}/{$region}";
@@ -4854,7 +4847,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4868,7 +4861,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listTaxTypeGroups($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/taxtypegroups";
@@ -4876,7 +4869,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4890,7 +4883,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listTaxTypesByNexusAndCountry($country, $companyId, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/taxtypes/countries/{$country}";
@@ -4898,7 +4891,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['companyId' => $companyId, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4914,7 +4907,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listUnitOfBasisByCountryAndTaxTypeAndTaxSubTypeAndRateType($country, $taxTypeId, $taxSubTypeId, $rateTypeId, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/unitofbasis/countries/{$country}/taxtypes/{$taxTypeId}/taxsubtypes/{$taxSubTypeId}";
@@ -4922,7 +4915,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['rateTypeId' => $rateTypeId, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4937,7 +4930,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listUnitOfMeasurement($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/unitofmeasurements";
@@ -4945,7 +4938,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4964,7 +4957,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The unique ID number of the company that owns this DistanceThreshold
      * @param CompanyDistanceThresholdModel[] $model The DistanceThreshold object or objects you wish to create.
-     * @return CompanyDistanceThresholdModel[]
+     * @return \stdClass
      */
     public function createDistanceThreshold($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/distancethresholds";
@@ -4972,7 +4965,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -4991,7 +4984,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The unique ID number of the company that owns this DistanceThreshold
      * @param int $id The unique ID number of the DistanceThreshold object you wish to delete.
-     * @return ErrorDetail[]
+     * @return \stdClass
      */
     public function deleteDistanceThreshold($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/distancethresholds/{$id}";
@@ -4999,7 +4992,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -5018,7 +5011,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns this DistanceThreshold object
      * @param int $id The unique ID number referring to this DistanceThreshold object
-     * @return CompanyDistanceThresholdModel
+     * @return \stdClass
      */
     public function getDistanceThreshold($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/distancethresholds/{$id}";
@@ -5026,7 +5019,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -5049,7 +5042,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listDistanceThresholds($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/distancethresholds";
@@ -5057,7 +5050,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -5082,7 +5075,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function queryDistanceThresholds($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/distancethresholds";
@@ -5090,7 +5083,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -5113,7 +5106,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The unique ID number of the company that owns this DistanceThreshold object.
      * @param int $id The unique ID number of the DistanceThreshold object to replace.
      * @param CompanyDistanceThresholdModel $model The new DistanceThreshold object to store.
-     * @return CompanyDistanceThresholdModel
+     * @return \stdClass
      */
     public function updateDistanceThreshold($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/distancethresholds/{$id}";
@@ -5121,7 +5114,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -5133,12 +5126,12 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The company ID that will be issued this certificate.
      * @param CreateECommerceTokenInputModel $model 
-     * @return ECommerceTokenOutputModel
+     * @return \stdClass
      */
     public function createECommerceToken($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/ecommercetokens";
@@ -5146,7 +5139,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -5158,12 +5151,12 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The company ID that the refreshed certificate belongs to.
      * @param RefreshECommerceTokenInputModel $model 
-     * @return FetchResult
+     * @return \stdClass
      */
     public function refreshECommerceToken($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/ecommercetokens";
@@ -5171,7 +5164,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -5185,7 +5178,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id 
-     * @return FirmClientLinkageOutputModel
+     * @return \stdClass
      */
     public function approveFirmClientLinkage($id)    {
         $path = "/api/v2/firmclientlinkages/{$id}/approve";
@@ -5193,7 +5186,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -5216,7 +5209,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param NewFirmClientAccountRequestModel $model Information about the account you wish to create.
-     * @return FirmClientLinkageOutputModel
+     * @return \stdClass
      */
     public function createAndLinkNewFirmClientAccount($model)    {
         $path = "/api/v2/firmclientlinkages/createandlinkclient";
@@ -5224,7 +5217,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -5238,7 +5231,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param FirmClientLinkageInputModel $model FirmClientLinkageInputModel
-     * @return FirmClientLinkageOutputModel
+     * @return \stdClass
      */
     public function createFirmClientLinkage($model)    {
         $path = "/api/v2/firmclientlinkages";
@@ -5246,7 +5239,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -5260,7 +5253,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id 
-     * @return ErrorDetail[]
+     * @return \stdClass
      */
     public function deleteFirmClientLinkage($id)    {
         $path = "/api/v2/firmclientlinkages/{$id}";
@@ -5268,7 +5261,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -5278,11 +5271,11 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id 
-     * @return FirmClientLinkageOutputModel
+     * @return \stdClass
      */
     public function getFirmClientLinkage($id)    {
         $path = "/api/v2/firmclientlinkages/{$id}";
@@ -5290,7 +5283,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -5300,11 +5293,11 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* firmAccountName, clientAccountName
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listFirmClientLinkage($filter=null)    {
         $path = "/api/v2/firmclientlinkages";
@@ -5312,7 +5305,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -5326,7 +5319,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id 
-     * @return FirmClientLinkageOutputModel
+     * @return \stdClass
      */
     public function rejectFirmClientLinkage($id)    {
         $path = "/api/v2/firmclientlinkages/{$id}/reject";
@@ -5334,7 +5327,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -5348,7 +5341,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id 
-     * @return FirmClientLinkageOutputModel
+     * @return \stdClass
      */
     public function resetFirmClientLinkage($id)    {
         $path = "/api/v2/firmclientlinkages/{$id}/reset";
@@ -5356,7 +5349,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -5370,7 +5363,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id 
-     * @return FirmClientLinkageOutputModel
+     * @return \stdClass
      */
     public function revokeFirmClientLinkage($id)    {
         $path = "/api/v2/firmclientlinkages/{$id}/revoke";
@@ -5378,7 +5371,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -5401,7 +5394,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param FreeTrialRequestModel $model Required information to provision a free trial account.
-     * @return NewAccountModel
+     * @return \stdClass
      */
     public function requestFreeTrial($model)    {
         $path = "/api/v2/accounts/freetrials/request";
@@ -5409,7 +5402,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -5430,14 +5423,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * * This API depends on the following active services:*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id The unique ID number of this funding request
      * @param string $businessUnit The company's business unit (See POABusinessUnit::* for a list of allowable values)
      * @param string $subscriptionType The company's subscription type (See POASubscriptionType::* for a list of allowable values)
-     * @return FundingStatusModel
+     * @return \stdClass
      */
     public function activateFundingRequest($id, $businessUnit, $subscriptionType)    {
         $path = "/api/v2/fundingrequests/{$id}/widget";
@@ -5445,7 +5438,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['businessUnit' => $businessUnit, 'subscriptionType' => $subscriptionType],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -5471,7 +5464,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The unique ID number of this funding request
      * @param string $businessUnit The company's business unit (See POABusinessUnit::* for a list of allowable values)
      * @param string $subscriptionType The company's subscription type (See POASubscriptionType::* for a list of allowable values)
-     * @return FundingStatusModel
+     * @return \stdClass
      */
     public function fundingRequestStatus($id, $businessUnit, $subscriptionType)    {
         $path = "/api/v2/fundingrequests/{$id}";
@@ -5479,7 +5472,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['businessUnit' => $businessUnit, 'subscriptionType' => $subscriptionType],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -5498,7 +5491,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns this item.
      * @param int $itemId The ID of the item you wish to delete the classifications.
-     * @return ErrorDetail[]
+     * @return \stdClass
      */
     public function batchDeleteItemClassifications($companyId, $itemId)    {
         $path = "/api/v2/companies/{$companyId}/items/{$itemId}/classifications";
@@ -5506,7 +5499,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -5527,7 +5520,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns this item.
      * @param int $itemId The ID of the item you wish to delete the parameters.
-     * @return ErrorDetail[]
+     * @return \stdClass
      */
     public function batchDeleteItemParameters($companyId, $itemId)    {
         $path = "/api/v2/companies/{$companyId}/items/{$itemId}/parameters";
@@ -5535,7 +5528,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -5558,7 +5551,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns this items.
      * @param ItemBulkUploadInputModel $model The items you wish to upload.
-     * @return ItemBulkUploadOutputModel
+     * @return \stdClass
      */
     public function bulkUploadItems($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/items/upload";
@@ -5566,7 +5559,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -5588,7 +5581,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The company id.
      * @param int $itemId The item id.
      * @param ItemClassificationInputModel[] $model The item classifications you wish to create.
-     * @return ItemClassificationOutputModel[]
+     * @return \stdClass
      */
     public function createItemClassifications($companyId, $itemId, $model)    {
         $path = "/api/v2/companies/{$companyId}/items/{$itemId}/classifications";
@@ -5596,7 +5589,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -5622,7 +5615,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The ID of the company that owns this item parameter.
      * @param int $itemId The item id.
      * @param ItemParameterModel[] $model The item parameters you wish to create.
-     * @return ItemParameterModel[]
+     * @return \stdClass
      */
     public function createItemParameters($companyId, $itemId, $model)    {
         $path = "/api/v2/companies/{$companyId}/items/{$itemId}/parameters";
@@ -5630,7 +5623,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -5653,7 +5646,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns this item.
      * @param ItemModel[] $model The item you wish to create.
-     * @return ItemModel[]
+     * @return \stdClass
      */
     public function createItems($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/items";
@@ -5661,7 +5654,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -5679,7 +5672,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The ID of the company that defined these items
      * @param int $itemId The ID of the item as defined by the company that owns this tag.
      * @param ItemTagDetailInputModel[] $model Tags you wish to associate with the Item
-     * @return ItemTagDetailOutputModel[]
+     * @return \stdClass
      */
     public function createItemTags($companyId, $itemId, $model)    {
         $path = "/api/v2/companies/{$companyId}/items/{$itemId}/tags";
@@ -5687,7 +5680,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -5706,7 +5699,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that creates this request.
      * @param ItemTaxCodeClassificationRequestInputModel $model The request you wish to create.
-     * @return ItemTaxCodeClassificationRequestOutputModel
+     * @return \stdClass
      */
     public function createTaxCodeClassificationRequest($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/classificationrequests/taxcode";
@@ -5714,7 +5707,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -5743,7 +5736,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns this item.
      * @param string $itemCode The code of the item you want to delete.
-     * @return ErrorDetail[]
+     * @return \stdClass
      */
     public function deleteCatalogueItem($companyId, $itemCode)    {
         $path = "/api/v2/companies/{$companyId}/itemcatalogue/{$itemCode}";
@@ -5751,7 +5744,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -5774,7 +5767,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns this item.
      * @param int $id The ID of the item you wish to delete.
-     * @return ErrorDetail[]
+     * @return \stdClass
      */
     public function deleteItem($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/items/{$id}";
@@ -5782,7 +5775,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -5802,7 +5795,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The company id.
      * @param int $itemId The item id.
      * @param int $id The item classification id.
-     * @return ErrorDetail[]
+     * @return \stdClass
      */
     public function deleteItemClassification($companyId, $itemId, $id)    {
         $path = "/api/v2/companies/{$companyId}/items/{$itemId}/classifications/{$id}";
@@ -5810,7 +5803,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -5832,7 +5825,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The company id
      * @param int $itemId The item id
      * @param int $id The parameter id
-     * @return ErrorDetail[]
+     * @return \stdClass
      */
     public function deleteItemParameter($companyId, $itemId, $id)    {
         $path = "/api/v2/companies/{$companyId}/items/{$itemId}/parameters/{$id}";
@@ -5840,7 +5833,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -5858,7 +5851,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The ID of the company that defined these items
      * @param int $itemId The ID of the item as defined by the company that owns this tag.
      * @param int $itemTagDetailId The ID of the item tag detail you wish to delete.
-     * @return ErrorDetail[]
+     * @return \stdClass
      */
     public function deleteItemTag($companyId, $itemId, $itemTagDetailId)    {
         $path = "/api/v2/companies/{$companyId}/items/{$itemId}/tags/{$itemTagDetailId}";
@@ -5866,7 +5859,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -5883,7 +5876,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that defined these items.
      * @param int $itemId The ID of the item as defined by the company that owns this tag.
-     * @return ErrorDetail[]
+     * @return \stdClass
      */
     public function deleteItemTags($companyId, $itemId)    {
         $path = "/api/v2/companies/{$companyId}/items/{$itemId}/tags";
@@ -5891,7 +5884,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -5916,7 +5909,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function getClassificationStatus($companyId, $includeClassificationDetails, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/classificationrequests/taxcode";
@@ -5924,7 +5917,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$includeClassificationDetails' => null === $includeClassificationDetails ? null : json_encode($includeClassificationDetails), '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -5946,7 +5939,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The ID of the company that owns this item object
      * @param int $id The primary key of this item
      * @param string $include A comma separated list of additional data to retrieve.
-     * @return ItemModel
+     * @return \stdClass
      */
     public function getItem($companyId, $id, $include=null)    {
         $path = "/api/v2/companies/{$companyId}/items/{$id}";
@@ -5954,7 +5947,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -5974,7 +5967,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The company id.
      * @param int $itemId The item id.
      * @param int $id The item classification id.
-     * @return ItemClassificationOutputModel
+     * @return \stdClass
      */
     public function getItemClassification($companyId, $itemId, $id)    {
         $path = "/api/v2/companies/{$companyId}/items/{$itemId}/classifications/{$id}";
@@ -5982,7 +5975,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -6004,7 +5997,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The company id
      * @param int $itemId The item id
      * @param int $id The parameter id
-     * @return ItemParameterModel
+     * @return \stdClass
      */
     public function getItemParameter($companyId, $itemId, $id)    {
         $path = "/api/v2/companies/{$companyId}/items/{$itemId}/parameters/{$id}";
@@ -6012,7 +6005,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -6032,7 +6025,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* tagName
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function getItemTags($companyId, $itemId, $filter=null, $top=null, $skip=null)    {
         $path = "/api/v2/companies/{$companyId}/items/{$itemId}/tags";
@@ -6040,7 +6033,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -6065,7 +6058,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The ID of the company that owns this item object
      * @param string $itemCode The ItemCode of the item for which you want to retrieve premium classification
      * @param string $systemCode The SystemCode for which you want to retrieve premium classification
-     * @return ItemPremiumClassificationOutputModel
+     * @return \stdClass
      */
     public function getPremiumClassification($companyId, $itemCode, $systemCode)    {
         $path = "/api/v2/companies/{$companyId}/items/{$itemCode}/premiumClassification/{$systemCode}";
@@ -6073,7 +6066,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -6096,7 +6089,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function getTaxCodeRecommendations($companyId, $requestId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/classificationrequests/taxcode/{$requestId}/recommendations";
@@ -6104,7 +6097,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -6132,7 +6125,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listImportRestrictions($companyId, $itemCode, $countryOfImport, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/items/{$itemCode}/restrictions/import/{$countryOfImport}";
@@ -6140,7 +6133,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -6166,7 +6159,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listItemClassifications($companyId, $itemId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/items/{$itemId}/classifications";
@@ -6174,7 +6167,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -6202,7 +6195,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listItemParameters($companyId, $itemId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/items/{$itemId}/parameters";
@@ -6210,7 +6203,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -6249,7 +6242,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @param string $tagName Tag Name on the basis of which you want to filter Items
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listItemsByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null, $tagName=null)    {
         $path = "/api/v2/companies/{$companyId}/items";
@@ -6257,7 +6250,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy, 'tagName' => $tagName],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -6285,7 +6278,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function queryItems($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/items";
@@ -6293,7 +6286,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -6323,7 +6316,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function queryItemsByTag($companyId, $tag, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/items/bytags/{$tag}";
@@ -6331,7 +6324,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -6352,7 +6345,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns this item.
      * @param ItemCatalogueInputModel[] $model The items you want to create or update.
-     * @return ItemCatalogueOutputModel
+     * @return \stdClass
      */
     public function syncItemCatalogue($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/itemcatalogue";
@@ -6360,7 +6353,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -6386,7 +6379,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns this item.
      * @param SyncItemsRequestModel $model The request object.
-     * @return SyncItemsResponseModel
+     * @return \stdClass
      */
     public function syncItems($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/items/sync";
@@ -6394,7 +6387,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -6421,7 +6414,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The ID of the company that this item belongs to.
      * @param int $id The ID of the item you wish to update
      * @param ItemModel $model The item object you wish to update.
-     * @return ItemModel
+     * @return \stdClass
      */
     public function updateItem($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/items/{$id}";
@@ -6429,7 +6422,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -6452,7 +6445,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $itemId The item id.
      * @param int $id The item classification id.
      * @param ItemClassificationInputModel $model The item object you wish to update.
-     * @return ItemClassificationOutputModel
+     * @return \stdClass
      */
     public function updateItemClassification($companyId, $itemId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/items/{$itemId}/classifications/{$id}";
@@ -6460,7 +6453,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -6483,7 +6476,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $itemId The item id
      * @param int $id The item parameter id
      * @param ItemParameterModel $model The item object you wish to update.
-     * @return ItemParameterModel
+     * @return \stdClass
      */
     public function updateItemParameter($companyId, $itemId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/items/{$itemId}/parameters/{$id}";
@@ -6491,7 +6484,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -6511,7 +6504,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $accountId The ID of the account that owns this override
      * @param JurisdictionOverrideModel[] $model The jurisdiction override objects to create
-     * @return JurisdictionOverrideModel[]
+     * @return \stdClass
      */
     public function createJurisdictionOverrides($accountId, $model)    {
         $path = "/api/v2/accounts/{$accountId}/jurisdictionoverrides";
@@ -6519,7 +6512,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -6534,7 +6527,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $accountId The ID of the account that owns this override
      * @param int $id The ID of the override you wish to delete
-     * @return ErrorDetail[]
+     * @return \stdClass
      */
     public function deleteJurisdictionOverride($accountId, $id)    {
         $path = "/api/v2/accounts/{$accountId}/jurisdictionoverrides/{$id}";
@@ -6542,7 +6535,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -6562,7 +6555,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $accountId The ID of the account that owns this override
      * @param int $id The primary key of this override
-     * @return JurisdictionOverrideModel
+     * @return \stdClass
      */
     public function getJurisdictionOverride($accountId, $id)    {
         $path = "/api/v2/accounts/{$accountId}/jurisdictionoverrides/{$id}";
@@ -6570,7 +6563,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -6597,7 +6590,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listJurisdictionOverridesByAccount($accountId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/accounts/{$accountId}/jurisdictionoverrides";
@@ -6605,7 +6598,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -6631,7 +6624,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function queryJurisdictionOverrides($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/jurisdictionoverrides";
@@ -6639,7 +6632,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -6655,7 +6648,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $accountId The ID of the account that this jurisdictionoverride belongs to.
      * @param int $id The ID of the jurisdictionoverride you wish to update
      * @param JurisdictionOverrideModel $model The jurisdictionoverride object you wish to update.
-     * @return JurisdictionOverrideModel
+     * @return \stdClass
      */
     public function updateJurisdictionOverride($accountId, $id, $model)    {
         $path = "/api/v2/accounts/{$accountId}/jurisdictionoverrides/{$id}";
@@ -6663,7 +6656,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -6689,7 +6682,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The ID of the company that owns this location parameter.
      * @param int $locationId The location id.
      * @param LocationParameterModel[] $model The location parameters you wish to create.
-     * @return LocationParameterModel[]
+     * @return \stdClass
      */
     public function createLocationParameters($companyId, $locationId, $model)    {
         $path = "/api/v2/companies/{$companyId}/locations/{$locationId}/parameters";
@@ -6697,7 +6690,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -6712,7 +6705,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns this location.
      * @param LocationModel[] $model The location you wish to create.
-     * @return LocationModel[]
+     * @return \stdClass
      */
     public function createLocations($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/locations";
@@ -6720,7 +6713,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -6735,7 +6728,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns this location.
      * @param int $id The ID of the location you wish to delete.
-     * @return ErrorDetail[]
+     * @return \stdClass
      */
     public function deleteLocation($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/locations/{$id}";
@@ -6743,7 +6736,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -6765,7 +6758,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The company id
      * @param int $locationId The location id
      * @param int $id The parameter id
-     * @return ErrorDetail[]
+     * @return \stdClass
      */
     public function deleteLocationParameter($companyId, $locationId, $id)    {
         $path = "/api/v2/companies/{$companyId}/locations/{$locationId}/parameters/{$id}";
@@ -6773,7 +6766,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -6792,13 +6785,13 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this location
      * @param int $id The primary key of this location
      * @param string $include A comma separated list of additional data to retrieve.
-     * @return LocationModel
+     * @return \stdClass
      */
     public function getLocation($companyId, $id, $include=null)    {
         $path = "/api/v2/companies/{$companyId}/locations/{$id}";
@@ -6806,7 +6799,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -6822,13 +6815,13 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The company id
      * @param int $locationId The location id
      * @param int $id The parameter id
-     * @return LocationParameterModel
+     * @return \stdClass
      */
     public function getLocationParameter($companyId, $locationId, $id)    {
         $path = "/api/v2/companies/{$companyId}/locations/{$locationId}/parameters/{$id}";
@@ -6836,7 +6829,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -6855,7 +6848,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The company id
@@ -6864,7 +6857,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listLocationParameters($companyId, $locationId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/locations/{$locationId}/parameters";
@@ -6872,7 +6865,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -6893,7 +6886,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns these locations
@@ -6902,7 +6895,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listLocationsByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/locations";
@@ -6910,7 +6903,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -6932,7 +6925,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* isMarketplaceOutsideUsa, settings, parameters
@@ -6940,7 +6933,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function queryLocations($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/locations";
@@ -6948,7 +6941,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -6966,7 +6959,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The ID of the company that this location belongs to.
      * @param int $id The ID of the location you wish to update
      * @param LocationModel $model The location you wish to update.
-     * @return LocationModel
+     * @return \stdClass
      */
     public function updateLocation($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/locations/{$id}";
@@ -6974,7 +6967,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -6997,7 +6990,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $locationId The location id
      * @param int $id The location parameter id
      * @param LocationParameterModel $model The location parameter object you wish to update.
-     * @return LocationParameterModel
+     * @return \stdClass
      */
     public function updateLocationParameter($companyId, $locationId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/locations/{$locationId}/parameters/{$id}";
@@ -7005,7 +6998,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -7017,12 +7010,12 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this location
      * @param int $id The primary key of this location
-     * @return LocationValidationModel
+     * @return \stdClass
      */
     public function validateLocation($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/locations/{$id}/validate";
@@ -7030,7 +7023,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -7065,7 +7058,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $type The transaction type for this MultiDocument transaction (See DocumentType::* for a list of allowable values)
      * @param string $include Specifies objects to include in this fetch call
      * @param AdjustMultiDocumentModel $model The adjust request you wish to execute
-     * @return MultiDocumentModel
+     * @return \stdClass
      */
     public function adjustMultiDocumentTransaction($code, $type, $include=null, $model=null)    {
         $path = "/api/v2/transactions/multidocument/{$code}/type/{$type}/adjust";
@@ -7073,7 +7066,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -7110,7 +7103,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param string $code The transaction code for this MultiDocument transaction
      * @param string $type The transaction type for this MultiDocument transaction (See DocumentType::* for a list of allowable values)
-     * @return AuditMultiDocumentModel
+     * @return \stdClass
      */
     public function auditMultiDocumentTransaction($code, $type)    {
         $path = "/api/v2/transactions/multidocument/{$code}/type/{$type}/audit";
@@ -7118,7 +7111,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -7148,7 +7141,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param CommitMultiDocumentModel $model The commit request you wish to execute
-     * @return MultiDocumentModel
+     * @return \stdClass
      */
     public function commitMultiDocumentTransaction($model)    {
         $path = "/api/v2/transactions/multidocument/commit";
@@ -7156,7 +7149,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -7211,7 +7204,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param string $include Specifies objects to include in the response after transaction is created
      * @param CreateMultiDocumentModel $model the multi document transaction model
-     * @return MultiDocumentModel
+     * @return \stdClass
      */
     public function createMultiDocumentTransaction($include=null, $model=null)    {
         $path = "/api/v2/transactions/multidocument";
@@ -7219,7 +7212,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -7255,7 +7248,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $code The multidocument code to retrieve
      * @param string $type The transaction type to retrieve (See DocumentType::* for a list of allowable values)
      * @param string $include Specifies objects to include in the response after transaction is created
-     * @return MultiDocumentModel
+     * @return \stdClass
      */
     public function getMultiDocumentTransactionByCodeAndType($code, $type, $include=null)    {
         $path = "/api/v2/transactions/multidocument/{$code}/type/{$type}";
@@ -7263,7 +7256,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -7307,7 +7300,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $id The unique ID number of the MultiDocument transaction to retrieve
      * @param string $include Specifies objects to include in the response after transaction is created
-     * @return MultiDocumentModel
+     * @return \stdClass
      */
     public function getMultiDocumentTransactionById($id, $include=null)    {
         $path = "/api/v2/transactions/multidocument/{$id}";
@@ -7315,7 +7308,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -7360,7 +7353,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listMultiDocumentTransactions($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/transactions/multidocument";
@@ -7368,7 +7361,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -7429,7 +7422,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $type The type of this MultiDocument transaction (See DocumentType::* for a list of allowable values)
      * @param string $include Specifies objects to include in the response after transaction is created
      * @param RefundTransactionModel $model Information about the refund to create
-     * @return MultiDocumentModel
+     * @return \stdClass
      */
     public function refundMultiDocumentTransaction($code, $type, $include=null, $model=null)    {
         $path = "/api/v2/transactions/multidocument/{$code}/type/{$type}/refund";
@@ -7437,7 +7430,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -7465,7 +7458,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param VerifyMultiDocumentModel $model Information from your accounting system to verify against this MultiDocument transaction as it is stored in AvaTax
-     * @return MultiDocumentModel
+     * @return \stdClass
      */
     public function verifyMultiDocumentTransaction($model)    {
         $path = "/api/v2/transactions/multidocument/verify";
@@ -7473,7 +7466,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -7506,7 +7499,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $code The transaction code for this MultiDocument transaction
      * @param string $type The transaction type for this MultiDocument transaction (See DocumentType::* for a list of allowable values)
      * @param VoidTransactionModel $model The void request you wish to execute
-     * @return MultiDocumentModel
+     * @return \stdClass
      */
     public function voidMultiDocumentTransaction($code, $type, $model)    {
         $path = "/api/v2/transactions/multidocument/{$code}/type/{$type}/void";
@@ -7514,7 +7507,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -7547,7 +7540,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns this nexus.
      * @param NexusModel[] $model The nexus you wish to create.
-     * @return NexusModel[]
+     * @return \stdClass
      */
     public function createNexus($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/nexus";
@@ -7555,7 +7548,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -7580,7 +7573,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The ID of the company that owns this nexus parameter.
      * @param int $nexusId The nexus id.
      * @param NexusParameterDetailModel[] $model The nexus parameters you wish to create.
-     * @return NexusParameterDetailModel[]
+     * @return \stdClass
      */
     public function createNexusParameters($companyId, $nexusId, $model)    {
         $path = "/api/v2/companies/{$companyId}/nexus/{$nexusId}/parameters";
@@ -7588,7 +7581,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -7617,7 +7610,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that will own this nexus.
      * @param DeclareNexusByAddressModel[] $model The nexus you wish to create.
-     * @return NexusByAddressModel[]
+     * @return \stdClass
      */
     public function declareNexusByAddress($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/nexus/byaddress";
@@ -7625,7 +7618,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -7648,7 +7641,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The ID of the company that owns this nexus.
      * @param int $id The ID of the nexus you wish to delete.
      * @param boolean $cascadeDelete If true, deletes all the child nexus if they exist along with parent nexus
-     * @return ErrorDetail[]
+     * @return \stdClass
      */
     public function deleteNexus($companyId, $id, $cascadeDelete)    {
         $path = "/api/v2/companies/{$companyId}/nexus/{$id}";
@@ -7656,7 +7649,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['cascadeDelete' => null === $cascadeDelete ? null : json_encode($cascadeDelete)],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -7677,7 +7670,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The company id
      * @param int $nexusId The nexus id
      * @param int $id The parameter id
-     * @return ErrorDetail[]
+     * @return \stdClass
      */
     public function deleteNexusParameter($companyId, $nexusId, $id)    {
         $path = "/api/v2/companies/{$companyId}/nexus/{$nexusId}/parameters/{$id}";
@@ -7685,7 +7678,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -7705,7 +7698,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns this nexus.
      * @param int $nexusId The ID of the nexus you wish to delete the parameters.
-     * @return ErrorDetail[]
+     * @return \stdClass
      */
     public function deleteNexusParameters($companyId, $nexusId)    {
         $path = "/api/v2/companies/{$companyId}/nexus/{$nexusId}/parameters";
@@ -7713,7 +7706,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -7736,7 +7729,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The ID of the company that owns this nexus object
      * @param int $id The primary key of this nexus
      * @param string $include 
-     * @return NexusModel
+     * @return \stdClass
      */
     public function getNexus($companyId, $id, $include=null)    {
         $path = "/api/v2/companies/{$companyId}/nexus/{$id}";
@@ -7744,7 +7737,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -7771,7 +7764,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The ID of the company that owns this nexus object
      * @param string $formCode The form code that we are looking up the nexus for
      * @param string $include 
-     * @return NexusByTaxFormModel
+     * @return \stdClass
      */
     public function getNexusByFormCode($companyId, $formCode, $include=null)    {
         $path = "/api/v2/companies/{$companyId}/nexus/byform/{$formCode}";
@@ -7779,7 +7772,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -7800,7 +7793,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The company id
      * @param int $nexusId The nexus id
      * @param int $id The parameter id
-     * @return NexusParameterDetailModel
+     * @return \stdClass
      */
     public function getNexusParameter($companyId, $nexusId, $id)    {
         $path = "/api/v2/companies/{$companyId}/nexus/{$nexusId}/parameters/{$id}";
@@ -7808,7 +7801,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -7837,7 +7830,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listNexusByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/nexus";
@@ -7845,7 +7838,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -7875,7 +7868,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listNexusByCompanyAndTaxTypeGroup($companyId, $taxTypeGroup, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/nexus/byTaxTypeGroup/{$taxTypeGroup}";
@@ -7883,7 +7876,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -7910,7 +7903,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listNexusParameters($companyId, $nexusId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/nexus/{$nexusId}/parameters";
@@ -7918,7 +7911,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -7946,7 +7939,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function queryNexus($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/nexus";
@@ -7954,7 +7947,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -7988,7 +7981,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The ID of the company that this nexus belongs to.
      * @param int $id The ID of the nexus you wish to update
      * @param NexusModel $model The nexus object you wish to update.
-     * @return NexusModel
+     * @return \stdClass
      */
     public function updateNexus($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/nexus/{$id}";
@@ -7996,7 +7989,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -8019,7 +8012,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $nexusId The nexus id
      * @param int $id The nexus parameter id
      * @param NexusParameterDetailModel $model The nexus object you wish to update.
-     * @return NexusParameterDetailModel
+     * @return \stdClass
      */
     public function updateNexusParameter($companyId, $nexusId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/nexus/{$nexusId}/parameters/{$id}";
@@ -8027,7 +8020,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -8042,7 +8035,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param CreateNoticeResponsibilityTypeModel $model The responsibility type to create
-     * @return NoticeResponsibilityModel
+     * @return \stdClass
      */
     public function createNoticeResponsibilityType($model)    {
         $path = "/api/v2/notices/responsibilities";
@@ -8050,7 +8043,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -8065,7 +8058,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param CreateNoticeRootCauseTypeModel $model The root cause type to create
-     * @return NoticeRootCauseModel
+     * @return \stdClass
      */
     public function createNoticeRootCauseType($model)    {
         $path = "/api/v2/notices/rootcauses";
@@ -8073,7 +8066,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -8087,7 +8080,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param int $responsibilityId The unique ID of the responsibility type
-     * @return ErrorDetail[]
+     * @return \stdClass
      */
     public function deleteNoticeResponsibilityType($responsibilityId)    {
         $path = "/api/v2/notices/responsibilities/{$responsibilityId}";
@@ -8095,7 +8088,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -8109,7 +8102,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param int $rootCauseId The unique ID of the root cause type
-     * @return ErrorDetail[]
+     * @return \stdClass
      */
     public function deleteNoticeRootCauseType($rootCauseId)    {
         $path = "/api/v2/notices/rootcauses/{$rootCauseId}";
@@ -8117,7 +8110,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -8140,11 +8133,11 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id The id of the notification you wish to mark as dismissed.
-     * @return NotificationModel
+     * @return \stdClass
      */
     public function dismissNotification($id)    {
         $path = "/api/v2/notifications/{$id}/dismiss";
@@ -8152,7 +8145,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -8169,11 +8162,11 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id The id of the notification to retrieve.
-     * @return NotificationModel
+     * @return \stdClass
      */
     public function getNotification($id)    {
         $path = "/api/v2/notifications/{$id}";
@@ -8181,7 +8174,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -8201,14 +8194,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listNotifications($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/notifications";
@@ -8216,7 +8209,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -8245,7 +8238,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param NewAccountRequestModel $model Information about the account you wish to create and the selected product offerings.
-     * @return NewAccountModel
+     * @return \stdClass
      */
     public function requestNewAccount($model)    {
         $path = "/api/v2/accounts/request";
@@ -8253,7 +8246,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -8271,7 +8264,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $id The avatax account id of the customer
      * @param string $offer The offer to be added to an already existing customer
-     * @return OfferModel
+     * @return \stdClass
      */
     public function requestNewEntitlement($id, $offer)    {
         $path = "/api/v2/accounts/{$id}/entitlements/{$offer}";
@@ -8279,7 +8272,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -8297,7 +8290,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param AccountModel $model The account you wish to create.
-     * @return AccountModel[]
+     * @return \stdClass
      */
     public function createAccount($model)    {
         $path = "/api/v2/accounts";
@@ -8305,7 +8298,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -8332,7 +8325,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param NotificationModel[] $model The notifications you wish to create.
-     * @return NotificationModel[]
+     * @return \stdClass
      */
     public function createNotifications($model)    {
         $path = "/api/v2/notifications";
@@ -8340,7 +8333,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -8361,7 +8354,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param SubscriptionTypeModel $model The subscription type object you wish to create.
-     * @return SubscriptionTypeModel
+     * @return \stdClass
      */
     public function createServiceTypes($model)    {
         $path = "/api/v2/servicetypes";
@@ -8369,7 +8362,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -8388,7 +8381,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $accountId The ID of the account that owns this subscription.
      * @param SubscriptionModel[] $model The subscription you wish to create.
-     * @return SubscriptionModel[]
+     * @return \stdClass
      */
     public function createSubscriptions($accountId, $model)    {
         $path = "/api/v2/accounts/{$accountId}/subscriptions";
@@ -8396,7 +8389,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -8414,7 +8407,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the account you wish to delete.
-     * @return ErrorDetail[]
+     * @return \stdClass
      */
     public function deleteAccount($id)    {
         $path = "/api/v2/accounts/{$id}";
@@ -8422,7 +8415,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -8446,7 +8439,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id The id of the notification you wish to delete.
-     * @return ErrorDetail[]
+     * @return \stdClass
      */
     public function deleteNotification($id)    {
         $path = "/api/v2/notifications/{$id}";
@@ -8454,7 +8447,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -8472,7 +8465,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id The unique ID number of the Subscription object you wish to delete.
-     * @return ErrorDetail[]
+     * @return \stdClass
      */
     public function deleteServiceType($id)    {
         $path = "/api/v2/servicetypes/{$id}";
@@ -8480,7 +8473,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -8498,7 +8491,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $accountId The ID of the account that owns this subscription.
      * @param int $id The ID of the subscription you wish to delete.
-     * @return ErrorDetail[]
+     * @return \stdClass
      */
     public function deleteSubscription($accountId, $id)    {
         $path = "/api/v2/accounts/{$accountId}/subscriptions/{$id}";
@@ -8506,7 +8499,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -8525,11 +8518,11 @@ class AvaTaxClient extends AvaTaxClientBase
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxTypeGroupIdSK
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listServiceTypes($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/servicetypes/servicetypes";
@@ -8537,7 +8530,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -8559,7 +8552,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $userId The unique ID of the user whose password will be changed
      * @param boolean $isUndoMigrateRequest If user's password was migrated to AI, undo this.
      * @param SetPasswordModel $model The new password for this user
-     * @return string
+     * @return \stdClass
      */
     public function resetPassword($userId, $isUndoMigrateRequest, $model)    {
         $path = "/api/v2/passwords/{$userId}/reset";
@@ -8567,7 +8560,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['isUndoMigrateRequest' => null === $isUndoMigrateRequest ? null : json_encode($isUndoMigrateRequest)],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -8585,7 +8578,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $id The ID of the account you wish to update.
      * @param AccountModel $model The account object you wish to update.
-     * @return AccountModel
+     * @return \stdClass
      */
     public function updateAccount($id, $model)    {
         $path = "/api/v2/accounts/{$id}";
@@ -8593,7 +8586,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -8618,7 +8611,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $id The id of the notification you wish to update.
      * @param NotificationModel $model The notification object you wish to update.
-     * @return NotificationModel
+     * @return \stdClass
      */
     public function updateNotification($id, $model)    {
         $path = "/api/v2/notifications/{$id}";
@@ -8626,7 +8619,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -8646,7 +8639,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $id The unique ID number of the existing subscription type object to replace.
      * @param SubscriptionTypeModel $model The subscription type object to update.
-     * @return SubscriptionTypeModel
+     * @return \stdClass
      */
     public function updateServiceType($id, $model)    {
         $path = "/api/v2/servicetypes/{$id}";
@@ -8654,7 +8647,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -8677,7 +8670,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $accountId The ID of the account that this subscription belongs to.
      * @param int $id The ID of the subscription you wish to update
      * @param SubscriptionModel $model The subscription you wish to update.
-     * @return SubscriptionModel
+     * @return \stdClass
      */
     public function updateSubscription($accountId, $id, $model)    {
         $path = "/api/v2/accounts/{$accountId}/subscriptions/{$id}";
@@ -8685,7 +8678,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -8712,7 +8705,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id The unique ID number of this report
-     * @return object
+     * @return \stdClass
      */
     public function downloadReport($id)    {
         $path = "/api/v2/reports/{$id}/attachment";
@@ -8720,7 +8713,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -8740,7 +8733,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id The unique ID number of the report to retrieve
-     * @return ReportModel
+     * @return \stdClass
      */
     public function getReport($id)    {
         $path = "/api/v2/reports/{$id}";
@@ -8748,7 +8741,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -8782,7 +8775,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The unique ID number of the company to report on.
      * @param ExportDocumentLineModel $model Options that may be configured to customize the report.
-     * @return ReportModel[]
+     * @return \stdClass
      */
     public function initiateExportDocumentLineReport($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/reports/exportdocumentline/initiate";
@@ -8790,7 +8783,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -8817,7 +8810,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $pageKey Provide a page key to retrieve the next page of results.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listReports($companyId, $pageKey, $skip=null, $top=null)    {
         $path = "/api/v2/reports";
@@ -8825,7 +8818,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['companyId' => $companyId, 'pageKey' => $pageKey, '$skip' => $skip, '$top' => $top],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -8854,7 +8847,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns this setting.
      * @param SettingModel[] $model The setting you wish to create.
-     * @return SettingModel[]
+     * @return \stdClass
      */
     public function createSettings($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/settings";
@@ -8862,7 +8855,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -8886,7 +8879,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns this setting.
      * @param int $id The ID of the setting you wish to delete.
-     * @return ErrorDetail[]
+     * @return \stdClass
      */
     public function deleteSetting($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/settings/{$id}";
@@ -8894,7 +8887,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -8913,12 +8906,12 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this setting
      * @param int $id The primary key of this setting
-     * @return SettingModel
+     * @return \stdClass
      */
     public function getSetting($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/settings/{$id}";
@@ -8926,7 +8919,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -8948,7 +8941,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns these settings
@@ -8957,7 +8950,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listSettingsByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/settings";
@@ -8965,7 +8958,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -8987,7 +8980,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* modifiedDate, ModifiedUserId
@@ -8995,7 +8988,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function querySettings($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/settings";
@@ -9003,7 +8996,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -9032,7 +9025,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The ID of the company that this setting belongs to.
      * @param int $id The ID of the setting you wish to update
      * @param SettingModel $model The setting you wish to update.
-     * @return SettingModel
+     * @return \stdClass
      */
     public function updateSetting($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/settings/{$id}";
@@ -9040,7 +9033,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -9057,7 +9050,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $accountId The ID of the account that owns this subscription
      * @param int $id The primary key of this subscription
-     * @return SubscriptionModel
+     * @return \stdClass
      */
     public function getSubscription($accountId, $id)    {
         $path = "/api/v2/accounts/{$accountId}/subscriptions/{$id}";
@@ -9065,7 +9058,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -9088,7 +9081,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listSubscriptionsByAccount($accountId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/accounts/{$accountId}/subscriptions";
@@ -9096,7 +9089,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -9118,7 +9111,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function querySubscriptions($filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/subscriptions";
@@ -9126,7 +9119,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -9145,7 +9138,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns this tax code.
      * @param TaxCodeModel[] $model The tax code you wish to create.
-     * @return TaxCodeModel[]
+     * @return \stdClass
      */
     public function createTaxCodes($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/taxcodes";
@@ -9153,7 +9146,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -9168,7 +9161,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns this tax code.
      * @param int $id The ID of the tax code you wish to delete.
-     * @return ErrorDetail[]
+     * @return \stdClass
      */
     public function deleteTaxCode($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/taxcodes/{$id}";
@@ -9176,7 +9169,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -9190,12 +9183,12 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ECMAccountUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this tax code
      * @param int $id The primary key of this tax code
-     * @return TaxCodeModel
+     * @return \stdClass
      */
     public function getTaxCode($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/taxcodes/{$id}";
@@ -9203,7 +9196,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -9220,7 +9213,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ECMAccountUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns these tax codes
@@ -9229,7 +9222,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listTaxCodesByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/taxcodes";
@@ -9237,7 +9230,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -9254,7 +9247,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ECMAccountUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
@@ -9262,7 +9255,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function queryTaxCodes($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/taxcodes";
@@ -9270,7 +9263,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -9292,7 +9285,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The ID of the company that this tax code belongs to.
      * @param int $id The ID of the tax code you wish to update
      * @param TaxCodeModel $model The tax code you wish to update.
-     * @return TaxCodeModel
+     * @return \stdClass
      */
     public function updateTaxCode($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/taxcodes/{$id}";
@@ -9300,7 +9293,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -9332,12 +9325,12 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
      * Swagger Name: AvaTaxClient
      * 
      * @param PointOfSaleDataRequestModel $model Parameters about the desired file format and report format, specifying which company, locations and TaxCodes to include.
-     * @return object
+     * @return \stdClass
      */
     public function buildTaxContentFile($model)    {
         $path = "/api/v2/pointofsaledata/build";
@@ -9345,7 +9338,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -9377,7 +9370,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro.
      * Swagger Name: AvaTaxClient
      * 
@@ -9387,7 +9380,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $format The format of the file (JSON by default) (See PointOfSaleFileType::* for a list of allowable values)
      * @param string $partnerId If specified, requests a custom partner-formatted version of the file. (See PointOfSalePartnerId::* for a list of allowable values)
      * @param boolean $includeJurisCodes When true, the file will include jurisdiction codes in the result.
-     * @return object
+     * @return \stdClass
      */
     public function buildTaxContentFileForLocation($companyId, $id, $date, $format, $partnerId, $includeJurisCodes)    {
         $path = "/api/v2/companies/{$companyId}/locations/{$id}/pointofsaledata";
@@ -9395,7 +9388,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['date' => $date, 'format' => $format, 'partnerId' => $partnerId, 'includeJurisCodes' => null === $includeJurisCodes ? null : json_encode($includeJurisCodes)],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -9444,12 +9437,12 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param string $date The date for which point-of-sale data would be calculated (today by default). Example input: 2016-12-31
      * @param string $region A two character region code which limits results to a specific region.
-     * @return object
+     * @return \stdClass
      */
     public function downloadTaxRatesByZipCode($date, $region)    {
         $path = "/api/v2/taxratesbyzipcode/download/{$date}";
@@ -9457,7 +9450,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['region' => $region],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -9492,7 +9485,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $region Name or ISO 3166 code identifying the region within the country.     This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions     For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
      * @param string $postalCode The postal code of the location.
      * @param string $country Name or ISO 3166 code identifying the country.     This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries     For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
-     * @return TaxRateModel
+     * @return \stdClass
      */
     public function taxRatesByAddress($line1, $line2, $line3, $city, $region, $postalCode, $country)    {
         $path = "/api/v2/taxrates/byaddress";
@@ -9500,7 +9493,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['line1' => $line1, 'line2' => $line2, 'line3' => $line3, 'city' => $city, 'region' => $region, 'postalCode' => $postalCode, 'country' => $country],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -9532,7 +9525,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param string $country Name or ISO 3166 code identifying the country.     This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries     For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
      * @param string $postalCode The postal code of the location.
-     * @return TaxRateModel
+     * @return \stdClass
      */
     public function taxRatesByPostalCode($country, $postalCode)    {
         $path = "/api/v2/taxrates/bypostalcode";
@@ -9540,7 +9533,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['country' => $country, 'postalCode' => $postalCode],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -9567,7 +9560,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns this tax rule.
      * @param TaxRuleModel[] $model The tax rule you wish to create.
-     * @return TaxRuleModel[]
+     * @return \stdClass
      */
     public function createTaxRules($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/taxrules";
@@ -9575,7 +9568,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -9602,7 +9595,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns this tax rule.
      * @param int $id The ID of the tax rule you wish to delete.
-     * @return ErrorDetail[]
+     * @return \stdClass
      */
     public function deleteTaxRule($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/taxrules/{$id}";
@@ -9610,7 +9603,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -9637,7 +9630,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns this tax rule
      * @param int $id The primary key of this tax rule
-     * @return TaxRuleModel
+     * @return \stdClass
      */
     public function getTaxRule($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/taxrules/{$id}";
@@ -9645,7 +9638,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -9679,7 +9672,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listTaxRules($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/taxrules";
@@ -9687,7 +9680,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -9720,7 +9713,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function queryTaxRules($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/taxrules";
@@ -9728,7 +9721,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -9756,7 +9749,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The ID of the company that this tax rule belongs to.
      * @param int $id The ID of the tax rule you wish to update
      * @param TaxRuleModel $model The tax rule you wish to update.
-     * @return TaxRuleModel
+     * @return \stdClass
      */
     public function updateTaxRule($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/taxrules/{$id}";
@@ -9764,7 +9757,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -9799,7 +9792,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param string $include Specifies objects to include in the response after transaction is created
      * @param AddTransactionLineModel $model information about the transaction and lines to be added
-     * @return TransactionModel
+     * @return \stdClass
      */
     public function addLines($include=null, $model=null)    {
         $path = "/api/v2/companies/transactions/lines/add";
@@ -9807,7 +9800,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -9854,7 +9847,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $documentType (Optional): The document type of the transaction to adjust. (See DocumentType::* for a list of allowable values)
      * @param string $include Specifies objects to include in this fetch call
      * @param AdjustTransactionModel $model The adjustment you wish to make
-     * @return TransactionModel
+     * @return \stdClass
      */
     public function adjustTransaction($companyCode, $transactionCode, $documentType, $include=null, $model=null)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/adjust";
@@ -9862,7 +9855,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['documentType' => $documentType, '$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -9900,7 +9893,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param string $companyCode The code identifying the company that owns this transaction
      * @param string $transactionCode The code identifying the transaction
-     * @return AuditTransactionModel
+     * @return \stdClass
      */
     public function auditTransaction($companyCode, $transactionCode)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/audit";
@@ -9908,7 +9901,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -9947,7 +9940,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $companyCode The code identifying the company that owns this transaction
      * @param string $transactionCode The code identifying the transaction
      * @param string $documentType The document type of the original transaction (See DocumentType::* for a list of allowable values)
-     * @return AuditTransactionModel
+     * @return \stdClass
      */
     public function auditTransactionWithType($companyCode, $transactionCode, $documentType)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/types/{$documentType}/audit";
@@ -9955,7 +9948,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -9976,7 +9969,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param BulkLockTransactionModel $model bulk lock request
-     * @return BulkLockTransactionResult
+     * @return \stdClass
      */
     public function bulkLockTransaction($model)    {
         $path = "/api/v2/transactions/lock";
@@ -9984,7 +9977,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -10031,7 +10024,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $documentType (Optional): The document type of the transaction to change document code. If not provided, the default is SalesInvoice. (See DocumentType::* for a list of allowable values)
      * @param string $include Specifies objects to include in this fetch call
      * @param ChangeTransactionCodeModel $model The code change request you wish to execute
-     * @return TransactionModel
+     * @return \stdClass
      */
     public function changeTransactionCode($companyCode, $transactionCode, $documentType, $include=null, $model=null)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/changecode";
@@ -10039,7 +10032,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['documentType' => $documentType, '$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -10084,7 +10077,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $documentType (Optional): The document type of the transaction to commit. If not provided, the default is SalesInvoice. (See DocumentType::* for a list of allowable values)
      * @param string $include Specifies objects to include in this fetch call
      * @param CommitTransactionModel $model The commit request you wish to execute
-     * @return TransactionModel
+     * @return \stdClass
      */
     public function commitTransaction($companyCode, $transactionCode, $documentType, $include=null, $model=null)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/commit";
@@ -10092,7 +10085,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['documentType' => $documentType, '$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -10140,7 +10133,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param string $include Specifies objects to include in the response after transaction is created
      * @param CreateOrAdjustTransactionModel $model The transaction you wish to create or adjust
-     * @return TransactionModel
+     * @return \stdClass
      */
     public function createOrAdjustTransaction($include=null, $model=null)    {
         $path = "/api/v2/transactions/createoradjust";
@@ -10148,7 +10141,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -10203,7 +10196,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param string $include Specifies objects to include in the response after transaction is created
      * @param CreateTransactionModel $model The transaction you wish to create
-     * @return TransactionModel
+     * @return \stdClass
      */
     public function createTransaction($include=null, $model=null)    {
         $path = "/api/v2/transactions/create";
@@ -10211,7 +10204,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -10243,7 +10236,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param string $include Specifies objects to include in the response after transaction is created
      * @param RemoveTransactionLineModel $model information about the transaction and lines to be removed
-     * @return TransactionModel
+     * @return \stdClass
      */
     public function deleteLines($include=null, $model=null)    {
         $path = "/api/v2/companies/transactions/lines/delete";
@@ -10251,7 +10244,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -10264,7 +10257,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param string $companyCode 
-     * @return VarianceResponseModel
+     * @return \stdClass
      */
     public function getAllVarianceReportByCompanyCode($companyCode)    {
         $path = "/api/v2/companies/{$companyCode}/AllVariance";
@@ -10272,7 +10265,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -10315,7 +10308,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $transactionCode The transaction code to retrieve
      * @param string $documentType (Optional): The document type of the transaction to retrieve (See DocumentType::* for a list of allowable values)
      * @param string $include Specifies objects to include in this fetch call
-     * @return TransactionModel
+     * @return \stdClass
      */
     public function getTransactionByCode($companyCode, $transactionCode, $documentType, $include=null)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}";
@@ -10323,7 +10316,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['documentType' => $documentType, '$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -10349,7 +10342,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $transactionCode The transaction code to retrieve
      * @param string $documentType The transaction type to retrieve (See DocumentType::* for a list of allowable values)
      * @param string $include Specifies objects to include in this fetch call
-     * @return TransactionModel
+     * @return \stdClass
      */
     public function getTransactionByCodeAndType($companyCode, $transactionCode, $documentType, $include=null)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/types/{$documentType}";
@@ -10357,7 +10350,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -10388,7 +10381,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $id The unique ID number of the transaction to retrieve
      * @param string $include Specifies objects to include in this fetch call
-     * @return TransactionModel
+     * @return \stdClass
      */
     public function getTransactionById($id, $include=null)    {
         $path = "/api/v2/transactions/{$id}";
@@ -10396,7 +10389,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -10410,7 +10403,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param string $companyCode 
      * @param string $transactionId 
-     * @return VarianceResponseModel
+     * @return \stdClass
      */
     public function getVarianceReportByCompanyCodeByTransactionId($companyCode, $transactionId)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionId}/variance";
@@ -10418,7 +10411,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -10467,7 +10460,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listTransactionsByCompany($companyCode, $dataSourceId, $include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyCode}/transactions";
@@ -10475,7 +10468,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['dataSourceId' => $dataSourceId, '$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -10522,7 +10515,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $documentType (Optional): The document type of the transaction to lock. If not provided, the default is SalesInvoice. (See DocumentType::* for a list of allowable values)
      * @param string $include Specifies objects to include in this fetch call
      * @param LockTransactionModel $model The lock request you wish to execute
-     * @return TransactionModel
+     * @return \stdClass
      */
     public function lockTransaction($companyCode, $transactionCode, $documentType, $include=null, $model=null)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/lock";
@@ -10530,7 +10523,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['documentType' => $documentType, '$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -10588,7 +10581,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $documentType (Optional): The document type of the transaction to refund. If not provided, the default is SalesInvoice. (See DocumentType::* for a list of allowable values)
      * @param boolean $useTaxDateOverride (Optional): If set to true, processes refund using taxDateOverride rather than taxAmountOverride (Note: taxAmountOverride is not allowed for SST states).
      * @param RefundTransactionModel $model Information about the refund to create
-     * @return TransactionModel
+     * @return \stdClass
      */
     public function refundTransaction($companyCode, $transactionCode, $include=null, $documentType=null, $useTaxDateOverride=null, $model=null)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/refund";
@@ -10596,7 +10589,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include, 'documentType' => $documentType, 'useTaxDateOverride' => null === $useTaxDateOverride ? null : json_encode($useTaxDateOverride)],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -10641,7 +10634,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $documentType (Optional): The document type of the transaction to settle. If not provided, the default is SalesInvoice. (See DocumentType::* for a list of allowable values)
      * @param string $include Specifies objects to include in this fetch call
      * @param SettleTransactionModel $model The data from an external system to reconcile against AvaTax
-     * @return TransactionModel
+     * @return \stdClass
      */
     public function settleTransaction($companyCode, $transactionCode, $documentType, $include=null, $model=null)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/settle";
@@ -10649,7 +10642,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['documentType' => $documentType, '$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -10688,7 +10681,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $transactionCode The transaction code to Uncommit
      * @param string $documentType (Optional): The document type of the transaction to Uncommit. If not provided, the default is SalesInvoice. (See DocumentType::* for a list of allowable values)
      * @param string $include Specifies objects to include in this fetch call
-     * @return TransactionModel
+     * @return \stdClass
      */
     public function uncommitTransaction($companyCode, $transactionCode, $documentType, $include=null)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/uncommit";
@@ -10696,7 +10689,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['documentType' => $documentType, '$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -10732,7 +10725,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $transactionCode The transaction code to commit
      * @param string $documentType (Optional): The document type of the transaction to commit. If not provided, the default is SalesInvoice. (See DocumentType::* for a list of allowable values)
      * @param string $include Specifies objects to include in this fetch call
-     * @return TransactionModel
+     * @return \stdClass
      */
     public function unvoidTransaction($companyCode, $transactionCode, $documentType, $include=null)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/unvoid";
@@ -10740,7 +10733,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['documentType' => $documentType, '$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -10754,7 +10747,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param string $companyCode 
      * @param VarianceRequestModel[] $model 
-     * @return VarianceResponseModel
+     * @return \stdClass
      */
     public function varianceReport($companyCode, $model)    {
         $path = "/api/v2/companies/{$companyCode}/variance";
@@ -10762,7 +10755,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -10806,7 +10799,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $documentType (Optional): The document type of the transaction to verify. If not provided, the default is SalesInvoice. (See DocumentType::* for a list of allowable values)
      * @param string $include Specifies objects to include in this fetch call
      * @param VerifyTransactionModel $model The data from an external system to reconcile against AvaTax
-     * @return TransactionModel
+     * @return \stdClass
      */
     public function verifyTransaction($companyCode, $transactionCode, $documentType, $include=null, $model=null)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/verify";
@@ -10814,7 +10807,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['documentType' => $documentType, '$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -10860,7 +10853,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $documentType (Optional): The document type of the transaction to void. If not provided, the default is SalesInvoice. (See DocumentType::* for a list of allowable values)
      * @param string $include Specifies objects to include in this fetch call
      * @param VoidTransactionModel $model The void request you wish to execute. To void a transaction the code must be set to 'DocVoided'
-     * @return TransactionModel
+     * @return \stdClass
      */
     public function voidTransaction($companyCode, $transactionCode, $documentType, $include=null, $model=null)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/void";
@@ -10868,7 +10861,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['documentType' => $documentType, '$include' => $include],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -10885,7 +10878,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns this UPC.
      * @param UPCModel[] $model The UPC you wish to create.
-     * @return UPCModel[]
+     * @return \stdClass
      */
     public function createUPCs($companyId, $model)    {
         $path = "/api/v2/companies/{$companyId}/upcs";
@@ -10893,7 +10886,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -10909,7 +10902,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns this UPC.
      * @param int $id The ID of the UPC you wish to delete.
-     * @return ErrorDetail[]
+     * @return \stdClass
      */
     public function deleteUPC($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/upcs/{$id}";
@@ -10917,7 +10910,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -10934,7 +10927,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that owns this UPC
      * @param int $id The primary key of this UPC
-     * @return UPCModel
+     * @return \stdClass
      */
     public function getUPC($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/upcs/{$id}";
@@ -10942,7 +10935,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -10966,7 +10959,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listUPCsByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/upcs";
@@ -10974,7 +10967,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -10997,7 +10990,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function queryUPCs($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/upcs";
@@ -11005,7 +10998,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -11025,7 +11018,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The ID of the company that this UPC belongs to.
      * @param int $id The ID of the UPC you wish to update
      * @param UPCModel $model The UPC you wish to update.
-     * @return UPCModel
+     * @return \stdClass
      */
     public function updateUPC($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/upcs/{$id}";
@@ -11033,7 +11026,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -11049,7 +11042,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The id of the company the User Defined Field belongs to.
      * @param int $id The id of the User Defined Field you wish to delete.
-     * @return ErrorDetail[]
+     * @return \stdClass
      */
     public function deleteUserDefinedField($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/userdefinedfields/{$id}";
@@ -11057,7 +11050,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -11065,14 +11058,14 @@ class AvaTaxClient extends AvaTaxClientBase
      *
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * * This API depends on the following active services:*Required* (all): AvaTaxPro, BasicReturns.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId 
      * @param string $udfType Document or Line level UDF (See UserDefinedFieldType::* for a list of allowable values)
      * @param boolean $allowDefaults If true this will add defaulted UDFs to the list that are not named yet
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listUserDefinedFieldsByCompanyId($companyId, $udfType, $allowDefaults)    {
         $path = "/api/v2/companies/{$companyId}/userdefinedfields";
@@ -11080,7 +11073,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['udfType' => $udfType, 'allowDefaults' => null === $allowDefaults ? null : json_encode($allowDefaults)],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -11097,7 +11090,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The id of the company the user defined field belongs to.
      * @param int $id 
      * @param CompanyUserDefinedFieldModel $model 
-     * @return CompanyUserDefinedFieldModel
+     * @return \stdClass
      */
     public function updateUserDefinedField($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/userdefinedfields";
@@ -11105,7 +11098,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['id' => $id],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -11125,7 +11118,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param PasswordChangeModel $model An object containing your current password and the new password.
-     * @return string
+     * @return \stdClass
      */
     public function changePassword($model)    {
         $path = "/api/v2/passwords";
@@ -11133,7 +11126,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -11156,7 +11149,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $accountId The unique ID number of the account where these users will be created.
      * @param UserModel[] $model The user or array of users you wish to create.
-     * @return UserModel[]
+     * @return \stdClass
      */
     public function createUsers($accountId, $model)    {
         $path = "/api/v2/accounts/{$accountId}/users";
@@ -11164,7 +11157,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -11184,7 +11177,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $id The ID of the user you wish to delete.
      * @param int $accountId The accountID of the user you wish to delete.
-     * @return ErrorDetail[]
+     * @return \stdClass
      */
     public function deleteUser($id, $accountId)    {
         $path = "/api/v2/accounts/{$accountId}/users/{$id}";
@@ -11192,7 +11185,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -11207,13 +11200,13 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the user to retrieve.
      * @param int $accountId The accountID of the user you wish to get.
      * @param string $include Optional fetch commands.
-     * @return UserModel
+     * @return \stdClass
      */
     public function getUser($id, $accountId, $include=null)    {
         $path = "/api/v2/accounts/{$accountId}/users/{$id}";
@@ -11221,7 +11214,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -11245,12 +11238,12 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the user to retrieve.
      * @param int $accountId The accountID of the user you wish to get.
-     * @return UserEntitlementModel
+     * @return \stdClass
      */
     public function getUserEntitlements($id, $accountId)    {
         $path = "/api/v2/accounts/{$accountId}/users/{$id}/entitlements";
@@ -11258,7 +11251,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -11279,7 +11272,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $accountId The accountID of the user you wish to list.
@@ -11288,7 +11281,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listUsersByAccount($accountId, $include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/accounts/{$accountId}/users";
@@ -11296,7 +11289,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -11319,7 +11312,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param string $include Optional fetch commands.
@@ -11327,7 +11320,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return FetchResult
+     * @return \stdClass
      */
     public function queryUsers($include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/users";
@@ -11335,7 +11328,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -11354,7 +11347,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The ID of the user you wish to update.
      * @param int $accountId The accountID of the user you wish to update.
      * @param UserModel $model The user object you wish to update.
-     * @return UserModel
+     * @return \stdClass
      */
     public function updateUser($id, $accountId, $model)    {
         $path = "/api/v2/accounts/{$accountId}/users/{$id}";
@@ -11362,7 +11355,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -11379,7 +11372,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param string $serviceTypeId The service to check
-     * @return SubscriptionModel
+     * @return \stdClass
      */
     public function getMySubscription($serviceTypeId)    {
         $path = "/api/v2/utilities/subscriptions/{$serviceTypeId}";
@@ -11387,7 +11380,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -11403,7 +11396,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * specific features of AvaTax.
      * Swagger Name: AvaTaxClient
      * 
-     * @return FetchResult
+     * @return \stdClass
      */
     public function listMySubscriptions()    {
         $path = "/api/v2/utilities/subscriptions";
@@ -11411,7 +11404,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -11439,7 +11432,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * * This API may be called without providing authentication credentials.
      * Swagger Name: AvaTaxClient
      * 
-     * @return PingResultModel
+     * @return \stdClass
      */
     public function ping()    {
         $path = "/api/v2/utilities/ping";
@@ -11447,7 +11440,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => null
         ];
-        return $this->restCall($path, 'GET', $guzzleParams,'23.3.1' );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -11466,7 +11459,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxBeverageClient
      * 
      * @param AgeVerifyRequest $model Information about the individual whose age is being verified.
-     * @return AgeVerifyResult
+     * @return \stdClass
      */
     public function findAgeVerification($model)    {
         $path = "/api/v2/ageverification/store/identity/find";
@@ -11474,7 +11467,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'' );
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -11497,7 +11490,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxBeverageClient
      * 
      * @param StoreAgeVerifyRequest $model Information about the individual whose age has been verified and the corresponding age verification response.
-     * @return 
+     * @return \stdClass
      */
     public function storeAgeVerification($model)    {
         $path = "/api/v2/ageverification/store/identity";
@@ -11505,7 +11498,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => [],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'' );
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -11525,7 +11518,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param string $simulatedFailureCode (Optional) The failure code included in the simulated response of the endpoint. Note that this endpoint is only available in Sandbox for testing purposes.
      * @param AgeVerifyRequest $model Information about the individual whose age is being verified.
-     * @return StoreIfVerifiedResult
+     * @return \stdClass
      */
     public function storeIfVerified($simulatedFailureCode, $model)    {
         $path = "/api/v2/ageverification/store/identity/storeIfVerified";
@@ -11533,7 +11526,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['simulatedFailureCode' => $simulatedFailureCode],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'PUT', $guzzleParams,'' );
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -11556,7 +11549,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param string $simulatedFailureCode (Optional) The failure code included in the simulated response of the endpoint. Note that this endpoint is only available in Sandbox for testing purposes.
      * @param AgeVerifyRequest $model Information about the individual whose age is being verified.
-     * @return AgeVerifyResult
+     * @return \stdClass
      */
     public function verifyAge($simulatedFailureCode, $model)    {
         $path = "/api/v2/ageverification/verify";
@@ -11564,7 +11557,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'query' => ['simulatedFailureCode' => $simulatedFailureCode],
             'body' => json_encode($model)
         ];
-        return $this->restCall($path, 'POST', $guzzleParams,'' );
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -11578,7 +11571,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $documentType (Optional): The document type of the transaction to operate on. If omitted, defaults to "SalesInvoice"
      * @param string $api_version (Optional): API version that should satisfy the request. If omitted, defaults to 2.2
      * @param string $x_avalara_version (Optional): API version that should satisfy the request. If omitted, defaults to 2.2. Header takes precendence if both header and query parameters are present.
-     * @return 
+     * @return \stdClass
      */
     public function deregisterShipment($companyCode, $transactionCode, $documentType, $api_version= "" , $x_avalara_version= "" )    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/shipment/registration";
@@ -11587,7 +11580,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'body' => null
         ];
         $headerParams=['x-avalara-version' => $x_avalara_version];
-        return $this->restCall($path, 'DELETE', $guzzleParams,'',$headerParams );
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION, $headerParams );
     }
 
     /**
@@ -11601,7 +11594,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $documentType (Optional): The document type of the transaction to operate on. If omitted, defaults to "SalesInvoice"
      * @param string $api_version (Optional): API version that should satisfy the request. If omitted, defaults to 2.2
      * @param string $x_avalara_version (Optional): API version that should satisfy the request. If omitted, defaults to 2.2. Header takes precendence if both header and query parameters are present.
-     * @return 
+     * @return \stdClass
      */
     public function registerShipment($companyCode, $transactionCode, $documentType, $api_version= "" , $x_avalara_version= "" )    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/shipment/registration";
@@ -11610,7 +11603,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'body' => null
         ];
         $headerParams=['x-avalara-version' => $x_avalara_version];
-        return $this->restCall($path, 'PUT', $guzzleParams,'',$headerParams );
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION, $headerParams );
     }
 
     /**
@@ -11624,7 +11617,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $documentType (Optional): The document type of the transaction to operate on. If omitted, defaults to "SalesInvoice"
      * @param string $api_version (Optional): API version that should satisfy the request. If omitted, defaults to 2.2
      * @param string $x_avalara_version (Optional): API version that should satisfy the request. If omitted, defaults to 2.2. Header takes precendence if both header and query parameters are present.
-     * @return ShippingVerifyResult
+     * @return \stdClass
      */
     public function registerShipmentIfCompliant($companyCode, $transactionCode, $documentType, $api_version= "" , $x_avalara_version= "" )    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/shipment/registerIfCompliant";
@@ -11633,7 +11626,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'body' => null
         ];
         $headerParams=['x-avalara-version' => $x_avalara_version];
-        return $this->restCall($path, 'PUT', $guzzleParams,'',$headerParams );
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION, $headerParams );
     }
 
     /**
@@ -11662,7 +11655,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $documentType (Optional): The document type of the transaction to operate on. If omitted, defaults to "SalesInvoice"
      * @param string $api_version (Optional): API version that should satisfy the request. If omitted, defaults to 2.2
      * @param string $x_avalara_version (Optional): API version that should satisfy the request. If omitted, defaults to 2.2. Header takes precendence if both header and query parameters are present.
-     * @return ShippingVerifyResult
+     * @return \stdClass
      */
     public function verifyShipment($companyCode, $transactionCode, $documentType, $api_version= "" , $x_avalara_version= "" )    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/shipment/verify";
@@ -11671,7 +11664,7 @@ class AvaTaxClient extends AvaTaxClientBase
             'body' => null
         ];
         $headerParams=['x-avalara-version' => $x_avalara_version];
-        return $this->restCall($path, 'GET', $guzzleParams,'',$headerParams );
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION, $headerParams );
     }
 
 }
