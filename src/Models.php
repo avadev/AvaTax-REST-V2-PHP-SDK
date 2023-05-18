@@ -9517,6 +9517,25 @@ class NoticeReasonModel
  * NoticeResponsibility Model
  * Swagger Name: AvaTaxClient
  */
+class NoticeResponsibilityDetail
+{
+    /**
+     * @var int The unique ID number of this filing frequency.
+     */
+    public $id;
+    /**
+     * @var int TaxNoticeId
+     */
+    public $noticeId;
+    /**
+     * @var int TaxNoticeResponsibilityId
+     */
+    public $taxNoticeResponsibilityId;
+}
+/**
+ * NoticeResponsibility Model
+ * Swagger Name: AvaTaxClient
+ */
 class NoticeResponsibilityDetailModel
 {
     /**
@@ -9558,6 +9577,25 @@ class NoticeResponsibilityModel
      * @var int The sort order of this responsibility
      */
     public $sortOrder;
+}
+/**
+ * NoticeRootCause Model
+ * Swagger Name: AvaTaxClient
+ */
+class NoticeRootCauseDetail
+{
+    /**
+     * @var int The unique ID number of this filing frequency.
+     */
+    public $id;
+    /**
+     * @var int TaxNoticeId
+     */
+    public $noticeId;
+    /**
+     * @var int TaxNoticeRootCauseId
+     */
+    public $taxNoticeRootCauseId;
 }
 /**
  * NoticeRootCause Model
@@ -9627,6 +9665,10 @@ class NoticeStatusModel
      * @var int If a list of status values is to be displayed in a dropdown, they should be displayed in this numeric order.
      */
     public $sortOrder;
+    /**
+     * @var boolean The active Flag of this tax authority type.
+     */
+    public $activeFlag;
 }
 /**
  * Tax Notice Type Model

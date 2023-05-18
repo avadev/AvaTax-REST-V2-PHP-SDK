@@ -2,7 +2,7 @@
 namespace Avalara;
 use GuzzleHttp\Client;
 
-define('AVATAX_SDK_VERSION', '23.4.1');
+define('AVATAX_SDK_VERSION', '23.5.0');
 
 /*****************************************************************************
  *                                                                           *
