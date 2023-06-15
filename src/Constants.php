@@ -2,7 +2,7 @@
 namespace Avalara;
 use GuzzleHttp\Client;
 
-define('AVATAX_SDK_VERSION', '23.5.0');
+define('AVATAX_SDK_VERSION', '23.6.1');
 
 /*****************************************************************************
  *                                                                           *
@@ -991,6 +991,51 @@ class DeliveryTerms
      */
     const C_DDP = 2;
 
+    /**
+     * Free on Board
+     */
+    const C_FOB = 3;
+
+    /**
+     * Free Carrier
+     */
+    const C_FCA = 4;
+
+    /**
+     * Free Alongside Ship
+     */
+    const C_FAS = 5;
+
+    /**
+     * Ex Works
+     */
+    const C_EXW = 6;
+
+    /**
+     * Delivered at Place Unloaded
+     */
+    const C_DPU = 7;
+
+    /**
+     * Carriage Paid To
+     */
+    const C_CPT = 8;
+
+    /**
+     * Carriage Insurance Paid To
+     */
+    const C_CIP = 9;
+
+    /**
+     * Cost, Insurance, and Freight
+     */
+    const C_CIF = 10;
+
+    /**
+     * Cost And Freight
+     */
+    const C_CFR = 11;
+
 }
 
 /**
@@ -1565,6 +1610,7 @@ class ErrorCodeId
     const C_INVALIDSYSTEMCODE = 1735;
     const C_NOITEMSFORCLASSIFICATION = 1736;
     const C_INVALIDFILENAME = 1737;
+    const C_NOCLASSIFICATIONFORSAMEHSCODE = 1738;
 
     /**
      * SendSales API errors
