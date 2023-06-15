@@ -6158,7 +6158,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The company id.
      * @param int $itemId The item id.
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* productCode, systemCode
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* productCode, systemCode, IsPremium
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -8340,35 +8340,6 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
-     * Create Avalara-supported subscription (ServiceTypes)
-     *
-     * For Registrar Use Only
-     * This API is for use by Avalara Registrar administrative users only.
-     *  
-     * Create one service/subscription object.
-     *  
-     * Returns the newly created Avalara-supported subscription (service) type.
-     * This API is intended to be useful for adding new Avalara-supported subscription type (service type).
-     * You may always contact Avalara's sales department for information on available products or services.
-     * 
-     * ### Security Policies
-     * 
-     * * This API requires one of the following user roles: BatchServiceAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     * Swagger Name: AvaTaxClient
-     * 
-     * @param SubscriptionTypeModel $model The subscription type object you wish to create.
-     * @return \stdClass
-     */
-    public function createServiceTypes($model)    {
-        $path = "/api/v2/servicetypes";
-        $guzzleParams = [
-            'query' => [],
-            'body' => json_encode($model)
-        ];
-        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
-    }
-
-    /**
      * Create a new subscription
      *
      * This API is for use by Avalara Registrar administrative users only.
@@ -8446,32 +8417,6 @@ class AvaTaxClient extends AvaTaxClientBase
      */
     public function deleteNotification($id)    {
         $path = "/api/v2/notifications/{$id}";
-        $guzzleParams = [
-            'query' => [],
-            'body' => null
-        ];
-        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
-    }
-
-    /**
-     * Delete a single Subscription (ServiceTypes) object
-     *
-     * For Registrar Use Only
-     * This API is for use by Avalara Registrar administrative users only.
-     *  
-     * Marks the Subscription (ServiceTypes) object identified by this URL as deleted.
-     * This API is useful for deleting an existing Avalara-supported subscription type (service type).
-     * 
-     * ### Security Policies
-     * 
-     * * This API requires one of the following user roles: BatchServiceAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     * Swagger Name: AvaTaxClient
-     * 
-     * @param int $id The unique ID number of the Subscription object you wish to delete.
-     * @return \stdClass
-     */
-    public function deleteServiceType($id)    {
-        $path = "/api/v2/servicetypes/{$id}";
         $guzzleParams = [
             'query' => [],
             'body' => null
@@ -8618,34 +8563,6 @@ class AvaTaxClient extends AvaTaxClientBase
      */
     public function updateNotification($id, $model)    {
         $path = "/api/v2/notifications/{$id}";
-        $guzzleParams = [
-            'query' => [],
-            'body' => json_encode($model)
-        ];
-        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
-    }
-
-    /**
-     * Update existing Avalara-supported subscription (ServiceTypes)
-     *
-     * For Registrar Use Only
-     * This API is for use by Avalara Registrar administrative users only.
-     *  
-     * Returns the updated Avalara-supported service types.
-     * This API is intended to be useful for updating an existing subscription(service) type detail.
-     * You may always contact Avalara's sales department for information on available products or services.
-     * 
-     * ### Security Policies
-     * 
-     * * This API requires one of the following user roles: BatchServiceAdmin, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     * Swagger Name: AvaTaxClient
-     * 
-     * @param int $id The unique ID number of the existing subscription type object to replace.
-     * @param SubscriptionTypeModel $model The subscription type object to update.
-     * @return \stdClass
-     */
-    public function updateServiceType($id, $model)    {
-        $path = "/api/v2/servicetypes/{$id}";
         $guzzleParams = [
             'query' => [],
             'body' => json_encode($model)

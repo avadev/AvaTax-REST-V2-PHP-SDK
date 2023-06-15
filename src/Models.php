@@ -1702,6 +1702,10 @@ class ClassificationModel
      * @var string The system code in which the product belongs.
      */
     public $systemCode;
+    /**
+     * @var boolean If there is an premium classification justification present for this classification
+     */
+    public $isPremium;
 }
 /**
  * usage of system defined parameters.
@@ -6859,6 +6863,10 @@ class ItemClassificationOutputModel
      * @var string A unique code representing this item.
      */
     public $systemCode;
+    /**
+     * @var boolean If there is an premium classification justification present for this classification
+     */
+    public $isPremium;
 }
 /**
  * Represents an item in your company's product catalog.
