@@ -48,12 +48,12 @@ class LogInformation
         $this-> statusCode = 500;
     }
 
-    public function populateErrorInfo($e)
+    public function populateErrorInfo($e, $errorContents)
     {
         $this-> populateTotalExecutionTime();
         $this-> statusCode = $e-> getCode();
         $this-> headerCorrelationId = $e-> getResponse()-> getHeader('x-correlation-id')[0];
-        $this-> exceptionMessage = $e-> getResponse()->getBody()->getContents();
+        $this-> exceptionMessage = $errorContents; 
     }
 
     private function populateCommonResponseInfo($response)

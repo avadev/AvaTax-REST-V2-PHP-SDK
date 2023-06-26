@@ -259,11 +259,12 @@ class AvaTaxClientBase
 
         } catch (\GuzzleHttp\Exception\ClientException $e) {
             // populate exception details in log object
-            $logModel->populateErrorInfo($e);
+            $errorContents = $e->getResponse()->getBody()->getContents();
+            $logModel->populateErrorInfo($e, $errorContents);
             if (!$this->catchExceptions) {
                 throw $e;
             }
-            return $e->getResponse()->getBody()->getContents();
+            return $errorContents;
         } finally {
             // log the error / info details
             if(!is_null($this->logger)) {
