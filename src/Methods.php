@@ -4261,7 +4261,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Some parameters are only available for use if you have subscribed to certain features of AvaTax.
      * Swagger Name: AvaTaxClient
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* values
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* values, valueDescriptions
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -9461,6 +9461,34 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Create new Country Coefficients. If already exist update them.
+     *
+     * Create one or more Country Coefficients for particular country.
+     *  
+     * We would like to use country coefficients during Cross-Border calculations to slightly increase or decrease
+     * a calculation for a line based on the tax-subtype and Country of destination for a transaction.
+     *  
+     * This will allow AvaTax to minimize the variance caused between actual transaction taken place on ground Vs Tax
+     * Calculated by AvaTax.
+     *  
+     * Make sure to use the same API to update the country coefficients that is already present in the database.
+     * This will make existing entry for specific country as ineffective for that date. And new entry created will get applicable
+     * to the newer transactions.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param CountryCoefficientsRequestEntity $model The Country Coefficients for specific country you wish to create.
+     * @return \stdClass
+     */
+    public function createCountryCoefficients($model)    {
+        $path = "/api/v2/countryCoefficients";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
      * Create a new tax rule
      *
      * Create one or more custom tax rules attached to this company.
@@ -9560,6 +9588,32 @@ class AvaTaxClient extends AvaTaxClientBase
         $path = "/api/v2/companies/{$companyId}/taxrules/{$id}";
         $guzzleParams = [
             'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Retrieve country coefficients for specific country
+     *
+     * Retrieve all or any specific records of Country Coefficients based on the filters(optional) for specific country.
+     *  
+     *  Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     *  Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param string $country Country for which data need to be pulled for.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* CoefficientsId, AccountId, ModifiedUserId, CreatedUserId
+     * @param string $include A comma separated list of additional data to retrieve.
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return \stdClass
+     */
+    public function listCountryCoefficients($country, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/{$country}/CountryCoefficients";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
@@ -9701,6 +9755,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *  
      *  * Lines
      *  * Details (implies lines)
+     * * AccountPayableSalesTaxDetails (implies lines - only for Account Payable transaction)
      *  * Summary (implies details)
      *  * Addresses
      * * SummaryOnly (omit lines and details - reduces API response size)
@@ -9746,6 +9801,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *  
      * * Lines
      * * Details (implies lines)
+     * * AccountPayableSalesTaxDetails (implies lines - only for Account Payable transaction)
      * * Summary (implies details)
      * * Addresses
      * * SummaryOnly (omit lines and details - reduces API response size)
@@ -9923,6 +9979,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *  
      * * Lines
      * * Details (implies lines)
+     * * AccountPayableSalesTaxDetails (implies lines - only for Account Payable transaction)
      * * Summary (implies details)
      * * Addresses
      * * SummaryOnly (omit lines and details - reduces API response size)
@@ -9977,6 +10034,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *  
      * * Lines
      * * Details (implies lines)
+     * * AccountPayableSalesTaxDetails (implies lines - only for Account Payable transaction)
      * * Summary (implies details)
      * * Addresses
      * * SummaryOnly (omit lines and details - reduces API response size)
@@ -10038,6 +10096,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *  
      * * Lines
      * * Details (implies lines)
+     * * AccountPayableSalesTaxDetails (implies lines - only for Account Payable transaction)
      * * Summary (implies details)
      * * Addresses
      * * SummaryOnly (omit lines and details - reduces API response size)
@@ -10102,6 +10161,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *  
      * * Lines
      * * Details (implies lines)
+     * * AccountPayableSalesTaxDetails (implies lines - only for Account Payable transaction)
      * * Summary (implies details)
      * * Addresses
      * * SummaryOnly (omit lines and details - reduces API response size)
@@ -10149,6 +10209,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *  
      *  * Lines
      *  * Details (implies lines)
+     * * AccountPayableSalesTaxDetails (implies lines - only for Account Payable transaction)
      *  * Summary (implies details)
      *  * Addresses
      * * SummaryOnly (omit lines and details - reduces API response size)
@@ -10213,6 +10274,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *  
      * * Lines
      * * Details (implies lines)
+     * * AccountPayableSalesTaxDetails (implies lines - only for Account Payable transaction)
      * * Summary (implies details)
      * * Addresses
      * * SummaryOnly (omit lines and details - reduces API response size)
@@ -10295,6 +10357,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *  
      * * Lines
      * * Details (implies lines)
+     * * AccountPayableSalesTaxDetails (implies lines - only for Account Payable transaction)
      * * Summary (implies details)
      * * Addresses
      * * SummaryOnly (omit lines and details - reduces API response size)
@@ -10362,6 +10425,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *  
      * * Lines
      * * Details (implies lines)
+     * * AccountPayableSalesTaxDetails (implies lines - only for Account Payable transaction)
      * * Summary (implies details)
      * * Addresses
      * * SummaryOnly (omit lines and details - reduces API response size)
@@ -10418,6 +10482,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *  
      * * Lines
      * * Details (implies lines)
+     * * AccountPayableSalesTaxDetails (implies lines - only for Account Payable transaction)
      * * Summary (implies details)
      * * Addresses
      * * SummaryOnly (omit lines and details - reduces API response size)
@@ -10482,6 +10547,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *  
      * * Lines
      * * Details (implies lines)
+     * * AccountPayableSalesTaxDetails (implies lines - only for Account Payable transaction)
      * * Summary (implies details)
      * * Addresses
      * * SummaryOnly (omit lines and details - reduces API response size)
@@ -10538,6 +10604,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *  
      * * Lines
      * * Details (implies lines)
+     * * AccountPayableSalesTaxDetails (implies lines - only for Account Payable transaction)
      * * Summary (implies details)
      * * Addresses
      * * SummaryOnly (omit lines and details - reduces API response size)
@@ -10585,6 +10652,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *  
      * * Lines
      * * Details (implies lines)
+     * * AccountPayableSalesTaxDetails (implies lines - only for Account Payable transaction)
      * * Summary (implies details)
      * * Addresses
      * * SummaryOnly (omit lines and details - reduces API response size)
@@ -10629,6 +10697,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *  
      * * Lines
      * * Details (implies lines)
+     * * AccountPayableSalesTaxDetails (implies lines - only for Account Payable transaction)
      * * Summary (implies details)
      * * Addresses
      * * SummaryOnly (omit lines and details - reduces API response size)
@@ -10702,6 +10771,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *  
      * * Lines
      * * Details (implies lines)
+     * * AccountPayableSalesTaxDetails (implies lines - only for Account Payable transaction)
      * * Summary (implies details)
      * * Addresses
      * * SummaryOnly (omit lines and details - reduces API response size)
@@ -10756,6 +10826,7 @@ class AvaTaxClient extends AvaTaxClientBase
      *  
      * * Lines
      * * Details (implies lines)
+     * * AccountPayableSalesTaxDetails (implies lines - only for Account Payable transaction)
      * * Summary (implies details)
      * * Addresses
      * * SummaryOnly (omit lines and details - reduces API response size)
