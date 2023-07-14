@@ -2648,6 +2648,153 @@ class CoordinateInfo
     public $longitude;
 }
 /**
+ * Represents the Country coefficients model, using which tax rules rates can be modified dynamically for CB transaciotns while applying tax rules
+ * in order to reduce the variance for all the transactions at country level.
+ * Swagger Name: AvaTaxClient
+ */
+class CountryCoefficientsEntity
+{
+    /**
+     * @var int CoefficientsId
+     */
+    public $coefficientsId;
+    /**
+     * @var int AccountId
+     */
+    public $accountId;
+    /**
+     * @var int The CompanyId of company for which coefficient will be applied.
+     */
+    public $companyId;
+    /**
+     * @var string The country for which coefficient will be applied.
+     */
+    public $country;
+    /**
+     * @var float Value by which rates need to be altered while calculating taxes.
+     */
+    public $coefficient;
+    /**
+     * @var string TaxSubTypeId
+     */
+    public $taxSubTypeId;
+    /**
+     * @var string CurrencyCode
+     */
+    public $currencyCode;
+    /**
+     * @var int UnitOfBasisId
+     */
+    public $unitOfBasisId;
+    /**
+     * @var boolean IsApplicable  Flag that is being used to mark the effectiveness of the specific entry for the particular date.
+     */
+    public $isApplicable;
+    /**
+     * @var string ModifiedDate
+     */
+    public $modifiedDate;
+    /**
+     * @var string StartDate
+     */
+    public $startDate;
+    /**
+     * @var string 
+     */
+    public $endDate;
+    /**
+     * @var int ModifiedUserId.     To track the user by which the records have been modified in the past.  This will allow us to track the historical changes made to particular record.
+     */
+    public $modifiedUserId;
+    /**
+     * @var string StartDate
+     */
+    public $createdDate;
+    /**
+     * @var int CreatedUserId.     To track the user who created the record at first place
+     */
+    public $createdUserId;
+}
+/**
+ * Represents the Country coefficients request input model, using which tax rules rates can be modified dynamically for CB transaciotns while applying tax rules
+ * in order to reduce the variance for all the transactions at country level.
+ * Swagger Name: AvaTaxClient
+ */
+class CountryCoefficientsRequestEntity
+{
+    /**
+     * @var int AccountId
+     */
+    public $accountId;
+    /**
+     * @var CountryCoefficientsRequestModel[] CountryCoefficientsRequestModel list
+     */
+    public $coefficientDetails;
+}
+/**
+ * Represents the Country coefficients model, using which tax rules rates can be modified dynamically for CB transaciotns while applying tax rules
+ * in order to reduce the variance for all the transactions at country level.
+ * Swagger Name: AvaTaxClient
+ */
+class CountryCoefficientsRequestModel
+{
+    /**
+     * @var string CompanyCode
+     */
+    public $companyCode;
+    /**
+     * @var string The country for which coefficient will be applied.
+     */
+    public $country;
+    /**
+     * @var float Value by which rates need to be altered while calculating taxes.
+     */
+    public $coefficient;
+    /**
+     * @var string TaxSubTypeId
+     */
+    public $taxSubTypeId;
+    /**
+     * @var string CurrencyCode
+     */
+    public $currencyCode;
+    /**
+     * @var int UnitOfBasisId
+     */
+    public $unitOfBasisId;
+    /**
+     * @var boolean IsApplicable  Flag that is being used to mark the effectiveness of the specific entry for the particular date.
+     */
+    public $isApplicable;
+    /**
+     * @var string StartDate
+     */
+    public $startDate;
+    /**
+     * @var string 
+     */
+    public $endDate;
+}
+/**
+ * Represents the coefficient, using which tax rules rates can be modified dynamically while applying tax rules
+ * in order to reduce the variance for all the transactions at country level.
+ *  
+ * Avalara supports a few different types of tax rules. For information about tax rule types, see
+ * [TaxRuleTypeId](https://developer.avalara.com/cofficients)
+ * Swagger Name: AvaTaxClient
+ */
+class CountryCoefficientsResponseModel
+{
+    /**
+     * @var int Total Number of Country Coefficients records inserted/updated.
+     */
+    public $count;
+    /**
+     * @var string Message
+     */
+    public $message;
+}
+/**
  * The CoverLetter model represents a message sent along with an invitation to use CertExpress to
  * upload certificates. An invitation allows customers to use CertExpress to upload their exemption
  * certificates directly; this cover letter explains why the invitation was sent.
@@ -9963,6 +10110,10 @@ class ParameterUsageModel
      */
     public $values;
     /**
+     * @var string[] If the parameter is of enumeration data type, then this list will be populated with description for each enum value.
+     */
+    public $valueDescriptions;
+    /**
      * @var string The unit of measurement type of the parameter
      */
     public $measurementType;
@@ -12233,6 +12384,10 @@ class TransactionLineModel
      * @var TransactionLineDetailModel[] Optional: A list of tax details for this line item.     Tax details represent taxes being charged by various tax authorities. Taxes that appear in the `details` collection are intended to be  displayed to the customer and charged as a 'tax' on the invoice.     To fetch this list, add the query string `?$include=Details` to your URL.
      */
     public $details;
+    /**
+     * @var TransactionLineDetailModel[] Optional: A list of Account payable Sales tax details for this line item.     To fetch this list, add the query string `?$include=AccountPayableSalesTaxDetails` to your URL.
+     */
+    public $accountPayableSalesTaxDetails;
     /**
      * @var TransactionLineDetailModel[] Optional: A list of non-passthrough tax details for this line item.     Tax details represent taxes being charged by various tax authorities. Taxes that appear in the `nonPassthroughDetails` collection are  taxes that must be paid directly by the company and not shown to the customer.
      */
