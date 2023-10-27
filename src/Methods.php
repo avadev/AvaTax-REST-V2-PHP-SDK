@@ -528,6 +528,89 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Create new rule
+     *
+     * 
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyid The ID of the company that owns this AP Config Setting object
+     * @param APConfigSettingRequestModel $model The AP Config Setting you wish to create.
+     * @return \stdClass
+     */
+    public function createAPConfigSetting($companyid, $model)    {
+        $path = "/api/v2/companies/{$companyid}/apconfigsetting";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Retrieve rule for this company
+     *
+     * 
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyid The ID of the company that defined this rule
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* meta, amount, varianceForIgnore, varianceForAccrue, variancePercent
+     * @param string $include A comma separated list of additional data to retrieve.
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return \stdClass
+     */
+    public function getAPConfigSettingByCompany($companyid, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/companies/{$companyid}/apconfigsetting";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Retrieve all rules
+     *
+     * 
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* meta, amount, varianceForIgnore, varianceForAccrue, variancePercent
+     * @param string $include A comma separated list of additional data to retrieve.
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return \stdClass
+     */
+    public function queryAPConfigSetting($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/apconfigsetting";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Update a AP config setting
+     *
+     * 
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyid The ID of the company that owns this AP config setting object
+     * @param APConfigSettingRequestModel $model The AP config setting object you wish to update.
+     * @return \stdClass
+     */
+    public function updateAPConfigSetting($companyid, $model)    {
+        $path = "/api/v2/companies/{$companyid}/apconfigsetting";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
      * Create a new AvaFileForm
      *
      * Create one or more AvaFileForms
@@ -2488,6 +2571,149 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Bulk upload cost centers
+     *
+     * Allows bulk upload of cost centers for the specified company. Use the companyId path parameter to identify the company for which the cost centers should be uploaded.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyid The ID of the company that owns this cost center object
+     * @param CostCenterBulkUploadInputModel $model The cost center bulk upload model.
+     * @return \stdClass
+     */
+    public function bulkUploadCostCenters($companyid, $model)    {
+        $path = "/api/v2/companies/{$companyid}/costcenters/$upload";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Create new cost center
+     *
+     * Creates one or more new item objects attached to this company.
+     * 
+     * Costcenter is defined as function or department within a company which is not directly going to generate revenues and profits to the company but is still incurring expenses to the company for its operations.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyid The ID of the company that owns this cost center object
+     * @param CostCenterRequestModel $model The cost center you wish to create.
+     * @return \stdClass
+     */
+    public function createCostCenter($companyid, $model)    {
+        $path = "/api/v2/companies/{$companyid}/costcenters";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Delete cost center for the given id
+     *
+     * Deletes a cost center with the specified costcenterId that belongs to the company.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyid The ID of the company that owns this cost center object
+     * @param int $costcenterid The primary key of this cost center
+     * @return \stdClass
+     */
+    public function deleteCostCenter($companyid, $costcenterid)    {
+        $path = "/api/v2/companies/{$companyid}/costcenters/{$costcenterid}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Retrieve a single cost center
+     *
+     * Retrieves details of a single cost center identified by costcenterId, which is owned by the company.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyid The ID of the company that owns this cost center object
+     * @param int $costcenterid The primary key of this cost center
+     * @return \stdClass
+     */
+    public function getCostCenterById($companyid, $costcenterid)    {
+        $path = "/api/v2/companies/{$companyid}/costcenters/{$costcenterid}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Retrieve cost centers for this company
+     *
+     * Retrieves a list of cost centers attached to this company. You can apply filters to retrieve specific records.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyid The ID of the company that defined these cost centers
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* companyId, meta, defaultItem
+     * @param string $include A comma separated list of objects to fetch underneath this company. Any object with a URL path underneath this company can be fetched by specifying its name.
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return \stdClass
+     */
+    public function listCostCentersByCompany($companyid, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/companies/{$companyid}/costcenters";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Retrieve all cost centers
+     *
+     * Retrieves all cost centers available. You can apply filters to retrieve specific records.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* companyId, meta, defaultItem
+     * @param string $include A comma separated list of objects to fetch underneath this company. Any object with a URL path underneath this company can be fetched by specifying its name.
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return \stdClass
+     */
+    public function queryCostCenters($filter=null, $include=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/costcenters";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Update a single cost center
+     *
+     * Updates a single cost center owned by the company. Use the costcenterId path parameter to identify the cost center to update.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyid The ID of the company that owns this cost center object
+     * @param int $costcenterid The primary key of this cost center
+     * @param CostCenterRequestModel $model The cost center object you wish to update.
+     * @return \stdClass
+     */
+    public function updateCostCenter($companyid, $costcenterid, $model)    {
+        $path = "/api/v2/companies/{$companyid}/costcenters/{$costcenterid}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
      * Create customers for this company
      *
      * Create one or more customers for this company.
@@ -4414,7 +4640,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param string $country The country to examine for rate types
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* country
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -11664,6 +11890,68 @@ class AvaTaxClient extends AvaTaxClientBase
         ];
         $headerParams=['x-avalara-version' => $x_avalara_version];
         return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION, $headerParams );
+    }
+
+    /**
+     * Enqueues a batch of AvaTax transactions to be deregistered by ASV
+     *
+     * 
+     * Swagger Name: AvaTaxBeverageClient
+     * 
+     * @param string $companyCode The company code of the company that recorded the transaction
+     * @param string $batchCode The batch code of generated by AvaTax batch transaction upload
+     * @param string $api_version (Optional): API version that should satisfy the request. If omitted, defaults to 2.2
+     * @param string $x_avalara_version (Optional): API version that should satisfy the request. If omitted, defaults to 2.2. Header takes precendence if both header and query parameters are present.
+     * @return \stdClass
+     */
+    public function enqueueBatchDeregistration($companyCode, $batchCode, $api_version= "" , $x_avalara_version= "" )    {
+        $path = "/api/v2/asv/companies/{$companyCode}/batches/{$batchCode}/deregister";
+        $guzzleParams = [
+            'query' => ['api-version' => $api_version],
+            'body' => null
+        ];
+        $headerParams=['x-avalara-version' => $x_avalara_version];
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION, $headerParams );
+    }
+
+    /**
+     * Enqueues a batch of AvaTax transactions to be registered by ASV
+     *
+     * 
+     * Swagger Name: AvaTaxBeverageClient
+     * 
+     * @param string $companyCode The company code of the company that recorded the transaction
+     * @param string $batchCode The batch code generated by AvaTax for batch transaction upload process
+     * @param string $api_version (Optional): API version that should satisfy the request. If omitted, defaults to 2.2
+     * @param string $x_avalara_version (Optional): API version that should satisfy the request. If omitted, defaults to 2.2. Header takes precendence if both header and query parameters are present.
+     * @return \stdClass
+     */
+    public function enqueueBatchRegistration($companyCode, $batchCode, $api_version= "" , $x_avalara_version= "" )    {
+        $path = "/api/v2/asv/companies/{$companyCode}/batches/{$batchCode}/register";
+        $guzzleParams = [
+            'query' => ['api-version' => $api_version],
+            'body' => null
+        ];
+        $headerParams=['x-avalara-version' => $x_avalara_version];
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION, $headerParams );
+    }
+
+    /**
+     * Gets records for current and previously processed batch registration jobs
+     *
+     * 
+     * Swagger Name: AvaTaxBeverageClient
+     * 
+     * @param string $accountId (Optional): For users with access to multiple accounts, filters results to those associated with the specified Account ID. If not specified, the Account ID defaults to the one associated with the account
+     * @return \stdClass
+     */
+    public function getBatchRegistrationData($accountId)    {
+        $path = "/api/v2/asv/batches";
+        $guzzleParams = [
+            'query' => ['accountId' => $accountId],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
 }

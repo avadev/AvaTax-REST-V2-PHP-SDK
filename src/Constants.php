@@ -2,7 +2,7 @@
 namespace Avalara;
 use GuzzleHttp\Client;
 
-define('AVATAX_SDK_VERSION', '23.8.1');
+define('AVATAX_SDK_VERSION', '23.10.1');
 
 /*****************************************************************************
  *                                                                           *
@@ -195,6 +195,32 @@ class DocumentType
      *  This is a temporary document type and is not saved in tax history.
      */
     const C_CUSTOMSORDER = 11;
+
+    /**
+     * Represents a proposed movement of inventory from one jurisdiction to another.
+     *  
+     *  This document type is used when physical goods are shipped from one jurisdiction to another, and it
+     *  may cause updates in the tax liability for various jurisdictions.
+     *  
+     *  For an inventory transfer invoice, the `companyCode` of the transaction refers to the owner of the inventory
+     *  that will be moved from one location to another.
+     *  
+     *  This is a permanent document and is recorded in AvaTax.
+     */
+    const C_INVENTORYTRANSFEROUTBOUNDINVOICE = 12;
+
+    /**
+     * Represents a proposed movement of inventory from one jurisdiction to another.
+     *  
+     *  This document type is used when physical goods are shipped from one jurisdiction to another, and it
+     *  may cause updates in the tax liability for various jurisdictions.
+     *  
+     *  For an inventory transfer invoice, the `companyCode` of the transaction refers to the owner of the inventory
+     *  that will be moved from one location to another.
+     *  
+     *  This is a temporary document type and is not saved in tax history.
+     */
+    const C_INVENTORYTRANSFEROUTBOUNDORDER = 13;
 
     /**
      * Not a real document type.
@@ -692,6 +718,7 @@ class BatchType
     const C_UPCVALIDATIONIMPORT = 12;
     const C_CUSTOMERSUPPLIERIMPORT = 13;
     const C_VARIANCEIMPORT = 14;
+    const C_COSTCENTERIMPORT = 15;
 
 }
 
@@ -1411,6 +1438,7 @@ class ErrorCodeId
     const C_MISSINGLINE = 311;
     const C_INVALIDADDRESSTEXTCASE = 312;
     const C_DOCUMENTNOTCOMMITTED = 313;
+    const C_LINEFETCHLIMITEXCEEDED = 314;
     const C_INVALIDDOCUMENTTYPESTOFETCH = 315;
     const C_TIMEOUTREQUESTED = 316;
     const C_INVALIDPOSTALCODE = 317;
@@ -1611,6 +1639,7 @@ class ErrorCodeId
     const C_NOITEMSFORCLASSIFICATION = 1736;
     const C_INVALIDFILENAME = 1737;
     const C_NOCLASSIFICATIONFORSAMEHSCODE = 1738;
+    const C_INVALIDVALUEERROR = 1739;
 
     /**
      * SendSales API errors
@@ -1736,6 +1765,7 @@ class ErrorCodeId
     const C_CONTENTACCESSDENIED = 2810;
     const C_CONTENTNOTFOUND = 2811;
     const C_REGISTRATIONNUMBERNOTFOUND = 2812;
+    const C_INVALIDCOSTCENTER = 2813;
 
 }
 
