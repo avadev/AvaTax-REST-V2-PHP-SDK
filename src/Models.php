@@ -54,6 +54,64 @@ class ACHEntryDetailModel
     public $traceNumber;
 }
 /**
+ * AP Config Setting Request Model
+ * Swagger Name: AvaTaxClient
+ */
+class APConfigSettingRequestModel
+{
+    /**
+     * @var int The Amount
+     */
+    public $amount;
+    /**
+     * @var int The Variance For Ignore
+     */
+    public $varianceForIgnore;
+    /**
+     * @var int The Variance For Accrue
+     */
+    public $varianceForAccrue;
+    /**
+     * @var int The Variance Percent
+     */
+    public $variancePercent;
+}
+/**
+ * AP Config Setting Response Model
+ * Swagger Name: AvaTaxClient
+ */
+class APConfigSettingSuccessResponseModel
+{
+    /**
+     * @var int The Rule Id
+     */
+    public $ruleId;
+    /**
+     * @var int CompanyId to which the rule belongs
+     */
+    public $companyId;
+    /**
+     * @var TaxProfileMetaDataModel 
+     */
+    public $meta;
+    /**
+     * @var int The Amount
+     */
+    public $amount;
+    /**
+     * @var int The Variance For Ignore
+     */
+    public $varianceForIgnore;
+    /**
+     * @var int The Variance For Accrue
+     */
+    public $varianceForAccrue;
+    /**
+     * @var int The Variance Percent
+     */
+    public $variancePercent;
+}
+/**
  * Represents one configuration setting for this account
  * Swagger Name: AvaTaxClient
  */
@@ -2646,6 +2704,117 @@ class CoordinateInfo
      * @var float Longitude
      */
     public $longitude;
+}
+/**
+ * Represents a bulk upload input model.
+ * Swagger Name: AvaTaxClient
+ */
+class CostCenterBulkUploadInputModel
+{
+    /**
+     * @var CostCenterRequestModel[] List of costCenters
+     */
+    public $costCenters;
+}
+/**
+ * Represents a bulk upload response model.
+ * Swagger Name: AvaTaxClient
+ */
+class CostCenterBulkUploadOutputModel
+{
+    /**
+     * @var int Count of processed objects
+     */
+    public $total;
+    /**
+     * @var CostCenterUploadErrorModel[] Dictionary of object and respective list of errors
+     */
+    public $failed;
+}
+/**
+ * Cost Center Request Model
+ * Swagger Name: AvaTaxClient
+ */
+class CostCenterRequestModel
+{
+    /**
+     * @var string The Entity Use Code
+     */
+    public $entityUseCode;
+    /**
+     * @var string Effective from Date
+     */
+    public $effectiveDate;
+    /**
+     * @var string End Date
+     */
+    public $endDate;
+    /**
+     * @var Int64TaxProfileObjectReferenceModel 
+     */
+    public $defaultItem;
+    /**
+     * @var string The Cost center Name
+     */
+    public $costCenterCode;
+}
+/**
+ * Cost Center Response Model
+ * Swagger Name: AvaTaxClient
+ */
+class CostCenterSuccessResponseModel
+{
+    /**
+     * @var int The Cost center Id
+     */
+    public $costCenterId;
+    /**
+     * @var int CompanyId to which the cost center belongs
+     */
+    public $companyId;
+    /**
+     * @var TaxProfileMetaDataModel 
+     */
+    public $meta;
+    /**
+     * @var string The Entity Use Code
+     */
+    public $entityUseCode;
+    /**
+     * @var string Effective from Date
+     */
+    public $effectiveDate;
+    /**
+     * @var string End Date
+     */
+    public $endDate;
+    /**
+     * @var Int64TaxProfileObjectReferenceModel 
+     */
+    public $defaultItem;
+    /**
+     * @var string The Cost center Name
+     */
+    public $costCenterCode;
+}
+/**
+ * Represents a costCenter upload error model.
+ * Swagger Name: AvaTaxClient
+ */
+class CostCenterUploadErrorModel
+{
+    /**
+     * @var int Row index of a costCenter
+     */
+    public $rowIndex;
+    /**
+     * @var string Cost Center name
+     */
+    public $costCenterCode;
+    /**
+     * @var string[] List of errors for against given costCenter name
+     */
+    public $errors;
 }
 /**
  * Represents the Country coefficients model, using which tax rules rates can be modified dynamically for CB transaciotns while applying tax rules
@@ -6740,6 +6909,25 @@ class InspectResponseModel
      * @var DeterminationFactorModel[] A list of determination factors for a line that is being inspected through the InspectLine API.
      */
     public $determinationFactors;
+}
+/**
+ * TaxProfile Service Object Reference Model
+ * Swagger Name: AvaTaxClient
+ */
+class Int64TaxProfileObjectReferenceModel
+{
+    /**
+     * @var int Identifier or Id of data
+     */
+    public $identifier;
+    /**
+     * @var string Display name
+     */
+    public $displayName;
+    /**
+     * @var string Location
+     */
+    public $location;
 }
 /**
  * Represents a message to be displayed on an invoice.
@@ -11444,6 +11632,48 @@ class TaxOverrideModel
     public $taxAmountByTaxTypes;
 }
 /**
+ * Info model for Problem Detail
+ * Swagger Name: AvaTaxClient
+ */
+class TaxProfileErrorResponseModel
+{
+    /**
+     * @var string Title
+     */
+    public $title;
+    /**
+     * @var string Status
+     */
+    public $status;
+    /**
+     * @var string Detail
+     */
+    public $detail;
+}
+/**
+ * Tax Profile Service Meta data information
+ * Swagger Name: AvaTaxClient
+ */
+class TaxProfileMetaDataModel
+{
+    /**
+     * @var string Created By User
+     */
+    public $createdUser;
+    /**
+     * @var string Created Date
+     */
+    public $createdDate;
+    /**
+     * @var string Modified User
+     */
+    public $modifiedUser;
+    /**
+     * @var string Modified Date
+     */
+    public $modifiedDate;
+}
+/**
  * Contains information about the general tangible personal property sales tax rates for this jurisdiction.
  *  
  * This rate is calculated by making assumptions about the tax calculation process. It does not account for:
@@ -13594,6 +13824,13 @@ class ShippingVerifyResult
      * @var object[] Describes the results of the checks made for each line in the transaction.
      */
     public $lines;
+}
+/**
+ * The Response of the /batches endpoint.
+ * Swagger Name: AvaTaxBeverageClient
+ */
+class GetBatchesResult
+{
 }
 /**
  * Message Object
