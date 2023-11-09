@@ -1284,6 +1284,21 @@ class AvailableCycleModel
     public $cycleName;
 }
 /**
+ * This is used to map the error details in response
+ * Swagger Name: AvaTaxClient
+ */
+class BadRequestErrorResponse
+{
+    /**
+     * @var int Status code in the response
+     */
+    public $code;
+    /**
+     * @var string Error message in the response
+     */
+    public $message;
+}
+/**
  * Replace an existing transaction recorded in AvaTax with a new one.
  * Swagger Name: AvaTaxClient
  */
@@ -2691,6 +2706,21 @@ class ContactModel
     public $modifiedUserId;
 }
 /**
+ * Model to represent the system
+ * Swagger Name: AvaTaxClient
+ */
+class Context
+{
+    /**
+     * @var string Unique id of the system
+     */
+    public $id;
+    /**
+     * @var string System name
+     */
+    public $system;
+}
+/**
  * Coordinate Info
  * Swagger Name: AvaTaxClient
  */
@@ -3090,7 +3120,7 @@ class CreateMultiDocumentModel
      */
     public $companyCode;
     /**
-     * @var string Transaction Date - The date on the invoice, purchase order, etc.     By default, this date will be used to calculate the tax rates for the transaction. If you wish to use a  different date to calculate tax rates, please specify a `taxOverride` of type `taxDate`.
+     * @var string Transaction Date - The date on the invoice, purchase order, etc. AvaTax accepts date values in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)  format and stores the date as `yyyy-MM-dd`.     By default, this date will be used to calculate the tax rates for the transaction. If you want to use a  different date to calculate tax rates, please specify a `taxOverride` of type `taxDate`.
      */
     public $date;
     /**
@@ -3368,7 +3398,7 @@ class CreateTransactionModel
      */
     public $companyCode;
     /**
-     * @var string Transaction Date - The date on the invoice, purchase order, etc.     By default, this date will be used to calculate the tax rates for the transaction. If you wish to use a  different date to calculate tax rates, please specify a `taxOverride` of type `taxDate`.
+     * @var string Transaction Date - The date on the invoice, purchase order, etc. AvaTax accepts date values in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)  format and stores the date as `yyyy-MM-dd`.     By default, this date will be used to calculate the tax rates for the transaction. If you want to use a  different date to calculate tax rates, please specify a `taxOverride` of type `taxDate`.
      */
     public $date;
     /**
@@ -4005,6 +4035,68 @@ class DataSourceModel
     public $externalState;
 }
 /**
+ * Model used for Domain control verification response
+ * Swagger Name: AvaTaxClient
+ */
+class DcvCreationResponse
+{
+    /**
+     * @var string Domain control verification is already exist or newly created
+     */
+    public $message;
+    /**
+     * @var DcvViewModel 
+     */
+    public $dcvViewModel;
+}
+/**
+ * ViewModel to get Domain control verification
+ * Swagger Name: AvaTaxClient
+ */
+class DcvViewModel
+{
+    /**
+     * @var string Unique id of the Domain control verification
+     */
+    public $id;
+    /**
+     * @var string Domain name for which Domain control verification record is created
+     */
+    public $domainName;
+    /**
+     * @var Context 
+     */
+    public $context;
+    /**
+     * @var string Unique token for Domain control verification
+     */
+    public $token;
+    /**
+     * @var string Status of the domain Verified/Pending/Cancelled
+     */
+    public $status;
+    /**
+     * @var string Email id of the user who create Domain control verification
+     */
+    public $emailId;
+    /**
+     * @var string Domain control verification creation date
+     */
+    public $createdOn;
+    /**
+     * @var string Domain control verification created by
+     */
+    public $createdBy;
+    /**
+     * @var string Domain control verification update date
+     */
+    public $updatedOn;
+    /**
+     * @var string Domain control verification update by
+     */
+    public $updatedBy;
+}
+/**
  * Use this object to provide an address and date range where your company does business.
  * This address will be used to determine what jurisdictions you should declare nexus and
  * calculate tax.
@@ -4199,6 +4291,17 @@ class DeterminationFactorModel
      * @var string The name of the user who created the determination factor.
      */
     public $createdBy;
+}
+/**
+ * ViewModel to receive DomainName from user
+ * Swagger Name: AvaTaxClient
+ */
+class DomainNameViewModel
+{
+    /**
+     * @var string Domain Name for which Domain control verification is created
+     */
+    public $domainName;
 }
 /**
  * The resource model returned by the ECommerceTokenController's endpoints.
@@ -6210,6 +6313,21 @@ class FirmClientLinkageOutputModel
     public $firmContactEmail;
 }
 /**
+ * This is used to map the error details in response
+ * Swagger Name: AvaTaxClient
+ */
+class ForbiddenErrorResponse
+{
+    /**
+     * @var int Status code in the response
+     */
+    public $code;
+    /**
+     * @var string Error message in the response
+     */
+    public $message;
+}
+/**
  * Represents information about a tax form known to Avalara
  * Swagger Name: AvaTaxClient
  */
@@ -6928,6 +7046,21 @@ class Int64TaxProfileObjectReferenceModel
      * @var string Location
      */
     public $location;
+}
+/**
+ * This is used to map the error details in response
+ * Swagger Name: AvaTaxClient
+ */
+class InternalServerErrorResponse
+{
+    /**
+     * @var int Status code in the response
+     */
+    public $code;
+    /**
+     * @var string Error message in the response
+     */
+    public $message;
 }
 /**
  * Represents a message to be displayed on an invoice.
@@ -7701,6 +7834,101 @@ class ItemUploadErrorModel
     public $errors;
 }
 /**
+ * Represents information about a single legal taxing jurisdiction with parent jurisdiction
+ * Swagger Name: AvaTaxClient
+ */
+class JurisdictionHierarchyModel
+{
+    /**
+     * @var int ParentId of the Jurisdiction
+     */
+    public $parentId;
+    /**
+     * @var JurisdictionNexusModel[] List of Nexus details associated with the jurisdiction
+     */
+    public $nexus;
+    /**
+     * @var string The code that is used to identify this jurisdiction
+     */
+    public $code;
+    /**
+     * @var string The name of this jurisdiction
+     */
+    public $name;
+    /**
+     * @var string The type of the jurisdiction, indicating whether it is a country, state/region, city, for example. (See JurisdictionType::* for a list of allowable values)
+     */
+    public $type;
+    /**
+     * @var float The base rate of tax specific to this jurisdiction.
+     */
+    public $rate;
+    /**
+     * @var float The "Sales" tax rate specific to this jurisdiction.
+     */
+    public $salesRate;
+    /**
+     * @var string The Avalara-supplied signature code for this jurisdiction.
+     */
+    public $signatureCode;
+    /**
+     * @var string Name or ISO 3166 code identifying the region within the country.     This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions     For a full list of all supported codes and names, please see the Definitions API `ListRegions`.
+     */
+    public $region;
+    /**
+     * @var float The "Seller's Use" tax rate specific to this jurisdiction.
+     */
+    public $useRate;
+    /**
+     * @var string The city name of this jurisdiction
+     */
+    public $city;
+    /**
+     * @var string The county name of this jurisdiction
+     */
+    public $county;
+    /**
+     * @var string Name or ISO 3166 code identifying the country of this jurisdiction.     This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries     For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
+     */
+    public $country;
+    /**
+     * @var string A short name of the jurisidiction
+     */
+    public $shortName;
+    /**
+     * @var string State FIPS code
+     */
+    public $stateFips;
+    /**
+     * @var string County FIPS code
+     */
+    public $countyFips;
+    /**
+     * @var string City FIPS code
+     */
+    public $placeFips;
+    /**
+     * @var int Unique AvaTax Id of this Jurisdiction
+     */
+    public $id;
+    /**
+     * @var string The date this jurisdiction starts to take effect on tax calculations
+     */
+    public $effectiveDate;
+    /**
+     * @var string The date this jurisdiction stops to take effect on tax calculations
+     */
+    public $endDate;
+    /**
+     * @var boolean The isAcm specific to this jurisdiction.
+     */
+    public $isAcm;
+    /**
+     * @var boolean The isSst specific to this jurisdiction.
+     */
+    public $isSst;
+}
+/**
  * Represents information about a single legal taxing jurisdiction
  * Swagger Name: AvaTaxClient
  */
@@ -7786,6 +8014,25 @@ class JurisdictionModel
      * @var boolean The isSst specific to this jurisdiction.
      */
     public $isSst;
+}
+/**
+ * Model to represent the detail of NexusTaxTpeGroup and TaxName for Jurisdiction
+ * Swagger Name: AvaTaxClient
+ */
+class JurisdictionNexusModel
+{
+    /**
+     * @var string TaxTypeGroupId for Nexus of Jurisdiction
+     */
+    public $taxTypeGroupId;
+    /**
+     * @var string NexusTaxTypeGroupId for Nexus of Jurisdiction
+     */
+    public $nexusTaxTypeGroupId;
+    /**
+     * @var string TaxName for Nexus of Jurisdiction
+     */
+    public $taxName;
 }
 /**
  * Represents an override of tax jurisdictions for a specific address.
@@ -9387,6 +9634,21 @@ class NexusTaxTypeGroupModel
     public $showColumn;
 }
 /**
+ * This is used to map the error details in response
+ * Swagger Name: AvaTaxClient
+ */
+class NotFoundErrorResponse
+{
+    /**
+     * @var int Status code in the response
+     */
+    public $code;
+    /**
+     * @var string Error message in the response
+     */
+    public $message;
+}
+/**
  * Represents communication between Avalara and the company regarding the processing of a tax notice.
  * Swagger Name: AvaTaxClient
  */
@@ -9737,6 +9999,14 @@ class NoticeModel
      * @var string The user who created the notice
      */
     public $createdByUserName;
+    /**
+     * @var string The user who modified the notice
+     */
+    public $modifiedUserName;
+    /**
+     * @var string The user who closed the notice
+     */
+    public $closedByUserName;
     /**
      * @var int The unique ID number of the user that owns the notice
      */
@@ -13161,6 +13431,21 @@ class UPCModel
      * @var int The user ID of the user who last modified this record.
      */
     public $modifiedUserId;
+}
+/**
+ * This is used to map the error details in response
+ * Swagger Name: AvaTaxClient
+ */
+class UnauthorizedErrorResponse
+{
+    /**
+     * @var int Status code in the response
+     */
+    public $code;
+    /**
+     * @var string Error message in the response
+     */
+    public $message;
 }
 /**
  * 
