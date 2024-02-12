@@ -2,7 +2,7 @@
 namespace Avalara;
 use GuzzleHttp\Client;
 
-define('AVATAX_SDK_VERSION', '23.11.0');
+define('AVATAX_SDK_VERSION', '24.2.0');
 
 /*****************************************************************************
  *                                                                           *
@@ -325,6 +325,35 @@ class POASubscriptionType
     const C_AMRA = 5;
     const C_MRSPREMIUM = 6;
     const C_MRSPREMIER = 7;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * Defines how a stack rate is determined for a specific country and region.
+ */
+class StackAggregationOption
+{
+    /**
+     * No aggregation.
+     *  The component rate is used for the stack rate.
+     */
+    const C_NOSTACKAGGREGATION = 0;
+
+    /**
+     * Rates are aggregated across all jurisdiction types.
+     */
+    const C_FULLSTACKAGGREGATION = 1;
+
+    /**
+     * State and county rates are aggregated.
+     */
+    const C_AGGREGATESTATEANDCOUNTY = 2;
+
+    /**
+     * City and county rates are aggregated.
+     */
+    const C_AGGREGATECITYANDCOUNTY = 3;
 
 }
 
@@ -1767,6 +1796,11 @@ class ErrorCodeId
     const C_REGISTRATIONNUMBERNOTFOUND = 2812;
     const C_INVALIDCOSTCENTER = 2813;
 
+    /**
+     * Occurs when a Header value is incorrect or invalid in some way
+     */
+    const C_INVALIDHTTPHEADER = 3000;
+
 }
 
 /**
@@ -1954,6 +1988,11 @@ class DocumentStatus
      *  as `PendingApproval` until the government has certified the transaction.
      */
     const C_PENDINGAPPROVAL = 7;
+
+    /**
+     * This new status is added for Reporting API to download get reports with Saved(1) and Posted(2) state.
+     */
+    const C_UNCOMMITTED = 12;
 
     /**
      * DEPRECATED - Represents "a document in any status" when searching. Please search using the

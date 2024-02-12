@@ -536,6 +536,12 @@ class AddressValidationInfo
  *  
  * In the United States, some jurisdictions recognize the address types `pointOfOrderOrigin` and `pointOfOrderAcceptance`.
  * These address types affect the sourcing models of some transactions.
+ * 
+ * VAT transactions support a `goodsPlaceOrServiceRendered` address, which indicates where goods are located or where services 
+ * are rendered. VAT transactions also support an `import` address, which specifies the address of the buyer importing a good 
+ * from another country.
+ * 
+ * India GST transactions support a `billTo` address, which specifies where invoices and other billing-related information are sent to the buyer.
  *  
  * If latitude and longitude information is provided for any of these addresses along with line, city, region, country and postal code information,
  * we will be using only latitude and longitude and will discard line, city, region, country and postal code information for the transaction.
@@ -2558,6 +2564,172 @@ class ComplianceJurisdictionRateModel
      * @var int The id of the tax authority.
      */
     public $taxAuthorityId;
+}
+/**
+ * Model for RateOption.
+ * Swagger Name: AvaTaxClient
+ */
+class ComplianceRateOptionModel
+{
+    /**
+     * @var string The name of the Jurisdiction
+     */
+    public $jurisName;
+    /**
+     * @var string The Group Code
+     */
+    public $groupCode;
+    /**
+     * @var int The id of the tax region.
+     */
+    public $taxRegionId;
+    /**
+     * @var string The name of the tax region.
+     */
+    public $taxRegionName;
+    /**
+     * @var string The report level.
+     */
+    public $reportLevel;
+    /**
+     * @var string The Tax Type Code.
+     */
+    public $taxTypeCode;
+    /**
+     * @var string The name of the Tax Type Code.
+     */
+    public $taxTypeCodeName;
+    /**
+     * @var string The Sub Type Code.
+     */
+    public $taxSubTypeCode;
+    /**
+     * @var string The name of Sub Type.
+     */
+    public $taxSubTypeCodeName;
+    /**
+     * @var string The rate type of the rate.
+     */
+    public $rateTypeCode;
+    /**
+     * @var string The rate type description.
+     */
+    public $rateTypeCodeName;
+    /**
+     * @var float The Stack Rate
+     */
+    public $stackRate;
+    /**
+     * @var float The Component Rate
+     */
+    public $componentRate;
+    /**
+     * @var int The id of the tax authority.
+     */
+    public $taxAuthorityId;
+    /**
+     * @var string City
+     */
+    public $cityName;
+    /**
+     * @var string County
+     */
+    public $countyName;
+    /**
+     * @var string Effective Date
+     */
+    public $effDate;
+    /**
+     * @var string End date
+     */
+    public $endDate;
+}
+/**
+ * A flattened model for State Config.
+ * Swagger Name: AvaTaxClient
+ */
+class ComplianceStateConfigModel
+{
+    /**
+     * @var int The Id of the StateConfig.
+     */
+    public $stateConfigId;
+    /**
+     * @var string The Effective Date
+     */
+    public $effDate;
+    /**
+     * @var string The End Date
+     */
+    public $endDate;
+    /**
+     * @var boolean Has Boundary
+     */
+    public $hasBoundary;
+    /**
+     * @var boolean Has Rates
+     */
+    public $hasRates;
+    /**
+     * @var boolean Is Local Admin
+     */
+    public $isLocalAdmin;
+    /**
+     * @var boolean Is Local Nexus
+     */
+    public $isLocalNexus;
+    /**
+     * @var boolean IsSerState
+     */
+    public $isSerState;
+    /**
+     * @var int Min Boundary LevelId
+     */
+    public $minBoundaryLevelId;
+    /**
+     * @var int Sst Status Id
+     */
+    public $sstStatusId;
+    /**
+     * @var string Short name of State.
+     */
+    public $state;
+    /**
+     * @var string StateFips
+     */
+    public $stateFips;
+    /**
+     * @var string The name of the State.
+     */
+    public $stateName;
+    /**
+     * @var string Boundary Table BaseName
+     */
+    public $boundaryTableBaseName;
+    /**
+     * @var int STJCount
+     */
+    public $stjCount;
+    /**
+     * @var string TsState Id
+     */
+    public $tsStateId;
+    /**
+     * @var string The name of the country.
+     */
+    public $country;
+    /**
+     * @var int IsJaasEnabled
+     */
+    public $isJaasEnabled;
+    /**
+     * @var boolean The name of the country.
+     */
+    public $hasSSTBoundary;
+    /**
+     * @var string The name of the country.
+     */
+    public $modifiedDate;
 }
 /**
  * The tax rate model.
@@ -7834,6 +8006,17 @@ class ItemUploadErrorModel
     public $errors;
 }
 /**
+ * Represents JurisName Model
+ * Swagger Name: AvaTaxClient
+ */
+class JurisNameModel
+{
+    /**
+     * @var string Value
+     */
+    public $jurisName;
+}
+/**
  * Represents information about a single legal taxing jurisdiction with parent jurisdiction
  * Swagger Name: AvaTaxClient
  */
@@ -7927,6 +8110,22 @@ class JurisdictionHierarchyModel
      * @var boolean The isSst specific to this jurisdiction.
      */
     public $isSst;
+    /**
+     * @var string The CreateDate specific to this jurisdiction.
+     */
+    public $createDate;
+    /**
+     * @var boolean IsLocalAdmin.
+     */
+    public $isLocalAdmin;
+    /**
+     * @var string ModifiedDate
+     */
+    public $modifiedDate;
+    /**
+     * @var int TaxAuthorityTypeId.
+     */
+    public $taxAuthorityTypeId;
 }
 /**
  * Represents information about a single legal taxing jurisdiction
@@ -8014,6 +8213,22 @@ class JurisdictionModel
      * @var boolean The isSst specific to this jurisdiction.
      */
     public $isSst;
+    /**
+     * @var string The CreateDate specific to this jurisdiction.
+     */
+    public $createDate;
+    /**
+     * @var boolean IsLocalAdmin.
+     */
+    public $isLocalAdmin;
+    /**
+     * @var string ModifiedDate
+     */
+    public $modifiedDate;
+    /**
+     * @var int TaxAuthorityTypeId.
+     */
+    public $taxAuthorityTypeId;
 }
 /**
  * Model to represent the detail of NexusTaxTpeGroup and TaxName for Jurisdiction
@@ -9699,6 +9914,10 @@ class NoticeCommentModel
      */
     public $resourceFileId;
     /**
+     * @var int documentId
+     */
+    public $documentId;
+    /**
      * @var string The date/time when this record was last modified.
      */
     public $modifiedDate;
@@ -9850,6 +10069,10 @@ class NoticeFinanceModel
      * @var int The ResourceFileId of the finance detail attachment
      */
     public $resourceFileId;
+    /**
+     * @var int documentId
+     */
+    public $documentId;
     /**
      * @var string The date when this record was created.
      */
@@ -11080,6 +11303,25 @@ class RemoveTransactionLineModel
     public $renumber;
 }
 /**
+ * Represents ReportCodeOption Model
+ * Swagger Name: AvaTaxClient
+ */
+class ReportCodeOptionModel
+{
+    /**
+     * @var string Value
+     */
+    public $stateAssignedCode;
+    /**
+     * @var string Label
+     */
+    public $label;
+    /**
+     * @var string JurisName
+     */
+    public $jurisName;
+}
+/**
  * A model for displaying report task metadata
  * Swagger Name: AvaTaxClient
  */
@@ -12015,6 +12257,10 @@ class TaxRegionJurisdictionModel
      * @var string The date in which this tax region jurisdiction stops to take effect.
      */
     public $endDate;
+    /**
+     * @var string The modifiedDate of the tax region jurisdiction.
+     */
+    public $modifiedDate;
 }
 /**
  * The tax region model.
@@ -12357,6 +12603,53 @@ class TaxTypeGroupModel
      * @var int The order this record is being returned in the response
      */
     public $displaySequence;
+}
+/**
+ * Represents TaxTypeMapping Model
+ * Swagger Name: AvaTaxClient
+ */
+class TaxTypeMappingModel
+{
+    /**
+     * @var int TaxTypeMappingId
+     */
+    public $taxTypeMappingId;
+    /**
+     * @var int TaxTypeGroupIdSK
+     */
+    public $taxTypeGroupIdSK;
+    /**
+     * @var int TaxTypeIdSK
+     */
+    public $taxTypeIdSK;
+    /**
+     * @var int TaxSubTypeIdSK
+     */
+    public $taxSubTypeIdSK;
+    /**
+     * @var int GeneralOrStandardRateTypeIdSK
+     */
+    public $generalOrStandardRateTypeIdSK;
+    /**
+     * @var string TaxTypeGroupId
+     */
+    public $taxTypeGroupId;
+    /**
+     * @var string TaxTypeId
+     */
+    public $taxTypeId;
+    /**
+     * @var string TaxSubTypeId
+     */
+    public $taxSubTypeId;
+    /**
+     * @var string Country
+     */
+    public $country;
+    /**
+     * @var string GeneralOrStandardRateTypeId
+     */
+    public $generalOrStandardRateTypeId;
 }
 /**
  * Represents a tax type

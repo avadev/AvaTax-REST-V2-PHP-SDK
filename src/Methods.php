@@ -1078,7 +1078,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     * * This API depends on the following active services:*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that will record certificates
@@ -1117,7 +1117,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     * * This API depends on the following active services:*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that issued this invitation
@@ -1157,7 +1157,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     * * This API depends on the following active services:*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that issued this invitation
@@ -1196,8 +1196,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Your tax transaction must contain the correct customer code
      *  
      * Before you can use any exemption certificates endpoints, you must set up your company for exemption certificate data storage.
-     * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption 
-     * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption 
+     * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption
+     * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption
      * certificate storage for this company, call `RequestCertificateSetup`.
      *  
      * If the users specified in the certificates do not exist, the API will create the user and link them to the certificate
@@ -1205,7 +1205,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, BatchServiceAdmin, CompanyAdmin, CSPTester, ProStoresOperator, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
-     * * This API depends on the following active services:*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID number of the company recording this certificate
@@ -1235,14 +1235,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * Revoked certificates can no longer be used.
      *  
      * Before you can use any exemption certificates endpoints, you must set up your company for exemption certificate data storage.
-     * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption 
-     * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption 
+     * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption
+     * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption
      * certificate storage for this company, call `RequestCertificateSetup`.
      * 
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     * * This API depends on the following active services:*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded this certificate
@@ -1272,14 +1272,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * log onto the administrative website for the product you purchased.
      *  
      * Before you can use any exemption certificates endpoints, you must set up your company for exemption certificate data storage.
-     * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption 
-     * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption 
+     * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption
+     * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption
      * certificate storage for this company, call `RequestCertificateSetup`.
      * 
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     * * This API depends on the following active services:*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded this certificate
@@ -1314,14 +1314,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * * attributes - Retrieves all attributes applied to the certificate.
      *  
      * Before you can use any exemption certificates endpoints, you must set up your company for exemption certificate data storage.
-     * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption 
-     * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption 
+     * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption
+     * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption
      * certificate storage for this company, call `RequestCertificateSetup`.
      * 
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     * * This API depends on the following active services:*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID number of the company that recorded this certificate
@@ -1352,7 +1352,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     * * This API depends on the following active services:*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The company ID to check
@@ -1381,14 +1381,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * log onto the administrative website for the product you purchased.
      *  
      * Before you can use any exemption certificates endpoints, you must set up your company for exemption certificate data storage.
-     * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption 
-     * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption 
+     * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption
+     * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption
      * certificate storage for this company, call `RequestCertificateSetup`.
      * 
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     * * This API depends on the following active services:*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded this certificate
@@ -1420,14 +1420,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * log onto the administrative website for the product you purchased.
      *  
      * Before you can use any exemption certificates endpoints, you must set up your company for exemption certificate data storage.
-     * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption 
-     * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption 
+     * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption
+     * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption
      * certificate storage for this company, call `RequestCertificateSetup`.
      * 
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     * * This API depends on the following active services:*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded this certificate
@@ -1458,14 +1458,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * log onto the administrative website for the product you purchased.
      *  
      * Before you can use any exemption certificates endpoints, you must set up your company for exemption certificate data storage.
-     * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption 
-     * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption 
+     * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption
+     * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption
      * certificate storage for this company, call `RequestCertificateSetup`.
      * 
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     * * This API depends on the following active services:*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded this certificate
@@ -1495,14 +1495,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * log onto the administrative website for the product you purchased.
      *  
      * Before you can use any exemption certificates endpoints, you must set up your company for exemption certificate data storage.
-     * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption 
-     * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption 
+     * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption
+     * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption
      * certificate storage for this company, call `RequestCertificateSetup`.
      * 
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     * * This API depends on the following active services:*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded this certificate
@@ -1536,14 +1536,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * * attributes - Retrieves all attributes applied to the certificate.
      *  
      * Before you can use any exemption certificates endpoints, you must set up your company for exemption certificate data storage.
-     * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption 
-     * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption 
+     * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption
+     * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption
      * certificate storage for this company, call `RequestCertificateSetup`.
      * 
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     * * This API depends on the following active services:*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID number of the company to search
@@ -1579,7 +1579,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     * * This API depends on the following active services:*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId 
@@ -1608,14 +1608,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * log onto the administrative website for the product you purchased.
      *  
      * Before you can use any exemption certificates endpoints, you must set up your company for exemption certificate data storage.
-     * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption 
-     * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption 
+     * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption
+     * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption
      * certificate storage for this company, call `RequestCertificateSetup`.
      * 
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     * * This API depends on the following active services:*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded this certificate
@@ -1648,14 +1648,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * log onto the administrative website for the product you purchased.
      *  
      * Before you can use any exemption certificates endpoints, you must set up your company for exemption certificate data storage.
-     * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption 
-     * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption 
+     * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption
+     * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption
      * certificate storage for this company, call `RequestCertificateSetup`.
      * 
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     * * This API depends on the following active services:*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded this certificate
@@ -1683,14 +1683,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * log onto the administrative website for the product you purchased.
      *  
      * Before you can use any exemption certificates endpoints, you must set up your company for exemption certificate data storage.
-     * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption 
-     * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption 
+     * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption
+     * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption
      * certificate storage for this company, call `RequestCertificateSetup`.
      * 
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     * * This API depends on the following active services:*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID number of the company that recorded this certificate
@@ -1721,14 +1721,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * log onto the administrative website for the product you purchased.
      *  
      * Before you can use any exemption certificates endpoints, you must set up your company for exemption certificate data storage.
-     * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption 
-     * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption 
+     * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption
+     * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption
      * certificate storage for this company, call `RequestCertificateSetup`.
      * 
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     * * This API depends on the following active services:*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded this certificate
@@ -2438,6 +2438,138 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Retrieve all unique jurisnames based on filter.
+     *
+     * ### Security Policies
+     * 
+     * * This API depends on the following active services:*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param string $country The two-character ISO-3166 code for the country.
+     * @param string $region The two or three character region code for the region.
+     * @param string $effectiveDate Used to limit the jurisnames returned.
+     * @param string $endDate Used to limit the jurisnames returned.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return \stdClass
+     */
+    public function queryJurisNames($country, $region, $effectiveDate, $endDate, $filter=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/compliance/jurisnames/{$country}/{$region}";
+        $guzzleParams = [
+            'query' => ['effectiveDate' => $effectiveDate, 'endDate' => $endDate, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Retrieve all RateOptions.
+     *
+     * This API is available by invitation only.
+     * 
+     * ### Security Policies
+     * 
+     * * This API depends on the following active services:*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param string $country The two-character ISO-3166 code for the country.
+     * @param string $region The two or three character region code for the region.
+     * @param string $effectiveDate Used to limit the jurisdictions or rates returned.
+     * @param string $endDate Used to limit the jurisdictions or rates returned.
+     * @param string $aggregationOption Aggregation method used. (See StackAggregationOption::* for a list of allowable values)
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxRegionId, taxTypeCodeName, taxSubTypeCode, taxSubTypeCodeName, rateTypeCodeName, componentRate, taxAuthorityId, cityName, countyName, effDate, endDate
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return \stdClass
+     */
+    public function queryRateOptions($country, $region, $effectiveDate, $endDate, $aggregationOption, $top=null, $skip=null, $filter=null, $orderBy=null)    {
+        $path = "/api/v2/compliance/rateOptions/{$country}/{$region}";
+        $guzzleParams = [
+            'query' => ['effectiveDate' => $effectiveDate, 'endDate' => $endDate, 'aggregationOption' => $aggregationOption, '$top' => $top, '$skip' => $skip, '$filter' => $filter, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Retrieve StateConfig information
+     *
+     * This API is available by invitation only.
+     * 
+     * ### Security Policies
+     * 
+     * * This API depends on the following active services:*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* effDate, endDate, hasBoundary, hasRates, isLocalAdmin, isLocalNexus, isSerState, minBoundaryLevelId, sstStatusId, state, stateFips, boundaryTableBaseName, stjCount, tsStateId, isJaasEnabled, hasSSTBoundary
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return \stdClass
+     */
+    public function queryStateConfig($filter=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/compliance/stateconfig";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Retrieve all State Reporting Codes based on filter.
+     *
+     * ### Security Policies
+     * 
+     * * This API depends on the following active services:*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param string $country The two-character ISO-3166 code for the country.
+     * @param string $region The two or three character region code for the region.
+     * @param string $effectiveDate Used to limit the StateReportingCodes or rates returned.
+     * @param string $endDate Used to limit the StateReportingCodes or rates returned.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* label
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return \stdClass
+     */
+    public function queryStateReportingCodes($country, $region, $effectiveDate, $endDate, $filter=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/compliance/stateReportingCodes/{$country}/{$region}";
+        $guzzleParams = [
+            'query' => ['effectiveDate' => $effectiveDate, 'endDate' => $endDate, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Retrieve all tax type mappings based on filter.
+     *
+     * ### Security Policies
+     * 
+     * * This API depends on the following active services:*Returns* (at least one of): Mrs, MRSComplianceManager, AvaTaxCsp.*Firm Managed* (for accounts managed by a firm): ARA, ARAManaged.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxTypeGroupIdSK, taxTypeIdSK, taxSubTypeIdSK, generalOrStandardRateTypeIdSK, taxTypeGroupId, taxTypeId, country, generalOrStandardRateTypeId
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return \stdClass
+     */
+    public function queryTaxTypeMappings($filter=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/compliance/taxtypemappings";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
      * Create a new contact
      *
      * Create one or more new contact objects.
@@ -2762,7 +2894,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     * * This API depends on the following active services:*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
@@ -2797,7 +2929,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     * * This API depends on the following active services:*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
@@ -2838,7 +2970,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     * * This API depends on the following active services:*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
@@ -2877,7 +3009,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     * * This API depends on the following active services:*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded the provided customer
@@ -2913,7 +3045,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     * * This API depends on the following active services:*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
@@ -2950,7 +3082,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     * * This API depends on the following active services:*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company defining customers.
@@ -2989,7 +3121,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     * * This API depends on the following active services:*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded the provided customer
@@ -3024,7 +3156,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     * * This API depends on the following active services:*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
@@ -3067,7 +3199,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     * * This API depends on the following active services:*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
@@ -3109,7 +3241,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     * * This API depends on the following active services:*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
@@ -3151,7 +3283,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     * * This API depends on the following active services:*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded the customer
@@ -3187,7 +3319,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
-     * * This API depends on the following active services:*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
@@ -3223,7 +3355,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * ### Security Policies
      * 
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin.
-     * * This API depends on the following active services:*Required* (all): AvaTaxPro.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
@@ -3859,7 +3991,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * The rate, salesRate, and useRate fields are not available on the JurisdictionModels returned by this API.
      * Swagger Name: AvaTaxClient
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* rate, salesRate, signatureCode, useRate, isAcm, isSst
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* rate, salesRate, signatureCode, useRate, isAcm, isSst, createDate, isLocalAdmin, taxAuthorityTypeId
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -3951,7 +4083,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * The rate, salesRate, and useRate fields are not available on the JurisdictionHirearchyModels returned by this API.
      * Swagger Name: AvaTaxClient
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* parentId, nexus, rate, salesRate, signatureCode, useRate, isAcm, isSst
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* parentId, nexus, rate, salesRate, signatureCode, useRate, isAcm, isSst, createDate, isLocalAdmin, taxAuthorityTypeId
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -5705,37 +5837,6 @@ class AvaTaxClient extends AvaTaxClientBase
         $guzzleParams = [
             'query' => [],
             'body' => null
-        ];
-        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
-    }
-
-    /**
-     * FREE API - Request a free trial of AvaTax
-     *
-     * Call this API to obtain a free AvaTax account.
-     *  
-     * This API is free to use. No authentication credentials are required to call this API. You must read and
-     * accept [Avalara's terms and conditions](https://www1.avalara.com/us/en/legal/terms.html) for the account to be
-     * created.
-     *  
-     * If all conditions are met, this API will grant a free trial version of AvaTax. For a list of functionality
-     * available in the free trial and its limitations, please see the [AvaTax Developer Website Free Trial page](https://developer.avalara.com/avatax/signup/).
-     *  
-     * After your free trial concludes, you will still be able to use the [Free AvaTax API Suite](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Free/).
-     * 
-     * ### Security Policies
-     * 
-     * * This API may be called without providing authentication credentials.
-     * Swagger Name: AvaTaxClient
-     * 
-     * @param FreeTrialRequestModel $model Required information to provision a free trial account.
-     * @return \stdClass
-     */
-    public function requestFreeTrial($model)    {
-        $path = "/api/v2/accounts/freetrials/request";
-        $guzzleParams = [
-            'query' => [],
-            'body' => json_encode($model)
         ];
         return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
