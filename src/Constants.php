@@ -2,7 +2,7 @@
 namespace Avalara;
 use GuzzleHttp\Client;
 
-define('AVATAX_SDK_VERSION', '24.2.0');
+define('AVATAX_SDK_VERSION', '24.4.2');
 
 /*****************************************************************************
  *                                                                           *
@@ -359,6 +359,24 @@ class StackAggregationOption
 
 /**
  * Swagger Name: AvaTaxClient
+ * AP Config Tolerance Type
+ */
+class ApConfigToleranceType
+{
+    /**
+     * RealTime
+     */
+    const C_REALTIME = 0;
+
+    /**
+     * Batch
+     */
+    const C_BATCH = 1;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
  * Status of an Avalara account
  */
 class AccountStatusId
@@ -534,6 +552,24 @@ class AdjustmentReason
      * Offline
      */
     const C_OFFLINE = 9;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * 
+ */
+class BulkImportStatus
+{    const C_NONE = 0;
+    const C_SUCCESS = 1;
+    const C_CREATED = 2;
+    const C_UPDATED = 4;
+    const C_NOTIMPORTED = 8;
+    const C_IGNORED = 16;
+    const C_ERROR = 32;
+    const C_VALIDATIONFAILED = 64;
+    const C_PARTIALSUCCESS = 128;
+    const C_INVALID = 256;
 
 }
 
@@ -1669,6 +1705,7 @@ class ErrorCodeId
     const C_INVALIDFILENAME = 1737;
     const C_NOCLASSIFICATIONFORSAMEHSCODE = 1738;
     const C_INVALIDVALUEERROR = 1739;
+    const C_ITEMDUALWRITEPARAMETERVALUEMISMATCHERROR = 1740;
 
     /**
      * SendSales API errors
@@ -1740,6 +1777,7 @@ class ErrorCodeId
     const C_FIELDLENGTHERROR = 2400;
     const C_INPUTCONTAINSBLACKLISTEDCHARACTERS = 2401;
     const C_CANNOTCREATENESTEDOBJECTS = 2402;
+    const C_INVALIDUSERNAME = 2403;
 
     /**
      * User's SubjectId not updated by DB query
@@ -2660,39 +2698,6 @@ class AddressCategoryId
 
 /**
  * Swagger Name: AvaTaxClient
- * Types of jurisdiction referenced in a transaction
- */
-class JurisTypeId
-{
-    /**
-     * State
-     */
-    const C_STA = 1;
-
-    /**
-     * County
-     */
-    const C_CTY = 2;
-
-    /**
-     * City
-     */
-    const C_CIT = 3;
-
-    /**
-     * Special
-     */
-    const C_STJ = 4;
-
-    /**
-     * Country
-     */
-    const C_CNT = 5;
-
-}
-
-/**
- * Swagger Name: AvaTaxClient
  * Describes the different types of statuses which describe an entity (company).
  */
 class NexusTypeId
@@ -2728,29 +2733,6 @@ class NexusTypeId
 
 /**
  * Swagger Name: AvaTaxClient
- * Sourcing
- */
-class Sourcing
-{
-    /**
-     * Mixed sourcing, for states that do both origin and destination calculation
-     */
-    const C_MIXED = 42;
-
-    /**
-     * Destination
-     */
-    const C_DESTINATION = 68;
-
-    /**
-     * Origin
-     */
-    const C_ORIGIN = 79;
-
-}
-
-/**
- * Swagger Name: AvaTaxClient
  * Describes nexus type id
  */
 class LocalNexusTypeId
@@ -2773,6 +2755,62 @@ class LocalNexusTypeId
      *  This value only takes effect if you set `hasLocalNexus` = true.
      */
     const C_ALL = 2;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * Types of jurisdiction referenced in a transaction
+ */
+class JurisTypeId
+{
+    /**
+     * State
+     */
+    const C_STA = 1;
+
+    /**
+     * County
+     */
+    const C_CTY = 2;
+
+    /**
+     * City
+     */
+    const C_CIT = 3;
+
+    /**
+     * Special
+     */
+    const C_STJ = 4;
+
+    /**
+     * Country
+     */
+    const C_CNT = 5;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * Sourcing
+ */
+class Sourcing
+{
+    /**
+     * Mixed sourcing, for states that do both origin and destination calculation
+     */
+    const C_MIXED = 42;
+
+    /**
+     * Destination
+     */
+    const C_DESTINATION = 68;
+
+    /**
+     * Origin
+     */
+    const C_ORIGIN = 79;
 
 }
 
@@ -3339,6 +3377,36 @@ class ChargedTo
 class DeemedSellerType
 {    const C_MARKETPLACE = 1;
     const C_MERCHANT = 2;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * /// The user can set some tolerance or threshold limits inorder to take appropriate actions when
+ *  their transactions are above or below certain threshold limits.
+ *  Account Payable (AP) status code indicates an action that needs to be taken when the tolerance/threshold falls between certain range.
+ */
+class APStatus
+{    const C_PAYASBILLEDMATCH = 0;
+    const C_SHORTPAYITEMSACCRUEMATCH = 1;
+    const C_MARKFORREVIEWMATCH = 2;
+    const C_REJECTMATCH = 3;
+    const C_PAYASBILLEDNOACCRUAL = 4;
+    const C_PAYASBILLEDACCRUEUNDERCHARGE = 5;
+    const C_SHORTPAYITEMSACCRUEUNDERCHARGE = 6;
+    const C_MARKFORREVIEWUNDERCHARGE = 7;
+    const C_REJECTUNDERCHARGE = 8;
+    const C_PAYASBILLEDOVERCHARGE = 9;
+    const C_SHORTPAYAVALARACALCULATED = 10;
+    const C_SHORTPAYITEMSACCRUEOVERCHARGE = 11;
+    const C_MARKFORREVIEWOVERCHARGE = 12;
+    const C_REJECTOVERCHARGE = 13;
+    const C_AMOUNTTHRESHOLDNOTMET = 14;
+    const C_COSTCENTEREXEMPTED = 15;
+    const C_ITEMEXEMPTED = 16;
+    const C_TRUSTEDVENDOR = 17;
+    const C_ACCRUEDBYVENDOR = 18;
+    const C_IGNORED = 19;
 
 }
 

@@ -60,21 +60,69 @@ class ACHEntryDetailModel
 class APConfigSettingRequestModel
 {
     /**
-     * @var int The Amount
+     * @var float The Amount
      */
     public $amount;
     /**
-     * @var int The Variance For Ignore
+     * @var float The Variance For Ignore
      */
     public $varianceForIgnore;
     /**
-     * @var int The Variance For Accrue
+     * @var float The Variance For Accrue
      */
     public $varianceForAccrue;
     /**
-     * @var int The Variance Percent
+     * @var float The Variance Percent
      */
     public $variancePercent;
+    /**
+     * @var string The Ap Config Tolerance Type  BATCH or REALTIME (See ApConfigToleranceType::* for a list of allowable values)
+     */
+    public $apConfigToleranceType;
+    /**
+     * @var float Pay Billed Do Not Accrue
+     */
+    public $payAsBilledNoAccrual;
+    /**
+     * @var float Pay Billed Accrue
+     */
+    public $payAsBilledAccrueUndercharge;
+    /**
+     * @var float ShortPay Items UnderCharge
+     */
+    public $shortPayItemsAccrueUndercharge;
+    /**
+     * @var float Review UnderCharge
+     */
+    public $markForReviewUndercharge;
+    /**
+     * @var float Reject UnderCharge
+     */
+    public $rejectUndercharge;
+    /**
+     * @var float Pay As BilledOvercharge
+     */
+    public $payAsBilledOvercharge;
+    /**
+     * @var float Short Pay Avalara CalculatedTax
+     */
+    public $shortPayAvalaraCalculated;
+    /**
+     * @var float Short Pay Items
+     */
+    public $shortPayItemsAccrueOvercharge;
+    /**
+     * @var float Review OverCharge
+     */
+    public $markForReviewOvercharge;
+    /**
+     * @var float Reject OverCharge
+     */
+    public $rejectOvercharge;
+    /**
+     * @var boolean Is Active
+     */
+    public $isActive;
 }
 /**
  * AP Config Setting Response Model
@@ -95,21 +143,69 @@ class APConfigSettingSuccessResponseModel
      */
     public $meta;
     /**
-     * @var int The Amount
+     * @var float The Amount
      */
     public $amount;
     /**
-     * @var int The Variance For Ignore
+     * @var float The Variance For Ignore
      */
     public $varianceForIgnore;
     /**
-     * @var int The Variance For Accrue
+     * @var float The Variance For Accrue
      */
     public $varianceForAccrue;
     /**
-     * @var int The Variance Percent
+     * @var float The Variance Percent
      */
     public $variancePercent;
+    /**
+     * @var string The Ap Config Tolerance Type  BATCH or REALTIME (See ApConfigToleranceType::* for a list of allowable values)
+     */
+    public $apConfigToleranceType;
+    /**
+     * @var float Pay Billed Do Not Accrue
+     */
+    public $payAsBilledNoAccrual;
+    /**
+     * @var float Pay Billed Accrue
+     */
+    public $payAsBilledAccrueUndercharge;
+    /**
+     * @var float ShortPay Items UnderCharge
+     */
+    public $shortPayItemsAccrueUndercharge;
+    /**
+     * @var float Review UnderCharge
+     */
+    public $markForReviewUndercharge;
+    /**
+     * @var float Reject UnderCharge
+     */
+    public $rejectUndercharge;
+    /**
+     * @var float Pay As BilledOvercharge
+     */
+    public $payAsBilledOvercharge;
+    /**
+     * @var float Short Pay Avalara CalculatedTax
+     */
+    public $shortPayAvalaraCalculated;
+    /**
+     * @var float Short Pay Items
+     */
+    public $shortPayItemsAccrueOvercharge;
+    /**
+     * @var float Review OverCharge
+     */
+    public $markForReviewOvercharge;
+    /**
+     * @var float Reject OverCharge
+     */
+    public $rejectOvercharge;
+    /**
+     * @var boolean Is Active
+     */
+    public $isActive;
 }
 /**
  * Represents one configuration setting for this account
@@ -270,6 +366,10 @@ class AccountModel
      * @var boolean Is Saml based authentication used by this account for user to login via AI.
      */
     public $isSamlEnabled;
+    /**
+     * @var boolean A boolean flag to identify if the account is deleted
+     */
+    public $isDeleted;
 }
 /**
  * Specifies a duration for which to grant TSA accounts write access.
@@ -623,6 +723,40 @@ class AdjustTransactionModel
     public $newTransaction;
 }
 /**
+ * Input model for the Advanced Rules bulk import API
+ * Swagger Name: AvaTaxClient
+ */
+class AdvancedRuleBulkImportModel
+{
+    /**
+     * @var boolean Flag to try updating existing rules instead of just append
+     */
+    public $replaceExisting;
+    /**
+     * @var AdvancedRuleExecutionModel[] List of rule executions to import
+     */
+    public $executions;
+}
+/**
+ * Output model for the Advanced Rules bulk import API
+ * Swagger Name: AvaTaxClient
+ */
+class AdvancedRuleBulkImportResultModel
+{
+    /**
+     * @var string Aggregated import result code (See BulkImportStatus::* for a list of allowable values)
+     */
+    public $importResult;
+    /**
+     * @var string Aggregated import result message
+     */
+    public $importMessage;
+    /**
+     * @var AdvancedRuleImportResultModel[] Import results for individual rule executions
+     */
+    public $executions;
+}
+/**
  * Model for retrieving customer data schema
  * Swagger Name: AvaTaxClient
  */
@@ -683,6 +817,22 @@ class AdvancedRuleExecutionModel
      * @var string Unique identifier of customer data used in rule execution
      */
     public $customerDataId;
+    /**
+     * @var string Creator of the rule
+     */
+    public $createdBy;
+    /**
+     * @var string When the rule execution was created
+     */
+    public $createdOn;
+    /**
+     * @var string Last updater of the rule execution
+     */
+    public $modifiedBy;
+    /**
+     * @var string When the rule execution was last updated
+     */
+    public $modifiedOn;
 }
 /**
  * Model for updating rule execution order
@@ -702,18 +852,6 @@ class AdvancedRuleExecutionOrderModel
 class AdvancedRuleFullDetailsModel
 {
     /**
-     * @var string The code script for the rule
-     */
-    public $script;
-    /**
-     * @var string Script run for validating customer data
-     */
-    public $customerDataValidatorScript;
-    /**
-     * @var boolean Has the rule been approved
-     */
-    public $isApproved;
-    /**
      * @var string Creator of the rule
      */
     public $createdBy;
@@ -721,18 +859,6 @@ class AdvancedRuleFullDetailsModel
      * @var string When the rule was created
      */
     public $createdOn;
-    /**
-     * @var string Last updater of the rule
-     */
-    public $modifiedBy;
-    /**
-     * @var string When the rule was last updated
-     */
-    public $modifiedOn;
-    /**
-     * @var string Approver of the rule
-     */
-    public $approvedBy;
     /**
      * @var boolean Is this a system rule as opposed to customer-facing
      */
@@ -754,10 +880,6 @@ class AdvancedRuleFullDetailsModel
      */
     public $version;
     /**
-     * @var int[] Account Ids the rule is visible for in CUP, when IsVisibleInCUP = false
-     */
-    public $accountsVisibleFor;
-    /**
      * @var string Unique identifier for a rule
      */
     public $ruleId;
@@ -777,6 +899,33 @@ class AdvancedRuleFullDetailsModel
      * @var string Execution position. Both, Before or After
      */
     public $executionPosition;
+}
+/**
+ * Model for the results of importing a single rule execution with the Advanced Rules bulk import API
+ * Swagger Name: AvaTaxClient
+ */
+class AdvancedRuleImportResultModel
+{
+    /**
+     * @var string Name of rule execution
+     */
+    public $name;
+    /**
+     * @var string Import result status code (e.g. Success, ValidationFailed, NotCreated, etc.)
+     */
+    public $importResult;
+    /**
+     * @var string Import result status message (e.g. list of validation errors)
+     */
+    public $importDetails;
+    /**
+     * @var string Rule execution unique identifier
+     */
+    public $ruleExecutionId;
+    /**
+     * @var string Unique identifier of rule to execute
+     */
+    public $ruleId;
 }
 /**
  * Model representing a lookup file for a company
@@ -851,32 +1000,6 @@ class AdvancedRuleModel
      * @var string Execution position. Both, Before or After
      */
     public $executionPosition;
-}
-/**
- * Model for toggling visibility of an advanced rule for an account
- * Swagger Name: AvaTaxClient
- */
-class AdvancedRuleVisibilityModel
-{
-    /**
-     * @var boolean Should the rule be visible or not visible
-     */
-    public $isVisible;
-    /**
-     * @var int The account Id for which the rule is to be visible/not visible
-     */
-    public $accountId;
-}
-/**
- * Model for changing the approved status of an advanced rule
- * Swagger Name: AvaTaxClient
- */
-class ApproveAdvancedRuleModel
-{
-    /**
-     * @var boolean Should the rule be approved
-     */
-    public $isApproved;
 }
 /**
  * Approve a set of filings.
@@ -2310,6 +2433,10 @@ class CompanyModel
      * @var CustomerSupplierModel[] The customers and suppliers of a company
      */
     public $supplierandcustomers;
+    /**
+     * @var boolean A boolean flag to identify if the company is deleted
+     */
+    public $isDeleted;
 }
 /**
  * Represents a parameter associated with a company.
@@ -2719,7 +2846,7 @@ class ComplianceStateConfigModel
      */
     public $country;
     /**
-     * @var int IsJaasEnabled
+     * @var boolean IsJaasEnabled
      */
     public $isJaasEnabled;
     /**
@@ -2781,6 +2908,26 @@ class ComplianceTaxRateModel
      * @var int The rate type tax type mapping id.
      */
     public $rateTypeTaxTypeMappingId;
+    /**
+     * @var string The date this rate was created.
+     */
+    public $createDate;
+    /**
+     * @var string The Source.
+     */
+    public $source;
+    /**
+     * @var string The currency Code.
+     */
+    public $currencyCode;
+    /**
+     * @var int The uom Id.
+     */
+    public $uomId;
+    /**
+     * @var string The date this rate was modified.
+     */
+    public $modifiedDate;
 }
 /**
  * A contact person for a company.
@@ -4460,9 +4607,21 @@ class DeterminationFactorModel
      */
     public $names;
     /**
-     * @var string The name of the user who created the determination factor.
+     * @var string[] The name of the user who created any applied determination factor.
      */
     public $createdBy;
+    /**
+     * @var string The determination factor entityUseCode.
+     */
+    public $entityUseCode;
+    /**
+     * @var string The determination factor exemptCertId.
+     */
+    public $exemptCertId;
+    /**
+     * @var string The determination factor exemptNo.
+     */
+    public $exemptNo;
 }
 /**
  * ViewModel to receive DomainName from user
@@ -8248,6 +8407,10 @@ class JurisdictionNexusModel
      * @var string TaxName for Nexus of Jurisdiction
      */
     public $taxName;
+    /**
+     * @var boolean Shows if system nexus records are associated with tax collection
+     */
+    public $taxableNexus;
 }
 /**
  * Represents an override of tax jurisdictions for a specific address.
@@ -9609,6 +9772,108 @@ class NexusByTaxFormModel
      * @var NexusModel[] A list of all currently-defined company nexus that are related to this tax form
      */
     public $companyNexus;
+}
+/**
+ * Reponse model for the returns specific nexus fetch API
+ * Swagger Name: AvaTaxClient
+ */
+class NexusForReturnsModel
+{
+    /**
+     * @var int The nexus's id
+     */
+    public $id;
+    /**
+     * @var int Company Id
+     */
+    public $companyId;
+    /**
+     * @var int For region nexus, the assigned id for the country.  For country nexus, null.
+     */
+    public $assignedToCountryId;
+    /**
+     * @var string The two character ISO-3166 country code of the country in which this company declared nexus.
+     */
+    public $country;
+    /**
+     * @var string The two or three character ISO region code of the region, state, or province in which this company declared nexus.
+     */
+    public $region;
+    /**
+     * @var string Jurisdiction Name
+     */
+    public $jurisName;
+    /**
+     * @var string Nexus Tax Type Group
+     */
+    public $nexusTaxTypeGroup;
+    /**
+     * @var string Nexus Type
+     */
+    public $nexusTypeId;
+    /**
+     * @var boolean Has Local Nexus?
+     */
+    public $hasLocalNexus;
+    /**
+     * @var string Local Nexus Tax Type or null if no local nexus
+     */
+    public $localNexusType;
+    /**
+     * @var int The id of the SST nexus record if there is one.
+     */
+    public $sstNexusId;
+    /**
+     * @var string If has SST Nexus, the nexus type id of the nexus
+     */
+    public $sstType;
+    /**
+     * @var string Min the effective Date can be
+     */
+    public $effectiveDate;
+    /**
+     * @var string Max the end date can be
+     */
+    public $endDate;
+    /**
+     * @var string SST Effective Date
+     */
+    public $sstEffectiveDate;
+    /**
+     * @var string SST End Date
+     */
+    public $sstEndDate;
+    /**
+     * @var boolean Has nexus parameter IsRemoteSeller?
+     */
+    public $isRemoteSeller;
+}
+/**
+ * Request model for the returns specific nexus fetch API
+ * Swagger Name: AvaTaxClient
+ */
+class NexusForReturnsRequestModel
+{
+    /**
+     * @var string Description of the desired nexus tax type group (e.g. SalesAndUse, Lodging, etc.)
+     */
+    public $nexusTaxTypeGroup;
+    /**
+     * @var string The nexus type id desired (optional) (See NexusTypeId::* for a list of allowable values)
+     */
+    public $nexusTypeId;
+    /**
+     * @var string The local nexus type id desired (optional) (See LocalNexusTypeId::* for a list of allowable values)
+     */
+    public $localNexusTypeId;
+    /**
+     * @var boolean Flag indicating whether the response should include inactive nexus entries (optional)
+     */
+    public $showHistorical;
+    /**
+     * @var boolean Flag indicating whether to only include SST nexus entries in the response (optional)
+     */
+    public $showSSTOnly;
 }
 /**
  * Represents a declaration of nexus within a particular taxing jurisdiction.
@@ -11158,6 +11423,25 @@ class RateModel
     public $type;
 }
 /**
+ * Represents RateType1703 Model
+ * Swagger Name: AvaTaxClient
+ */
+class RateType1703Model
+{
+    /**
+     * @var int RateTypeIdSK
+     */
+    public $rateTypeIdSK;
+    /**
+     * @var string RateTypeId
+     */
+    public $rateTypeId;
+    /**
+     * @var string Description
+     */
+    public $description;
+}
+/**
  * Rate type Model
  * Swagger Name: AvaTaxClient
  */
@@ -11175,6 +11459,29 @@ class RateTypeModel
      * @var string Country code for this rate type
      */
     public $country;
+}
+/**
+ * Represents RateTypeTaxTypeMappingModel Model
+ * Swagger Name: AvaTaxClient
+ */
+class RateTypeTaxTypeMappingModel
+{
+    /**
+     * @var int TaxTypeMappingId
+     */
+    public $rateTypeTaxTypeMappingId;
+    /**
+     * @var int TaxTypeMappingId
+     */
+    public $taxTypeMappingId;
+    /**
+     * @var int RateTypeIdSK
+     */
+    public $rateTypeIdSK;
+    /**
+     * @var string RateTypeId
+     */
+    public $rateTypeId;
 }
 /**
  * Rate types Model
@@ -12324,6 +12631,18 @@ class TaxRegionModel
      * @var DenormalizedJurisModel[] List of jurisdictions associated with this tax region.
      */
     public $jurisdictions;
+    /**
+     * @var string The date this tax region was created.
+     */
+    public $createDate;
+    /**
+     * @var string The date this tax region was modified.
+     */
+    public $modifiedDate;
+    /**
+     * @var string Food SER Code
+     */
+    public $foodSERCode;
 }
 /**
  * Represents a tax rule that changes the behavior of Avalara's tax engine for certain products and/or entity use codes
@@ -12543,6 +12862,25 @@ class TaxRuleProductDetailModel
     public $systemId;
 }
 /**
+ * Represents RateTypeTaxTypeMapping Model
+ * Swagger Name: AvaTaxClient
+ */
+class TaxSubType1703Model
+{
+    /**
+     * @var int TaxSubTypeIdSK
+     */
+    public $taxSubTypeIdSK;
+    /**
+     * @var string TaxSubTypeId
+     */
+    public $taxSubTypeId;
+    /**
+     * @var string Description
+     */
+    public $description;
+}
+/**
  * Represents a tax subtype
  * Swagger Name: AvaTaxClient
  */
@@ -12564,6 +12902,25 @@ class TaxSubTypeModel
      * @var string The upper level group of tax types.
      */
     public $taxTypeGroup;
+}
+/**
+ * Represents TaxType1703 Model
+ * Swagger Name: AvaTaxClient
+ */
+class TaxType1703Model
+{
+    /**
+     * @var int TaxTypeIdSK
+     */
+    public $taxTypeIdSK;
+    /**
+     * @var string TaxTypeId
+     */
+    public $taxTypeId;
+    /**
+     * @var string Description
+     */
+    public $description;
 }
 /**
  * Represents a tax type group
@@ -12807,6 +13164,10 @@ class TransactionLineDetailModel
      * @var int The unique ID number of the exemption reason for this tax detail.
      */
     public $exemptReasonId;
+    /**
+     * @var int The rule according to which portion of this detail was considered exempt.
+     */
+    public $exemptRuleId;
     /**
      * @var boolean True if this detail element represented an in-state transaction.
      */
@@ -13548,6 +13909,14 @@ class TransactionModel
      * @var string Delivery Terms (or Incoterms) refer to agreed-upon conditions between a buyer and a seller for the delivery of goods. They are three-letter   trade terms that describe the practical arrangements for the delivery of goods from sellers to buyers and set out the obligations, costs, and   risks between the two parties.  The DeliveryTerms field determines who acts as the Importer of Record and who arranges the Transport of the goods when this   information is not separately sent to AvaTax in the request. When used in conjunction with isSellerImporterOfRecord, this parameter can also   influence whether AvaTax includes Import Duty and Tax in the transaction totals. If the fields for transport or isSellerImporterOfRecord are   passed in the request and conflict with the DeliveryTerms, the values provided in the first will take priority over the DeliveryTerms   parameter. If neither transport nor isSellerImporterOfRecord is passed in the request and DeliveryTerms is passed, AvaTax will determine who   acts as Importer of Record and who arranges the Transport of the goods based on the specified DeliveryTerms. If none of these fields is   passed, AvaTax will keep the current behavior and default transport to "Seller" for goods and isSellerImporterOfRecord to "False" (i.e., the   AvaTax user does not act as Importer of record)."  Finally, this field is also used for reports.    The Delivery Terms that the user can pass are the following:  1. Ex Works (EXW)  2. Free Carrier (FCA)  3. Carrier and Insurance Paid to (CIP)  4. Carriage Paid To (CPT)  5. Delivered at Place (DAP)  6. Delivered at Place Unloaded (DPU)  7. Delivered Duty Paid (DDP)  8. Free Alongside Ship (FAS)  9. Free on Board (FOB)  10. Cost and Freight (CFR)  11. Cost, Insurance and Freight (CIF)    DAP and DDP are two delivery terms that indicate that Import Duty and Tax should be included in the transaction total. (See DeliveryTerms::* for a list of allowable values)
      */
     public $deliveryTerms;
+    /**
+     * @var string Users can set tolerance or threshold limits on transactions and inform users of appropriate actions to take  if a transaction falls outside of these values.   An Accounts Payable (AP) status code indicates the action that needs to be taken when the tolerance/threshold   falls above or below the tolerance/threshold limits.     Available AP status codes are:  1. PayAsBilledMatch  2. PayAsBilledNoAccrual  3. PayAsBilledAccrueUndercharge  4. ShortPayItemsAccrueUndercharge  5. MarkForReviewUndercharge  6. RejectUndercharge  7. ShortPayItemsAccrueOvercharge  8. MarkForReviewOvercharge  9. RejectOvercharge  10. RejectMatch  11. MarkForReviewMatch  12. ShortPayItemsAccrueMatch  13. PayAsBilledOvercharge  14. ShortPayAvalaraCalculated  15. AmountThresholdNotMet  16. TrustedVendor  17. CostCenterExempted  18. ItemExempted  19. AccruedByVendor (See APStatus::* for a list of allowable values)
+     */
+    public $apStatusCode;
+    /**
+     * @var string An Accounts Payable (AP) status indicates an action that needs to be taken when the tolerance amount falls   above or below certain threshold limits.     Available AP statuses are:  1. Ignored - No variance, pay as billed (PayAsBilledMatch)  2. Ignored - Undercharged, pay as billed (PayAsBilledNoAccrual)  3. Accrued - Pay bill and accrue undercharge variance (PayAsBilledAccrueUndercharge)  4. Accrued - Pay for items and accrue all tax (ShortPayItemsAccrueUndercharge)  5. Needs review - Undercharged (MarkForReviewUndercharge)  6. Ignored - Reject undercharged transaction (RejectUndercharge)  7. Accrued - Pay for items and accrue all tax (ShortPayItemsAccrueOvercharge)  8. Needs review - Overcharged (MarkForReviewOvercharge)  9. Ignored - Reject overcharged transaction (RejectOvercharge)  10. Ignored - No variance, reject transaction (RejectMatch)  11. Needs review - No variance (MarkForReviewMatch)  12. Accrued - No variance, pay for items and accrue all tax (ShortPayItemsAccrueMatch)  13. Ignored - Overcharged, pay as billed (PayAsBilledOvercharge)  14. Ignored - Overcharged, pay Avalara’s calculated tax (ShortPayAvalaraCalculated)  15. Ignored - Amount threshold not met (AmountThresholdNotMet)  16. Ignored - Use trusted vendor’s calculations (TrustedVendor)  17. Ignored - Cost center exempted from tax (CostCenterExempted)  18. Ignored - Item exempted from tax (ItemExempted)  19. Accrued - Accrued by Vendor (AccruedByVendor)
+     */
+    public $apStatus;
 }
 /**
  * Represents a transaction parameter.
@@ -13754,6 +14123,10 @@ class UnitOfBasisModel
      * @var string UnitOfBasis Name
      */
     public $unitOfBasis;
+    /**
+     * @var boolean A boolean value based on the current definition of a Fee in AvaTax
+     */
+    public $isFee;
 }
 /**
  * The "Unit of Measurement" model captures information about a type of measurement. Types of measurement refer to
@@ -13908,6 +14281,10 @@ class UserModel
      * @var boolean Suppress new user email
      */
     public $suppressNewUserEmail;
+    /**
+     * @var boolean A boolean flag to identify if the user is deleted
+     */
+    public $isDeleted;
 }
 /**
  * Represents a validated address
