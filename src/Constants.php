@@ -2,7 +2,7 @@
 namespace Avalara;
 use GuzzleHttp\Client;
 
-define('AVATAX_SDK_VERSION', '24.4.2');
+define('AVATAX_SDK_VERSION', '24.6.1');
 
 /*****************************************************************************
  *                                                                           *
@@ -784,6 +784,7 @@ class BatchType
     const C_CUSTOMERSUPPLIERIMPORT = 13;
     const C_VARIANCEIMPORT = 14;
     const C_COSTCENTERIMPORT = 15;
+    const C_GLACCOUNTIMPORT = 16;
 
 }
 
@@ -1706,6 +1707,8 @@ class ErrorCodeId
     const C_NOCLASSIFICATIONFORSAMEHSCODE = 1738;
     const C_INVALIDVALUEERROR = 1739;
     const C_ITEMDUALWRITEPARAMETERVALUEMISMATCHERROR = 1740;
+    const C_DUPLICATEITEMIDSINTAXCODECLASSIFICATIONREQUEST = 1741;
+    const C_TOOMANYITEMIDSINTAXCODECLASSIFICATIONREQUEST = 1742;
 
     /**
      * SendSales API errors
@@ -1833,6 +1836,16 @@ class ErrorCodeId
     const C_CONTENTNOTFOUND = 2811;
     const C_REGISTRATIONNUMBERNOTFOUND = 2812;
     const C_INVALIDCOSTCENTER = 2813;
+
+    /**
+     * Sync flow restricts one record for Item model
+     */
+    const C_TOOMANYITEMSINSYNCFLOWREQUEST = 2814;
+
+    /**
+     * IMS-2096: Recommendation status update rule
+     */
+    const C_INVALIDTAXCODEIDINRECOMMENDATIONSTATUSUPDATE = 2815;
 
     /**
      * Occurs when a Header value is incorrect or invalid in some way
@@ -3387,26 +3400,30 @@ class DeemedSellerType
  *  Account Payable (AP) status code indicates an action that needs to be taken when the tolerance/threshold falls between certain range.
  */
 class APStatus
-{    const C_PAYASBILLEDMATCH = 0;
+{    const C_NOACCRUALMATCH = 0;
     const C_SHORTPAYITEMSACCRUEMATCH = 1;
     const C_MARKFORREVIEWMATCH = 2;
     const C_REJECTMATCH = 3;
-    const C_PAYASBILLEDNOACCRUAL = 4;
-    const C_PAYASBILLEDACCRUEUNDERCHARGE = 5;
+    const C_NOACCRUALUNDERCHARGE = 4;
+    const C_ACCRUEDUNDERCHARGE = 5;
     const C_SHORTPAYITEMSACCRUEUNDERCHARGE = 6;
-    const C_MARKFORREVIEWUNDERCHARGE = 7;
+    const C_NEEDREVIEWUNDERCHARGE = 7;
     const C_REJECTUNDERCHARGE = 8;
-    const C_PAYASBILLEDOVERCHARGE = 9;
+    const C_NOACCRUALOVERCHARGE = 9;
     const C_SHORTPAYAVALARACALCULATED = 10;
     const C_SHORTPAYITEMSACCRUEOVERCHARGE = 11;
     const C_MARKFORREVIEWOVERCHARGE = 12;
     const C_REJECTOVERCHARGE = 13;
-    const C_AMOUNTTHRESHOLDNOTMET = 14;
-    const C_COSTCENTEREXEMPTED = 15;
-    const C_ITEMEXEMPTED = 16;
-    const C_TRUSTEDVENDOR = 17;
-    const C_ACCRUEDBYVENDOR = 18;
-    const C_IGNORED = 19;
+    const C_NOACCRUALAMOUNTTHRESHOLDNOTMET = 14;
+    const C_NOACCRUALEXEMPTEDCOSTCENTER = 15;
+    const C_NOACCRUALEXEMPTEDITEM = 16;
+    const C_NOACCRUALTRUSTEDVENDOR = 17;
+    const C_ACCRUEDVENDOR = 18;
+    const C_NEEDREVIEWVENDOR = 19;
+    const C_NOACCRUALEXEMPTEDVENDOR = 20;
+    const C_NOACCRUALEXEMPTEDGLACCOUNT = 21;
+    const C_PENDINGACCRUALVENDOR = 22;
+    const C_PENDINGACCRUALUNDERCHARGE = 23;
 
 }
 

@@ -1864,33 +1864,6 @@ class ChangeTransactionCodeModel
     public $newCode;
 }
 /**
- * Represents classification details model
- * Swagger Name: AvaTaxClient
- */
-class ClassificationDetailsModel
-{
-    /**
-     * @var int The number of items which are classified
-     */
-    public $classified;
-    /**
-     * @var int The number of items which are in progress state
-     */
-    public $inProgress;
-    /**
-     * @var int The number of items which are not classified
-     */
-    public $notClassified;
-    /**
-     * @var int The number of items which are failed because of some error
-     */
-    public $failed;
-    /**
-     * @var int The number of items which are not found as they may be deleted
-     */
-    public $notFound;
-}
-/**
  * Represents a classification for a given item.
  * Swagger Name: AvaTaxClient
  */
@@ -1928,13 +1901,17 @@ class ClassificationParameterUsageMapModel
      */
     public $taxTypeGroupId;
     /**
-     * @var string This defines if the parameter is recommeded ,optional or mandatory (See Visibility::* for a list of allowable values)
+     * @var string This defines if the parameter is recommended ,optional or mandatory (See Visibility::* for a list of allowable values)
      */
     public $visibility;
     /**
      * @var string The type of parameter as determined by its application, e.g. Product, Transaction, Calculated
      */
     public $attributeType;
+    /**
+     * @var string The sub-type of parameter as determined by its application.
+     */
+    public $attributeSubType;
     /**
      * @var string The name of the property. To use this property, add a field on the `parameters` object of a [CreateTransaction](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Transactions/CreateTransaction/) call.
      */
@@ -6570,6 +6547,17 @@ class FilingsTaxSummaryModel
     public $reportableTaxAmount;
 }
 /**
+ * Filter Model
+ * Swagger Name: AvaTaxClient
+ */
+class FilterModel
+{
+    /**
+     * @var string Filter
+     */
+    public $filter;
+}
+/**
  * Account Linkage Input model
  * Swagger Name: AvaTaxClient
  */
@@ -7285,6 +7273,117 @@ class FundingStatusModel
     public $templateRequestId;
 }
 /**
+ * Represents a bulk upload input model.
+ * Swagger Name: AvaTaxClient
+ */
+class GLAccountBulkUploadInputModel
+{
+    /**
+     * @var GLAccountRequestModel[] List of GL accounts
+     */
+    public $glAccounts;
+}
+/**
+ * Represents a bulk upload response model.
+ * Swagger Name: AvaTaxClient
+ */
+class GLAccountBulkUploadOutputModel
+{
+    /**
+     * @var int The total number of processed objects
+     */
+    public $total;
+    /**
+     * @var GLAccountUploadErrorModel[] A dictionary of the object and a respective list of errors
+     */
+    public $failed;
+}
+/**
+ * GL account request model
+ * Swagger Name: AvaTaxClient
+ */
+class GLAccountRequestModel
+{
+    /**
+     * @var string The entity use code
+     */
+    public $entityUseCode;
+    /**
+     * @var string The "effective from" date
+     */
+    public $effectiveDate;
+    /**
+     * @var string The end date
+     */
+    public $endDate;
+    /**
+     * @var Int64TaxProfileObjectReferenceModel 
+     */
+    public $defaultItem;
+    /**
+     * @var string The GL account code
+     */
+    public $glAccountCode;
+}
+/**
+ * GL account response model
+ * Swagger Name: AvaTaxClient
+ */
+class GLAccountSuccessResponseModel
+{
+    /**
+     * @var int The GL account ID
+     */
+    public $glAccountId;
+    /**
+     * @var int The company ID to which this GL account belongs
+     */
+    public $companyId;
+    /**
+     * @var TaxProfileMetaDataModel 
+     */
+    public $meta;
+    /**
+     * @var string The entity use code
+     */
+    public $entityUseCode;
+    /**
+     * @var string The "effective from" date
+     */
+    public $effectiveDate;
+    /**
+     * @var string The end date
+     */
+    public $endDate;
+    /**
+     * @var Int64TaxProfileObjectReferenceModel 
+     */
+    public $defaultItem;
+    /**
+     * @var string The GL account code
+     */
+    public $glAccountCode;
+}
+/**
+ * Represents a GL account upload error model
+ * Swagger Name: AvaTaxClient
+ */
+class GLAccountUploadErrorModel
+{
+    /**
+     * @var int Row index of a GL account
+     */
+    public $rowIndex;
+    /**
+     * @var string GL Account code
+     */
+    public $glAccountCode;
+    /**
+     * @var string[] List of errors for against given GL account code
+     */
+    public $errors;
+}
+/**
  * 
  * Swagger Name: AvaTaxClient
  */
@@ -7539,17 +7638,21 @@ class ItemCatalogueInputModel
      */
     public $description;
     /**
-     * @var string A summary for selection of the tax code.
-     */
-    public $summary;
-    /**
      * @var string The tax code of the item.
      */
     public $taxCode;
     /**
+     * @var string Type of item
+     */
+    public $itemType;
+    /**
      * @var string The universal product code of the item.
      */
     public $upc;
+    /**
+     * @var string A summary for selection of the tax code.
+     */
+    public $summary;
     /**
      * @var string A way to group similar items.
      */
@@ -7686,11 +7789,11 @@ class ItemModel
      */
     public $itemCode;
     /**
-     * @var int DEPRECATED - Date: 11/13/2018, Version: 18.12, Message: For identifying an `Item` with `Avalara TaxCode`, please call the [CreateItemClassification API] with your ItemCode and the Avalara TaxCode.  The unique ID number of the tax code that is applied when selling this item.  When creating or updating an item, you can either specify the Tax Code ID number or the Tax Code string; you do not need to specify both values.
+     * @var int The unique ID number of the tax code that is applied when selling this item.  When creating or updating an item, you can either specify the Tax Code ID number or the Tax Code string;  you do not need to specify both values.
      */
     public $taxCodeId;
     /**
-     * @var string DEPRECATED - Date: 11/13/2018, Version: 18.12, Message: For identifying an `Item` with `Avalara TaxCode`, please call the [CreateItemClassification API] with your ItemCode and the Avalara TaxCode.  The unique code string of the Tax Code that is applied when selling this item.  When creating or updating an item, you can either specify the Tax Code ID number or the Tax Code string; you do not need to specify both values.
+     * @var string The unique code string of the Tax Code that is applied when selling this item.  When creating or updating an item, you can either specify the Tax Code ID number or the Tax Code string;  you do not need to specify both values.
      */
     public $taxCode;
     /**
@@ -7722,7 +7825,7 @@ class ItemModel
      */
     public $modifiedUserId;
     /**
-     * @var string Source of creation of this item
+     * @var string Source of creation of this.
      */
     public $source;
     /**
@@ -7730,11 +7833,19 @@ class ItemModel
      */
     public $sourceEntityId;
     /**
+     * @var string Type of item
+     */
+    public $itemType;
+    /**
      * @var string Universal unique code for item
      */
     public $upc;
     /**
-     * @var ClassificationModel[] List of classifications that belong to this item.  A single classification consits of a productCode and a systemCode for a particular item.
+     * @var string Long Summary for Item
+     */
+    public $summary;
+    /**
+     * @var ClassificationModel[] List of classifications that belong to this item.  A single classification consists of a productCode and a systemCode for a particular item.
      */
     public $classifications;
     /**
@@ -7749,6 +7860,14 @@ class ItemModel
      * @var object Additional key-description of the product.
      */
     public $properties;
+    /**
+     * @var ItemStatusOutputModel[] List of item status
+     */
+    public $itemStatus;
+    /**
+     * @var TaxCodeRecommendationStatusOutputModel 
+     */
+    public $taxCodeRecommendationStatus;
 }
 /**
  * Represents a parameter associated with an item.
@@ -7950,6 +8069,36 @@ class ItemRestrictionOutputModel
     public $createdUserId;
 }
 /**
+ * Status Output Model
+ * Swagger Name: AvaTaxClient
+ */
+class ItemStatusModel
+{
+    /**
+     * @var string Status
+     */
+    public $name;
+    /**
+     * @var string Description
+     */
+    public $description;
+}
+/**
+ * Output model for item status
+ * Swagger Name: AvaTaxClient
+ */
+class ItemStatusOutputModel
+{
+    /**
+     * @var string Item Status
+     */
+    public $status;
+    /**
+     * @var string Last modified date
+     */
+    public $modifiedDate;
+}
+/**
  * An abridged item model used for syncing product catalogs with AvaTax.
  * Swagger Name: AvaTaxClient
  */
@@ -8029,17 +8178,9 @@ class ItemTagDetailOutputModel
 class ItemTaxCodeClassificationRequestInputModel
 {
     /**
-     * @var boolean Determines if classification has to be initiated for all items of a company
-     */
-    public $classifyAllItems;
-    /**
      * @var int[] Item ids for which classification has to be initiated
      */
     public $itemIds;
-    /**
-     * @var string[] Product categories of items
-     */
-    public $productCategories;
 }
 /**
  * Represents a tax code classification request output model
@@ -8048,11 +8189,11 @@ class ItemTaxCodeClassificationRequestInputModel
 class ItemTaxCodeClassificationRequestOutputModel
 {
     /**
-     * @var int The unique ID of the classification request
+     * @var int The unique Request Id of classification request
      */
     public $requestId;
     /**
-     * @var int The unique ID of the company that created the classification request.
+     * @var int The unique ID number of the company that has created classification request.
      */
     public $companyId;
     /**
@@ -8060,11 +8201,11 @@ class ItemTaxCodeClassificationRequestOutputModel
      */
     public $request;
     /**
-     * @var string The status of the classification request
+     * @var string The status of classification request
      */
     public $status;
     /**
-     * @var string The request type of the classification request
+     * @var string The request type of classification request
      */
     public $requestType;
     /**
@@ -8081,69 +8222,19 @@ class ItemTaxCodeClassificationRequestOutputModel
     public $modifiedDate;
 }
 /**
- * Represents a tax code classification request status output model
+ * Status Output Model
  * Swagger Name: AvaTaxClient
  */
-class ItemTaxCodeClassificationRequestStatusOutputModel
+class ItemTaxCodeRecommendationStatusModel
 {
     /**
-     * @var int The unique Request Id of classification request
+     * @var string Status
      */
-    public $requestId;
+    public $name;
     /**
-     * @var ClassificationDetailsModel 
-     */
-    public $classificationDetails;
-    /**
-     * @var int The total number of items for which classification is initiated in request
-     */
-    public $totalItems;
-    /**
-     * @var string The status of classification request
-     */
-    public $status;
-    /**
-     * @var string The date/time when this request was created.
-     */
-    public $createdDate;
-}
-/**
- * Represents item tax code model
- * Swagger Name: AvaTaxClient
- */
-class ItemTaxCodeModel
-{
-    /**
-     * @var string Suggested tax code
-     */
-    public $taxCode;
-    /**
-     * @var string Suggested tax code description
+     * @var string Description
      */
     public $description;
-    /**
-     * @var int Priority of Suggested tax code description
-     */
-    public $rank;
-}
-/**
- * Represents item tax code recommendations model
- * Swagger Name: AvaTaxClient
- */
-class ItemTaxCodeRecommendationsOutputModel
-{
-    /**
-     * @var string A unique code representing this item.
-     */
-    public $itemCode;
-    /**
-     * @var ItemTaxCodeModel[] Item tax code recommendations
-     */
-    public $recommendations;
-    /**
-     * @var string Url
-     */
-    public $url;
 }
 /**
  * Represents a item upload error model.
@@ -10973,6 +11064,10 @@ class ParameterModel
      */
     public $attributeType;
     /**
+     * @var string The sub-type of parameter as determined by its application.
+     */
+    public $attributeSubType;
+    /**
      * @var string[] If the parameter is of enumeration data type, then this list will be populated with all of the possible enumeration values.
      */
     public $values;
@@ -11031,6 +11126,10 @@ class ParameterUsageModel
      * @var string The type of parameter as determined by its application, e.g. Product, Transaction, Calculated
      */
     public $attributeType;
+    /**
+     * @var string The sub-type of parameter as determined by its application.
+     */
+    public $attributeSubType;
     /**
      * @var string The name of the property. To use this property, add a field on the `parameters` object of a [CreateTransaction](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Transactions/CreateTransaction/) call.
      */
@@ -11817,21 +11916,6 @@ class ResourceFileDownloadResult
     public $contentType;
 }
 /**
- * Resource File Type Model
- * Swagger Name: AvaTaxClient
- */
-class ResourceFileTypeModel
-{
-    /**
-     * @var int The resource file type id
-     */
-    public $resourceFileTypeId;
-    /**
-     * @var string The name of the file type
-     */
-    public $name;
-}
-/**
  * A request to upload a file to Resource Files
  * Swagger Name: AvaTaxClient
  */
@@ -11858,32 +11942,9 @@ class ResourceFileUploadRequestModel
      */
     public $name;
     /**
-     * @var int The resource type ID of this file.
-     */
-    public $resourceFileTypeId;
-    /**
      * @var int Length of the file in bytes.
      */
     public $length;
-}
-/**
- * Encapsulates the result of uploading a file to the resource system
- * Swagger Name: AvaTaxClient
- */
-class ResourceFileUploadResultModel
-{
-    /**
-     * @var string If the request failed, this contains a description of the error.
-     */
-    public $message;
-    /**
-     * @var int If the request succeeded, this is the ID number of the file.
-     */
-    public $resourceFileId;
-    /**
-     * @var boolean True if the upload request succeeded.
-     */
-    public $aaa_success;
 }
 /**
  * usage of system defined parameters for returns.
@@ -11911,6 +11972,10 @@ class ReturnsParameterUsageModel
      * @var string The type of parameter as determined by its application, e.g. Product, Transaction, Calculated
      */
     public $attributeType;
+    /**
+     * @var string The sub-type of parameter as determined by its application.
+     */
+    public $attributeSubType;
     /**
      * @var string The name of the property. To use this property, add a field on the `parameters` object of a [CreateTransaction](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Transactions/CreateTransaction/) call.
      */
@@ -12352,6 +12417,36 @@ class TaxCodeModel
      * @var int The user ID of the user who last modified this record.
      */
     public $modifiedUserId;
+}
+/**
+ * Output model for item tax code recommendation status
+ * Swagger Name: AvaTaxClient
+ */
+class TaxCodeRecommendationStatusOutputModel
+{
+    /**
+     * @var string Recommendation status
+     */
+    public $status;
+    /**
+     * @var string Status message
+     */
+    public $message;
+}
+/**
+ * Tax Code Recommendation Output Model
+ * Swagger Name: AvaTaxClient
+ */
+class TaxCodeRecommendationsOutputModel
+{
+    /**
+     * @var string Recommended TaxCode
+     */
+    public $taxCode;
+    /**
+     * @var string Recommended TaxCode Level
+     */
+    public $level;
 }
 /**
  * Information about Avalara-defined tax code types.
@@ -13910,11 +14005,11 @@ class TransactionModel
      */
     public $deliveryTerms;
     /**
-     * @var string Users can set tolerance or threshold limits on transactions and inform users of appropriate actions to take  if a transaction falls outside of these values.   An Accounts Payable (AP) status code indicates the action that needs to be taken when the tolerance/threshold   falls above or below the tolerance/threshold limits.     Available AP status codes are:  1. PayAsBilledMatch  2. PayAsBilledNoAccrual  3. PayAsBilledAccrueUndercharge  4. ShortPayItemsAccrueUndercharge  5. MarkForReviewUndercharge  6. RejectUndercharge  7. ShortPayItemsAccrueOvercharge  8. MarkForReviewOvercharge  9. RejectOvercharge  10. RejectMatch  11. MarkForReviewMatch  12. ShortPayItemsAccrueMatch  13. PayAsBilledOvercharge  14. ShortPayAvalaraCalculated  15. AmountThresholdNotMet  16. TrustedVendor  17. CostCenterExempted  18. ItemExempted  19. AccruedByVendor (See APStatus::* for a list of allowable values)
+     * @var string Users can set tolerance or threshold limits on transactions and inform users of appropriate actions to take  if a transaction falls outside of these values.   An Accounts Payable (AP) status code indicates the action that needs to be taken when the tolerance/threshold   falls above or below the tolerance/threshold limits.     Available AP status codes are:  1. NoAccrualMatch  2. NoAccrualUndercharge  3. NoAccrualOvercharge  4. NoAccrualAmountThresholdNotMet  5. NoAccrualTrustedVendor  6. NoAccrualExemptedCostCenter  7. NoAccrualExemptedItem  8. NoAccrualExemptedVendor  9. AccruedUndercharge  10. AccruedVendor  11. NeedReviewUndercharge  12. NeedReviewVendor  13. PendingAccrualVendor  14. PendingAccrualUndercharge (See APStatus::* for a list of allowable values)
      */
     public $apStatusCode;
     /**
-     * @var string An Accounts Payable (AP) status indicates an action that needs to be taken when the tolerance amount falls   above or below certain threshold limits.     Available AP statuses are:  1. Ignored - No variance, pay as billed (PayAsBilledMatch)  2. Ignored - Undercharged, pay as billed (PayAsBilledNoAccrual)  3. Accrued - Pay bill and accrue undercharge variance (PayAsBilledAccrueUndercharge)  4. Accrued - Pay for items and accrue all tax (ShortPayItemsAccrueUndercharge)  5. Needs review - Undercharged (MarkForReviewUndercharge)  6. Ignored - Reject undercharged transaction (RejectUndercharge)  7. Accrued - Pay for items and accrue all tax (ShortPayItemsAccrueOvercharge)  8. Needs review - Overcharged (MarkForReviewOvercharge)  9. Ignored - Reject overcharged transaction (RejectOvercharge)  10. Ignored - No variance, reject transaction (RejectMatch)  11. Needs review - No variance (MarkForReviewMatch)  12. Accrued - No variance, pay for items and accrue all tax (ShortPayItemsAccrueMatch)  13. Ignored - Overcharged, pay as billed (PayAsBilledOvercharge)  14. Ignored - Overcharged, pay Avalara’s calculated tax (ShortPayAvalaraCalculated)  15. Ignored - Amount threshold not met (AmountThresholdNotMet)  16. Ignored - Use trusted vendor’s calculations (TrustedVendor)  17. Ignored - Cost center exempted from tax (CostCenterExempted)  18. Ignored - Item exempted from tax (ItemExempted)  19. Accrued - Accrued by Vendor (AccruedByVendor)
+     * @var string An Accounts Payable (AP) status indicates an action that needs to be taken when the tolerance amount falls   above or below certain threshold limits.
      */
     public $apStatus;
 }
