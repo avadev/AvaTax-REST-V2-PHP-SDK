@@ -431,6 +431,49 @@ class ActivateAccountModel
     public $haveReadAvalaraTermsAndConditions;
 }
 /**
+ * Certificate with exemption reason and exposure zone. Exposed in url $includes
+ * Swagger Name: AvaTaxClient
+ */
+class ActiveCertificateModel
+{
+    /**
+     * @var int Certificate ID.
+     */
+    public $id;
+    /**
+     * @var string Created date time
+     */
+    public $created;
+    /**
+     * @var string Modified date time
+     */
+    public $modified;
+    /**
+     * @var string Certificate's expected tax number
+     */
+    public $expectedTaxNumber;
+    /**
+     * @var string Certificate's actual tax number
+     */
+    public $actualTaxNumber;
+    /**
+     * @var ExposureZoneModel 
+     */
+    public $exposureZone;
+    /**
+     * @var ExemptionReasonModel 
+     */
+    public $expectedTaxCode;
+    /**
+     * @var ExemptionReasonModel 
+     */
+    public $actualTaxCode;
+    /**
+     * @var CertificateModel 
+     */
+    public $certificate;
+}
+/**
  * Model to add specific lines to exising transaction
  * Swagger Name: AvaTaxClient
  */
@@ -1011,6 +1054,49 @@ class ApproveFilingsModel
      * @var boolean Set this value to true in order to approve the filings.
      */
     public $approve;
+}
+/**
+ * 
+ * Swagger Name: AvaTaxClient
+ */
+class AssociatedObjectDeletedErrorDetailsModel
+{
+    /**
+     * @var string  (See ErrorCodeId::* for a list of allowable values)
+     */
+    public $code;
+    /**
+     * @var int 
+     */
+    public $number;
+    /**
+     * @var string 
+     */
+    public $message;
+    /**
+     * @var string 
+     */
+    public $description;
+    /**
+     * @var string 
+     */
+    public $faultCode;
+    /**
+     * @var string 
+     */
+    public $faultSubCode;
+    /**
+     * @var string 
+     */
+    public $helpLink;
+    /**
+     * @var string 
+     */
+    public $refersTo;
+    /**
+     * @var string  (See SeverityLevel::* for a list of allowable values)
+     */
+    public $severity;
 }
 /**
  * 
@@ -1733,6 +1819,56 @@ class CertificateAttributeModel
     public $isSystemCode;
 }
 /**
+ * Invalid reason for the certificate
+ * Swagger Name: AvaTaxClient
+ */
+class CertificateInvalidReasonModel
+{
+    /**
+     * @var int 
+     */
+    public $id;
+    /**
+     * @var string 
+     */
+    public $name;
+    /**
+     * @var string 
+     */
+    public $description;
+    /**
+     * @var boolean 
+     */
+    public $systemCode;
+}
+/**
+ * certificate log for a customer. Exposed in url $includes
+ * Swagger Name: AvaTaxClient
+ */
+class CertificateLogModel
+{
+    /**
+     * @var int Log ID
+     */
+    public $id;
+    /**
+     * @var int Certificate ID
+     */
+    public $certificateId;
+    /**
+     * @var string Account name
+     */
+    public $account;
+    /**
+     * @var string Log description
+     */
+    public $entry;
+    /**
+     * @var string Date of creation for log entry
+     */
+    public $created;
+}
+/**
  * A certificate is a document stored in either AvaTax Exemptions or CertCapture. The certificate document
  * can contain information about a customer's eligibility for exemption from sales or use taxes based on
  * criteria you specify when you store the certificate. To view or manage your certificates directly, please
@@ -1798,6 +1934,10 @@ class CertificateModel
      */
     public $status;
     /**
+     * @var string The status of the certificate as displayed on https://exemptions.avalara.com. Can take values (See CertificateEcmStatus::* for a list of allowable values)
+     */
+    public $ecmStatus;
+    /**
      * @var string The date/time when this record was created.
      */
     public $createdDate;
@@ -1833,6 +1973,26 @@ class CertificateModel
      * @var CertificateAttributeModel[] A list of certificate attributes that apply to this certificate.     You can fetch this data by specifying `$include=attributes` when calling a certificate fetch API.
      */
     public $attributes;
+    /**
+     * @var HistoryModel[] A list of certificate update histories for this certificate.     You can fetch this data by specifying `$include=histories` when calling a certificate fetch API.
+     */
+    public $histories;
+    /**
+     * @var CustomerJobModel[] A list of certificate update histories for this certificate.     You can fetch this data by specifying `$include=jobs` when calling a certificate fetch API.
+     */
+    public $jobs;
+    /**
+     * @var CertificateLogModel[] A list of certificate logs for this certificate.     You can fetch this data by specifying `$include=logs` when calling a certificate fetch API.
+     */
+    public $logs;
+    /**
+     * @var CertificateInvalidReasonModel[] A list of invalid reasons if the certificate status is not valid     You can fetch this data by specifying `$include=invalid_reasons` when calling a certificate fetch API.
+     */
+    public $invalidReasons;
+    /**
+     * @var CustomFieldModel[] A list of custom defined fields for this certificate     You can fetch this data by specifying `$include=custom_fields` when calling a certificate fetch API.
+     */
+    public $customFields;
     /**
      * @var int The unique ID number of current AvaTax Exemption Certificate that refers this certificate.
      */
@@ -3290,6 +3450,29 @@ class CountryCoefficientsResponseModel
     public $message;
 }
 /**
+ * Defines a country as known to Avalara's certificate management system.
+ * Swagger Name: AvaTaxClient
+ */
+class CountryModel
+{
+    /**
+     * @var int The unique ID number of this country as defined in Avalara's certificate management system.
+     */
+    public $id;
+    /**
+     * @var string The name of this country in US English.
+     */
+    public $name;
+    /**
+     * @var string The three-character ISO 3166 code for this country.
+     */
+    public $initials;
+    /**
+     * @var string The two-character ISO 3166 code for this country.
+     */
+    public $abbreviation;
+}
+/**
  * The CoverLetter model represents a message sent along with an invitation to use CertExpress to
  * upload certificates. An invitation allows customers to use CertExpress to upload their exemption
  * certificates directly; this cover letter explains why the invitation was sent.
@@ -3480,7 +3663,7 @@ class CreateMultiDocumentModel
      */
     public $taxOverride;
     /**
-     * @var string The three-character ISO 4217 currency code for this transaction.
+     * @var string The three-character ISO 4217 currency code representing the ‘invoice currency’ (the currency the transaction was invoiced in).   If this is different than the currency the tax liability needs to be reported in, you’ll also need to provide the   `exchangeRateCurrencyCode` and the `exchangeRate` for conversion to the reporting country.
      */
     public $currencyCode;
     /**
@@ -3488,7 +3671,7 @@ class CreateMultiDocumentModel
      */
     public $serviceMode;
     /**
-     * @var float Currency exchange rate from this transaction to the company base currency.     This only needs to be set if the transaction currency is different than the company base currency.  It defaults to 1.0.
+     * @var float The currency exchange rate from the invoice currency (`currencyCode`) to the reporting currency (`exchangeRateCurrencyCode`).  This only needs to be set if the invoice currency and the reporting currency are different. It defaults to 1.0.
      */
     public $exchangeRate;
     /**
@@ -3496,7 +3679,7 @@ class CreateMultiDocumentModel
      */
     public $exchangeRateEffectiveDate;
     /**
-     * @var string Optional three-character ISO 4217 reporting exchange rate currency code for this transaction. The default value is USD.
+     * @var string The three-character ISO 4217 currency code representing the ‘reporting currency’ (the currency the transaction’s tax liability needs to be reported in).   You can leave this blank if the invoice currency provided in the `currencyCode` field is also the reporting currency.
      */
     public $exchangeRateCurrencyCode;
     /**
@@ -3758,7 +3941,7 @@ class CreateTransactionModel
      */
     public $taxOverride;
     /**
-     * @var string The three-character ISO 4217 currency code for this transaction.
+     * @var string The three-character ISO 4217 currency code representing the ‘invoice currency’ (the currency the transaction was invoiced in).   If this is different than the currency the tax liability needs to be reported in, you’ll also need to provide the   `exchangeRateCurrencyCode` and the `exchangeRate` for conversion to the reporting country.
      */
     public $currencyCode;
     /**
@@ -3766,7 +3949,7 @@ class CreateTransactionModel
      */
     public $serviceMode;
     /**
-     * @var float Currency exchange rate from this transaction to the company base currency.     This only needs to be set if the transaction currency is different than the company base currency.  It defaults to 1.0.
+     * @var float The currency exchange rate from the invoice currency (`currencyCode`) to the reporting currency (`exchangeRateCurrencyCode`).  This only needs to be set if the invoice currency and the reporting currency are different. It defaults to 1.0.
      */
     public $exchangeRate;
     /**
@@ -3774,7 +3957,7 @@ class CreateTransactionModel
      */
     public $exchangeRateEffectiveDate;
     /**
-     * @var string Optional three-character ISO 4217 reporting exchange rate currency code for this transaction. The default value is USD.
+     * @var string The three-character ISO 4217 currency code representing the ‘reporting currency’ (the currency the transaction’s tax liability needs to be reported in).   You can leave this blank if the invoice currency provided in the `currencyCode` field is also the reporting currency.
      */
     public $exchangeRateCurrencyCode;
     /**
@@ -3845,9 +4028,29 @@ class CurrencyModel
 class CustomFieldModel
 {
     /**
+     * @var int Custom field ID
+     */
+    public $id;
+    /**
      * @var string The name of the custom field.
      */
     public $name;
+    /**
+     * @var string Custom field type
+     */
+    public $type;
+    /**
+     * @var string 
+     */
+    public $possibleValues;
+    /**
+     * @var boolean Custom field uses data entry or not?
+     */
+    public $usesDataEntry;
+    /**
+     * @var boolean Custom field is required in data entry or not?
+     */
+    public $requiredInDataEntry;
     /**
      * @var string The value of the custom field.
      */
@@ -3884,6 +4087,25 @@ class CustomerAttributeModel
      * @var boolean A flag denotes that this attribute can't be removed/added to a customer record
      */
     public $isChangeable;
+}
+/**
+ * Customer job model. Exposed in url $includes
+ * Swagger Name: AvaTaxClient
+ */
+class CustomerJobModel
+{
+    /**
+     * @var int ID
+     */
+    public $id;
+    /**
+     * @var int Job number
+     */
+    public $jobNumber;
+    /**
+     * @var string Job name
+     */
+    public $name;
 }
 /**
  * Represents a customer to whom you sell products and/or services.
@@ -3992,6 +4214,10 @@ class CustomerModel
      */
     public $exposureZones;
     /**
+     * @var CustomerModel[] A list of bill-to customer records that are connected to this ship-to customer.     Customer records represent businesses or individuals who can provide exemption certificates. Some customers  may have certificates that are linked to their shipping address or their billing address. To group these  customer records together, you may link multiple bill-to and ship-to addresses together to represent a single  entity that has multiple different addresses of different kinds.
+     */
+    public $billTos;
+    /**
      * @var CustomerModel[] A list of ship-to customer records that are connected to this bill-to customer.     Customer records represent businesses or individuals who can provide exemption certificates. Some customers  may have certificates that are linked to their shipping address or their billing address. To group these  customer records together, you may link multiple bill-to and ship-to addresses together to represent a single  entity that has multiple different addresses of different kinds.
      */
     public $shipTos;
@@ -3999,6 +4225,26 @@ class CustomerModel
      * @var CustomerAttributeModel[] A list of attributes that apply to this customer.     You can fetch this data by specifying `$include=attributes` when calling a customer fetch API.
      */
     public $attributes;
+    /**
+     * @var ActiveCertificateModel[] List if active certificates with exemption reasons
+     */
+    public $activeCertificates;
+    /**
+     * @var HistoryModel[] List of field update histories for this customer
+     */
+    public $histories;
+    /**
+     * @var CustomerJobModel[] List of jobs for this customer
+     */
+    public $jobs;
+    /**
+     * @var CertificateLogModel[] List of logs for this customer
+     */
+    public $logs;
+    /**
+     * @var StateModel[] List of states where this customer ships to
+     */
+    public $shipToStates;
 }
 /**
  * Represents a parameter associated with a company.
@@ -7384,6 +7630,37 @@ class GLAccountUploadErrorModel
     public $errors;
 }
 /**
+ * Update history for Avalara.AvaTax.AccountServices.Models.v2.CustomerModel and Avalara.AvaTax.AccountServices.Models.v2.CertificateModel. Exposed in url $includes
+ * Swagger Name: AvaTaxClient
+ */
+class HistoryModel
+{
+    /**
+     * @var int ID
+     */
+    public $id;
+    /**
+     * @var string Account name whose history this is
+     */
+    public $account;
+    /**
+     * @var string Field name which is updated
+     */
+    public $field;
+    /**
+     * @var string Old value of the field
+     */
+    public $oldValue;
+    /**
+     * @var string New value of the field
+     */
+    public $newValue;
+    /**
+     * @var string Date of creation of this history object
+     */
+    public $created;
+}
+/**
  * 
  * Swagger Name: AvaTaxClient
  */
@@ -7868,6 +8145,10 @@ class ItemModel
      * @var TaxCodeRecommendationStatusOutputModel 
      */
     public $taxCodeRecommendationStatus;
+    /**
+     * @var TaxCodeRecommendationOutputModel[] Item tax code recommendations
+     */
+    public $taxCodeRecommendations;
 }
 /**
  * Represents a parameter associated with an item.
@@ -10984,6 +11265,49 @@ class NotificationModel
     public $modifiedDate;
 }
 /**
+ * 
+ * Swagger Name: AvaTaxClient
+ */
+class ObjectDeletedErrorModel
+{
+    /**
+     * @var string  (See ErrorCodeId::* for a list of allowable values)
+     */
+    public $code;
+    /**
+     * @var int 
+     */
+    public $number;
+    /**
+     * @var string 
+     */
+    public $message;
+    /**
+     * @var string 
+     */
+    public $description;
+    /**
+     * @var string 
+     */
+    public $faultCode;
+    /**
+     * @var string 
+     */
+    public $faultSubCode;
+    /**
+     * @var string 
+     */
+    public $helpLink;
+    /**
+     * @var string 
+     */
+    public $refersTo;
+    /**
+     * @var string  (See SeverityLevel::* for a list of allowable values)
+     */
+    public $severity;
+}
+/**
  * Gets the response for the offer request
  * Swagger Name: AvaTaxClient
  */
@@ -12168,6 +12492,33 @@ class SkyscraperStatusModel
     public $requiredFilingCalendarDataFields;
 }
 /**
+ * Defines a state, region, or province as known to Avalara's certificate management system.
+ * Swagger Name: AvaTaxClient
+ */
+class StateModel
+{
+    /**
+     * @var int A unique ID number that represents this state, region, or province.
+     */
+    public $id;
+    /**
+     * @var string The state, region, or province name as known in US English.
+     */
+    public $name;
+    /**
+     * @var string The abbreviated two or three character ISO 3166 state, province, or region code.
+     */
+    public $initials;
+    /**
+     * @var int A geocoding identification number for this state
+     */
+    public $geoCode;
+    /**
+     * @var CountryModel 
+     */
+    public $country;
+}
+/**
  * Represents a service that this account has subscribed to.
  * Swagger Name: AvaTaxClient
  */
@@ -12419,6 +12770,21 @@ class TaxCodeModel
     public $modifiedUserId;
 }
 /**
+ * Tax Code Recommendation Output Model
+ * Swagger Name: AvaTaxClient
+ */
+class TaxCodeRecommendationOutputModel
+{
+    /**
+     * @var string Recommended TaxCode
+     */
+    public $taxCode;
+    /**
+     * @var string Recommended TaxCode Level
+     */
+    public $level;
+}
+/**
  * Output model for item tax code recommendation status
  * Swagger Name: AvaTaxClient
  */
@@ -12432,21 +12798,6 @@ class TaxCodeRecommendationStatusOutputModel
      * @var string Status message
      */
     public $message;
-}
-/**
- * Tax Code Recommendation Output Model
- * Swagger Name: AvaTaxClient
- */
-class TaxCodeRecommendationsOutputModel
-{
-    /**
-     * @var string Recommended TaxCode
-     */
-    public $taxCode;
-    /**
-     * @var string Recommended TaxCode Level
-     */
-    public $level;
 }
 /**
  * Information about Avalara-defined tax code types.
@@ -13396,7 +13747,7 @@ class TransactionLineDetailModel
      */
     public $isNonPassThru;
     /**
-     * @var boolean The Taxes/Fee component. True if the fee is applied.
+     * @var boolean The Taxes/Fee component. True if the fee is applied.   When `isFee` is `false`, this represents a tax rate percentage. For example, `"rate": 0.022500` represents a 2.25% tax rate.  When `isFee` is `true`, this represents a specific monetary amount. For example, for `"currencyCode": "USD"` and `"isFee": true`, the `"rate": 15` represents a fee of $15.00 USD.
      */
     public $isFee;
     /**
@@ -13797,11 +14148,11 @@ class TransactionModel
      */
     public $batchCode;
     /**
-     * @var string The three-character ISO 4217 currency code that was used for payment for this transaction.
+     * @var string The three-character ISO 4217 currency code representing the ‘invoice currency’ (the currency the transaction was invoiced in).   If this is different than the currency the tax liability needs to be reported in, you’ll also need to provide the   `exchangeRateCurrencyCode` and the `exchangeRate` for conversion to the reporting country.
      */
     public $currencyCode;
     /**
-     * @var string The three-character ISO 4217 exchange rate currency code that was used for payment for this transaction.
+     * @var string The three-character ISO 4217 currency code representing the ‘reporting currency’ (the currency the transaction’s tax liability needs to be reported in).   You can leave this blank if the invoice currency provided in the `currencyCode` field is also the reporting currency.
      */
     public $exchangeRateCurrencyCode;
     /**
@@ -13925,7 +14276,7 @@ class TransactionModel
      */
     public $exchangeRateEffectiveDate;
     /**
-     * @var float If this transaction included foreign currency exchange, this is the exchange rate that was used.
+     * @var float The currency exchange rate from the invoice currency (`currencyCode`) to the reporting currency (`exchangeRateCurrencyCode`).  This only needs to be set if the invoice currency and the reporting currency are different. It defaults to 1.0.
      */
     public $exchangeRate;
     /**

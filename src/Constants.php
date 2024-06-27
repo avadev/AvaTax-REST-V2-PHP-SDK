@@ -2,7 +2,7 @@
 namespace Avalara;
 use GuzzleHttp\Client;
 
-define('AVATAX_SDK_VERSION', '24.6.1');
+define('AVATAX_SDK_VERSION', '24.6.3');
 
 /*****************************************************************************
  *                                                                           *
@@ -570,732 +570,6 @@ class BulkImportStatus
     const C_VALIDATIONFAILED = 64;
     const C_PARTIALSUCCESS = 128;
     const C_INVALID = 256;
-
-}
-
-/**
- * Swagger Name: AvaTaxClient
- * Indicates what level of auditing information is available for a transaction
- */
-class ApiCallStatus
-{
-    /**
-     * If the original api call is availabe on S3
-     */
-    const C_ORIGINALAPICALLAVAILABLE = 0;
-
-    /**
-     * if the original api call is not available, reconstructed api call should always be available
-     */
-    const C_RECONSTRUCTEDAPICALLAVAILABLE = 1;
-
-    /**
-     * Any other api call status
-     */
-    const C_ANY = -1;
-
-}
-
-/**
- * Swagger Name: AvaTaxClient
- * A list of possible AvaFile Form Types.
- */
-class FormTypeId
-{
-    /**
-     * Denotes the form type is Sales and Use Tax
-     */
-    const C_SALESANDUSE = 0;
-
-    /**
-     * Denotes the form type is Sales Tax only
-     */
-    const C_SALES = 1;
-
-    /**
-     * Denotes the form type is Sellers Use Tax only
-     */
-    const C_SELLERSUSE = 2;
-
-    /**
-     * Denotes the form type is Lodging Tax only
-     */
-    const C_LODGING = 3;
-
-    /**
-     * Denotes the form type is Sales and Lodging Tax
-     */
-    const C_SALESANDLODGING = 4;
-
-    /**
-     * Denotes the form type is Consumer Use Tax only
-     */
-    const C_CONSUMERUSE = 5;
-
-    /**
-     * Denotes the form type is Resort and Rental Tax
-     */
-    const C_RESORTANDRENTAL = 6;
-
-    /**
-     * Denotes the form type is Tourist and Rental Tax
-     */
-    const C_TOURISTANDRENTAL = 7;
-
-    /**
-     * Denotes the form type is Prepayment
-     */
-    const C_PREPAYMENT = 8;
-
-    /**
-     * Denotes the form type is Prepayment Allowance
-     */
-    const C_PREPAYMENTALLOWED = 9;
-
-}
-
-/**
- * Swagger Name: AvaTaxClient
- * A list of possible AvaFile filing option types.
- */
-class FilingOptionTypeId
-{
-    /**
-     * Denotes the tax return is being filed on paper.
-     */
-    const C_PAPER = 0;
-
-    /**
-     * Denotes the form can be efiled optionally.
-     */
-    const C_OPTIONALEFILE = 1;
-
-    /**
-     * Denotes the form is being filed via efile.
-     */
-    const C_MANDATORYEFILE = 2;
-
-}
-
-/**
- * Swagger Name: AvaTaxClient
- * A list of possible Due Date Types
- */
-class DueDateTypeId
-{
-    /**
-     * Denotes form is due on the due day
-     */
-    const C_BYDAY = 0;
-
-    /**
-     * Denotes form is due by last day of the month
-     */
-    const C_BYLASTDAY = 1;
-
-    /**
-     * Denotes form is due by second to last day of the month
-     */
-    const C_BYSECONDLASTDAY = 2;
-
-}
-
-/**
- * Swagger Name: AvaTaxClient
- * Indicates the rounding behavior of a form
- */
-class RoundingTypeId
-{
-    /**
-     * There is no rounding on the return
-     */
-    const C_NONE = 0;
-
-    /**
-     * Round to the nearest whole number
-     */
-    const C_NEAREST = 1;
-
-    /**
-     * Always round up
-     */
-    const C_UP = 2;
-
-    /**
-     * Always round down
-     */
-    const C_DOWN = 3;
-
-}
-
-/**
- * Swagger Name: AvaTaxClient
- * Indicates the behavior of a tax form for a company with multiple places of business.
- *  
- *  Some tax authorities require that a separate form must be filed for each place of business.
- */
-class OutletTypeId
-{
-    /**
-     * File a single return per cycle for your entire business.
-     */
-    const C_NONE = 0;
-
-    /**
-     * You may file separate forms for each outlet; contact the tax authority for more details about location based reporting requirements.
-     */
-    const C_SCHEDULE = 1;
-
-    /**
-     * You may file separate forms for each outlet; contact the tax authority for more details about location based reporting requirements.
-     */
-    const C_DUPLICATE = 2;
-
-    /**
-     * File a single return, but you must have a line item for each place of business.
-     */
-    const C_CONSOLIDATED = 3;
-
-}
-
-/**
- * Swagger Name: AvaTaxClient
- * The type of data contained in this batch
- */
-class BatchType
-{    const C_AVACERTUPDATE = 0;
-    const C_AVACERTUPDATEALL = 1;
-    const C_BATCHMAINTENANCE = 2;
-    const C_COMPANYLOCATIONIMPORT = 3;
-    const C_DOCUMENTIMPORT = 4;
-    const C_EXEMPTCERTIMPORT = 5;
-    const C_ITEMIMPORT = 6;
-    const C_SALESAUDITEXPORT = 7;
-    const C_SSTPTESTDECKIMPORT = 8;
-    const C_TAXRULEIMPORT = 9;
-
-    /**
-     * This batch type represents tax transaction data being uploaded to AvaTax. Each line in the batch represents a single transaction
-     *  or a line in a multi-line transaction. For reference, see [Batched Transactions in REST v2](http://developer.avalara.com/blog/2016/10/24/batch-transaction-upload-in-rest-v2)
-     */
-    const C_TRANSACTIONIMPORT = 10;
-    const C_UPCBULKIMPORT = 11;
-    const C_UPCVALIDATIONIMPORT = 12;
-    const C_CUSTOMERSUPPLIERIMPORT = 13;
-    const C_VARIANCEIMPORT = 14;
-    const C_COSTCENTERIMPORT = 15;
-    const C_GLACCOUNTIMPORT = 16;
-
-}
-
-/**
- * Swagger Name: AvaTaxClient
- * The status of a batch file
- */
-class BatchStatus
-{
-    /**
-     * Batch file has been received and is in the queue to be processed.
-     */
-    const C_WAITING = 0;
-
-    /**
-     * Batch file experienced system errors and cannot be processed.
-     */
-    const C_SYSTEMERRORS = 1;
-
-    /**
-     * Batch file is cancelled
-     */
-    const C_CANCELLED = 2;
-
-    /**
-     * Batch file has been completely processed.
-     */
-    const C_COMPLETED = 3;
-
-    /**
-     * Batch file is currently being created.
-     */
-    const C_CREATING = 4;
-
-    /**
-     * Batch file has been deleted.
-     */
-    const C_DELETED = 5;
-
-    /**
-     * Batch file was processed with some errors.
-     */
-    const C_ERRORS = 6;
-
-    /**
-     * Batch processing was paused.
-     */
-    const C_PAUSED = 7;
-
-    /**
-     * Batch is currently being processed.
-     */
-    const C_PROCESSING = 8;
-
-    /**
-     * Batch is currently being cancelled.
-     */
-    const C_CANCELLING = 9;
-
-}
-
-/**
- * Swagger Name: AvaTaxClient
- * Reason code for voiding or cancelling a transaction
- */
-class VoidReasonCode
-{
-    /**
-     * Unspecified reason
-     */
-    const C_UNSPECIFIED = 0;
-
-    /**
-     * Post operation failed - Document status will be changed to unposted
-     */
-    const C_POSTFAILED = 1;
-
-    /**
-     * Document deleted - If committed, document status will be changed to Cancelled. If not committed, document will be
-     *  deleted.
-     */
-    const C_DOCDELETED = 2;
-
-    /**
-     * Document has been voided and DocStatus will be set to Cancelled
-     */
-    const C_DOCVOIDED = 3;
-
-    /**
-     * AdjustTax operation has been cancelled. Adjustment will be reversed.
-     */
-    const C_ADJUSTMENTCANCELLED = 4;
-
-}
-
-/**
- * Swagger Name: AvaTaxClient
- * The way of delivering request
- */
-class CertificateRequestDeliveryMethod
-{
-    /**
-     * The invitation will be sent via email to the recipient's email address.
-     */
-    const C_EMAIL = 1;
-
-    /**
-     * The invitation will be sent via facsimile to the recipient's facsimile phone number.
-     *  
-     *  Facsimile transmission make take time to process and deliver via phone lines.
-     */
-    const C_FAX = 2;
-
-    /**
-     * The request will be processed and turned into a web link (URL) which the user can click on to visit the CertExpress site and immediately
-     *  begin entering data about their certificates.
-     */
-    const C_DOWNLOAD = 3;
-
-}
-
-/**
- * Swagger Name: AvaTaxClient
- * Indicates the status of a CertExpress invitation link.
- */
-class CertExpressInvitationStatus
-{
-    /**
-     * The CertExpress website is currently building a landing page for the customer. Please
-     *  wait about 10 seconds and fetch this request again to see when it will be ready.
-     */
-    const C_INPROGRESS = 0;
-
-    /**
-     * Indicates that the CertExpress invitation has been completed and is ready to use.
-     */
-    const C_READY = 1;
-
-}
-
-/**
- * Swagger Name: AvaTaxClient
- * Visibility for a parameter.
- */
-class Visibility
-{
-    /**
-     * Denotes the Parameter is required
-     */
-    const C_REQUIRED = 0;
-
-    /**
-     * Denotes the Parameter is recommended
-     */
-    const C_RECOMMENDED = 1;
-
-    /**
-     * Denotes the Parameter is optional
-     */
-    const C_OPTIONAL = 2;
-
-    /**
-     * Denotes the Parameter is conditional
-     */
-    const C_CONDITIONAL = 3;
-
-}
-
-/**
- * Swagger Name: AvaTaxClient
- * Choice of rounding level for a transaction
- */
-class RoundingLevelId
-{
-    /**
-     * Round tax on each line separately
-     */
-    const C_LINE = 0;
-
-    /**
-     * Round tax at the document level
-     */
-    const C_DOCUMENT = 1;
-
-}
-
-/**
- * Swagger Name: AvaTaxClient
- * TaxDependencyLevelId
- */
-class TaxDependencyLevelId
-{
-    /**
-     * Document
-     */
-    const C_DOCUMENT = 0;
-
-    /**
-     * State
-     */
-    const C_STATE = 1;
-
-    /**
-     * TaxRegion
-     */
-    const C_TAXREGION = 2;
-
-    /**
-     * Address
-     */
-    const C_ADDRESS = 3;
-
-}
-
-/**
- * Swagger Name: AvaTaxClient
- * 
- */
-class UserDefinedFieldDataType
-{
-    /**
-     * Represents String dataType
-     */
-    const C_STRING = 0;
-
-    /**
-     * Represents Number dataType
-     */
-    const C_NUMBER = 1;
-
-    /**
-     * Represents Date dataType
-     */
-    const C_DATE = 2;
-
-    /**
-     * Represents Boolean dataType
-     */
-    const C_BOOLEAN = 3;
-
-}
-
-/**
- * Swagger Name: AvaTaxClient
- * Service modes for tax calculation when using an AvaLocal server.
- */
-class ServiceMode
-{
-    /**
-     * Automatically use local or remote (default)
-     */
-    const C_AUTOMATIC = 0;
-
-    /**
-     * Local server only
-     */
-    const C_LOCAL = 1;
-
-    /**
-     * Remote server only
-     */
-    const C_REMOTE = 2;
-
-}
-
-/**
- * Swagger Name: AvaTaxClient
- * Indicates the level of detail requested from a tax API call
- */
-class TaxDebugLevel
-{
-    /**
-     * User requests the normal level of debug information when creating a tax transaction
-     */
-    const C_NORMAL = 0;
-
-    /**
-     * User requests additional diagnostic information when creating a tax transaction
-     */
-    const C_DIAGNOSTIC = 1;
-
-}
-
-/**
- * Swagger Name: AvaTaxClient
- * 
- */
-class DeliveryTerms
-{
-    /**
-     * Delivery At Place (DAP) implies that Duty And Tax will be paid by the Buyer or Consignee of the shipment
-     */
-    const C_DAP = 1;
-
-    /**
-     * Delivery Duty Paid (DDP) implies that Duty And Tax will be paid by the Shipper
-     */
-    const C_DDP = 2;
-
-    /**
-     * Free on Board
-     */
-    const C_FOB = 3;
-
-    /**
-     * Free Carrier
-     */
-    const C_FCA = 4;
-
-    /**
-     * Free Alongside Ship
-     */
-    const C_FAS = 5;
-
-    /**
-     * Ex Works
-     */
-    const C_EXW = 6;
-
-    /**
-     * Delivered at Place Unloaded
-     */
-    const C_DPU = 7;
-
-    /**
-     * Carriage Paid To
-     */
-    const C_CPT = 8;
-
-    /**
-     * Carriage Insurance Paid To
-     */
-    const C_CIP = 9;
-
-    /**
-     * Cost, Insurance, and Freight
-     */
-    const C_CIF = 10;
-
-    /**
-     * Cost And Freight
-     */
-    const C_CFR = 11;
-
-}
-
-/**
- * Swagger Name: AvaTaxClient
- * Filing Frequency types
- */
-class FilingFrequencyId
-{
-    /**
-     * File once per month
-     */
-    const C_MONTHLY = 1;
-
-    /**
-     * File once per three months
-     */
-    const C_QUARTERLY = 2;
-
-    /**
-     * File twice per year
-     */
-    const C_SEMIANNUALLY = 3;
-
-    /**
-     * File once per year
-     */
-    const C_ANNUALLY = 4;
-
-    /**
-     * File every other month
-     */
-    const C_BIMONTHLY = 5;
-
-    /**
-     * File only when there are documents to report
-     */
-    const C_OCCASIONAL = 6;
-
-    /**
-     * File for the first two months of each quarter, then do not file on the quarterly month.
-     */
-    const C_INVERSEQUARTERLY = 7;
-
-    /**
-     * File every week
-     */
-    const C_WEEKLY = 8;
-
-}
-
-/**
- * Swagger Name: AvaTaxClient
- * Status when deleting an error transaction
- */
-class AvataxDeleteErrorTransactionStatus
-{
-    /**
-     * Successful delete
-     */
-    const C_SUCCESS = 0;
-
-    /**
-     * Failed delete
-     */
-    const C_FAILURE = 1;
-
-}
-
-/**
- * Swagger Name: AvaTaxClient
- * Jurisdiction Type
- */
-class JurisdictionType
-{
-    /**
-     * Country
-     */
-    const C_COUNTRY = 0;
-
-    /**
-     * State
-     */
-    const C_STATE = 1;
-
-    /**
-     * County
-     */
-    const C_COUNTY = 2;
-
-    /**
-     * City
-     */
-    const C_CITY = 3;
-
-    /**
-     * Special Tax Jurisdiction
-     */
-    const C_SPECIAL = 4;
-
-}
-
-/**
- * Swagger Name: AvaTaxClient
- * Exempt Cert type
- */
-class ExemptCertTypeId
-{
-    /**
-     * Blanked certificate
-     */
-    const C_BLANKET = 0;
-
-    /**
-     * Single use
-     */
-    const C_SINGLEUSE = 1;
-
-}
-
-/**
- * Swagger Name: AvaTaxClient
- * Status for this exempt certificate
- */
-class ExemptCertStatusId
-{
-    /**
-     * Inactive certificate
-     */
-    const C_INACTIVE = 0;
-
-    /**
-     * Active certificate
-     */
-    const C_ACTIVE = 1;
-
-    /**
-     * Expired certificate
-     */
-    const C_EXPIRED = 2;
-
-    /**
-     * Revoked certificate
-     */
-    const C_REVOKED = 3;
-
-}
-
-/**
- * Swagger Name: AvaTaxClient
- * Exempt certificate review status
- */
-class ExemptCertReviewStatusId
-{
-    /**
-     * Review pending
-     */
-    const C_PENDING = 0;
-
-    /**
-     * Certificate was accepted
-     */
-    const C_ACCEPTED = 1;
-
-    /**
-     * Certificate was rejected
-     */
-    const C_REJECTED = 2;
 
 }
 
@@ -1879,6 +1153,745 @@ class SeverityLevel
      * Unexpected exceptions occurred, operation failed
      */
     const C_EXCEPTION = 3;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * Indicates what level of auditing information is available for a transaction
+ */
+class ApiCallStatus
+{
+    /**
+     * If the original api call is availabe on S3
+     */
+    const C_ORIGINALAPICALLAVAILABLE = 0;
+
+    /**
+     * if the original api call is not available, reconstructed api call should always be available
+     */
+    const C_RECONSTRUCTEDAPICALLAVAILABLE = 1;
+
+    /**
+     * Any other api call status
+     */
+    const C_ANY = -1;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * A list of possible AvaFile Form Types.
+ */
+class FormTypeId
+{
+    /**
+     * Denotes the form type is Sales and Use Tax
+     */
+    const C_SALESANDUSE = 0;
+
+    /**
+     * Denotes the form type is Sales Tax only
+     */
+    const C_SALES = 1;
+
+    /**
+     * Denotes the form type is Sellers Use Tax only
+     */
+    const C_SELLERSUSE = 2;
+
+    /**
+     * Denotes the form type is Lodging Tax only
+     */
+    const C_LODGING = 3;
+
+    /**
+     * Denotes the form type is Sales and Lodging Tax
+     */
+    const C_SALESANDLODGING = 4;
+
+    /**
+     * Denotes the form type is Consumer Use Tax only
+     */
+    const C_CONSUMERUSE = 5;
+
+    /**
+     * Denotes the form type is Resort and Rental Tax
+     */
+    const C_RESORTANDRENTAL = 6;
+
+    /**
+     * Denotes the form type is Tourist and Rental Tax
+     */
+    const C_TOURISTANDRENTAL = 7;
+
+    /**
+     * Denotes the form type is Prepayment
+     */
+    const C_PREPAYMENT = 8;
+
+    /**
+     * Denotes the form type is Prepayment Allowance
+     */
+    const C_PREPAYMENTALLOWED = 9;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * A list of possible AvaFile filing option types.
+ */
+class FilingOptionTypeId
+{
+    /**
+     * Denotes the tax return is being filed on paper.
+     */
+    const C_PAPER = 0;
+
+    /**
+     * Denotes the form can be efiled optionally.
+     */
+    const C_OPTIONALEFILE = 1;
+
+    /**
+     * Denotes the form is being filed via efile.
+     */
+    const C_MANDATORYEFILE = 2;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * A list of possible Due Date Types
+ */
+class DueDateTypeId
+{
+    /**
+     * Denotes form is due on the due day
+     */
+    const C_BYDAY = 0;
+
+    /**
+     * Denotes form is due by last day of the month
+     */
+    const C_BYLASTDAY = 1;
+
+    /**
+     * Denotes form is due by second to last day of the month
+     */
+    const C_BYSECONDLASTDAY = 2;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * Indicates the rounding behavior of a form
+ */
+class RoundingTypeId
+{
+    /**
+     * There is no rounding on the return
+     */
+    const C_NONE = 0;
+
+    /**
+     * Round to the nearest whole number
+     */
+    const C_NEAREST = 1;
+
+    /**
+     * Always round up
+     */
+    const C_UP = 2;
+
+    /**
+     * Always round down
+     */
+    const C_DOWN = 3;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * Indicates the behavior of a tax form for a company with multiple places of business.
+ *  
+ *  Some tax authorities require that a separate form must be filed for each place of business.
+ */
+class OutletTypeId
+{
+    /**
+     * File a single return per cycle for your entire business.
+     */
+    const C_NONE = 0;
+
+    /**
+     * You may file separate forms for each outlet; contact the tax authority for more details about location based reporting requirements.
+     */
+    const C_SCHEDULE = 1;
+
+    /**
+     * You may file separate forms for each outlet; contact the tax authority for more details about location based reporting requirements.
+     */
+    const C_DUPLICATE = 2;
+
+    /**
+     * File a single return, but you must have a line item for each place of business.
+     */
+    const C_CONSOLIDATED = 3;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * The type of data contained in this batch
+ */
+class BatchType
+{    const C_AVACERTUPDATE = 0;
+    const C_AVACERTUPDATEALL = 1;
+    const C_BATCHMAINTENANCE = 2;
+    const C_COMPANYLOCATIONIMPORT = 3;
+    const C_DOCUMENTIMPORT = 4;
+    const C_EXEMPTCERTIMPORT = 5;
+    const C_ITEMIMPORT = 6;
+    const C_SALESAUDITEXPORT = 7;
+    const C_SSTPTESTDECKIMPORT = 8;
+    const C_TAXRULEIMPORT = 9;
+
+    /**
+     * This batch type represents tax transaction data being uploaded to AvaTax. Each line in the batch represents a single transaction
+     *  or a line in a multi-line transaction. For reference, see [Batched Transactions in REST v2](http://developer.avalara.com/blog/2016/10/24/batch-transaction-upload-in-rest-v2)
+     */
+    const C_TRANSACTIONIMPORT = 10;
+    const C_UPCBULKIMPORT = 11;
+    const C_UPCVALIDATIONIMPORT = 12;
+    const C_CUSTOMERSUPPLIERIMPORT = 13;
+    const C_VARIANCEIMPORT = 14;
+    const C_COSTCENTERIMPORT = 15;
+    const C_GLACCOUNTIMPORT = 16;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * The status of a batch file
+ */
+class BatchStatus
+{
+    /**
+     * Batch file has been received and is in the queue to be processed.
+     */
+    const C_WAITING = 0;
+
+    /**
+     * Batch file experienced system errors and cannot be processed.
+     */
+    const C_SYSTEMERRORS = 1;
+
+    /**
+     * Batch file is cancelled
+     */
+    const C_CANCELLED = 2;
+
+    /**
+     * Batch file has been completely processed.
+     */
+    const C_COMPLETED = 3;
+
+    /**
+     * Batch file is currently being created.
+     */
+    const C_CREATING = 4;
+
+    /**
+     * Batch file has been deleted.
+     */
+    const C_DELETED = 5;
+
+    /**
+     * Batch file was processed with some errors.
+     */
+    const C_ERRORS = 6;
+
+    /**
+     * Batch processing was paused.
+     */
+    const C_PAUSED = 7;
+
+    /**
+     * Batch is currently being processed.
+     */
+    const C_PROCESSING = 8;
+
+    /**
+     * Batch is currently being cancelled.
+     */
+    const C_CANCELLING = 9;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * Reason code for voiding or cancelling a transaction
+ */
+class VoidReasonCode
+{
+    /**
+     * Unspecified reason
+     */
+    const C_UNSPECIFIED = 0;
+
+    /**
+     * Post operation failed - Document status will be changed to unposted
+     */
+    const C_POSTFAILED = 1;
+
+    /**
+     * Document deleted - If committed, document status will be changed to Cancelled. If not committed, document will be
+     *  deleted.
+     */
+    const C_DOCDELETED = 2;
+
+    /**
+     * Document has been voided and DocStatus will be set to Cancelled
+     */
+    const C_DOCVOIDED = 3;
+
+    /**
+     * AdjustTax operation has been cancelled. Adjustment will be reversed.
+     */
+    const C_ADJUSTMENTCANCELLED = 4;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * The way of delivering request
+ */
+class CertificateRequestDeliveryMethod
+{
+    /**
+     * The invitation will be sent via email to the recipient's email address.
+     */
+    const C_EMAIL = 1;
+
+    /**
+     * The invitation will be sent via facsimile to the recipient's facsimile phone number.
+     *  
+     *  Facsimile transmission make take time to process and deliver via phone lines.
+     */
+    const C_FAX = 2;
+
+    /**
+     * The request will be processed and turned into a web link (URL) which the user can click on to visit the CertExpress site and immediately
+     *  begin entering data about their certificates.
+     */
+    const C_DOWNLOAD = 3;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * Indicates the status of a CertExpress invitation link.
+ */
+class CertExpressInvitationStatus
+{
+    /**
+     * The CertExpress website is currently building a landing page for the customer. Please
+     *  wait about 10 seconds and fetch this request again to see when it will be ready.
+     */
+    const C_INPROGRESS = 0;
+
+    /**
+     * Indicates that the CertExpress invitation has been completed and is ready to use.
+     */
+    const C_READY = 1;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * 
+ */
+class CertificateEcmStatus
+{    const C_NONE = 0;
+    const C_EXPIRED = 1;
+    const C_INVALID = 2;
+    const C_VALID = 3;
+    const C_PENDINGFUTURE = 4;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * Visibility for a parameter.
+ */
+class Visibility
+{
+    /**
+     * Denotes the Parameter is required
+     */
+    const C_REQUIRED = 0;
+
+    /**
+     * Denotes the Parameter is recommended
+     */
+    const C_RECOMMENDED = 1;
+
+    /**
+     * Denotes the Parameter is optional
+     */
+    const C_OPTIONAL = 2;
+
+    /**
+     * Denotes the Parameter is conditional
+     */
+    const C_CONDITIONAL = 3;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * Choice of rounding level for a transaction
+ */
+class RoundingLevelId
+{
+    /**
+     * Round tax on each line separately
+     */
+    const C_LINE = 0;
+
+    /**
+     * Round tax at the document level
+     */
+    const C_DOCUMENT = 1;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * TaxDependencyLevelId
+ */
+class TaxDependencyLevelId
+{
+    /**
+     * Document
+     */
+    const C_DOCUMENT = 0;
+
+    /**
+     * State
+     */
+    const C_STATE = 1;
+
+    /**
+     * TaxRegion
+     */
+    const C_TAXREGION = 2;
+
+    /**
+     * Address
+     */
+    const C_ADDRESS = 3;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * 
+ */
+class UserDefinedFieldDataType
+{
+    /**
+     * Represents String dataType
+     */
+    const C_STRING = 0;
+
+    /**
+     * Represents Number dataType
+     */
+    const C_NUMBER = 1;
+
+    /**
+     * Represents Date dataType
+     */
+    const C_DATE = 2;
+
+    /**
+     * Represents Boolean dataType
+     */
+    const C_BOOLEAN = 3;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * Service modes for tax calculation when using an AvaLocal server.
+ */
+class ServiceMode
+{
+    /**
+     * Automatically use local or remote (default)
+     */
+    const C_AUTOMATIC = 0;
+
+    /**
+     * Local server only
+     */
+    const C_LOCAL = 1;
+
+    /**
+     * Remote server only
+     */
+    const C_REMOTE = 2;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * Indicates the level of detail requested from a tax API call
+ */
+class TaxDebugLevel
+{
+    /**
+     * User requests the normal level of debug information when creating a tax transaction
+     */
+    const C_NORMAL = 0;
+
+    /**
+     * User requests additional diagnostic information when creating a tax transaction
+     */
+    const C_DIAGNOSTIC = 1;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * 
+ */
+class DeliveryTerms
+{
+    /**
+     * Delivery At Place (DAP) implies that Duty And Tax will be paid by the Buyer or Consignee of the shipment
+     */
+    const C_DAP = 1;
+
+    /**
+     * Delivery Duty Paid (DDP) implies that Duty And Tax will be paid by the Shipper
+     */
+    const C_DDP = 2;
+
+    /**
+     * Free on Board
+     */
+    const C_FOB = 3;
+
+    /**
+     * Free Carrier
+     */
+    const C_FCA = 4;
+
+    /**
+     * Free Alongside Ship
+     */
+    const C_FAS = 5;
+
+    /**
+     * Ex Works
+     */
+    const C_EXW = 6;
+
+    /**
+     * Delivered at Place Unloaded
+     */
+    const C_DPU = 7;
+
+    /**
+     * Carriage Paid To
+     */
+    const C_CPT = 8;
+
+    /**
+     * Carriage Insurance Paid To
+     */
+    const C_CIP = 9;
+
+    /**
+     * Cost, Insurance, and Freight
+     */
+    const C_CIF = 10;
+
+    /**
+     * Cost And Freight
+     */
+    const C_CFR = 11;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * Filing Frequency types
+ */
+class FilingFrequencyId
+{
+    /**
+     * File once per month
+     */
+    const C_MONTHLY = 1;
+
+    /**
+     * File once per three months
+     */
+    const C_QUARTERLY = 2;
+
+    /**
+     * File twice per year
+     */
+    const C_SEMIANNUALLY = 3;
+
+    /**
+     * File once per year
+     */
+    const C_ANNUALLY = 4;
+
+    /**
+     * File every other month
+     */
+    const C_BIMONTHLY = 5;
+
+    /**
+     * File only when there are documents to report
+     */
+    const C_OCCASIONAL = 6;
+
+    /**
+     * File for the first two months of each quarter, then do not file on the quarterly month.
+     */
+    const C_INVERSEQUARTERLY = 7;
+
+    /**
+     * File every week
+     */
+    const C_WEEKLY = 8;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * Status when deleting an error transaction
+ */
+class AvataxDeleteErrorTransactionStatus
+{
+    /**
+     * Successful delete
+     */
+    const C_SUCCESS = 0;
+
+    /**
+     * Failed delete
+     */
+    const C_FAILURE = 1;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * Jurisdiction Type
+ */
+class JurisdictionType
+{
+    /**
+     * Country
+     */
+    const C_COUNTRY = 0;
+
+    /**
+     * State
+     */
+    const C_STATE = 1;
+
+    /**
+     * County
+     */
+    const C_COUNTY = 2;
+
+    /**
+     * City
+     */
+    const C_CITY = 3;
+
+    /**
+     * Special Tax Jurisdiction
+     */
+    const C_SPECIAL = 4;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * Exempt Cert type
+ */
+class ExemptCertTypeId
+{
+    /**
+     * Blanked certificate
+     */
+    const C_BLANKET = 0;
+
+    /**
+     * Single use
+     */
+    const C_SINGLEUSE = 1;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * Status for this exempt certificate
+ */
+class ExemptCertStatusId
+{
+    /**
+     * Inactive certificate
+     */
+    const C_INACTIVE = 0;
+
+    /**
+     * Active certificate
+     */
+    const C_ACTIVE = 1;
+
+    /**
+     * Expired certificate
+     */
+    const C_EXPIRED = 2;
+
+    /**
+     * Revoked certificate
+     */
+    const C_REVOKED = 3;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * Exempt certificate review status
+ */
+class ExemptCertReviewStatusId
+{
+    /**
+     * Review pending
+     */
+    const C_PENDING = 0;
+
+    /**
+     * Certificate was accepted
+     */
+    const C_ACCEPTED = 1;
+
+    /**
+     * Certificate was rejected
+     */
+    const C_REJECTED = 2;
 
 }
 
