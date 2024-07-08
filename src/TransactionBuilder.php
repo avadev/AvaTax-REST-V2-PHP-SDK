@@ -135,6 +135,18 @@ class TransactionBuilder
     }
 
     /**
+     * Set a customer email
+     *
+     * @param   string              email
+     * @return  TransactionBuilder
+     */
+    public function withEmail($email)
+    {
+        $this->_model['email'] = $email;
+        return $this;
+    }
+
+    /**
      * Set client application customer or usage type
      *
      * @param   string              code    (See API endpoint `/api/v2/definitions/entityusecodes` for a list of allowable values)
