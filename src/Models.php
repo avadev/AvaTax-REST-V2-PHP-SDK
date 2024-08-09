@@ -1602,13 +1602,13 @@ class BatchModel
      */
     public $batchAgent;
     /**
-     * @var string Any optional flags provided for this batch
-     */
-    public $options;
-    /**
      * @var int The unique ID number of this batch.
      */
     public $id;
+    /**
+     * @var string Any optional flags provided for this batch
+     */
+    public $options;
     /**
      * @var string The user-friendly readable name for this batch.
      */
@@ -3790,6 +3790,10 @@ class CreateTransactionBatchRequestModel
      * @var TransactionBatchItemModel[] The list of transactions contained in this batch.
      */
     public $transactions;
+    /**
+     * @var string Any optional flags provided for this batch
+     */
+    public $options;
 }
 /**
  * Represents a create transaction batch response model.
@@ -3801,6 +3805,10 @@ class CreateTransactionBatchResponseModel
      * @var int The unique ID number of this batch.
      */
     public $id;
+    /**
+     * @var string Any optional flags provided for this batch
+     */
+    public $options;
     /**
      * @var string The user-friendly readable name for this batch.
      */
@@ -3996,6 +4004,68 @@ class CreateTransactionModel
      * @var string Delivery Terms (or Incoterms) refer to agreed-upon conditions between a buyer and a seller for the delivery of goods. They are three-letter   trade terms that describe the practical arrangements for the delivery of goods from sellers to buyers and set out the obligations, costs, and   risks between the two parties.  The DeliveryTerms field determines who acts as the Importer of Record and who arranges the Transport of the goods when this   information is not separately sent to AvaTax in the request. When used in conjunction with isSellerImporterOfRecord, this parameter can also   influence whether AvaTax includes Import Duty and Tax in the transaction totals. If the fields for transport or isSellerImporterOfRecord are   passed in the request and conflict with the DeliveryTerms, the values provided in the first will take priority over the DeliveryTerms   parameter. If neither transport nor isSellerImporterOfRecord is passed in the request and DeliveryTerms is passed, AvaTax will determine who   acts as Importer of Record and who arranges the Transport of the goods based on the specified DeliveryTerms. If none of these fields is   passed, AvaTax will keep the current behavior and default transport to "Seller" for goods and isSellerImporterOfRecord to "False" (i.e., the   AvaTax user does not act as Importer of record)."  Finally, this field is also used for reports.    The Delivery Terms that the user can pass are the following:  1. Ex Works (EXW)  2. Free Carrier (FCA)  3. Carrier and Insurance Paid to (CIP)  4. Carriage Paid To (CPT)  5. Delivered at Place (DAP)  6. Delivered at Place Unloaded (DPU)  7. Delivered Duty Paid (DDP)  8. Free Alongside Ship (FAS)  9. Free on Board (FOB)  10. Cost and Freight (CFR)  11. Cost, Insurance and Freight (CIF)    DAP and DDP are two delivery terms that indicate that Import Duty and Tax should be included in the transaction total. (See DeliveryTerms::* for a list of allowable values)
      */
     public $deliveryTerms;
+}
+/**
+ * Credit Transaction Detail Lines
+ * Swagger Name: AvaTaxClient
+ */
+class CreditTransactionDetailLines
+{
+    /**
+     * @var string ReportingDate
+     */
+    public $reportingDate;
+    /**
+     * @var string LineNo
+     */
+    public $lineNo;
+    /**
+     * @var float LineAmount
+     */
+    public $lineAmount;
+    /**
+     * @var float ExemptAmount
+     */
+    public $exemptAmount;
+    /**
+     * @var float TaxableAmount
+     */
+    public $taxableAmount;
+    /**
+     * @var float TaxAmount
+     */
+    public $taxAmount;
+}
+/**
+ * Credit Transaction Details
+ * Swagger Name: AvaTaxClient
+ */
+class CreditTransactionDetails
+{
+    /**
+     * @var string DocCode
+     */
+    public $docCode;
+    /**
+     * @var string DocDate
+     */
+    public $docDate;
+    /**
+     * @var float TotalExempt
+     */
+    public $totalExempt;
+    /**
+     * @var float TotalTaxable
+     */
+    public $totalTaxable;
+    /**
+     * @var float TotalTax
+     */
+    public $totalTax;
+    /**
+     * @var CreditTransactionDetailLines[] Lines
+     */
+    public $lines;
 }
 /**
  * Represents an ISO 4217 currency code used for designating the currency of a transaction.
@@ -5256,6 +5326,51 @@ class ErrorTransactionOutputModel
     public $documentCode;
 }
 /**
+ * Model to delete message
+ * Swagger Name: AvaTaxClient
+ */
+class EventDeleteBatchMessageModel
+{
+    /**
+     * @var string The receipt handle associated with the message to delete.
+     */
+    public $receiptHandle;
+    /**
+     * @var string A system-assigned message ID
+     */
+    public $messageId;
+}
+/**
+ * Encloses the delete message command.
+ * Swagger Name: AvaTaxClient
+ */
+class EventDeleteMessageModel
+{
+    /**
+     * @var EventDeleteBatchMessageModel[] Command details for the delete message
+     */
+    public $eventDeleteBatchMessageCommands;
+}
+/**
+ * Encloses event message details
+ * Swagger Name: AvaTaxClient
+ */
+class EventMessageResponse
+{
+    /**
+     * @var string Message content
+     */
+    public $body;
+    /**
+     * @var string A system-assigned message ID
+     */
+    public $messageId;
+    /**
+     * @var string The receipt handle associated with the message to delete.
+     */
+    public $receiptHandle;
+}
+/**
  * An exemption reason defines why a certificate allows a customer to be exempt
  * for purposes of tax calculation. For a full list of defined exemption reasons,
  * please call the `ListCertificateExemptionReasons` API.
@@ -5860,6 +5975,10 @@ class FilingCalendarModel
      * @var int Auto Lock Override Day
      */
     public $autoLockOverrideDay;
+    /**
+     * @var string The three-character currency code according to country. For example if country is 'US' then currency is 'USD'. Similarly, if country is 'CA' then currency is 'CAD', etc.
+     */
+    public $currency;
 }
 /**
  * FilingFrequency Model
@@ -6216,7 +6335,7 @@ class FilingReturnCreditModel
      */
     public $totalTax;
     /**
-     * @var WorksheetDocument[] The excluded carry over credit documents
+     * @var CreditTransactionDetails[] The excluded carry over credit documents
      */
     public $transactionDetails;
 }
@@ -6450,6 +6569,14 @@ class FilingReturnModel
      * @var FilingReturnCreditModel 
      */
     public $appliedCarryOverCredits;
+    /**
+     * @var string The three-character liability currency code.
+     */
+    public $liabilityCurrencyCode;
+    /**
+     * @var string The three-character filing calendar currency code for this return. For example if country is 'US' then currency is 'USD'. Similarly, if country is 'CA' then currency is 'CAD', etc.
+     */
+    public $filingCalendarCurrencyCode;
     /**
      * @var string The date when this record was created.
      */
@@ -7923,11 +8050,11 @@ class ItemCatalogueInputModel
      */
     public $itemType;
     /**
-     * @var string The universal product code of the item.
+     * @var string The universal product code of the item.     Deprecated - As of 6/25/2024, this field is deprecated. Instead of using this field, you can pass this value as a parameter. The parameter name is UPC.
      */
     public $upc;
     /**
-     * @var string A summary for selection of the tax code.
+     * @var string Long Summary for Item     Deprecated - As of 6/25/2024, this field is deprecated. Instead of using this field, you can pass this value as a parameter. The parameter name is Summary.
      */
     public $summary;
     /**
@@ -7943,7 +8070,7 @@ class ItemCatalogueInputModel
      */
     public $source;
     /**
-     * @var string The Id of this item at the source
+     * @var string The unique identifier of this item at the source
      */
     public $sourceEntityId;
     /**
@@ -7951,7 +8078,7 @@ class ItemCatalogueInputModel
      */
     public $properties;
     /**
-     * @var ClassificationModel[] Classifications Attached to the Product
+     * @var ClassificationModel[] Classifications Attached to the Product  Please note: `taxCode` (ProductCode for SystemCode `AVATAXCODE`) is being removed from `classifications`. You can still find it in the `taxCode` field.
      */
     public $classifications;
     /**
@@ -7989,7 +8116,7 @@ class ItemCatalogueResultModel
      */
     public $itemCode;
     /**
-     * @var string The Id of this item at the source
+     * @var string The unique identifier of this item at the source
      */
     public $sourceEntityId;
     /**
@@ -8106,7 +8233,7 @@ class ItemModel
      */
     public $source;
     /**
-     * @var string The Id of this item at the source
+     * @var string The unique identifier of this item at the source
      */
     public $sourceEntityId;
     /**
@@ -8114,15 +8241,15 @@ class ItemModel
      */
     public $itemType;
     /**
-     * @var string Universal unique code for item
+     * @var string Universal unique code for item     Deprecated - As of 6/25/2024, this field is deprecated. Instead of using this field, you can pass this value as a parameter. `The parameter name is UPC`.
      */
     public $upc;
     /**
-     * @var string Long Summary for Item
+     * @var string Long Summary for Item     Deprecated - As of 6/25/2024, this field is deprecated. Instead of using this field, you can pass this value as a parameter. `The parameter name is Summary`.
      */
     public $summary;
     /**
-     * @var ClassificationModel[] List of classifications that belong to this item.  A single classification consists of a productCode and a systemCode for a particular item.
+     * @var ClassificationModel[] List of classifications that belong to this item.  A single classification consists of a productCode and a systemCode for a particular item.     Please note: `taxCode` (ProductCode for SystemCode `AVATAXCODE`) is being removed from `classifications`. You can still find it in the `taxCode` field.
      */
     public $classifications;
     /**
@@ -9473,41 +9600,6 @@ class MarketplaceModel
     public $marketplace;
 }
 /**
- * 
- * Swagger Name: AvaTaxClient
- */
-class Message
-{
-    /**
-     * @var string 
-     */
-    public $details;
-    /**
-     * @var string 
-     */
-    public $helpLink;
-    /**
-     * @var string 
-     */
-    public $name;
-    /**
-     * @var string 
-     */
-    public $refersTo;
-    /**
-     * @var string 
-     */
-    public $severity;
-    /**
-     * @var string 
-     */
-    public $source;
-    /**
-     * @var string 
-     */
-    public $summary;
-}
-/**
  * A company and account
  * Swagger Name: AvaTaxClient
  */
@@ -9869,6 +9961,14 @@ class MultiTaxFilingReturnModel
      * @var string The FilingTaskType for this return.
      */
     public $type;
+    /**
+     * @var string The three-character liability currency code.
+     */
+    public $liabilityCurrencyCode;
+    /**
+     * @var string The three-character filing calendar currency code for this return. For example if country is 'US' then currency is 'USD'. Similarly, if country is 'CA' then currency is 'CAD', etc.
+     */
+    public $filingCalendarCurrencyCode;
     /**
      * @var FilingsTaxSummaryModel 
      */
@@ -15089,92 +15189,6 @@ class VoidTransactionModel
      * @var string Please specify the reason for voiding or cancelling this transaction.  To void the transaction, please specify the reason 'DocVoided'.  If you do not provide a reason, the void command will fail. (See VoidReasonCode::* for a list of allowable values)
      */
     public $code;
-}
-/**
- * 
- * Swagger Name: AvaTaxClient
- */
-class WorksheetDocument
-{
-    /**
-     * @var string 
-     */
-    public $docCode;
-    /**
-     * @var string 
-     */
-    public $docDate;
-    /**
-     * @var float 
-     */
-    public $totalExempt;
-    /**
-     * @var float 
-     */
-    public $totalTaxable;
-    /**
-     * @var float 
-     */
-    public $totalTax;
-    /**
-     * @var WorksheetDocumentLine[] 
-     */
-    public $lines;
-    /**
-     * @var Message[] 
-     */
-    public $messages;
-    /**
-     * @var string 
-     */
-    public $resultCode;
-    /**
-     * @var string 
-     */
-    public $transactionId;
-}
-/**
- * 
- * Swagger Name: AvaTaxClient
- */
-class WorksheetDocumentLine
-{
-    /**
-     * @var string 
-     */
-    public $reportingDate;
-    /**
-     * @var string 
-     */
-    public $lineNo;
-    /**
-     * @var float 
-     */
-    public $lineAmount;
-    /**
-     * @var float 
-     */
-    public $exemptAmount;
-    /**
-     * @var float 
-     */
-    public $taxableAmount;
-    /**
-     * @var float 
-     */
-    public $taxAmount;
-    /**
-     * @var Message[] 
-     */
-    public $messages;
-    /**
-     * @var string 
-     */
-    public $resultCode;
-    /**
-     * @var string 
-     */
-    public $transactionId;
 }
 /**
  * Represents a verification request using Skyscraper for a company

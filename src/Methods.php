@@ -5504,6 +5504,88 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Delete AFC event notifications.
+     *
+     * ### Security Policies
+     * 
+     * * This API depends on the following active services:*Required* (all): ECMPremiumComms, ECMProComms.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param boolean $isDlq Specify `true` to delete event notifications from the dead letter queue; otherwise, specify `false`.
+     * @param EventDeleteMessageModel $model Details of the event you want to delete.
+     * @return \stdClass
+     */
+    public function deleteAfcEventNotifications($isDlq, $model)    {
+        $path = "/api/v2/event-notifications/afc";
+        $guzzleParams = [
+            'query' => ['isDlq' => null === $isDlq ? null : json_encode($isDlq)],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Delete company event notifications
+     *
+     * ### Security Policies
+     * 
+     * * This API depends on the following active services:*Required* (all): ECMPro, ECMPremium.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The unique ID number of the company that recorded these event notifications.
+     * @param EventDeleteMessageModel $model Details of the event you want to delete.
+     * @return \stdClass
+     */
+    public function deleteEventNotifications($companyId, $model)    {
+        $path = "/api/v2/event-notifications/companies/{$companyId}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Retrieve company event notifications.
+     *
+     * ### Security Policies
+     * 
+     * * This API depends on the following active services:*Required* (all): ECMPro, ECMPremium.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The unique ID number of the company that recorded these event notifications.
+     * @return \stdClass
+     */
+    public function getEventNotifications($companyId)    {
+        $path = "/api/v2/event-notifications/companies/{$companyId}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Retrieve AFC event notifications
+     *
+     * ### Security Policies
+     * 
+     * * This API depends on the following active services:*Required* (all): ECMPremiumComms, ECMProComms.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param boolean $isDlq Specify `true` to retrieve event notifications from the dead letter queue; otherwise, specify `false`.
+     * @return \stdClass
+     */
+    public function listAfcEventNotifications($isDlq)    {
+        $path = "/api/v2/event-notifications/afc";
+        $guzzleParams = [
+            'query' => ['isDlq' => null === $isDlq ? null : json_encode($isDlq)],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
      * Create a new eCommerce token.
      *
      * Creates a new eCommerce token.
@@ -6691,6 +6773,35 @@ class AvaTaxClient extends AvaTaxClientBase
         $path = "/api/v2/companies/{$companyId}/items";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy, 'tagName' => $tagName, 'itemStatus' => $itemStatus, 'taxCodeRecommendationStatus' => $taxCodeRecommendationStatus],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Retrieve the parameters by companyId and itemId.
+     *
+     * Returns the list of parameters based on the company's service types and the item code.
+     * Ignores nexus if a service type is configured in the 'IgnoreNexusForServiceTypes' configuration section.
+     * Ignores nexus for the AvaAlcohol service type.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId Company Identifier.
+     * @param int $itemId Item Identifier.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* serviceTypes, regularExpression, attributeSubType, values
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return \stdClass
+     */
+    public function listRecommendedParameterByCompanyIdAndItemId($companyId, $itemId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/definitions/companies/{$companyId}/items/{$itemId}/parameters";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
