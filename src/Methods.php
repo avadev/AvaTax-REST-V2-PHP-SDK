@@ -120,7 +120,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @return \stdClass
      */
-    public function auditAccount($id, $start, $end, $top=null, $skip=null)    {
+    public function auditAccount($id, $start=null, $end=null, $top=null, $skip=null)    {
         $path = "/api/v2/accounts/{$id}/audit";
         $guzzleParams = [
             'query' => ['start' => $start, 'end' => $end, '$top' => $top, '$skip' => $skip],
@@ -418,7 +418,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $textCase selectable text case for address validation (See TextCase::* for a list of allowable values)
      * @return \stdClass
      */
-    public function resolveAddress($line1, $line2, $line3, $city, $region, $postalCode, $country, $textCase)    {
+    public function resolveAddress($line1=null, $line2=null, $line3=null, $city=null, $region=null, $postalCode=null, $country=null, $textCase=null)    {
         $path = "/api/v2/addresses/resolve";
         $guzzleParams = [
             'query' => ['line1' => $line1, 'line2' => $line2, 'line3' => $line3, 'city' => $city, 'region' => $region, 'postalCode' => $postalCode, 'country' => $country, 'textCase' => $textCase],
@@ -467,7 +467,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param APConfigSettingRequestModel $model The AP Config Setting you wish to create.
      * @return \stdClass
      */
-    public function createAPConfigSetting($companyid, $model)    {
+    public function createAPConfigSetting($companyid, $model=null)    {
         $path = "/api/v2/companies/{$companyid}/apconfigsetting";
         $guzzleParams = [
             'query' => [],
@@ -531,7 +531,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param APConfigSettingRequestModel $model The AP config setting object you wish to update.
      * @return \stdClass
      */
-    public function updateAPConfigSetting($companyid, $model)    {
+    public function updateAPConfigSetting($companyid, $model=null)    {
         $path = "/api/v2/companies/{$companyid}/apconfigsetting";
         $guzzleParams = [
             'query' => [],
@@ -1116,7 +1116,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param CertificateModel[] $model Certificates to be created
      * @return \stdClass
      */
-    public function createCertificates($companyId, $preValidatedExemptionReason, $model)    {
+    public function createCertificates($companyId, $preValidatedExemptionReason=null, $model=null)    {
         $path = "/api/v2/companies/{$companyId}/certificates";
         $guzzleParams = [
             'query' => ['$preValidatedExemptionReason' => null === $preValidatedExemptionReason ? null : json_encode($preValidatedExemptionReason)],
@@ -1191,7 +1191,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $type The data format in which to retrieve the certificate image (See CertificatePreviewType::* for a list of allowable values)
      * @return \stdClass
      */
-    public function downloadCertificateImage($companyId, $id, $page, $type)    {
+    public function downloadCertificateImage($companyId, $id, $page=null, $type=null)    {
         $path = "/api/v2/companies/{$companyId}/certificates/{$id}/attachment";
         $guzzleParams = [
             'query' => ['$page' => $page, '$type' => $type],
@@ -1215,6 +1215,11 @@ class AvaTaxClient extends AvaTaxClientBase
      * * customers - Retrieves the list of customers linked to the certificate.
      * * po_numbers - Retrieves all PO numbers tied to the certificate.
      * * attributes - Retrieves all attributes applied to the certificate.
+     * * histories - Retrieves the certificate update history
+     * * jobs - Retrieves the jobs for this certificate
+     * * logs - Retrieves the certificate log
+     * * invalid_reasons - Retrieves invalid reasons for this certificate if the certificate is invalid
+     * * custom_fields - Retrieves custom fields set for this certificate
      *  
      * Before you can use any exemption certificates endpoints, you must set up your company for exemption certificate data storage.
      * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption
@@ -1229,7 +1234,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID number of the company that recorded this certificate
      * @param int $id The unique ID number of this certificate
-     * @param string $include OPTIONAL: A comma separated list of special fetch options. You can specify one or more of the following:      * customers - Retrieves the list of customers linked to the certificate.   * po_numbers - Retrieves all PO numbers tied to the certificate.   * attributes - Retrieves all attributes applied to the certificate.
+     * @param string $include OPTIONAL: A comma separated list of special fetch options. You can specify one or more of the following:      * customers - Retrieves the list of customers linked to the certificate.   * po_numbers - Retrieves all PO numbers tied to the certificate.   * attributes - Retrieves all attributes applied to the certificate.   * histories - Retrieves the certificate update history   * jobs - Retrieves the jobs for this certificate   * logs - Retrieves the certificate log   * invalid_reasons - Retrieves invalid reasons for this certificate if the certificate is invalid   * custom_fields - Retrieves custom fields set for this certificate
      * @return \stdClass
      */
     public function getCertificate($companyId, $id, $include=null)    {
@@ -1437,7 +1442,12 @@ class AvaTaxClient extends AvaTaxClientBase
      * * customers - Retrieves the list of customers linked to the certificate.
      * * po_numbers - Retrieves all PO numbers tied to the certificate.
      * * attributes - Retrieves all attributes applied to the certificate.
-     *  
+     * * histories - Retrieves the certificate update history
+     * * jobs - Retrieves the jobs for this certificate
+     * * logs - Retrieves the certificate log
+     * * invalid_reasons - Retrieves invalid reasons for this certificate if the certificate is invalid
+     * * custom_fields - Retrieves custom fields set for this certificate
+     * 
      * Before you can use any exemption certificates endpoints, you must set up your company for exemption certificate data storage.
      * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption
      * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption
@@ -1450,7 +1460,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID number of the company to search
-     * @param string $include OPTIONAL: A comma separated list of special fetch options. You can specify one or more of the following:      * customers - Retrieves the list of customers linked to the certificate.   * po_numbers - Retrieves all PO numbers tied to the certificate.   * attributes - Retrieves all attributes applied to the certificate.
+     * @param string $include OPTIONAL: A comma separated list of special fetch options. You can specify one or more of the following:      * customers - Retrieves the list of customers linked to the certificate.   * po_numbers - Retrieves all PO numbers tied to the certificate.   * attributes - Retrieves all attributes applied to the certificate.   * histories - Retrieves the certificate update history   * jobs - Retrieves the jobs for this certificate   * logs - Retrieves the certificate log   * invalid_reasons - Retrieves invalid reasons for this certificate if the certificate is invalid   * custom_fields - Retrieves custom fields set for this certificate
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* exemptionNumber, status, ecmStatus, ecmsId, ecmsStatus, pdf, pages
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
@@ -1646,6 +1656,59 @@ class AvaTaxClient extends AvaTaxClientBase
             'body' => null
         ];
         return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Retrieve a single communication certificate.
+     *
+     * ### Security Policies
+     * 
+     * * This API depends on the following active services:*Required* (all): ECMPremiumComms, ECMProComms.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The ID number of the company to search
+     * @param int $certificateId The ID number of the certifificate to search
+     * @return \stdClass
+     */
+    public function getCommunicationCertificate($companyId, $certificateId)    {
+        $path = "/companies/{$companyId}/communication-certificates/{$certificateId}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Retrieve all communication certificates.
+     *
+     * List all account objects that can be seen by the current user.
+     *  
+     * This API lists all accounts you are allowed to see. In general, most users will only be able to see their own account.
+     *  
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters. 
+     * For more information about filtering in REST, please see the documentation at http://developer.avalara.com/avatax/filtering-in-rest/ .
+     * 
+     * ### Security Policies
+     * 
+     * * This API depends on the following active services:*Required* (all): ECMPremiumComms, ECMProComms.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* EffectiveDate, ExpirationDate, TaxNumber, Exemptions
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @param int $companyId The ID number of the company to search
+     * @return \stdClass
+     */
+    public function listCommunicationCertificates($filter=null, $top=null, $skip=null, $orderBy=null, $companyId=null)    {
+        $path = "/companies/{$companyId}/communication-certificates";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -1845,7 +1908,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param FundingInitiateModel $model The funding initialization request
      * @return \stdClass
      */
-    public function createFundingRequest($id, $businessUnit, $subscriptionType, $model)    {
+    public function createFundingRequest($id, $businessUnit=null, $subscriptionType=null, $model=null)    {
         $path = "/api/v2/companies/{$id}/funding/setup";
         $guzzleParams = [
             'query' => ['businessUnit' => $businessUnit, 'subscriptionType' => $subscriptionType],
@@ -1948,7 +2011,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $currency The currency of the funding. USD and CAD are the only valid currencies
      * @return \stdClass
      */
-    public function fundingConfigurationsByCompanyAndCurrency($companyId, $currency)    {
+    public function fundingConfigurationsByCompanyAndCurrency($companyId, $currency=null)    {
         $path = "/api/v2/companies/{$companyId}/funding/configurations";
         $guzzleParams = [
             'query' => ['currency' => $currency],
@@ -2301,7 +2364,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param CompanyModel $model The company object you wish to update.
      * @return \stdClass
      */
-    public function updateCompany($id, $model)    {
+    public function updateCompany($id, $model=null)    {
         $path = "/api/v2/companies/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -2331,7 +2394,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param CompanyParameterDetailModel $model The company parameter object you wish to update.
      * @return \stdClass
      */
-    public function updateCompanyParameterDetail($companyId, $id, $model)    {
+    public function updateCompanyParameterDetail($companyId, $id, $model=null)    {
         $path = "/api/v2/companies/{$companyId}/parameters/{$id}";
         $guzzleParams = [
             'query' => [],
@@ -2358,7 +2421,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return \stdClass
      */
-    public function queryJurisNames($country, $region, $effectiveDate, $endDate, $filter=null, $top=null, $skip=null, $orderBy=null)    {
+    public function queryJurisNames($country, $region, $effectiveDate=null, $endDate=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/compliance/jurisnames/{$country}/{$region}";
         $guzzleParams = [
             'query' => ['effectiveDate' => $effectiveDate, 'endDate' => $endDate, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -2388,7 +2451,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return \stdClass
      */
-    public function queryRateOptions($country, $region, $effectiveDate, $endDate, $aggregationOption, $top=null, $skip=null, $filter=null, $orderBy=null)    {
+    public function queryRateOptions($country, $region, $effectiveDate=null, $endDate=null, $aggregationOption=null, $top=null, $skip=null, $filter=null, $orderBy=null)    {
         $path = "/api/v2/compliance/rateOptions/{$country}/{$region}";
         $guzzleParams = [
             'query' => ['effectiveDate' => $effectiveDate, 'endDate' => $endDate, 'aggregationOption' => $aggregationOption, '$top' => $top, '$skip' => $skip, '$filter' => $filter, '$orderBy' => $orderBy],
@@ -2440,7 +2503,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return \stdClass
      */
-    public function queryStateReportingCodes($country, $region, $effectiveDate, $endDate, $filter=null, $top=null, $skip=null, $orderBy=null)    {
+    public function queryStateReportingCodes($country, $region, $effectiveDate=null, $endDate=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/compliance/stateReportingCodes/{$country}/{$region}";
         $guzzleParams = [
             'query' => ['effectiveDate' => $effectiveDate, 'endDate' => $endDate, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -2559,7 +2622,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns these contacts
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* scsContactId
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -2589,7 +2652,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, FirmAdmin, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* scsContactId
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -2642,7 +2705,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param CostCenterBulkUploadInputModel $model The cost center bulk upload model.
      * @return \stdClass
      */
-    public function bulkUploadCostCenters($companyid, $model)    {
+    public function bulkUploadCostCenters($companyid, $model=null)    {
         $path = "/api/v2/companies/{$companyid}/costcenters/$upload";
         $guzzleParams = [
             'query' => [],
@@ -2663,7 +2726,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param CostCenterRequestModel $model The cost center you wish to create.
      * @return \stdClass
      */
-    public function createCostCenter($companyid, $model)    {
+    public function createCostCenter($companyid, $model=null)    {
         $path = "/api/v2/companies/{$companyid}/costcenters";
         $guzzleParams = [
             'query' => [],
@@ -2766,7 +2829,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param CostCenterRequestModel $model The cost center object you wish to update.
      * @return \stdClass
      */
-    public function updateCostCenter($companyid, $costcenterid, $model)    {
+    public function updateCostCenter($companyid, $costcenterid, $model=null)    {
         $path = "/api/v2/companies/{$companyid}/costcenters/{$costcenterid}";
         $guzzleParams = [
             'query' => [],
@@ -2861,9 +2924,16 @@ class AvaTaxClient extends AvaTaxClientBase
      *  
      * You can use the `$include` parameter to fetch the following additional objects for expansion:
      *  
-     * * Certificates - Fetch a list of certificates linked to this customer.
-     * * CustomFields - Fetch a list of custom fields associated to this customer.
+     * * certificates - Fetch a list of certificates linked to this customer.
      * * attributes - Retrieves all attributes applied to the customer.
+     * * active_certificates - Retrieves all the active certificates linked to this customer
+     * * histories - Retrieves the update history for this customer
+     * * logs - Retrieves customer logs
+     * * jobs - Retrieves customer jobs
+     * * billTos - Retrieves bill-tos linked with this customer
+     * * shipTos - Retrieves ship-tos linked with this customer
+     * * shipToStates - Retrieves ship-to states for this customer
+     * * custom_fields - Retrieves custom fields set for this customer
      *  
      * Before you can use any exemption certificates endpoints, you must set up your company for exemption certificate data storage.
      * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption
@@ -3064,7 +3134,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
      * @param string $customerCode The unique code representing this customer
-     * @param string $include OPTIONAL: A comma separated list of special fetch options. You can specify one or more of the following:      * customers - Retrieves the list of customers linked to the certificate.   * po_numbers - Retrieves all PO numbers tied to the certificate.   * attributes - Retrieves all attributes applied to the certificate.
+     * @param string $include OPTIONAL: A comma separated list of special fetch options. You can specify one or more of the following:      * customers - Retrieves the list of customers linked to the certificate.   * po_numbers - Retrieves all PO numbers tied to the certificate.   * attributes - Retrieves all attributes applied to the certificate.   * histories - Retrieves the certificate update history   * jobs - Retrieves the jobs for this certificate   * logs - Retrieves the certificate log   * invalid_reasons - Retrieves invalid reasons for this certificate if the certificate is invalid   * custom_fields - Retrieves custom fields set for this certificate
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* exemptionNumber, status, ecmStatus, ecmsId, ecmsStatus, pdf, pages
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
@@ -3133,9 +3203,17 @@ class AvaTaxClient extends AvaTaxClientBase
      *  
      * You can use the `$include` parameter to fetch the following additional objects for expansion:
      *  
-     * * Certificates - Fetch a list of certificates linked to this customer.
+     * * certificates - Fetch a list of certificates linked to this customer.
      * * attributes - Retrieves all attributes applied to the customer.
-     *  
+     * * active_certificates - Retrieves all the active certificates linked to this customer
+     * * histories - Retrieves the update history for this customer
+     * * logs - Retrieves customer logs
+     * * jobs - Retrieves customer jobs
+     * * billTos - Retrieves bill-tos linked with this customer
+     * * shipTos - Retrieves ship-tos linked with this customer
+     * * shipToStates - Retrieves ship-to states for this customer
+     * * custom_fields - Retrieves custom fields set for this customer
+     * 
      * Before you can use any exemption certificates endpoints, you must set up your company for exemption certificate data storage.
      * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption
      * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption
@@ -3148,7 +3226,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
-     * @param string $include OPTIONAL - You can specify the value `certificates` to fetch information about certificates linked to the customer.
+     * @param string $include OPTIONAL - You can specify any of the values in `certificates`, `attributes`, `active_certificates`, `histories`, `logs`, `jobs`, `billTos`, `shipTos`, `shipToStates`, and `custom_fields` to fetch additional information for this certificate.
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
@@ -3549,7 +3627,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return \stdClass
      */
-    public function listCertificateAttributes($companyid, $filter=null, $top=null, $skip=null, $orderBy=null)    {
+    public function listCertificateAttributes($companyid=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/certificateattributes";
         $guzzleParams = [
             'query' => ['companyid' => $companyid, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -3972,7 +4050,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return \stdClass
      */
-    public function listJurisdictionsByAddress($line1, $line2, $line3, $city, $region, $postalCode, $country, $filter=null, $top=null, $skip=null, $orderBy=null)    {
+    public function listJurisdictionsByAddress($line1=null, $line2=null, $line3=null, $city=null, $region=null, $postalCode=null, $country=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/jurisdictionsnearaddress";
         $guzzleParams = [
             'query' => ['line1' => $line1, 'line2' => $line2, 'line3' => $line3, 'city' => $city, 'region' => $region, 'postalCode' => $postalCode, 'country' => $country, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -4005,7 +4083,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return \stdClass
      */
-    public function listJurisdictionsByRateTypeTaxTypeMapping($country, $taxTypeId, $taxSubTypeId, $rateTypeId, $region, $filter=null, $top=null, $skip=null, $orderBy=null)    {
+    public function listJurisdictionsByRateTypeTaxTypeMapping($country, $taxTypeId, $taxSubTypeId, $rateTypeId, $region=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/jurisdictions/countries/{$country}/taxtypes/{$taxTypeId}/taxsubtypes/{$taxSubTypeId}";
         $guzzleParams = [
             'query' => ['rateTypeId' => $rateTypeId, 'region' => $region, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -4086,7 +4164,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return \stdClass
      */
-    public function listLocationQuestionsByAddress($line1, $line2, $line3, $city, $region, $postalCode, $country, $latitude, $longitude, $filter=null, $top=null, $skip=null, $orderBy=null)    {
+    public function listLocationQuestionsByAddress($line1=null, $line2=null, $line3=null, $city=null, $region=null, $postalCode=null, $country=null, $latitude=null, $longitude=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/locationquestions";
         $guzzleParams = [
             'query' => ['line1' => $line1, 'line2' => $line2, 'line3' => $line3, 'city' => $city, 'region' => $region, 'postalCode' => $postalCode, 'country' => $country, 'latitude' => $latitude, 'longitude' => $longitude, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -4185,7 +4263,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return \stdClass
      */
-    public function listNexusByAddress($line1, $line2, $line3, $city, $region, $postalCode, $country, $filter=null, $top=null, $skip=null, $orderBy=null)    {
+    public function listNexusByAddress($line1=null, $line2=null, $line3=null, $city=null, $region=null, $postalCode=null, $country=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/definitions/nexus/byaddress";
         $guzzleParams = [
             'query' => ['line1' => $line1, 'line2' => $line2, 'line3' => $line3, 'city' => $city, 'region' => $region, 'postalCode' => $postalCode, 'country' => $country, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -5458,7 +5536,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param DomainNameViewModel $model 
      * @return \stdClass
      */
-    public function createDcv($model)    {
+    public function createDcv($model=null)    {
         $path = "/api/v2/domain-control-verifications";
         $guzzleParams = [
             'query' => [],
@@ -5498,6 +5576,88 @@ class AvaTaxClient extends AvaTaxClientBase
         $path = "/api/v2/domain-control-verifications/{$domainControlVerificationId}";
         $guzzleParams = [
             'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Delete AFC event notifications.
+     *
+     * ### Security Policies
+     * 
+     * * This API depends on the following active services:*Required* (all): ECMPremiumComms, ECMProComms.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param boolean $isDlq Specify `true` to delete event notifications from the dead letter queue; otherwise, specify `false`.
+     * @param EventDeleteMessageModel $model Details of the event you want to delete.
+     * @return \stdClass
+     */
+    public function deleteAfcEventNotifications($isDlq=null, $model=null)    {
+        $path = "/api/v2/event-notifications/afc";
+        $guzzleParams = [
+            'query' => ['isDlq' => null === $isDlq ? null : json_encode($isDlq)],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Delete company event notifications
+     *
+     * ### Security Policies
+     * 
+     * * This API depends on the following active services:*Required* (all): ECMPro, ECMPremium.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The unique ID number of the company that recorded these event notifications.
+     * @param EventDeleteMessageModel $model Details of the event you want to delete.
+     * @return \stdClass
+     */
+    public function deleteEventNotifications($companyId, $model)    {
+        $path = "/api/v2/event-notifications/companies/{$companyId}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Retrieve company event notifications.
+     *
+     * ### Security Policies
+     * 
+     * * This API depends on the following active services:*Required* (all): ECMPro, ECMPremium.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The unique ID number of the company that recorded these event notifications.
+     * @return \stdClass
+     */
+    public function getEventNotifications($companyId)    {
+        $path = "/api/v2/event-notifications/companies/{$companyId}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Retrieve AFC event notifications
+     *
+     * ### Security Policies
+     * 
+     * * This API depends on the following active services:*Required* (all): ECMPremiumComms, ECMProComms.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param boolean $isDlq Specify `true` to retrieve event notifications from the dead letter queue; otherwise, specify `false`.
+     * @return \stdClass
+     */
+    public function listAfcEventNotifications($isDlq=null)    {
+        $path = "/api/v2/event-notifications/afc";
+        $guzzleParams = [
+            'query' => ['isDlq' => null === $isDlq ? null : json_encode($isDlq)],
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
@@ -5787,7 +5947,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $subscriptionType The company's subscription type (See POASubscriptionType::* for a list of allowable values)
      * @return \stdClass
      */
-    public function activateFundingRequest($id, $businessUnit, $subscriptionType)    {
+    public function activateFundingRequest($id, $businessUnit=null, $subscriptionType=null)    {
         $path = "/api/v2/fundingrequests/{$id}/widget";
         $guzzleParams = [
             'query' => ['businessUnit' => $businessUnit, 'subscriptionType' => $subscriptionType],
@@ -5821,7 +5981,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $subscriptionType The company's subscription type (See POASubscriptionType::* for a list of allowable values)
      * @return \stdClass
      */
-    public function fundingRequestStatus($id, $businessUnit, $subscriptionType)    {
+    public function fundingRequestStatus($id, $businessUnit=null, $subscriptionType=null)    {
         $path = "/api/v2/fundingrequests/{$id}";
         $guzzleParams = [
             'query' => ['businessUnit' => $businessUnit, 'subscriptionType' => $subscriptionType],
@@ -5840,7 +6000,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param GLAccountBulkUploadInputModel $model The GL account bulk upload model.
      * @return \stdClass
      */
-    public function bulkUploadGLAccounts($companyid, $model)    {
+    public function bulkUploadGLAccounts($companyid, $model=null)    {
         $path = "/api/v2/companies/{$companyid}/glaccounts/$upload";
         $guzzleParams = [
             'query' => [],
@@ -5861,7 +6021,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param GLAccountRequestModel $model The GL Account you want to create
      * @return \stdClass
      */
-    public function createGLAccount($companyid, $model)    {
+    public function createGLAccount($companyid, $model=null)    {
         $path = "/api/v2/companies/{$companyid}/glaccounts";
         $guzzleParams = [
             'query' => [],
@@ -5942,7 +6102,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param GLAccountRequestModel $model The GL account object you want to update
      * @return \stdClass
      */
-    public function updateGLAccount($companyid, $glaccountid, $model)    {
+    public function updateGLAccount($companyid, $glaccountid, $model=null)    {
         $path = "/api/v2/companies/{$companyid}/glaccounts/{$glaccountid}";
         $guzzleParams = [
             'query' => [],
@@ -6125,7 +6285,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param ItemModel[] $model The item you wish to create.
      * @return \stdClass
      */
-    public function createItems($companyId, $processRecommendationsSynchronously, $model)    {
+    public function createItems($companyId, $processRecommendationsSynchronously=null, $model=null)    {
         $path = "/api/v2/companies/{$companyId}/items";
         $guzzleParams = [
             'query' => ['processRecommendationsSynchronously' => null === $processRecommendationsSynchronously ? null : json_encode($processRecommendationsSynchronously)],
@@ -6178,7 +6338,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param ItemTaxCodeClassificationRequestInputModel $model The request you wish to create.
      * @return \stdClass
      */
-    public function createTaxCodeClassificationRequest($companyId, $model)    {
+    public function createTaxCodeClassificationRequest($companyId, $model=null)    {
         $path = "/api/v2/companies/{$companyId}/classificationrequests/taxcode";
         $guzzleParams = [
             'query' => [],
@@ -6697,6 +6857,35 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Retrieve the parameters by companyId and itemId.
+     *
+     * Returns the list of parameters based on the company's service types and the item code.
+     * Ignores nexus if a service type is configured in the 'IgnoreNexusForServiceTypes' configuration section.
+     * Ignores nexus for the AvaAlcohol service type.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId Company Identifier.
+     * @param int $itemId Item Identifier.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* serviceTypes, regularExpression, attributeSubType, values
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return \stdClass
+     */
+    public function listRecommendedParameterByCompanyIdAndItemId($companyId, $itemId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/definitions/companies/{$companyId}/items/{$itemId}/parameters";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
      * Retrieve all items
      *
      * Get multiple item objects across all companies.
@@ -6897,7 +7086,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param ItemModel $model The item object you wish to update.
      * @return \stdClass
      */
-    public function updateItem($companyId, $id, $isRecommendationSelected, $model)    {
+    public function updateItem($companyId, $id, $isRecommendationSelected=null, $model=null)    {
         $path = "/api/v2/companies/{$companyId}/items/{$id}";
         $guzzleParams = [
             'query' => ['isRecommendationSelected' => null === $isRecommendationSelected ? null : json_encode($isRecommendationSelected)],
@@ -8124,7 +8313,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param boolean $cascadeDelete If true, deletes all the child nexus if they exist along with parent nexus
      * @return \stdClass
      */
-    public function deleteNexus($companyId, $id, $cascadeDelete)    {
+    public function deleteNexus($companyId, $id, $cascadeDelete=null)    {
         $path = "/api/v2/companies/{$companyId}/nexus/{$id}";
         $guzzleParams = [
             'query' => ['cascadeDelete' => null === $cascadeDelete ? null : json_encode($cascadeDelete)],
@@ -8980,7 +9169,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param SetPasswordModel $model The new password for this user
      * @return \stdClass
      */
-    public function resetPassword($userId, $isUndoMigrateRequest, $model)    {
+    public function resetPassword($userId, $isUndoMigrateRequest=null, $model=null)    {
         $path = "/api/v2/passwords/{$userId}/reset";
         $guzzleParams = [
             'query' => ['isUndoMigrateRequest' => null === $isUndoMigrateRequest ? null : json_encode($isUndoMigrateRequest)],
@@ -9210,7 +9399,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @return \stdClass
      */
-    public function listReports($companyId, $pageKey, $skip=null, $top=null)    {
+    public function listReports($companyId=null, $pageKey=null, $skip=null, $top=null)    {
         $path = "/api/v2/reports";
         $guzzleParams = [
             'query' => ['companyId' => $companyId, 'pageKey' => $pageKey, '$skip' => $skip, '$top' => $top],
@@ -9780,7 +9969,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param boolean $includeJurisCodes When true, the file will include jurisdiction codes in the result.
      * @return \stdClass
      */
-    public function buildTaxContentFileForLocation($companyId, $id, $date, $format, $partnerId, $includeJurisCodes)    {
+    public function buildTaxContentFileForLocation($companyId, $id, $date=null, $format=null, $partnerId=null, $includeJurisCodes=null)    {
         $path = "/api/v2/companies/{$companyId}/locations/{$id}/pointofsaledata";
         $guzzleParams = [
             'query' => ['date' => $date, 'format' => $format, 'partnerId' => $partnerId, 'includeJurisCodes' => null === $includeJurisCodes ? null : json_encode($includeJurisCodes)],
@@ -9842,7 +10031,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $region A two character region code which limits results to a specific region.
      * @return \stdClass
      */
-    public function downloadTaxRatesByZipCode($date, $region)    {
+    public function downloadTaxRatesByZipCode($date, $region=null)    {
         $path = "/api/v2/taxratesbyzipcode/download/{$date}";
         $guzzleParams = [
             'query' => ['region' => $region],
@@ -9887,7 +10076,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $country Name or ISO 3166 code identifying the country.     This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries     For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
      * @return \stdClass
      */
-    public function taxRatesByAddress($line1, $line2, $line3, $city, $region, $postalCode, $country)    {
+    public function taxRatesByAddress($line1, $line2=null, $line3=null, $city=null, $region=null, $postalCode=null, $country=null)    {
         $path = "/api/v2/taxrates/byaddress";
         $guzzleParams = [
             'query' => ['line1' => $line1, 'line2' => $line2, 'line3' => $line3, 'city' => $city, 'region' => $region, 'postalCode' => $postalCode, 'country' => $country],
@@ -9957,7 +10146,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param CountryCoefficientsRequestEntity $model The Country Coefficients for specific country you wish to create.
      * @return \stdClass
      */
-    public function createCountryCoefficients($model)    {
+    public function createCountryCoefficients($model=null)    {
         $path = "/api/v2/countryCoefficients";
         $guzzleParams = [
             'query' => [],
@@ -10307,7 +10496,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param AdjustTransactionModel $model The adjustment you wish to make
      * @return \stdClass
      */
-    public function adjustTransaction($companyCode, $transactionCode, $documentType, $include=null, $model=null)    {
+    public function adjustTransaction($companyCode, $transactionCode, $documentType=null, $include=null, $model=null)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/adjust";
         $guzzleParams = [
             'query' => ['documentType' => $documentType, '$include' => $include],
@@ -10485,7 +10674,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param ChangeTransactionCodeModel $model The code change request you wish to execute
      * @return \stdClass
      */
-    public function changeTransactionCode($companyCode, $transactionCode, $documentType, $include=null, $model=null)    {
+    public function changeTransactionCode($companyCode, $transactionCode, $documentType=null, $include=null, $model=null)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/changecode";
         $guzzleParams = [
             'query' => ['documentType' => $documentType, '$include' => $include],
@@ -10539,7 +10728,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param CommitTransactionModel $model The commit request you wish to execute
      * @return \stdClass
      */
-    public function commitTransaction($companyCode, $transactionCode, $documentType, $include=null, $model=null)    {
+    public function commitTransaction($companyCode, $transactionCode, $documentType=null, $include=null, $model=null)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/commit";
         $guzzleParams = [
             'query' => ['documentType' => $documentType, '$include' => $include],
@@ -10778,7 +10967,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $include Specifies objects to include in this fetch call
      * @return \stdClass
      */
-    public function getTransactionByCode($companyCode, $transactionCode, $documentType, $include=null)    {
+    public function getTransactionByCode($companyCode, $transactionCode, $documentType=null, $include=null)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}";
         $guzzleParams = [
             'query' => ['documentType' => $documentType, '$include' => $include],
@@ -10932,7 +11121,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return \stdClass
      */
-    public function listTransactionsByCompany($companyCode, $dataSourceId, $include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
+    public function listTransactionsByCompany($companyCode, $dataSourceId=null, $include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyCode}/transactions";
         $guzzleParams = [
             'query' => ['dataSourceId' => $dataSourceId, '$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
@@ -10988,7 +11177,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param LockTransactionModel $model The lock request you wish to execute
      * @return \stdClass
      */
-    public function lockTransaction($companyCode, $transactionCode, $documentType, $include=null, $model=null)    {
+    public function lockTransaction($companyCode, $transactionCode, $documentType=null, $include=null, $model=null)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/lock";
         $guzzleParams = [
             'query' => ['documentType' => $documentType, '$include' => $include],
@@ -11109,7 +11298,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param SettleTransactionModel $model The data from an external system to reconcile against AvaTax
      * @return \stdClass
      */
-    public function settleTransaction($companyCode, $transactionCode, $documentType, $include=null, $model=null)    {
+    public function settleTransaction($companyCode, $transactionCode, $documentType=null, $include=null, $model=null)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/settle";
         $guzzleParams = [
             'query' => ['documentType' => $documentType, '$include' => $include],
@@ -11157,7 +11346,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $include Specifies objects to include in this fetch call
      * @return \stdClass
      */
-    public function uncommitTransaction($companyCode, $transactionCode, $documentType, $include=null)    {
+    public function uncommitTransaction($companyCode, $transactionCode, $documentType=null, $include=null)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/uncommit";
         $guzzleParams = [
             'query' => ['documentType' => $documentType, '$include' => $include],
@@ -11202,7 +11391,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $include Specifies objects to include in this fetch call
      * @return \stdClass
      */
-    public function unvoidTransaction($companyCode, $transactionCode, $documentType, $include=null)    {
+    public function unvoidTransaction($companyCode, $transactionCode, $documentType=null, $include=null)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/unvoid";
         $guzzleParams = [
             'query' => ['documentType' => $documentType, '$include' => $include],
@@ -11277,7 +11466,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param VerifyTransactionModel $model The data from an external system to reconcile against AvaTax
      * @return \stdClass
      */
-    public function verifyTransaction($companyCode, $transactionCode, $documentType, $include=null, $model=null)    {
+    public function verifyTransaction($companyCode, $transactionCode, $documentType=null, $include=null, $model=null)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/verify";
         $guzzleParams = [
             'query' => ['documentType' => $documentType, '$include' => $include],
@@ -11332,7 +11521,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param VoidTransactionModel $model The void request you wish to execute. To void a transaction the code must be set to 'DocVoided'
      * @return \stdClass
      */
-    public function voidTransaction($companyCode, $transactionCode, $documentType, $include=null, $model=null)    {
+    public function voidTransaction($companyCode, $transactionCode, $documentType=null, $include=null, $model=null)    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/void";
         $guzzleParams = [
             'query' => ['documentType' => $documentType, '$include' => $include],
@@ -11544,7 +11733,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param boolean $allowDefaults If true this will add defaulted UDFs to the list that are not named yet
      * @return \stdClass
      */
-    public function listUserDefinedFieldsByCompanyId($companyId, $udfType, $allowDefaults)    {
+    public function listUserDefinedFieldsByCompanyId($companyId, $udfType=null, $allowDefaults=null)    {
         $path = "/api/v2/companies/{$companyId}/userdefinedfields";
         $guzzleParams = [
             'query' => ['udfType' => $udfType, 'allowDefaults' => null === $allowDefaults ? null : json_encode($allowDefaults)],
@@ -11569,7 +11758,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param CompanyUserDefinedFieldModel $model 
      * @return \stdClass
      */
-    public function updateUserDefinedField($companyId, $id, $model)    {
+    public function updateUserDefinedField($companyId, $id=null, $model=null)    {
         $path = "/api/v2/companies/{$companyId}/userdefinedfields";
         $guzzleParams = [
             'query' => ['id' => $id],
@@ -11997,7 +12186,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param AgeVerifyRequest $model Information about the individual whose age is being verified.
      * @return \stdClass
      */
-    public function storeIfVerified($simulatedFailureCode, $model)    {
+    public function storeIfVerified($simulatedFailureCode=null, $model=null)    {
         $path = "/api/v2/ageverification/store/identity/storeIfVerified";
         $guzzleParams = [
             'query' => ['simulatedFailureCode' => $simulatedFailureCode],
@@ -12028,7 +12217,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param AgeVerifyRequest $model Information about the individual whose age is being verified.
      * @return \stdClass
      */
-    public function verifyAge($simulatedFailureCode, $model)    {
+    public function verifyAge($simulatedFailureCode=null, $model=null)    {
         $path = "/api/v2/ageverification/verify";
         $guzzleParams = [
             'query' => ['simulatedFailureCode' => $simulatedFailureCode],
@@ -12050,7 +12239,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $x_avalara_version (Optional): API version that should satisfy the request. If omitted, defaults to 2.2. Header takes precendence if both header and query parameters are present.
      * @return \stdClass
      */
-    public function deregisterShipment($companyCode, $transactionCode, $documentType, $api_version= "" , $x_avalara_version= "" )    {
+    public function deregisterShipment($companyCode, $transactionCode, $documentType=null, $api_version= "" , $x_avalara_version= "" )    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/shipment/registration";
         $guzzleParams = [
             'query' => ['documentType' => $documentType, 'api-version' => $api_version],
@@ -12073,7 +12262,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $x_avalara_version (Optional): API version that should satisfy the request. If omitted, defaults to 2.2. Header takes precendence if both header and query parameters are present.
      * @return \stdClass
      */
-    public function registerShipment($companyCode, $transactionCode, $documentType, $api_version= "" , $x_avalara_version= "" )    {
+    public function registerShipment($companyCode, $transactionCode, $documentType=null, $api_version= "" , $x_avalara_version= "" )    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/shipment/registration";
         $guzzleParams = [
             'query' => ['documentType' => $documentType, 'api-version' => $api_version],
@@ -12096,7 +12285,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $x_avalara_version (Optional): API version that should satisfy the request. If omitted, defaults to 2.2. Header takes precendence if both header and query parameters are present.
      * @return \stdClass
      */
-    public function registerShipmentIfCompliant($companyCode, $transactionCode, $documentType, $api_version= "" , $x_avalara_version= "" )    {
+    public function registerShipmentIfCompliant($companyCode, $transactionCode, $documentType=null, $api_version= "" , $x_avalara_version= "" )    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/shipment/registerIfCompliant";
         $guzzleParams = [
             'query' => ['documentType' => $documentType, 'api-version' => $api_version],
@@ -12134,7 +12323,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $x_avalara_version (Optional): API version that should satisfy the request. If omitted, defaults to 2.2. Header takes precendence if both header and query parameters are present.
      * @return \stdClass
      */
-    public function verifyShipment($companyCode, $transactionCode, $documentType, $api_version= "" , $x_avalara_version= "" )    {
+    public function verifyShipment($companyCode, $transactionCode, $documentType=null, $api_version= "" , $x_avalara_version= "" )    {
         $path = "/api/v2/companies/{$companyCode}/transactions/{$transactionCode}/shipment/verify";
         $guzzleParams = [
             'query' => ['documentType' => $documentType, 'api-version' => $api_version],
@@ -12197,7 +12386,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $accountId (Optional): For users with access to multiple accounts, filters results to those associated with the specified Account ID. If not specified, the Account ID defaults to the one associated with the account
      * @return \stdClass
      */
-    public function getBatchRegistrationData($accountId)    {
+    public function getBatchRegistrationData($accountId=null)    {
         $path = "/api/v2/asv/batches";
         $guzzleParams = [
             'query' => ['accountId' => $accountId],

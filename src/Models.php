@@ -431,29 +431,29 @@ class ActivateAccountModel
     public $haveReadAvalaraTermsAndConditions;
 }
 /**
- * Certificate with exemption reason and exposure zone. Exposed in url $includes
+ * Certificate with exemption reason and exposure zone. This is exposed in the URL's `$includes`.
  * Swagger Name: AvaTaxClient
  */
 class ActiveCertificateModel
 {
     /**
-     * @var int Certificate ID.
+     * @var int The unique ID number of this certificate.
      */
     public $id;
     /**
-     * @var string Created date time
+     * @var string The date/time when this certificate was created.
      */
     public $created;
     /**
-     * @var string Modified date time
+     * @var string The date/time when this certificate was last modified.
      */
     public $modified;
     /**
-     * @var string Certificate's expected tax number
+     * @var string The expected tax number for this certificate.
      */
     public $expectedTaxNumber;
     /**
-     * @var string Certificate's actual tax number
+     * @var string The actual tax number for this certificate.
      */
     public $actualTaxNumber;
     /**
@@ -1602,13 +1602,13 @@ class BatchModel
      */
     public $batchAgent;
     /**
-     * @var string Any optional flags provided for this batch
-     */
-    public $options;
-    /**
      * @var int The unique ID number of this batch.
      */
     public $id;
+    /**
+     * @var string Any optional flags provided for this batch
+     */
+    public $options;
     /**
      * @var string The user-friendly readable name for this batch.
      */
@@ -1819,52 +1819,52 @@ class CertificateAttributeModel
     public $isSystemCode;
 }
 /**
- * Invalid reason for the certificate
+ * The reason the certificate is invalid.
  * Swagger Name: AvaTaxClient
  */
 class CertificateInvalidReasonModel
 {
     /**
-     * @var int 
+     * @var int The unique ID of this invalid reason.
      */
     public $id;
     /**
-     * @var string 
+     * @var string The name of this certificate invalid reason.
      */
     public $name;
     /**
-     * @var string 
+     * @var string A description of the certificate invalid reason.
      */
     public $description;
     /**
-     * @var boolean 
+     * @var boolean This value is `true` if the invalid reason is a system code.
      */
     public $systemCode;
 }
 /**
- * certificate log for a customer. Exposed in url $includes
+ * The certificate log for a customer. This is exposed in the URL's `$includes`.
  * Swagger Name: AvaTaxClient
  */
 class CertificateLogModel
 {
     /**
-     * @var int Log ID
+     * @var int The unique ID number of this log entry.
      */
     public $id;
     /**
-     * @var int Certificate ID
+     * @var int The unique ID number of this certificate.
      */
     public $certificateId;
     /**
-     * @var string Account name
+     * @var string The name of this account.
      */
     public $account;
     /**
-     * @var string Log description
+     * @var string The log entry description.
      */
     public $entry;
     /**
-     * @var string Date of creation for log entry
+     * @var string The date/time when this certificate log was created.
      */
     public $created;
 }
@@ -1878,7 +1878,7 @@ class CertificateLogModel
 class CertificateModel
 {
     /**
-     * @var int Unique ID number of this certificate.
+     * @var int The unique ID number of this certificate.
      */
     public $id;
     /**
@@ -1930,11 +1930,11 @@ class CertificateModel
      */
     public $exemptionReason;
     /**
-     * @var string The status of the certificate
+     * @var string The status of the certificate.
      */
     public $status;
     /**
-     * @var string The status of the certificate as displayed on https://exemptions.avalara.com. Can take values (See CertificateEcmStatus::* for a list of allowable values)
+     * @var string The status of the certificate as displayed on https://exemptions.avalara.com. The values in `CertificateEcmStatus` include all the possible status values. (See CertificateEcmStatus::* for a list of allowable values)
      */
     public $ecmStatus;
     /**
@@ -1954,7 +1954,7 @@ class CertificateModel
      */
     public $businessNumberType;
     /**
-     * @var int Number of pages contained within this certificate.
+     * @var int The number of pages contained within this certificate.
      */
     public $pageCount;
     /**
@@ -1974,23 +1974,23 @@ class CertificateModel
      */
     public $attributes;
     /**
-     * @var HistoryModel[] A list of certificate update histories for this certificate.     You can fetch this data by specifying `$include=histories` when calling a certificate fetch API.
+     * @var HistoryModel[] A list of update histories for this certificate.     You can fetch this data by specifying `$include=histories` when calling a certificate fetch API.
      */
     public $histories;
     /**
-     * @var CustomerJobModel[] A list of certificate update histories for this certificate.     You can fetch this data by specifying `$include=jobs` when calling a certificate fetch API.
+     * @var CustomerJobModel[] A list of jobs for this certificate.     You can fetch this data by specifying `$include=jobs` when calling a certificate fetch API.
      */
     public $jobs;
     /**
-     * @var CertificateLogModel[] A list of certificate logs for this certificate.     You can fetch this data by specifying `$include=logs` when calling a certificate fetch API.
+     * @var CertificateLogModel[] A list of logs for this certificate.     You can fetch this data by specifying `$include=logs` when calling a certificate fetch API.
      */
     public $logs;
     /**
-     * @var CertificateInvalidReasonModel[] A list of invalid reasons if the certificate status is not valid     You can fetch this data by specifying `$include=invalid_reasons` when calling a certificate fetch API.
+     * @var CertificateInvalidReasonModel[] For a certificate with an invalid status, this lists the reasons why the certificate is invalid.     You can fetch this data by specifying `$include=invalid_reasons` when calling a certificate fetch API.
      */
     public $invalidReasons;
     /**
-     * @var CustomFieldModel[] A list of custom defined fields for this certificate     You can fetch this data by specifying `$include=custom_fields` when calling a certificate fetch API.
+     * @var CustomFieldModel[] A list of custom defined fields for this certificate.     You can fetch this data by specifying `$include=custom_fields` when calling a certificate fetch API.
      */
     public $customFields;
     /**
@@ -2149,6 +2149,144 @@ class CommitTransactionModel
      * @var boolean Set this value to be `true` to commit this transaction.     Committing a transaction allows it to be reported on a tax filing. Uncommitted transactions will not be reported.
      */
     public $commit;
+}
+/**
+ * Encloses communication certificate details
+ * Swagger Name: AvaTaxClient
+ */
+class CommunicationCertificateResponse
+{
+    /**
+     * @var int Certificate Id
+     */
+    public $id;
+    /**
+     * @var string Certificate effective date
+     */
+    public $effectiveDate;
+    /**
+     * @var string Certificate expiration date
+     */
+    public $expirationDate;
+    /**
+     * @var string Certificate exemption reason
+     */
+    public $exemptionReason;
+    /**
+     * @var string Certificate exemption region
+     */
+    public $exemptionRegion;
+    /**
+     * @var string Certificate tax number
+     */
+    public $taxNumber;
+    /**
+     * @var string Certificate status
+     */
+    public $certificateStatus;
+    /**
+     * @var CommunicationCustomerResponse[] Customers which have this certificate
+     */
+    public $customers;
+    /**
+     * @var CommunicationTaxTypeResponse[] Tax details of this certificate
+     */
+    public $exemptions;
+}
+/**
+ * Encloses count and model value details
+ * Swagger Name: AvaTaxClient
+ */
+class CommunicationCertificateResponsePage
+{
+    /**
+     * @var int Count of records
+     */
+    public $count;
+    /**
+     * @var CommunicationCertificateResponse[] Requested model list
+     */
+    public $value;
+}
+/**
+ * Encloses communication certificate customer
+ * Swagger Name: AvaTaxClient
+ */
+class CommunicationCustomerResponse
+{
+    /**
+     * @var int Customer Id
+     */
+    public $id;
+    /**
+     * @var string Customer number
+     */
+    public $customerNumber;
+}
+/**
+ * Encloses Communication exemption designator details
+ * Swagger Name: AvaTaxClient
+ */
+class CommunicationExemptionDesignatorResponse
+{
+    /**
+     * @var int Communication category Id
+     */
+    public $id;
+    /**
+     * @var string Tax category
+     */
+    public $type;
+    /**
+     * @var string Communication category name
+     */
+    public $name;
+}
+/**
+ * Encloses communication location details
+ * Swagger Name: AvaTaxClient
+ */
+class CommunicationLocationResponse
+{
+    /**
+     * @var string Communication tax country
+     */
+    public $country;
+    /**
+     * @var string Communication tax state
+     */
+    public $state;
+    /**
+     * @var string Communication tax County
+     */
+    public $county;
+    /**
+     * @var string Communication tax city
+     */
+    public $city;
+}
+/**
+ * Encloses communication tax type details
+ * Swagger Name: AvaTaxClient
+ */
+class CommunicationTaxTypeResponse
+{
+    /**
+     * @var CommunicationLocationResponse 
+     */
+    public $location;
+    /**
+     * @var CommunicationExemptionDesignatorResponse 
+     */
+    public $exemptionDesignator;
+    /**
+     * @var string[] Communication scope
+     */
+    public $scope;
+    /**
+     * @var string Communication domain
+     */
+    public $domain;
 }
 /**
  * Represents a transaction/service type pair for telecommunications tax
@@ -3790,6 +3928,10 @@ class CreateTransactionBatchRequestModel
      * @var TransactionBatchItemModel[] The list of transactions contained in this batch.
      */
     public $transactions;
+    /**
+     * @var string Any optional flags provided for this batch
+     */
+    public $options;
 }
 /**
  * Represents a create transaction batch response model.
@@ -3801,6 +3943,10 @@ class CreateTransactionBatchResponseModel
      * @var int The unique ID number of this batch.
      */
     public $id;
+    /**
+     * @var string Any optional flags provided for this batch
+     */
+    public $options;
     /**
      * @var string The user-friendly readable name for this batch.
      */
@@ -3998,6 +4144,68 @@ class CreateTransactionModel
     public $deliveryTerms;
 }
 /**
+ * Credit Transaction Detail Lines
+ * Swagger Name: AvaTaxClient
+ */
+class CreditTransactionDetailLines
+{
+    /**
+     * @var string ReportingDate
+     */
+    public $reportingDate;
+    /**
+     * @var string LineNo
+     */
+    public $lineNo;
+    /**
+     * @var float LineAmount
+     */
+    public $lineAmount;
+    /**
+     * @var float ExemptAmount
+     */
+    public $exemptAmount;
+    /**
+     * @var float TaxableAmount
+     */
+    public $taxableAmount;
+    /**
+     * @var float TaxAmount
+     */
+    public $taxAmount;
+}
+/**
+ * Credit Transaction Details
+ * Swagger Name: AvaTaxClient
+ */
+class CreditTransactionDetails
+{
+    /**
+     * @var string DocCode
+     */
+    public $docCode;
+    /**
+     * @var string DocDate
+     */
+    public $docDate;
+    /**
+     * @var float TotalExempt
+     */
+    public $totalExempt;
+    /**
+     * @var float TotalTaxable
+     */
+    public $totalTaxable;
+    /**
+     * @var float TotalTax
+     */
+    public $totalTax;
+    /**
+     * @var CreditTransactionDetailLines[] Lines
+     */
+    public $lines;
+}
+/**
  * Represents an ISO 4217 currency code used for designating the currency of a transaction.
  * Swagger Name: AvaTaxClient
  */
@@ -4028,7 +4236,7 @@ class CurrencyModel
 class CustomFieldModel
 {
     /**
-     * @var int Custom field ID
+     * @var int The unique ID of this custom field.
      */
     public $id;
     /**
@@ -4036,19 +4244,19 @@ class CustomFieldModel
      */
     public $name;
     /**
-     * @var string Custom field type
+     * @var string The type of custom field.
      */
     public $type;
     /**
-     * @var string 
+     * @var string The possible values the custom field can have.
      */
     public $possibleValues;
     /**
-     * @var boolean Custom field uses data entry or not?
+     * @var boolean This value is `true` if the custom field uses a data entry.
      */
     public $usesDataEntry;
     /**
-     * @var boolean Custom field is required in data entry or not?
+     * @var boolean Shows whether the custom field is required in data entry.
      */
     public $requiredInDataEntry;
     /**
@@ -4089,21 +4297,21 @@ class CustomerAttributeModel
     public $isChangeable;
 }
 /**
- * Customer job model. Exposed in url $includes
+ * Customer job model. This is exposed in the URL's `$includes`.
  * Swagger Name: AvaTaxClient
  */
 class CustomerJobModel
 {
     /**
-     * @var int ID
+     * @var int The unique ID number of this customer's job.
      */
     public $id;
     /**
-     * @var int Job number
+     * @var int The job number of this customer.
      */
     public $jobNumber;
     /**
-     * @var string Job name
+     * @var string The job name of this customer.
      */
     public $name;
 }
@@ -4114,7 +4322,7 @@ class CustomerJobModel
 class CustomerModel
 {
     /**
-     * @var int Unique ID number of this customer.
+     * @var int The unique ID number of this customer.
      */
     public $id;
     /**
@@ -4226,23 +4434,23 @@ class CustomerModel
      */
     public $attributes;
     /**
-     * @var ActiveCertificateModel[] List if active certificates with exemption reasons
+     * @var ActiveCertificateModel[] A list of active certificates with exemption reasons.
      */
     public $activeCertificates;
     /**
-     * @var HistoryModel[] List of field update histories for this customer
+     * @var HistoryModel[] A list of field update histories for this customer.
      */
     public $histories;
     /**
-     * @var CustomerJobModel[] List of jobs for this customer
+     * @var CustomerJobModel[] A list of jobs for this customer.
      */
     public $jobs;
     /**
-     * @var CertificateLogModel[] List of logs for this customer
+     * @var CertificateLogModel[] A list of logs for this customer.
      */
     public $logs;
     /**
-     * @var StateModel[] List of states where this customer ships to
+     * @var StateModel[] A list of states where this customer ships to.
      */
     public $shipToStates;
 }
@@ -5256,6 +5464,51 @@ class ErrorTransactionOutputModel
     public $documentCode;
 }
 /**
+ * Model to delete message
+ * Swagger Name: AvaTaxClient
+ */
+class EventDeleteBatchMessageModel
+{
+    /**
+     * @var string The receipt handle associated with the message to delete.
+     */
+    public $receiptHandle;
+    /**
+     * @var string A system-assigned message ID
+     */
+    public $messageId;
+}
+/**
+ * Encloses the delete message command.
+ * Swagger Name: AvaTaxClient
+ */
+class EventDeleteMessageModel
+{
+    /**
+     * @var EventDeleteBatchMessageModel[] Command details for the delete message
+     */
+    public $eventDeleteBatchMessageCommands;
+}
+/**
+ * Encloses event message details
+ * Swagger Name: AvaTaxClient
+ */
+class EventMessageResponse
+{
+    /**
+     * @var string Message content
+     */
+    public $body;
+    /**
+     * @var string A system-assigned message ID
+     */
+    public $messageId;
+    /**
+     * @var string The receipt handle associated with the message to delete.
+     */
+    public $receiptHandle;
+}
+/**
  * An exemption reason defines why a certificate allows a customer to be exempt
  * for purposes of tax calculation. For a full list of defined exemption reasons,
  * please call the `ListCertificateExemptionReasons` API.
@@ -5860,6 +6113,10 @@ class FilingCalendarModel
      * @var int Auto Lock Override Day
      */
     public $autoLockOverrideDay;
+    /**
+     * @var string The three-character currency code according to country. For example if country is 'US' then currency is 'USD'. Similarly, if country is 'CA' then currency is 'CAD', etc.
+     */
+    public $currency;
 }
 /**
  * FilingFrequency Model
@@ -6216,7 +6473,7 @@ class FilingReturnCreditModel
      */
     public $totalTax;
     /**
-     * @var WorksheetDocument[] The excluded carry over credit documents
+     * @var CreditTransactionDetails[] The excluded carry over credit documents
      */
     public $transactionDetails;
 }
@@ -6450,6 +6707,14 @@ class FilingReturnModel
      * @var FilingReturnCreditModel 
      */
     public $appliedCarryOverCredits;
+    /**
+     * @var string The three-character liability currency code.
+     */
+    public $liabilityCurrencyCode;
+    /**
+     * @var string The three-character filing calendar currency code for this return. For example if country is 'US' then currency is 'USD'. Similarly, if country is 'CA' then currency is 'CAD', etc.
+     */
+    public $filingCalendarCurrencyCode;
     /**
      * @var string The date when this record was created.
      */
@@ -7446,6 +7711,14 @@ class FundingInitiateModel
      * @var boolean Set this value to true to request an HTML-based funding widget that can be embedded within an  existing user interface. A user can then interact with the HTML-based funding widget to set up  funding information for the company.
      */
     public $requestWidget;
+    /**
+     * @var string Currency
+     */
+    public $currency;
+    /**
+     * @var string AgreementType
+     */
+    public $agreementType;
 }
 /**
  * Status of an Avalara Managed Returns funding configuration for a company
@@ -7630,33 +7903,33 @@ class GLAccountUploadErrorModel
     public $errors;
 }
 /**
- * Update history for Avalara.AvaTax.AccountServices.Models.v2.CustomerModel and Avalara.AvaTax.AccountServices.Models.v2.CertificateModel. Exposed in url $includes
+ * Update history for Avalara.AvaTax.AccountServices.Models.v2.CustomerModel and Avalara.AvaTax.AccountServices.Models.v2.CertificateModel. This is exposed in the URL's `$includes`.
  * Swagger Name: AvaTaxClient
  */
 class HistoryModel
 {
     /**
-     * @var int ID
+     * @var int The unique ID number of this history.
      */
     public $id;
     /**
-     * @var string Account name whose history this is
+     * @var string The account name this history belongs to.
      */
     public $account;
     /**
-     * @var string Field name which is updated
+     * @var string The name of the field to update.
      */
     public $field;
     /**
-     * @var string Old value of the field
+     * @var string The old value of the field.
      */
     public $oldValue;
     /**
-     * @var string New value of the field
+     * @var string The new value of the field.
      */
     public $newValue;
     /**
-     * @var string Date of creation of this history object
+     * @var string The date/time when this history was created.
      */
     public $created;
 }
@@ -7923,11 +8196,11 @@ class ItemCatalogueInputModel
      */
     public $itemType;
     /**
-     * @var string The universal product code of the item.
+     * @var string The universal product code of the item.     Deprecated - As of 6/25/2024, this field is deprecated. Instead of using this field, you can pass this value as a parameter. The parameter name is UPC.
      */
     public $upc;
     /**
-     * @var string A summary for selection of the tax code.
+     * @var string Long Summary for Item     Deprecated - As of 6/25/2024, this field is deprecated. Instead of using this field, you can pass this value as a parameter. The parameter name is Summary.
      */
     public $summary;
     /**
@@ -7943,7 +8216,7 @@ class ItemCatalogueInputModel
      */
     public $source;
     /**
-     * @var string The Id of this item at the source
+     * @var string The unique identifier of this item at the source
      */
     public $sourceEntityId;
     /**
@@ -7951,7 +8224,7 @@ class ItemCatalogueInputModel
      */
     public $properties;
     /**
-     * @var ClassificationModel[] Classifications Attached to the Product
+     * @var ClassificationModel[] Classifications Attached to the Product  Please note: `taxCode` (ProductCode for SystemCode `AVATAXCODE`) is being removed from `classifications`. You can still find it in the `taxCode` field.
      */
     public $classifications;
     /**
@@ -7989,7 +8262,7 @@ class ItemCatalogueResultModel
      */
     public $itemCode;
     /**
-     * @var string The Id of this item at the source
+     * @var string The unique identifier of this item at the source
      */
     public $sourceEntityId;
     /**
@@ -8106,7 +8379,7 @@ class ItemModel
      */
     public $source;
     /**
-     * @var string The Id of this item at the source
+     * @var string The unique identifier of this item at the source
      */
     public $sourceEntityId;
     /**
@@ -8114,15 +8387,15 @@ class ItemModel
      */
     public $itemType;
     /**
-     * @var string Universal unique code for item
+     * @var string Universal unique code for item     Deprecated - As of 6/25/2024, this field is deprecated. Instead of using this field, you can pass this value as a parameter. `The parameter name is UPC`.
      */
     public $upc;
     /**
-     * @var string Long Summary for Item
+     * @var string Long Summary for Item     Deprecated - As of 6/25/2024, this field is deprecated. Instead of using this field, you can pass this value as a parameter. `The parameter name is Summary`.
      */
     public $summary;
     /**
-     * @var ClassificationModel[] List of classifications that belong to this item.  A single classification consists of a productCode and a systemCode for a particular item.
+     * @var ClassificationModel[] List of classifications that belong to this item.  A single classification consists of a productCode and a systemCode for a particular item.     Please note: `taxCode` (ProductCode for SystemCode `AVATAXCODE`) is being removed from `classifications`. You can still find it in the `taxCode` field.
      */
     public $classifications;
     /**
@@ -9473,41 +9746,6 @@ class MarketplaceModel
     public $marketplace;
 }
 /**
- * 
- * Swagger Name: AvaTaxClient
- */
-class Message
-{
-    /**
-     * @var string 
-     */
-    public $details;
-    /**
-     * @var string 
-     */
-    public $helpLink;
-    /**
-     * @var string 
-     */
-    public $name;
-    /**
-     * @var string 
-     */
-    public $refersTo;
-    /**
-     * @var string 
-     */
-    public $severity;
-    /**
-     * @var string 
-     */
-    public $source;
-    /**
-     * @var string 
-     */
-    public $summary;
-}
-/**
  * A company and account
  * Swagger Name: AvaTaxClient
  */
@@ -9869,6 +10107,14 @@ class MultiTaxFilingReturnModel
      * @var string The FilingTaskType for this return.
      */
     public $type;
+    /**
+     * @var string The three-character liability currency code.
+     */
+    public $liabilityCurrencyCode;
+    /**
+     * @var string The three-character filing calendar currency code for this return. For example if country is 'US' then currency is 'USD'. Similarly, if country is 'CA' then currency is 'CAD', etc.
+     */
+    public $filingCalendarCurrencyCode;
     /**
      * @var FilingsTaxSummaryModel 
      */
@@ -13699,7 +13945,7 @@ class TransactionLineDetailModel
      */
     public $taxTypeGroupId;
     /**
-     * @var string The name of the tax against which this tax amount was calculated.
+     * @var string The name of the tax against which this tax amount was calculated. Note: This output field is informational, and the values in this field may change. As such, we discourage hardcoding any string matching on this field.
      */
     public $taxName;
     /**
@@ -14356,7 +14602,7 @@ class TransactionModel
      */
     public $deliveryTerms;
     /**
-     * @var string Users can set tolerance or threshold limits on transactions and inform users of appropriate actions to take  if a transaction falls outside of these values.   An Accounts Payable (AP) status code indicates the action that needs to be taken when the tolerance/threshold   falls above or below the tolerance/threshold limits.     Available AP status codes are:  1. NoAccrualMatch  2. NoAccrualUndercharge  3. NoAccrualOvercharge  4. NoAccrualAmountThresholdNotMet  5. NoAccrualTrustedVendor  6. NoAccrualExemptedCostCenter  7. NoAccrualExemptedItem  8. NoAccrualExemptedVendor  9. AccruedUndercharge  10. AccruedVendor  11. NeedReviewUndercharge  12. NeedReviewVendor  13. PendingAccrualVendor  14. PendingAccrualUndercharge (See APStatus::* for a list of allowable values)
+     * @var string Users can set tolerance or threshold limits on transactions and inform users of appropriate actions to take  if a transaction falls outside of these values.   An Accounts Payable (AP) status code indicates the action that needs to be taken when the tolerance/threshold   falls above or below the tolerance/threshold limits.     Available AP status codes are:  1. NoAccrualMatch  2. NoAccrualUndercharge  3. NoAccrualOvercharge  4. NoAccrualAmountThresholdNotMet  5. NoAccrualTrustedVendor  6. NoAccrualExemptedCostCenter  7. NoAccrualExemptedItem  8. NoAccrualExemptedVendor  9. NoAccrualRejectMatch  10. NoAccrualRejectUndercharge  11. NoAccrualShortPayAvalaraCalculated  12. NoAccrualRejectOvercharge  13. NoAccrualExemptedGLAccount  14. AccruedUndercharge  15. AccruedVendor  16. AccruedShortPayItemsMatch  17. AccruedShortPayItemsUndercharge  18. AccruedShortPayItemsOvercharge  19. NeedReviewUndercharge  20. NeedReviewVendor  21. NeedReviewMatch  22. NeedReviewOvercharge  23. PendingAccrualVendor  24. PendingAccrualUndercharge  25. PendingShortPayItemsUndercharge  26. PendingShortPayItemsMatch  27. PendingShortPayItemsOvercharge (See APStatus::* for a list of allowable values)
      */
     public $apStatusCode;
     /**
@@ -15089,92 +15335,6 @@ class VoidTransactionModel
      * @var string Please specify the reason for voiding or cancelling this transaction.  To void the transaction, please specify the reason 'DocVoided'.  If you do not provide a reason, the void command will fail. (See VoidReasonCode::* for a list of allowable values)
      */
     public $code;
-}
-/**
- * 
- * Swagger Name: AvaTaxClient
- */
-class WorksheetDocument
-{
-    /**
-     * @var string 
-     */
-    public $docCode;
-    /**
-     * @var string 
-     */
-    public $docDate;
-    /**
-     * @var float 
-     */
-    public $totalExempt;
-    /**
-     * @var float 
-     */
-    public $totalTaxable;
-    /**
-     * @var float 
-     */
-    public $totalTax;
-    /**
-     * @var WorksheetDocumentLine[] 
-     */
-    public $lines;
-    /**
-     * @var Message[] 
-     */
-    public $messages;
-    /**
-     * @var string 
-     */
-    public $resultCode;
-    /**
-     * @var string 
-     */
-    public $transactionId;
-}
-/**
- * 
- * Swagger Name: AvaTaxClient
- */
-class WorksheetDocumentLine
-{
-    /**
-     * @var string 
-     */
-    public $reportingDate;
-    /**
-     * @var string 
-     */
-    public $lineNo;
-    /**
-     * @var float 
-     */
-    public $lineAmount;
-    /**
-     * @var float 
-     */
-    public $exemptAmount;
-    /**
-     * @var float 
-     */
-    public $taxableAmount;
-    /**
-     * @var float 
-     */
-    public $taxAmount;
-    /**
-     * @var Message[] 
-     */
-    public $messages;
-    /**
-     * @var string 
-     */
-    public $resultCode;
-    /**
-     * @var string 
-     */
-    public $transactionId;
 }
 /**
  * Represents a verification request using Skyscraper for a company
