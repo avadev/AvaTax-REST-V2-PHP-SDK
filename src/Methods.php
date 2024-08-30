@@ -1215,6 +1215,11 @@ class AvaTaxClient extends AvaTaxClientBase
      * * customers - Retrieves the list of customers linked to the certificate.
      * * po_numbers - Retrieves all PO numbers tied to the certificate.
      * * attributes - Retrieves all attributes applied to the certificate.
+     * * histories - Retrieves the certificate update history
+     * * jobs - Retrieves the jobs for this certificate
+     * * logs - Retrieves the certificate log
+     * * invalid_reasons - Retrieves invalid reasons for this certificate if the certificate is invalid
+     * * custom_fields - Retrieves custom fields set for this certificate
      *  
      * Before you can use any exemption certificates endpoints, you must set up your company for exemption certificate data storage.
      * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption
@@ -1229,7 +1234,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID number of the company that recorded this certificate
      * @param int $id The unique ID number of this certificate
-     * @param string $include OPTIONAL: A comma separated list of special fetch options. You can specify one or more of the following:      * customers - Retrieves the list of customers linked to the certificate.   * po_numbers - Retrieves all PO numbers tied to the certificate.   * attributes - Retrieves all attributes applied to the certificate.
+     * @param string $include OPTIONAL: A comma separated list of special fetch options. You can specify one or more of the following:      * customers - Retrieves the list of customers linked to the certificate.   * po_numbers - Retrieves all PO numbers tied to the certificate.   * attributes - Retrieves all attributes applied to the certificate.   * histories - Retrieves the certificate update history   * jobs - Retrieves the jobs for this certificate   * logs - Retrieves the certificate log   * invalid_reasons - Retrieves invalid reasons for this certificate if the certificate is invalid   * custom_fields - Retrieves custom fields set for this certificate
      * @return \stdClass
      */
     public function getCertificate($companyId, $id, $include=null)    {
@@ -1437,7 +1442,12 @@ class AvaTaxClient extends AvaTaxClientBase
      * * customers - Retrieves the list of customers linked to the certificate.
      * * po_numbers - Retrieves all PO numbers tied to the certificate.
      * * attributes - Retrieves all attributes applied to the certificate.
-     *  
+     * * histories - Retrieves the certificate update history
+     * * jobs - Retrieves the jobs for this certificate
+     * * logs - Retrieves the certificate log
+     * * invalid_reasons - Retrieves invalid reasons for this certificate if the certificate is invalid
+     * * custom_fields - Retrieves custom fields set for this certificate
+     * 
      * Before you can use any exemption certificates endpoints, you must set up your company for exemption certificate data storage.
      * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption
      * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption
@@ -1450,7 +1460,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID number of the company to search
-     * @param string $include OPTIONAL: A comma separated list of special fetch options. You can specify one or more of the following:      * customers - Retrieves the list of customers linked to the certificate.   * po_numbers - Retrieves all PO numbers tied to the certificate.   * attributes - Retrieves all attributes applied to the certificate.
+     * @param string $include OPTIONAL: A comma separated list of special fetch options. You can specify one or more of the following:      * customers - Retrieves the list of customers linked to the certificate.   * po_numbers - Retrieves all PO numbers tied to the certificate.   * attributes - Retrieves all attributes applied to the certificate.   * histories - Retrieves the certificate update history   * jobs - Retrieves the jobs for this certificate   * logs - Retrieves the certificate log   * invalid_reasons - Retrieves invalid reasons for this certificate if the certificate is invalid   * custom_fields - Retrieves custom fields set for this certificate
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* exemptionNumber, status, ecmStatus, ecmsId, ecmsStatus, pdf, pages
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
@@ -1646,6 +1656,59 @@ class AvaTaxClient extends AvaTaxClientBase
             'body' => null
         ];
         return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Retrieve a single communication certificate.
+     *
+     * ### Security Policies
+     * 
+     * * This API depends on the following active services:*Required* (all): ECMPremiumComms, ECMProComms.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The ID number of the company to search
+     * @param int $certificateId The ID number of the certifificate to search
+     * @return \stdClass
+     */
+    public function getCommunicationCertificate($companyId, $certificateId)    {
+        $path = "/companies/{$companyId}/communication-certificates/{$certificateId}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Retrieve all communication certificates.
+     *
+     * List all account objects that can be seen by the current user.
+     *  
+     * This API lists all accounts you are allowed to see. In general, most users will only be able to see their own account.
+     *  
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters. 
+     * For more information about filtering in REST, please see the documentation at http://developer.avalara.com/avatax/filtering-in-rest/ .
+     * 
+     * ### Security Policies
+     * 
+     * * This API depends on the following active services:*Required* (all): ECMPremiumComms, ECMProComms.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* EffectiveDate, ExpirationDate, TaxNumber, Exemptions
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @param int $companyId The ID number of the company to search
+     * @return \stdClass
+     */
+    public function listCommunicationCertificates($filter=null, $top=null, $skip=null, $orderBy=null, $companyId=null)    {
+        $path = "/companies/{$companyId}/communication-certificates";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -2559,7 +2622,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns these contacts
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* scsContactId
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -2589,7 +2652,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, FirmAdmin, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* scsContactId
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -2861,9 +2924,16 @@ class AvaTaxClient extends AvaTaxClientBase
      *  
      * You can use the `$include` parameter to fetch the following additional objects for expansion:
      *  
-     * * Certificates - Fetch a list of certificates linked to this customer.
-     * * CustomFields - Fetch a list of custom fields associated to this customer.
+     * * certificates - Fetch a list of certificates linked to this customer.
      * * attributes - Retrieves all attributes applied to the customer.
+     * * active_certificates - Retrieves all the active certificates linked to this customer
+     * * histories - Retrieves the update history for this customer
+     * * logs - Retrieves customer logs
+     * * jobs - Retrieves customer jobs
+     * * billTos - Retrieves bill-tos linked with this customer
+     * * shipTos - Retrieves ship-tos linked with this customer
+     * * shipToStates - Retrieves ship-to states for this customer
+     * * custom_fields - Retrieves custom fields set for this customer
      *  
      * Before you can use any exemption certificates endpoints, you must set up your company for exemption certificate data storage.
      * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption
@@ -3064,7 +3134,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
      * @param string $customerCode The unique code representing this customer
-     * @param string $include OPTIONAL: A comma separated list of special fetch options. You can specify one or more of the following:      * customers - Retrieves the list of customers linked to the certificate.   * po_numbers - Retrieves all PO numbers tied to the certificate.   * attributes - Retrieves all attributes applied to the certificate.
+     * @param string $include OPTIONAL: A comma separated list of special fetch options. You can specify one or more of the following:      * customers - Retrieves the list of customers linked to the certificate.   * po_numbers - Retrieves all PO numbers tied to the certificate.   * attributes - Retrieves all attributes applied to the certificate.   * histories - Retrieves the certificate update history   * jobs - Retrieves the jobs for this certificate   * logs - Retrieves the certificate log   * invalid_reasons - Retrieves invalid reasons for this certificate if the certificate is invalid   * custom_fields - Retrieves custom fields set for this certificate
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* exemptionNumber, status, ecmStatus, ecmsId, ecmsStatus, pdf, pages
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
@@ -3133,9 +3203,17 @@ class AvaTaxClient extends AvaTaxClientBase
      *  
      * You can use the `$include` parameter to fetch the following additional objects for expansion:
      *  
-     * * Certificates - Fetch a list of certificates linked to this customer.
+     * * certificates - Fetch a list of certificates linked to this customer.
      * * attributes - Retrieves all attributes applied to the customer.
-     *  
+     * * active_certificates - Retrieves all the active certificates linked to this customer
+     * * histories - Retrieves the update history for this customer
+     * * logs - Retrieves customer logs
+     * * jobs - Retrieves customer jobs
+     * * billTos - Retrieves bill-tos linked with this customer
+     * * shipTos - Retrieves ship-tos linked with this customer
+     * * shipToStates - Retrieves ship-to states for this customer
+     * * custom_fields - Retrieves custom fields set for this customer
+     * 
      * Before you can use any exemption certificates endpoints, you must set up your company for exemption certificate data storage.
      * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption
      * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption
@@ -3148,7 +3226,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
-     * @param string $include OPTIONAL - You can specify the value `certificates` to fetch information about certificates linked to the customer.
+     * @param string $include OPTIONAL - You can specify any of the values in `certificates`, `attributes`, `active_certificates`, `histories`, `logs`, `jobs`, `billTos`, `shipTos`, `shipToStates`, and `custom_fields` to fetch additional information for this certificate.
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
@@ -5504,6 +5582,88 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Delete AFC event notifications.
+     *
+     * ### Security Policies
+     * 
+     * * This API depends on the following active services:*Required* (all): ECMPremiumComms, ECMProComms.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param boolean $isDlq Specify `true` to delete event notifications from the dead letter queue; otherwise, specify `false`.
+     * @param EventDeleteMessageModel $model Details of the event you want to delete.
+     * @return \stdClass
+     */
+    public function deleteAfcEventNotifications($isDlq, $model)    {
+        $path = "/api/v2/event-notifications/afc";
+        $guzzleParams = [
+            'query' => ['isDlq' => null === $isDlq ? null : json_encode($isDlq)],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Delete company event notifications
+     *
+     * ### Security Policies
+     * 
+     * * This API depends on the following active services:*Required* (all): ECMPro, ECMPremium.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The unique ID number of the company that recorded these event notifications.
+     * @param EventDeleteMessageModel $model Details of the event you want to delete.
+     * @return \stdClass
+     */
+    public function deleteEventNotifications($companyId, $model)    {
+        $path = "/api/v2/event-notifications/companies/{$companyId}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Retrieve company event notifications.
+     *
+     * ### Security Policies
+     * 
+     * * This API depends on the following active services:*Required* (all): ECMPro, ECMPremium.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The unique ID number of the company that recorded these event notifications.
+     * @return \stdClass
+     */
+    public function getEventNotifications($companyId)    {
+        $path = "/api/v2/event-notifications/companies/{$companyId}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Retrieve AFC event notifications
+     *
+     * ### Security Policies
+     * 
+     * * This API depends on the following active services:*Required* (all): ECMPremiumComms, ECMProComms.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param boolean $isDlq Specify `true` to retrieve event notifications from the dead letter queue; otherwise, specify `false`.
+     * @return \stdClass
+     */
+    public function listAfcEventNotifications($isDlq)    {
+        $path = "/api/v2/event-notifications/afc";
+        $guzzleParams = [
+            'query' => ['isDlq' => null === $isDlq ? null : json_encode($isDlq)],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
      * Create a new eCommerce token.
      *
      * Creates a new eCommerce token.
@@ -6691,6 +6851,35 @@ class AvaTaxClient extends AvaTaxClientBase
         $path = "/api/v2/companies/{$companyId}/items";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy, 'tagName' => $tagName, 'itemStatus' => $itemStatus, 'taxCodeRecommendationStatus' => $taxCodeRecommendationStatus],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Retrieve the parameters by companyId and itemId.
+     *
+     * Returns the list of parameters based on the company's service types and the item code.
+     * Ignores nexus if a service type is configured in the 'IgnoreNexusForServiceTypes' configuration section.
+     * Ignores nexus for the AvaAlcohol service type.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId Company Identifier.
+     * @param int $itemId Item Identifier.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* serviceTypes, regularExpression, attributeSubType, values
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return \stdClass
+     */
+    public function listRecommendedParameterByCompanyIdAndItemId($companyId, $itemId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/definitions/companies/{$companyId}/items/{$itemId}/parameters";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
