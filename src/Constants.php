@@ -2,7 +2,7 @@
 namespace Avalara;
 use GuzzleHttp\Client;
 
-define('AVATAX_SDK_VERSION', '24.6.3');
+define('AVATAX_SDK_VERSION', '24.8.2');
 
 /*****************************************************************************
  *                                                                           *
@@ -1120,6 +1120,16 @@ class ErrorCodeId
      * IMS-2096: Recommendation status update rule
      */
     const C_INVALIDTAXCODEIDINRECOMMENDATIONSTATUSUPDATE = 2815;
+
+    /**
+     * ECM communication certificates error
+     */
+    const C_COMMUNICATIONCERTIFICATESERROR = 2816;
+
+    /**
+     * Invalid currency and aggrement type combination
+     */
+    const C_INVALIDCURRENCYAGGREMENTTYPE = 2817;
 
     /**
      * Occurs when a Header value is incorrect or invalid in some way
@@ -3414,19 +3424,19 @@ class DeemedSellerType
  */
 class APStatus
 {    const C_NOACCRUALMATCH = 0;
-    const C_SHORTPAYITEMSACCRUEMATCH = 1;
-    const C_MARKFORREVIEWMATCH = 2;
-    const C_REJECTMATCH = 3;
+    const C_ACCRUEDSHORTPAYITEMSMATCH = 1;
+    const C_NEEDREVIEWMATCH = 2;
+    const C_NOACCRUALREJECTMATCH = 3;
     const C_NOACCRUALUNDERCHARGE = 4;
     const C_ACCRUEDUNDERCHARGE = 5;
-    const C_SHORTPAYITEMSACCRUEUNDERCHARGE = 6;
+    const C_ACCRUEDSHORTPAYITEMSUNDERCHARGE = 6;
     const C_NEEDREVIEWUNDERCHARGE = 7;
-    const C_REJECTUNDERCHARGE = 8;
+    const C_NOACCRUALREJECTUNDERCHARGE = 8;
     const C_NOACCRUALOVERCHARGE = 9;
-    const C_SHORTPAYAVALARACALCULATED = 10;
-    const C_SHORTPAYITEMSACCRUEOVERCHARGE = 11;
-    const C_MARKFORREVIEWOVERCHARGE = 12;
-    const C_REJECTOVERCHARGE = 13;
+    const C_NOACCRUALSHORTPAYAVALARACALCULATED = 10;
+    const C_ACCRUEDSHORTPAYITEMSOVERCHARGE = 11;
+    const C_NEEDREVIEWOVERCHARGE = 12;
+    const C_NOACCRUALREJECTOVERCHARGE = 13;
     const C_NOACCRUALAMOUNTTHRESHOLDNOTMET = 14;
     const C_NOACCRUALEXEMPTEDCOSTCENTER = 15;
     const C_NOACCRUALEXEMPTEDITEM = 16;
@@ -3437,6 +3447,18 @@ class APStatus
     const C_NOACCRUALEXEMPTEDGLACCOUNT = 21;
     const C_PENDINGACCRUALVENDOR = 22;
     const C_PENDINGACCRUALUNDERCHARGE = 23;
+    const C_PENDINGSHORTPAYITEMSUNDERCHARGE = 24;
+    const C_PENDINGSHORTPAYITEMSMATCH = 25;
+    const C_PENDINGSHORTPAYITEMSOVERCHARGE = 26;
+    const C_SHORTPAYITEMSACCRUEMATCH = -1;
+    const C_MARKFORREVIEWMATCH = -1;
+    const C_REJECTMATCH = -1;
+    const C_SHORTPAYITEMSACCRUEUNDERCHARGE = -1;
+    const C_REJECTUNDERCHARGE = -1;
+    const C_SHORTPAYAVALARACALCULATED = -1;
+    const C_SHORTPAYITEMSACCRUEOVERCHARGE = -1;
+    const C_MARKFORREVIEWOVERCHARGE = -1;
+    const C_REJECTOVERCHARGE = -1;
 
 }
 
