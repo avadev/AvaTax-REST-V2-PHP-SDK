@@ -135,6 +135,18 @@ class TransactionBuilder
     }
 
     /**
+     * Set a customer email
+     *
+     * @param   string              email
+     * @return  TransactionBuilder
+     */
+    public function withEmail($email)
+    {
+        $this->_model['email'] = $email;
+        return $this;
+    }
+
+    /**
      * Set client application customer or usage type
      *
      * @param   string              code    (See API endpoint `/api/v2/definitions/entityusecodes` for a list of allowable values)
@@ -255,6 +267,29 @@ class TransactionBuilder
         return $this;
     }
 
+        /**
+     * Add a parameter to the current line when unit is specified
+     *
+     * @param   string              name
+     * @param   string              value
+     * @param   string              unit
+     * @return  TransactionBuilder
+     */
+    public function withLineParameterAndUnit($name, $value, $unit)
+    {
+        $li = $this->getMostRecentLineIndex();
+        if (empty($this->_model['lines'][$li]['parameters'])) {
+            $this->_model['lines'][$li]['parameters'] = [];
+        }
+        $l = [
+            'name' => $name,
+            'value' => $value,
+            'unit' => $unit
+        ];
+        $this->_model['lines'][$li]['parameters'][] = $l;
+        return $this;
+    }
+
     /**
      * Add an address to this transaction
      *
@@ -279,6 +314,26 @@ class TransactionBuilder
             'region' => $region,
             'postalCode' => $postalCode,
             'country' => $country
+        ];
+        $this->_model['addresses'][$type] = $ai;
+        return $this;
+    }
+    
+    /**
+     * Add an address to this transaction using an existing company location code.
+     * 
+     * AvaTax will search for a company location whose code matches the `locationCode` parameter and use the address
+     * of that location.
+     *
+     * @param   string              type          Address Type (See AddressType::* for a list of allowable values)
+     * @param   string              locationCode  The location code of the address
+     * @return  TransactionBuilder
+     */
+    public function WithAddressLocationCode($type, $locationCode)
+    {
+        if (empty($this->_model['addresses'])) $this->_model['addresses'] = [];
+        $ai = [
+            'locationCode' => $locationCode
         ];
         $this->_model['addresses'][$type] = $ai;
         return $this;
@@ -465,7 +520,10 @@ class TransactionBuilder
      * @param   float  $amount      Value of the item.
      * @param   float  $quantity    Quantity of the item.
      * @param   string $itemCode
-     * @param   string $taxCode     Tax Code of the item. If left blank, the default item (P0000000) is assumed.
+     * @param   string $taxCode     Tax Code of the item.
+        - If itemCode is blank and taxCode is left blank, the default item (P0000000) is assumed.
+        - If itemCode is mapped to a taxCode in AvaTax Management System then the mapped taxCode
+          takes precedence, even if left blank or provided with any other value.
      * @param   string $lineNumber  Custom Line number, defaults to auto-incremented number if null
      * @return  TransactionBuilder
      */
