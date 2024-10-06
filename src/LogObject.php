@@ -61,7 +61,7 @@ class LogInformation
     private function populateCommonResponseInfo($response)
     {
         $this-> populateTotalExecutionTime();
-        if($e-> getResponse()-> hasHeader('x-correlation-id')) {
+        if($response-> hasHeader('x-correlation-id')) {
             $this-> headerCorrelationId = $response-> getHeader('x-correlation-id')[0];
         }
         $this-> statusCode = $response-> getStatusCode();
