@@ -2,7 +2,7 @@
 namespace Avalara;
 use GuzzleHttp\Client;
 
-define('AVATAX_SDK_VERSION', '24.8.2');
+define('AVATAX_SDK_VERSION', '24.10.0');
 
 /*****************************************************************************
  *                                                                           *
@@ -1132,9 +1132,27 @@ class ErrorCodeId
     const C_INVALIDCURRENCYAGGREMENTTYPE = 2817;
 
     /**
+     * ItemTaxCodeRecommendation Status can't be set without particular state of recommendation
+     */
+    const C_INVALIDTAXCODERECOMMENDATIONSTATUSUPDATE = 2818;
+
+    /**
+     * Filing Request Error Codes
+     */
+    const C_DUPLICATEFILINGREQUEST = 2819;
+
+    /**
      * Occurs when a Header value is incorrect or invalid in some way
      */
     const C_INVALIDHTTPHEADER = 3000;
+    const C_SCSSERVICEUNREACHABLE = 3001;
+    const C_DUPLICATECONTACTCODE = 3002;
+    const C_SCSSERVERERROR = 3003;
+
+    /**
+     * Occurs when user reconciliation happens and unable to create user at AvaTax
+     */
+    const C_USERRECONCILIATIONERROR = 3004;
 
 }
 
@@ -2091,6 +2109,11 @@ class ReportSource
      * mongodb
      */
     const C_MONGODB = 1;
+
+    /**
+     * returns api
+     */
+    const C_RETURNSAPI = 2;
 
 }
 
