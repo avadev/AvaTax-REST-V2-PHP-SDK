@@ -3219,7 +3219,7 @@ class ContactModel
      */
     public $companyId;
     /**
-     * @var string A unique code for this contact.
+     * @var string A unique code for this contact which is unique throughout company.
      */
     public $contactCode;
     /**
@@ -5634,6 +5634,10 @@ class ExportDocumentLineModel
      * @var boolean If true, include document line details in the generated report.  If false, include only document line in the generated report.  Defaults to false if not specified.
      */
     public $includeDocumentLineDetails;
+    /**
+     * @var boolean If true, include multi tax line details in the generated report.  If false, include document or document line in the generated report based on includeDocumentLineDetails.  Defaults to false if not specified.
+     */
+    public $includeMultiTaxLineDetails;
 }
 /**
  * Information about a physical area or zone in which a certificate can apply.
@@ -7087,6 +7091,65 @@ class FirmClientLinkageInputModel
  * Account Linkage output model
  * Swagger Name: AvaTaxClient
  */
+class FirmClientLinkageModel
+{
+    /**
+     * @var int The unique ID number of firm-client linkage.
+     */
+    public $id;
+    /**
+     * @var int Firm Account to be linked with the firm
+     */
+    public $firmAccountId;
+    /**
+     * @var string FIrm Account name
+     */
+    public $firmAccountName;
+    /**
+     * @var int Client Account to be linked with the firm
+     */
+    public $clientAccountId;
+    /**
+     * @var string Client Account name
+     */
+    public $clientAccountName;
+    /**
+     * @var string Created date of the linkage
+     */
+    public $createdDate;
+    /**
+     * @var int User who created the linkage
+     */
+    public $createdUserId;
+    /**
+     * @var string Modified date of the linkage
+     */
+    public $modifiedDate;
+    /**
+     * @var int User who modified the linkage
+     */
+    public $modifiedUserId;
+    /**
+     * @var string The status of the account linkage. The following are the available statuses  * Requested - When a linkage is requested  * Approved - When the linkage is approved  * Rejected - When the linkage is rejected  * Revoked - When the linkage is revoked. (See FirmClientLinkageStatus::* for a list of allowable values)
+     */
+    public $status;
+    /**
+     * @var boolean This is set to 1 if the linkage is deleted.
+     */
+    public $isDeleted;
+    /**
+     * @var string Name of the firm's point of contact person for the client
+     */
+    public $firmContactName;
+    /**
+     * @var string Email of the firm's point of contact person for the client
+     */
+    public $firmContactEmail;
+}
+/**
+ * Account Linkage output model
+ * Swagger Name: AvaTaxClient
+ */
 class FirmClientLinkageOutputModel
 {
     /**
@@ -8422,6 +8485,10 @@ class ItemModel
      * @var TaxCodeRecommendationOutputModel[] Item tax code recommendations
      */
     public $taxCodeRecommendations;
+    /**
+     * @var ItemTaxCodeDetailsOutputModel 
+     */
+    public $taxCodeDetails;
 }
 /**
  * Represents a parameter associated with an item.
@@ -8774,6 +8841,25 @@ class ItemTaxCodeClassificationRequestOutputModel
      * @var string The date/time when this record was last modified.
      */
     public $modifiedDate;
+}
+/**
+ * ItemTaxCodeDetailsOutputModel
+ * Swagger Name: AvaTaxClient
+ */
+class ItemTaxCodeDetailsOutputModel
+{
+    /**
+     * @var string TaxCode assigned to Item
+     */
+    public $taxCode;
+    /**
+     * @var string Description for the TaxCode
+     */
+    public $description;
+    /**
+     * @var boolean Provides if the TaxCode is Active or Not
+     */
+    public $isActive;
 }
 /**
  * Status Output Model
@@ -12446,6 +12532,10 @@ class ReportParametersModel
      * @var boolean If true, include document line details in the generated report.  If false, include only document line in the generated report.  Defaults to false if not specified.
      */
     public $includeDocumentLineDetails;
+    /**
+     * @var boolean If true, include multi tax line details in the generated report.  If false, include document or document line in the generated report based on includeDocumentLineDetails.  Defaults to false if not specified.
+     */
+    public $includeMultiTaxLineDetails;
 }
 /**
  * Represents a license key reset request.
@@ -14028,6 +14118,18 @@ class TransactionLineDetailModel
      * @var string ID of the AvaTax user creating the transaction. This field will be calculated by AvaTax based on the Company settings and the transaction details.
      */
     public $avtUserBIN;
+    /**
+     * @var float The percentage of input VAT/GST that is recoverable.
+     */
+    public $recoverabilityPercentage;
+    /**
+     * @var float The amount of input VAT/GST that is recoverable based on the recoverability percentage.
+     */
+    public $recoverableAmount;
+    /**
+     * @var float The amount of input VAT/GST that is not recoverable.
+     */
+    public $nonRecoverableAmount;
 }
 /**
  * Represents information about location types stored in a line
@@ -14282,6 +14384,18 @@ class TransactionLineModel
      * @var string A long description of the product.
      */
     public $summary;
+    /**
+     * @var float The percentage of input VAT/GST that is recoverable.
+     */
+    public $recoverabilityPercentage;
+    /**
+     * @var float The amount of input VAT/GST that is recoverable based on the recoverability percentage.
+     */
+    public $recoverableAmount;
+    /**
+     * @var float The amount of input VAT/GST that is not recoverable.
+     */
+    public $nonRecoverableAmount;
 }
 /**
  * Represents a transaction parameter.
