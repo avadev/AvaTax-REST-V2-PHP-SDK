@@ -52,14 +52,18 @@ class LogInformation
     {
         $this-> populateTotalExecutionTime();
         $this-> statusCode = $e-> getCode();
-        $this-> headerCorrelationId = $e-> getResponse()-> getHeader('x-correlation-id')[0];
+        if($e-> getResponse()-> hasHeader('x-correlation-id')) {
+            $this-> headerCorrelationId = $e-> getResponse()-> getHeader('x-correlation-id')[0];
+        }
         $this-> exceptionMessage = $errorContents; 
     }
 
     private function populateCommonResponseInfo($response)
     {
         $this-> populateTotalExecutionTime();
-        $this-> headerCorrelationId = $response-> getHeader('x-correlation-id')[0];
+        if($response-> hasHeader('x-correlation-id')) {
+            $this-> headerCorrelationId = $response-> getHeader('x-correlation-id')[0];
+        }
         $this-> statusCode = $response-> getStatusCode();
     }
 
