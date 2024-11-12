@@ -4829,22 +4829,6 @@ class DcvViewModel
      * @var string Email id of the user who create Domain control verification
      */
     public $emailId;
-    /**
-     * @var string Domain control verification creation date
-     */
-    public $createdOn;
-    /**
-     * @var string Domain control verification created by
-     */
-    public $createdBy;
-    /**
-     * @var string Domain control verification update date
-     */
-    public $updatedOn;
-    /**
-     * @var string Domain control verification update by
-     */
-    public $updatedBy;
 }
 /**
  * Use this object to provide an address and date range where your company does business.
@@ -5626,6 +5610,10 @@ class ExportDocumentLineModel
      * @var string Defines report source. (See ReportSource::* for a list of allowable values)
      */
     public $reportSource;
+    /**
+     * @var LiabilityParametersModel 
+     */
+    public $liabilityParameters;
     /**
      * @var string Defines the compression mode of the result file  For compression, the accepted values are: NONE, GZIP (See Compression::* for a list of allowable values)
      */
@@ -7853,6 +7841,14 @@ class FundingStatusModel
      * @var int TemplateRequestId
      */
     public $templateRequestId;
+    /**
+     * @var string Currency
+     */
+    public $currency;
+    /**
+     * @var string AgreementType
+     */
+    public $agreementType;
 }
 /**
  * Represents a bulk upload input model.
@@ -9283,6 +9279,41 @@ class JurisdictionRateTypeTaxTypeMappingModel
      * @var string The date this jurisdiction stops to take effect on tax calculations
      */
     public $endDate;
+}
+/**
+ * The model for liability parameters definitions
+ * Swagger Name: AvaTaxClient
+ */
+class LiabilityParametersModel
+{
+    /**
+     * @var string The type of Returns liability report to be generated (See ReturnsLiabilityType::* for a list of allowable values)
+     */
+    public $liabilityType;
+    /**
+     * @var string The type of Returns report to be generated (See ReturnsReportType::* for a list of allowable values)
+     */
+    public $returnsReportType;
+    /**
+     * @var int The Hospitality Account ID with Subscription Type as AvaLoding
+     */
+    public $hospitalityAccountId;
+    /**
+     * @var int Filter report based on the year
+     */
+    public $year;
+    /**
+     * @var object Filter report based on the month
+     */
+    public $month;
+    /**
+     * @var string Filter report based on the country code
+     */
+    public $country;
+    /**
+     * @var string Filter report based on the region code or state code
+     */
+    public $region;
 }
 /**
  * Represents a license key for this account.
@@ -12525,6 +12556,10 @@ class ReportParametersModel
      */
     public $taxSubType;
     /**
+     * @var LiabilityParametersModel 
+     */
+    public $liabilityParameters;
+    /**
      * @var string Defines the compression mode of the result file  For compression, the accepted values are: NONE, GZIP (See Compression::* for a list of allowable values)
      */
     public $compression;
@@ -15367,7 +15402,7 @@ class VarianceResponseModel
     /**
      * @var VarianceResponseEntity[] 
      */
-    public $varianceResponses;
+    public $variance;
 }
 /**
  * 

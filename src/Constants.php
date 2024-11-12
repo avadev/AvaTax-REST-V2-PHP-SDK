@@ -2,7 +2,7 @@
 namespace Avalara;
 use GuzzleHttp\Client;
 
-define('AVATAX_SDK_VERSION', '24.10.0');
+define('AVATAX_SDK_VERSION', '24.11.2');
 
 /*****************************************************************************
  *                                                                           *
@@ -983,6 +983,8 @@ class ErrorCodeId
     const C_ITEMDUALWRITEPARAMETERVALUEMISMATCHERROR = 1740;
     const C_DUPLICATEITEMIDSINTAXCODECLASSIFICATIONREQUEST = 1741;
     const C_TOOMANYITEMIDSINTAXCODECLASSIFICATIONREQUEST = 1742;
+    const C_INVALIDPRODUCTCODELENGTH = 1743;
+    const C_INVALIDPRODUCTCODEFORMAT = 1744;
 
     /**
      * SendSales API errors
@@ -1153,6 +1155,49 @@ class ErrorCodeId
      * Occurs when user reconciliation happens and unable to create user at AvaTax
      */
     const C_USERRECONCILIATIONERROR = 3004;
+
+    /**
+     * Occurs when a patch operation is attempted on a field that is not allowed to be patched
+     */
+    const C_INVALIDHTTPPATCHREQUEST = 3005;
+
+    /**
+     * Occurs when a patch operation other than 'given' operation is performed for the fields
+     */
+    const C_UNSUPPORTEDPATCHOPERATIONERROR = 3006;
+
+    /**
+     * Occurs when system code and country code does not have active mapping.
+     */
+    const C_SYSTEMCODEANDCOUNTRYCODEMISMATCH = 3007;
+
+    /**
+     * Occurs when multiple entries for system code and country code exists.
+     */
+    const C_DUPLICATESYSTEMANDCOUNTRYFORITEM = 3008;
+
+    /**
+     * Avalara Gateway errors:
+     */
+    const C_NOTFOUND = 4001;
+    const C_UNEXPECTED = 4002;
+    const C_NOHOSTFOUND = 4003;
+    const C_UNEXPECTEDAUTH = 4004;
+    const C_SITESELECTIONFAILED = 4006;
+    const C_DROPDEFAULTUSERNAME = 4007;
+    const C_DROPDEFAULTNOTMIGRATED = 4008;
+    const C_DROPBEARERAUTH = 4009;
+    const C_SITESELECTIONERROR = 4010;
+    const C_RATELIMITEXCEEDED = 4011;
+    const C_NOHEALTHYSITE = 4012;
+    const C_CLIENTDISCONNECTED = 4013;
+    const C_SERVICEDISCONNECTED = 4014;
+    const C_SERVICETIMEOUT = 4015;
+
+    /**
+     * Error string from the service unknown
+     */
+    const C_UNEXPECTEDERROR = -1;
 
 }
 
@@ -2115,6 +2160,11 @@ class ReportSource
      */
     const C_RETURNSAPI = 2;
 
+    /**
+     * tax region and tax type
+     */
+    const C_TAXREGION = 3;
+
 }
 
 /**
@@ -2648,6 +2698,52 @@ class BoundaryLevel
      * 5-digit zip precision
      */
     const C_ZIP5 = 2;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * Defines returns liability type.
+ */
+class ReturnsLiabilityType
+{
+    /**
+     * all
+     */
+    const C_ALL = 0;
+
+    /**
+     * original
+     */
+    const C_ORIGINAL = 1;
+
+    /**
+     * amend
+     */
+    const C_AMENDED = 2;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * Defines returns report type.
+ */
+class ReturnsReportType
+{
+    /**
+     * liability summary return detail hospitality
+     */
+    const C_LIABILITYSUMMARYRETURNDETAILHOSPITALITY = 0;
+
+    /**
+     * liability summary return detail
+     */
+    const C_LIABILITYSUMMARYRETURNDETAIL = 1;
+
+    /**
+     * liability carry over credit
+     */
+    const C_LIABILITYCARRYOVERCREDIT = 2;
 
 }
 
