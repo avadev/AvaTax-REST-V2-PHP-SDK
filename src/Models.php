@@ -6540,6 +6540,10 @@ class FilingReturnModel
      */
     public $formCode;
     /**
+     * @var string The unique code of the form, prefixed by the country code.
+     */
+    public $taxFormCode;
+    /**
      * @var string A description for the return.
      */
     public $description;
@@ -6798,6 +6802,10 @@ class FilingReturnModelBasic
      * @var string The unique code of the form.
      */
     public $formCode;
+    /**
+     * @var string The unique code of the form, prefixed by the country code.
+     */
+    public $taxFormCode;
     /**
      * @var string A description for the return.
      */
@@ -10196,6 +10204,10 @@ class MultiTaxFilingReturnModel
      * @var string The unique code of the form.
      */
     public $formCode;
+    /**
+     * @var string The unique code of the form, prefixed by the country code.
+     */
+    public $taxFormCode;
     /**
      * @var string A description for the return.
      */
