@@ -2,7 +2,7 @@
 namespace Avalara;
 use GuzzleHttp\Client;
 
-define('AVATAX_SDK_VERSION', '24.11.2');
+define('AVATAX_SDK_VERSION', '24.12.0');
 
 /*****************************************************************************
  *                                                                           *
@@ -985,6 +985,7 @@ class ErrorCodeId
     const C_TOOMANYITEMIDSINTAXCODECLASSIFICATIONREQUEST = 1742;
     const C_INVALIDPRODUCTCODELENGTH = 1743;
     const C_INVALIDPRODUCTCODEFORMAT = 1744;
+    const C_INVALIDCOUNTRYASSIGNMENT = 1745;
 
     /**
      * SendSales API errors
@@ -1175,6 +1176,12 @@ class ErrorCodeId
      * Occurs when multiple entries for system code and country code exists.
      */
     const C_DUPLICATESYSTEMANDCOUNTRYFORITEM = 3008;
+    const C_INVALIDHSCODECLASSIFICATIONSTATUSOVERRIDE = 3009;
+
+    /**
+     * Occurs when the field name provided in the request isn't valid.
+     */
+    const C_INVALIDFIELD = 3010;
 
     /**
      * Avalara Gateway errors:

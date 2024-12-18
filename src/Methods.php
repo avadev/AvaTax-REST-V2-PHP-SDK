@@ -5995,12 +5995,14 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $id The unique ID number of this funding request
      * @param string $businessUnit The company's business unit (See POABusinessUnit::* for a list of allowable values)
      * @param string $subscriptionType The company's subscription type (See POASubscriptionType::* for a list of allowable values)
+     * @param string $currency Currency
+     * @param string $agreementType Agreement Type
      * @return \stdClass
      */
-    public function activateFundingRequest($id, $businessUnit=null, $subscriptionType=null)    {
+    public function activateFundingRequest($id, $businessUnit=null, $subscriptionType=null, $currency=null, $agreementType=null)    {
         $path = "/api/v2/fundingrequests/{$id}/widget";
         $guzzleParams = [
-            'query' => ['businessUnit' => $businessUnit, 'subscriptionType' => $subscriptionType],
+            'query' => ['businessUnit' => $businessUnit, 'subscriptionType' => $subscriptionType, 'currency' => $currency, 'agreementType' => $agreementType],
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
