@@ -257,7 +257,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the account to retrieve
-     * @param string $licensekeyname The ID of the account to retrieve
+     * @param string $licensekeyname The license key name to be retrieved
      * @return \stdClass
      */
     public function getLicenseKey($id, $licensekeyname)    {
@@ -680,7 +680,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, BatchServiceAdmin, CompanyAdmin, CSPTester, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, BatchServiceAdmin, CompanyAdmin, CSPTester, FirmAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this batch.
@@ -721,7 +721,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, BatchServiceAdmin, CompanyAdmin, CSPTester, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, BatchServiceAdmin, CompanyAdmin, CSPTester, FirmAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this batch.
@@ -760,7 +760,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, BatchServiceAdmin, CompanyAdmin, CSPTester, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, BatchServiceAdmin, CompanyAdmin, CSPTester, FirmAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this batch.
@@ -792,7 +792,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: BatchServiceAdmin, CSPAdmin, CSPTester, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin.
+     * * This API requires one of the following user roles: BatchServiceAdmin, CSPAdmin, CSPTester, FirmAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this batch.
@@ -815,7 +815,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, FirmAdmin, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this batch
@@ -853,7 +853,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, FirmAdmin, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns this batch
@@ -896,7 +896,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, FirmAdmin, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that owns these batches
@@ -940,7 +940,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, FirmAdmin, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* files
@@ -1461,7 +1461,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID number of the company to search
      * @param string $include OPTIONAL: A comma separated list of special fetch options. You can specify one or more of the following:      * customers - Retrieves the list of customers linked to the certificate.   * po_numbers - Retrieves all PO numbers tied to the certificate.   * attributes - Retrieves all attributes applied to the certificate.   * histories - Retrieves the certificate update history   * jobs - Retrieves the jobs for this certificate   * logs - Retrieves the certificate log   * invalid_reasons - Retrieves invalid reasons for this certificate if the certificate is invalid   * custom_fields - Retrieves custom fields set for this certificate
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* exemptionNumber, status, ecmStatus, ecmsId, ecmsStatus, pdf, pages
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* exemptionNumber, status, ecmsId, ecmsStatus, pdf, pages
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -3135,7 +3135,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The unique ID number of the company that recorded this customer
      * @param string $customerCode The unique code representing this customer
      * @param string $include OPTIONAL: A comma separated list of special fetch options. You can specify one or more of the following:      * customers - Retrieves the list of customers linked to the certificate.   * po_numbers - Retrieves all PO numbers tied to the certificate.   * attributes - Retrieves all attributes applied to the certificate.   * histories - Retrieves the certificate update history   * jobs - Retrieves the jobs for this certificate   * logs - Retrieves the certificate log   * invalid_reasons - Retrieves invalid reasons for this certificate if the certificate is invalid   * custom_fields - Retrieves custom fields set for this certificate
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* exemptionNumber, status, ecmStatus, ecmsId, ecmsStatus, pdf, pages
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* exemptionNumber, status, ecmsId, ecmsStatus, pdf, pages
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -3956,6 +3956,25 @@ class AvaTaxClient extends AvaTaxClientBase
         $path = "/api/v2/definitions/filingfrequencies";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * List of all HS code classification statuses that can be assigned to an Item.
+     *
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @return \stdClass
+     */
+    public function listItemHSCodeClassificationStatus()    {
+        $path = "/api/v2/definitions/items/hscode-classification-status";
+        $guzzleParams = [
+            'query' => [],
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
@@ -6577,6 +6596,30 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Dismiss the `Status` and `Details` values of the given ItemHSCodeClassificationStatus.
+     *
+     * Dismiss the existing `Status` and `Details` of the ItemHSCodeClassificationStatus object at this URL with an updated object.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, BatchServiceAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The ID of the company to which this item belongs.
+     * @param int $itemId The ID of the item whose classification status you want to update.
+     * @param string $country The country of the HS code classification request status record that is to be updated.
+     * @return \stdClass
+     */
+    public function dismissHSCodeClassificationStatus($companyId, $itemId, $country)    {
+        $path = "/api/v2/companies/{$companyId}/items/{$itemId}/hscode-classifications-status/$dismiss";
+        $guzzleParams = [
+            'query' => ['country' => $country],
+            'body' => null
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
      * Retrieve a single item
      *
      * Get the `Item` object identified by this URL.
@@ -6737,15 +6780,37 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $companyId The ID of the company that owns this item object
      * @param string $itemCode The ItemCode of the item for which you want to retrieve premium classification
      * @param string $systemCode The SystemCode for which you want to retrieve premium classification
+     * @param string $country Optional: Provide the country for which you want to retrieve the premium classification.
      * @return \stdClass
      */
-    public function getPremiumClassification($companyId, $itemCode, $systemCode)    {
+    public function getPremiumClassification($companyId, $itemCode, $systemCode, $country=null)    {
         $path = "/api/v2/companies/{$companyId}/items/{$itemCode}/premiumClassification/{$systemCode}";
         $guzzleParams = [
-            'query' => [],
+            'query' => ['country' => $country],
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Create an HS code classification request.
+     *
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, BatchServiceAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The ID of the company for which you want to create this HS code classification request.
+     * @param ItemHSCodeClassificationInputModel[] $model Item HSCodeClassification input Model
+     * @return \stdClass
+     */
+    public function initiateHSCodeClassification($companyId, $model=null)    {
+        $path = "/api/v2/companies/{$companyId}/items/$initiate-hscode-classification";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -6803,7 +6868,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The company id.
      * @param int $itemId The item id.
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* productCode, systemCode, IsPremium
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* productCode, systemCode, country, IsPremium, ClassificationEvent
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -6855,6 +6920,42 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Retrieve premium classification for an item based on its `companyId` and `itemCode`.
+     *
+     * Retrieve the premium classification for an Item based on its `itemCode` and `companyId`.
+     *  
+     * NOTE: If your item code contains any of these characters /, +, ?,",' ,% or #, please use the following encoding before making a request:
+     * * Replace '/' with '\_-ava2f-\_' For example: 'Item/Code' becomes 'Item_-ava2f-_Code'
+     * * Replace '+' with '\_-ava2b-\_' For example: 'Item+Code' becomes 'Item_-ava2b-_Code'
+     * * Replace '?' with '\_-ava3f-\_' For example: 'Item?Code' becomes 'Item_-ava3f-_Code'
+     * * Replace '%' with '\_-ava25-\_' For example: 'Item%Code' becomes 'Item_-ava25-_Code'
+     * * Replace '#' with '\_-ava23-\_' For example: 'Item#Code' becomes 'Item_-ava23-_Code'
+     * * Replace ''' with '\_-ava27-\_' For example: 'Item'Code' becomes 'Item_-ava27-_Code'
+     * * Replace '"' with '\_-ava22-\_' For example: 'Item"Code' becomes 'Item_-ava22-_Code'
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The ID of the company that owns this item object.
+     * @param string $itemCode The item code of the item for which you want to retrieve premium classification.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* HsCode, justification, createdDate, createdUserId
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @return \stdClass
+     */
+    public function listItemPremiumClassifications($companyId, $itemCode, $filter=null, $skip=null, $orderBy=null, $top=null)    {
+        $path = "/api/v2/companies/{$companyId}/items/{$itemCode}/premiumClassifications";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$skip' => $skip, '$orderBy' => $orderBy, '$top' => $top],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
      * Retrieve items for this company
      *
      * List all items defined for the current company.
@@ -6875,6 +6976,12 @@ class AvaTaxClient extends AvaTaxClientBase
      *  
      * You may specify Tax Code recommendation status in the `taxCodeRecommendationStatus` query parameter if you want to filter items on the basis of tax code recommendation status
      *  
+     * You can specify an HS code classification status in the `hsCodeClassificationStatus` query parameter if you want to filter items based on an HS code classification status.
+     *  
+     * You can specify a comma-separated list of countries in the `hsCodeExistsInCountries` query parameter if you want to filter items based on whether an HS code exists for the provided countries.
+     *  
+     * You can specify a comma-separated list of countries in the `hsCodeDoesNotExistsInCountries` query parameter if you want to filter items on the basis of whether an HS code does not exist for the provided countries.
+     *  
      * You may specify one or more of the following values in the `$include` parameter to fetch additional nested data, using commas to separate multiple values:
      *  
      * * Parameters
@@ -6882,6 +6989,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * * Tags
      * * Properties
      * * TaxCodeRecommendationStatus
+     * * HsCodeClassificationStatus
      * * TaxCodeDetails
      * 
      * ### Security Policies
@@ -6890,7 +6998,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that defined these items
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxCode, source, sourceEntityId, itemType, upc, summary, classifications, parameters, tags, properties, itemStatus, taxCodeRecommendationStatus, taxCodeRecommendations, taxCodeDetails
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxCode, source, sourceEntityId, itemType, upc, summary, classifications, parameters, tags, properties, itemStatus, taxCodeRecommendationStatus, taxCodeRecommendations, taxCodeDetails, hsCodeClassificationStatus
      * @param string $include A comma separated list of additional data to retrieve.
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
@@ -6898,12 +7006,15 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $tagName Tag Name on the basis of which you want to filter Items
      * @param string $itemStatus A comma separated list of item status on the basis of which you want to filter Items
      * @param string $taxCodeRecommendationStatus Tax code recommendation status on the basis of which you want to filter Items
+     * @param string $hsCodeClassificationStatus HS code classification status on the basis of which you want to filter items.
+     * @param string $hsCodeExistsInCountries A comma-separated list of countries for which the HS code is assigned and based on which you want to filter the items.
+     * @param string $hsCodeDoesNotExistsInCountries A comma-separated list of countries for which the HS code is not assigned and based on which you want to filter the items.
      * @return \stdClass
      */
-    public function listItemsByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null, $tagName=null, $itemStatus=null, $taxCodeRecommendationStatus=null)    {
+    public function listItemsByCompany($companyId, $filter=null, $include=null, $top=null, $skip=null, $orderBy=null, $tagName=null, $itemStatus=null, $taxCodeRecommendationStatus=null, $hsCodeClassificationStatus=null, $hsCodeExistsInCountries=null, $hsCodeDoesNotExistsInCountries=null)    {
         $path = "/api/v2/companies/{$companyId}/items";
         $guzzleParams = [
-            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy, 'tagName' => $tagName, 'itemStatus' => $itemStatus, 'taxCodeRecommendationStatus' => $taxCodeRecommendationStatus],
+            'query' => ['$filter' => $filter, '$include' => $include, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy, 'tagName' => $tagName, 'itemStatus' => $itemStatus, 'taxCodeRecommendationStatus' => $taxCodeRecommendationStatus, 'hsCodeClassificationStatus' => $hsCodeClassificationStatus, 'hsCodeExistsInCountries' => $hsCodeExistsInCountries, 'hsCodeDoesNotExistsInCountries' => $hsCodeDoesNotExistsInCountries],
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
@@ -6939,6 +7050,41 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Patch a single item
+     *
+     * Update the existing item object at this URL with the specified patch changes.
+     *  
+     * Items are a way of separating your tax calculation process from your tax configuration details. If you choose, you
+     * can provide `itemCode` values for each `CreateTransaction()` API call rather than specifying tax codes, parameters, descriptions,
+     * and other data fields. AvaTax will automatically look up each `itemCode` and apply the correct tax codes and parameters
+     * from the item table instead. This allows your CreateTransaction call to be as simple as possible, and your tax compliance
+     * team can manage your item catalog and adjust the tax behavior of items without having to modify your software.
+     *  
+     * Only specified fields in the existing object will be updated with the data you provide via PATCH.
+     * To set a field's value to null, you can either set the field to null explicitly or omit it from the PATCH request.
+     *  
+     * The tax code takes precedence over the tax code ID if both are provided.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, BatchServiceAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The ID of the company that this item belongs to.
+     * @param int $id The ID of the item you want to update.
+     * @param Operation[] $model A JSON patch (refer to https://datatracker.ietf.org/doc/html/rfc6902).
+     * @return \stdClass
+     */
+    public function patchItem($companyId, $id, $model=null)    {
+        $path = "/api/v2/companies/{$companyId}/items/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PATCH', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
      * Retrieve all items
      *
      * Get multiple item objects across all companies.
@@ -6958,7 +7104,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * Swagger Name: AvaTaxClient
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxCode, source, sourceEntityId, itemType, upc, summary, classifications, parameters, tags, properties, itemStatus, taxCodeRecommendationStatus, taxCodeRecommendations, taxCodeDetails
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxCode, source, sourceEntityId, itemType, upc, summary, classifications, parameters, tags, properties, itemStatus, taxCodeRecommendationStatus, taxCodeRecommendations, taxCodeDetails, hsCodeClassificationStatus
      * @param string $include A comma separated list of additional data to retrieve.
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
@@ -7033,7 +7179,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that defined these items.
      * @param string $tag The master tag to be associated with item.
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxCode, source, sourceEntityId, itemType, upc, summary, classifications, parameters, tags, properties, itemStatus, taxCodeRecommendationStatus, taxCodeRecommendations, taxCodeDetails
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxCode, source, sourceEntityId, itemType, upc, summary, classifications, parameters, tags, properties, itemStatus, taxCodeRecommendationStatus, taxCodeRecommendations, taxCodeDetails, hsCodeClassificationStatus
      * @param string $include A comma separated list of additional data to retrieve.
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
@@ -7204,6 +7350,36 @@ class AvaTaxClient extends AvaTaxClientBase
      */
     public function updateItemParameter($companyId, $itemId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/items/{$itemId}/parameters/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Add/update item classifications.
+     *
+     * Add/update classifications to an item.
+     *  
+     * A classification is the code for a product in a particular tax system. Classifications enable an item to be used in multiple tax systems that may have different tax rates for a product.
+     *  
+     * When an item is used in a transaction, the applicable classification will be used to determine the appropriate tax rate.
+     *  
+     * An item may only have one classification per tax system per country.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, BatchServiceAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The company ID.
+     * @param int $itemId The item ID.
+     * @param ItemClassificationInputModel[] $model The item classifications you want to create.
+     * @return \stdClass
+     */
+    public function upsertItemClassifications($companyId, $itemId, $model=null)    {
+        $path = "/api/v2/companies/{$companyId}/items/{$itemId}/classifications";
         $guzzleParams = [
             'query' => [],
             'body' => json_encode($model)
@@ -10097,14 +10273,11 @@ class AvaTaxClient extends AvaTaxClientBase
     /**
      * Sales tax rates for a specified address
      *
-     * Usage of this API is subject to rate limits. Users who exceed the rate limit will receive HTTP
-     * response code 429 - `Too Many Requests`.
-     *  
      * This API assumes that you are selling general tangible personal property at a retail point-of-sale
      * location in the United States only.
      *  
-     * Please be advised that this endpoint is designed for approximate tax rate estimation only and 
-     * may not yield precise results. For a more powerful and accurate tax estimation, upgrade to the 
+     * Please be advised that this endpoint is designed for approximate tax rate estimation only and
+     * may not yield precise results. For a more powerful and accurate tax estimation, upgrade to the
      * `CreateTransaction` API, which offers a variety of advanced features including, but not limited
      * to:
      *  
@@ -10150,8 +10323,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * This API assumes that you are selling general tangible personal property at a retail point-of-sale
      * location in the United States only.
      *  
-     * Please be advised that this endpoint is designed for approximate tax rate estimation only and 
-     * may not yield precise results. For a more powerful and accurate tax estimation, upgrade to the 
+     * Please be advised that this endpoint is designed for approximate tax rate estimation only and
+     * may not yield precise results. For a more powerful and accurate tax estimation, upgrade to the
      * `CreateTransaction` API, which offers a variety of advanced features including, but not limited
      * to:
      *  

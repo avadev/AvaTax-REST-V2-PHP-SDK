@@ -2,7 +2,7 @@
 namespace Avalara;
 use GuzzleHttp\Client;
 
-define('AVATAX_SDK_VERSION', '24.12.0');
+define('AVATAX_SDK_VERSION', '25.1.0');
 
 /*****************************************************************************
  *                                                                           *
@@ -818,7 +818,7 @@ class ErrorCodeId
     const C_OFFERCODEALREADYAPPLIED = 610;
     const C_ACCOUNTALREADYEXISTS = 611;
     const C_LICENSEKEYNAMEALREADYEXISTSFORACCOUNT = 612;
-    const C_USERALREADYEXIST = 613;
+    const C_USERALREADYEXISTS = 613;
     const C_USERNOTFOUND = 614;
     const C_USERMANAGEMENTEXCEPTION = 615;
 
@@ -1182,6 +1182,7 @@ class ErrorCodeId
      * Occurs when the field name provided in the request isn't valid.
      */
     const C_INVALIDFIELD = 3010;
+    const C_DUPLICATEPATCHOPERATION = 3011;
 
     /**
      * Avalara Gateway errors:

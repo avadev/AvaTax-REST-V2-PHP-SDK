@@ -2030,6 +2030,10 @@ class ChangeTransactionCodeModel
 class ClassificationModel
 {
     /**
+     * @var int The unique ID of the classification.
+     */
+    public $id;
+    /**
      * @var string The product code of an item in a given system.
      */
     public $productCode;
@@ -2037,6 +2041,10 @@ class ClassificationModel
      * @var string The system code in which the product belongs.
      */
     public $systemCode;
+    /**
+     * @var string The country where the product belongs.
+     */
+    public $country;
     /**
      * @var boolean If there is an premium classification justification present for this classification
      */
@@ -5673,6 +5681,21 @@ class ExposureZoneModel
     public $country;
 }
 /**
+ * Failed HS code classification model.
+ * Swagger Name: AvaTaxClient
+ */
+class FailedHSCodeClassificationModel
+{
+    /**
+     * @var int The failed item ID.
+     */
+    public $itemId;
+    /**
+     * @var HSCodeClassificationError[] A list of errors, if any.
+     */
+    public $errors;
+}
+/**
  * Filing Returns Model
  * Swagger Name: AvaTaxClient
  */
@@ -7970,6 +7993,29 @@ class GLAccountUploadErrorModel
     public $errors;
 }
 /**
+ * The HS code classification error model.
+ * Swagger Name: AvaTaxClient
+ */
+class HSCodeClassificationError
+{
+    /**
+     * @var string The error code.
+     */
+    public $code;
+    /**
+     * @var string The error message
+     */
+    public $message;
+    /**
+     * @var string Target is source where failure is happened.
+     */
+    public $target;
+    /**
+     * @var string The fault code
+     */
+    public $faultCode;
+}
+/**
  * Update history for Avalara.AvaTax.AccountServices.Models.v2.CustomerModel and Avalara.AvaTax.AccountServices.Models.v2.CertificateModel. This is exposed in the URL's `$includes`.
  * Swagger Name: AvaTaxClient
  */
@@ -8355,6 +8401,10 @@ class ItemClassificationInputModel
      * @var string The system code in which the product belongs.
      */
     public $systemCode;
+    /**
+     * @var string The country associated with the product.
+     */
+    public $country;
 }
 /**
  * Product classification output model.
@@ -8383,9 +8433,164 @@ class ItemClassificationOutputModel
      */
     public $systemCode;
     /**
+     * @var string A unique code representing this item.
+     */
+    public $country;
+    /**
      * @var boolean If there is an premium classification justification present for this classification
      */
     public $isPremium;
+    /**
+     * @var string This represents the type of classification event.
+     */
+    public $classificationEvent;
+}
+/**
+ * Input model of the HS code classification.
+ * Swagger Name: AvaTaxClient
+ */
+class ItemHSCodeClassificationInputModel
+{
+    /**
+     * @var int The unique item ID.
+     */
+    public $itemId;
+    /**
+     * @var string[] Country of destination for this HS code classification.
+     */
+    public $countryOfDestinations;
+    /**
+     * @var boolean Used for checking the premium classification status.
+     */
+    public $isPremiumClassification;
+    /**
+     * @var boolean A field for checking whether this is a reclassification.
+     */
+    public $isReclassification;
+    /**
+     * @var boolean Whether this item classification is disputed.
+     */
+    public $isDisputed;
+    /**
+     * @var boolean Whether this item classification is a priority classification.
+     */
+    public $isPriority;
+    /**
+     * @var boolean the item is exported to other countries.
+     */
+    public $isExport;
+    /**
+     * @var boolean IsExportControl flag to identify cross border classification
+     */
+    public $isExportControl;
+    /**
+     * @var string Instructions related to this item classification.
+     */
+    public $instructions;
+    /**
+     * @var string The language used in this item classification.
+     */
+    public $language;
+}
+/**
+ * The output model for an HS code classification.
+ * Swagger Name: AvaTaxClient
+ */
+class ItemHSCodeClassificationOutputModel
+{
+    /**
+     * @var int The total items requested for classification.
+     */
+    public $total;
+    /**
+     * @var FailedHSCodeClassificationModel[] A list of failed HS code classifications.
+     */
+    public $failed;
+}
+/**
+ * ItemHsCodeClassificationStatusInputModel
+ * Swagger Name: AvaTaxClient
+ */
+class ItemHSCodeClassificationStatusInputModel
+{
+    /**
+     * @var string The Country for which the item is getting classified
+     */
+    public $country;
+    /**
+     * @var string Status of the HS Code classification
+     */
+    public $status;
+    /**
+     * @var string The description for the HS Code classification created/updated
+     */
+    public $details;
+}
+/**
+ * Represent HS code classification for a given item.
+ * Swagger Name: AvaTaxClient
+ */
+class ItemHSCodeClassificationStatusModel
+{
+    /**
+     * @var string The unique ID of this HS code classification.
+     */
+    public $id;
+    /**
+     * @var int The unique ID of the company that owns this HS code classification.
+     */
+    public $companyId;
+    /**
+     * @var int A unique code representing the item
+     */
+    public $itemId;
+    /**
+     * @var string The country for which the item is getting classified.
+     */
+    public $country;
+    /**
+     * @var string The status of the HS code classification
+     */
+    public $status;
+    /**
+     * @var string The description for the HS code classification being created/updated.
+     */
+    public $details;
+    /**
+     * @var string The date when this record was created.
+     */
+    public $createdAt;
+    /**
+     * @var int The ID of the user who created this record.
+     */
+    public $createdUserId;
+    /**
+     * @var string The date/time when this record was last modified.
+     */
+    public $modifiedAt;
+    /**
+     * @var int The ID of the user who last modified this record.
+     */
+    public $modifiedUserId;
+    /**
+     * @var string The date/time when the request for this record was completed.
+     */
+    public $completedAt;
+}
+/**
+ * Item HSCode Classification Status Output Model
+ * Swagger Name: AvaTaxClient
+ */
+class ItemHSCodeClassificationStatusOutputModel
+{
+    /**
+     * @var string Status
+     */
+    public $name;
+    /**
+     * @var string Description
+     */
+    public $description;
 }
 /**
  * Represents an item in your company's product catalog.
@@ -8493,6 +8698,10 @@ class ItemModel
      * @var ItemTaxCodeDetailsOutputModel 
      */
     public $taxCodeDetails;
+    /**
+     * @var ItemHSCodeClassificationStatusModel[] List of item parameters
+     */
+    public $hsCodeClassificationStatus;
 }
 /**
  * Represents a parameter associated with an item.
@@ -8547,6 +8756,10 @@ class ItemPremiumClassificationInputModel
      * @var string Justification why this HsCode is attached to this item.
      */
     public $justification;
+    /**
+     * @var string The two-character ISO 3166 country code for which this premium classification is being created.
+     */
+    public $country;
 }
 /**
  * Represents a Premium Classification output model associated with an item's SystemCode..
@@ -8586,6 +8799,10 @@ class ItemPremiumClassificationOutputModel
      * @var int The user who created the record.
      */
     public $createdUserId;
+    /**
+     * @var string The country code associated with this premium classification.
+     */
+    public $country;
 }
 /**
  * Represents a parameter associated with an item.
@@ -11696,6 +11913,29 @@ class OfferModel
      * @var string Message indicating what action took place
      */
     public $offerMessage;
+}
+/**
+ * 
+ * Swagger Name: AvaTaxClient
+ */
+class Operation
+{
+    /**
+     * @var object 
+     */
+    public $value;
+    /**
+     * @var string 
+     */
+    public $path;
+    /**
+     * @var string 
+     */
+    public $op;
+    /**
+     * @var string 
+     */
+    public $from;
 }
 /**
  * Represents the exact API request and response from the original transaction API call, if available
