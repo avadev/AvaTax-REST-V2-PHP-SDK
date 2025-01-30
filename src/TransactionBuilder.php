@@ -423,7 +423,7 @@ class TransactionBuilder
     {
         // Address the DateOverride constraint.
         if (($type == TaxOverrideType::C_TAXDATE) && (empty($taxDate))) {
-            throw new Exception("A valid date is required for a Tax Date Tax Override.");
+            throw new \Exception("A valid date is required for a Tax Date Tax Override.");
         }
 
         $li = $this->getMostRecentLineIndex();
