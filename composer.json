@@ -36,11 +36,12 @@
   "license": "Apache-2.0",
   "type": "library",
   "require": {
-    "php": ">=5.5.9",
-    "guzzlehttp/guzzle": "~6|~7",
+    "php": "^8.3",
+    "guzzlehttp/guzzle": "^6.0 || ^7.0",
     "psr/log": "^1.0 || ^2.0 || ^3.0"
   },
   "require-dev": {
+    "phpstan/phpstan": "^2.1",
     "phpunit/phpunit": ">=5.7"
   },
   "support": {
@@ -58,6 +59,7 @@
     ]
   },
   "scripts": {
-    "test": "php -d xdebug.profiler_enable=on vendor/bin/phpunit --configuration tests/phpunit.xml"
+    "test": "php -d xdebug.profiler_enable=on vendor/bin/phpunit --configuration tests/phpunit.xml",
+    "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon --memory-limit 1G"
   }
 }
