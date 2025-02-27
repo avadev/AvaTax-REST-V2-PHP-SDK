@@ -1930,7 +1930,7 @@ class CertificateModel
      */
     public $exemptionReason;
     /**
-     * @var string The status of the certificate.
+     * @var string The status of the certificate.  Possible values for status COMPLETE,PENDING,PENDING-FUTURE,PENDING-MULTI,PENDING-SINGLE,REVOKED
      */
     public $status;
     /**
@@ -10461,6 +10461,10 @@ class MultiTaxFilingReturnModel
      * @var string The three-character filing calendar currency code for this return. For example if country is 'US' then currency is 'USD'. Similarly, if country is 'CA' then currency is 'CAD', etc.
      */
     public $filingCalendarCurrencyCode;
+    /**
+     * @var boolean Can the return be unlocked or not.
+     */
+    public $canUnlock;
     /**
      * @var FilingsTaxSummaryModel 
      */
