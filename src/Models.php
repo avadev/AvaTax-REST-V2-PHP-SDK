@@ -8508,6 +8508,17 @@ class ItemHSCodeClassificationOutputModel
     public $failed;
 }
 /**
+ * Represents a HsCodeClassification SLA Response for a given company.
+ * Swagger Name: AvaTaxClient
+ */
+class ItemHSCodeClassificationSlaOutputModel
+{
+    /**
+     * @var int The SLA time in hours
+     */
+    public $slaInHours;
+}
+/**
  * ItemHsCodeClassificationStatusInputModel
  * Swagger Name: AvaTaxClient
  */
@@ -15014,6 +15025,14 @@ class TransactionModel
      * @var string An Accounts Payable (AP) status indicates an action that needs to be taken when the tolerance amount falls   above or below certain threshold limits.
      */
     public $apStatus;
+    /**
+     * @var string The name of the vendor
+     */
+    public $vendorName;
+    /**
+     * @var float The transaction-level variance (the difference between Vendor Charged Tax and AvaTax Calculated Tax) that has been calculated for this AP transaction.
+     */
+    public $varianceAmount;
 }
 /**
  * Represents a transaction parameter.

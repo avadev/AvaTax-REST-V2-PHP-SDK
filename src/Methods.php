@@ -6679,6 +6679,30 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Retrieve the HS code classification SLA details for a company.
+     *
+     * This endpoint returns the SLA details for HS code classification for the
+     * specified company. The response includes information about processing times,
+     * service commitments, and other relevant SLA terms.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The ID of the company for which to retrieve the SLA details.
+     * @return \stdClass
+     */
+    public function getHSCodeClassificationSLA($companyId)    {
+        $path = "/api/v2/companies/{$companyId}/items/hscode-classification/$get-sla";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
      * Retrieve a single item
      *
      * Get the `Item` object identified by this URL.
@@ -11401,7 +11425,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $companyCode The company code of the company that recorded this transaction
      * @param int $dataSourceId Optionally filter transactions to those from a specific data source.
      * @param string $include Specifies objects to include in this fetch call
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* exchangeRateCurrencyCode, totalDiscount, lines, addresses, locationTypes, summary, taxDetailsByTaxType, parameters, userDefinedFields, messages, invoiceMessages, isFakeTransaction, deliveryTerms, apStatusCode, apStatus
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* exchangeRateCurrencyCode, totalDiscount, lines, addresses, locationTypes, summary, taxDetailsByTaxType, parameters, userDefinedFields, messages, invoiceMessages, isFakeTransaction, deliveryTerms, apStatusCode, apStatus, vendorName, varianceAmount
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
