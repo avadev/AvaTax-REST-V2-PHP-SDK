@@ -697,6 +697,39 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Create a new Advanced Rules batch
+     *
+     * Create a new Advanced Rules batch objects attached to this company.
+     *  
+     * When an Advanced Rules batch is created, it is added to the AvaTax Batch v2 Queue and will be
+     * processed as quickly as possible in the order it was received. To check the
+     * status of a batch, fetch the batch and retrieve the results of the batch
+     * operation.
+     *  
+     * The maximum content length of the request body is limited to 28.6 MB. If this limit
+     * is exceeded, a 404 Not Found status will be returned (possibly with a CORS error if
+     * the API is called from a browser). In this situation, please split the request into
+     * smaller batches.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, BatchServiceAdmin, CompanyAdmin, CSPTester, FirmAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The ID of the company that owns this batch.
+     * @param CreateAdvancedRulesBatchRequestModel $model The Advanced Rules batch you wish to create.
+     * @return \stdClass
+     */
+    public function createAdvancedRulesBatch($companyId, $model)    {
+        $path = "/api/v2/companies/{$companyId}/batches/advancedrules";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
      * Create a new batch
      *
      * Create one or more new batch objects attached to this company.
@@ -1162,6 +1195,36 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Delete Certificate Custom Fields
+     *
+     * Deletes custom fields for a specified certificate.
+     *  
+     * Before you can use any exemption certificates endpoints, you must set up your company for exemption certificate data storage.
+     * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption
+     * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption
+     * certificate storage for this company, call `RequestCertificateSetup`.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The unique ID number of the company that recorded this certificate
+     * @param int $id The unique ID number of this certificate
+     * @param DeleteCustomFields[] $model Delete custom fields request model
+     * @return \stdClass
+     */
+    public function deleteCertificateCustomFields($companyId, $id, $model=null)    {
+        $path = "/api/v2/companies/{$companyId}/certificates/{$id}/custom-fields";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
      * Download an image for this certificate
      *
      * Download an image or PDF file for this certificate.
@@ -1428,6 +1491,34 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Retrieve Certificate Custom Fields
+     *
+     * This API is used to retrieve custom fields for a certificate.
+     * Before you can use any exemption certificates endpoints, you must set up your company for exemption certificate data storage.
+     * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption
+     * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption
+     * certificate storage for this company, call `RequestCertificateSetup`.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The unique ID number of the company that recorded this certificate
+     * @param int $id The unique ID number of this certificate
+     * @return \stdClass
+     */
+    public function listCustomFieldsForCertificate($companyId, $id)    {
+        $path = "/api/v2/companies/{$companyId}/certificates/{$id}/custom-fields";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
      * List all certificates for a company
      *
      * List all certificates recorded by a company
@@ -1447,7 +1538,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * * logs - Retrieves the certificate log
      * * invalid_reasons - Retrieves invalid reasons for this certificate if the certificate is invalid
      * * custom_fields - Retrieves custom fields set for this certificate
-     * 
+     *  
      * Before you can use any exemption certificates endpoints, you must set up your company for exemption certificate data storage.
      * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption
      * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption
@@ -1613,6 +1704,36 @@ class AvaTaxClient extends AvaTaxClientBase
      */
     public function updateCertificate($companyId, $id, $model)    {
         $path = "/api/v2/companies/{$companyId}/certificates/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Update Certificate Custom Fields
+     *
+     * Updates the values of custom fields for a certificate
+     *  
+     * Before you can use any exemption certificates endpoints, you must set up your company for exemption certificate data storage.
+     * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption
+     * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption
+     * certificate storage for this company, call `RequestCertificateSetup`.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The unique ID number of the company that recorded this certificate
+     * @param int $id The unique ID number of this certificate
+     * @param UpdateCustomFieldsModel $model The request model containing updated custom field values
+     * @return \stdClass
+     */
+    public function updateCertificateCustomFields($companyId, $id, $model=null)    {
+        $path = "/api/v2/companies/{$companyId}/certificates/{$id}/custom-fields";
         $guzzleParams = [
             'query' => [],
             'body' => json_encode($model)
@@ -2912,6 +3033,36 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Delete custom fields
+     *
+     * Deletes the value of the custom field.
+     *  
+     * Before you can use any exemption certificates endpoints, you must set up your company for exemption certificate data storage.
+     * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption
+     * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption
+     * certificate storage for this company, call `RequestCertificateSetup`.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The unique ID number of the company that recorded this customer
+     * @param string $customerCode The unique code representing this customer
+     * @param DeleteCustomFields[] $model Delete custom fields request model
+     * @return \stdClass
+     */
+    public function deleteCustomFields($companyId, $customerCode, $model=null)    {
+        $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/custom-fields";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
      * Retrieve a single customer
      *
      * Retrieve the customer identified by this URL.
@@ -3076,7 +3227,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Retrieves a list of active certificates for a specified customer within a company.
      *
      * This API is intended to identify whether a customer has any active certificates.
-     * 
+     *  
      * Before you can use any exemption certificates endpoints, you must set up your company for exemption certificate data storage.
      * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption
      * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption
@@ -3180,11 +3331,39 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Retrieves a list of custom fields for a specified customer within a company.
+     *
+     * This API is used to retrieve custom field for a customer.
+     * Before you can use any exemption certificates endpoints, you must set up your company for exemption certificate data storage.
+     * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption
+     * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption
+     * certificate storage for this company, call `RequestCertificateSetup`.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The unique ID number of the company that recorded this customer
+     * @param string $customerCode The unique code representing this customer
+     * @return \stdClass
+     */
+    public function listCustomFieldsForCustomer($companyId, $customerCode)    {
+        $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/custom-fields";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
      * Retrieves a list of inactive certificates for a specified customer within a company.
      *
-     * This API is used to retrieve inactive certificates for a customer. Inactive certificates may include expired, 
+     * This API is used to retrieve inactive certificates for a customer. Inactive certificates may include expired,
      * revoked, or otherwise non-compliant certificates.
-     * 
+     *  
      * Before you can use any exemption certificates endpoints, you must set up your company for exemption certificate data storage.
      * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption
      * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption
@@ -3272,7 +3451,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * * shipTos - Retrieves ship-tos linked with this customer
      * * shipToStates - Retrieves ship-to states for this customer
      * * custom_fields - Retrieves custom fields set for this customer
-     * 
+     *  
      * Before you can use any exemption certificates endpoints, you must set up your company for exemption certificate data storage.
      * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption
      * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption
@@ -3405,6 +3584,36 @@ class AvaTaxClient extends AvaTaxClientBase
      */
     public function updateCustomer($companyId, $customerCode, $model)    {
         $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Update custom fields
+     *
+     * Update the value of the custom field.
+     *  
+     * Before you can use any exemption certificates endpoints, you must set up your company for exemption certificate data storage.
+     * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption
+     * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption
+     * certificate storage for this company, call `RequestCertificateSetup`.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The unique ID number of the company that recorded this customer
+     * @param string $customerCode The unique code representing this customer
+     * @param UpdateCustomFieldsModel $model Update custom fields request model
+     * @return \stdClass
+     */
+    public function updateCustomFields($companyId, $customerCode, $model=null)    {
+        $path = "/api/v2/companies/{$companyId}/customers/{$customerCode}/custom-fields";
         $guzzleParams = [
             'query' => [],
             'body' => json_encode($model)
@@ -10221,7 +10430,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * This API builds the file on demand, and is limited to files with no more than 7500 scenarios. To build a tax content
      * file for a single location at a time, please use `BuildTaxContentFileForLocation`.
      *  
-     * NOTE: This API does not work for Tennessee tax holiday scenarios.
+     * NOTE: This API does not work for sales tax holiday scenarios.
      * 
      * ### Security Policies
      * 
@@ -10266,7 +10475,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * This API builds the file on demand, and is limited to files with no more than 7500 scenarios. To build a tax content
      * file for a multiple locations in a single file, please use `BuildTaxContentFile`.
      *  
-     * NOTE: This API does not work for Tennessee tax holiday scenarios.
+     * NOTE: This API does not work for sales tax holiday scenarios.
      * 
      * ### Security Policies
      * 

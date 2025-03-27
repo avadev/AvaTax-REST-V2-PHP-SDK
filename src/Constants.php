@@ -2,7 +2,7 @@
 namespace Avalara;
 use GuzzleHttp\Client;
 
-define('AVATAX_SDK_VERSION', '25.3.0');
+define('AVATAX_SDK_VERSION', '25.3.2');
 
 /*****************************************************************************
  *                                                                           *
@@ -1203,6 +1203,14 @@ class ErrorCodeId
     const C_SERVICETIMEOUT = 4015;
 
     /**
+     * File Validation Service (FVS) Errors
+     */
+    const C_UNSUPPORTEDMEDIATYPE = 4016;
+    const C_INVALIDMEDIATYPE = 4017;
+    const C_FILESIZELIMITEXCEEDED = 4018;
+    const C_INVALIDIMAGE = 4019;
+
+    /**
      * Error string from the service unknown
      */
     const C_UNEXPECTEDERROR = -1;
@@ -1449,6 +1457,7 @@ class BatchType
     const C_VARIANCEIMPORT = 14;
     const C_COSTCENTERIMPORT = 15;
     const C_GLACCOUNTIMPORT = 16;
+    const C_ADVANCEDRULESIMPORT = 17;
 
 }
 

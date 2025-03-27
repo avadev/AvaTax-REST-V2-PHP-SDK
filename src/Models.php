@@ -776,6 +776,10 @@ class AdvancedRuleBulkImportModel
      */
     public $replaceExisting;
     /**
+     * @var boolean Flag to forbid reordering of the rules when all existing rules are updated
+     */
+    public $doNotReorder;
+    /**
      * @var AdvancedRuleExecutionModel[] List of rule executions to import
      */
     public $executions;
@@ -2230,6 +2234,10 @@ class CommunicationCustomerResponse
      * @var string Customer number
      */
     public $customerNumber;
+    /**
+     * @var string Customer name
+     */
+    public $name;
 }
 /**
  * Encloses Communication exemption designator details
@@ -3672,6 +3680,96 @@ class CoverLetterModel
     public $version;
 }
 /**
+ * Represents a create advanced rules batch request model.
+ * Swagger Name: AvaTaxClient
+ */
+class CreateAdvancedRulesBatchRequestModel
+{
+    /**
+     * @var string The user-friendly readable name for this batch.
+     */
+    public $name;
+    /**
+     * @var boolean Flag to try updating existing rules instead of just append
+     */
+    public $replaceExisting;
+    /**
+     * @var string Any optional flags provided for this batch
+     */
+    public $options;
+    /**
+     * @var AdvancedRuleExecutionModel[] List of rule executions to import
+     */
+    public $executions;
+}
+/**
+ * Represents a create advanced rules batch response model.
+ * Swagger Name: AvaTaxClient
+ */
+class CreateAdvancedRulesBatchResponseModel
+{
+    /**
+     * @var int The unique ID number of this batch.
+     */
+    public $id;
+    /**
+     * @var string Any optional flags provided for this batch
+     */
+    public $options;
+    /**
+     * @var string The user-friendly readable name for this batch.
+     */
+    public $name;
+    /**
+     * @var int The Account ID number of the account that owns this batch.
+     */
+    public $accountId;
+    /**
+     * @var int The Company ID number of the company that owns this batch.
+     */
+    public $companyId;
+    /**
+     * @var string This batch's current processing status (See BatchStatus::* for a list of allowable values)
+     */
+    public $status;
+    /**
+     * @var string The date/time when this batch started processing
+     */
+    public $startedDate;
+    /**
+     * @var int The number of records in this batch; determined by the server
+     */
+    public $recordCount;
+    /**
+     * @var int The current record being processed
+     */
+    public $currentRecord;
+    /**
+     * @var string The date/time when this batch was completely processed
+     */
+    public $completedDate;
+    /**
+     * @var string The date when this record was created.
+     */
+    public $createdDate;
+    /**
+     * @var int The User ID of the user who created this record.
+     */
+    public $createdUserId;
+    /**
+     * @var string The date/time when this record was last modified.
+     */
+    public $modifiedDate;
+    /**
+     * @var int The user ID of the user who last modified this record.
+     */
+    public $modifiedUserId;
+    /**
+     * @var BatchFileModel[] The list of files contained in this batch.
+     */
+    public $files;
+}
+/**
  * Represents an invitation for a customer to use CertExpress to self-report their own certificates.
  * This invitation is delivered by your choice of method, or you can present a hyperlink to the user
  * directly in your connector. Your customer will be redirected to https://app.certexpress.com/ where
@@ -4902,6 +5000,17 @@ class DeclareNexusByAddressModel
      * @var float Geospatial longitude measurement, in Decimal Degrees floating point format.
      */
     public $longitude;
+}
+/**
+ * Delete Custom Field request model
+ * Swagger Name: AvaTaxClient
+ */
+class DeleteCustomFields
+{
+    /**
+     * @var int Custom field id
+     */
+    public $id;
 }
 /**
  * Response model of a single error transaction delete
@@ -10787,7 +10896,7 @@ class NexusForReturnsModel
      */
     public $nexusTaxTypeGroup;
     /**
-     * @var string Nexus Type
+     * @var string Nexus Type (See NexusTypeId::* for a list of allowable values)
      */
     public $nexusTypeId;
     /**
@@ -15307,6 +15416,32 @@ class UpdateCompanyLocationRemittanceModel
      * @var string If this place of business has closed, the date when this location closed business. If null it'll be set to the date of 9998-12-31.
      */
     public $endDate;
+}
+/**
+ * Update custom fields model
+ * Swagger Name: AvaTaxClient
+ */
+class UpdateCustomFields
+{
+    /**
+     * @var int Id of the custom field
+     */
+    public $id;
+    /**
+     * @var string Value of the custom field
+     */
+    public $value;
+}
+/**
+ * UpdateCustomFieldsModel with list of UpdateCustomFields
+ * Swagger Name: AvaTaxClient
+ */
+class UpdateCustomFieldsModel
+{
+    /**
+     * @var UpdateCustomFields[] List of UpdateCustomFields
+     */
+    public $customFields;
 }
 /**
  * User Entitlement Model
