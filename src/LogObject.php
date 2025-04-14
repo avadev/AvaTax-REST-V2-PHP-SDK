@@ -14,6 +14,7 @@ class LogInformation
     public $statusCode;
     public $timestamp;
     public $exceptionMessage;
+    public $queryParams;
 
     public function setStartTime($startTime)
     {
@@ -29,6 +30,10 @@ class LogInformation
         if($this-> logRequestAndResponseBody)
         {
             $this-> requestDetails = $guzzleParams['body'];
+        }
+        // Log query parameters if they are present
+        if (isset($guzzleParams['query'])) {
+            $this->queryParams = $guzzleParams['query'];
         }
     }
 
