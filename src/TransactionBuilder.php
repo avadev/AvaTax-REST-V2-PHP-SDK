@@ -291,6 +291,27 @@ class TransactionBuilder
     }
 
     /**
+     * Add a user defined field to the current line.
+     *
+     * @param string $name  The name of the user defined field.
+     * @param string $value The value for the user defined field.
+     * @return TransactionBuilder
+     * @throws \Exception if no line exists.
+     */
+    public function withLineUserDefinedField($name, $value)
+    {
+        $li = $this->getMostRecentLineIndex();
+        if (empty($this->_model['lines'][$li]['userDefinedFields'])) {
+            $this->_model['lines'][$li]['userDefinedFields'] = [];
+        }
+        $this->_model['lines'][$li]['userDefinedFields'][] = [
+            'name'  => $name,
+            'value' => $value
+        ];
+        return $this;
+    }
+
+    /**
      * Add an address to this transaction
      *
      * @param   string              type          Address Type (See AddressType::* for a list of allowable values)
