@@ -2,7 +2,7 @@
 namespace Avalara;
 use GuzzleHttp\Client;
 
-define('AVATAX_SDK_VERSION', '25.3.2');
+define('AVATAX_SDK_VERSION', '25.5.1');
 
 /*****************************************************************************
  *                                                                           *
@@ -1209,6 +1209,8 @@ class ErrorCodeId
     const C_INVALIDMEDIATYPE = 4017;
     const C_FILESIZELIMITEXCEEDED = 4018;
     const C_INVALIDIMAGE = 4019;
+    const C_IMAGEALREADYLINKED = 4020;
+    const C_ITEMIDMISMATCH = 4021;
 
     /**
      * Error string from the service unknown
@@ -1458,6 +1460,7 @@ class BatchType
     const C_COSTCENTERIMPORT = 15;
     const C_GLACCOUNTIMPORT = 16;
     const C_ADVANCEDRULESIMPORT = 17;
+    const C_ITEMIMPORTV2 = 18;
 
 }
 
@@ -3776,6 +3779,46 @@ class SecurityRoleId
      * ECMCompanyUser
      */
     const C_ECMCOMPANYUSER = 27;
+
+    /**
+     * ReturnsOnlyAccountAdmin
+     */
+    const C_RETURNSONLYACCOUNTADMIN = 28;
+
+    /**
+     * ReturnsOnlyAccountUser
+     */
+    const C_RETURNSONLYACCOUNTUSER = 29;
+
+    /**
+     * ReturnsOnlyCompanyAdmin
+     */
+    const C_RETURNSONLYCOMPANYADMIN = 30;
+
+    /**
+     * ReturnsOnlyCompanyUser
+     */
+    const C_RETURNSONLYCOMPANYUSER = 31;
+
+    /**
+     * AvaTaxOnlyAccountAdmin
+     */
+    const C_AVATAXONLYACCOUNTADMIN = 32;
+
+    /**
+     * AvaTaxOnlyAccountUser
+     */
+    const C_AVATAXONLYACCOUNTUSER = 33;
+
+    /**
+     * AvaTaxOnlyCompanyAdmin
+     */
+    const C_AVATAXONLYCOMPANYADMIN = 34;
+
+    /**
+     * AvaTaxOnlyCompanyUser
+     */
+    const C_AVATAXONLYCOMPANYUSER = 35;
 
 }
 
