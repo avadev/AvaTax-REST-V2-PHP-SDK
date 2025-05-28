@@ -958,7 +958,7 @@ class AdvancedRuleImportResultModel
      */
     public $name;
     /**
-     * @var string Import result status code (e.g. Success, ValidationFailed, NotCreated, etc.)
+     * @var string Import result status code (e.g. Success, ValidationFailed, NotCreated, etc.) (See BulkImportStatus::* for a list of allowable values)
      */
     public $importResult;
     /**
@@ -2728,6 +2728,10 @@ class CompanyModel
      * @var boolean A boolean flag to identify if the company is deleted
      */
     public $isDeleted;
+    /**
+     * @var boolean A boolean flag to identify if the company saves advanced rules after calculation.
+     */
+    public $isAdvSave;
 }
 /**
  * Represents a parameter associated with a company.
@@ -3810,6 +3814,88 @@ class CreateECommerceTokenInputModel
      * @var string The customer's number that the token will be issued for.
      */
     public $customerNumber;
+}
+/**
+ * Represents a create item import batch request model.
+ * Swagger Name: AvaTaxClient
+ */
+class CreateItemImportBatchRequestModel
+{
+    /**
+     * @var string The user-friendly readable name for this batch
+     */
+    public $name;
+    /**
+     * @var ItemModel[] List of items to import
+     */
+    public $items;
+}
+/**
+ * Represents a create item import batch response model.
+ * Swagger Name: AvaTaxClient
+ */
+class CreateItemImportBatchResponseModel
+{
+    /**
+     * @var int The unique ID number of this batch.
+     */
+    public $id;
+    /**
+     * @var string Any optional flags provided for this batch
+     */
+    public $options;
+    /**
+     * @var string The user-friendly readable name for this batch.
+     */
+    public $name;
+    /**
+     * @var int The Account ID number of the account that owns this batch.
+     */
+    public $accountId;
+    /**
+     * @var int The Company ID number of the company that owns this batch.
+     */
+    public $companyId;
+    /**
+     * @var string This batch's current processing status (See BatchStatus::* for a list of allowable values)
+     */
+    public $status;
+    /**
+     * @var string The date/time when this batch started processing
+     */
+    public $startedDate;
+    /**
+     * @var int The number of records in this batch; determined by the server
+     */
+    public $recordCount;
+    /**
+     * @var int The current record being processed
+     */
+    public $currentRecord;
+    /**
+     * @var string The date/time when this batch was completely processed
+     */
+    public $completedDate;
+    /**
+     * @var string The date when this record was created.
+     */
+    public $createdDate;
+    /**
+     * @var int The User ID of the user who created this record.
+     */
+    public $createdUserId;
+    /**
+     * @var string The date/time when this record was last modified.
+     */
+    public $modifiedDate;
+    /**
+     * @var int The user ID of the user who last modified this record.
+     */
+    public $modifiedUserId;
+    /**
+     * @var BatchFileModel[] The list of files contained in this batch.
+     */
+    public $files;
 }
 /**
  * A MultiDocument transaction represents a sale or purchase that occurred between more than two companies.
@@ -9648,7 +9734,7 @@ class LiabilityParametersModel
      */
     public $year;
     /**
-     * @var object Filter report based on the month
+     * @var int Filter report based on the month. Accepts a single integer value between 1 and 12 representing the calendar month.  Validation behavior:  - If an invalid value is provided, the Execute button will be disabled in Swagger UI  - Invalid month value will result in a JsonFormatError when called through Postman
      */
     public $month;
     /**
