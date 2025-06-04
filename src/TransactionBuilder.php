@@ -444,7 +444,7 @@ class TransactionBuilder
     {
         // Address the DateOverride constraint.
         if (($type == TaxOverrideType::C_TAXDATE) && (empty($taxDate))) {
-            throw new Exception("A valid date is required for a Tax Date Tax Override.");
+            throw new \Exception("A valid date is required for a Tax Date Tax Override.");
         }
 
         $li = $this->getMostRecentLineIndex();
@@ -661,7 +661,7 @@ class TransactionBuilder
     {
         $c = count($this->_model['lines']);
         if ($c <= 0) {
-            throw new \Exception("No lines have been added. The $memberName method applies to the most recent line.  To use this function, first add a line.");
+            throw new \Exception("No lines have been added. The memberName method applies to the most recent line.  To use this function, first add a line.");
         }
 
         return $c-1;
