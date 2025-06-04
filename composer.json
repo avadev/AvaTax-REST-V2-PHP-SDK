@@ -41,7 +41,6 @@
     "psr/log": "^1.0 || ^2.0 || ^3.0"
   },
   "require-dev": {
-    "phpstan/phpstan": "^2.1",
     "phpunit/phpunit": ">=5.7"
   },
   "support": {
@@ -59,7 +58,6 @@
     ]
   },
   "scripts": {
-    "test": "php -d xdebug.profiler_enable=on vendor/bin/phpunit --configuration tests/phpunit.xml",
-    "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon --memory-limit 1G"
+    "test": "php -d xdebug.profiler_enable=on vendor/bin/phpunit --configuration tests/phpunit.xml"
   }
 }

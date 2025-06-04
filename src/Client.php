@@ -65,7 +65,7 @@ class AvaTaxClientBase
      *
      * @throws \Exception
      */
-    public function __construct($appName, $appVersion, $machineName="", $environment="", $guzzleParams = [], ?LoggerInterface $logger = null, $logRequestAndResponseBody = false)
+    public function __construct($appName, $appVersion, $machineName="", $environment="", $guzzleParams = [], LoggerInterface $logger = null, $logRequestAndResponseBody = false)
     {
         // app name and app version are mandatory fields.
         if ($appName == "" || $appName == null || $appVersion == "" || $appVersion == null) {
