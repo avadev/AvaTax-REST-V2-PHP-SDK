@@ -1528,7 +1528,7 @@ class BatchAdjustTransactionModel
      */
     public $companyCode;
     /**
-     * @var string Please specify the transaction code of the transacion to void.
+     * @var string Please specify the transaction code of the transaction to void.
      */
     public $transactionCode;
     /**
@@ -1677,7 +1677,7 @@ class BatchVoidTransactionModel
      */
     public $companyCode;
     /**
-     * @var string Please specify the transaction code of the transacion to void.
+     * @var string Please specify the transaction code of the transaction to void.
      */
     public $transactionCode;
     /**
@@ -2112,6 +2112,45 @@ class ClassificationParameterUsageMapModel
      * @var string The unit of measurement type of the parameter
      */
     public $measurementType;
+}
+/**
+ * Represents a physical location used in exemption certificate management.
+ * Swagger Name: AvaTaxClient
+ */
+class ClerkLocationModel
+{
+    /**
+     * @var int Unique identifier for the location.
+     */
+    public $id;
+    /**
+     * @var string Display name of the location.
+     */
+    public $name;
+    /**
+     * @var string Code used to reference this location.
+     */
+    public $code;
+    /**
+     * @var string Primary street address of the location.
+     */
+    public $address_line1;
+    /**
+     * @var string Additional address details (e.g., suite, building).
+     */
+    public $address_line2;
+    /**
+     * @var string City in which the location is situated.
+     */
+    public $city;
+    /**
+     * @var string Postal or ZIP code of the location.
+     */
+    public $zip;
+    /**
+     * @var StateModel 
+     */
+    public $state;
 }
 /**
  * An AvaTax account.
@@ -8799,6 +8838,88 @@ class ItemHSCodeClassificationStatusOutputModel
     public $description;
 }
 /**
+ * Item image output model with the image URL
+ * Swagger Name: AvaTaxClient
+ */
+class ItemImageDetailOutputModel
+{
+    /**
+     * @var string The image url
+     */
+    public $imageUrl;
+    /**
+     * @var string Guid Primary key for ItemImage
+     */
+    public $itemImageId;
+    /**
+     * @var int Numeric primary key for ItemImage
+     */
+    public $itemImageDetailId;
+    /**
+     * @var int Gets or sets the company ID associated with the item image.
+     */
+    public $companyId;
+    /**
+     * @var int Gets or sets the item ID.
+     */
+    public $itemId;
+    /**
+     * @var string Gets or sets the creation timestamp of the item image.
+     */
+    public $createdAt;
+    /**
+     * @var int Gets or sets the ID of the user who created the item image.
+     */
+    public $createdUserId;
+    /**
+     * @var string Gets or sets the last modification timestamp of the item image.
+     */
+    public $modifiedAt;
+    /**
+     * @var int Gets or sets the ID of the user who last modified the item image.
+     */
+    public $modifiedUserId;
+}
+/**
+ * Item image details model
+ * Swagger Name: AvaTaxClient
+ */
+class ItemImageDetailsModel
+{
+    /**
+     * @var string Guid Primary key for ItemImage
+     */
+    public $itemImageId;
+    /**
+     * @var int Numeric primary key for ItemImage
+     */
+    public $itemImageDetailId;
+    /**
+     * @var int Gets or sets the company ID associated with the item image.
+     */
+    public $companyId;
+    /**
+     * @var int Gets or sets the item ID.
+     */
+    public $itemId;
+    /**
+     * @var string Gets or sets the creation timestamp of the item image.
+     */
+    public $createdAt;
+    /**
+     * @var int Gets or sets the ID of the user who created the item image.
+     */
+    public $createdUserId;
+    /**
+     * @var string Gets or sets the last modification timestamp of the item image.
+     */
+    public $modifiedAt;
+    /**
+     * @var int Gets or sets the ID of the user who last modified the item image.
+     */
+    public $modifiedUserId;
+}
+/**
  * Represents an item in your company's product catalog.
  * Swagger Name: AvaTaxClient
  */
@@ -8908,6 +9029,10 @@ class ItemModel
      * @var ItemHSCodeClassificationStatusModel[] List of item parameters
      */
     public $hsCodeClassificationStatus;
+    /**
+     * @var ItemImageDetailsModel 
+     */
+    public $image;
 }
 /**
  * Represents a parameter associated with an item.
@@ -12326,6 +12451,25 @@ class PasswordChangeModel
      * @var string New Password
      */
     public $newPassword;
+}
+/**
+ * Represents a single patch operation
+ * Swagger Name: AvaTaxClient
+ */
+class PatchOperation
+{
+    /**
+     * @var string The operation to perform (add, replace, remove, etc.)
+     */
+    public $op;
+    /**
+     * @var string Path to the property being modified
+     */
+    public $path;
+    /**
+     * @var string Value as a string (for add and replace operations)
+     */
+    public $value;
 }
 /**
  * Ping Result Model
