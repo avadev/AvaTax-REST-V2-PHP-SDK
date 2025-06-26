@@ -1780,6 +1780,33 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Retrieves a list of location records associated with the specified company.
+     * This endpoint is secured and requires appropriate subscription and permission levels.
+     *
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The unique identifier of the company whose locations are being requested.
+     * @param string $include OPTIONAL: A comma separated list of special fetch options. You can specify one or more of the following:
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* id
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return \stdClass
+     */
+    public function listLocationByCompany($companyId, $include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/companies/{$companyId}/clerk/locations";
+        $guzzleParams = [
+            'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
      * Retrieve a single communication certificate.
      *
      * ### Security Policies
@@ -2827,7 +2854,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @return \stdClass
      */
     public function bulkUploadCostCenters($companyid, $model=null)    {
-        $path = "/api/v2/companies/{$companyid}/costcenters/\$upload";
+        $path = "/api/v2/companies/{$companyid}/costcenters/$upload";
         $guzzleParams = [
             'query' => [],
             'body' => json_encode($model)
@@ -5410,7 +5437,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Retrieves the list of Avalara-supported system tax codes.
      * A 'TaxCode' represents a uniquely identified type of product, good, or service.
      * Avalara supports correct tax rates and taxability rules for all TaxCodes in all supported jurisdictions.
-     * If you identify your products by tax code in your 'Create Transacion' API calls, Avalara will correctly calculate tax rates and
+     * If you identify your products by tax code in your 'Create Transaction' API calls, Avalara will correctly calculate tax rates and
      * taxability rules for this product in all supported jurisdictions.
      * 
      * ### Security Policies
@@ -6340,7 +6367,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @return \stdClass
      */
     public function bulkUploadGLAccounts($companyid, $model=null)    {
-        $path = "/api/v2/companies/{$companyid}/glaccounts/\$upload";
+        $path = "/api/v2/companies/{$companyid}/glaccounts/$upload";
         $guzzleParams = [
             'query' => [],
             'body' => json_encode($model)
@@ -6783,6 +6810,36 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Delete the image associated with an item.
+     *
+     * Delete the image associated with an item.
+     *  
+     * Permanently deletes both the image and its association with the specified item.
+     * This endpoint allows users to manage product visual representations by removing outdated or incorrect images,
+     * and cleaning up unused resources in the system.
+     * Once deleted, the image association cannot be recovered. To use the image again, it must be re-uploaded and
+     * re-linked with the item.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, BatchServiceAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The unique ID of the company.
+     * @param int $itemId The unique ID of the item.
+     * @param string $imageId The unique ID of the image to delete.
+     * @return \stdClass
+     */
+    public function deleteItemImage($companyId, $itemId, $imageId)    {
+        $path = "/api/v2/companies/{$companyId}/items/{$itemId}/images/{$imageId}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
      * Delete a single item parameter
      *
      * Delete a single item parameter.
@@ -6879,7 +6936,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @return \stdClass
      */
     public function dismissHSCodeClassificationStatus($companyId, $itemId, $country)    {
-        $path = "/api/v2/companies/{$companyId}/items/{$itemId}/hscode-classifications-status/\$dismiss";
+        $path = "/api/v2/companies/{$companyId}/items/{$itemId}/hscode-classifications-status/$dismiss";
         $guzzleParams = [
             'query' => ['country' => $country],
             'body' => null
@@ -6903,7 +6960,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @return \stdClass
      */
     public function getHSCodeClassificationSLA($companyId)    {
-        $path = "/api/v2/companies/{$companyId}/items/hscode-classification/\$get-sla";
+        $path = "/api/v2/companies/{$companyId}/items/hscode-classification/$get-sla";
         $guzzleParams = [
             'query' => [],
             'body' => null
@@ -7085,6 +7142,33 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Get the image associated with an item.
+     *
+     * Get the image file for the specified image ID linked to the item.
+     *  
+     * This endpoint allows users to retrieve and display product images in user interfaces or to verify the current
+     * image associated with a specific item.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The unique ID of the company.
+     * @param int $itemId The unique ID of the item.
+     * @param string $imageId The unique ID of the image to retrieve.
+     * @return \stdClass
+     */
+    public function getProductImage($companyId, $itemId, $imageId)    {
+        $path = "/api/v2/companies/{$companyId}/items/{$itemId}/images/{$imageId}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
      * Create an HS code classification request.
      *
      * ### Security Policies
@@ -7097,7 +7181,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @return \stdClass
      */
     public function initiateHSCodeClassification($companyId, $model=null)    {
-        $path = "/api/v2/companies/{$companyId}/items/\$initiate-hscode-classification";
+        $path = "/api/v2/companies/{$companyId}/items/$initiate-hscode-classification";
         $guzzleParams = [
             'query' => [],
             'body' => json_encode($model)
@@ -7290,7 +7374,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that defined these items
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxCode, source, sourceEntityId, itemType, upc, summary, classifications, parameters, tags, properties, itemStatus, taxCodeRecommendationStatus, taxCodeRecommendations, taxCodeDetails, hsCodeClassificationStatus
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxCode, source, sourceEntityId, itemType, upc, summary, classifications, parameters, tags, properties, itemStatus, taxCodeRecommendationStatus, taxCodeRecommendations, taxCodeDetails, hsCodeClassificationStatus, image
      * @param string $include A comma separated list of additional data to retrieve.
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
@@ -7396,7 +7480,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * Swagger Name: AvaTaxClient
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxCode, source, sourceEntityId, itemType, upc, summary, classifications, parameters, tags, properties, itemStatus, taxCodeRecommendationStatus, taxCodeRecommendations, taxCodeDetails, hsCodeClassificationStatus
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxCode, source, sourceEntityId, itemType, upc, summary, classifications, parameters, tags, properties, itemStatus, taxCodeRecommendationStatus, taxCodeRecommendations, taxCodeDetails, hsCodeClassificationStatus, image
      * @param string $include A comma separated list of additional data to retrieve.
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
@@ -7471,7 +7555,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that defined these items.
      * @param string $tag The master tag to be associated with item.
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxCode, source, sourceEntityId, itemType, upc, summary, classifications, parameters, tags, properties, itemStatus, taxCodeRecommendationStatus, taxCodeRecommendations, taxCodeDetails, hsCodeClassificationStatus
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxCode, source, sourceEntityId, itemType, upc, summary, classifications, parameters, tags, properties, itemStatus, taxCodeRecommendationStatus, taxCodeRecommendations, taxCodeDetails, hsCodeClassificationStatus, image
      * @param string $include A comma separated list of additional data to retrieve.
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
@@ -7548,6 +7632,34 @@ class AvaTaxClient extends AvaTaxClientBase
             'body' => json_encode($model)
         ];
         return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Update an existing image for an item.
+     *
+     * This endpoint allows users to update the existing image associated with a specific item by uploading a new image file.
+     *  
+     * The updated image serves as the item's visual representation and will be used for tax code recommendation purposes.
+     *  
+     * Restrictions:
+     * - Supported formats: JPEG, GIF, PNG
+     * - Maximum file size: 10MB
+     * - Maximum file name length allowed: 200 characters
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The unique ID of the company.
+     * @param int $itemId The unique ID of the item.
+     * @param string $imageId The unique ID of the image to update.
+     * @param object $imageFile 
+     * @return \stdClass
+     */
+    public function updateImage($companyId, $itemId, $imageId, $imageFile)    {
+        $path = "/api/v2/companies/{$companyId}/items/{$itemId}/images/{$imageId}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -7647,6 +7759,33 @@ class AvaTaxClient extends AvaTaxClientBase
             'body' => json_encode($model)
         ];
         return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Upload an image for an item.
+     *
+     * This endpoint allows users to upload an image file for a specific item.
+     *  
+     * The uploaded image serves as the item's visual representation and will be used for tax code recommendation purposes.
+     *  
+     * Restrictions:
+     * - Supported formats: JPEG, GIF, PNG
+     * - Maximum file size: 10MB
+     * - Maximum file name length allowed: 200 characters
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The unique ID of the company.
+     * @param int $itemId The unique ID of the item.
+     * @param object $imageFile 
+     * @return \stdClass
+     */
+    public function uploadImage($companyId, $itemId, $imageFile)    {
+        $path = "/api/v2/companies/{$companyId}/items/{$itemId}/images";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -10267,7 +10406,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Create one or more new taxcode objects attached to this company.
      * A 'TaxCode' represents a uniquely identified type of product, good, or service.
      * Avalara supports correct tax rates and taxability rules for all TaxCodes in all supported jurisdictions.
-     * If you identify your products by tax code in your 'Create Transacion' API calls, Avalara will correctly calculate tax rates and
+     * If you identify your products by tax code in your 'Create Transaction' API calls, Avalara will correctly calculate tax rates and
      * taxability rules for this product in all supported jurisdictions.
      * 
      * ### Security Policies
@@ -10317,7 +10456,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Get the taxcode object identified by this URL.
      * A 'TaxCode' represents a uniquely identified type of product, good, or service.
      * Avalara supports correct tax rates and taxability rules for all TaxCodes in all supported jurisdictions.
-     * If you identify your products by tax code in your 'Create Transacion' API calls, Avalara will correctly calculate tax rates and
+     * If you identify your products by tax code in your 'Create Transaction' API calls, Avalara will correctly calculate tax rates and
      * taxability rules for this product in all supported jurisdictions.
      * 
      * ### Security Policies
@@ -10344,7 +10483,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * List all taxcode objects attached to this company.
      * A 'TaxCode' represents a uniquely identified type of product, good, or service.
      * Avalara supports correct tax rates and taxability rules for all TaxCodes in all supported jurisdictions.
-     * If you identify your products by tax code in your 'Create Transacion' API calls, Avalara will correctly calculate tax rates and
+     * If you identify your products by tax code in your 'Create Transaction' API calls, Avalara will correctly calculate tax rates and
      * taxability rules for this product in all supported jurisdictions.
      *  
      * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
@@ -10378,7 +10517,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Get multiple taxcode objects across all companies.
      * A 'TaxCode' represents a uniquely identified type of product, good, or service.
      * Avalara supports correct tax rates and taxability rules for all TaxCodes in all supported jurisdictions.
-     * If you identify your products by tax code in your 'Create Transacion' API calls, Avalara will correctly calculate tax rates and
+     * If you identify your products by tax code in your 'Create Transaction' API calls, Avalara will correctly calculate tax rates and
      * taxability rules for this product in all supported jurisdictions.
      *  
      * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
@@ -10411,7 +10550,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Replace the existing taxcode object at this URL with an updated object.
      * A 'TaxCode' represents a uniquely identified type of product, good, or service.
      * Avalara supports correct tax rates and taxability rules for all TaxCodes in all supported jurisdictions.
-     * If you identify your products by tax code in your 'Create Transacion' API calls, Avalara will correctly calculate tax rates and
+     * If you identify your products by tax code in your 'Create Transaction' API calls, Avalara will correctly calculate tax rates and
      * taxability rules for this product in all supported jurisdictions.
      * All data from the existing object will be replaced with data in the object you PUT.
      * To set a field's value to null, you may either set its value to null or omit that field from the object you post.
