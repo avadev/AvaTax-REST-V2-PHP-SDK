@@ -2134,11 +2134,11 @@ class ClerkLocationModel
     /**
      * @var string Primary street address of the location.
      */
-    public $address_line1;
+    public $addressLine1;
     /**
      * @var string Additional address details (e.g., suite, building).
      */
-    public $address_line2;
+    public $addressLine2;
     /**
      * @var string City in which the location is situated.
      */
@@ -2148,9 +2148,41 @@ class ClerkLocationModel
      */
     public $zip;
     /**
-     * @var StateModel 
+     * @var int A unique ID number that represents this state, region, or province.
      */
-    public $state;
+    public $stateId;
+    /**
+     * @var string The state, region, or province name as known in US English.
+     */
+    public $stateName;
+    /**
+     * @var string The abbreviated two or three character ISO 3166 state, province, or region code.
+     */
+    public $stateInitials;
+    /**
+     * @var int The unique ID number of this country as defined in Avalara's certificate management system.
+     */
+    public $countryId;
+    /**
+     * @var string The name of this country in US English.
+     */
+    public $countryName;
+    /**
+     * @var string The three-character ISO 3166 code for this country.
+     */
+    public $countryInitials;
+    /**
+     * @var int id of the client (client_id)
+     */
+    public $clientId;
+    /**
+     * @var string name of the client
+     */
+    public $clientName;
+    /**
+     * @var string The Avalara AvaTax™ CompanyId this client maps to.
+     */
+    public $avataxCompanyId;
 }
 /**
  * An AvaTax account.
@@ -14771,6 +14803,10 @@ class TransactionLineDetailModel
      * @var float The amount of input VAT/GST that is not recoverable.
      */
     public $nonRecoverableAmount;
+    /**
+     * @var string Indicates the VAT code for this detail.
+     */
+    public $vatCode;
 }
 /**
  * Represents information about location types stored in a line

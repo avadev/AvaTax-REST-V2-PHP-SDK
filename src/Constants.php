@@ -2,7 +2,7 @@
 namespace Avalara;
 use GuzzleHttp\Client;
 
-define('AVATAX_SDK_VERSION', '25.6.2');
+define('AVATAX_SDK_VERSION', '25.7.1');
 
 /*****************************************************************************
  *                                                                           *
@@ -35,14 +35,19 @@ class TransactionAddressType
 class TextCase
 {
     /**
+     * Default (casing determined by address standardization setting in Avalara)
+     */
+    const C_DEFAULT = 0;
+
+    /**
      * Upper case
      */
-    const C_UPPER = 0;
+    const C_UPPER = 1;
 
     /**
      * Mixed Case
      */
-    const C_MIXED = 1;
+    const C_MIXED = 2;
 
 }
 
@@ -1211,6 +1216,7 @@ class ErrorCodeId
     const C_INVALIDIMAGE = 4019;
     const C_IMAGEALREADYLINKED = 4020;
     const C_ITEMIDMISMATCH = 4021;
+    const C_INVALIDFILENAMELENGTH = 4022;
 
     /**
      * Error string from the service unknown

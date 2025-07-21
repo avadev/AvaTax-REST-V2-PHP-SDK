@@ -771,6 +771,39 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Create item import batch.
+     *
+     * Create a new item import batch objects attached to this company.
+     *  
+     * When an item import batch is created, it is added to the AvaTax Batch v2 Queue and will be
+     * processed in the order it was received. To check the
+     * status of a batch, fetch the batch and retrieve the results of the batch
+     * operation.
+     *  
+     * The maximum content length of the request body is limited to 28.6 MB. If this limit
+     * exceeds then a 404 Not Found status is returned (possibly with a CORS error if
+     * the API is called from a browser). In this situation, please split the request into
+     * smaller batches.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, BatchServiceAdmin, CompanyAdmin, CSPTester, FirmAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The ID of the company that owns this batch.
+     * @param CreateItemImportBatchRequestModel $model The item import batch you wish to create.
+     * @return \stdClass
+     */
+    public function createItemImportBatch($companyId, $model)    {
+        $path = "/api/v2/companies/{$companyId}/batches/items";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
      * Create a new transaction batch
      *
      * Create a new transaction batch objects attached to this company.
@@ -1780,7 +1813,7 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
-     * Retrieves a list of location records associated with the specified company.
+     * Retrieves a list of location records associated with the specified account.
      * This endpoint is secured and requires appropriate subscription and permission levels.
      *
      * ### Security Policies
@@ -1789,7 +1822,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
      * Swagger Name: AvaTaxClient
      * 
-     * @param int $companyId The unique identifier of the company whose locations are being requested.
+     * @param int $accountId The unique identifier of the account whose locations are being requested.
      * @param string $include OPTIONAL: A comma separated list of special fetch options. You can specify one or more of the following:
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* id
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
@@ -1797,8 +1830,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
      * @return \stdClass
      */
-    public function listLocationByCompany($companyId, $include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
-        $path = "/api/v2/companies/{$companyId}/clerk/locations";
+    public function listLocationByAccount($accountId, $include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/companies/{$accountId}/clerk/locations";
         $guzzleParams = [
             'query' => ['$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
