@@ -60,9 +60,13 @@ class ACHEntryDetailModel
 class APConfigSettingRequestModel
 {
     /**
-     * @var float The Amount
+     * @var float The Amount Threshold To Ignore Transaction
      */
     public $amount;
+    /**
+     * @var float The Amount Threshold To Mark Transaction For Manual Review
+     */
+    public $amountToMarkForReview;
     /**
      * @var float The Variance For Ignore
      */
@@ -143,9 +147,13 @@ class APConfigSettingSuccessResponseModel
      */
     public $meta;
     /**
-     * @var float The Amount
+     * @var float The Amount Threshold To Ignore Transaction
      */
     public $amount;
+    /**
+     * @var float The Amount Threshold To Mark Transaction For Manual Review
+     */
+    public $amountToMarkForReview;
     /**
      * @var float The Variance For Ignore
      */
@@ -1714,6 +1722,72 @@ class BulkLockTransactionResult
      * @var int Number of records that have been modified
      */
     public $numberOfRecords;
+}
+/**
+ * Individual cache information
+ * Swagger Name: AvaTaxClient
+ */
+class CacheInfo
+{
+    /**
+     * @var string Name of the cache
+     */
+    public $name;
+    /**
+     * @var int Memory size of the cache in bytes
+     */
+    public $memorySizeBytes;
+    /**
+     * @var float Memory size of the cache in megabytes
+     */
+    public $memorySizeMB;
+    /**
+     * @var float Memory size of the cache in GB
+     */
+    public $memorySizeGB;
+    /**
+     * @var int Number of items in the cache
+     */
+    public $itemCount;
+    /**
+     * @var boolean Whether the cache is currently loaded
+     */
+    public $isLoaded;
+    /**
+     * @var string Time when the cache was last refreshed
+     */
+    public $lastRefreshTime;
+    /**
+     * @var string Duration of the last cache refresh operation
+     */
+    public $lastRefreshDuration;
+}
+/**
+ * Cache memory usage details
+ * Swagger Name: AvaTaxClient
+ */
+class CacheMemoryUsage
+{
+    /**
+     * @var object Dictionary of cache information indexed by cache name
+     */
+    public $caches;
+    /**
+     * @var int Total memory used by all caches in bytes
+     */
+    public $totalCacheMemory;
+    /**
+     * @var float Total memory used by all caches in GB
+     */
+    public $totalCacheMemoryGB;
+    /**
+     * @var int Total number of caches monitored
+     */
+    public $totalCacheCount;
+    /**
+     * @var string Timestamp when the cache memory usage was collected
+     */
+    public $timestamp;
 }
 /**
  * Represents an invitation for a customer to use CertExpress to self-report their own certificates.
@@ -4528,6 +4602,77 @@ class CustomFieldModel
     public $value;
 }
 /**
+ * Base model for custom rules that can be either DynamicRuleModel or AdvancedRuleExecutionModel or TaxRuleModel
+ * Swagger Name: AvaTaxClient
+ */
+class CustomRuleSummaryModel
+{
+    /**
+     * @var string The unique identifier for this custom rule summary
+     */
+    public $id;
+    /**
+     * @var int The company ID that the custom rule belongs to
+     */
+    public $companyId;
+    /**
+     * @var string The status of the custom rule (See CustomRuleStatus::* for a list of allowable values)
+     */
+    public $status;
+    /**
+     * @var string The type of custom rule (See CustomRuleType::* for a list of allowable values)
+     */
+    public $type;
+    /**
+     * @var string The subtypes of the custom rule (See CustomRuleSubtype::* for a list of allowable values)
+     */
+    public $subtype;
+    /**
+     * @var string[] Name or ISO 3166 codes identifying the region where this rule will apply.
+     */
+    public $country;
+    /**
+     * @var string[] Name or ISO 3166 code identifying the country where this rule will apply.
+     */
+    public $region;
+    /**
+     * @var string[] For rules that apply to a specific tax code only, this specifies which tax code is affected by this rule.
+     */
+    public $taxCode;
+    /**
+     * @var string[] Indicates the codes of the tax type that applies to this rule.
+     */
+    public $taxType;
+    /**
+     * @var string[] The entity use code to which this rule applies.
+     */
+    public $entityUseCode;
+    /**
+     * @var int The order of the rule executions (only applies to advanced rules)
+     */
+    public $order;
+    /**
+     * @var string The first date at which this rule applies. If null, this rule will apply to all dates prior to the end date.
+     */
+    public $effectiveDate;
+    /**
+     * @var string The last date for which this rule applies. If null, this rule will apply to all dates after the effective date.
+     */
+    public $endDate;
+    /**
+     * @var string The date the rule was last modified.
+     */
+    public $modifiedDate;
+    /**
+     * @var string The date the rule was created.
+     */
+    public $createdDate;
+    /**
+     * @var object The rule entity data, which can be either a TaxRuleModel, a DynamicRuleModel, or an AdvancedRuleExecutionModel
+     */
+    public $ruleEntity;
+}
+/**
  * A Customer's linked attribute denoting what features applied to the customer. A customer can
  * be linked to multiple customer attributes and vice versa.
  * Swagger Name: AvaTaxClient
@@ -5322,6 +5467,558 @@ class DomainNameViewModel
      * @var string Domain Name for which Domain control verification is created
      */
     public $domainName;
+}
+/**
+ * Represents the definition and schema of a Dynamic Rule component.
+ * Swagger Name: AvaTaxClient
+ */
+class DynamicRuleComponentDefinitionModel
+{
+    /**
+     * @var string The primary type of the component, determining its role in the rule execution.  This is typically one of the following: Condition, Action, or Variable. (See DynamicRuleComponentType::* for a list of allowable values)
+     */
+    public $type;
+    /**
+     * @var string The specific subtype of the component, providing more detailed classification  within the main type. For example, a Condition type might have subtypes like  MatchCustomerCode, MatchProductCode, etc.  The subtype determines the expected format of the data property. (See DynamicRuleComponentSubtype::* for a list of allowable values)
+     */
+    public $subtype;
+    /**
+     * @var string Display name of this component
+     */
+    public $name;
+    /**
+     * @var string A description of the component's purpose and usage
+     */
+    public $description;
+    /**
+     * @var string The JSON schema defining the component's configuration structure, as a string
+     */
+    public $dataSchema;
+    /**
+     * @var string[] The execution steps in which the component is usable
+     */
+    public $validSteps;
+    /**
+     * @var string[] Array of node subtypes which are required to be present when this node type is present
+     */
+    public $requires;
+}
+/**
+ * Represents a component within a Dynamic Rule definition.
+ * Components define the logic and flow of a rule, and include condition nodes, action nodes, and rule-wide variables.
+ * Swagger Name: AvaTaxClient
+ */
+class DynamicRuleComponentInputModel
+{
+    /**
+     * @var string Unique identifier for the component.  This ID is used to reference the component and establish connections  between components via the 'next' property.
+     */
+    public $id;
+    /**
+     * @var string The primary type of the component, determining its role in the rule execution.  This is typically one of the following: Condition, Action, or Variable. (See DynamicRuleComponentType::* for a list of allowable values)
+     */
+    public $type;
+    /**
+     * @var string The specific subtype of the component, providing more detailed classification  within the main type. For example, a Condition type might have subtypes like  MatchCustomerCode, MatchProductCode, etc.  The subtype determines the expected format of the data property. (See DynamicRuleComponentSubtype::* for a list of allowable values)
+     */
+    public $subtype;
+    /**
+     * @var string JSON-formatted string containing the configuration data for the component.  The structure of this data varies based on the component type and subtype.  For example, a MatchCustomerCode condition might contain an array of customer codes to match against.
+     */
+    public $data;
+    /**
+     * @var string[] Array of component IDs that represent the next components in the rule execution flow.  This property defines the outgoing edges in the rule graph, allowing for  conditional branching and sequential processing of components.
+     */
+    public $next;
+}
+/**
+ * Represents a component within a Dynamic Rule definition.
+ * Components define the logic and flow of a rule, and include condition nodes, action nodes, and rule-wide variables.
+ * Swagger Name: AvaTaxClient
+ */
+class DynamicRuleComponentOutputModel
+{
+    /**
+     * @var string Unique identifier for the component.  This ID is used to reference the component and establish connections  between components via the 'next' property.
+     */
+    public $id;
+    /**
+     * @var string The primary type of the component, determining its role in the rule execution.  This is typically one of the following: Condition, Action, or Variable. (See DynamicRuleComponentType::* for a list of allowable values)
+     */
+    public $type;
+    /**
+     * @var string The specific subtype of the component, providing more detailed classification  within the main type. For example, a Condition type might have subtypes like  MatchCustomerCode, MatchProductCode, etc.  The subtype determines the expected format of the data property. (See DynamicRuleComponentSubtype::* for a list of allowable values)
+     */
+    public $subtype;
+    /**
+     * @var string JSON-formatted string containing the configuration data for the component.  The structure of this data varies based on the component type and subtype.  For example, a MatchCustomerCode condition might contain an array of customer codes to match against.
+     */
+    public $data;
+    /**
+     * @var string[] Array of component IDs that represent the next components in the rule execution flow.  This property defines the outgoing edges in the rule graph, allowing for  conditional branching and sequential processing of components.
+     */
+    public $next;
+}
+/**
+ * Represents the definition of a Dynamic Rule, which defines its execution flow.
+ * Swagger Name: AvaTaxClient
+ */
+class DynamicRuleDefinitionInputModel
+{
+    /**
+     * @var DynamicRuleComponentInputModel[] Define fixed components with rule-wide scope
+     */
+    public $variables;
+    /**
+     * @var DynamicRuleComponentInputModel[] Define components which make up the execution graph
+     */
+    public $nodes;
+}
+/**
+ * Represents the definition of a Dynamic Rule, which defines its execution flow.
+ * Swagger Name: AvaTaxClient
+ */
+class DynamicRuleDefinitionOutputModel
+{
+    /**
+     * @var DynamicRuleComponentOutputModel[] Define fixed components with rule-wide scope
+     */
+    public $variables;
+    /**
+     * @var DynamicRuleComponentOutputModel[] Define components which make up the execution graph
+     */
+    public $nodes;
+}
+/**
+ * Represents an enumeration value with title and value.
+ * Swagger Name: AvaTaxClient
+ */
+class DynamicRuleEnumValueModel
+{
+    /**
+     * @var string The display title for the enum value.
+     */
+    public $title;
+    /**
+     * @var string The actual enum value.
+     */
+    public $value;
+}
+/**
+ * Represents the a field available in the Dynamic Rules interface.
+ * Swagger Name: AvaTaxClient
+ */
+class DynamicRuleFieldDefinitionModel
+{
+    /**
+     * @var string The internal name of the field. This is also the field's name as it appears in tokens.
+     */
+    public $name;
+    /**
+     * @var string Formatted display or "nice" name of the field.
+     */
+    public $title;
+    /**
+     * @var string A description of the field's usage and purpose.
+     */
+    public $description;
+    /**
+     * @var string The category of the field; useful for filtering.
+     */
+    public $category;
+    /**
+     * @var DynamicRuleFieldLevelDefinitionModel 
+     */
+    public $documentLevel;
+    /**
+     * @var DynamicRuleFieldLevelDefinitionModel 
+     */
+    public $lineLevel;
+}
+/**
+ * Information about a field at a specific "level" (Document or Line).
+ * Swagger Name: AvaTaxClient
+ */
+class DynamicRuleFieldLevelDefinitionModel
+{
+    /**
+     * @var string The JSON type of the field.
+     */
+    public $type;
+    /**
+     * @var string The internal expression type of the field.
+     */
+    public $expressionType;
+    /**
+     * @var boolean Whether the field is deprecated or not.
+     */
+    public $deprecated;
+    /**
+     * @var DynamicRuleEnumValueModel[] Optional list of enumerated values.
+     */
+    public $anyOf;
+    /**
+     * @var string[] The execution steps in which the field is readable.
+     */
+    public $readSteps;
+    /**
+     * @var boolean Whether the field is read-only.
+     */
+    public $readOnly;
+    /**
+     * @var string[] The execution steps in which the field is writable.
+     */
+    public $writeSteps;
+    /**
+     * @var boolean Whether the field is write-only.
+     */
+    public $writeOnly;
+}
+/**
+ * Represents a tax rule that is generated or affected by a dynamic rule.
+ * This model mirrors structure of a standard tax rule with relevant fields.
+ * Swagger Name: AvaTaxClient
+ */
+class DynamicRuleGeneratedTaxRuleModel
+{
+    /**
+     * @var int The unique ID number of the company that owns this tax rule.
+     */
+    public $companyId;
+    /**
+     * @var string For rules that apply to a specific tax code only, this specifies which tax code is affected by this rule.     The `RateOverrideRule`, `BaseRule`, and `ExemptEntityRule` rule types can be applied to all tax codes. To  make a rule that applies to all tax codes, leave both fields blank.     The `ProductTaxabilityRule` rule must be associated with a tax code.
+     */
+    public $taxCode;
+    /**
+     * @var string For U.S. tax rules, this is the state's Federal Information Processing Standard (FIPS) code.     This field is required for rules that apply to specific jurisdictions in the United States. It is not required  if you set the `isAllJuris` flag to true.
+     */
+    public $stateFIPS;
+    /**
+     * @var string The name of the jurisdiction to which this tax rule applies.
+     */
+    public $jurisName;
+    /**
+     * @var string The code of the jurisdiction to which this tax rule applies.
+     */
+    public $jurisCode;
+    /**
+     * @var string The type of the jurisdiction to which this tax rule applies.     Custom tax rules can apply to a specific jurisdiction or to all jurisdictions.     To make a custom tax rule for US or Canada that applies to all jurisdictions of a specific type, see the `isAllJuris`  field for more information. (See JurisdictionType::* for a list of allowable values)
+     */
+    public $jurisdictionTypeId;
+    /**
+     * @var string Some tax type groups contain multiple different types of tax. To create a rule that affects only one  type of tax within a tax type group, set this value to the code matching the specific tax type within  that group. The custom tax rule will then only apply to taxes calculated for that specific type.     For rules that affect all tax types, use the value `A` to match `All` tax types within that group.
+     */
+    public $taxTypeId;
+    /**
+     * @var string Indicates the code of the tax type that applies to this rule.
+     */
+    public $taxTypeCode;
+    /**
+     * @var string This type value determines the behavior of the tax rule.
+     */
+    public $taxRuleTypeId;
+    /**
+     * @var string Indicates the code of the rate type that applies to this rule.     If you specify a value in the rateTypeCode field, this rule will cause tax lines that are affected by the rule  to change to a different rate type code.
+     */
+    public $rateTypeCode;
+    /**
+     * @var boolean Allows you to make tax rules apply to lower jurisdictions. This feature is only available in the United States and Canada.     * In the United States, this value can be used for rules written at the `State` jurisdictional level. If set to `true`, this rule will at the state level, county level, city level, and special jurisdiction level.  * In Canada, this value can be used for rules written at the `Country` or `State` jurisdictional levels. If set to `true`, this rule will at all lower jurisdictional levels.     For any other use case, this value must be `false`.
+     */
+    public $isAllJuris;
+    /**
+     * @var float This field has different behavior based on the type of the tax rule.     * For a product taxability rule, this value is either 1 or 0, indicating taxable or non-taxable.  * For a rate override rule, this value is the corrected rate stored as a decimal, for example, a rate of 5% would be stored as 0.05 decimal. If you use the special value of 1.0, only the cap and threshold values will be applied and the rate will be left alone.
+     */
+    public $value;
+    /**
+     * @var float The maximum cap for the price of this item according to this rule. Any amount above this cap will not be subject to this rule.     For example, if you must pay 5% of a product's value up to a maximum value of $1000, you would set the `cap` to `1000.00` and the `value` to `0.05`.
+     */
+    public $cap;
+    /**
+     * @var float The per-unit threshold that must be met before this rule applies.     For example, if your product is nontaxable unless it is above $100 per product, you would set the `threshold` value to `100`. In this case, the rate  for the rule would apply to the entire amount above $100.     You can also create rules that make the entire product taxable if it exceeds a threshold, but is nontaxable  if it is below the threshold. To choose this, set the `options` field to the value `TaxAll`.
+     */
+    public $threshold;
+    /**
+     * @var string The first date at which this rule applies. If `null`, this rule will apply to all dates prior to the end date.
+     */
+    public $effectiveDate;
+    /**
+     * @var string The last date for which this rule applies. If `null`, this rule will apply to all dates after the effective date.
+     */
+    public $endDate;
+    /**
+     * @var string A friendly name for this tax rule.
+     */
+    public $description;
+    /**
+     * @var string The entity use code to which this rule applies.
+     */
+    public $entityUseCode;
+    /**
+     * @var string The sourcing types to which this rule applies.
+     */
+    public $sourcing;
+    /**
+     * @var string For U.S. tax rules, this is the county's Federal Information Processing Standard (FIPS) code.     This field is required for rules that apply to specific jurisdictions in the United States. It is not required  if you set the `isAllJuris` flag to true.
+     */
+    public $countyFIPS;
+    /**
+     * @var string Name or ISO 3166 code identifying the country where this rule will apply.     This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries
+     */
+    public $country;
+    /**
+     * @var string Name or ISO 3166 code identifying the region where this rule will apply.     This field supports many different region identifiers:   * Two and three character ISO 3166 region codes   * Fully spelled out names of the region in ISO supported languages   * Common alternative spellings for many regions
+     */
+    public $region;
+    /**
+     * @var string This field has different behavior based on the type of rule.     * For a product taxability rule, if the rule applies to an item, this value will override the tax type group of the original product.  * For other rules, this value determines what tax type groups will be affected by the rule.
+     */
+    public $taxTypeGroup;
+    /**
+     * @var string This field has different behavior based on the type of rule.     * For a product taxability rule, if the rule applies to an item, this value will override the tax sub type of the original product.  * For other rules, this value determines what tax sub types will be affected by the rule.
+     */
+    public $taxSubType;
+    /**
+     * @var string Supports custom options for your tax rule.
+     */
+    public $options;
+}
+/**
+ * A Dynamic Rule is a type of a custom rule which is similar to an Advanced Rule, but
+ * has a graph-based execution flow made up of modular Conditions and Actions that may
+ * be linked to one or more traditional custom Tax Rules.
+ * Swagger Name: AvaTaxClient
+ */
+class DynamicRuleInputModel
+{
+    /**
+     * @var DynamicRuleDefinitionInputModel 
+     */
+    public $definition;
+    /**
+     * @var string The name of the execution
+     */
+    public $name;
+    /**
+     * @var string The description of the execution
+     */
+    public $description;
+    /**
+     * @var string The start date when the execution is valid
+     */
+    public $effectiveDate;
+    /**
+     * @var string The end date when the execution is valid
+     */
+    public $endDate;
+    /**
+     * @var boolean Whether the execution is enabled
+     */
+    public $enabled;
+    /**
+     * @var boolean Whether to continue execution if this rule fails
+     */
+    public $continueOnError;
+}
+/**
+ * A Dynamic Rule is a type of a custom rule which is similar to an Advanced Rule, but
+ * has a graph-based execution flow made up of modular Conditions and Actions that may
+ * be linked to one or more traditional custom Tax Rules.
+ * Swagger Name: AvaTaxClient
+ */
+class DynamicRuleOutputModel
+{
+    /**
+     * @var int Unique identifier for the execution
+     */
+    public $id;
+    /**
+     * @var DynamicRuleDefinitionOutputModel 
+     */
+    public $definition;
+    /**
+     * @var int The company ID of the execution
+     */
+    public $companyId;
+    /**
+     * @var string The name of the execution
+     */
+    public $name;
+    /**
+     * @var string The description of the execution
+     */
+    public $description;
+    /**
+     * @var string The start date when the execution is valid
+     */
+    public $effectiveDate;
+    /**
+     * @var string The end date when the execution is valid
+     */
+    public $endDate;
+    /**
+     * @var boolean Whether the execution is enabled
+     */
+    public $enabled;
+    /**
+     * @var boolean Whether to continue execution if this rule fails
+     */
+    public $continueOnError;
+    /**
+     * @var boolean Whether the rule is deleted
+     */
+    public $isDeleted;
+    /**
+     * @var int Version number of the rule
+     */
+    public $version;
+    /**
+     * @var string The date when the execution was created
+     */
+    public $createdDate;
+    /**
+     * @var int The user who created the execution
+     */
+    public $createdUserId;
+    /**
+     * @var string The date when the execution was last modified
+     */
+    public $modifiedDate;
+    /**
+     * @var int The user who last modified the execution
+     */
+    public $modifiedUserId;
+}
+/**
+ * Model for constructing a simple template graph based on user selected node subtypes
+ * Swagger Name: AvaTaxClient
+ */
+class DynamicRuleTemplateRequestModel
+{
+    /**
+     * @var string[] The node types that must be included in the resulting template
+     */
+    public $nodeSubtypes;
+}
+/**
+ * Represents a valid expression token in Dynamic Rules, i.e. the variables, delimited by double curly braces,
+ * that may be used when performing string manipulation or evaluating formulas within a Dynamic Rule.
+ * Swagger Name: AvaTaxClient
+ */
+class DynamicRuleTokenDefinitionModel
+{
+    /**
+     * @var string Full contents of the token, including the prefix, but excluding functions.
+     */
+    public $token;
+    /**
+     * @var string The type of the token before evaluation. Usually this corresponds to the prefix.
+     */
+    public $tokenType;
+    /**
+     * @var string The type of the token after evaluation.
+     */
+    public $evaluatedType;
+    /**
+     * @var string Filterable token category.
+     */
+    public $category;
+    /**
+     * @var string Details about the token's purpose or usage.
+     */
+    public $description;
+}
+/**
+ * Represents a single validation message for a dynamic rule.
+ * Swagger Name: AvaTaxClient
+ */
+class DynamicRuleValidationMessageModel
+{
+    /**
+     * @var string The severity level of the message (error, warning, or info).
+     */
+    public $level;
+    /**
+     * @var string The detailed message content.
+     */
+    public $message;
+    /**
+     * @var string An optional reference indicating what part of the rule or configuration this message pertains to.  This is usually a node identifier, but may be empty if the message is not related to a specific node.
+     */
+    public $refersTo;
+}
+/**
+ * Represents a single step in the execution plan of a dynamic rule.
+ * Swagger Name: AvaTaxClient
+ */
+class DynamicRuleValidationPlanStepModel
+{
+    /**
+     * @var string Describes the stage or phase of calculation this step belongs to.  For example, "BeforeCalc".
+     */
+    public $step;
+    /**
+     * @var int The order in which this step will be executed.
+     */
+    public $order;
+    /**
+     * @var string[] A list of node identifiers that are part of this execution step, in the order they will be executed.  These refer to specific conditions or actions.
+     */
+    public $nodes;
+}
+/**
+ * Represents the complete validation result for a dynamic rule, including a summary,
+ * individual messages, an execution plan, and affected tax rules.
+ * Swagger Name: AvaTaxClient
+ */
+class DynamicRuleValidationResultModel
+{
+    /**
+     * @var DynamicRuleValidationSummaryModel 
+     */
+    public $summary;
+    /**
+     * @var DynamicRuleValidationMessageModel[] A list of detailed validation messages (errors, warnings, info).
+     */
+    public $messages;
+    /**
+     * @var DynamicRuleValidationPlanStepModel[] A list of steps outlining the execution plan for the dynamic rule.  This can help in understanding how the rule will be processed.
+     */
+    public $executionPlan;
+    /**
+     * @var DynamicRuleGeneratedTaxRuleModel[] A list of tax rules that would be generated or affected by this dynamic rule if it were saved.
+     */
+    public $taxRules;
+    /**
+     * @var string[] The list of lookup files used by this rule.
+     */
+    public $lookupFilesUsed;
+}
+/**
+ * Represents a summary of the validation results for a dynamic rule.
+ * Swagger Name: AvaTaxClient
+ */
+class DynamicRuleValidationSummaryModel
+{
+    /**
+     * @var string A high-level message describing the overall validation status.  For example, "Errors are present, do not save rule."
+     */
+    public $message;
+    /**
+     * @var int The total number of errors found during validation.
+     */
+    public $errorCount;
+    /**
+     * @var int The total number of warnings found during validation.
+     */
+    public $warningCount;
+    /**
+     * @var int The total number of informational messages generated during validation.
+     */
+    public $infoCount;
+    /**
+     * @var int The total number of tax rules that would be generated or affected by this dynamic rule.
+     */
+    public $taxRuleCount;
 }
 /**
  * The resource model returned by the ECommerceTokenController's endpoints.
@@ -10451,6 +11148,250 @@ class MarketplaceModel
     public $marketplace;
 }
 /**
+ * Memory alert information
+ * Swagger Name: AvaTaxClient
+ */
+class MemoryAlert
+{
+    /**
+     * @var string Unique identifier for the alert
+     */
+    public $id;
+    /**
+     * @var string Title of the alert
+     */
+    public $title;
+    /**
+     * @var string Detailed description of the alert
+     */
+    public $description;
+    /**
+     * @var string Severity level of the alert (See MemoryAlertSeverity::* for a list of allowable values)
+     */
+    public $severity;
+    /**
+     * @var string Timestamp when the alert was generated
+     */
+    public $timestamp;
+    /**
+     * @var object Additional metrics associated with the alert
+     */
+    public $metrics;
+}
+/**
+ * Memory optimization recommendation
+ * Swagger Name: AvaTaxClient
+ */
+class MemoryRecommendation
+{
+    /**
+     * @var string Unique identifier for the recommendation
+     */
+    public $id;
+    /**
+     * @var string Title of the recommendation
+     */
+    public $title;
+    /**
+     * @var string Detailed description of the recommendation
+     */
+    public $description;
+    /**
+     * @var string Impact of implementing the recommendation
+     */
+    public $impact;
+    /**
+     * @var string Implementation guidance for the recommendation
+     */
+    public $implementation;
+    /**
+     * @var string Priority level of the recommendation (See MemoryRecommendationPriority::* for a list of allowable values)
+     */
+    public $priority;
+    /**
+     * @var float Estimated memory savings in megabytes if recommendation is implemented
+     */
+    public $estimatedMemorySavingsMB;
+}
+/**
+ * Memory usage statistics
+ * Swagger Name: AvaTaxClient
+ */
+class MemoryUsageStats
+{
+    /**
+     * @var int Total physical memory available on the system in bytes
+     */
+    public $totalPhysicalMemory;
+    /**
+     * @var float Total physical memory available on the system in GB
+     */
+    public $totalPhysicalMemoryGB;
+    /**
+     * @var int Available physical memory on the system in bytes
+     */
+    public $availablePhysicalMemory;
+    /**
+     * @var float Available physical memory on the system in GB
+     */
+    public $availablePhysicalMemoryGB;
+    /**
+     * @var int Used physical memory on the system in bytes
+     */
+    public $usedPhysicalMemory;
+    /**
+     * @var float Used physical memory on the system in GB
+     */
+    public $usedPhysicalMemoryGB;
+    /**
+     * @var float Percentage of physical memory currently in use
+     */
+    public $physicalMemoryUsagePercentage;
+    /**
+     * @var int Total virtual memory available to the process in bytes
+     */
+    public $totalVirtualMemory;
+    /**
+     * @var float Total virtual memory available to the process in GB
+     */
+    public $totalVirtualMemoryGB;
+    /**
+     * @var int Available virtual memory to the process in bytes
+     */
+    public $availableVirtualMemory;
+    /**
+     * @var float Available virtual memory to the process in GB
+     */
+    public $availableVirtualMemoryGB;
+    /**
+     * @var int Used virtual memory by the process in bytes
+     */
+    public $usedVirtualMemory;
+    /**
+     * @var float Used virtual memory by the process in GB
+     */
+    public $usedVirtualMemoryGB;
+    /**
+     * @var float Percentage of virtual memory currently in use
+     */
+    public $virtualMemoryUsagePercentage;
+    /**
+     * @var int Total size of the managed heap in bytes
+     */
+    public $managedHeapSize;
+    /**
+     * @var float Total size of the managed heap in GB
+     */
+    public $managedHeapSizeGB;
+    /**
+     * @var int Used portion of the managed heap in bytes
+     */
+    public $managedHeapUsed;
+    /**
+     * @var float Used portion of the managed heap in GB
+     */
+    public $managedHeapUsedGB;
+    /**
+     * @var int Free portion of the managed heap in bytes
+     */
+    public $managedHeapFree;
+    /**
+     * @var float Free portion of the managed heap in GB
+     */
+    public $managedHeapFreeGB;
+    /**
+     * @var float Percentage of managed heap currently in use
+     */
+    public $managedHeapUsagePercentage;
+    /**
+     * @var int Current working set size of the process in bytes
+     */
+    public $workingSetSize;
+    /**
+     * @var float Current working set size of the process in GB
+     */
+    public $workingSetSizeGB;
+    /**
+     * @var int Private memory size of the process in bytes
+     */
+    public $privateMemorySize;
+    /**
+     * @var float Private memory size of the process in GB
+     */
+    public $privateMemorySizeGB;
+    /**
+     * @var int Peak working set size of the process in bytes
+     */
+    public $peakWorkingSetSize;
+    /**
+     * @var float Peak working set size of the process in GB
+     */
+    public $peakWorkingSetSizeGB;
+    /**
+     * @var int Peak virtual memory size of the process in bytes
+     */
+    public $peakVirtualMemorySize;
+    /**
+     * @var float Peak virtual memory size of the process in GB
+     */
+    public $peakVirtualMemorySizeGB;
+    /**
+     * @var int Number of Gen0 garbage collections performed
+     */
+    public $garbageCollectionGen0Count;
+    /**
+     * @var int Number of Gen1 garbage collections performed
+     */
+    public $garbageCollectionGen1Count;
+    /**
+     * @var int Number of Gen2 garbage collections performed
+     */
+    public $garbageCollectionGen2Count;
+    /**
+     * @var string Timestamp when the memory statistics were collected
+     */
+    public $timestamp;
+    /**
+     * @var string Name of the machine where the process is running
+     */
+    public $machineName;
+    /**
+     * @var string Name of the process
+     */
+    public $processName;
+    /**
+     * @var int Process ID
+     */
+    public $processId;
+}
+/**
+ * Memory usage trend data
+ * Swagger Name: AvaTaxClient
+ */
+class MemoryUsageTrend
+{
+    /**
+     * @var MemoryUsageStats[] List of memory usage data points over time
+     */
+    public $dataPoints;
+    /**
+     * @var string Duration of the trend analysis period
+     */
+    public $duration;
+    /**
+     * @var float Average memory usage percentage over the trend period
+     */
+    public $averageMemoryUsage;
+    /**
+     * @var float Peak memory usage percentage during the trend period
+     */
+    public $peakMemoryUsage;
+    /**
+     * @var float Lowest memory usage percentage during the trend period
+     */
+    public $lowMemoryUsage;
+}
+/**
  * A company and account
  * Swagger Name: AvaTaxClient
  */
@@ -11834,10 +12775,6 @@ class NoticeModel
      * @var string The description of the notice
      */
     public $description;
-    /**
-     * @var int The ava file form id of the notice
-     */
-    public $avaFileFormId;
     /**
      * @var int The id of the revenue contact
      */

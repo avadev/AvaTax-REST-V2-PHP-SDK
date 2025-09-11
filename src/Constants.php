@@ -2,7 +2,7 @@
 namespace Avalara;
 use GuzzleHttp\Client;
 
-define('AVATAX_SDK_VERSION', '25.7.1');
+define('AVATAX_SDK_VERSION', '25.9.0');
 
 /*****************************************************************************
  *                                                                           *
@@ -1219,6 +1219,12 @@ class ErrorCodeId
     const C_INVALIDFILENAMELENGTH = 4022;
 
     /**
+     * MTCC related error code
+     */
+    const C_REQUIREDPARAMETERSNOTFOUND = 4023;
+    const C_NOCLASSIFICATIONSFOUND = 4024;
+
+    /**
      * Error string from the service unknown
      */
     const C_UNEXPECTEDERROR = -1;
@@ -1828,6 +1834,230 @@ class DeliveryTerms
 
 /**
  * Swagger Name: AvaTaxClient
+ * The status of a custom rule as returned by the custom rule summary endpoint.
+ */
+class CustomRuleStatus
+{
+    /**
+     * The status of the rule is unknown.
+     */
+    const C_UNKNOWN = 0;
+
+    /**
+     * The rule is enabled and effective on the current date.
+     */
+    const C_ACTIVE = 1;
+
+    /**
+     * The rule is not enabled.
+     */
+    const C_INACTIVE = 2;
+
+    /**
+     * The rule is marked enabled, but it is past the end date of the rule.
+     */
+    const C_EXPIRED = 3;
+
+    /**
+     * The rule is marked enabled, but it is before the first effective date of the rule.
+     */
+    const C_FUTURE = 4;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * The type of a custom rule
+ */
+class CustomRuleType
+{
+    /**
+     * An unknown rule type.
+     */
+    const C_UNKNOWN = 0;
+
+    /**
+     * A tax rule.
+     */
+    const C_TAXRULE = 1;
+
+    /**
+     * An advanced rule.
+     */
+    const C_ADVANCEDRULE = 2;
+
+    /**
+     * A dynamic rule.
+     */
+    const C_DYNAMICRULE = 3;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * The subtype of a custom rule
+ */
+class CustomRuleSubtype
+{
+    /**
+     * The unknown rule type
+     */
+    const C_UNKNOWN = 0;
+
+    /**
+     * A product taxability tax rule
+     */
+    const C_PRODUCTTAXABILITYRULE = 1;
+
+    /**
+     * An exempt entity tax rule
+     */
+    const C_EXEMPTENTITYRULE = 2;
+
+    /**
+     * A rate override tax rule
+     */
+    const C_RATEOVERRIDERULE = 3;
+
+    /**
+     * A base override tax rule
+     */
+    const C_BASEOVERRIDERULE = 4;
+
+    /**
+     * A Marketplace advanced rule
+     */
+    const C_MARKETPLACE = 5;
+
+    /**
+     * A Bundled Items Allocation advanced rule
+     */
+    const C_BUNDLEDITEMSALLOCATION = 6;
+
+    /**
+     * A Multiple Points of Use Allocation advanced rule
+     */
+    const C_MULTIPLEPOINTSOFUSEALLOCATION = 7;
+
+    /**
+     * A Find and Replace Before Calculationadvanced rule
+     */
+    const C_FINDANDREPLACEBEFORECALCULATION = 8;
+
+    /**
+     * A Find and Replace After Calculation advanced rule
+     */
+    const C_FINDANDREPLACEAFTERCALCULATION = 9;
+
+    /**
+     * A Reporting Location advanced rule
+     */
+    const C_REPORTINGLOCATION = 10;
+
+    /**
+     * A Seller Remits Aggregator advanced rule
+     */
+    const C_SELLERREMITSAGGREGATOR = 11;
+
+    /**
+     * A Consumer Use Allocation advanced rule
+     */
+    const C_CONSUMERUSEALLOCATION = 12;
+
+    /**
+     * A Find and Replace Jurisdiction Match advanced rule
+     */
+    const C_FINDANDREPLACEJURISDICTIONMATCH = 13;
+
+    /**
+     * Updates a transaction field with a value.
+     */
+    const C_UPDATEFIELD = 14;
+
+    /**
+     * Copies a value from one field to another.
+     */
+    const C_COPYFIELD = 15;
+
+    /**
+     * Updates address-related fields.
+     */
+    const C_UPDATEADDRESS = 16;
+
+    /**
+     * Copies address values between address types.
+     */
+    const C_COPYADDRESS = 17;
+
+    /**
+     * Updates a parameter value.
+     */
+    const C_UPDATEPARAMETER = 18;
+
+    /**
+     * Updates a user-defined field value.
+     */
+    const C_UPDATEUSERDEFINEDFIELD = 19;
+
+    /**
+     * Updates a tax override value.
+     */
+    const C_UPDATETAXOVERRIDE = 20;
+
+    /**
+     * Updates the location code.
+     */
+    const C_UPDATELOCATIONCODE = 21;
+
+    /**
+     * Updates the marketplace location code.
+     */
+    const C_UPDATEMARKETPLACE = 22;
+
+    /**
+     * Allocates values based on a field.
+     */
+    const C_ALLOCATEBYFIELD = 23;
+
+    /**
+     * Allocates values based on an address.
+     */
+    const C_ALLOCATEBYADDRESS = 24;
+
+    /**
+     * Allocates consumer use tax.
+     */
+    const C_ALLOCATECONSUMERUSE = 25;
+
+    /**
+     * Aggregates line values post-allocation.
+     */
+    const C_AGGREGATELINES = 26;
+
+    /**
+     * Overrides the tax rate.
+     */
+    const C_TAXRULERATEOVERRIDE = 27;
+
+    /**
+     * Overrides the taxable base.
+     */
+    const C_TAXRULEBASEOVERRIDE = 28;
+
+    /**
+     * Overrides product taxability.
+     */
+    const C_TAXRULEPRODUCTTAXABILITY = 29;
+
+    /**
+     * Updates an exemption stauts.
+     */
+    const C_TAXRULEEXEMPTENTITY = 30;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
  * Filing Frequency types
  */
 class FilingFrequencyId
@@ -1922,6 +2152,213 @@ class JurisdictionType
      * Special Tax Jurisdiction
      */
     const C_SPECIAL = 4;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * Represents the type of component in a dynamic rule.
+ */
+class DynamicRuleComponentType
+{
+    /**
+     * Unknown component type.
+     */
+    const C_UNKNOWN = 0;
+
+    /**
+     * A condition component that evaluates an expression and returns boolean results.
+     */
+    const C_CONDITION = 1;
+
+    /**
+     * An action component that executes a specific operation when a rule is triggered.
+     */
+    const C_ACTION = 2;
+
+    /**
+     * A variable component that defines a named value that can be referenced within rules.
+     */
+    const C_VARIABLE = 3;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * Identifier for the specific varieties of component behavior.
+ *  The subtype determines the expected format of a component's data property.
+ */
+class DynamicRuleComponentSubtype
+{
+    /**
+     * An unknown or uninitialized subtype.
+     */
+    const C_UNKNOWN = 0;
+
+    /**
+     * Unspecified condition.
+     */
+    const C_CONDITION = 1;
+
+    /**
+     * Compares two arbitrary expressions.
+     */
+    const C_MATCHEXPRESSION = 2;
+
+    /**
+     * Compares a field against one or more specific values.
+     */
+    const C_MATCHFIELD = 3;
+
+    /**
+     * Matches based on the customer code.
+     */
+    const C_MATCHCUSTOMERCODE = 4;
+
+    /**
+     * Matches based on the document type.
+     */
+    const C_MATCHDOCUMENTTYPE = 5;
+
+    /**
+     * Matches based on a user-defined field.
+     */
+    const C_MATCHUSERDEFINEDFIELD = 6;
+
+    /**
+     * Matches based on a parameter.
+     */
+    const C_MATCHPARAMETER = 7;
+
+    /**
+     * Matches based on tax override information.
+     */
+    const C_MATCHTAXOVERRIDE = 8;
+
+    /**
+     * Matches based on address information.
+     */
+    const C_MATCHADDRESS = 9;
+
+    /**
+     * Matches based on the tariff code.
+     */
+    const C_MATCHTARIFFCODE = 10;
+
+    /**
+     * Matches based on the tax code.
+     */
+    const C_MATCHTAXCODE = 11;
+
+    /**
+     * Matches based on jurisdiction and tax applicability.
+     */
+    const C_MATCHTAX = 12;
+
+    /**
+     * Unspecified action.
+     */
+    const C_ACTION = 256;
+
+    /**
+     * Updates a transaction field with a value.
+     */
+    const C_UPDATEFIELD = 257;
+
+    /**
+     * Copies a value from one field to another.
+     */
+    const C_COPYFIELD = 258;
+
+    /**
+     * Updates address-related fields.
+     */
+    const C_UPDATEADDRESS = 259;
+
+    /**
+     * Copies address values between address types.
+     */
+    const C_COPYADDRESS = 260;
+
+    /**
+     * Updates a parameter value.
+     */
+    const C_UPDATEPARAMETER = 261;
+
+    /**
+     * Updates a user-defined field value.
+     */
+    const C_UPDATEUSERDEFINEDFIELD = 262;
+
+    /**
+     * Updates a tax override value.
+     */
+    const C_UPDATETAXOVERRIDE = 263;
+
+    /**
+     * Updates the location code.
+     */
+    const C_UPDATELOCATIONCODE = 264;
+
+    /**
+     * Updates the marketplace location code.
+     */
+    const C_UPDATEMARKETPLACE = 265;
+
+    /**
+     * Allocates values based on a field.
+     */
+    const C_ALLOCATEBYFIELD = 266;
+
+    /**
+     * Allocates values based on an address.
+     */
+    const C_ALLOCATEBYADDRESS = 267;
+
+    /**
+     * Allocates consumer use tax.
+     */
+    const C_ALLOCATECONSUMERUSE = 268;
+
+    /**
+     * Aggregates line values post-allocation.
+     */
+    const C_AGGREGATELINES = 269;
+
+    /**
+     * Overrides the tax rate.
+     */
+    const C_TAXRULERATEOVERRIDE = 270;
+
+    /**
+     * Overrides the taxable base.
+     */
+    const C_TAXRULEBASEOVERRIDE = 271;
+
+    /**
+     * Overrides product taxability.
+     */
+    const C_TAXRULEPRODUCTTAXABILITY = 272;
+
+    /**
+     * Updates an exemption stauts.
+     */
+    const C_TAXRULEEXEMPTENTITY = 273;
+
+    /**
+     * Unspecified variable.
+     */
+    const C_VARIABLE = 512;
+
+    /**
+     * Named expression.
+     */
+    const C_EXPRESSION = 513;
+
+    /**
+     * Named aggregation computation.
+     */
+    const C_AGGREGATION = 514;
 
 }
 
@@ -2879,6 +3316,29 @@ class AddressCategoryId
 
 /**
  * Swagger Name: AvaTaxClient
+ * 
+ */
+class MemoryAlertSeverity
+{    const C_INFO = 0;
+    const C_WARNING = 1;
+    const C_CRITICAL = 2;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * 
+ */
+class MemoryRecommendationPriority
+{    const C_LOW = 0;
+    const C_MEDIUM = 1;
+    const C_HIGH = 2;
+    const C_CRITICAL = 3;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
  * Describes the different types of statuses which describe an entity (company).
  */
 class NexusTypeId
@@ -3233,6 +3693,11 @@ class AuthenticationTypeId
      * This API call was authenticated by OpenID Bearer Token.
      */
     const C_OPENIDBEARERTOKEN = 3;
+
+    /**
+     * This API call was authenticated by mTLS client certificate.
+     */
+    const C_CLIENTMTLSCERTIFICATE = 4;
 
 }
 
