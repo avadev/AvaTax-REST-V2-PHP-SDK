@@ -2,7 +2,7 @@
 namespace Avalara;
 use GuzzleHttp\Client;
 
-define('AVATAX_SDK_VERSION', '25.9.0');
+define('AVATAX_SDK_VERSION', '25.11.0');
 
 /*****************************************************************************
  *                                                                           *
@@ -951,6 +951,16 @@ class ErrorCodeId
     const C_ADVANCEDRULEERROR = 1605;
 
     /**
+     * Represents an error occurred in dynamic rules
+     */
+    const C_DYNAMICRULEERROR = 1620;
+
+    /**
+     * Error for when dynamic rule validation has errors
+     */
+    const C_RULEVALIDATIONERROR = 1621;
+
+    /**
      * Miscellaneous
      */
     const C_TAXRULEREQUIRESNEXUS = 1701;
@@ -1223,6 +1233,7 @@ class ErrorCodeId
      */
     const C_REQUIREDPARAMETERSNOTFOUND = 4023;
     const C_NOCLASSIFICATIONSFOUND = 4024;
+    const C_INVALIDADDRESSORGEOCOORDINATES = 4025;
 
     /**
      * Error string from the service unknown

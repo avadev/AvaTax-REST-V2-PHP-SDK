@@ -2048,6 +2048,10 @@ class CertificateModel
      */
     public $exposureZone;
     /**
+     * @var string The name of the exposure zone where this certificate is valid.  This is a computed property for filtering purposes.
+     */
+    public $exposureZoneName;
+    /**
      * @var CertificateAttributeModel[] A list of certificate attributes that apply to this certificate.     You can fetch this data by specifying `$include=attributes` when calling a certificate fetch API.
      */
     public $attributes;
@@ -4628,6 +4632,10 @@ class CustomRuleSummaryModel
      */
     public $subtype;
     /**
+     * @var string[] The description of the subtypes of the custom rule
+     */
+    public $subtypeDescription;
+    /**
      * @var string[] Name or ISO 3166 codes identifying the region where this rule will apply.
      */
     public $country;
@@ -5781,6 +5789,10 @@ class DynamicRuleGeneratedTaxRuleModel
      * @var string Supports custom options for your tax rule.
      */
     public $options;
+    /**
+     * @var string The tariff code (HS Code) associated with this tax rule.  On the TaxRuleModel, this must be converted to TaxRuleProductDetailModel.
+     */
+    public $tariffCode;
 }
 /**
  * A Dynamic Rule is a type of a custom rule which is similar to an Advanced Rule, but
@@ -5863,10 +5875,6 @@ class DynamicRuleOutputModel
      * @var boolean Whether to continue execution if this rule fails
      */
     public $continueOnError;
-    /**
-     * @var boolean Whether the rule is deleted
-     */
-    public $isDeleted;
     /**
      * @var int Version number of the rule
      */
@@ -10824,6 +10832,14 @@ class LocationModel
      */
     public $country;
     /**
+     * @var float Geospatial latitude measurement, in Decimal Degrees floating point format.  If provided along with longitude, these coordinates will be used for tax calculations  and will take precedence over the address fields.
+     */
+    public $latitude;
+    /**
+     * @var float Geospatial longitude measurement, in Decimal Degrees floating point format.  If provided along with latitude, these coordinates will be used for tax calculations  and will take precedence over the address fields.
+     */
+    public $longitude;
+    /**
      * @var boolean Set this flag to true to indicate that this is the default location for this company.
      */
     public $isDefault;
@@ -14526,6 +14542,10 @@ class SubscriptionTypeModel
      */
     public $description;
     /**
+     * @var string Identifies the system this ServiceType belongs to - Avatax, ECM, Avatax-Returns etc,
+     */
+    public $system;
+    /**
      * @var int TaxTypeGroupIdSK to be associated with ServiceType
      */
     public $taxTypeGroupIdSK;
@@ -17031,6 +17051,310 @@ class VarianceUnit
      * @var string 
      */
     public $currency;
+}
+/**
+ * Represents a certificate document for vendors.
+ * This model inherits all properties from CertificateModel and adds vendor-specific functionality.
+ * Swagger Name: AvaTaxClient
+ */
+class VendorCertificateModel
+{
+    /**
+     * @var int The unique ID number of the document type for this vendor certificate.
+     */
+    public $documentTypeId;
+    /**
+     * @var string The name of the document type for this vendor certificate.
+     */
+    public $documentTypeName;
+    /**
+     * @var string The description of the document type for this vendor certificate.
+     */
+    public $documentTypeDescription;
+    /**
+     * @var boolean Indicates whether this document type is for outgoing documents.
+     */
+    public $documentTypeOutgoing;
+    /**
+     * @var int The unique ID number of this certificate.
+     */
+    public $id;
+    /**
+     * @var int The unique ID number of the AvaTax company that recorded this certificate.
+     */
+    public $companyId;
+    /**
+     * @var string The date when this certificate was signed.
+     */
+    public $signedDate;
+    /**
+     * @var string Expiration date when this certificate will no longer be valid.
+     */
+    public $expirationDate;
+    /**
+     * @var string File name for the image of this certificate.     When creating a certificate, if you do not upload a PDF or JPG image, you must specify the filename  of the certificate as it is tracked in your repository.     To create a certificate, you must provide one of the following fields: either a `filename`, a `pdf` file,  or an array of JPG `pages`. The API will return an error if you omit these fields or if you attempt to  put values in more than one of them.
+     */
+    public $filename;
+    /**
+     * @var boolean This value is true if there exists scanned PDF copy of this certificate or the PDF version of the form that the customer filled via the CertCapture wizard on S3 bucket.
+     */
+    public $documentExists;
+    /**
+     * @var boolean True if this certificate is marked as valid. A valid certificate can be considered for exemption purposes.  When a certificate is marked invalid, it will no longer be considered when calculating exemption for  a customer.
+     */
+    public $valid;
+    /**
+     * @var boolean This value is true if the certificate has gone through the certificate validation process.  For more information on the certificate validation process, please see the Avalara Help Center.
+     */
+    public $verified;
+    /**
+     * @var float If this certificate provides exemption from transactional taxes, what percentage of the transaction  is considered exempt?     For a fully exempt certificate, this percentage should be 100.
+     */
+    public $exemptPercentage;
+    /**
+     * @var boolean This value is true if this certificate is a single (or standalone) certificate. This value is set  during the audit stage of the certificate validation process.
+     */
+    public $isSingleCertificate;
+    /**
+     * @var string Indicates the tax number passed in for the certificate.
+     */
+    public $exemptionNumber;
+    /**
+     * @var ExemptionReasonModel 
+     */
+    public $validatedExemptionReason;
+    /**
+     * @var ExemptionReasonModel 
+     */
+    public $exemptionReason;
+    /**
+     * @var string The status of the certificate.  Possible values for status COMPLETE,PENDING,PENDING-FUTURE,PENDING-MULTI,PENDING-SINGLE,REVOKED
+     */
+    public $status;
+    /**
+     * @var string The status of the certificate as displayed on https://exemptions.avalara.com. The values in `CertificateEcmStatus` include all the possible status values. (See CertificateEcmStatus::* for a list of allowable values)
+     */
+    public $ecmStatus;
+    /**
+     * @var string The date/time when this record was created.
+     */
+    public $createdDate;
+    /**
+     * @var string The date/time when this record was last modified.
+     */
+    public $modifiedDate;
+    /**
+     * @var string The tax number type for the certificate. For example, `FEIN`, `Social Security Number`, or `Employer Identification Number`.
+     */
+    public $taxNumberType;
+    /**
+     * @var string Description of business for the certificate. For example, `Retail trade`, `Professional services`, or `Construction`.
+     */
+    public $businessNumberType;
+    /**
+     * @var int The number of pages contained within this certificate.
+     */
+    public $pageCount;
+    /**
+     * @var CustomerModel[] A list of customers to which this certificate applies. You can fetch this data by specifying  `$include=customers` when calling a certificate fetch API.
+     */
+    public $customers;
+    /**
+     * @var PoNumberModel[] A list of purchase order numbers that are valid for use with this certificate.     If this certificate is applicable for all purchase order numbers, this field will be empty.     You can fetch this data by specifying `$include=po_numbers` when calling a certificate fetch API.
+     */
+    public $poNumbers;
+    /**
+     * @var ExposureZoneModel 
+     */
+    public $exposureZone;
+    /**
+     * @var string The name of the exposure zone where this certificate is valid.  This is a computed property for filtering purposes.
+     */
+    public $exposureZoneName;
+    /**
+     * @var CertificateAttributeModel[] A list of certificate attributes that apply to this certificate.     You can fetch this data by specifying `$include=attributes` when calling a certificate fetch API.
+     */
+    public $attributes;
+    /**
+     * @var HistoryModel[] A list of update histories for this certificate.     You can fetch this data by specifying `$include=histories` when calling a certificate fetch API.
+     */
+    public $histories;
+    /**
+     * @var CustomerJobModel[] A list of jobs for this certificate.     You can fetch this data by specifying `$include=jobs` when calling a certificate fetch API.
+     */
+    public $jobs;
+    /**
+     * @var CertificateLogModel[] A list of logs for this certificate.     You can fetch this data by specifying `$include=logs` when calling a certificate fetch API.
+     */
+    public $logs;
+    /**
+     * @var CertificateInvalidReasonModel[] For a certificate with an invalid status, this lists the reasons why the certificate is invalid.     You can fetch this data by specifying `$include=invalid_reasons` when calling a certificate fetch API.
+     */
+    public $invalidReasons;
+    /**
+     * @var CustomFieldModel[] A list of custom defined fields for this certificate.     You can fetch this data by specifying `$include=custom_fields` when calling a certificate fetch API.
+     */
+    public $customFields;
+    /**
+     * @var int The unique ID number of current AvaTax Exemption Certificate that refers this certificate.
+     */
+    public $ecmsId;
+    /**
+     * @var string The status of current AvaTax Exemption Certificate that refers to this certificate.
+     */
+    public $ecmsStatus;
+    /**
+     * @var string This field is available for input only. To retrieve the image after creation, use the  `DownloadCertificateImage` API.     When creating a certificate, you may optionally provide a PDF image in Base64 URLEncoded format.  PDFs are automatically parsed into individual page JPG images and can be retrieved back  later as either the original PDF or the individual pages.     To create a certificate, you must provide one of the following fields: either a `filename`, a `pdf` file,  or an array of JPG `pages`. The API will return an error if you omit these fields or if you attempt to  put values in more than one of them.
+     */
+    public $pdf;
+    /**
+     * @var string[] This field is available for input only. To retrieve the image after creation, use the  `DownloadCertificateImage` API.     When creating a certificate, you may optionally provide a list of JPG images, one per page, in  Base64 URLEncoded format. These JPG images are automatically combined into a single downloadable  PDF and can be retrieved back later as either the original JPG images or the combined PDF.     To create a certificate, you must provide one of the following fields: either a `filename`, a `pdf` file,  or an array of JPG `pages`. The API will return an error if you omit these fields or if you attempt to  put values in more than one of them.
+     */
+    public $pages;
+}
+/**
+ * Represents a vendor from whom you purchase products and/or services.
+ * This model inherits all properties from CustomerModel and adds vendor-specific functionality.
+ * Swagger Name: AvaTaxClient
+ */
+class VendorModel
+{
+    /**
+     * @var boolean Indicates whether this entity is a vendor.  This flag helps distinguish vendors from regular customers in the system.  Note: This field is automatically set to true for vendor endpoints and cannot be overridden by user filters.
+     */
+    public $isVendor;
+    /**
+     * @var int The unique ID number of this customer.
+     */
+    public $id;
+    /**
+     * @var int The unique ID number of the AvaTax company that recorded this customer.
+     */
+    public $companyId;
+    /**
+     * @var string The unique code identifying this customer. Must be unique within your company.     This code should be used in the `customerCode` field of any call that creates or adjusts a transaction  in order to ensure that all exemptions that apply to this customer are correctly considered.     Note: This field is case sensitive.
+     */
+    public $customerCode;
+    /**
+     * @var string A customer-configurable alternate ID number for this customer. You may set this value to match any  other system that would like to reference this customer record.
+     */
+    public $alternateId;
+    /**
+     * @var string A friendly name identifying this customer.
+     */
+    public $name;
+    /**
+     * @var string Indicates the "Attn:" component of the address for this customer, if this customer requires mailings to be shipped  to the attention of a specific person or department name.
+     */
+    public $attnName;
+    /**
+     * @var string First line of the street address of this customer.
+     */
+    public $line1;
+    /**
+     * @var string Second line of the street address of this customer.
+     */
+    public $line2;
+    /**
+     * @var string City component of the street address of this customer.
+     */
+    public $city;
+    /**
+     * @var string Postal Code / Zip Code component of the address of this customer.
+     */
+    public $postalCode;
+    /**
+     * @var string The main phone number for this customer.
+     */
+    public $phoneNumber;
+    /**
+     * @var string The fax phone number for this customer, if any.
+     */
+    public $faxNumber;
+    /**
+     * @var string The main email address for this customer.
+     */
+    public $emailAddress;
+    /**
+     * @var string The name of the main contact person for this customer.
+     */
+    public $contactName;
+    /**
+     * @var string Date when this customer last executed a transaction.
+     */
+    public $lastTransaction;
+    /**
+     * @var string The date when this record was created.
+     */
+    public $createdDate;
+    /**
+     * @var string The date/time when this record was last modified.
+     */
+    public $modifiedDate;
+    /**
+     * @var string Name or ISO 3166 code identifying the country.     This field supports many different country identifiers:   * Two character ISO 3166 codes   * Three character ISO 3166 codes   * Fully spelled out names of the country in ISO supported languages   * Common alternative spellings for many countries     For a full list of all supported codes and names, please see the Definitions API `ListCountries`.
+     */
+    public $country;
+    /**
+     * @var string ISO 3166 code identifying the region within the country.  Two and three character ISO 3166 region codes.  This is a required field if the country is US or CA. For other countries, this is an optional field.  For a full list of all supported codes, please see the Definitions API `ListRegions`.
+     */
+    public $region;
+    /**
+     * @var boolean True if this customer record is specifically used for bill-to purposes.
+     */
+    public $isBill;
+    /**
+     * @var boolean True if this customer record is specifically used for ship-to purposes.
+     */
+    public $isShip;
+    /**
+     * @var string For customers in the United States, this field is the federal taxpayer ID number. For businesses, this is  a Federal Employer Identification Number. For individuals, this will be a Social Security Number.
+     */
+    public $taxpayerIdNumber;
+    /**
+     * @var CertificateModel[] A list of exemption certficates that apply to this customer. You can fetch this data by specifying  `$include=certificates` when calling a customer fetch API.
+     */
+    public $certificates;
+    /**
+     * @var CustomFieldModel[] A list of custom fields defined on this customer.     For more information about custom fields, see the [Avalara Help Center article about custom fields](https://help.avalara.com/0021_Avalara_CertCapture/All_About_CertCapture/Edit_or_Remove_Details_about_Customers).
+     */
+    public $customFields;
+    /**
+     * @var ExposureZoneModel[] A list of exposure zones where you do business with this customer.     To keep track of certificates that are needed for each customer, set this value to a list of all exposure zones where you  sell products to this customer. You can find a list of exposure zones by calling `ListExposureZones`.     This field is often called "Ship-To States" or "Ship-To Zones", since it generally refers to locations where you ship products  when this customer makes a purchase.     This field is useful for audit purposes since it helps you ensure you have the necessary certificates for each customer.
+     */
+    public $exposureZones;
+    /**
+     * @var CustomerModel[] A list of bill-to customer records that are connected to this ship-to customer.     Customer records represent businesses or individuals who can provide exemption certificates. Some customers  may have certificates that are linked to their shipping address or their billing address. To group these  customer records together, you may link multiple bill-to and ship-to addresses together to represent a single  entity that has multiple different addresses of different kinds.
+     */
+    public $billTos;
+    /**
+     * @var CustomerModel[] A list of ship-to customer records that are connected to this bill-to customer.     Customer records represent businesses or individuals who can provide exemption certificates. Some customers  may have certificates that are linked to their shipping address or their billing address. To group these  customer records together, you may link multiple bill-to and ship-to addresses together to represent a single  entity that has multiple different addresses of different kinds.
+     */
+    public $shipTos;
+    /**
+     * @var CustomerAttributeModel[] A list of attributes that apply to this customer.     You can fetch this data by specifying `$include=attributes` when calling a customer fetch API.
+     */
+    public $attributes;
+    /**
+     * @var ActiveCertificateModel[] A list of active certificates with exemption reasons.
+     */
+    public $activeCertificates;
+    /**
+     * @var HistoryModel[] A list of field update histories for this customer.
+     */
+    public $histories;
+    /**
+     * @var CustomerJobModel[] A list of jobs for this customer.
+     */
+    public $jobs;
+    /**
+     * @var CertificateLogModel[] A list of logs for this customer.
+     */
+    public $logs;
+    /**
+     * @var StateModel[] A list of states where this customer ships to.
+     */
+    public $shipToStates;
 }
 /**
  * Verify that a MultiDocument object matches the information in your accounting system.
