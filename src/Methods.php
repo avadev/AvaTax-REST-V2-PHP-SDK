@@ -6517,6 +6517,46 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Parse natural language query into structured filters
+     *
+     * Parse natural language queries into structured API filters. This endpoint forwards the query to NLQ (Natural Language Query)
+     * service for interpretation and returns only the intent and structured filters.
+     *  
+     * Example queries:
+     * - "give me items created in last 1 week which are having status complete"
+     * - "show me all items with item code CERMUG"
+     * - "find items containing 'mug' in description"
+     *  
+     * Response format:
+     * {
+     *  "intent": "GET",
+     *  "filters": {
+     *  "createdDate": { "value": "from: 2025-09-12 to: 2025-09-19" },
+     *  "itemStatus": { "value": ["Complete"] }
+     *  }
+     * }
+     *  
+     * Raw NLQ responses are logged for debugging purposes.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The ID of the company that owns these items
+     * @param NaturalLanguageSearchRequestModel $model Natural language search request
+     * @return \stdClass
+     */
+    public function aIsearch($companyId, $model=null)    {
+        $path = "/api/v2/companies/{$companyId}/items/nlq/$parse";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
      * Delete all classifications for an item
      *
      * Delete all the classifications for a given item.
@@ -6536,6 +6576,35 @@ class AvaTaxClient extends AvaTaxClientBase
      */
     public function batchDeleteItemClassifications($companyId, $itemId)    {
         $path = "/api/v2/companies/{$companyId}/items/{$itemId}/classifications";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Delete all custom parameters for an item
+     *
+     * Delete all the custom parameters for a given item.
+     *  
+     * Custom parameters provide extra information about an item that can be used for various business purposes.
+     * These parameters are stored as key-value pairs where the parameter name is the key and the value is the corresponding data.
+     *  
+     * Custom parameters can be used to store custom attributes, metadata, or any other supplementary information
+     * that doesn't fit into the standard item fields.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, BatchServiceAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The ID of the company that owns this item.
+     * @param int $itemId The ID of the item you wish to delete the custom parameters.
+     * @return \stdClass
+     */
+    public function batchDeleteItemCustomParameters($companyId, $itemId)    {
+        $path = "/api/v2/companies/{$companyId}/items/{$itemId}/custom-parameters";
         $guzzleParams = [
             'query' => [],
             'body' => null
@@ -6588,6 +6657,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * team can manage your item catalog and adjust the tax behavior of items without having to modify your software.
      *  
      * The tax code takes precedence over the tax code id if both are provided.
+     *  
+     * Please provide all the countries of destination values as a valid two letter ISO-3166 country code.
+     * Refer to 'ListCountries' api to get valid country code for any country if needed.
      * 
      * ### Security Policies
      * 
@@ -6638,6 +6710,36 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Add custom parameters to an item.
+     *
+     * Add custom parameters to an item.
+     *  
+     * Custom parameters provide extra information about an item that can be used for various business purposes.
+     * These parameters are stored as key-value pairs where the parameter name is the key and the value is the corresponding data.
+     *  
+     * Custom parameters can be used to store custom attributes, metadata, or any other supplementary information
+     * that doesn't fit into the standard item fields.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, BatchServiceAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The ID of the company that owns this item custom parameter.
+     * @param int $itemId The item id.
+     * @param ItemCustomParametersModel[] $model The item custom parameters you wish to create.
+     * @return \stdClass
+     */
+    public function createItemCustomParameters($companyId, $itemId, $model=null)    {
+        $path = "/api/v2/companies/{$companyId}/items/{$itemId}/custom-parameters";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
      * Add parameters to an item.
      *
      * Add parameters to an item.
@@ -6651,6 +6753,8 @@ class AvaTaxClient extends AvaTaxClientBase
      * To see available parameters for this item, call `/api/v2/definitions/parameters?$filter=attributeType eq Product`
      *  
      * Some parameters are only available for use if you have subscribed to specific AvaTax services. To see which parameters you are able to use, add the query parameter "$showSubscribed=true" to the parameter definition call above.
+     * Please provide all the countries parameter values as a valid two letter ISO-3166 country code.
+     * Refer to 'ListCountries' api to get valid country code for any country if needed.
      * 
      * ### Security Policies
      * 
@@ -6685,6 +6789,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * and other data fields. AvaTax will automatically look up each `itemCode` and apply the correct tax codes and parameters
      * from the item table instead. This allows your CreateTransaction call to be as simple as possible, and your tax compliance
      * team can manage your item catalog and adjust the tax behavior of items without having to modify your software.
+     *  
+     * Please provide all the countries of destination values as a valid two letter ISO-3166 country code.
+     * Refer to 'ListCountries' api to get valid country code for any country if needed.
      *  
      * The tax code takes precedence over the tax code id if both are provided.
      * 
@@ -6857,6 +6964,36 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Delete a single item custom parameter
+     *
+     * Delete a single item custom parameter.
+     *  
+     * Custom parameters provide extra information about an item that can be used for various business purposes.
+     * These parameters are stored as key-value pairs where the parameter name is the key and the value is the corresponding data.
+     *  
+     * Custom parameters can be used to store custom attributes, metadata, or any other supplementary information
+     * that doesn't fit into the standard item fields.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, BatchServiceAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The company id
+     * @param int $itemId The item id
+     * @param int $id The custom parameter id
+     * @return \stdClass
+     */
+    public function deleteItemCustomParameter($companyId, $itemId, $id)    {
+        $path = "/api/v2/companies/{$companyId}/items/{$itemId}/custom-parameters/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
      * Delete the image associated with an item.
      *
      * Delete the image associated with an item.
@@ -6992,6 +7129,28 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Fetch Additional HS Duty Details for items
+     *
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The ID of the company for which you want to get additional HS Duty Details.
+     * @param int $itemId 
+     * @param ItemAdditionalHSCodeDutyInputModel[] $model Additional HS Code Duty Details input Model
+     * @return \stdClass
+     */
+    public function fetchAdditionalHSCodeDutyDetails($companyId, $itemId, $model=null)    {
+        $path = "/api/v2/companies/{$companyId}/items/{$itemId}/hsdutydetails/$fetch-additional-hsdutydetails";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
      * Retrieve the HS code classification SLA details for a company.
      *
      * This endpoint returns the SLA details for HS code classification for the
@@ -7066,6 +7225,36 @@ class AvaTaxClient extends AvaTaxClientBase
      */
     public function getItemClassification($companyId, $itemId, $id)    {
         $path = "/api/v2/companies/{$companyId}/items/{$itemId}/classifications/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Retrieve a single item custom parameter
+     *
+     * Retrieve a single item custom parameter.
+     *  
+     * Custom parameters provide extra information about an item that can be used for various business purposes.
+     * These parameters are stored as key-value pairs where the parameter name is the key and the value is the corresponding data.
+     *  
+     * Custom parameters can be used to store custom attributes, metadata, or any other supplementary information
+     * that doesn't fit into the standard item fields.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The company id
+     * @param int $itemId The item id
+     * @param int $id The custom parameter id
+     * @return \stdClass
+     */
+    public function getItemCustomParameter($companyId, $itemId, $id)    {
+        $path = "/api/v2/companies/{$companyId}/items/{$itemId}/custom-parameters/{$id}";
         $guzzleParams = [
             'query' => [],
             'body' => null
@@ -7216,6 +7405,31 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Get the real-time tax code recommendations for the specified items without saving item data.
+     *
+     * Provides immediate tax code recommendations for item details submitted in the request. Item data is processed only for recommendation purposes and is not persisted.
+     *  
+     * Maximum items per request: 50 (subject to change).
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The unique ID of the company.
+     * @param ItemTaxcodeRecommendationBatchesInputModel[] $model The list of items to analyze for tax code recommendations (maximum 50).
+     * @return \stdClass
+     */
+    public function getSyncTaxCodeRecommendations($companyId, $model)    {
+        $path = "/api/v2/companies/{$companyId}/$taxcode-recommendations";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
      * Create an HS code classification request.
      *
      * ### Security Policies
@@ -7299,6 +7513,42 @@ class AvaTaxClient extends AvaTaxClientBase
      */
     public function listItemClassifications($companyId, $itemId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
         $path = "/api/v2/companies/{$companyId}/items/{$itemId}/classifications";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Retrieve custom parameters for an item
+     *
+     * List custom parameters for an item.
+     *  
+     * Custom parameters provide extra information about an item that can be used for various business purposes.
+     * These parameters are stored as key-value pairs where the parameter name is the key and the value is the corresponding data.
+     *  
+     * Custom parameters can be used to store custom attributes, metadata, or any other supplementary information
+     * that doesn't fit into the standard item fields.
+     *  
+     * Search for specific objects using the criteria in the `$filter` parameter; full documentation is available on [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/) .
+     * Paginate your results using the `$top`, `$skip`, and `$orderby` parameters.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The company id
+     * @param int $itemId The item id
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* id, name, value
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return \stdClass
+     */
+    public function listItemCustomParameters($companyId, $itemId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/companies/{$companyId}/items/{$itemId}/custom-parameters";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
@@ -7421,7 +7671,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company that defined these items
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxCode, source, sourceEntityId, itemType, upc, summary, classifications, parameters, tags, properties, itemStatus, taxCodeRecommendationStatus, taxCodeRecommendations, taxCodeDetails, hsCodeClassificationStatus, image
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxCode, source, sourceEntityId, itemType, upc, summary, classifications, parameters, customParameters, tags, properties, itemStatus, taxCodeRecommendationStatus, taxCodeRecommendations, taxCodeDetails, hsCodeClassificationStatus, image
      * @param string $include A comma separated list of additional data to retrieve.
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
@@ -7527,7 +7777,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
      * Swagger Name: AvaTaxClient
      * 
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxCode, source, sourceEntityId, itemType, upc, summary, classifications, parameters, tags, properties, itemStatus, taxCodeRecommendationStatus, taxCodeRecommendations, taxCodeDetails, hsCodeClassificationStatus, image
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxCode, source, sourceEntityId, itemType, upc, summary, classifications, parameters, customParameters, tags, properties, itemStatus, taxCodeRecommendationStatus, taxCodeRecommendations, taxCodeDetails, hsCodeClassificationStatus, image
      * @param string $include A comma separated list of additional data to retrieve.
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
@@ -7602,7 +7852,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID of the company that defined these items.
      * @param string $tag The master tag to be associated with item.
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxCode, source, sourceEntityId, itemType, upc, summary, classifications, parameters, tags, properties, itemStatus, taxCodeRecommendationStatus, taxCodeRecommendations, taxCodeDetails, hsCodeClassificationStatus, image
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxCode, source, sourceEntityId, itemType, upc, summary, classifications, parameters, customParameters, tags, properties, itemStatus, taxCodeRecommendationStatus, taxCodeRecommendations, taxCodeDetails, hsCodeClassificationStatus, image
      * @param string $include A comma separated list of additional data to retrieve.
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
@@ -7632,6 +7882,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * system can use this to sync all their items from an ERP with Avalara.
      *  
      * Parameters and Classifications can be added with the Item.
+     *  
+     * Please provide all the countries parameter values as a valid two letter ISO-3166 country code.
+     * Refer to 'ListCountries' api to get valid country code for any country if needed.
      * 
      * ### Security Policies
      * 
@@ -7666,6 +7919,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * and other data fields. AvaTax will automatically look up each `itemCode` and apply the correct tax codes and parameters
      * from the item table instead. This allows your CreateTransaction call to be as simple as possible, and your tax compliance
      * team can manage your item catalog and adjust the tax behavior of items without having to modify your software.
+     *  
+     * Please provide all the countries of destination values as a valid two letter ISO-3166 country code.
+     * Refer to 'ListCountries' api to get valid country code for any country if needed.
      * 
      * ### Security Policies
      * 
@@ -7782,6 +8038,37 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Update an item custom parameter
+     *
+     * Update an item custom parameter.
+     *  
+     * Custom parameters provide extra information about an item that can be used for various business purposes.
+     * These parameters are stored as key-value pairs where the parameter name is the key and the value is the corresponding data.
+     *  
+     * Custom parameters can be used to store custom attributes, metadata, or any other supplementary information
+     * that doesn't fit into the standard item fields.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, BatchServiceAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The company id.
+     * @param int $itemId The item id
+     * @param int $id The item custom parameter id
+     * @param ItemCustomParametersModel $model The item custom parameter object you wish to update.
+     * @return \stdClass
+     */
+    public function updateItemCustomParameter($companyId, $itemId, $id, $model=null)    {
+        $path = "/api/v2/companies/{$companyId}/items/{$itemId}/custom-parameters/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
      * Update an item parameter
      *
      * Update an item parameter.
@@ -7791,6 +8078,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * A parameter added to an item will be used by default in tax calculation but will not show on the transaction line referencing the item .
      *  
      * A parameter specified on a transaction line will override an item parameter if they share the same parameter name.
+     *  
+     * Please provide all the countries parameter values as a valid two letter ISO-3166 country code.
+     * Refer to 'ListCountries' api to get valid country code for any country if needed.
      * 
      * ### Security Policies
      * 
@@ -7870,6 +8160,36 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Add/update an item custom parameter
+     *
+     * Add/update an item custom parameter.
+     *  
+     * Custom parameters provide extra information about an item that can be used for various business purposes.
+     * These parameters are stored as key-value pairs where the parameter name is the key and the value is the corresponding data.
+     *  
+     * Custom parameters can be used to store custom attributes, metadata, or any other supplementary information
+     * that doesn't fit into the standard item fields.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, BatchServiceAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The company id.
+     * @param int $itemId The item id
+     * @param ItemCustomParametersModel[] $model The item custom parameter object you wish to Upsert.
+     * @return \stdClass
+     */
+    public function upsertItemCustomParameter($companyId, $itemId, $model=null)    {
+        $path = "/api/v2/companies/{$companyId}/items/{$itemId}/custom-parameters";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
      * Add/update an item parameter.
      *
      * Add/update an item parameter.
@@ -7879,6 +8199,9 @@ class AvaTaxClient extends AvaTaxClientBase
      * A parameter added to an item will be used by default in tax calculation but will not show on the transaction line referencing the item .
      *  
      * A parameter specified on a transaction line will override an item parameter if they share the same parameter name.
+     *  
+     * Please provide all the countries parameter values as a valid two letter ISO-3166 country code.
+     * Refer to 'ListCountries' api to get valid country code for any country if needed.
      * 
      * ### Security Policies
      * 
