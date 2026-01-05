@@ -4908,6 +4908,14 @@ class CustomerSupplierCountryParamModel
      * @var boolean 
      */
     public $isRegisteredThroughFiscalRep;
+    /**
+     * @var string VAT number for the customer/supplier in this country
+     */
+    public $vatNumber;
+    /**
+     * @var int Status of VAT number validation (0=NotValidated, 1=Valid, 2=Invalid, 3=Unverifiable, 4=ValidationError, 5=UnsupportedCountry)
+     */
+    public $vatNumberStatus;
 }
 /**
  * Represents a parameter associated with a company.
@@ -5793,6 +5801,10 @@ class DynamicRuleGeneratedTaxRuleModel
      * @var string The tariff code (HS Code) associated with this tax rule.  On the TaxRuleModel, this must be converted to TaxRuleProductDetailModel.
      */
     public $tariffCode;
+    /**
+     * @var string For tax rules that are calculated using units of measurement,  this indicates the unit of measurement type used to calculate the amounts for this rule.
+     */
+    public $unitOfBasis;
 }
 /**
  * A Dynamic Rule is a type of a custom rule which is similar to an Advanced Rule, but
@@ -6351,6 +6363,40 @@ class ErrorDetail
      * @var string  (See SeverityLevel::* for a list of allowable values)
      */
     public $severity;
+}
+/**
+ * Information about the error that occurred
+ * Swagger Name: AvaTaxClient
+ */
+class ErrorInfo
+{
+    /**
+     * @var string Type of error that occurred (See ErrorCodeId::* for a list of allowable values)
+     */
+    public $code;
+    /**
+     * @var string Short one-line message to summaryize what went wrong
+     */
+    public $message;
+    /**
+     * @var string What object or service caused the error? (See ErrorTargetCode::* for a list of allowable values)
+     */
+    public $target;
+    /**
+     * @var ErrorDetail[] Array of detailed error messages
+     */
+    public $details;
+}
+/**
+ * Helper function for throwing known error response
+ * Swagger Name: AvaTaxClient
+ */
+class ErrorResult
+{
+    /**
+     * @var ErrorInfo 
+     */
+    public $error;
 }
 /**
  * Base model class for single error transaction delete request
@@ -8063,6 +8109,17 @@ class FilterModel
     public $filter;
 }
 /**
+ * Represents a filter value that can be a string, array, or object
+ * Swagger Name: AvaTaxClient
+ */
+class FilterValue
+{
+    /**
+     * @var object The filter value - can be string, array, or object
+     */
+    public $value;
+}
+/**
  * Account Linkage Input model
  * Swagger Name: AvaTaxClient
  */
@@ -9228,6 +9285,41 @@ class IsoRegionModel
     public $isRegionTaxable;
 }
 /**
+ * Represents input model for additional HS Code Duty Details request.
+ * Swagger Name: AvaTaxClient
+ */
+class ItemAdditionalHSCodeDutyInputModel
+{
+    /**
+     * @var int The unique ID of the item.
+     */
+    public $itemId;
+    /**
+     * @var int The unique ID of the company.
+     */
+    public $companyId;
+    /**
+     * @var string The country of import.
+     */
+    public $countryOfImport;
+    /**
+     * @var string The country of export.
+     */
+    public $countryOfExport;
+    /**
+     * @var string The country of origin.
+     */
+    public $countryOfOrigin;
+    /**
+     * @var string The manufacturer name.
+     */
+    public $manufacturerName;
+    /**
+     * @var string The country of import.
+     */
+    public $hscode;
+}
+/**
  * Represents a bulk upload input model.
  * Swagger Name: AvaTaxClient
  */
@@ -9315,6 +9407,10 @@ class ItemCatalogueInputModel
      * @var ItemParameterModel[] Parameters Attached to the Product
      */
     public $parameters;
+    /**
+     * @var ItemCustomParametersModel[] List of item custom parameters
+     */
+    public $customParameters;
 }
 /**
  * Item Catalogue output model.
@@ -9417,6 +9513,25 @@ class ItemClassificationOutputModel
     public $classificationEvent;
 }
 /**
+ * Class to accommodate Custom defined parameters
+ * Swagger Name: AvaTaxClient
+ */
+class ItemCustomParametersModel
+{
+    /**
+     * @var int The unique ID number of this item custom parameter
+     */
+    public $id;
+    /**
+     * @var string A unique code representing this item custom parameter.
+     */
+    public $name;
+    /**
+     * @var string The value of the custom parameter for this item.  When creating or updating an item, you can specify custom parameter values  to store additional metadata or business-specific information.
+     */
+    public $value;
+}
+/**
  * Input model of the HS code classification.
  * Swagger Name: AvaTaxClient
  */
@@ -9427,7 +9542,7 @@ class ItemHSCodeClassificationInputModel
      */
     public $itemId;
     /**
-     * @var string[] Country of destination for this HS code classification.
+     * @var string[] Country of destination for this HS code classification.  Please provide all the values as valid 2-letter ISO 3166 country code.  Refer to 'ListCountries' api to get valid country code for any country if needed.
      */
     public $countryOfDestinations;
     /**
@@ -9573,6 +9688,173 @@ class ItemHSCodeClassificationStatusOutputModel
      * @var string Description
      */
     public $description;
+}
+/**
+ * Represents HS Code CVD (Countervailing Duty) and ADD (Anti-Dumping Duty) Details.
+ * Swagger Name: AvaTaxClient
+ */
+class ItemHSCodeCvdAddDetailModel
+{
+    /**
+     * @var string The type of duty (cvd, add, etc.).
+     */
+    public $type;
+    /**
+     * @var string The rate for this duty.
+     */
+    public $rate;
+    /**
+     * @var string The unit of measure.
+     */
+    public $uom;
+}
+/**
+ * Represents HS Code Duty Details for an item.
+ * Swagger Name: AvaTaxClient
+ */
+class ItemHSCodeDutyDetailModel
+{
+    /**
+     * @var int The unique ID of the HS Code Duty Detail.
+     */
+    public $id;
+    /**
+     * @var int The unique ID of the item.
+     */
+    public $itemId;
+    /**
+     * @var int The unique ID of the company.
+     */
+    public $companyId;
+    /**
+     * @var string The country of import.
+     */
+    public $countryOfImport;
+    /**
+     * @var string The country of export.
+     */
+    public $countryOfExport;
+    /**
+     * @var string The country of origin.
+     */
+    public $countryOfOrigin;
+    /**
+     * @var string The manufacturer name.
+     */
+    public $manufacturerName;
+    /**
+     * @var string The MFN rate.
+     */
+    public $mfnRate;
+    /**
+     * @var string The unit of measure.
+     */
+    public $uom;
+    /**
+     * @var string The date when this record was created.
+     */
+    public $createdDate;
+    /**
+     * @var int The user ID of the user who created this record.
+     */
+    public $createdUserId;
+    /**
+     * @var ItemHSCodeFTADetailModel[] List of FTA details.
+     */
+    public $ftaDetails;
+    /**
+     * @var ItemHSCodeCvdAddDetailModel[] List of CVD/ADD details.
+     */
+    public $cvdAddDetails;
+    /**
+     * @var ItemHSCodePunitiveRateDetailModel[] List of punitive rate details.
+     */
+    public $punitiveRateDetails;
+    /**
+     * @var ItemHSCodeRestrictionDetailModel[] List of restriction details.
+     */
+    public $restrictionDetails;
+}
+/**
+ * Represents HS Code FTA (Free Trade Agreement) Details.
+ * Swagger Name: AvaTaxClient
+ */
+class ItemHSCodeFTADetailModel
+{
+    /**
+     * @var string The name of the FTA.
+     */
+    public $name;
+    /**
+     * @var string The rate for this FTA.
+     */
+    public $rate;
+    /**
+     * @var string The unit of measure.
+     */
+    public $uom;
+}
+/**
+ * Represents HS Code Punitive Rate Details.
+ * Swagger Name: AvaTaxClient
+ */
+class ItemHSCodePunitiveRateDetailModel
+{
+    /**
+     * @var string The rate for this punitive duty.
+     */
+    public $rate;
+    /**
+     * @var string The unit of measure.
+     */
+    public $uom;
+    /**
+     * @var boolean Whether this rate is stackable with other rates.
+     */
+    public $isStackable;
+    /**
+     * @var boolean Whether this is a tax on tax.
+     */
+    public $isTaxOnTax;
+}
+/**
+ * Represents HS Code Restriction Details.
+ * Swagger Name: AvaTaxClient
+ */
+class ItemHSCodeRestrictionDetailModel
+{
+    /**
+     * @var string The type of restriction.
+     */
+    public $type;
+    /**
+     * @var string The regulation governing this restriction.
+     */
+    public $regulation;
+    /**
+     * @var string The name of the restriction.
+     */
+    public $name;
+    /**
+     * @var string The summary of the restriction.
+     */
+    public $summary;
+    /**
+     * @var string The government agency responsible for this restriction.
+     */
+    public $governmentAgency;
+    /**
+     * @var string The compliance title.
+     */
+    public $complianceTitle;
+    /**
+     * @var string The compliance message.
+     */
+    public $complianceMessage;
+    /**
+     * @var string The compliance citation or reference.
+     */
+    public $complianceCitation;
 }
 /**
  * Item image output model with the image URL
@@ -9738,6 +10020,10 @@ class ItemModel
      * @var ItemParameterModel[] List of item parameters.
      */
     public $parameters;
+    /**
+     * @var ItemCustomParametersModel[] List of item custom parameters
+     */
+    public $customParameters;
     /**
      * @var ItemTagDetailInputModel[] List of item tags.
      */
@@ -10164,6 +10450,87 @@ class ItemTaxCodeRecommendationStatusModel
      * @var string Description
      */
     public $description;
+}
+/**
+ * Represents the output model containing the status and results of a tax code recommendation batch.
+ * Swagger Name: AvaTaxClient
+ */
+class ItemTaxcodeRecommendationBatchStatusOutputModel
+{
+    /**
+     * @var int The unique ID of the batch.
+     */
+    public $batchId;
+    /**
+     * @var string The current processing status of the batch.  Possible values: "Pending", "Processing", "Completed", "Failed", "Deleted"
+     */
+    public $batchStatus;
+    /**
+     * @var ItemTaxcodeRecommendationBatchesOutputModel[] The list of items with their tax code recommendations.  This property is populated only when the batch status is "Completed".
+     */
+    public $value;
+    /**
+     * @var string An optional message providing additional information about the batch.
+     */
+    public $message;
+}
+/**
+ * Represents an input model of a single item for tax code recommendation batches (both synchronous and asynchronous).
+ * Swagger Name: AvaTaxClient
+ */
+class ItemTaxcodeRecommendationBatchesInputModel
+{
+    /**
+     * @var string A brief description of the item.
+     */
+    public $description;
+    /**
+     * @var string The category of the item.  For example: "Home > Kitchen > Mugs"
+     */
+    public $category;
+    /**
+     * @var string The type of item. (optional)  Examples: "Physical", "Digital", "Service", "Freight"
+     */
+    public $itemType;
+    /**
+     * @var string The Universal Product Code (UPC) associated with the item. (optional)
+     */
+    public $upc;
+    /**
+     * @var string A summary or detailed description of the item. (optional)
+     */
+    public $summary;
+}
+/**
+ * Represents the output model for tax code recommendation batches (both synchronous and asynchronous).
+ * Swagger Name: AvaTaxClient
+ */
+class ItemTaxcodeRecommendationBatchesOutputModel
+{
+    /**
+     * @var string A brief description of the item.
+     */
+    public $description;
+    /**
+     * @var string The category of the item.
+     */
+    public $category;
+    /**
+     * @var string The type of item. Examples: "Physical", "Digital", "Service", "Freight"
+     */
+    public $itemType;
+    /**
+     * @var string The Universal Product Code (UPC) associated with the item.
+     */
+    public $upc;
+    /**
+     * @var string A summary or detailed description of the item.
+     */
+    public $summary;
+    /**
+     * @var TaxCodeRecommendationOutputModel[] The list of generated tax code recommendations for this item.
+     */
+    public $taxCodeRecommendations;
 }
 /**
  * Represents a item upload error model.
@@ -11829,6 +12196,32 @@ class MultiTaxFilingReturnModel
      * @var FilingAttachmentModel[] The attachments for this return.
      */
     public $attachments;
+}
+/**
+ * Request model for natural language search
+ * Swagger Name: AvaTaxClient
+ */
+class NaturalLanguageSearchRequestModel
+{
+    /**
+     * @var string Natural language query to search for items
+     */
+    public $query;
+}
+/**
+ * Response model for natural language search
+ * Swagger Name: AvaTaxClient
+ */
+class NaturalLanguageSearchResponseModel
+{
+    /**
+     * @var string Intent of the search query (e.g., "GET" for read operations, "WRITE" for write operations)
+     */
+    public $intent;
+    /**
+     * @var object Structured filters extracted from the natural language query
+     */
+    public $filters;
 }
 /**
  * Represents information about a newly created account
@@ -15438,6 +15831,21 @@ class TaxTypeModel
      * @var string The description of this tax type.
      */
     public $description;
+}
+/**
+ * Represents the output model for tax code batches creation.
+ * Swagger Name: AvaTaxClient
+ */
+class TaxcodeBatchOutputModel
+{
+    /**
+     * @var int The unique ID of the company.
+     */
+    public $companyId;
+    /**
+     * @var int The batch identifier.
+     */
+    public $batchId;
 }
 /**
  * An address used within this transaction.

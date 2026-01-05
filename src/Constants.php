@@ -2,7 +2,7 @@
 namespace Avalara;
 use GuzzleHttp\Client;
 
-define('AVATAX_SDK_VERSION', '25.11.0');
+define('AVATAX_SDK_VERSION', '25.12.0');
 
 /*****************************************************************************
  *                                                                           *
@@ -2065,6 +2065,11 @@ class CustomRuleSubtype
      */
     const C_TAXRULEEXEMPTENTITY = 30;
 
+    /**
+     * Defines one or more custom content rules.
+     */
+    const C_CUSTOMTAX = 31;
+
 }
 
 /**
@@ -2267,6 +2272,21 @@ class DynamicRuleComponentSubtype
     const C_MATCHTAX = 12;
 
     /**
+     * Matches based on jurisdiction and a custom tax type and subtype.
+     */
+    const C_CUSTOMTAX = 13;
+
+    /**
+     * Matches based on address jurisdictions.
+     */
+    const C_MATCHJURISDICTION = 14;
+
+    /**
+     * Matches based on the entity use code.
+     */
+    const C_MATCHENTITYUSECODE = 15;
+
+    /**
      * Unspecified action.
      */
     const C_ACTION = 256;
@@ -2439,6 +2459,49 @@ class ExemptCertReviewStatusId
      * Certificate was rejected
      */
     const C_REJECTED = 2;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * What object experienced the error?
+ */
+class ErrorTargetCode
+{
+    /**
+     * Error target is unknown
+     */
+    const C_UNKNOWN = 0;
+
+    /**
+     * There was an error in the request URL, querystring, or body
+     */
+    const C_HTTPREQUEST = 1;
+
+    /**
+     * There was an error in the HTTP Request headers
+     */
+    const C_HTTPREQUESTHEADERS = 2;
+
+    /**
+     * Some data provided by the user was incorrect
+     */
+    const C_INCORRECTDATA = 3;
+
+    /**
+     * There was an error in the AvaTax API Server
+     */
+    const C_AVATAXAPISERVER = 10;
+
+    /**
+     * There was an error in the Avalara Identity Server
+     */
+    const C_AVALARAIDENTITYSERVER = 11;
+
+    /**
+     * The customer's account setup does not permit certain actions
+     */
+    const C_CUSTOMERACCOUNTSETUP = 12;
 
 }
 
@@ -2638,6 +2701,16 @@ class ReportSource
      * tax region and tax type
      */
     const C_TAXREGION = 3;
+
+    /**
+     * accounts payable document
+     */
+    const C_APDOCUMENT = 4;
+
+    /**
+     * accounts payable document line detail
+     */
+    const C_APDOCUMENTLINEDETAIL = 5;
 
 }
 
@@ -4071,6 +4144,7 @@ class APStatus
     const C_PENDINGSHORTPAYITEMSUNDERCHARGE = 24;
     const C_PENDINGSHORTPAYITEMSMATCH = 25;
     const C_PENDINGSHORTPAYITEMSOVERCHARGE = 26;
+    const C_NOACCRUALEXEMPTEDMAPPING = 27;
     const C_SHORTPAYITEMSACCRUEMATCH = -1;
     const C_MARKFORREVIEWMATCH = -1;
     const C_REJECTMATCH = -1;
