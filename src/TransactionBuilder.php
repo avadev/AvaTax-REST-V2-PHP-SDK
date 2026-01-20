@@ -536,6 +536,21 @@ class TransactionBuilder
     }
 
     /**
+     * Set category for current line
+     *
+     * @param   string              $category
+     * @return  TransactionBuilder
+     * @throws  \Exception
+     */
+    public function withLineCategory($category)
+    {
+        $li = $this->getMostRecentLineIndex();
+        $this->_model['lines'][$li]['category'] = $category;
+
+        return $this;
+    }
+
+    /**
      * Add a line to this transaction
      *
      * @param   float  $amount      Value of the item.
