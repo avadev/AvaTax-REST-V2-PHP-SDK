@@ -159,6 +159,18 @@ class TransactionBuilder
     }
 
     /**
+     * Set client application customer or usage type
+     *
+     * @param   string              code    (See API endpoint `/api/v2/definitions/entityusecodes` for a list of allowable values)
+     * @return TransactionBuilder
+     */
+    public function withSalesPersonCode($code)
+    {
+        $this->_model['salespersonCode'] = $code;
+        return $this;
+    }
+
+    /**
      * Set purchase order number
      *
      * @param   string              no
