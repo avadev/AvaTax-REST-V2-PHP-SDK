@@ -6,3 +6,4 @@ include:
 sast:tests:
   extends: .sast:tests
   stage: app-sec:jobs
+  
