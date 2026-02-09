@@ -68,6 +68,10 @@ class APConfigSettingRequestModel
      */
     public $amountToMarkForReview;
     /**
+     * @var boolean Ignore threshold when Vendor Charged Tax is zero
+     */
+    public $ignoreThresholdWhenVCTZero;
+    /**
      * @var float The Variance For Ignore
      */
     public $varianceForIgnore;
@@ -154,6 +158,10 @@ class APConfigSettingSuccessResponseModel
      * @var float The Amount Threshold To Mark Transaction For Manual Review
      */
     public $amountToMarkForReview;
+    /**
+     * @var boolean Ignore threshold when Vendor Charged Tax is zero
+     */
+    public $ignoreThresholdWhenVCTZero;
     /**
      * @var float The Variance For Ignore
      */
@@ -4937,6 +4945,58 @@ class CustomerSupplierModel
     public $customerCode;
 }
 /**
+ * Represents a customer with its country parameter information.
+ * This model combines CustomerSupplier and CustomerSupplierCountryParam data.
+ * Swagger Name: AvaTaxClient
+ */
+class CustomerSupplierWithCountryParamModel
+{
+    /**
+     * @var int Customer ID
+     */
+    public $customerId;
+    /**
+     * @var string Customer Code
+     */
+    public $customerCode;
+    /**
+     * @var int Company ID
+     */
+    public $companyId;
+    /**
+     * @var int Customer Type ID (1=Customer, 2=Supplier)
+     */
+    public $customerTypeId;
+    /**
+     * @var int Customer Supplier Country Parameter ID
+     */
+    public $customerSupplierCountryParamId;
+    /**
+     * @var string Country code
+     */
+    public $country;
+    /**
+     * @var boolean Whether the customer is established in this country
+     */
+    public $isEstablished;
+    /**
+     * @var string Business Identification Number
+     */
+    public $businessIdentificationNo;
+    /**
+     * @var boolean Whether registered through fiscal representative
+     */
+    public $isRegisteredThroughFiscalRep;
+    /**
+     * @var string VAT number for the customer in this country
+     */
+    public $vatNumber;
+    /**
+     * @var int Status of VAT number validation (0=NotValidated, 1=Valid, 2=Invalid, 3=Unverifiable, 4=ValidationError, 5=UnsupportedCountry)
+     */
+    public $vatNumberStatus;
+}
+/**
  * Model with options for adding a new filing calendar
  * Swagger Name: AvaTaxClient
  */
@@ -5794,6 +5854,10 @@ class DynamicRuleGeneratedTaxRuleModel
      */
     public $taxSubType;
     /**
+     * @var string The currency code to use for this rule.
+     */
+    public $currencyCode;
+    /**
      * @var string Supports custom options for your tax rule.
      */
     public $options;
@@ -5814,6 +5878,10 @@ class DynamicRuleGeneratedTaxRuleModel
  */
 class DynamicRuleInputModel
 {
+    /**
+     * @var int Unique identifier for the execution
+     */
+    public $id;
     /**
      * @var DynamicRuleDefinitionInputModel 
      */
@@ -9318,6 +9386,10 @@ class ItemAdditionalHSCodeDutyInputModel
      * @var string The country of import.
      */
     public $hscode;
+    /**
+     * @var boolean The country of import.
+     */
+    public $isAdditionalDuty;
 }
 /**
  * Represents a bulk upload input model.
@@ -9569,6 +9641,10 @@ class ItemHSCodeClassificationInputModel
      * @var boolean IsExportControl flag to identify cross border classification
      */
     public $isExportControl;
+    /**
+     * @var boolean Indicates whether this classification is for compliance purposes.
+     */
+    public $isCompliance;
     /**
      * @var string Instructions related to this item classification.
      */
@@ -12361,6 +12437,10 @@ class NewAccountRequestModel
      * @var string Type of the account to be created. Regular, Firm or FirmClient (See AccountTypeId::* for a list of allowable values)
      */
     public $accountType;
+    /**
+     * @var boolean Set this to true if this is a test account
+     */
+    public $isTest;
     /**
      * @var string United States Taxpayer ID number, usually your Employer Identification Number if you are a business or your  Social Security Number if you are an individual.  This value is required if the address provided is inside the US and if you subscribed to the Avalara Managed Returns or SST Certified Service Provider service. Otherwise it is optional.
      */

@@ -2,7 +2,7 @@
 namespace Avalara;
 use GuzzleHttp\Client;
 
-define('AVATAX_SDK_VERSION', '25.12.1');
+define('AVATAX_SDK_VERSION', '26.2.0');
 
 /*****************************************************************************
  *                                                                           *
@@ -359,6 +359,17 @@ class StackAggregationOption
      * City and county rates are aggregated.
      */
     const C_AGGREGATECITYANDCOUNTY = 3;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * 
+ */
+class ContentScope
+{    const C_SYSTEM = 0;
+    const C_CUSTOM = 1;
+    const C_ALL = 2;
 
 }
 
