@@ -2889,6 +2889,14 @@ class CompanyModel
      * @var boolean A boolean flag to identify if the company saves advanced rules after calculation.
      */
     public $isAdvSave;
+    /**
+     * @var string The url of the company.
+     */
+    public $companyUrl;
+    /**
+     * @var string The description of the company.
+     */
+    public $companyDescription;
 }
 /**
  * Represents a parameter associated with a company.
@@ -4628,6 +4636,10 @@ class CustomRuleSummaryModel
      */
     public $companyId;
     /**
+     * @var string The name of the custom rule
+     */
+    public $name;
+    /**
      * @var string The status of the custom rule (See CustomRuleStatus::* for a list of allowable values)
      */
     public $status;
@@ -4636,7 +4648,7 @@ class CustomRuleSummaryModel
      */
     public $type;
     /**
-     * @var string The subtypes of the custom rule (See CustomRuleSubtype::* for a list of allowable values)
+     * @var string The subtypes (categories) of the custom rule (See CustomRuleSubtype::* for a list of allowable values)
      */
     public $subtype;
     /**
@@ -4652,17 +4664,41 @@ class CustomRuleSummaryModel
      */
     public $region;
     /**
+     * @var string The type(s) of the jurisdiction(s) to which this rule applies. (See JurisdictionType::* for a list of allowable values)
+     */
+    public $jurisdictionTypeId;
+    /**
+     * @var string[] The name(s) of the jurisdiction(s) to which this rule applies.
+     */
+    public $jurisName;
+    /**
+     * @var string[] The code(s) of the jurisdiction(s) to which this rule applies.
+     */
+    public $jurisCode;
+    /**
      * @var string[] For rules that apply to a specific tax code only, this specifies which tax code is affected by this rule.
      */
     public $taxCode;
     /**
-     * @var string[] Indicates the codes of the tax type that applies to this rule.
+     * @var string[] Indicates the codes of the tax type that this rule applies to.
      */
     public $taxType;
+    /**
+     * @var string[] Indicates the codes of the tax sub types that this rule applies to.
+     */
+    public $taxSubType;
+    /**
+     * @var string[] Indicates the rate types that this rule applies to.
+     */
+    public $rateTypeCode;
     /**
      * @var string[] The entity use code to which this rule applies.
      */
     public $entityUseCode;
+    /**
+     * @var string[] The company location codes to which this rule is associated with.
+     */
+    public $companyLocationCode;
     /**
      * @var int The order of the rule executions (only applies to advanced rules)
      */
@@ -4995,6 +5031,61 @@ class CustomerSupplierWithCountryParamModel
      * @var int Status of VAT number validation (0=NotValidated, 1=Valid, 2=Invalid, 3=Unverifiable, 4=ValidationError, 5=UnsupportedCountry)
      */
     public $vatNumberStatus;
+}
+/**
+ * Represents a VAT Number record for a company.
+ * Swagger Name: AvaTaxClient
+ */
+class CustomerVatNumberModel
+{
+    /**
+     * @var int Unique identifier for the VAT number record
+     */
+    public $id;
+    /**
+     * @var int Company ID associated with this VAT number
+     */
+    public $companyId;
+    /**
+     * @var string VAT identification number
+     */
+    public $vatNumber;
+    /**
+     * @var string User input business/company name
+     */
+    public $businessName;
+    /**
+     * @var string ISO 2-character country code
+     */
+    public $country;
+    /**
+     * @var int VAT number validation status: 0=NotValidated, 1=Valid, 2=Invalid, 3=Error
+     */
+    public $vatNumberStatus;
+    /**
+     * @var string Business name returned from VIES
+     */
+    public $registeredBusinessName;
+    /**
+     * @var int Business name comparison status: 0=NotValidated, 1=Valid, 2=Invalid, 3=Error
+     */
+    public $businessNameStatus;
+    /**
+     * @var string Last validation timestamp
+     */
+    public $validationDate;
+    /**
+     * @var string Validation source: 'VIES' or 'ELR'
+     */
+    public $validationSource;
+    /**
+     * @var string Date/time when this record was created
+     */
+    public $createdDate;
+    /**
+     * @var string Date/time when this record was last modified
+     */
+    public $modifiedDate;
 }
 /**
  * Model with options for adding a new filing calendar
@@ -6656,11 +6747,11 @@ class ExportDocumentLineModel
      */
     public $currencyCode;
     /**
-     * @var int Number of partitions (2 - 250) to split the report into.  If a value is provided for this property, a value must also be provided for the partition property.
+     * @var int DEPRECATED - Date: 02/18/2026, Version: 26.3.0, Message: This field is deprecated. Please do not use it. This will be removed from the model on 08/18/2027.  Number of partitions (2 - 250) to split the report into.  If a value is provided for this property, a value must also be provided for the partition property.
      */
     public $numberOfPartitions;
     /**
-     * @var int The zero-based partition number to retrieve in this export request.  If a value is provided for this property, a value must also be provided for the numberOfPartitions property.
+     * @var int DEPRECATED - Date: 02/18/2026, Version: 26.3.0, Message: This field is deprecated. Please do not use it. This will be removed from the model on 08/18/2027.  The zero-based partition number to retrieve in this export request.  If a value is provided for this property, a value must also be provided for the numberOfPartitions property.
      */
     public $partition;
     /**
@@ -6719,6 +6810,34 @@ class ExportDocumentLineModel
      * @var boolean If true, include multi tax line details in the generated report.  If false, include document or document line in the generated report based on includeDocumentLineDetails.  Defaults to false if not specified.
      */
     public $includeMultiTaxLineDetails;
+    /**
+     * @var boolean If true, shows all transactions that are in the incorrect currency.  If false, hides all transactions that are in the incorrect currency.  Defaults to false if not specified.
+     */
+    public $incorrectCurrencyOnly;
+    /**
+     * @var boolean If true, shows all additional transaction attributes.  If false, hides all additional transaction attributes.  Defaults to false if not specified.
+     */
+    public $includeAdditionalAttributes;
+    /**
+     * @var boolean If true, shows all user defined fields.  If false, hides all user defined fields.  Defaults to false if not specified.
+     */
+    public $includeUserDefinedFields;
+    /**
+     * @var string Sets the ImportId for Accounts Payable reports.  Defaults to an empty string if not specified.
+     */
+    public $importId;
+    /**
+     * @var boolean If true, filter using the user-defined field at the document line level.  If false, filter using the user-defined field at the document level.  Defaults to true if not specified.
+     */
+    public $filterAtLineLevel;
+    /**
+     * @var object Sets a user-defined field filter as a name/value pair.  Only one name/value pair is allowed.  Returns null if both name and value are not set.
+     */
+    public $udfFilter;
+    /**
+     * @var string[] The names of the jurisdictions for which document lines are fetched.  Defaults to null if not specified.
+     */
+    public $jurisdictionNames;
 }
 /**
  * Information about a physical area or zone in which a certificate can apply.
@@ -14254,6 +14373,53 @@ class QueryRequestModel
     public $sortBy;
 }
 /**
+ * Represents a single tax rate item
+ * Swagger Name: AvaTaxClient
+ */
+class RateItemModel
+{
+    /**
+     * @var float The tax rate as a decimal (e.g., 0.20 for 20%)
+     */
+    public $rate;
+    /**
+     * @var string The display name formatted as "<rate> (<taxName>)" (e.g., "20.0% (VAT/GST)")
+     */
+    public $displayName;
+    /**
+     * @var string The tax name (e.g., "VAT/GST")
+     */
+    public $taxName;
+    /**
+     * @var string The jurisdiction code
+     */
+    public $jurisCode;
+    /**
+     * @var string The jurisdiction name
+     */
+    public $jurisName;
+    /**
+     * @var string The jurisdiction type ID
+     */
+    public $jurisdictionTypeId;
+    /**
+     * @var string The country code
+     */
+    public $country;
+    /**
+     * @var string The rate type ID
+     */
+    public $rateTypeId;
+    /**
+     * @var string The tax type group ID
+     */
+    public $taxTypeGroupId;
+    /**
+     * @var string The tax sub type ID
+     */
+    public $taxSubType;
+}
+/**
  * Indicates one element of a sales tax rate.
  * Swagger Name: AvaTaxClient
  */
@@ -14576,11 +14742,11 @@ class ReportParametersModel
      */
     public $currencyCode;
     /**
-     * @var int Number of partitions to split the report into.
+     * @var int DEPRECATED - Date: 02/18/2026, Version: 26.3.0, Message: This field is deprecated. Please do not use it. This will be removed from the model on 08/18/2027.  Number of partitions to split the report into.
      */
     public $numberOfPartitions;
     /**
-     * @var int The zero-based partition number to retrieve in this export request.
+     * @var int DEPRECATED - Date: 02/18/2026, Version: 26.3.0, Message: This field is deprecated. Please do not use it. This will be removed from the model on 08/18/2027.  The zero-based partition number to retrieve in this export request.
      */
     public $partition;
     /**
@@ -14635,6 +14801,34 @@ class ReportParametersModel
      * @var boolean If true, include multi tax line details in the generated report.  If false, include document or document line in the generated report based on includeDocumentLineDetails.  Defaults to false if not specified.
      */
     public $includeMultiTaxLineDetails;
+    /**
+     * @var boolean If true, shows all transactions that are in the incorrect currency.  If false, hides all transactions that are in the incorrect currency.  Defaults to false if not specified.
+     */
+    public $incorrectCurrencyOnly;
+    /**
+     * @var boolean If true, shows all additional transaction attributes.  If false, hides all additional transaction attributes.  Defaults to false if not specified.
+     */
+    public $includeAdditionalAttributes;
+    /**
+     * @var boolean If true, shows all user defined fields.  If false, hides all user defined fields.  Defaults to false if not specified.
+     */
+    public $includeUserDefinedFields;
+    /**
+     * @var string Sets the ImportId for Accounts Payable reports.  Defaults to an empty string if not specified.
+     */
+    public $importId;
+    /**
+     * @var boolean If true, filter using the user-defined field at the document line level.  If false, filter using the user-defined field at the document level.  Defaults to true if not specified.
+     */
+    public $filterAtLineLevel;
+    /**
+     * @var object Sets a user-defined field filter as a name/value pair.  Only one name/value pair is allowed.  Returns null if both name and value are not set.
+     */
+    public $udfFilter;
+    /**
+     * @var string[] The names of the jurisdictions for which document lines are fetched.  Defaults to null if not specified.
+     */
+    public $jurisdictionNames;
 }
 /**
  * Represents a license key reset request.
@@ -17059,6 +17253,18 @@ class UnitOfBasisModel
      * @var string UnitOfBasis Name
      */
     public $unitOfBasis;
+    /**
+     * @var int UnitOfBasis measurement type ID
+     */
+    public $measurementTypeId;
+    /**
+     * @var string UnitOfBasis measurement type code
+     */
+    public $measurementTypeCode;
+    /**
+     * @var string[] UnitOfBasis attributes used
+     */
+    public $attributesUsed;
     /**
      * @var boolean A boolean value based on the current definition of a Fee in AvaTax
      */

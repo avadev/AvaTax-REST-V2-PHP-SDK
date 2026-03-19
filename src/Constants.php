@@ -2,7 +2,7 @@
 namespace Avalara;
 use GuzzleHttp\Client;
 
-define('AVATAX_SDK_VERSION', '26.2.0');
+define('AVATAX_SDK_VERSION', '26.3.2');
 
 /*****************************************************************************
  *                                                                           *
@@ -1247,6 +1247,14 @@ class ErrorCodeId
     const C_INVALIDADDRESSORGEOCOORDINATES = 4025;
 
     /**
+     * IDP relater error code
+     */
+    const C_QUERYPARSINGERROR = 4026;
+    const C_VALUEMISMATCH = 4027;
+    const C_INVALIDSTATUSFORHSVERIFICATION = 4028;
+    const C_CANNOTVERIFYHSCODE = 4029;
+
+    /**
      * Error string from the service unknown
      */
     const C_UNEXPECTEDERROR = -1;
@@ -1495,6 +1503,12 @@ class BatchType
     const C_GLACCOUNTIMPORT = 16;
     const C_ADVANCEDRULESIMPORT = 17;
     const C_ITEMIMPORTV2 = 18;
+
+    /**
+     * This batch type represents VAT number validation data being uploaded.
+     *  Each line contains a business name, VAT number, and country code to be validated against VIES.
+     */
+    const C_VATVALIDATIONIMPORT = 19;
 
 }
 
@@ -2085,6 +2099,39 @@ class CustomRuleSubtype
 
 /**
  * Swagger Name: AvaTaxClient
+ * Jurisdiction Type
+ */
+class JurisdictionType
+{
+    /**
+     * Country
+     */
+    const C_COUNTRY = 0;
+
+    /**
+     * State
+     */
+    const C_STATE = 1;
+
+    /**
+     * County
+     */
+    const C_COUNTY = 2;
+
+    /**
+     * City
+     */
+    const C_CITY = 3;
+
+    /**
+     * Special Tax Jurisdiction
+     */
+    const C_SPECIAL = 4;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
  * Filing Frequency types
  */
 class FilingFrequencyId
@@ -2146,39 +2193,6 @@ class AvataxDeleteErrorTransactionStatus
      * Failed delete
      */
     const C_FAILURE = 1;
-
-}
-
-/**
- * Swagger Name: AvaTaxClient
- * Jurisdiction Type
- */
-class JurisdictionType
-{
-    /**
-     * Country
-     */
-    const C_COUNTRY = 0;
-
-    /**
-     * State
-     */
-    const C_STATE = 1;
-
-    /**
-     * County
-     */
-    const C_COUNTY = 2;
-
-    /**
-     * City
-     */
-    const C_CITY = 3;
-
-    /**
-     * Special Tax Jurisdiction
-     */
-    const C_SPECIAL = 4;
 
 }
 
@@ -2570,6 +2584,11 @@ class ReportDateFilter
 class ReportDocType
 {
     /**
+     * Output all tax transactions in the report
+     */
+    const C_ALL = 65;
+
+    /**
      * Output all ConsumerUse tax transactions in the report
      */
     const C_CONSUMERUSE = 67;
@@ -2722,6 +2741,11 @@ class ReportSource
      * accounts payable document line detail
      */
     const C_APDOCUMENTLINEDETAIL = 5;
+
+    /**
+     * document line detail all taxes
+     */
+    const C_DOCUMENTLINEDETAILALLTAXES = 6;
 
 }
 
@@ -4386,6 +4410,11 @@ class SecurityRoleId
      * AvaTaxOnlyCompanyUser
      */
     const C_AVATAXONLYCOMPANYUSER = 35;
+
+    /**
+     * AvaTaxOnlyUserAdmin
+     */
+    const C_AVATAXONLYUSERADMIN = 36;
 
 }
 
