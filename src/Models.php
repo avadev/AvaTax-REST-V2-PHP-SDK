@@ -16446,6 +16446,10 @@ class TransactionLineDetailModel
      * @var string Indicates the VAT code for this detail.
      */
     public $vatCode;
+    /**
+     * @var object[] Contains granular duty details as a list of key-value pairs.  This field provides additional detailed information about duty calculations  specific to TCS (Tax Calculation Service) operations.
+     */
+    public $granularDutyDetails;
 }
 /**
  * Represents information about location types stored in a line
@@ -17747,6 +17751,109 @@ class VarianceUnit
     public $currency;
 }
 /**
+ * Represents additional information for vendor
+ * Swagger Name: AvaTaxClient
+ */
+class VendorAdditionalInfoModel
+{
+    /**
+     * @var int The unique ID number of this vendor additional info record.
+     */
+    public $id;
+    /**
+     * @var int The ID of the vendor (customer) this additional information is associated with.
+     */
+    public $vendorId;
+    /**
+     * @var int The identifier for the cost center associated with this vendor.
+     */
+    public $costCenterId;
+    /**
+     * @var string The cost center code associated with this vendor.
+     */
+    public $costCenterCode;
+    /**
+     * @var int The identifier for the item code associated with this vendor.
+     */
+    public $itemCodeId;
+    /**
+     * @var string The item code associated with this vendor.
+     */
+    public $itemCode;
+    /**
+     * @var string The default tax exemption for this vendor.
+     */
+    public $defaultTaxExemption;
+    /**
+     * @var int The ID of the ship-from location for this vendor.
+     */
+    public $shipFromLocationId;
+    /**
+     * @var string The code identifying the ship-from location for this vendor.
+     */
+    public $shipFromLocationCode;
+    /**
+     * @var string Street address line of the ship-from location for this vendor.
+     */
+    public $shipFromAddressLine;
+    /**
+     * @var string City component of the ship-from address for this vendor.
+     */
+    public $shipFromAddressCity;
+    /**
+     * @var string State or region component of the ship-from address for this vendor.
+     */
+    public $shipFromAddressState;
+    /**
+     * @var string Postal code / zip code component of the ship-from address for this vendor.
+     */
+    public $shipFromAddressZip;
+    /**
+     * @var string Country component of the ship-from address for this vendor.
+     */
+    public $shipFromAddressCountry;
+    /**
+     * @var int The unique ID of the ship-to location for this vendor.
+     */
+    public $shipToLocationId;
+    /**
+     * @var string The code identifying the ship-to location for this vendor.
+     */
+    public $shipToLocationCode;
+    /**
+     * @var string Street address line of the ship-to location for this vendor.
+     */
+    public $shipToAddressLine;
+    /**
+     * @var string City component of the ship-to address for this vendor.
+     */
+    public $shipToAddressCity;
+    /**
+     * @var string State or region component of the ship-to address for this vendor.
+     */
+    public $shipToAddressState;
+    /**
+     * @var string Postal code / zip code component of the ship-to address for this vendor.
+     */
+    public $shipToAddressZip;
+    /**
+     * @var string Country component of the ship-to address for this vendor.
+     */
+    public $shipToAddressCountry;
+    /**
+     * @var boolean This value is `true` if this vendor is marked as a trusted vendor.
+     */
+    public $isTrustedVendor;
+    /**
+     * @var boolean This value is `true` if accrual accounting is enabled for this vendor.
+     */
+    public $isAccrual;
+    /**
+     * @var boolean This value is `true` if tax liability is on the vendor rather than the purchaser.
+     */
+    public $isTaxOnVendor;
+}
+/**
  * Represents a certificate document for vendors.
  * This model inherits all properties from CertificateModel and adds vendor-specific functionality.
  * Swagger Name: AvaTaxClient
@@ -17917,6 +18024,10 @@ class VendorModel
      * @var boolean Indicates whether this entity is a vendor.  This flag helps distinguish vendors from regular customers in the system.  Note: This field is automatically set to true for vendor endpoints and cannot be overridden by user filters.
      */
     public $isVendor;
+    /**
+     * @var VendorAdditionalInfoModel 
+     */
+    public $vendorAdditionalInfo;
     /**
      * @var int The unique ID number of this customer.
      */
