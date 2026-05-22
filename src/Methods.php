@@ -2099,6 +2099,33 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Create VAT Numbers for a company
+     *
+     * Create one or more VAT number records for a company.
+     * Each record is validated synchronously against the ELR / Directory Search service
+     * (which proxies VIES). The response includes validation results:
+     * `vatNumberStatus`, `registeredBusinessName`, `businessNameStatus`, `validationDate`,
+     * and `validationSource`.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AvaTaxOnlyAccountAdmin, AvaTaxOnlyCompanyAdmin, BatchServiceAdmin, CompanyAdmin, CSPTester, FirmAdmin, Registrar, ReturnsOnlyAccountAdmin, ReturnsOnlyCompanyAdmin, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The ID of the company that owns these VAT numbers
+     * @param CustomerVatNumberModel[] $model The VAT number records you wish to create
+     * @return \stdClass
+     */
+    public function createVatNumbers($companyId, $model)    {
+        $path = "/api/v2/companies/{$companyId}/vatnumbers";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
      * Delete a single company
      *
      * Deleting a company will delete all child companies, and all users attached to this company.
@@ -2141,6 +2168,29 @@ class AvaTaxClient extends AvaTaxClientBase
      */
     public function deleteCompanyParameter($companyId, $id)    {
         $path = "/api/v2/companies/{$companyId}/parameters/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Delete a single VAT Number
+     *
+     * Marks the VAT number record identified by this URL as deleted.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AvaTaxOnlyAccountAdmin, AvaTaxOnlyCompanyAdmin, BatchServiceAdmin, CompanyAdmin, CSPTester, FirmAdmin, SSTAdmin, TechnicalSupportAdmin.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The ID of the company that owns this VAT number
+     * @param int $id The unique ID of the VAT number record to delete
+     * @return \stdClass
+     */
+    public function deleteVatNumber($companyId, $id)    {
+        $path = "/api/v2/companies/{$companyId}/vatnumbers/{$id}";
         $guzzleParams = [
             'query' => [],
             'body' => null
@@ -2361,6 +2411,29 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Retrieve a single VAT Number
+     *
+     * Retrieve a single VAT Number record by its unique ID.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, AvaTaxOnlyAccountAdmin, AvaTaxOnlyAccountUser, AvaTaxOnlyCompanyAdmin, AvaTaxOnlyCompanyUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, ReturnsOnlyAccountAdmin, ReturnsOnlyAccountUser, ReturnsOnlyCompanyAdmin, ReturnsOnlyCompanyUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The ID of the company that owns this VAT number
+     * @param int $id The unique ID of the VAT number record
+     * @return \stdClass
+     */
+    public function getVatNumber($companyId, $id)    {
+        $path = "/api/v2/companies/{$companyId}/vatnumbers/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
      * Get ACH entry detail report for company and period
      *
      * This API is available by invitation only.
@@ -2467,6 +2540,47 @@ class AvaTaxClient extends AvaTaxClientBase
         $path = "/api/v2/companies/mrs";
         $guzzleParams = [
             'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Retrieve VAT Numbers for a company
+     *
+     * Retrieve all VAT Numbers associated with this company.
+     *  
+     * A VAT Number represents a customer's VAT identification number that has been validated
+     * against VIES (VAT Information Exchange System).
+     *  
+     * Search for specific records using the `$filter` parameter. Supported filters include:
+     * * `vatNumber` - Filter by VAT number
+     * * `country` - Filter by country code (e.g., "GB", "DE")
+     * * `vatNumberStatus` - Filter by VAT number validation status (0=NotValidated, 1=Valid, 2=Invalid, 3=Error)
+     * * `businessNameStatus` - Filter by business name comparison status (0=NotValidated, 1=Valid, 2=Invalid, 3=Error)
+     * * `businessName` - Filter by business name
+     *  
+     * Order results using `$orderBy`. Common orderings:
+     * * `vatNumber ASC` - Order by VAT number ascending
+     * * `validationDate DESC` - Order by most recently validated first
+     * * `modifiedDate DESC` - Order by most recently modified first
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, AvaTaxOnlyAccountAdmin, AvaTaxOnlyAccountUser, AvaTaxOnlyCompanyAdmin, AvaTaxOnlyCompanyUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, ReturnsOnlyAccountAdmin, ReturnsOnlyAccountUser, ReturnsOnlyCompanyAdmin, ReturnsOnlyCompanyUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The ID of the company
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* createdDate, modifiedDate
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return \stdClass
+     */
+    public function listVatNumbers($companyId, $filter=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/companies/{$companyId}/vatnumbers";
+        $guzzleParams = [
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
@@ -2609,6 +2723,68 @@ class AvaTaxClient extends AvaTaxClientBase
             'body' => json_encode($model)
         ];
         return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Update a single VAT Number
+     *
+     * Replace the existing VAT number record with the data in the object you PUT.
+     *  
+     * Only `vatNumber`, `businessName`, and `country` fields can be updated. The
+     * validation-related fields (`vatNumberStatus`, `registeredBusinessName`,
+     * `businessNameStatus`, `validationDate`, `validationSource`) are managed by the
+     * system and are refreshed automatically: every successful PUT re-triggers a
+     * synchronous VAT validation against the ELR / Directory Search service (which
+     * proxies VIES). This makes "Fix" flows work as expected — correcting an
+     * invalid VAT number immediately updates its status.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AvaTaxOnlyAccountAdmin, AvaTaxOnlyCompanyAdmin, BatchServiceAdmin, CompanyAdmin, CSPTester, FirmAdmin, Registrar, ReturnsOnlyAccountAdmin, ReturnsOnlyCompanyAdmin, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The ID of the company that owns this VAT number
+     * @param int $id The unique ID of the VAT number record to update
+     * @param CustomerVatNumberModel $model The VAT number object you wish to update
+     * @return \stdClass
+     */
+    public function updateVatNumber($companyId, $id, $model)    {
+        $path = "/api/v2/companies/{$companyId}/vatnumbers/{$id}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Validate a VAT Number without storing it
+     *
+     * Performs a synchronous VAT number validation against the ELR / Directory Search service
+     * (which proxies VIES) without persisting any record in the `CustomerVatNumber` table.
+     *  
+     * This is useful for UI flows that allow the user to "test" a VAT number before
+     * deciding whether to add it. The response payload mirrors the shape returned by
+     * the create/update endpoints, but `id`, `createdDate`, and `modifiedDate` are not set.
+     * Business-name comparison is not performed here; use the create endpoint to persist
+     * and obtain a `businessNameStatus`.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, AvaTaxOnlyAccountAdmin, AvaTaxOnlyAccountUser, AvaTaxOnlyCompanyAdmin, AvaTaxOnlyCompanyUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, ReturnsOnlyAccountAdmin, ReturnsOnlyAccountUser, ReturnsOnlyCompanyAdmin, ReturnsOnlyCompanyUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The ID of the company on whose behalf the validation is performed
+     * @param CustomerVatNumberModel $model The VAT number to validate (vatNumber, country)
+     * @return \stdClass
+     */
+    public function validateVatNumber($companyId, $model)    {
+        $path = "/api/v2/companies/{$companyId}/vatnumbers/validate";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -3894,29 +4070,6 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
-     * Test whether a form supports online login verification
-     *
-     * This API is intended to be useful to identify whether the user should be allowed
-     * to automatically verify their login and password. This API will provide a result only if the form supports automatic online login verification.
-     * Swagger Name: AvaTaxClient
-     * 
-     * @param string $form The name of the form you would like to verify. This is the tax form code
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxFormCodes, scraperType, expectedResponseTime, requiredFilingCalendarDataFields
-     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
-     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
-     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return \stdClass
-     */
-    public function getLoginVerifierByForm($form, $filter=null, $top=null, $skip=null, $orderBy=null)    {
-        $path = "/api/v2/definitions/filingcalendars/loginverifiers/{$form}";
-        $guzzleParams = [
-            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
-            'body' => null
-        ];
-        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
-    }
-
-    /**
      * List all market place locations.
      *
      * List all market place locations.
@@ -4570,29 +4723,6 @@ class AvaTaxClient extends AvaTaxClientBase
         $path = "/api/v2/definitions/locationquestions";
         $guzzleParams = [
             'query' => ['line1' => $line1, 'line2' => $line2, 'line3' => $line3, 'city' => $city, 'region' => $region, 'postalCode' => $postalCode, 'country' => $country, 'latitude' => $latitude, 'longitude' => $longitude, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
-            'body' => null
-        ];
-        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
-    }
-
-    /**
-     * List all forms where logins can be verified automatically
-     *
-     * List all forms where logins can be verified automatically.
-     * This API is intended to be useful to identify whether the user should be allowed
-     * to automatically verify their login and password.
-     * Swagger Name: AvaTaxClient
-     * 
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* taxFormCodes, scraperType, expectedResponseTime, requiredFilingCalendarDataFields
-     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
-     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
-     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
-     * @return \stdClass
-     */
-    public function listLoginVerifiers($filter=null, $top=null, $skip=null, $orderBy=null)    {
-        $path = "/api/v2/definitions/filingcalendars/loginverifiers";
-        $guzzleParams = [
-            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
@@ -6124,6 +6254,45 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * List economic nexus threshold statuses for a company
+     *
+     * Returns precomputed economic nexus threshold statuses for a company, sourced from a cache
+     * refreshed weekly from Snowflake.
+     *  
+     * When the optional `region` query parameter is provided, only the matching jurisdiction row is included in `states`.
+     * If no row exists for that company and region, `states` is an empty array (still 200 OK).
+     *  
+     * TPS currently binds this filter as query parameter `state`; use the same value. If the public contract standardizes on `region`,
+     * TPS or api-gateway should accept or rewrite `region` so filtering still applies.
+     *  
+     * Production traffic is served by TPS; api-gateway should route this path to TPS.
+     *  
+     * This endpoint requires the `NexusFetch` permission. If EcoNexus is not configured in TPS or the cache has not loaded, TPS returns 503.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, AvaTaxOnlyAccountAdmin, AvaTaxOnlyAccountUser, AvaTaxOnlyCompanyAdmin, AvaTaxOnlyCompanyUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, FirmAdmin, FirmUser, ReturnsOnlyAccountAdmin, ReturnsOnlyAccountUser, ReturnsOnlyCompanyAdmin, ReturnsOnlyCompanyUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The Avalara company identifier.
+     * @param string $region Optional two-letter US state/region postal code (case-insensitive), same meaning as the `state` column in the data store. When provided, `states` contains at most one item; if there is no data for that company and region, `states` is an empty array (200 OK).
+     * @param string $include Standard Avalara `$include` query option (see other v2 list APIs).
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return \stdClass
+     */
+    public function getEcoNexusThresholds($companyId, $region=null, $include=null, $filter=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/companies/{$companyId}/econexusthresholds";
+        $guzzleParams = [
+            'query' => ['region' => $region, '$include' => $include, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
      * Approves linkage to a firm for a client account
      *
      * This API enables the account admin of a client account to approve linkage request by a firm.
@@ -6374,6 +6543,27 @@ class AvaTaxClient extends AvaTaxClientBase
             'body' => json_encode($model)
         ];
         return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Resolves a form type to an extraction task identifier.
+     *
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, AvaTaxOnlyAccountAdmin, AvaTaxOnlyAccountUser, AvaTaxOnlyCompanyAdmin, AvaTaxOnlyCompanyUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param string $form_type The form type to resolve (e.g., "W-9").
+     * @return \stdClass
+     */
+    public function resolveFormTypeTask($form_type=null)    {
+        $path = "/api/v2/form-type-mappings/resolve-task";
+        $guzzleParams = [
+            'query' => ['form_type' => $form_type],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -6894,6 +7084,34 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Creates a batch to generate tax code recommendations asynchronously.
+     *
+     * Creates a new batch for asynchronous tax code recommendations processing.
+     * The batch is processed asynchronously, and you can check the status using the GetBatchTaxCodeRecommendations endpoint.
+     *  
+     * Maximum items created per request: 2,000 (subject to change).
+     *  
+     * Batches are automatically deleted after 1 day.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, AvaTaxOnlyAccountAdmin, AvaTaxOnlyAccountUser, AvaTaxOnlyCompanyAdmin, AvaTaxOnlyCompanyUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ReturnsOnlyAccountAdmin, ReturnsOnlyAccountUser, ReturnsOnlyCompanyAdmin, ReturnsOnlyCompanyUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The unique ID of the company.
+     * @param ItemTaxcodeRecommendationBatchesInputModel[] $model The list of items to include in the batch (maximum 2,000).
+     * @return \stdClass
+     */
+    public function createTaxcodeBatch($companyId, $model)    {
+        $path = "/api/v2/companies/{$companyId}/taxcode-recommendations/batches";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
      * Create a new tax code classification request
      *
      * Creates a new tax code classification request.
@@ -6918,6 +7136,31 @@ class AvaTaxClient extends AvaTaxClientBase
             'body' => json_encode($model)
         ];
         return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Deletes a tax code recommendation batch.
+     *
+     * Deletes the specified tax code recommendation batch.
+     *  
+     * Returns '404 Not Found' if the batch is already deleted, does not exist, or belongs to a different company.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, AvaTaxOnlyAccountAdmin, AvaTaxOnlyAccountUser, AvaTaxOnlyCompanyAdmin, AvaTaxOnlyCompanyUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ReturnsOnlyAccountAdmin, ReturnsOnlyAccountUser, ReturnsOnlyCompanyAdmin, ReturnsOnlyCompanyUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The unique ID of the company.
+     * @param int $batchId The unique ID of the batch to delete.
+     * @return \stdClass
+     */
+    public function deleteBatchTaxCodeRecommendations($companyId, $batchId)    {
+        $path = "/api/v2/companies/{$companyId}/taxcode-recommendations/batches/{$batchId}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -6950,6 +7193,28 @@ class AvaTaxClient extends AvaTaxClientBase
      */
     public function deleteCatalogueItem($companyId, $itemCode)    {
         $path = "/api/v2/companies/{$companyId}/itemcatalogue/{$itemCode}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Deletes HS Code classification status for the item by status id.
+     *
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AvaTaxOnlyAccountAdmin, AvaTaxOnlyCompanyAdmin, BatchServiceAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The ID of the company to which this item belongs
+     * @param int $itemId The ID of the item
+     * @param string $id The HS Code classification status id.
+     * @return \stdClass
+     */
+    public function deleteHSCodeClassificationStatus($companyId, $itemId, $id)    {
+        $path = "/api/v2/companies/{$companyId}/items/{$itemId}/hscode-classifications-status/{$id}";
         $guzzleParams = [
             'query' => [],
             'body' => null
@@ -7201,6 +7466,34 @@ class AvaTaxClient extends AvaTaxClientBase
             'body' => json_encode($model)
         ];
         return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Retrieves the status and results of a tax code recommendation batch.
+     *
+     * Retrieves the status and results of a tax code recommendation batch for the specified company.
+     * If the batch status is "Completed", the response includes the tax code recommendations for all items in the batch.
+     * If the batch status is "Waiting", "Processing", or any other non-complete status, only the status information is returned.
+     * Returns '404 Not Found' if the batch has been deleted or does not exist.
+     *  
+     * Batches are automatically deleted after 1 day.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, AvaTaxOnlyAccountAdmin, AvaTaxOnlyAccountUser, AvaTaxOnlyCompanyAdmin, AvaTaxOnlyCompanyUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ReturnsOnlyAccountAdmin, ReturnsOnlyAccountUser, ReturnsOnlyCompanyAdmin, ReturnsOnlyCompanyUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The unique ID of the company.
+     * @param int $batchId The unique ID of the recommendation batch.
+     * @return \stdClass
+     */
+    public function getBatchTaxCodeRecommendations($companyId, $batchId)    {
+        $path = "/api/v2/companies/{$companyId}/taxcode-recommendations/batches/{$batchId}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -10281,7 +10574,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, AvaTaxOnlyAccountAdmin, AvaTaxOnlyAccountUser, AvaTaxOnlyCompanyAdmin, AvaTaxOnlyCompanyUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, AvaTaxOnlyAccountAdmin, AvaTaxOnlyAccountUser, AvaTaxOnlyCompanyAdmin, AvaTaxOnlyCompanyUser, AvaTaxOnlyUserAdmin, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * * This API is available to Avalara system-level (registrar-level) users only.
      * Swagger Name: AvaTaxClient
      * 
@@ -10390,6 +10683,29 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Download an audit log report
+     *
+     * Downloads the file associated with an audit log report.
+     * If the report is not yet complete, you will receive a `ReportNotFinished` error.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, AvaTaxOnlyAccountAdmin, AvaTaxOnlyAccountUser, AvaTaxOnlyCompanyAdmin, AvaTaxOnlyCompanyUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ProStoresOperator, ReturnsOnlyAccountAdmin, ReturnsOnlyAccountUser, ReturnsOnlyCompanyAdmin, ReturnsOnlyCompanyUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param string $id The unique ID of the audit log report
+     * @return \stdClass
+     */
+    public function downloadAuditLogReport($id)    {
+        $path = "/api/v2/reports/exportauditlogs/{$id}/attachment";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
      * Download a report
      *
      * This API downloads the file associated with a report.
@@ -10417,6 +10733,50 @@ class AvaTaxClient extends AvaTaxClientBase
      */
     public function downloadReport($id)    {
         $path = "/api/v2/reports/{$id}/attachment";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Initiate an ExportAuditLogs report task
+     *
+     * Begins running an `ExportAuditLogs` report task and returns the identity of the report.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, AvaTaxOnlyAccountAdmin, AvaTaxOnlyAccountUser, AvaTaxOnlyCompanyAdmin, AvaTaxOnlyCompanyUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ProStoresOperator, ReturnsOnlyAccountAdmin, ReturnsOnlyAccountUser, ReturnsOnlyCompanyAdmin, ReturnsOnlyCompanyUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param ReportAuditLogModel $model Options to filter the audit log export.
+     * @return \stdClass
+     */
+    public function exportAuditLogs($model)    {
+        $path = "/api/v2/reports/exportauditlogs";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Get an audit log report by id
+     *
+     * Retrieves the status and details of an audit log report task.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, AvaTaxOnlyAccountAdmin, AvaTaxOnlyAccountUser, AvaTaxOnlyCompanyAdmin, AvaTaxOnlyCompanyUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ProStoresOperator, ReturnsOnlyAccountAdmin, ReturnsOnlyAccountUser, ReturnsOnlyCompanyAdmin, ReturnsOnlyCompanyUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param string $id The unique ID of the audit log report
+     * @return \stdClass
+     */
+    public function getAuditLogReport($id)    {
+        $path = "/api/v2/reports/exportauditlogs/{$id}";
         $guzzleParams = [
             'query' => [],
             'body' => null
@@ -12921,7 +13281,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, AvaTaxOnlyAccountAdmin, AvaTaxOnlyAccountUser, AvaTaxOnlyCompanyAdmin, AvaTaxOnlyCompanyUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, AvaTaxOnlyAccountAdmin, AvaTaxOnlyAccountUser, AvaTaxOnlyCompanyAdmin, AvaTaxOnlyCompanyUser, AvaTaxOnlyUserAdmin, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param PasswordChangeModel $model An object containing your current password and the new password.
@@ -12951,7 +13311,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, AvaTaxOnlyAccountAdmin, AvaTaxOnlyAccountUser, AvaTaxOnlyCompanyAdmin, AvaTaxOnlyCompanyUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, AvaTaxOnlyAccountAdmin, AvaTaxOnlyAccountUser, AvaTaxOnlyCompanyAdmin, AvaTaxOnlyCompanyUser, AvaTaxOnlyUserAdmin, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $accountId The unique ID number of the account where these users will be created.
@@ -12979,7 +13339,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AvaTaxOnlyAccountAdmin, AvaTaxOnlyCompanyAdmin, BatchServiceAdmin, CompanyAdmin, Compliance Root User, CSPTester, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TreasuryAdmin.
+     * * This API requires one of the following user roles: AccountAdmin, AvaTaxOnlyAccountAdmin, AvaTaxOnlyCompanyAdmin, AvaTaxOnlyUserAdmin, BatchServiceAdmin, CompanyAdmin, Compliance Root User, CSPTester, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TreasuryAdmin.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the user you wish to delete.
@@ -13007,7 +13367,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, AvaTaxOnlyAccountAdmin, AvaTaxOnlyAccountUser, AvaTaxOnlyCompanyAdmin, AvaTaxOnlyCompanyUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, ReturnsOnlyAccountAdmin, ReturnsOnlyAccountUser, ReturnsOnlyCompanyAdmin, ReturnsOnlyCompanyUser, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, AvaTaxOnlyAccountAdmin, AvaTaxOnlyAccountUser, AvaTaxOnlyCompanyAdmin, AvaTaxOnlyCompanyUser, AvaTaxOnlyUserAdmin, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, ReturnsOnlyAccountAdmin, ReturnsOnlyAccountUser, ReturnsOnlyCompanyAdmin, ReturnsOnlyCompanyUser, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the user to retrieve.
@@ -13045,7 +13405,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, AvaTaxOnlyAccountAdmin, AvaTaxOnlyAccountUser, AvaTaxOnlyCompanyAdmin, AvaTaxOnlyCompanyUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, ReturnsOnlyAccountAdmin, ReturnsOnlyAccountUser, ReturnsOnlyCompanyAdmin, ReturnsOnlyCompanyUser, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, AvaTaxOnlyAccountAdmin, AvaTaxOnlyAccountUser, AvaTaxOnlyCompanyAdmin, AvaTaxOnlyCompanyUser, AvaTaxOnlyUserAdmin, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, ReturnsOnlyAccountAdmin, ReturnsOnlyAccountUser, ReturnsOnlyCompanyAdmin, ReturnsOnlyCompanyUser, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the user to retrieve.
@@ -13079,7 +13439,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, AvaTaxOnlyAccountAdmin, AvaTaxOnlyAccountUser, AvaTaxOnlyCompanyAdmin, AvaTaxOnlyCompanyUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, ReturnsOnlyAccountAdmin, ReturnsOnlyAccountUser, ReturnsOnlyCompanyAdmin, ReturnsOnlyCompanyUser, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, AvaTaxOnlyAccountAdmin, AvaTaxOnlyAccountUser, AvaTaxOnlyCompanyAdmin, AvaTaxOnlyCompanyUser, AvaTaxOnlyUserAdmin, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, ReturnsOnlyAccountAdmin, ReturnsOnlyAccountUser, ReturnsOnlyCompanyAdmin, ReturnsOnlyCompanyUser, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $accountId The accountID of the user you wish to list.
@@ -13119,7 +13479,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, AvaTaxOnlyAccountAdmin, AvaTaxOnlyAccountUser, AvaTaxOnlyCompanyAdmin, AvaTaxOnlyCompanyUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, ReturnsOnlyAccountAdmin, ReturnsOnlyAccountUser, ReturnsOnlyCompanyAdmin, ReturnsOnlyCompanyUser, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, AvaTaxOnlyAccountAdmin, AvaTaxOnlyAccountUser, AvaTaxOnlyCompanyAdmin, AvaTaxOnlyCompanyUser, AvaTaxOnlyUserAdmin, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPAdmin, CSPTester, ECMAccountUser, ECMCompanyUser, FirmAdmin, FirmUser, ProStoresOperator, Registrar, ReturnsOnlyAccountAdmin, ReturnsOnlyAccountUser, ReturnsOnlyCompanyAdmin, ReturnsOnlyCompanyUser, SiteAdmin, SSTAdmin, SystemAdmin, SystemOperator, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param string $include Optional fetch commands.
@@ -13148,7 +13508,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * ### Security Policies
      * 
-     * * This API requires one of the following user roles: AccountAdmin, AccountUser, AvaTaxOnlyAccountAdmin, AvaTaxOnlyAccountUser, AvaTaxOnlyCompanyAdmin, AvaTaxOnlyCompanyUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
+     * * This API requires one of the following user roles: AccountAdmin, AccountUser, AvaTaxOnlyAccountAdmin, AvaTaxOnlyAccountUser, AvaTaxOnlyCompanyAdmin, AvaTaxOnlyCompanyUser, AvaTaxOnlyUserAdmin, BatchServiceAdmin, CompanyAdmin, CompanyUser, Compliance Root User, ComplianceAdmin, ComplianceUser, CSPTester, FirmAdmin, FirmUser, Registrar, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser, TreasuryAdmin, TreasuryUser.
      * Swagger Name: AvaTaxClient
      * 
      * @param int $id The ID of the user you wish to update.

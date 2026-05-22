@@ -2,7 +2,7 @@
 namespace Avalara;
 use GuzzleHttp\Client;
 
-define('AVATAX_SDK_VERSION', '26.4.0');
+define('AVATAX_SDK_VERSION', '26.5.0');
 
 /*****************************************************************************
  *                                                                           *
@@ -1509,6 +1509,7 @@ class BatchType
      *  Each line contains a business name, VAT number, and country code to be validated against VIES.
      */
     const C_VATVALIDATIONIMPORT = 19;
+    const C_TXNWITHDYNAMICPARAMBAG = 20;
 
 }
 
@@ -2312,6 +2313,11 @@ class DynamicRuleComponentSubtype
     const C_MATCHENTITYUSECODE = 15;
 
     /**
+     * Matches based on after-calculation messages.
+     */
+    const C_MATCHMESSAGE = 16;
+
+    /**
      * Unspecified action.
      */
     const C_ACTION = 256;
@@ -2400,6 +2406,16 @@ class DynamicRuleComponentSubtype
      * Updates an exemption stauts.
      */
     const C_TAXRULEEXEMPTENTITY = 273;
+
+    /**
+     * Adds a message or invoice message to the transaction response.
+     */
+    const C_ADDMESSAGE = 288;
+
+    /**
+     * Adds a line to the transaction.
+     */
+    const C_ADDLINE = 289;
 
     /**
      * Unspecified variable.
@@ -3895,24 +3911,6 @@ class SendSalesFileType
      * File is in Javascript Object Notation format
      */
     const C_JSON = 1;
-
-}
-
-/**
- * Swagger Name: AvaTaxClient
- * Type of verification task
- */
-class ScraperType
-{
-    /**
-     * Indicates that is is a login type
-     */
-    const C_LOGIN = 1;
-
-    /**
-     * Indicates that it is a Customer DOR Data type
-     */
-    const C_CUSTOMERDORDATA = 2;
 
 }
 
