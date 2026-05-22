@@ -4622,37 +4622,39 @@ class CustomFieldModel
     public $value;
 }
 /**
- * Base model for custom rules that can be either DynamicRuleModel or AdvancedRuleExecutionModel or TaxRuleModel
+ * Model which can provide a summary of any custom rule variety.
+ * Custom rules is the umbrella term for traditional Tax Rules,
+ * legacy Advanced Rules (transaction rules), and the newest Dynamic Rules.
  * Swagger Name: AvaTaxClient
  */
 class CustomRuleSummaryModel
 {
     /**
-     * @var string The unique identifier for this custom rule summary
+     * @var string The unique identifier for this custom rule.
      */
     public $id;
     /**
-     * @var int The company ID that the custom rule belongs to
+     * @var int The company ID that the custom rule belongs to.
      */
     public $companyId;
     /**
-     * @var string The name of the custom rule
+     * @var string The name of the custom rule.
      */
     public $name;
     /**
-     * @var string The status of the custom rule (See CustomRuleStatus::* for a list of allowable values)
+     * @var string The status of the custom rule. (See CustomRuleStatus::* for a list of allowable values)
      */
     public $status;
     /**
-     * @var string The type of custom rule (See CustomRuleType::* for a list of allowable values)
+     * @var string The type of rule entity which this custom rule is. (See CustomRuleType::* for a list of allowable values)
      */
     public $type;
     /**
-     * @var string The subtypes (categories) of the custom rule (See CustomRuleSubtype::* for a list of allowable values)
+     * @var string The subtypes (categories or actions) of the custom rule. (See CustomRuleSubtype::* for a list of allowable values)
      */
     public $subtype;
     /**
-     * @var string[] The description of the subtypes of the custom rule
+     * @var string[] The description of the subtypes of the custom rule.
      */
     public $subtypeDescription;
     /**
@@ -4700,7 +4702,7 @@ class CustomRuleSummaryModel
      */
     public $companyLocationCode;
     /**
-     * @var int The order of the rule executions (only applies to advanced rules)
+     * @var int The index order of the rule execution (only applies to advanced rules).
      */
     public $order;
     /**
@@ -4720,7 +4722,7 @@ class CustomRuleSummaryModel
      */
     public $createdDate;
     /**
-     * @var object The rule entity data, which can be either a TaxRuleModel, a DynamicRuleModel, or an AdvancedRuleExecutionModel
+     * @var object The rule entity data, which can be either a TaxRuleModel, a DynamicRuleModel, or an AdvancedRuleExecutionModel.
      */
     public $ruleEntity;
 }
@@ -8870,6 +8872,25 @@ class FormMasterModel
     public $aliasForFormMasterId;
 }
 /**
+ * Represents the resolved extraction task information for a given form type.
+ * Swagger Name: AvaTaxClient
+ */
+class FormTypeMappingModel
+{
+    /**
+     * @var string The extraction task identifier resolved from the form type.
+     */
+    public $taskId;
+    /**
+     * @var string The form type that was resolved.
+     */
+    public $formType;
+    /**
+     * @var string The mapped key associated with the form type.
+     */
+    public $mappedKey;
+}
+/**
  * Represents a request for a free trial account for AvaTax.
  * Free trial accounts are only available on the Sandbox environment.
  * Swagger Name: AvaTaxClient
@@ -10647,6 +10668,25 @@ class ItemTaxCodeRecommendationStatusModel
     public $description;
 }
 /**
+ * One recommended tax code (code, level, and Indix description) for bulk tax code recommendation responses.
+ * Swagger Name: AvaTaxClient
+ */
+class ItemTaxcodeRecommendationBaseBatchOutputModel
+{
+    /**
+     * @var string Recommended TaxCode
+     */
+    public $taxCode;
+    /**
+     * @var string Recommended TaxCode Level
+     */
+    public $level;
+    /**
+     * @var string Recommended TaxCode description (from Indix)
+     */
+    public $taxCodeDescription;
+}
+/**
  * Represents the output model containing the status and results of a tax code recommendation batch.
  * Swagger Name: AvaTaxClient
  */
@@ -10723,7 +10763,7 @@ class ItemTaxcodeRecommendationBatchesOutputModel
      */
     public $summary;
     /**
-     * @var TaxCodeRecommendationOutputModel[] The list of generated tax code recommendations for this item.
+     * @var ItemTaxcodeRecommendationBaseBatchOutputModel[] The list of generated tax code recommendations for this item.
      */
     public $taxCodeRecommendations;
 }
@@ -11596,72 +11636,6 @@ class LockTransactionModel
      * @var boolean Set this value to be true to commit this transaction.  Committing a transaction allows it to be reported on a tax return. Uncommitted transactions will not be reported.
      */
     public $isLocked;
-}
-/**
- * Represents a verification request using Skyscraper for a company
- * Swagger Name: AvaTaxClient
- */
-class LoginVerificationInputModel
-{
-    /**
-     * @var int CompanyId that we are verifying the login information for
-     */
-    public $companyId;
-    /**
-     * @var int AccountId of the login verification
-     */
-    public $accountId;
-    /**
-     * @var string Region of the verification request
-     */
-    public $region;
-    /**
-     * @var string TaxFormCode for the verification request
-     */
-    public $taxFormCode;
-    /**
-     * @var string Username that we are using for verification
-     */
-    public $username;
-    /**
-     * @var string Password we are using for verification
-     */
-    public $password;
-    /**
-     * @var object Additional options of the verification
-     */
-    public $additionalOptions;
-    /**
-     * @var int Bulk Request Id of the verification
-     */
-    public $bulkRequestId;
-    /**
-     * @var int Priority of the verification request
-     */
-    public $priority;
-}
-/**
- * This is the output model coming from skyscraper services
- * Swagger Name: AvaTaxClient
- */
-class LoginVerificationOutputModel
-{
-    /**
-     * @var int The job Id returned from skyscraper
-     */
-    public $jobId;
-    /**
-     * @var string The operation status of the job
-     */
-    public $operationStatus;
-    /**
-     * @var string The message returned from the job
-     */
-    public $message;
-    /**
-     * @var boolean Indicates if the login was successful
-     */
-    public $loginSuccess;
 }
 /**
  * Marketplace Location Output model
@@ -14626,6 +14600,137 @@ class RemoveTransactionLineModel
     public $renumber;
 }
 /**
+ * An input model for requesting an export of audit logs
+ * Swagger Name: AvaTaxClient
+ */
+class ReportAuditLogModel
+{
+    /**
+     * @var ReportAuditLogOperationInputModel[] The list of operations for this audit log report.
+     */
+    public $operations;
+    /**
+     * @var string The start date for the audit log report.
+     */
+    public $startDate;
+    /**
+     * @var string The end date for the audit log report.
+     */
+    public $endDate;
+    /**
+     * @var string The compression type for the report output (e.g., "NONE", "GZIP"). (See Compression::* for a list of allowable values)
+     */
+    public $compression;
+}
+/**
+ * Represents an operation within audit log report input parameters.
+ * Swagger Name: AvaTaxClient
+ */
+class ReportAuditLogOperationInputModel
+{
+    /**
+     * @var string The table name for this operation.
+     */
+    public $table;
+    /**
+     * @var object The filters for this operation as key-value pairs.
+     */
+    public $filters;
+}
+/**
+ * Represents an operation within audit log report parameters.
+ * Swagger Name: AvaTaxClient
+ */
+class ReportAuditLogOperationModel
+{
+    /**
+     * @var string The table name for this operation.
+     */
+    public $table;
+    /**
+     * @var object The filters for this operation as key-value pairs.
+     */
+    public $filters;
+}
+/**
+ * The output model for audit log report parameter definitions.
+ * Swagger Name: AvaTaxClient
+ */
+class ReportAuditLogParametersModel
+{
+    /**
+     * @var ReportAuditLogOperationModel[] The list of operations for this audit log report.
+     */
+    public $operations;
+    /**
+     * @var string The start date for the audit log report.
+     */
+    public $startDate;
+    /**
+     * @var string The end date for the audit log report.
+     */
+    public $endDate;
+    /**
+     * @var string The compression type for the report output (e.g., "NONE", "GZIP"). (See Compression::* for a list of allowable values)
+     */
+    public $compression;
+}
+/**
+ * A model for displaying audit log report task metadata
+ * Swagger Name: AvaTaxClient
+ */
+class ReportAuditLogResponseModel
+{
+    /**
+     * @var int The unique identifier of the report task
+     */
+    public $id;
+    /**
+     * @var string The type of the report
+     */
+    public $reportType;
+    /**
+     * @var ReportAuditLogParametersModel 
+     */
+    public $parameters;
+    /**
+     * @var string The current status of the report building task
+     */
+    public $status;
+    /**
+     * @var int The size of the report file, if available
+     */
+    public $size;
+    /**
+     * @var string The format of the report file
+     */
+    public $format;
+    /**
+     * @var string The name of the report file, if available
+     */
+    public $file;
+    /**
+     * @var string The time when the report task was initiated
+     */
+    public $createdDate;
+    /**
+     * @var int The Id of the user who initiated this task
+     */
+    public $createdUserId;
+    /**
+     * @var string The userName of the user who initiated the report task
+     */
+    public $createdUser;
+    /**
+     * @var string The time when the report was finished building, if completed
+     */
+    public $completedDate;
+    /**
+     * @var string The source of the report
+     */
+    public $reportSource;
+}
+/**
  * Represents ReportCodeOption Model
  * Swagger Name: AvaTaxClient
  */
@@ -15080,45 +15185,6 @@ class SettleTransactionModel
      * @var CommitTransactionModel 
      */
     public $commit;
-}
-/**
- * Represents a list of statuses of returns available in skyscraper
- * Swagger Name: AvaTaxClient
- */
-class SkyscraperStatusModel
-{
-    /**
-     * @var string The specific name of the returns available in skyscraper
-     */
-    public $name;
-    /**
-     * @var string[] The tax form codes available to file through skyscrper
-     */
-    public $taxFormCodes;
-    /**
-     * @var string The country of the returns
-     */
-    public $country;
-    /**
-     * @var string The Scraper type (See ScraperType::* for a list of allowable values)
-     */
-    public $scraperType;
-    /**
-     * @var boolean Indicates if the return is currently available
-     */
-    public $isAvailable;
-    /**
-     * @var string The expected response time of the call
-     */
-    public $expectedResponseTime;
-    /**
-     * @var string Message on the returns
-     */
-    public $message;
-    /**
-     * @var requiredFilingCalendarDataFieldModel[] A list of required fields to file
-     */
-    public $requiredFilingCalendarDataFields;
 }
 /**
  * Defines a state, region, or province as known to Avalara's certificate management system.
@@ -16120,6 +16186,80 @@ class TaxcodeBatchOutputModel
      * @var int The batch identifier.
      */
     public $batchId;
+}
+/**
+ * Economic nexus threshold status for a single US state.
+ * Swagger Name: AvaTaxClient
+ */
+class ThresholdStateSummaryModel
+{
+    /**
+     * @var string Two-letter US state postal code (e.g. CA, TX, WA). Matches the database column `state`; use that name in `$filter`.
+     */
+    public $state;
+    /**
+     * @var string Full display name of the state.
+     */
+    public $stateName;
+    /**
+     * @var string Threshold status as determined by the upstream data pipeline. Typical values: 'met', 'notmet'.
+     */
+    public $status;
+    /**
+     * @var string Label describing the measurement window used for threshold evaluation (e.g. 'Prior calendar year').
+     */
+    public $thresholdTimeframe;
+    /**
+     * @var string Start of the threshold evaluation window.
+     */
+    public $thresholdStartDate;
+    /**
+     * @var string End of the threshold evaluation window.
+     */
+    public $thresholdEndDate;
+    /**
+     * @var string What triggered the threshold evaluation. Typical values: 'Sales', 'Transactions'.
+     */
+    public $triggerType;
+    /**
+     * @var int The configured transaction count threshold for this state, if applicable.
+     */
+    public $transactionThreshold;
+    /**
+     * @var float The configured sales amount threshold for this state, if applicable.
+     */
+    public $salesThreshold;
+    /**
+     * @var float Actual total sales amount in the evaluation window.
+     */
+    public $totalSalesAmount;
+    /**
+     * @var int Actual total transaction count in the evaluation window.
+     */
+    public $totalTransactions;
+    /**
+     * @var string UTC timestamp of when the upstream Snowflake source record was last modified.
+     */
+    public $sourceLastUpdatedAt;
+}
+/**
+ * Response model for the economic nexus threshold statuses endpoint.
+ * Swagger Name: AvaTaxClient
+ */
+class ThresholdStatusesModel
+{
+    /**
+     * @var int The Avalara company identifier.
+     */
+    public $companyId;
+    /**
+     * @var ThresholdStateSummaryModel[] Per-state threshold summaries for the company. Empty array if no evaluated data exists.
+     */
+    public $states;
+    /**
+     * @var string UTC timestamp of when the TPS in-memory cache last successfully refreshed from Snowflake.  Null if a refresh has not yet completed.
+     */
+    public $lastRefreshedAt;
 }
 /**
  * An address used within this transaction.
@@ -18226,21 +18366,6 @@ class VoidTransactionModel
      * @var string Please specify the reason for voiding or cancelling this transaction.  To void the transaction, please specify the reason 'DocVoided'.  If you do not provide a reason, the void command will fail. (See VoidReasonCode::* for a list of allowable values)
      */
     public $code;
-}
-/**
- * Represents a verification request using Skyscraper for a company
- * Swagger Name: AvaTaxClient
- */
-class requiredFilingCalendarDataFieldModel
-{
-    /**
-     * @var string Region of the verification request
-     */
-    public $name;
-    /**
-     * @var string Username that we are using for verification
-     */
-    public $description;
 }
 /**
  * The Response of the /shippingverify endpoint. Describes the result of checking all applicable shipping rules against each line in the transaction.
