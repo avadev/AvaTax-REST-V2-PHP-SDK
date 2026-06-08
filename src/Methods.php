@@ -1316,6 +1316,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * * logs - Retrieves the certificate log
      * * invalid_reasons - Retrieves invalid reasons for this certificate if the certificate is invalid
      * * custom_fields - Retrieves custom fields set for this certificate
+     * * jurisdictions - Retrieves the list of jurisdictions associated with the certificate
      *  
      * Before you can use any exemption certificates endpoints, you must set up your company for exemption certificate data storage.
      * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption
@@ -1330,7 +1331,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The ID number of the company that recorded this certificate
      * @param int $id The unique ID number of this certificate
-     * @param string $include OPTIONAL: A comma separated list of special fetch options. You can specify one or more of the following:      * customers - Retrieves the list of customers linked to the certificate.   * po_numbers - Retrieves all PO numbers tied to the certificate.   * attributes - Retrieves all attributes applied to the certificate.   * histories - Retrieves the certificate update history   * jobs - Retrieves the jobs for this certificate   * logs - Retrieves the certificate log   * invalid_reasons - Retrieves invalid reasons for this certificate if the certificate is invalid   * custom_fields - Retrieves custom fields set for this certificate
+     * @param string $include OPTIONAL: A comma separated list of special fetch options. You can specify one or more of the following:      * customers - Retrieves the list of customers linked to the certificate.   * po_numbers - Retrieves all PO numbers tied to the certificate.   * attributes - Retrieves all attributes applied to the certificate.   * histories - Retrieves the certificate update history   * jobs - Retrieves the jobs for this certificate   * logs - Retrieves the certificate log   * invalid_reasons - Retrieves invalid reasons for this certificate if the certificate is invalid   * custom_fields - Retrieves custom fields set for this certificate   * jurisdictions - Retrieves the list of jurisdictions associated with the certificate
      * @return \stdClass
      */
     public function getCertificate($companyId, $id, $include=null)    {
@@ -1552,6 +1553,44 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * List local exempt jurisdictions for a given exposure zone and tax code
+     *
+     * Returns the list of jurisdictions that are valid for a given combination of exposure zone
+     * and exemption tax code. The returned jurisdictions can be used to add valid jurisdictions
+     * to a certificate.
+     *  
+     * Both `exposureZone` and `taxCode` are mandatory query parameters.
+     *  
+     * Before you can use any exemption certificates endpoints, you must set up your company for exemption certificate data storage.
+     * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption
+     * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption
+     * certificate storage for this company, call `RequestCertificateSetup`.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, AvaTaxOnlyAccountAdmin, AvaTaxOnlyAccountUser, AvaTaxOnlyCompanyAdmin, AvaTaxOnlyCompanyUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The ID number of the company
+     * @param string $exposureZone Required. The exposure zone name used to filter valid jurisdictions (e.g., "California").
+     * @param string $taxCode Required. The exemption tax code used to filter valid jurisdictions (e.g., "RESALE").
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* region, country, customerUsageType
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @return \stdClass
+     */
+    public function listLocalExemptJurisdictions($companyId, $exposureZone, $taxCode, $filter=null, $top=null, $skip=null, $orderBy=null)    {
+        $path = "/api/v2/companies/{$companyId}/jurisdictions";
+        $guzzleParams = [
+            'query' => ['exposureZone' => $exposureZone, 'taxCode' => $taxCode, '$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
      * List all certificates for a company
      *
      * List all certificates recorded by a company
@@ -1571,6 +1610,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * * logs - Retrieves the certificate log
      * * invalid_reasons - Retrieves invalid reasons for this certificate if the certificate is invalid
      * * custom_fields - Retrieves custom fields set for this certificate
+     * * jurisdictions - Retrieves the list of jurisdictions associated with the certificate
      *  
      * Before you can use any exemption certificates endpoints, you must set up your company for exemption certificate data storage.
      * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption
@@ -1584,7 +1624,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID number of the company to search
-     * @param string $include OPTIONAL: A comma separated list of special fetch options. You can specify one or more of the following:      * customers - Retrieves the list of customers linked to the certificate.   * po_numbers - Retrieves all PO numbers tied to the certificate.   * attributes - Retrieves all attributes applied to the certificate.   * histories - Retrieves the certificate update history   * jobs - Retrieves the jobs for this certificate   * logs - Retrieves the certificate log   * invalid_reasons - Retrieves invalid reasons for this certificate if the certificate is invalid   * custom_fields - Retrieves custom fields set for this certificate
+     * @param string $include OPTIONAL: A comma separated list of special fetch options. You can specify one or more of the following:      * customers - Retrieves the list of customers linked to the certificate.   * po_numbers - Retrieves all PO numbers tied to the certificate.   * attributes - Retrieves all attributes applied to the certificate.   * histories - Retrieves the certificate update history   * jobs - Retrieves the jobs for this certificate   * logs - Retrieves the certificate log   * invalid_reasons - Retrieves invalid reasons for this certificate if the certificate is invalid   * custom_fields - Retrieves custom fields set for this certificate   * jurisdictions - Retrieves the list of jurisdictions associated with the certificate
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* exemptionNumber, ecmsId, ecmsStatus, pdf, pages
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
@@ -2559,6 +2599,10 @@ class AvaTaxClient extends AvaTaxClientBase
      * * `vatNumberStatus` - Filter by VAT number validation status (0=NotValidated, 1=Valid, 2=Invalid, 3=Error)
      * * `businessNameStatus` - Filter by business name comparison status (0=NotValidated, 1=Valid, 2=Invalid, 3=Error)
      * * `businessName` - Filter by business name
+     * * `validationSource` - Filter by validation source ('VIES' or 'ELR')
+     * * `validationDate` - Filter by last validation timestamp (e.g., `validationDate gt 2026-01-01`)
+     * * `createdDate` - Filter by record creation timestamp (e.g., `createdDate ge 2026-01-01`)
+     * * `modifiedDate` - Filter by record modification timestamp (e.g., `modifiedDate gt 2026-05-01T00:00:00Z`)
      *  
      * Order results using `$orderBy`. Common orderings:
      * * `vatNumber ASC` - Order by VAT number ascending
@@ -2571,7 +2615,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * Swagger Name: AvaTaxClient
      * 
      * @param int $companyId The ID of the company
-     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* createdDate, modifiedDate
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
@@ -3577,7 +3621,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * 
      * @param int $companyId The unique ID number of the company that recorded this customer
      * @param string $customerCode The unique code representing this customer
-     * @param string $include OPTIONAL: A comma separated list of special fetch options. You can specify one or more of the following:      * customers - Retrieves the list of customers linked to the certificate.   * po_numbers - Retrieves all PO numbers tied to the certificate.   * attributes - Retrieves all attributes applied to the certificate.   * histories - Retrieves the certificate update history   * jobs - Retrieves the jobs for this certificate   * logs - Retrieves the certificate log   * invalid_reasons - Retrieves invalid reasons for this certificate if the certificate is invalid   * custom_fields - Retrieves custom fields set for this certificate
+     * @param string $include OPTIONAL: A comma separated list of special fetch options. You can specify one or more of the following:      * customers - Retrieves the list of customers linked to the certificate.   * po_numbers - Retrieves all PO numbers tied to the certificate.   * attributes - Retrieves all attributes applied to the certificate.   * histories - Retrieves the certificate update history   * jobs - Retrieves the jobs for this certificate   * logs - Retrieves the certificate log   * invalid_reasons - Retrieves invalid reasons for this certificate if the certificate is invalid   * custom_fields - Retrieves custom fields set for this certificate   * jurisdictions - Retrieves the list of jurisdictions associated with the certificate
      * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* exemptionNumber, ecmsId, ecmsStatus, pdf, pages
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
@@ -4515,6 +4559,25 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * List of all event types that can be subscribed to for Item reverse sync webhook registrations.
+     *
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, AvaTaxOnlyAccountAdmin, AvaTaxOnlyAccountUser, AvaTaxOnlyCompanyAdmin, AvaTaxOnlyCompanyUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ReturnsOnlyAccountAdmin, ReturnsOnlyAccountUser, ReturnsOnlyCompanyAdmin, ReturnsOnlyCompanyUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @return \stdClass
+     */
+    public function listItemReverseSyncEvents()    {
+        $path = "/api/v2/definitions/items/events";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
      * List of all recommendation status which can be assigned to an item
      *
      * ### Security Policies
@@ -4567,12 +4630,13 @@ class AvaTaxClient extends AvaTaxClientBase
      * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
      * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
      * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @param int $companyId Optional query parameter; when set, the result set is restricted to jurisdictions in regions   where the company has nexus. When omitted, all jurisdiction rows are eligible before filter is applied.
      * @return \stdClass
      */
-    public function listJurisdictions($filter=null, $top=null, $skip=null, $orderBy=null)    {
+    public function listJurisdictions($filter=null, $top=null, $skip=null, $orderBy=null, $companyId=null)    {
         $path = "/api/v2/definitions/jurisdictions";
         $guzzleParams = [
-            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy, 'companyId' => $companyId],
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
@@ -4666,6 +4730,42 @@ class AvaTaxClient extends AvaTaxClientBase
         $path = "/api/v2/definitions/jurisdictions/hierarchy";
         $guzzleParams = [
             'query' => ['$filter' => $filter, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * List tax types, subtypes, and rate types applicable for a given jurisdiction
+     *
+     * Returns a list of tax type and subtype groups, and optionally the available rate types for each group, applicable for a given jurisdiction.
+     *  
+     * This API lets you filter tax types and rate types based on whether they may apply in a given jurisdiction and provides a description of each.
+     * 
+     * If a company ID is provided, then only the tax types for which the company has nexus are shown.
+     * 
+     * If custom content is included, then all available custom tax types are included in the result if the calling user has the appropriate subscription
+     * and the tax types are available in the jurisdiction's country.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param string $country ISO country code (e.g. `US`)
+     * @param string $region ISO region or state/province code (e.g. `CA` for California)
+     * @param string $jurisdictionTypeId Jurisdiction type identifier (e.g. `STA` for state)
+     * @param string $jurisdictionCode Code identifying a specific jurisdiction
+     * @param int $companyId Optional query parameter. When set, tax type/subtype pairs are filtered to those which correspond to the company's   configured nexus. When omitted, no nexus-based filtering is applied.
+     * @param string $effectiveDate Optional query parameter. When companyId is not provided, this is the date used to filter  effective tax types and rate types. Defaults to the current date.
+     * @param int $top If nonzero, return no more than this number of results. Used with `$skip` to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
+     * @param int $skip If nonzero, skip this number of results before returning data. Used with `$top` to provide pagination for large datasets.
+     * @param string $orderBy A comma separated list of sort statements in the format `(fieldname) [ASC|DESC]`, for example `id ASC`.
+     * @param string $filter A filter statement to identify specific records to retrieve. For more information on filtering, see [Filtering in REST](http://developer.avalara.com/avatax/filtering-in-rest/).<br />*Not filterable:* rateTypes
+     * @param boolean $includeCustomContent When true, merges in potentially applicable custom tax types and subtypes into result (i.e. for which no system content is defined). Defaults to false.
+     * @param boolean $includeRateTypes Query parameter `$includeRateTypes`. When true (default), returns the rate types available for each tax type + subtype pair in the result.
+     * @return \stdClass
+     */
+    public function listJurisdictionTaxTypesAndSubTypes($country, $region, $jurisdictionTypeId, $jurisdictionCode, $companyId=null, $effectiveDate=null, $top=null, $skip=null, $orderBy=null, $filter=null, $includeCustomContent=null, $includeRateTypes=null)    {
+        $path = "/api/v2/definitions/jurisdictions/{$country}/{$region}/{$jurisdictionTypeId}/{$jurisdictionCode}/taxTypesAndSubTypes";
+        $guzzleParams = [
+            'query' => ['companyId' => $companyId, 'effectiveDate' => $effectiveDate, '$top' => $top, '$skip' => $skip, '$orderBy' => $orderBy, '$filter' => $filter, '$includeCustomContent' => null === $includeCustomContent ? null : json_encode($includeCustomContent), '$includeRateTypes' => null === $includeRateTypes ? null : json_encode($includeRateTypes)],
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
@@ -8566,6 +8666,147 @@ class AvaTaxClient extends AvaTaxClientBase
             'body' => json_encode($model)
         ];
         return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Verify the HSCode to be valid/invalid
+     *
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, AvaTaxOnlyAccountAdmin, AvaTaxOnlyAccountUser, AvaTaxOnlyCompanyAdmin, AvaTaxOnlyCompanyUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ReturnsOnlyAccountAdmin, ReturnsOnlyAccountUser, ReturnsOnlyCompanyAdmin, ReturnsOnlyCompanyUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The unique ID of the company
+     * @param ItemHSCodeVerificationInputModel[] $model The request model for HS Code Verification
+     * @return \stdClass
+     */
+    public function verifyHSCode($companyId, $model=null)    {
+        $path = "/api/v2/companies/{$companyId}/items/hscodes/$verify";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Create a webhook registration for a company.
+     *
+     * Creates a webhook registration for the specified company. The registration defines a
+     * connector, callback URL, registration type, and subscribed events.
+     *  
+     * The customer must pass the connector name in `connectorName`; this value is also
+     * used as the OAuth scope for the registration.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AvaTaxOnlyAccountAdmin, AvaTaxOnlyCompanyAdmin, BatchServiceAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The ID of the company for which you want to create the registration.
+     * @param ItemReverseSyncRegistrationInputModel $model The webhook registration details to create.
+     * @return \stdClass
+     */
+    public function createReverseSyncRegistration($companyId, $model)    {
+        $path = "/api/v2/connector-sync/companies/{$companyId}/registrations";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'POST', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Delete a webhook registration.
+     *
+     * Deletes the webhook registration identified by the specified registration ID for the given company.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AvaTaxOnlyAccountAdmin, AvaTaxOnlyCompanyAdmin, BatchServiceAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The ID of the company that owns this registration.
+     * @param int $registrationId The ID of the registration to delete.
+     * @return \stdClass
+     */
+    public function deleteReverseSyncRegistration($companyId, $registrationId)    {
+        $path = "/api/v2/connector-sync/companies/{$companyId}/registrations/{$registrationId}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Retrieve a webhook registration.
+     *
+     * Returns the webhook registration identified by the specified registration ID for the given company.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, AvaTaxOnlyAccountAdmin, AvaTaxOnlyAccountUser, AvaTaxOnlyCompanyAdmin, AvaTaxOnlyCompanyUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ReturnsOnlyAccountAdmin, ReturnsOnlyAccountUser, ReturnsOnlyCompanyAdmin, ReturnsOnlyCompanyUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The ID of the company that owns this registration.
+     * @param int $registrationId The ID of the registration.
+     * @return \stdClass
+     */
+    public function getReverseSyncRegistration($companyId, $registrationId)    {
+        $path = "/api/v2/connector-sync/companies/{$companyId}/registrations/{$registrationId}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * List webhook registrations for a company.
+     *
+     * Returns all webhook registrations for the specified company.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, AvaTaxOnlyAccountAdmin, AvaTaxOnlyAccountUser, AvaTaxOnlyCompanyAdmin, AvaTaxOnlyCompanyUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPAdmin, CSPTester, ReturnsOnlyAccountAdmin, ReturnsOnlyAccountUser, ReturnsOnlyCompanyAdmin, ReturnsOnlyCompanyUser, SiteAdmin, SSTAdmin, SystemAdmin, TechnicalSupportAdmin, TechnicalSupportUser.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The ID of the company that owns the webhook registrations.
+     * @return \stdClass
+     */
+    public function listReverseSyncRegistrations($companyId)    {
+        $path = "/api/v2/connector-sync/companies/{$companyId}/registrations";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Update a webhook registration.
+     *
+     * Updates the webhook registration with the provided fields. Only the fields included in the
+     * request body are updated.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AvaTaxOnlyAccountAdmin, AvaTaxOnlyCompanyAdmin, BatchServiceAdmin, CompanyAdmin, CSPTester, SSTAdmin, TechnicalSupportAdmin.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The ID of the company that owns this registration.
+     * @param int $registrationId The ID of the registration to update.
+     * @param ItemReverseSyncRegistrationUpdateModel $model The registration fields to update.
+     * @return \stdClass
+     */
+    public function updateReverseSyncRegistration($companyId, $registrationId, $model)    {
+        $path = "/api/v2/connector-sync/companies/{$companyId}/registrations/{$registrationId}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PATCH', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
@@ -13700,6 +13941,38 @@ class AvaTaxClient extends AvaTaxClientBase
     }
 
     /**
+     * Delete a vendor record
+     *
+     * Deletes the vendor object referenced by this URL.
+     *  
+     * A vendor object defines information about a person or business that you purchase products from.
+     * The same CertCapture customer resource is used for vendors (isVendor flag). Deleting removes the record.
+     *  
+     * Before you can use any exemption certificates endpoints, you must set up your company for exemption certificate data storage.
+     * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption
+     * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption
+     * certificate storage for this company, call `RequestCertificateSetup`.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, AvaTaxOnlyAccountAdmin, AvaTaxOnlyAccountUser, AvaTaxOnlyCompanyAdmin, AvaTaxOnlyCompanyUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The unique ID number of the company that recorded this vendor
+     * @param string $vendorCode The unique code representing this vendor
+     * @return \stdClass
+     */
+    public function deleteVendor($companyId, $vendorCode)    {
+        $path = "/api/v2/companies/{$companyId}/vendors/{$vendorCode}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => null
+        ];
+        return $this->restCall($path, 'DELETE', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
      * Retrieve a single vendor
      *
      * Retrieve the vendor identified by this URL.
@@ -13722,7 +13995,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * * shipTos - Retrieves ship-tos linked with this vendor
      * * shipToStates - Retrieves ship-to states for this vendor
      * * custom_fields - Retrieves custom fields set for this vendor
-     *  
+     * * vendorAdditionalInfo - Retrieves vendorAdditionalInfo for this vendor
      * Before you can use any exemption certificates endpoints, you must set up your company for exemption certificate data storage.
      * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption
      * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption
@@ -13814,6 +14087,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * * shipTos - Retrieves ship-tos linked with this vendor
      * * shipToStates - Retrieves ship-to states for this vendor
      * * custom_fields - Retrieves custom fields set for this vendor
+     * * vendorAdditionalInfo - Retrieves vendorAdditionalInfo for vendors
      *  
      * Before you can use any exemption certificates endpoints, you must set up your company for exemption certificate data storage.
      * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption
@@ -13843,6 +14117,41 @@ class AvaTaxClient extends AvaTaxClientBase
             'body' => null
         ];
         return $this->restCall($path, 'GET', $guzzleParams, AVATAX_SDK_VERSION );
+    }
+
+    /**
+     * Update a single vendor
+     *
+     * Replace the vendor object with a new record.
+     *  
+     * A vendor object defines information about a person or business that you purchase products from.
+     * When you create a tax transaction in AvaTax, you can use the `vendorCode` from this
+     * record. AvaTax will search for this `vendorCode` value and identify any certificates
+     * linked to this vendor object.
+     *  
+     * Before you can use any exemption certificates endpoints, you must set up your company for exemption certificate data storage.
+     * Companies that do not have this storage system set up will see `CertCaptureNotConfiguredError` when they call exemption
+     * certificate related APIs. To check if this is set up for a company, call `GetCertificateSetup`. To request setup of exemption
+     * certificate storage for this company, call `RequestCertificateSetup`.
+     * 
+     * ### Security Policies
+     * 
+     * * This API requires one of the following user roles: AccountAdmin, AccountOperator, AccountUser, AvaTaxOnlyAccountAdmin, AvaTaxOnlyAccountUser, AvaTaxOnlyCompanyAdmin, AvaTaxOnlyCompanyUser, BatchServiceAdmin, CompanyAdmin, CompanyUser, CSPTester, SSTAdmin, TechnicalSupportAdmin.
+     * * This API depends on the following active services:*Required* (all): AvaTaxPro, ECMEssentials, ECMPro, ECMPremium, VEMPro, VEMPremium, ECMProComms, ECMPremiumComms.
+     * Swagger Name: AvaTaxClient
+     * 
+     * @param int $companyId The unique ID number of the company that recorded this vendor
+     * @param string $vendorCode The unique code representing this vendor
+     * @param VendorModel $model The new vendor model that will replace the existing record at this URL
+     * @return \stdClass
+     */
+    public function updateVendor($companyId, $vendorCode, $model)    {
+        $path = "/api/v2/companies/{$companyId}/vendors/{$vendorCode}";
+        $guzzleParams = [
+            'query' => [],
+            'body' => json_encode($model)
+        ];
+        return $this->restCall($path, 'PUT', $guzzleParams, AVATAX_SDK_VERSION );
     }
 
     /**
