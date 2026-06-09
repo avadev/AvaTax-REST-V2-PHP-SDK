@@ -1928,6 +1928,66 @@ class CertificateInvalidReasonModel
     public $systemCode;
 }
 /**
+ * Represents a valid jurisdiction that can be linked to a certificate.
+ *  
+ * This model is returned by the `ListJurisdictions` API, which lists the jurisdictions
+ * that are valid for a given exposure zone and exemption tax code. The returned
+ * jurisdictions can then be used to add valid jurisdictions to a certificate.
+ * Swagger Name: AvaTaxClient
+ */
+class CertificateJurisdictionListModel
+{
+    /**
+     * @var string The code identifying the jurisdiction.
+     */
+    public $code;
+    /**
+     * @var string The name of the jurisdiction.
+     */
+    public $name;
+    /**
+     * @var string The type of the jurisdiction (e.g., Special, State, County, City).
+     */
+    public $type;
+    /**
+     * @var string The region (for example, the two-letter state or province abbreviation) where  this jurisdiction applies.
+     */
+    public $region;
+    /**
+     * @var string The ISO country code for this jurisdiction.
+     */
+    public $country;
+    /**
+     * @var string The customer usage type (entity use code) associated with this jurisdiction.
+     */
+    public $customerUsageType;
+}
+/**
+ * Represents a jurisdiction associated with a certificate.
+ * A certificate can be linked to one or more jurisdictions indicating the tax
+ * authority regions where the certificate applies.
+ * Swagger Name: AvaTaxClient
+ */
+class CertificateJurisdictionModel
+{
+    /**
+     * @var int Unique ID number
+     */
+    public $id;
+    /**
+     * @var string The type of the jurisdiction (e.g., State, County, City).
+     */
+    public $type;
+    /**
+     * @var string The name of the jurisdiction.
+     */
+    public $name;
+    /**
+     * @var string The FIPS code or identifier for the jurisdiction.
+     */
+    public $code;
+}
+/**
  * The certificate log for a customer. This is exposed in the URL's `$includes`.
  * Swagger Name: AvaTaxClient
  */
@@ -2060,6 +2120,10 @@ class CertificateModel
      */
     public $exposureZoneName;
     /**
+     * @var CertificateJurisdictionModel[] A list of jurisdictions associated with this certificate, indicating the tax authority  regions where the certificate applies. A certificate can have one or more jurisdictions.     You can fetch this data by specifying `$include=jurisdictions` when calling a certificate fetch API.
+     */
+    public $jurisdictions;
+    /**
      * @var CertificateAttributeModel[] A list of certificate attributes that apply to this certificate.     You can fetch this data by specifying `$include=attributes` when calling a certificate fetch API.
      */
     public $attributes;
@@ -2112,6 +2176,25 @@ class ChangeTransactionCodeModel
      * @var string To change the transaction code for this transaction, specify the new transaction code here.
      */
     public $newCode;
+}
+/**
+ * Tariff classification criteria flags used when mode is `auto_partial`.
+ * Swagger Name: AvaTaxClient
+ */
+class ClassificationCriteriaModel
+{
+    /**
+     * @var boolean When true, include items with no tariff code assigned.
+     */
+    public $NoTariffCodeAssigned;
+    /**
+     * @var boolean When true, include items with an invalid tariff code.
+     */
+    public $InvalidTariffCode;
+    /**
+     * @var boolean When true, include items whose tariff code needs review.
+     */
+    public $TariffCodeNeedsReview;
 }
 /**
  * Represents a classification for a given item.
@@ -2198,6 +2281,88 @@ class ClassificationParameterUsageMapModel
      * @var string The unit of measurement type of the parameter
      */
     public $measurementType;
+}
+/**
+ * Request body for creating company classification settings (`POST /classification-settings`).
+ * Swagger Name: AvaTaxClient
+ */
+class ClassificationSettingsInputModel
+{
+    /**
+     * @var string Classification mode: typically Avalara.ItemMasterCoreService.Common.ClassificationSettingsConstants.Modes.AutoFull or Avalara.ItemMasterCoreService.Common.ClassificationSettingsConstants.Modes.AutoPartial.
+     */
+    public $mode;
+    /**
+     * @var ClassificationCriteriaModel 
+     */
+    public $criteria;
+    /**
+     * @var CountryScopeModel 
+     */
+    public $countryScope;
+}
+/**
+ * API response for classification settings, including optimistic versioning and pipeline state.
+ * Swagger Name: AvaTaxClient
+ */
+class ClassificationSettingsOutputModel
+{
+    /**
+     * @var int Company that owns the settings row.
+     */
+    public $companyId;
+    /**
+     * @var string Current classification mode.
+     */
+    public $mode;
+    /**
+     * @var ClassificationCriteriaModel 
+     */
+    public $criteria;
+    /**
+     * @var CountryScopeModel 
+     */
+    public $countryScope;
+    /**
+     * @var int Monotonic settings version; increments when IMS updates the row.
+     */
+    public $settingsVersion;
+    /**
+     * @var string `created` immediately after create/update from this API; downstream may set `processing` then `completed`.
+     */
+    public $processingState;
+    /**
+     * @var int Processing attempt counter aligned with downstream jobs.
+     */
+    public $processingVersion;
+    /**
+     * @var string Set when IMS create/update last wrote the row (enters `created`).
+     */
+    public $processingStartedDate;
+    /**
+     * @var string Set by the downstream completion service when state becomes `completed`; null until then.
+     */
+    public $processingCompletedDate;
+    /**
+     * @var string Optional pipeline note (`processingnote` on `dbo.itemclassificationsettings`).
+     */
+    public $processingNote;
+    /**
+     * @var int User id that created the row.
+     */
+    public $createdUserId;
+    /**
+     * @var string UTC creation timestamp.
+     */
+    public $createdDate;
+    /**
+     * @var int User id for the last modification.
+     */
+    public $modifiedUserId;
+    /**
+     * @var string UTC last modification timestamp.
+     */
+    public $modifiedDate;
 }
 /**
  * Represents a physical location used in exemption certificate management.
@@ -3796,6 +3961,21 @@ class CountryModel
     public $abbreviation;
 }
 /**
+ * Restricts automated classification to all nexus countries or an explicit list.
+ * Swagger Name: AvaTaxClient
+ */
+class CountryScopeModel
+{
+    /**
+     * @var string Avalara.ItemMasterCoreService.Common.ClassificationSettingsConstants.CountryScopeTypes.All or Avalara.ItemMasterCoreService.Common.ClassificationSettingsConstants.CountryScopeTypes.Selected.
+     */
+    public $type;
+    /**
+     * @var string[] ISO 3166 alpha-2 codes when `type` is `selected`; ignored for `all`.
+     */
+    public $countries;
+}
+/**
  * The CoverLetter model represents a message sent along with an invitation to use CertExpress to
  * upload certificates. An invitation allows customers to use CertExpress to upload their exemption
  * certificates directly; this cover letter explains why the invitation was sent.
@@ -4725,6 +4905,679 @@ class CustomRuleSummaryModel
      * @var object The rule entity data, which can be either a TaxRuleModel, a DynamicRuleModel, or an AdvancedRuleExecutionModel.
      */
     public $ruleEntity;
+}
+/**
+ * Optional additional criteria for when a custom tax should apply. This model is
+ * structurally identical to `DynamicRuleDefinitionInputModel` but is kept as a distinct
+ * type so that the custom tax surface can evolve independently of the underlying dynamic
+ * rule definition. The nodes defined here are prepended to the main custom tax node when
+ * the custom tax is translated into a dynamic rule at persistence time.
+ * <br>
+ * This is the input variant used when creating or updating a custom tax.
+ * Swagger Name: AvaTaxClient
+ */
+class CustomTaxAdditionalCriteriaInputModel
+{
+    /**
+     * @var DynamicRuleComponentInputModel[] Define fixed components with rule-wide scope. Variables are computed once and can be  referenced by nodes in the execution graph via tokens such as `{{Variables.MyVar}}`.
+     */
+    public $variables;
+    /**
+     * @var DynamicRuleComponentInputModel[] Define components which make up the execution graph. Each node represents a condition  or action that runs as part of evaluating the custom tax; nodes are linked together via  the `next` property on each component.
+     */
+    public $nodes;
+}
+/**
+ * Optional additional criteria for when a custom tax should apply. This model is
+ * structurally identical to `DynamicRuleDefinitionOutputModel` but is kept as a
+ * distinct type so that the custom tax surface can evolve independently of the underlying
+ * dynamic rule definition. The nodes defined here are prepended to the main custom tax node
+ * when the custom tax is translated into a dynamic rule at persistence time.
+ * <br>
+ * This is the output variant returned by Custom Tax read endpoints.
+ * Swagger Name: AvaTaxClient
+ */
+class CustomTaxAdditionalCriteriaOutputModel
+{
+    /**
+     * @var DynamicRuleComponentOutputModel[] Define fixed components with rule-wide scope. Variables are computed once and can be  referenced by nodes in the execution graph via tokens such as `{{Variables.MyVar}}`.
+     */
+    public $variables;
+    /**
+     * @var DynamicRuleComponentOutputModel[] Define components which make up the execution graph. Each node represents a condition  or action that runs as part of evaluating the custom tax; nodes are linked together via  the `next` property on each component.
+     */
+    public $nodes;
+}
+/**
+ * Describes a single exemption override row for a custom tax.
+ * <br>
+ * This is the input variant used when creating or updating a custom tax. Each exemption row
+ * defines whether a matching transaction line is exempt from the custom tax, optionally
+ * scoped by jurisdiction, rate type, tax code, tariff code, or entity use code.
+ * Swagger Name: AvaTaxClient
+ */
+class CustomTaxExemptionsInputModel
+{
+    /**
+     * @var boolean Whether this tax treatment sets an item as exempt or not exempt. When true, matching  lines are exempt from this custom tax; when false, an existing exemption is explicitly  overridden so the custom tax still applies.
+     */
+    public $exempt;
+    /**
+     * @var string Optionally set the type of jurisdiction this exemption applies to, e.g. State or City.  When combined with `jurisCode`, the exemption is scoped to the matching  jurisdiction only. (See JurisdictionType::* for a list of allowable values)
+     */
+    public $jurisdictionTypeId;
+    /**
+     * @var string Optionally set the specific jurisdiction this exemption applies to. This should be one  of the jurisdictions defined on the parent custom tax.
+     */
+    public $jurisCode;
+    /**
+     * @var string Optionally set a specific rate type this exemption applies to.
+     */
+    public $rateTypeCode;
+    /**
+     * @var string Optionally set a specific tax code this exemption applies to. Tax codes identify  product or service categories for taxation.
+     */
+    public $taxCode;
+    /**
+     * @var string Optionally set a specific tariff code this exemption applies to. Tariff codes are used  for cross-border and customs taxation.
+     */
+    public $tariffCode;
+    /**
+     * @var string Optionally set a specific entity use code this exemption applies to. Entity use codes  describe customer usage such as resale, manufacturing, or government use.
+     */
+    public $entityUseCode;
+    /**
+     * @var string Optionally set a different effective date for this exemption. This date cannot be  earlier than the base effective date set for the entire custom tax.
+     */
+    public $effectiveDate;
+    /**
+     * @var string Optionally set a different expiration date for this exemption. This date cannot be  later than the base expiration date set for the entire custom tax.
+     */
+    public $endDate;
+    /**
+     * @var boolean Whether this exemption applies to all child jurisdictions or only the specified one.  When true, the exemption is applied to every jurisdiction beneath the one identified by  `jurisCode`; when false or null, only the exact jurisdiction is matched.
+     */
+    public $isAllJuris;
+}
+/**
+ * Describes a single exemption override row for a custom tax.
+ * <br>
+ * This is the output variant returned by Custom Tax read endpoints. Each exemption row
+ * defines whether a matching transaction line is exempt from the custom tax, optionally
+ * scoped by jurisdiction, rate type, tax code, tariff code, or entity use code.
+ * Swagger Name: AvaTaxClient
+ */
+class CustomTaxExemptionsOutputModel
+{
+    /**
+     * @var boolean Whether this tax treatment sets an item as exempt or not exempt. When true, matching  lines are exempt from this custom tax; when false, an existing exemption is explicitly  overridden so the custom tax still applies.
+     */
+    public $exempt;
+    /**
+     * @var string Optionally set the type of jurisdiction this exemption applies to, e.g. State or City.  When combined with `jurisCode`, the exemption is scoped to the matching  jurisdiction only. (See JurisdictionType::* for a list of allowable values)
+     */
+    public $jurisdictionTypeId;
+    /**
+     * @var string Optionally set the specific jurisdiction this exemption applies to. This should be one  of the jurisdictions defined on the parent custom tax.
+     */
+    public $jurisCode;
+    /**
+     * @var string Optionally set a specific rate type this exemption applies to.
+     */
+    public $rateTypeCode;
+    /**
+     * @var string Optionally set a specific tax code this exemption applies to. Tax codes identify  product or service categories for taxation.
+     */
+    public $taxCode;
+    /**
+     * @var string Optionally set a specific tariff code this exemption applies to. Tariff codes are used  for cross-border and customs taxation.
+     */
+    public $tariffCode;
+    /**
+     * @var string Optionally set a specific entity use code this exemption applies to. Entity use codes  describe customer usage such as resale, manufacturing, or government use.
+     */
+    public $entityUseCode;
+    /**
+     * @var string Optionally set a different effective date for this exemption. This date cannot be  earlier than the base effective date set for the entire custom tax.
+     */
+    public $effectiveDate;
+    /**
+     * @var string Optionally set a different expiration date for this exemption. This date cannot be  later than the base expiration date set for the entire custom tax.
+     */
+    public $endDate;
+    /**
+     * @var boolean Whether this exemption applies to all child jurisdictions or only the specified one.  When true, the exemption is applied to every jurisdiction beneath the one identified by  `jurisCode`; when false or null, only the exact jurisdiction is matched.
+     */
+    public $isAllJuris;
+}
+/**
+ * A Custom Tax represents a tax-rate / taxability / exemption package owned by a single
+ * company. It is a type of Custom Rule that exposes a focused, content-oriented shape for
+ * callers who want to manage tax overrides without constructing a Custom Rule by hand.
+ * <br>
+ * Use of the Custom Tax endpoints requires the `AvaCustomContent` subscription.
+ * <br>
+ * This is the input variant used when creating or updating a Custom Tax via the
+ * `CreateCustomTax`, `UpdateCustomTax`, or `ValidateCustomTax` endpoints. Any
+ * fields that are populated only by the system (such as `id`, `companyId`, and the
+ * created/modified audit fields) are excluded from this model and live on
+ * `CustomTaxOutputModel` instead.
+ * Swagger Name: AvaTaxClient
+ */
+class CustomTaxInputModel
+{
+    /**
+     * @var string The name of the custom tax. Displayed in UI surfaces and used to identify the custom  tax when reviewing rules for a company.
+     */
+    public $name;
+    /**
+     * @var string Optional description of the custom tax. Intended for use by compliance and support  teams to document the intent or source of the rule.
+     */
+    public $description;
+    /**
+     * @var string The country in which the custom tax applies. This is typically an ISO 3166-1 alpha-2  country code such as `US` or `CA`.
+     */
+    public $country;
+    /**
+     * @var string The region or state in which the custom tax applies. The expected value depends on  `country`; for the United States this is typically the two-letter state  abbreviation such as `WA`.
+     */
+    public $region;
+    /**
+     * @var string The tax type for this custom tax.
+     */
+    public $taxTypeCode;
+    /**
+     * @var string The tax subtype for this custom tax. Subtypes typically mirror the tax type but may be  customized to describe more granular categories.
+     */
+    public $taxSubType;
+    /**
+     * @var string[] The rate types associated with this custom tax.
+     */
+    public $rateTypeCodes;
+    /**
+     * @var string The default unit of basis used to calculate the value of this custom tax. Determines  how the rate on each rate row is interpreted — for example, `PerCurrencyUnit` for  a percentage or `PerUnit` for a flat amount per unit.
+     */
+    public $unitOfBasis;
+    /**
+     * @var string The start date when the tax is valid. Transactions with a document date earlier than  this date will not be affected by this custom tax.
+     */
+    public $effectiveDate;
+    /**
+     * @var string The end date when the tax is valid. Transactions with a document date later than this  date will not be affected by this custom tax.
+     */
+    public $endDate;
+    /**
+     * @var boolean Whether the custom tax is enabled. When false, the tax is persisted but is not  evaluated during tax calculation.
+     */
+    public $enabled;
+    /**
+     * @var boolean Whether to continue execution if there is an error evaluating the rule criteria. When  true, an error in this custom tax does not stop evaluation of other custom taxes or  custom rules on the transaction.
+     */
+    public $continueOnError;
+    /**
+     * @var CustomTaxJurisdictionInputModel[] A list of jurisdictions in which this custom tax applies. At least one jurisdiction is  required; each jurisdiction identifies a region of applicability for the tax.
+     */
+    public $jurisdictions;
+    /**
+     * @var CustomTaxAdditionalCriteriaInputModel 
+     */
+    public $conditions;
+    /**
+     * @var CustomTaxTaxabilityInputModel[] Define the taxability treatment and rate type assignment for this custom tax. Taxability  rows express default and override behaviour for items the tax applies to.
+     */
+    public $taxability;
+    /**
+     * @var CustomTaxRateInputModel[] Define the tax rates associated with this custom tax. Each rate row specifies the  numeric rate and the criteria under which that rate applies.
+     */
+    public $rates;
+    /**
+     * @var CustomTaxExemptionsInputModel[] Optional list of when items are exempt from this custom tax. Each exemption row defines  criteria that mark matching transaction lines as exempt (or explicitly not exempt).
+     */
+    public $exemptions;
+}
+/**
+ * Describes a single jurisdiction in which a custom tax is applicable.
+ * <br>
+ * This is the input variant used when creating or updating a custom tax. Each jurisdiction
+ * identifies a region of applicability for the parent custom tax.
+ * Swagger Name: AvaTaxClient
+ */
+class CustomTaxJurisdictionInputModel
+{
+    /**
+     * @var string The type of jurisdiction this is, e.g. State or City. (See JurisdictionType::* for a list of allowable values)
+     */
+    public $jurisdictionTypeId;
+    /**
+     * @var string The code identifying this jurisdiction, in combination with the `jurisdictionTypeId`.
+     */
+    public $jurisCode;
+    /**
+     * @var string Optionally set a different effective date for this jurisdiction. This date cannot be  earlier than the base effective date set for the entire custom tax. When omitted, the  jurisdiction inherits the custom tax's effective date.
+     */
+    public $effectiveDate;
+    /**
+     * @var string Optionally set a different expiration date for this jurisdiction. This date cannot be  later than the base expiration date set for the entire custom tax. When omitted, the  jurisdiction inherits the custom tax's end date.
+     */
+    public $endDate;
+}
+/**
+ * Describes a single jurisdiction in which a custom tax is applicable.
+ * <br>
+ * This is the output variant returned by Custom Tax read endpoints. Each jurisdiction
+ * identifies a region of applicability for the parent custom tax.
+ * Swagger Name: AvaTaxClient
+ */
+class CustomTaxJurisdictionOutputModel
+{
+    /**
+     * @var string The type of jurisdiction this is, e.g. State or City. (See JurisdictionType::* for a list of allowable values)
+     */
+    public $jurisdictionTypeId;
+    /**
+     * @var string The code identifying this jurisdiction, in combination with the `jurisdictionTypeId`.
+     */
+    public $jurisCode;
+    /**
+     * @var string Optionally set a different effective date for this jurisdiction. This date cannot be  earlier than the base effective date set for the entire custom tax. When omitted, the  jurisdiction inherits the custom tax's effective date.
+     */
+    public $effectiveDate;
+    /**
+     * @var string Optionally set a different expiration date for this jurisdiction. This date cannot be  later than the base expiration date set for the entire custom tax. When omitted, the  jurisdiction inherits the custom tax's end date.
+     */
+    public $endDate;
+}
+/**
+ * A Custom Tax represents a tax-rate / taxability / exemption package owned by a single
+ * company. It is a type of Custom Rule that exposes a focused, content-oriented shape for
+ * callers who want to manage tax overrides without constructing a Custom Rule by hand.
+ * <br>
+ * Use of the Custom Tax endpoints requires the `AvaCustomContent` subscription.
+ * <br>
+ * This is the output variant returned by `GetCustomTax`, `ListCustomTaxes`, and
+ * write endpoints that echo the persisted record. It includes system-populated fields such
+ * as `id`, `companyId`, and the created/modified audit fields which are not
+ * accepted on input.
+ * Swagger Name: AvaTaxClient
+ */
+class CustomTaxOutputModel
+{
+    /**
+     * @var int Unique identifier for this custom tax. Stable for the lifetime of the record and  shared with the broader Custom Rule namespace, so a Custom Tax id is never reused by  another Custom Rule on the same company.
+     */
+    public $id;
+    /**
+     * @var int The company ID of the company that owns this custom tax. Returned on output so clients  can correlate the record with its parent company.
+     */
+    public $companyId;
+    /**
+     * @var string The name of the custom tax. Displayed in UI surfaces and used to identify the custom  tax when reviewing rules for a company.
+     */
+    public $name;
+    /**
+     * @var string Optional description of the custom tax. Intended for use by compliance and support  teams to document the intent or source of the rule.
+     */
+    public $description;
+    /**
+     * @var string The country in which the custom tax applies. This is typically an ISO 3166-1 alpha-2  country code such as `US` or `CA`.
+     */
+    public $country;
+    /**
+     * @var string The region or state in which the custom tax applies. The expected value depends on  `country`; for the United States this is typically the two-letter state  abbreviation such as `WA`.
+     */
+    public $region;
+    /**
+     * @var string The tax type for this custom tax.
+     */
+    public $taxTypeCode;
+    /**
+     * @var string The tax subtype for this custom tax. Subtypes typically mirror the tax type but may be  customized to describe more granular categories.
+     */
+    public $taxSubType;
+    /**
+     * @var string[] The rate types associated with this custom tax.
+     */
+    public $rateTypeCodes;
+    /**
+     * @var string The default unit of basis used to calculate the value of this custom tax. Determines  how the rate on each rate row is interpreted — for example, `PerCurrencyUnit` for  a percentage or `PerUnit` for a flat amount per unit.
+     */
+    public $unitOfBasis;
+    /**
+     * @var string The start date when the tax is valid. Transactions with a document date earlier than  this date will not be affected by this custom tax.
+     */
+    public $effectiveDate;
+    /**
+     * @var string The end date when the tax is valid. Transactions with a document date later than this  date will not be affected by this custom tax.
+     */
+    public $endDate;
+    /**
+     * @var boolean Whether the custom tax is enabled. When false, the tax is persisted but is not  evaluated during tax calculation.
+     */
+    public $enabled;
+    /**
+     * @var boolean Whether to continue execution if there is an error evaluating the rule criteria. When  true, an error in this custom tax does not stop evaluation of other custom taxes or  custom rules on the transaction.
+     */
+    public $continueOnError;
+    /**
+     * @var CustomTaxJurisdictionOutputModel[] A list of jurisdictions in which this custom tax applies. At least one jurisdiction is  required; each jurisdiction identifies a region of applicability for the tax.
+     */
+    public $jurisdictions;
+    /**
+     * @var CustomTaxAdditionalCriteriaOutputModel 
+     */
+    public $conditions;
+    /**
+     * @var CustomTaxTaxabilityOutputModel[] Define the taxability treatment and rate type assignment for this custom tax. Taxability  rows express default and override behaviour for items the tax applies to.
+     */
+    public $taxability;
+    /**
+     * @var CustomTaxRateOutputModel[] Define the tax rates associated with this custom tax. Each rate row specifies the  numeric rate and the criteria under which that rate applies.
+     */
+    public $rates;
+    /**
+     * @var CustomTaxExemptionsOutputModel[] Optional list of when items are exempt from this custom tax. Each exemption row defines  criteria that mark matching transaction lines as exempt (or explicitly not exempt).
+     */
+    public $exemptions;
+    /**
+     * @var string The date when the custom tax was created. Populated automatically when the record is  persisted.
+     */
+    public $createdDate;
+    /**
+     * @var int The user who created the custom tax. Populated automatically from the calling user's  identity at creation time.
+     */
+    public $createdUserId;
+    /**
+     * @var string The date when the custom tax was last modified. Populated automatically whenever the  record is updated.
+     */
+    public $modifiedDate;
+    /**
+     * @var int The user who last modified the custom tax. Populated automatically from the calling  user's identity when the record is updated.
+     */
+    public $modifiedUserId;
+}
+/**
+ * Describes a single rate override row for a custom tax.
+ * <br>
+ * This is the input variant used when creating or updating a custom tax. Each rate row
+ * specifies a rate and a set of optional criteria (jurisdiction, tax code, tariff code,
+ * entity use code, etc.) which determine when the rate applies.
+ * Swagger Name: AvaTaxClient
+ */
+class CustomTaxRateInputModel
+{
+    /**
+     * @var float The rate which is assigned based on the criteria in this model. The value is interpreted  according to the custom tax's `unitOfBasis` (for example, a value of `0.05`  with `PerCurrencyUnit` means 5%).
+     */
+    public $rate;
+    /**
+     * @var float Optionally specify the maximum taxable amount. Any portion of the base above this cap  is not taxed at this rate.
+     */
+    public $cap;
+    /**
+     * @var float Optionally specify the per-unit threshold that must be met to apply this rate. If the  line amount is below the threshold this rate does not apply.
+     */
+    public $threshold;
+    /**
+     * @var string Optionally set the type of jurisdiction this rate applies to, e.g. State or City. When  specified together with `jurisCode`, this rate only applies to transactions sourced  to matching jurisdictions. (See JurisdictionType::* for a list of allowable values)
+     */
+    public $jurisdictionTypeId;
+    /**
+     * @var string Optionally set the specific jurisdiction this rate applies to. This should be one of  the jurisdictions defined on the parent custom tax.
+     */
+    public $jurisCode;
+    /**
+     * @var string The rate type for which this rate applies.
+     */
+    public $rateTypeCode;
+    /**
+     * @var string Optionally set a specific tax code this rate applies to. Tax codes identify product or  service categories for taxation.
+     */
+    public $taxCode;
+    /**
+     * @var string Optionally set a specific tariff code this rate applies to. Tariff codes are used for  cross-border and customs taxation.
+     */
+    public $tariffCode;
+    /**
+     * @var string Optionally set a specific entity use code this rate applies to. Entity use codes  describe customer usage such as resale, manufacturing, or government use.
+     */
+    public $entityUseCode;
+    /**
+     * @var string Optionally set a different effective date for this rate. This date cannot be earlier  than the base effective date set for the entire custom tax.
+     */
+    public $effectiveDate;
+    /**
+     * @var string Optionally set a different expiration date for this rate. This date cannot be later  than the base expiration date set for the entire custom tax.
+     */
+    public $endDate;
+    /**
+     * @var string Optionally set the currency code to use for this rate. When omitted, the rate uses the  transaction's currency.
+     */
+    public $currencyCode;
+    /**
+     * @var string Optionally override the unit of basis for this specific rate. If not specified, the  rate uses the custom tax default unit of basis.
+     */
+    public $unitOfBasis;
+    /**
+     * @var boolean Whether this rate applies to all child jurisdictions or only the specified one. When  true, the rate is applied to every jurisdiction beneath the one identified by  `jurisCode`; when false or null, only the exact jurisdiction is matched.
+     */
+    public $isAllJuris;
+    /**
+     * @var string[] Optional advanced settings for this rate. The allowed values depend on the tax type  and are documented separately.
+     */
+    public $options;
+}
+/**
+ * Describes a single rate override row for a custom tax.
+ * <br>
+ * This is the output variant returned by Custom Tax read endpoints. Each rate row specifies
+ * a rate and a set of optional criteria (jurisdiction, tax code, tariff code, entity use
+ * code, etc.) which determine when the rate applies.
+ * Swagger Name: AvaTaxClient
+ */
+class CustomTaxRateOutputModel
+{
+    /**
+     * @var float The rate which is assigned based on the criteria in this model. The value is interpreted  according to the custom tax's `unitOfBasis` (for example, a value of `0.05`  with `PerCurrencyUnit` means 5%).
+     */
+    public $rate;
+    /**
+     * @var float Optionally specify the maximum taxable amount. Any portion of the base above this cap  is not taxed at this rate.
+     */
+    public $cap;
+    /**
+     * @var float Optionally specify the per-unit threshold that must be met to apply this rate. If the  line amount is below the threshold this rate does not apply.
+     */
+    public $threshold;
+    /**
+     * @var string Optionally set the type of jurisdiction this rate applies to, e.g. State or City. When  specified together with `jurisCode`, this rate only applies to transactions sourced  to matching jurisdictions. (See JurisdictionType::* for a list of allowable values)
+     */
+    public $jurisdictionTypeId;
+    /**
+     * @var string Optionally set the specific jurisdiction this rate applies to. This should be one of  the jurisdictions defined on the parent custom tax.
+     */
+    public $jurisCode;
+    /**
+     * @var string The rate type for which this rate applies.
+     */
+    public $rateTypeCode;
+    /**
+     * @var string Optionally set a specific tax code this rate applies to. Tax codes identify product or  service categories for taxation.
+     */
+    public $taxCode;
+    /**
+     * @var string Optionally set a specific tariff code this rate applies to. Tariff codes are used for  cross-border and customs taxation.
+     */
+    public $tariffCode;
+    /**
+     * @var string Optionally set a specific entity use code this rate applies to. Entity use codes  describe customer usage such as resale, manufacturing, or government use.
+     */
+    public $entityUseCode;
+    /**
+     * @var string Optionally set a different effective date for this rate. This date cannot be earlier  than the base effective date set for the entire custom tax.
+     */
+    public $effectiveDate;
+    /**
+     * @var string Optionally set a different expiration date for this rate. This date cannot be later  than the base expiration date set for the entire custom tax.
+     */
+    public $endDate;
+    /**
+     * @var string Optionally set the currency code to use for this rate. When omitted, the rate uses the  transaction's currency.
+     */
+    public $currencyCode;
+    /**
+     * @var string Optionally override the unit of basis for this specific rate. If not specified, the  rate uses the custom tax default unit of basis.
+     */
+    public $unitOfBasis;
+    /**
+     * @var boolean Whether this rate applies to all child jurisdictions or only the specified one. When  true, the rate is applied to every jurisdiction beneath the one identified by  `jurisCode`; when false or null, only the exact jurisdiction is matched.
+     */
+    public $isAllJuris;
+    /**
+     * @var string[] Optional advanced settings for this rate. The allowed values depend on the tax type  and are documented separately.
+     */
+    public $options;
+}
+/**
+ * Describes a single taxability override row for a custom tax.
+ * <br>
+ * This is the input variant used when creating or updating a custom tax. Each taxability
+ * row defines whether an item is taxable or not, optionally scoped to a specific
+ * jurisdiction, tax code, tariff code, or entity use code.
+ * Swagger Name: AvaTaxClient
+ */
+class CustomTaxTaxabilityInputModel
+{
+    /**
+     * @var boolean Whether this tax treatment sets an item as taxable or not taxable. When true, items  matching the other criteria are taxable under this custom tax; when false, they are  explicitly marked as not taxable.
+     */
+    public $taxable;
+    /**
+     * @var float Optionally specify the maximum taxable amount. Any portion of the base above this cap  is not taxed under this taxability treatment.
+     */
+    public $cap;
+    /**
+     * @var float Optionally specify the per-unit threshold that must be met to apply this tax treatment.  If the line amount is below the threshold, this treatment does not apply.
+     */
+    public $threshold;
+    /**
+     * @var string Optionally set the type of jurisdiction this tax treatment applies to, e.g. State or  City. When combined with `jurisCode`, the taxability is scoped to the matching  jurisdiction only. (See JurisdictionType::* for a list of allowable values)
+     */
+    public $jurisdictionTypeId;
+    /**
+     * @var string Optionally set the specific jurisdiction this tax treatment applies to. This should be  one of the jurisdictions defined on the parent custom tax.
+     */
+    public $jurisCode;
+    /**
+     * @var string The rate type to assign as part of this tax treatment.
+     */
+    public $rateTypeCode;
+    /**
+     * @var string Optionally set a specific tax code this tax treatment applies to. Tax codes identify  product or service categories for taxation.
+     */
+    public $taxCode;
+    /**
+     * @var string Optionally set a specific tariff code this tax treatment applies to. Tariff codes are  used for cross-border and customs taxation.
+     */
+    public $tariffCode;
+    /**
+     * @var string Optionally set a specific entity use code this tax treatment applies to. Entity use  codes describe customer usage such as resale, manufacturing, or government use.
+     */
+    public $entityUseCode;
+    /**
+     * @var string Optionally set a different effective date for this tax treatment. This date cannot be  earlier than the base effective date set for the entire custom tax.
+     */
+    public $effectiveDate;
+    /**
+     * @var string Optionally set a different expiration date for this tax treatment. This date cannot be  later than the base expiration date set for the entire custom tax.
+     */
+    public $endDate;
+    /**
+     * @var string Optionally set the currency code to use for this tax treatment.
+     */
+    public $currencyCode;
+    /**
+     * @var boolean Whether this tax treatment applies to all child jurisdictions or only the specified one.  When true, the treatment is applied to every jurisdiction beneath the one identified by  `jurisCode`; when false or null, only the exact jurisdiction is matched.
+     */
+    public $isAllJuris;
+    /**
+     * @var string Optionally override the sourcing to Origin, Destination, or blank (default). Sourcing  controls which location of the transaction (origin or destination) is used to evaluate  this tax treatment.
+     */
+    public $sourcing;
+    /**
+     * @var string[] Optional advanced settings for this tax treatment. The allowed values depend on the  tax type and are documented separately.
+     */
+    public $options;
+}
+/**
+ * Describes a single taxability override row for a custom tax.
+ * <br>
+ * This is the output variant returned by Custom Tax read endpoints. Each taxability row
+ * defines whether an item is taxable or not, optionally scoped to a specific jurisdiction,
+ * tax code, tariff code, or entity use code.
+ * Swagger Name: AvaTaxClient
+ */
+class CustomTaxTaxabilityOutputModel
+{
+    /**
+     * @var boolean Whether this tax treatment sets an item as taxable or not taxable. When true, items  matching the other criteria are taxable under this custom tax; when false, they are  explicitly marked as not taxable.
+     */
+    public $taxable;
+    /**
+     * @var float Optionally specify the maximum taxable amount. Any portion of the base above this cap  is not taxed under this taxability treatment.
+     */
+    public $cap;
+    /**
+     * @var float Optionally specify the per-unit threshold that must be met to apply this tax treatment.  If the line amount is below the threshold, this treatment does not apply.
+     */
+    public $threshold;
+    /**
+     * @var string Optionally set the type of jurisdiction this tax treatment applies to, e.g. State or  City. When combined with `jurisCode`, the taxability is scoped to the matching  jurisdiction only. (See JurisdictionType::* for a list of allowable values)
+     */
+    public $jurisdictionTypeId;
+    /**
+     * @var string Optionally set the specific jurisdiction this tax treatment applies to. This should be  one of the jurisdictions defined on the parent custom tax.
+     */
+    public $jurisCode;
+    /**
+     * @var string The rate type to assign as part of this tax treatment.
+     */
+    public $rateTypeCode;
+    /**
+     * @var string Optionally set a specific tax code this tax treatment applies to. Tax codes identify  product or service categories for taxation.
+     */
+    public $taxCode;
+    /**
+     * @var string Optionally set a specific tariff code this tax treatment applies to. Tariff codes are  used for cross-border and customs taxation.
+     */
+    public $tariffCode;
+    /**
+     * @var string Optionally set a specific entity use code this tax treatment applies to. Entity use  codes describe customer usage such as resale, manufacturing, or government use.
+     */
+    public $entityUseCode;
+    /**
+     * @var string Optionally set a different effective date for this tax treatment. This date cannot be  earlier than the base effective date set for the entire custom tax.
+     */
+    public $effectiveDate;
+    /**
+     * @var string Optionally set a different expiration date for this tax treatment. This date cannot be  later than the base expiration date set for the entire custom tax.
+     */
+    public $endDate;
+    /**
+     * @var string Optionally set the currency code to use for this tax treatment.
+     */
+    public $currencyCode;
+    /**
+     * @var boolean Whether this tax treatment applies to all child jurisdictions or only the specified one.  When true, the treatment is applied to every jurisdiction beneath the one identified by  `jurisCode`; when false or null, only the exact jurisdiction is matched.
+     */
+    public $isAllJuris;
+    /**
+     * @var string Optionally override the sourcing to Origin, Destination, or blank (default). Sourcing  controls which location of the transaction (origin or destination) is used to evaluate  this tax treatment.
+     */
+    public $sourcing;
+    /**
+     * @var string[] Optional advanced settings for this tax treatment. The allowed values depend on the  tax type and are documented separately.
+     */
+    public $options;
 }
 /**
  * A Customer's linked attribute denoting what features applied to the customer. A customer can
@@ -6003,6 +6856,14 @@ class DynamicRuleInputModel
      * @var boolean Whether to continue execution if this rule fails
      */
     public $continueOnError;
+    /**
+     * @var boolean Whether this is a draft rule; draft rules are not executed  on transactions unless specifically enabled for testing
+     */
+    public $isDraft;
+    /**
+     * @var int The execution priority of the rule, which is used for sorting rules; within  each execution step, rules with a lower priority value are executed earlier
+     */
+    public $priority;
 }
 /**
  * A Dynamic Rule is a type of a custom rule which is similar to an Advanced Rule, but
@@ -6048,6 +6909,14 @@ class DynamicRuleOutputModel
      * @var boolean Whether to continue execution if this rule fails
      */
     public $continueOnError;
+    /**
+     * @var boolean Whether this is a draft rule; draft rules are not executed  on transactions unless specifically enabled for testing
+     */
+    public $isDraft;
+    /**
+     * @var int The execution priority of the rule, which is used for sorting rules; within  each execution step, rules with a lower priority value are executed earlier
+     */
+    public $priority;
     /**
      * @var int Version number of the rule
      */
@@ -10073,6 +10942,63 @@ class ItemHSCodeRestrictionDetailModel
     public $complianceCitation;
 }
 /**
+ * A single failed row from an HS code verification batch request.
+ * Swagger Name: AvaTaxClient
+ */
+class ItemHSCodeVerificationFailedRowModel
+{
+    /**
+     * @var int Zero-based index of the element in the request array.
+     */
+    public $rowIndex;
+    /**
+     * @var string Item id for the row when available (string for JSON consistency).
+     */
+    public $itemId;
+    /**
+     * @var string[] All error descriptions for this row.
+     */
+    public $errors;
+    /**
+     * @var string Primary error code for the row (when available).
+     */
+    public $errorCode;
+}
+/**
+ * Represents a HsCodeClassification SLA Response for a given company.
+ * Swagger Name: AvaTaxClient
+ */
+class ItemHSCodeVerificationInputModel
+{
+    /**
+     * @var int The unique ID of this item.
+     */
+    public $itemId;
+    /**
+     * @var string The country code for HS code verification (2-letter ISO 3166 country code).
+     */
+    public $country;
+    /**
+     * @var string The HS code to verify.
+     */
+    public $hsCode;
+}
+/**
+ * Response for HS code verification batch requests. When Avalara.ItemMasterCoreService.Models.v2.ItemHSCodeVerificationOutputModel.failed is non-empty, no rows were persisted or published.
+ * Swagger Name: AvaTaxClient
+ */
+class ItemHSCodeVerificationOutputModel
+{
+    /**
+     * @var int Number of rows in the request (same as request array length).
+     */
+    public $total;
+    /**
+     * @var ItemHSCodeVerificationFailedRowModel[] Rows that failed validation; empty when the full batch was accepted.
+     */
+    public $failed;
+}
+/**
  * Item image output model with the image URL
  * Swagger Name: AvaTaxClient
  */
@@ -10479,6 +11405,124 @@ class ItemRestrictionOutputModel
      * @var int The user which created the record
      */
     public $createdUserId;
+}
+/**
+ * Item Reverse Sync Event Definition Output Model
+ * Swagger Name: AvaTaxClient
+ */
+class ItemReverseSyncEventDefinitionOutputModel
+{
+    /**
+     * @var int Id
+     */
+    public $id;
+    /**
+     * @var string Name
+     */
+    public $name;
+    /**
+     * @var string Description
+     */
+    public $description;
+}
+/**
+ * Input model used to create a Connector Data Sync (reverse sync) webhook registration.
+ *  
+ * A registration tells Avalara which connector should be notified when an item-related
+ * event occurs (currently `HSCodeAssigned`), the callback URL to invoke, and the
+ * events the connector wishes to subscribe to.
+ * Swagger Name: AvaTaxClient
+ */
+class ItemReverseSyncRegistrationInputModel
+{
+    /**
+     * @var string The connector name. This value is also used as the OAuth scope for the registration.
+     */
+    public $connectorName;
+    /**
+     * @var string The webhook callback URL that the connector exposes to receive notifications.
+     */
+    public $url;
+    /**
+     * @var string The registration delivery channel (for example, Webhook). (See ItemReverseSyncTypeName::* for a list of allowable values)
+     */
+    public $typeName;
+    /**
+     * @var string The list of events this registration subscribes to. (See ItemReverseSyncEventType::* for a list of allowable values)
+     */
+    public $events;
+}
+/**
+ * Output model representing a Connector Data Sync (reverse sync) webhook registration.
+ * Swagger Name: AvaTaxClient
+ */
+class ItemReverseSyncRegistrationOutputModel
+{
+    /**
+     * @var int The unique identifier for this registration.
+     */
+    public $registrationId;
+    /**
+     * @var string The connector name. This value is also used as the OAuth scope for the registration.
+     */
+    public $connectorName;
+    /**
+     * @var int The Avalara company identifier that owns this registration.
+     */
+    public $companyId;
+    /**
+     * @var string The webhook callback URL that the connector exposes to receive notifications.
+     */
+    public $url;
+    /**
+     * @var string The registration delivery channel (for example, Webhook). (See ItemReverseSyncTypeName::* for a list of allowable values)
+     */
+    public $typeName;
+    /**
+     * @var boolean Indicates whether this registration is currently active.
+     */
+    public $isActive;
+    /**
+     * @var string The list of events this registration subscribes to. (See ItemReverseSyncEventType::* for a list of allowable values)
+     */
+    public $events;
+    /**
+     * @var string The date and time when this record was last modified.
+     */
+    public $modifiedDate;
+    /**
+     * @var int The user ID who last modified this record.
+     */
+    public $modifiedUserId;
+    /**
+     * @var string The date and time when this record was created.
+     */
+    public $createdDate;
+    /**
+     * @var int The user ID who created this record.
+     */
+    public $createdUserId;
+}
+/**
+ * Update model for an existing Connector Data Sync (reverse sync) webhook registration.
+ *  
+ * Only the fields included in the request body will be updated.
+ * Swagger Name: AvaTaxClient
+ */
+class ItemReverseSyncRegistrationUpdateModel
+{
+    /**
+     * @var string The webhook callback URL that the connector exposes to receive notifications.
+     */
+    public $url;
+    /**
+     * @var string The registration delivery channel (for example, Webhook). Omit to leave the persisted value unchanged. (See ItemReverseSyncTypeName::* for a list of allowable values)
+     */
+    public $typeName;
+    /**
+     * @var string The list of events this registration subscribes to. (See ItemReverseSyncEventType::* for a list of allowable values)
+     */
+    public $events;
 }
 /**
  * Status Output Model
@@ -11174,6 +12218,37 @@ class JurisdictionRateTypeTaxTypeMappingModel
      * @var string The date this jurisdiction stops to take effect on tax calculations
      */
     public $endDate;
+}
+/**
+ * One tax type + subtype combination for a jurisdiction.
+ * Swagger Name: AvaTaxClient
+ */
+class JurisdictionTaxTypesAndSubTypesModel
+{
+    /**
+     * @var string ID of the tax type.
+     */
+    public $taxTypeId;
+    /**
+     * @var string Text description of the tax type.
+     */
+    public $taxTypeDescription;
+    /**
+     * @var string ID of the tax subtype.
+     */
+    public $taxSubTypeId;
+    /**
+     * @var string Text description of the tax subtype.
+     */
+    public $taxSubTypeDescription;
+    /**
+     * @var string Summary tax type display name derived from tax type and subtype.
+     */
+    public $jurisdictionTaxTypeSubtypeDescription;
+    /**
+     * @var RateTypesModel[] Populated when `$includeRateTypes=true` (default). Empty when rate types are omitted.
+     */
+    public $rateTypes;
 }
 /**
  * The model for liability parameters definitions
@@ -14600,15 +15675,49 @@ class RemoveTransactionLineModel
     public $renumber;
 }
 /**
+ * Represents a filter within audit log report input parameters.
+ * Swagger Name: AvaTaxClient
+ */
+class ReportAuditLogFilterInputModel
+{
+    /**
+     * @var string The name of the filter (column name).
+     */
+    public $name;
+    /**
+     * @var string[] The values for this filter.
+     */
+    public $values;
+}
+/**
+ * Represents a filter within audit log report parameters.
+ * Swagger Name: AvaTaxClient
+ */
+class ReportAuditLogFilterModel
+{
+    /**
+     * @var string The name of the filter (column name).
+     */
+    public $name;
+    /**
+     * @var string[] The values for this filter.
+     */
+    public $values;
+}
+/**
  * An input model for requesting an export of audit logs
  * Swagger Name: AvaTaxClient
  */
 class ReportAuditLogModel
 {
     /**
-     * @var ReportAuditLogOperationInputModel[] The list of operations for this audit log report.
+     * @var string The type of the report (e.g., "audit").
      */
-    public $operations;
+    public $reportType;
+    /**
+     * @var ReportAuditLogReportInputModel[] The list of reports for this audit log report.
+     */
+    public $reports;
     /**
      * @var string The start date for the audit log report.
      */
@@ -14621,36 +15730,10 @@ class ReportAuditLogModel
      * @var string The compression type for the report output (e.g., "NONE", "GZIP"). (See Compression::* for a list of allowable values)
      */
     public $compression;
-}
-/**
- * Represents an operation within audit log report input parameters.
- * Swagger Name: AvaTaxClient
- */
-class ReportAuditLogOperationInputModel
-{
     /**
-     * @var string The table name for this operation.
+     * @var string The source of the report (e.g., "AUDITLOGS").
      */
-    public $table;
-    /**
-     * @var object The filters for this operation as key-value pairs.
-     */
-    public $filters;
-}
-/**
- * Represents an operation within audit log report parameters.
- * Swagger Name: AvaTaxClient
- */
-class ReportAuditLogOperationModel
-{
-    /**
-     * @var string The table name for this operation.
-     */
-    public $table;
-    /**
-     * @var object The filters for this operation as key-value pairs.
-     */
-    public $filters;
+    public $reportSource;
 }
 /**
  * The output model for audit log report parameter definitions.
@@ -14659,9 +15742,13 @@ class ReportAuditLogOperationModel
 class ReportAuditLogParametersModel
 {
     /**
-     * @var ReportAuditLogOperationModel[] The list of operations for this audit log report.
+     * @var string The type of the report (e.g., "audit").
      */
-    public $operations;
+    public $reportType;
+    /**
+     * @var ReportAuditLogReportModel[] The list of reports for this audit log report.
+     */
+    public $reports;
     /**
      * @var string The start date for the audit log report.
      */
@@ -14674,6 +15761,36 @@ class ReportAuditLogParametersModel
      * @var string The compression type for the report output (e.g., "NONE", "GZIP"). (See Compression::* for a list of allowable values)
      */
     public $compression;
+}
+/**
+ * Represents a report within audit log report input parameters.
+ * Swagger Name: AvaTaxClient
+ */
+class ReportAuditLogReportInputModel
+{
+    /**
+     * @var string The report sub-type (e.g., "account").
+     */
+    public $reportSubType;
+    /**
+     * @var ReportAuditLogFilterInputModel[] The filters for this report.
+     */
+    public $filters;
+}
+/**
+ * Represents a report within audit log report parameters.
+ * Swagger Name: AvaTaxClient
+ */
+class ReportAuditLogReportModel
+{
+    /**
+     * @var string The report sub-type (e.g., "account").
+     */
+    public $reportSubType;
+    /**
+     * @var ReportAuditLogFilterModel[] The filters for this report.
+     */
+    public $filters;
 }
 /**
  * A model for displaying audit log report task metadata
@@ -14686,9 +15803,9 @@ class ReportAuditLogResponseModel
      */
     public $id;
     /**
-     * @var string The type of the report
+     * @var int The account id associated with the report
      */
-    public $reportType;
+    public $accountId;
     /**
      * @var ReportAuditLogParametersModel 
      */
@@ -18112,6 +19229,10 @@ class VendorCertificateModel
      * @var string The name of the exposure zone where this certificate is valid.  This is a computed property for filtering purposes.
      */
     public $exposureZoneName;
+    /**
+     * @var CertificateJurisdictionModel[] A list of jurisdictions associated with this certificate, indicating the tax authority  regions where the certificate applies. A certificate can have one or more jurisdictions.     You can fetch this data by specifying `$include=jurisdictions` when calling a certificate fetch API.
+     */
+    public $jurisdictions;
     /**
      * @var CertificateAttributeModel[] A list of certificate attributes that apply to this certificate.     You can fetch this data by specifying `$include=attributes` when calling a certificate fetch API.
      */

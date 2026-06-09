@@ -2,7 +2,7 @@
 namespace Avalara;
 use GuzzleHttp\Client;
 
-define('AVATAX_SDK_VERSION', '26.5.0');
+define('AVATAX_SDK_VERSION', '26.6.0');
 
 /*****************************************************************************
  *                                                                           *
@@ -1253,6 +1253,15 @@ class ErrorCodeId
     const C_VALUEMISMATCH = 4027;
     const C_INVALIDSTATUSFORHSVERIFICATION = 4028;
     const C_CANNOTVERIFYHSCODE = 4029;
+    const C_REQUESTALREADYINPROGRESS = 4030;
+    const C_CLASSIFICATIONSETTINGSINPROGRESS = 4031;
+    const C_CANNOTDELETEENTITY = 4032;
+    const C_INCORRECTVALUEFORFIELD = 4033;
+
+    /**
+     * AP Threshold inheritance restriction — child company inherits AP Threshold settings from parent
+     */
+    const C_APTHRESHOLDINHERITANCERESTRICTION = 4034;
 
     /**
      * Error string from the service unknown
@@ -1899,6 +1908,11 @@ class CustomRuleStatus
      * The rule is marked enabled, but it is before the first effective date of the rule.
      */
     const C_FUTURE = 4;
+
+    /**
+     * The rule is marked as draft and will not execute unless specifically enabled for testing.
+     */
+    const C_DRAFT = 5;
 
 }
 
@@ -2557,6 +2571,11 @@ class ReportFormat
      */
     const C_CSV = 0;
 
+    /**
+     * The JavaScript Object Notation file format
+     */
+    const C_JSON = 1;
+
 }
 
 /**
@@ -2762,6 +2781,16 @@ class ReportSource
      * document line detail all taxes
      */
     const C_DOCUMENTLINEDETAILALLTAXES = 6;
+
+    /**
+     * document summary
+     */
+    const C_DOCUMENTSUMMARY = 7;
+
+    /**
+     * document
+     */
+    const C_DOCUMENT = 8;
 
 }
 
@@ -3272,6 +3301,24 @@ class ItemCatalogueResultEvent
     const C_ITEMUPDATED = 1;
     const C_ITEMDELETED = 2;
     const C_ERROR = 3;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * 
+ */
+class ItemReverseSyncTypeName
+{    const C_WEBHOOK = 0;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * 
+ */
+class ItemReverseSyncEventType
+{    const C_HSCODEASSIGNED = 1;
 
 }
 
