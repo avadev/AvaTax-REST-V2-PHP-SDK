@@ -1732,72 +1732,6 @@ class BulkLockTransactionResult
     public $numberOfRecords;
 }
 /**
- * Individual cache information
- * Swagger Name: AvaTaxClient
- */
-class CacheInfo
-{
-    /**
-     * @var string Name of the cache
-     */
-    public $name;
-    /**
-     * @var int Memory size of the cache in bytes
-     */
-    public $memorySizeBytes;
-    /**
-     * @var float Memory size of the cache in megabytes
-     */
-    public $memorySizeMB;
-    /**
-     * @var float Memory size of the cache in GB
-     */
-    public $memorySizeGB;
-    /**
-     * @var int Number of items in the cache
-     */
-    public $itemCount;
-    /**
-     * @var boolean Whether the cache is currently loaded
-     */
-    public $isLoaded;
-    /**
-     * @var string Time when the cache was last refreshed
-     */
-    public $lastRefreshTime;
-    /**
-     * @var string Duration of the last cache refresh operation
-     */
-    public $lastRefreshDuration;
-}
-/**
- * Cache memory usage details
- * Swagger Name: AvaTaxClient
- */
-class CacheMemoryUsage
-{
-    /**
-     * @var object Dictionary of cache information indexed by cache name
-     */
-    public $caches;
-    /**
-     * @var int Total memory used by all caches in bytes
-     */
-    public $totalCacheMemory;
-    /**
-     * @var float Total memory used by all caches in GB
-     */
-    public $totalCacheMemoryGB;
-    /**
-     * @var int Total number of caches monitored
-     */
-    public $totalCacheCount;
-    /**
-     * @var string Timestamp when the cache memory usage was collected
-     */
-    public $timestamp;
-}
-/**
  * Represents an invitation for a customer to use CertExpress to self-report their own certificates.
  * This invitation is delivered by your choice of method, or you can present a hyperlink to the user
  * directly in your connector. Your customer will be redirected to https://app.certexpress.com/ where
@@ -1928,6 +1862,47 @@ class CertificateInvalidReasonModel
     public $systemCode;
 }
 /**
+ * A job associated with a certificate.
+ *  
+ * Used as both the input shape on certificate POST/PUT (only `id` and the nested
+ * Avalara.AvaTax.AccountServices.Models.v2.CertificateJobModel.phases ids are required to link existing jobs/phases/tasks to the certificate)
+ * and the response shape on certificate GET endpoints when `jobs` is requested via
+ * `$include`. Use `$include=jobs.phases` or `$include=jobs.tasks` on GET to
+ * additionally populate the nested Avalara.AvaTax.AccountServices.Models.v2.CertificateJobModel.phases collection and the tasks under each phase.
+ * Swagger Name: AvaTaxClient
+ */
+class CertificateJobModel
+{
+    /**
+     * @var boolean Indicates whether this job was explicitly linked to the certificate.  Populated by CertCapture on GET responses; ignored on POST/PUT.
+     */
+    public $isExplicit;
+    /**
+     * @var boolean Indicates whether this is a direct association.  Populated by CertCapture on GET responses; ignored on POST/PUT.
+     */
+    public $isDirect;
+    /**
+     * @var int The unique ID of this job. Required on POST/PUT to link an existing job to the certificate.
+     */
+    public $id;
+    /**
+     * @var string The name of this job. Populated by CertCapture on GET responses; ignored on POST/PUT  (the job is identified by Avalara.AvaTax.AccountServices.Models.v2.CertificateJobModel.id).
+     */
+    public $name;
+    /**
+     * @var string The job number. Populated by CertCapture on GET responses; ignored on POST/PUT  (the job is identified by Avalara.AvaTax.AccountServices.Models.v2.CertificateJobModel.id).
+     */
+    public $jobNumber;
+    /**
+     * @var string The name of the exposure zone associated with this job. Populated by CertCapture on  GET responses; ignored on POST/PUT.
+     */
+    public $exposureZoneName;
+    /**
+     * @var JobPhaseModel[] The nested list of phases for this job (each phase containing its own tasks).     On GET, populated by CertCapture only when `$include=jobs.phases` or  `$include=jobs.tasks` is requested; null otherwise. On POST/PUT, supply the  phase / task `id` values to link them to the certificate alongside the job.
+     */
+    public $phases;
+}
+/**
  * Represents a valid jurisdiction that can be linked to a certificate.
  *  
  * This model is returned by the `ListJurisdictions` API, which lists the jurisdictions
@@ -1986,6 +1961,47 @@ class CertificateJurisdictionModel
      * @var string The FIPS code or identifier for the jurisdiction.
      */
     public $code;
+    /**
+     * @var boolean Whether sales-tax exemption applies for this jurisdiction. Default `true`.  Set `false` to opt the jurisdiction out of the sales-tax validator while  keeping any `taxTypeMappings` rows in scope.
+     */
+    public $isSalesTaxApplicable;
+    /**
+     * @var CertificateJurisdictionTaxMappingModel[] List of multi-tax mapping rows attached to this jurisdiction. Each row references  a TPS tax-type / sub-tax-type combination sourced from `GET /v2/tax-types`.
+     */
+    public $taxTypeMappings;
+}
+/**
+ * Represents one multi-tax mapping row attached to a certificate jurisdiction.
+ * Each row references a TPS tax-type / sub-tax-type combination that the
+ * certificate is exempt for.
+ * Swagger Name: AvaTaxClient
+ */
+class CertificateJurisdictionTaxMappingModel
+{
+    /**
+     * @var int Unique ID number of this mapping row.
+     */
+    public $id;
+    /**
+     * @var int TPS surrogate identifier for the tax type.
+     */
+    public $taxTypeId;
+    /**
+     * @var string TPS label for the tax type (e.g. `"Automotive"`).
+     */
+    public $taxType;
+    /**
+     * @var int TPS surrogate identifier for the sub-tax type.
+     */
+    public $subTaxTypeId;
+    /**
+     * @var string TPS label for the sub-tax type.
+     */
+    public $subTaxType;
+    /**
+     * @var int TPS `taxTypeMappingId`. Used as the diff key on PUT.
+     */
+    public $sourceMappingId;
 }
 /**
  * The certificate log for a customer. This is exposed in the URL's `$includes`.
@@ -2120,7 +2136,7 @@ class CertificateModel
      */
     public $exposureZoneName;
     /**
-     * @var CertificateJurisdictionModel[] A list of jurisdictions associated with this certificate, indicating the tax authority  regions where the certificate applies. A certificate can have one or more jurisdictions.     You can fetch this data by specifying `$include=jurisdictions` when calling a certificate fetch API.
+     * @var CertificateJurisdictionModel[] A list of jurisdictions associated with this certificate, indicating the tax authority  regions where the certificate applies. A certificate can have one or more jurisdictions.     You can fetch this data by specifying `$include=jurisdictions` when calling a certificate fetch API.     This collection itself is not filterable; use the sub-fields `jurisdictions.type_id`,  `jurisdictions.name`, or `jurisdictions.code` (exposed via the computed properties below)  to filter certificates by jurisdiction.
      */
     public $jurisdictions;
     /**
@@ -2132,7 +2148,7 @@ class CertificateModel
      */
     public $histories;
     /**
-     * @var CustomerJobModel[] A list of jobs for this certificate.     You can fetch this data by specifying `$include=jobs` when calling a certificate fetch API.
+     * @var CertificateJobModel[] The jobs (and their phases / tasks) associated with this certificate.     On POST / PUT: supply the `id` of each existing job — and optionally nested phase /  task `id`s — to link them to this certificate. All other fields on each entry  (`name`, `jobNumber`, `isExplicit`, etc.) are server-computed and ignored  on input.     On GET: populated when `$include=jobs` is specified. Use `$include=jobs.phases`  to also expand the phases within each job, and `$include=jobs.tasks` to expand the  tasks within each phase (which implies `jobs` and `jobs.phases`).
      */
     public $jobs;
     /**
@@ -2163,6 +2179,86 @@ class CertificateModel
      * @var string[] This field is available for input only. To retrieve the image after creation, use the  `DownloadCertificateImage` API.     When creating a certificate, you may optionally provide a list of JPG images, one per page, in  Base64 URLEncoded format. These JPG images are automatically combined into a single downloadable  PDF and can be retrieved back later as either the original JPG images or the combined PDF.     To create a certificate, you must provide one of the following fields: either a `filename`, a `pdf` file,  or an array of JPG `pages`. The API will return an error if you omit these fields or if you attempt to  put values in more than one of them.
      */
     public $pages;
+}
+/**
+ * Represents one TPS sub-tax-type node nested under a Avalara.AvaTax.AccountServices.Models.v2.CertificateTaxTypeModel.
+ * Swagger Name: AvaTaxClient
+ */
+class CertificateTaxSubTypeModel
+{
+    /**
+     * @var string TPS label for the sub-tax type.
+     */
+    public $subTaxType;
+    /**
+     * @var int TPS surrogate identifier for the sub-tax type.
+     */
+    public $subTaxTypeId;
+    /**
+     * @var int TPS source mapping identifier for this (tax_type, sub_tax_type) pair. Round-trips into  `CertificateJurisdictionTaxMappingModel.sourceMappingId` on POST/PUT certificates  and is the diff key the CertCapture API uses to reconcile PUT updates.
+     */
+    public $sourceMappingId;
+    /**
+     * @var CertificateTaxTypeJurisdictionModel[] Jurisdictions in which the (tax_type, sub_tax_type) pair is registered.
+     */
+    public $jurisdictions;
+}
+/**
+ * Represents one TPS-Nexus jurisdiction node nested under a Avalara.AvaTax.AccountServices.Models.v2.CertificateTaxSubTypeModel.
+ * Swagger Name: AvaTaxClient
+ */
+class CertificateTaxTypeJurisdictionModel
+{
+    /**
+     * @var string ISO-2 country code (e.g. `"US"`).
+     */
+    public $country;
+    /**
+     * @var string Region code within the country (e.g. two-letter state abbreviation).
+     */
+    public $region;
+    /**
+     * @var string Jurisdiction type (e.g. `"State"`, `"County"`, `"City"`).
+     */
+    public $type;
+    /**
+     * @var string FIPS-style jurisdiction code.
+     */
+    public $code;
+    /**
+     * @var string Human-readable name of the jurisdiction.
+     */
+    public $name;
+    /**
+     * @var string Short display name.
+     */
+    public $shortName;
+}
+/**
+ * Represents one TPS tax-type node returned by the `ListCertificateTaxTypes` API.
+ *  
+ * The pair (`taxType`, `taxTypeId`) is what the caller uses to
+ * populate `taxTypeMappings` on a certificate jurisdiction.
+ * Swagger Name: AvaTaxClient
+ */
+class CertificateTaxTypeModel
+{
+    /**
+     * @var string TPS label for the tax type (e.g. `"Automotive"`).
+     */
+    public $taxType;
+    /**
+     * @var int TPS surrogate identifier for the tax type.
+     */
+    public $taxTypeId;
+    /**
+     * @var string ISO-2 country code (e.g. `"US"`).
+     */
+    public $country;
+    /**
+     * @var CertificateTaxSubTypeModel[] Sub-tax-type details under this tax type.
+     */
+    public $taxSubTypeDetails;
 }
 /**
  * Settle this transaction with your ledger by verifying its amounts.
@@ -4150,6 +4246,166 @@ class CreateCertExpressInvitationModel
     public $deliveryMethod;
 }
 /**
+ * Represents a create Custom Rules import batch request model. The payload is the Custom Rules
+ * export envelope (tax rules, dynamic rules, and advanced rules) which is stored as JSON in S3
+ * and processed downstream by BatchV2.
+ * Swagger Name: AvaTaxClient
+ */
+class CreateCustomRulesBatchRequestModel
+{
+    /**
+     * @var string The user-friendly readable name for this batch. Optional - when omitted it is derived  from Avalara.AvaTax.AccountServices.Models.v2.CreateCustomRulesBatchRequestModel.kind and Avalara.AvaTax.AccountServices.Models.v2.CreateCustomRulesBatchRequestModel.exportedAt.
+     */
+    public $name;
+    /**
+     * @var string The kind of export this payload represents (e.g. "CustomRulesExport").
+     */
+    public $kind;
+    /**
+     * @var string The schema version of the export payload.
+     */
+    public $schemaVersion;
+    /**
+     * @var string The UTC timestamp when the source rules were exported.
+     */
+    public $exportedAt;
+    /**
+     * @var CustomRuleExportUser 
+     */
+    public $exportedBy;
+    /**
+     * @var int The account the rules were exported from.
+     */
+    public $sourceAccountId;
+    /**
+     * @var int The company the rules were exported from.
+     */
+    public $sourceCompanyId;
+    /**
+     * @var string The overall filter used to produce the export, if any.
+     */
+    public $filter;
+    /**
+     * @var string The tax-rule-specific filter used to produce the export, if any.
+     */
+    public $taxRuleFilter;
+    /**
+     * @var string The advanced-rule-specific filter used to produce the export, if any.
+     */
+    public $advancedRuleFilter;
+    /**
+     * @var string The dynamic-rule-specific filter used to produce the export, if any.
+     */
+    public $dynamicRuleFilter;
+    /**
+     * @var string The order-by clause used to produce the export, if any.
+     */
+    public $orderBy;
+    /**
+     * @var int The page size used when producing the export.
+     */
+    public $top;
+    /**
+     * @var int The number of records skipped when producing the export.
+     */
+    public $skip;
+    /**
+     * @var int The total number of rules contained in this payload.
+     */
+    public $totalCount;
+    /**
+     * @var int The number of traditional tax rules contained in this payload.
+     */
+    public $taxRuleCount;
+    /**
+     * @var int The number of dynamic rules contained in this payload.
+     */
+    public $dynamicRuleCount;
+    /**
+     * @var int The number of advanced rules contained in this payload.
+     */
+    public $advancedRuleCount;
+    /**
+     * @var TaxRuleModel[] The traditional tax rules to import. Stored verbatim so downstream processing receives the  exact exported shape.
+     */
+    public $taxRules;
+    /**
+     * @var DynamicRuleInputModel[] The dynamic (graph-based) rules to import. Stored verbatim so downstream processing receives  the exact exported shape.
+     */
+    public $dynamicRules;
+    /**
+     * @var AdvancedRuleModel[] The advanced rules to import. Stored verbatim so downstream processing receives the exact  exported shape.
+     */
+    public $advancedRules;
+}
+/**
+ * Represents a create Custom Rules import batch response model.
+ * Swagger Name: AvaTaxClient
+ */
+class CreateCustomRulesBatchResponseModel
+{
+    /**
+     * @var int The unique ID number of this batch.
+     */
+    public $id;
+    /**
+     * @var string Any optional flags provided for this batch
+     */
+    public $options;
+    /**
+     * @var string The user-friendly readable name for this batch.
+     */
+    public $name;
+    /**
+     * @var int The Account ID number of the account that owns this batch.
+     */
+    public $accountId;
+    /**
+     * @var int The Company ID number of the company that owns this batch.
+     */
+    public $companyId;
+    /**
+     * @var string This batch's current processing status (See BatchStatus::* for a list of allowable values)
+     */
+    public $status;
+    /**
+     * @var string The date/time when this batch started processing
+     */
+    public $startedDate;
+    /**
+     * @var int The number of records in this batch; determined by the server
+     */
+    public $recordCount;
+    /**
+     * @var int The current record being processed
+     */
+    public $currentRecord;
+    /**
+     * @var string The date/time when this batch was completely processed
+     */
+    public $completedDate;
+    /**
+     * @var string The date when this record was created.
+     */
+    public $createdDate;
+    /**
+     * @var int The User ID of the user who created this record.
+     */
+    public $createdUserId;
+    /**
+     * @var string The date/time when this record was last modified.
+     */
+    public $modifiedDate;
+    /**
+     * @var int The user ID of the user who last modified this record.
+     */
+    public $modifiedUserId;
+    /**
+     * @var BatchFileModel[] The list of files contained in this batch.
+     */
+    public $files;
+}
+/**
  * A model used to initialize a new CertCapture eCommerce token.
  * Swagger Name: AvaTaxClient
  */
@@ -4800,6 +5056,21 @@ class CustomFieldModel
      * @var string The value of the custom field.
      */
     public $value;
+}
+/**
+ * Identity of the user that produced an export, captured at request time.
+ * Swagger Name: AvaTaxClient
+ */
+class CustomRuleExportUser
+{
+    /**
+     * @var int Avalara UserId of the requester.
+     */
+    public $userId;
+    /**
+     * @var string Username (login) of the requester. May be null if not available on the  authenticated principal.
+     */
+    public $userName;
 }
 /**
  * Model which can provide a summary of any custom rule variety.
@@ -5612,25 +5883,6 @@ class CustomerAttributeModel
     public $isChangeable;
 }
 /**
- * Customer job model. This is exposed in the URL's `$includes`.
- * Swagger Name: AvaTaxClient
- */
-class CustomerJobModel
-{
-    /**
-     * @var int The unique ID number of this customer's job.
-     */
-    public $id;
-    /**
-     * @var int The job number of this customer.
-     */
-    public $jobNumber;
-    /**
-     * @var string The job name of this customer.
-     */
-    public $name;
-}
-/**
  * Represents a customer to whom you sell products and/or services.
  * Swagger Name: AvaTaxClient
  */
@@ -5756,10 +6008,6 @@ class CustomerModel
      * @var HistoryModel[] A list of field update histories for this customer.
      */
     public $histories;
-    /**
-     * @var CustomerJobModel[] A list of jobs for this customer.
-     */
-    public $jobs;
     /**
      * @var CertificateLogModel[] A list of logs for this customer.
      */
@@ -7287,6 +7535,25 @@ class EcmsModel
     public $details;
 }
 /**
+ * Response model for GET /api/v2/companies/{companyId}/econexusthresholds.
+ * Swagger Name: AvaTaxClient
+ */
+class EcoNexusThresholdsModel
+{
+    /**
+     * @var int The Avalara company identifier.
+     */
+    public $companyId;
+    /**
+     * @var ThresholdStateSummaryModel[] Per-state threshold summaries for the company. Empty array if no evaluated data exists.
+     */
+    public $states;
+    /**
+     * @var string UTC timestamp of when the TPS in-memory cache last successfully refreshed from Snowflake.  Omitted when a refresh has not yet completed.
+     */
+    public $lastRefreshedAt;
+}
+/**
  * Represents a code describing the intended use for a product that may affect its taxability
  * Swagger Name: AvaTaxClient
  */
@@ -7709,6 +7976,14 @@ class ExportDocumentLineModel
      * @var string[] The names of the jurisdictions for which document lines are fetched.  Defaults to null if not specified.
      */
     public $jurisdictionNames;
+    /**
+     * @var boolean If true, include Point of Order Acceptance (POA) and Point of Order Origin (POO) in the generated report.  If false, exclude POA and POO from the generated report.  Defaults to false if not specified.
+     */
+    public $includePOAandPOO;
+    /**
+     * @var int[] List of company IDs to include in the report.  Only supported for the Document Line and Document Line Detail reports  (reportSource = SNOWFLAKE with includeMultiTaxLineDetails = false).  If not specified, only the current company is included.
+     */
+    public $companyIds;
 }
 /**
  * Information about a physical area or zone in which a certificate can apply.
@@ -11831,6 +12106,108 @@ class ItemUploadErrorModel
     public $errors;
 }
 /**
+ * A job associated with a certificate or customer. Used for $include=jobs on certificate/customer
+ * fetch APIs, and as the request/response body for the standalone Jobs CRUD endpoints.
+ * Swagger Name: AvaTaxClient
+ */
+class JobModel
+{
+    /**
+     * @var int The unique ID number of this job.
+     */
+    public $id;
+    /**
+     * @var string The job number of this job.
+     */
+    public $jobNumber;
+    /**
+     * @var string The name of this job.
+     */
+    public $name;
+    /**
+     * @var string The date when this job was created.
+     */
+    public $createdDate;
+    /**
+     * @var string The date when this job was last modified.
+     */
+    public $modifiedDate;
+    /**
+     * @var ExposureZoneModel 
+     */
+    public $exposureZone;
+    /**
+     * @var JobPhaseModel[] A list of phases associated with this job.     You can fetch this data by specifying `$include=phases` when calling a job fetch API.  Use `$include=phases,tasks` to also expand the tasks within each phase.
+     */
+    public $phases;
+}
+/**
+ * A phase within a certificate job.
+ * Swagger Name: AvaTaxClient
+ */
+class JobPhaseModel
+{
+    /**
+     * @var int The unique ID number of this phase.
+     */
+    public $id;
+    /**
+     * @var string The name of this phase.
+     */
+    public $name;
+    /**
+     * @var int The ID of the job this phase belongs to.
+     */
+    public $jobId;
+    /**
+     * @var string The unique code for this phase.
+     */
+    public $phaseCode;
+    /**
+     * @var string The date when this phase was created.
+     */
+    public $createdDate;
+    /**
+     * @var string The date when this phase was last modified.
+     */
+    public $modifiedDate;
+    /**
+     * @var JobTaskModel[] A list of tasks within this phase.
+     */
+    public $tasks;
+}
+/**
+ * A task within a certificate job phase.
+ * Swagger Name: AvaTaxClient
+ */
+class JobTaskModel
+{
+    /**
+     * @var int The unique ID number of this task.
+     */
+    public $id;
+    /**
+     * @var int The ID of the phase this task belongs to.
+     */
+    public $phaseId;
+    /**
+     * @var string The name of this task.
+     */
+    public $name;
+    /**
+     * @var string The unique code for this task.
+     */
+    public $taskCode;
+    /**
+     * @var string The date when this task was created.
+     */
+    public $createdDate;
+    /**
+     * @var string The date when this task was last modified.
+     */
+    public $modifiedDate;
+}
+/**
  * Represents JurisName Model
  * Swagger Name: AvaTaxClient
  */
@@ -12773,250 +13150,6 @@ class MarketplaceModel
      * @var string Marketplace Location
      */
     public $marketplace;
-}
-/**
- * Memory alert information
- * Swagger Name: AvaTaxClient
- */
-class MemoryAlert
-{
-    /**
-     * @var string Unique identifier for the alert
-     */
-    public $id;
-    /**
-     * @var string Title of the alert
-     */
-    public $title;
-    /**
-     * @var string Detailed description of the alert
-     */
-    public $description;
-    /**
-     * @var string Severity level of the alert (See MemoryAlertSeverity::* for a list of allowable values)
-     */
-    public $severity;
-    /**
-     * @var string Timestamp when the alert was generated
-     */
-    public $timestamp;
-    /**
-     * @var object Additional metrics associated with the alert
-     */
-    public $metrics;
-}
-/**
- * Memory optimization recommendation
- * Swagger Name: AvaTaxClient
- */
-class MemoryRecommendation
-{
-    /**
-     * @var string Unique identifier for the recommendation
-     */
-    public $id;
-    /**
-     * @var string Title of the recommendation
-     */
-    public $title;
-    /**
-     * @var string Detailed description of the recommendation
-     */
-    public $description;
-    /**
-     * @var string Impact of implementing the recommendation
-     */
-    public $impact;
-    /**
-     * @var string Implementation guidance for the recommendation
-     */
-    public $implementation;
-    /**
-     * @var string Priority level of the recommendation (See MemoryRecommendationPriority::* for a list of allowable values)
-     */
-    public $priority;
-    /**
-     * @var float Estimated memory savings in megabytes if recommendation is implemented
-     */
-    public $estimatedMemorySavingsMB;
-}
-/**
- * Memory usage statistics
- * Swagger Name: AvaTaxClient
- */
-class MemoryUsageStats
-{
-    /**
-     * @var int Total physical memory available on the system in bytes
-     */
-    public $totalPhysicalMemory;
-    /**
-     * @var float Total physical memory available on the system in GB
-     */
-    public $totalPhysicalMemoryGB;
-    /**
-     * @var int Available physical memory on the system in bytes
-     */
-    public $availablePhysicalMemory;
-    /**
-     * @var float Available physical memory on the system in GB
-     */
-    public $availablePhysicalMemoryGB;
-    /**
-     * @var int Used physical memory on the system in bytes
-     */
-    public $usedPhysicalMemory;
-    /**
-     * @var float Used physical memory on the system in GB
-     */
-    public $usedPhysicalMemoryGB;
-    /**
-     * @var float Percentage of physical memory currently in use
-     */
-    public $physicalMemoryUsagePercentage;
-    /**
-     * @var int Total virtual memory available to the process in bytes
-     */
-    public $totalVirtualMemory;
-    /**
-     * @var float Total virtual memory available to the process in GB
-     */
-    public $totalVirtualMemoryGB;
-    /**
-     * @var int Available virtual memory to the process in bytes
-     */
-    public $availableVirtualMemory;
-    /**
-     * @var float Available virtual memory to the process in GB
-     */
-    public $availableVirtualMemoryGB;
-    /**
-     * @var int Used virtual memory by the process in bytes
-     */
-    public $usedVirtualMemory;
-    /**
-     * @var float Used virtual memory by the process in GB
-     */
-    public $usedVirtualMemoryGB;
-    /**
-     * @var float Percentage of virtual memory currently in use
-     */
-    public $virtualMemoryUsagePercentage;
-    /**
-     * @var int Total size of the managed heap in bytes
-     */
-    public $managedHeapSize;
-    /**
-     * @var float Total size of the managed heap in GB
-     */
-    public $managedHeapSizeGB;
-    /**
-     * @var int Used portion of the managed heap in bytes
-     */
-    public $managedHeapUsed;
-    /**
-     * @var float Used portion of the managed heap in GB
-     */
-    public $managedHeapUsedGB;
-    /**
-     * @var int Free portion of the managed heap in bytes
-     */
-    public $managedHeapFree;
-    /**
-     * @var float Free portion of the managed heap in GB
-     */
-    public $managedHeapFreeGB;
-    /**
-     * @var float Percentage of managed heap currently in use
-     */
-    public $managedHeapUsagePercentage;
-    /**
-     * @var int Current working set size of the process in bytes
-     */
-    public $workingSetSize;
-    /**
-     * @var float Current working set size of the process in GB
-     */
-    public $workingSetSizeGB;
-    /**
-     * @var int Private memory size of the process in bytes
-     */
-    public $privateMemorySize;
-    /**
-     * @var float Private memory size of the process in GB
-     */
-    public $privateMemorySizeGB;
-    /**
-     * @var int Peak working set size of the process in bytes
-     */
-    public $peakWorkingSetSize;
-    /**
-     * @var float Peak working set size of the process in GB
-     */
-    public $peakWorkingSetSizeGB;
-    /**
-     * @var int Peak virtual memory size of the process in bytes
-     */
-    public $peakVirtualMemorySize;
-    /**
-     * @var float Peak virtual memory size of the process in GB
-     */
-    public $peakVirtualMemorySizeGB;
-    /**
-     * @var int Number of Gen0 garbage collections performed
-     */
-    public $garbageCollectionGen0Count;
-    /**
-     * @var int Number of Gen1 garbage collections performed
-     */
-    public $garbageCollectionGen1Count;
-    /**
-     * @var int Number of Gen2 garbage collections performed
-     */
-    public $garbageCollectionGen2Count;
-    /**
-     * @var string Timestamp when the memory statistics were collected
-     */
-    public $timestamp;
-    /**
-     * @var string Name of the machine where the process is running
-     */
-    public $machineName;
-    /**
-     * @var string Name of the process
-     */
-    public $processName;
-    /**
-     * @var int Process ID
-     */
-    public $processId;
-}
-/**
- * Memory usage trend data
- * Swagger Name: AvaTaxClient
- */
-class MemoryUsageTrend
-{
-    /**
-     * @var MemoryUsageStats[] List of memory usage data points over time
-     */
-    public $dataPoints;
-    /**
-     * @var string Duration of the trend analysis period
-     */
-    public $duration;
-    /**
-     * @var float Average memory usage percentage over the trend period
-     */
-    public $averageMemoryUsage;
-    /**
-     * @var float Peak memory usage percentage during the trend period
-     */
-    public $peakMemoryUsage;
-    /**
-     * @var float Lowest memory usage percentage during the trend period
-     */
-    public $lowMemoryUsage;
 }
 /**
  * A company and account
@@ -16051,6 +16184,14 @@ class ReportParametersModel
      * @var string[] The names of the jurisdictions for which document lines are fetched.  Defaults to null if not specified.
      */
     public $jurisdictionNames;
+    /**
+     * @var boolean If true, include Point of Order Acceptance (POA) and Point of Order Origin (POO) in the generated report.  If false, exclude POA and POO from the generated report.  Defaults to false if not specified.
+     */
+    public $includePOAandPOO;
+    /**
+     * @var int[] List of company IDs included in the report.
+     */
+    public $companyIds;
 }
 /**
  * Represents a license key reset request.
@@ -17305,19 +17446,23 @@ class TaxcodeBatchOutputModel
     public $batchId;
 }
 /**
- * Economic nexus threshold status for a single US state.
+ * Economic nexus threshold status for a single US region.
  * Swagger Name: AvaTaxClient
  */
 class ThresholdStateSummaryModel
 {
     /**
-     * @var string Two-letter US state postal code (e.g. CA, TX, WA). Matches the database column `state`; use that name in `$filter`.
+     * @var string Opaque unique identifier for this threshold record (UUID from the upstream data source).
      */
-    public $state;
+    public $id;
     /**
-     * @var string Full display name of the state.
+     * @var string Two-letter US state postal code (e.g. CA, TX, WA).
      */
-    public $stateName;
+    public $region;
+    /**
+     * @var string Full display name of the region.
+     */
+    public $regionName;
     /**
      * @var string Threshold status as determined by the upstream data pipeline. Typical values: 'met', 'notmet'.
      */
@@ -17339,11 +17484,11 @@ class ThresholdStateSummaryModel
      */
     public $triggerType;
     /**
-     * @var int The configured transaction count threshold for this state, if applicable.
+     * @var int The configured transaction count threshold for this region, if applicable.
      */
     public $transactionThreshold;
     /**
-     * @var float The configured sales amount threshold for this state, if applicable.
+     * @var float The configured sales amount threshold for this region, if applicable.
      */
     public $salesThreshold;
     /**
@@ -17358,25 +17503,6 @@ class ThresholdStateSummaryModel
      * @var string UTC timestamp of when the upstream Snowflake source record was last modified.
      */
     public $sourceLastUpdatedAt;
-}
-/**
- * Response model for the economic nexus threshold statuses endpoint.
- * Swagger Name: AvaTaxClient
- */
-class ThresholdStatusesModel
-{
-    /**
-     * @var int The Avalara company identifier.
-     */
-    public $companyId;
-    /**
-     * @var ThresholdStateSummaryModel[] Per-state threshold summaries for the company. Empty array if no evaluated data exists.
-     */
-    public $states;
-    /**
-     * @var string UTC timestamp of when the TPS in-memory cache last successfully refreshed from Snowflake.  Null if a refresh has not yet completed.
-     */
-    public $lastRefreshedAt;
 }
 /**
  * An address used within this transaction.
@@ -19230,7 +19356,7 @@ class VendorCertificateModel
      */
     public $exposureZoneName;
     /**
-     * @var CertificateJurisdictionModel[] A list of jurisdictions associated with this certificate, indicating the tax authority  regions where the certificate applies. A certificate can have one or more jurisdictions.     You can fetch this data by specifying `$include=jurisdictions` when calling a certificate fetch API.
+     * @var CertificateJurisdictionModel[] A list of jurisdictions associated with this certificate, indicating the tax authority  regions where the certificate applies. A certificate can have one or more jurisdictions.     You can fetch this data by specifying `$include=jurisdictions` when calling a certificate fetch API.     This collection itself is not filterable; use the sub-fields `jurisdictions.type_id`,  `jurisdictions.name`, or `jurisdictions.code` (exposed via the computed properties below)  to filter certificates by jurisdiction.
      */
     public $jurisdictions;
     /**
@@ -19242,7 +19368,7 @@ class VendorCertificateModel
      */
     public $histories;
     /**
-     * @var CustomerJobModel[] A list of jobs for this certificate.     You can fetch this data by specifying `$include=jobs` when calling a certificate fetch API.
+     * @var CertificateJobModel[] The jobs (and their phases / tasks) associated with this certificate.     On POST / PUT: supply the `id` of each existing job — and optionally nested phase /  task `id`s — to link them to this certificate. All other fields on each entry  (`name`, `jobNumber`, `isExplicit`, etc.) are server-computed and ignored  on input.     On GET: populated when `$include=jobs` is specified. Use `$include=jobs.phases`  to also expand the phases within each job, and `$include=jobs.tasks` to expand the  tasks within each phase (which implies `jobs` and `jobs.phases`).
      */
     public $jobs;
     /**
@@ -19409,10 +19535,6 @@ class VendorModel
      * @var HistoryModel[] A list of field update histories for this customer.
      */
     public $histories;
-    /**
-     * @var CustomerJobModel[] A list of jobs for this customer.
-     */
-    public $jobs;
     /**
      * @var CertificateLogModel[] A list of logs for this customer.
      */

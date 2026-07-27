@@ -2,7 +2,7 @@
 namespace Avalara;
 use GuzzleHttp\Client;
 
-define('AVATAX_SDK_VERSION', '26.6.0');
+define('AVATAX_SDK_VERSION', '26.7.3');
 
 /*****************************************************************************
  *                                                                           *
@@ -568,6 +568,12 @@ class AdjustmentReason
      * Offline
      */
     const C_OFFLINE = 9;
+
+    /**
+     * Transaction was created by the /offset endpoint to reverse a previously committed,
+     *  locked document while preserving the original jurisdiction-level tax splits.
+     */
+    const C_OFFSET = 10;
 
 }
 
@@ -1519,6 +1525,12 @@ class BatchType
      */
     const C_VATVALIDATIONIMPORT = 19;
     const C_TXNWITHDYNAMICPARAMBAG = 20;
+
+    /**
+     * This batch type represents import of Custom Rules.
+     *  They can contain legacy tax rules, advanced rules, and dynamic rules.
+     */
+    const C_CUSTOMRULEIMPORT = 21;
 
 }
 
@@ -3493,29 +3505,6 @@ class AddressCategoryId
      * Address refers to the vendor's location, used for ACU transaction
      */
     const C_VENDOR = 9;
-
-}
-
-/**
- * Swagger Name: AvaTaxClient
- * 
- */
-class MemoryAlertSeverity
-{    const C_INFO = 0;
-    const C_WARNING = 1;
-    const C_CRITICAL = 2;
-
-}
-
-/**
- * Swagger Name: AvaTaxClient
- * 
- */
-class MemoryRecommendationPriority
-{    const C_LOW = 0;
-    const C_MEDIUM = 1;
-    const C_HIGH = 2;
-    const C_CRITICAL = 3;
 
 }
 
