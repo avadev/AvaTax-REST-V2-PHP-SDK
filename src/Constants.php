@@ -2,7 +2,7 @@
 namespace Avalara;
 use GuzzleHttp\Client;
 
-define('AVATAX_SDK_VERSION', '26.8.3');
+define('AVATAX_SDK_VERSION', '26.9.0');
 
 /*****************************************************************************
  *                                                                           *
@@ -303,6 +303,11 @@ class UserDefinedFieldType
      * Represents line level user defined type.
      */
     const C_LINE = 2;
+
+    /**
+     * Represents line detail level user defined type.
+     */
+    const C_DETAIL = 3;
 
 }
 
@@ -2254,190 +2259,6 @@ class CustomRuleType
 
 /**
  * Swagger Name: AvaTaxClient
- * The subtype of a custom rule
- */
-class CustomRuleSubtype
-{
-    /**
-     * The unknown rule type
-     */
-    const C_UNKNOWN = 0;
-
-    /**
-     * A product taxability tax rule
-     */
-    const C_PRODUCTTAXABILITYRULE = 1;
-
-    /**
-     * An exempt entity tax rule
-     */
-    const C_EXEMPTENTITYRULE = 2;
-
-    /**
-     * A rate override tax rule
-     */
-    const C_RATEOVERRIDERULE = 3;
-
-    /**
-     * A base override tax rule
-     */
-    const C_BASEOVERRIDERULE = 4;
-
-    /**
-     * A Marketplace advanced rule
-     */
-    const C_MARKETPLACE = 5;
-
-    /**
-     * A Bundled Items Allocation advanced rule
-     */
-    const C_BUNDLEDITEMSALLOCATION = 6;
-
-    /**
-     * A Multiple Points of Use Allocation advanced rule
-     */
-    const C_MULTIPLEPOINTSOFUSEALLOCATION = 7;
-
-    /**
-     * A Find and Replace Before Calculationadvanced rule
-     */
-    const C_FINDANDREPLACEBEFORECALCULATION = 8;
-
-    /**
-     * A Find and Replace After Calculation advanced rule
-     */
-    const C_FINDANDREPLACEAFTERCALCULATION = 9;
-
-    /**
-     * A Reporting Location advanced rule
-     */
-    const C_REPORTINGLOCATION = 10;
-
-    /**
-     * A Seller Remits Aggregator advanced rule
-     */
-    const C_SELLERREMITSAGGREGATOR = 11;
-
-    /**
-     * A Consumer Use Allocation advanced rule
-     */
-    const C_CONSUMERUSEALLOCATION = 12;
-
-    /**
-     * A Find and Replace Jurisdiction Match advanced rule
-     */
-    const C_FINDANDREPLACEJURISDICTIONMATCH = 13;
-
-    /**
-     * Updates a transaction field with a value.
-     */
-    const C_UPDATEFIELD = 14;
-
-    /**
-     * Copies a value from one field to another.
-     */
-    const C_COPYFIELD = 15;
-
-    /**
-     * Updates address-related fields.
-     */
-    const C_UPDATEADDRESS = 16;
-
-    /**
-     * Copies address values between address types.
-     */
-    const C_COPYADDRESS = 17;
-
-    /**
-     * Updates a parameter value.
-     */
-    const C_UPDATEPARAMETER = 18;
-
-    /**
-     * Updates a user-defined field value.
-     */
-    const C_UPDATEUSERDEFINEDFIELD = 19;
-
-    /**
-     * Updates a tax override value.
-     */
-    const C_UPDATETAXOVERRIDE = 20;
-
-    /**
-     * Updates the location code.
-     */
-    const C_UPDATELOCATIONCODE = 21;
-
-    /**
-     * Updates the marketplace location code.
-     */
-    const C_UPDATEMARKETPLACE = 22;
-
-    /**
-     * Allocates values based on a field.
-     */
-    const C_ALLOCATEBYFIELD = 23;
-
-    /**
-     * Allocates values based on an address.
-     */
-    const C_ALLOCATEBYADDRESS = 24;
-
-    /**
-     * Allocates consumer use tax.
-     */
-    const C_ALLOCATECONSUMERUSE = 25;
-
-    /**
-     * Aggregates line values post-allocation.
-     */
-    const C_AGGREGATELINES = 26;
-
-    /**
-     * Overrides the tax rate.
-     */
-    const C_TAXRULERATEOVERRIDE = 27;
-
-    /**
-     * Overrides the taxable base.
-     */
-    const C_TAXRULEBASEOVERRIDE = 28;
-
-    /**
-     * Overrides product taxability.
-     */
-    const C_TAXRULEPRODUCTTAXABILITY = 29;
-
-    /**
-     * Updates an exemption stauts.
-     */
-    const C_TAXRULEEXEMPTENTITY = 30;
-
-    /**
-     * Defines one or more custom content rules.
-     */
-    const C_CUSTOMTAX = 31;
-
-    /**
-     * Override a liability decision.
-     */
-    const C_UPDATELIABILITYDECISION = 32;
-
-    /**
-     * Adds a message or invoice message to the transaction response.
-     */
-    const C_ADDMESSAGE = 33;
-
-    /**
-     * Match on data source, origination site, and destination state, with effective ranges.
-     *  This emulates the conditions of the "Seller Remits Aggregator" advanced rule.
-     */
-    const C_MATCHSELLERREMITS = 34;
-
-}
-
-/**
- * Swagger Name: AvaTaxClient
  * Filing Frequency types
  */
 class FilingFrequencyId
@@ -4191,6 +4012,16 @@ class LiabilityType
      */
     const C_THIRDPARTY = 3;
 
+    /**
+     * Marketplace
+     */
+    const C_MARKETPLACE = 4;
+
+    /**
+     * OTA
+     */
+    const C_OTA = 5;
+
 }
 
 /**
@@ -4213,6 +4044,36 @@ class ChargedTo
      * ThirdParty
      */
     const C_THIRDPARTY = 2;
+
+}
+
+/**
+ * Swagger Name: AvaTaxClient
+ * Identifies the party that collects tax from the consumer, as distinct from
+ *  LiabilityType (who remits it) and ChargedTo (who pays it). Introduced for
+ *  AVT-99436 — OTA Marketplace Liability Decision.
+ */
+class CollectedBy
+{
+    /**
+     * Seller
+     */
+    const C_SELLER = 0;
+
+    /**
+     * Marketplace
+     */
+    const C_MARKETPLACE = 1;
+
+    /**
+     * Buyer
+     */
+    const C_BUYER = 2;
+
+    /**
+     * OTA
+     */
+    const C_OTA = 3;
 
 }
 

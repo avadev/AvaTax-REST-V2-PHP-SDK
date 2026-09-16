@@ -3248,6 +3248,22 @@ class CompanyParameterDetailModel
      * @var string The unit of measurement code for the parameter
      */
     public $unit;
+    /**
+     * @var string The date when this record was created.
+     */
+    public $createdDate;
+    /**
+     * @var int The User ID of the user who created this record.
+     */
+    public $createdUserId;
+    /**
+     * @var string The date when this record was last modified.
+     */
+    public $modifiedDate;
+    /**
+     * @var int The User ID of the user who last modified this record.
+     */
+    public $modifiedUserId;
 }
 /**
  * 
@@ -3319,7 +3335,7 @@ class CompanyUserDefinedFieldModel
      */
     public $dataType;
     /**
-     * @var string The category of user defined type For Example: Document level or Line level UDF. (See UserDefinedFieldType::* for a list of allowable values)
+     * @var string The scope of the user-defined field: Document, Line, or Detail. (See UserDefinedFieldType::* for a list of allowable values)
      */
     public $userDefinedFieldType;
     /**
@@ -5163,7 +5179,7 @@ class CustomRuleComponentDefinitionModel
      */
     public $type;
     /**
-     * @var string The specific subtype of the component, providing more detailed classification  within the main type. For example, a Condition type might have subtypes like  MatchCustomerCode, MatchProductCode, etc.  The subtype determines the expected format of the data property. (See CustomRuleComponentSubtype::* for a list of allowable values)
+     * @var string The specific subtype of the component, providing more detailed classification  within the main type. For example, a Condition type might have subtypes like  MatchCustomerCode, MatchProductCode, etc.  The subtype determines the expected format of the data property.
      */
     public $subtype;
     /**
@@ -5231,7 +5247,7 @@ class CustomRuleComponentOutputModel
      */
     public $type;
     /**
-     * @var string The specific subtype of the component, which describes the specific behavior  of the component within the main type. For example, MatchField is a subtype  of Condition, and UpdateField is a subtype of Action.  The subtype determines the expected format of the data property. (See CustomRuleComponentSubtype::* for a list of allowable values)
+     * @var string The specific subtype of the component, which describes the specific behavior  of the component within the main type. For example, MatchField is a subtype  of Condition, and UpdateField is a subtype of Action.  The subtype determines the expected format of the data property.
      */
     public $subtype;
     /**
@@ -5636,7 +5652,7 @@ class CustomRuleSummaryModel
      */
     public $type;
     /**
-     * @var string The subtypes (categories or actions) of the custom rule. (See CustomRuleSubtype::* for a list of allowable values)
+     * @var string[] The subtypes (categories or actions) of the custom rule.
      */
     public $subtype;
     /**
@@ -8170,7 +8186,7 @@ class ExportDocumentLineModel
      */
     public $includePOAandPOO;
     /**
-     * @var int[] List of company IDs to include in the report.  Only supported for the Document Line and Document Line Detail reports  (reportSource = SNOWFLAKE with includeMultiTaxLineDetails = false).  If not specified, only the current company is included.
+     * @var int[] List of company IDs to include in the report.  Only supported for the Document Line and Document Line Detail reports  (reportSource = SNOWFLAKE with includeMultiTaxLineDetails = false) and the  Document Line Detail All Taxes report (reportSource = DOCUMENTLINEDETAILALLTAXES  with includeAdditionalAttributes = true).  If not specified, only the current company is included.
      */
     public $companyIds;
 }
@@ -13165,6 +13181,22 @@ class LocationParameterModel
      * @var int The ID of the company location the parameter associated with.
      */
     public $locationId;
+    /**
+     * @var string The date when this record was created.
+     */
+    public $createdDate;
+    /**
+     * @var int The User ID of the user who created this record.
+     */
+    public $createdUserId;
+    /**
+     * @var string The date when this record was last modified.
+     */
+    public $modifiedDate;
+    /**
+     * @var int The User ID of the user who last modified this record.
+     */
+    public $modifiedUserId;
 }
 /**
  * Information about questions that the local jurisdictions require for each location
@@ -13251,6 +13283,22 @@ class LocationSettingModel
      * @var string The answer the user provided.
      */
     public $value;
+    /**
+     * @var string The date when this record was created.
+     */
+    public $createdDate;
+    /**
+     * @var int The User ID of the user who created this record.
+     */
+    public $createdUserId;
+    /**
+     * @var string The date when this record was last modified.
+     */
+    public $modifiedDate;
+    /**
+     * @var int The User ID of the user who last modified this record.
+     */
+    public $modifiedUserId;
 }
 /**
  * Tells you whether this location object has been correctly set up to the local jurisdiction's standards
@@ -16656,6 +16704,14 @@ class SettingModel
      */
     public $value;
     /**
+     * @var string The date when this record was created.
+     */
+    public $createdDate;
+    /**
+     * @var int The User ID of the user who created this record.
+     */
+    public $createdUserId;
+    /**
      * @var string The value when the entry was last modified.
      */
     public $modifiedDate;
@@ -17980,6 +18036,10 @@ class TransactionLineDetailModel
      */
     public $taxAuthorityTypeId;
     /**
+     * @var int The unique ID of the tax authority to which this tax will be remitted.
+     */
+    public $taxAuthorityId;
+    /**
      * @var int The unique ID number of the tax region.
      */
     public $taxRegionId;
@@ -18052,6 +18112,10 @@ class TransactionLineDetailModel
      */
     public $chargedTo;
     /**
+     * @var string CollectedBy identifies the party that collects the tax from the consumer (See CollectedBy::* for a list of allowable values)
+     */
+    public $collectedBy;
+    /**
      * @var string ID of the AvaTax user creating the transaction. This field will be calculated by AvaTax based on the Company settings and the transaction details.
      */
     public $avtUserBIN;
@@ -18072,9 +18136,32 @@ class TransactionLineDetailModel
      */
     public $vatCode;
     /**
+     * @var TransactionLineDetailUserDefinedFieldModel[] Custom user-defined fields assigned to this tax detail.
+     */
+    public $userDefinedFields;
+    /**
      * @var object[] Contains granular duty details as a list of key-value pairs.  This field provides additional detailed information about duty calculations  specific to TCS (Tax Calculation Service) operations.
      */
     public $granularDutyDetails;
+}
+/**
+ * A user-defined field value assigned to a tax detail.
+ * Swagger Name: AvaTaxClient
+ */
+class TransactionLineDetailUserDefinedFieldModel
+{
+    /**
+     * @var string The name of the user defined field.
+     */
+    public $name;
+    /**
+     * @var string The value of the user defined field.
+     */
+    public $value;
+    /**
+     * @var string The customer-friendly name of the user defined field.
+     */
+    public $friendlyName;
 }
 /**
  * Represents information about location types stored in a line
