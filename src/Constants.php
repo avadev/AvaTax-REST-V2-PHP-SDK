@@ -2,7 +2,7 @@
 namespace Avalara;
 use GuzzleHttp\Client;
 
-define('AVATAX_SDK_VERSION', '26.9.0');
+define('AVATAX_SDK_VERSION', '26.10.0');
 
 /*****************************************************************************
  *                                                                           *
@@ -2609,6 +2609,20 @@ class DocumentStatus
     const C_UNCOMMITTED = 12;
 
     /**
+     * Filter-only status that selects documents in `Saved`(1), `Posted`(2), `Committed`(3), and
+     *  `Cancelled`(4) status.
+     *  
+     *  This exact set is fixed. Statuses added to this enum in the future are NOT included
+     *  automatically; expanding the set requires a deliberate change here and in every consumer.
+     *  
+     *  This value is only valid when filtering or searching. Like `Any`(-1) it is negative and so
+     *  can never be stored in the `Document.DocumentStatusId` column, which is a `byte`. Do not
+     *  cast it to `byte` either - an unchecked cast silently yields 254. Expand it to the ids
+     *  above instead.
+     */
+    const C_ALL = -2;
+
+    /**
      * DEPRECATED - Represents "a document in any status" when searching. Please search using the
      *  [Filtering in REST](/avatax/filtering-in-rest/) documentation.
      */
@@ -3018,6 +3032,8 @@ class FilingStatusId
     const C_RETURNREJECTEDONBEHALF = 15;
     const C_APPROVEDTOFILEONBEHALF = 16;
     const C_FILEDBYCUSTOMER = 17;
+    const C_MAILED = 18;
+    const C_PAYMENTMADENOTFILED = 19;
 
 }
 

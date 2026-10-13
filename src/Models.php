@@ -4805,7 +4805,7 @@ class CreateTransactionBatchRequestModel
      */
     public $options;
     /**
-     * @var boolean Skips upload-time transaction type, company code, and nested model validation when true.  The transactions are instead validated individually while BatchV2 processes the batch,  and transaction validation failures are written to the batch error file.     An explicit value overrides the BatchProcessing configuration default. If omitted, the  configured SkipTransactionValidation value is used.
+     * @var boolean Skips upload-time transaction type, company code existence, and nested model validation  when true. The transactions are instead validated individually while BatchV2 processes  the batch, and transaction validation failures are written to the batch error file.     This only defers validation. Transactions that omit a company code still inherit the  company from the batch URL regardless of this setting.     An explicit value overrides the BatchProcessing configuration default. If omitted, the  configured SkipTransactionValidation value is used.
      */
     public $skipTransactionValidation;
 }
@@ -5127,6 +5127,25 @@ class CurrencyRoundingRuleDefaultModel
      * @var string The last tax date, inclusive, for which this default applies.
      */
     public $endDate;
+}
+/**
+ * Customs / clearance fee from landed-cost Global Compliance quoting.
+ * Swagger Name: AvaTaxClient
+ */
+class CustomClearanceFeeModel
+{
+    /**
+     * @var string The name of the customs / clearance fee.
+     */
+    public $name;
+    /**
+     * @var string The resolved customs / clearance fee value.
+     */
+    public $value;
+    /**
+     * @var string The currency code for the customs / clearance fee value.
+     */
+    public $currencyCode;
 }
 /**
  * A custom field provides extra information about a customer or certificate.
@@ -5508,6 +5527,10 @@ class CustomRuleGeneratedTaxRuleModel
      * @var string For tax rules that are calculated using units of measurement,  this indicates the unit of measurement type used to calculate the amounts for this rule.
      */
     public $unitOfBasis;
+    /**
+     * @var int For tax rules that are calculated using units of measurement which are neither per-currency  nor dimensionless, this indicates the unit of measurement used when evaluating tax rates.    For a list of units of measurement, use the [ListUnitsOfMeasurement API](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListUnitOfMeasurement/).
+     */
+    public $uomId;
 }
 /**
  * A Custom Rule customizes AvaTax's default tax calculation to match a company's specific requirements.
@@ -5704,9 +5727,13 @@ class CustomRuleSummaryModel
      */
     public $companyLocationCode;
     /**
-     * @var int The index order of the rule execution (only applies to advanced rules).
+     * @var int The index order of the rule's execution relative to other rules. Advanced Rules are  numbered first (in their AvaTax-defined execution order), followed by Custom Rules  (ordered by priority, then effective date, then name). Not applicable to Tax Rules.
      */
     public $order;
+    /**
+     * @var string The execution position of the rule relative to tax calculation ("Before", "After", or "Both").  Only applicable to Advanced Rules; null for Custom Rules and Tax Rules.
+     */
+    public $executionPosition;
     /**
      * @var string The first date at which this rule applies. If null, this rule will apply to all dates prior to the end date.
      */
@@ -6140,6 +6167,10 @@ class CustomTaxInputModel
      */
     public $unitOfBasis;
     /**
+     * @var int For tax rules that are calculated using units of measurement which are neither per-currency  nor dimensionless, this indicates the unit of measurement used when evaluating tax rates.    For a list of units of measurement, use the [ListUnitsOfMeasurement API](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListUnitOfMeasurement/).
+     */
+    public $uomId;
+    /**
      * @var string The first date when the tax is valid. Transactions with a document date earlier than  this date will not be affected by this custom tax.
      */
     public $effectiveDate;
@@ -6279,6 +6310,10 @@ class CustomTaxOutputModel
      */
     public $unitOfBasis;
     /**
+     * @var int For tax rules that are calculated using units of measurement which are neither per-currency  nor dimensionless, this indicates the unit of measurement used when evaluating tax rates.    For a list of units of measurement, use the [ListUnitsOfMeasurement API](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListUnitOfMeasurement/).
+     */
+    public $uomId;
+    /**
      * @var string The first date when the tax is valid. Transactions with a document date earlier than  this date will not be affected by this custom tax.
      */
     public $effectiveDate;
@@ -6396,6 +6431,10 @@ class CustomTaxRateInputModel
      */
     public $unitOfBasis;
     /**
+     * @var int Optionally override the unit of measurement for this specific rate. If not specified, the rate uses the  custom tax default unit of measurement.    For a list of units of measurement, use the [ListUnitsOfMeasurement API](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListUnitOfMeasurement/).
+     */
+    public $uomId;
+    /**
      * @var boolean Whether this rate applies to all child jurisdictions or only the specified one. When true, the rate is applied  to every jurisdiction beneath the one identified by `jurisCode`; when false or null, only the exact  jurisdiction is matched.
      */
     public $isAllJuris;
@@ -6468,6 +6507,10 @@ class CustomTaxRateOutputModel
      * @var string Optionally override the unit of basis for this specific rate. If not specified, the rate uses the custom tax  default unit of basis.
      */
     public $unitOfBasis;
+    /**
+     * @var int Optionally override the unit of measurement for this specific rate. If not specified, the rate uses the  custom tax default unit of measurement.    For a list of units of measurement, use the [ListUnitsOfMeasurement API](https://developer.avalara.com/api-reference/avatax/rest/v2/methods/Definitions/ListUnitOfMeasurement/).
+     */
+    public $uomId;
     /**
      * @var boolean Whether this rate applies to all child jurisdictions or only the specified one. When true, the rate is applied  to every jurisdiction beneath the one identified by `jurisCode`; when false or null, only the exact  jurisdiction is matched.
      */
@@ -6939,7 +6982,7 @@ class CustomerVatNumberModel
      */
     public $vatNumberStatus;
     /**
-     * @var string Business name returned from VIES
+     * @var string Registered business name from the validation service (VIES for EU/NI, ABR for Australia)
      */
     public $registeredBusinessName;
     /**
@@ -6951,7 +6994,7 @@ class CustomerVatNumberModel
      */
     public $validationDate;
     /**
-     * @var string Validation source: 'VIES' or 'ELR'
+     * @var string Validation scheme: 'VIES' for EU/NI VAT, 'ABN' for Australia.
      */
     public $validationSource;
     /**
@@ -7163,6 +7206,21 @@ class CycleSafeOptionResultModel
      * @var FrequencyAvailableModel[] Frequencies Available
      */
     public $frequenciesAvailable;
+}
+/**
+ * Represents a single data quality issue detected for an item during tax code recommendation.
+ * Swagger Name: AvaTaxClient
+ */
+class DataQualityIssueModel
+{
+    /**
+     * @var string The data quality issue code. For example: "DQ_MISSING_PRODUCT_ATTRIBUTES".
+     */
+    public $code;
+    /**
+     * @var string A human-readable description of the data quality issue.  May be null when no description is configured for the code.
+     */
+    public $description;
 }
 /**
  * Data source object
@@ -7738,7 +7796,7 @@ class EcoNexusThresholdsModel
      */
     public $companyId;
     /**
-     * @var ThresholdStateSummaryModel[] The per-state threshold statuses for this company.  Empty when no threshold status has been evaluated for the company.
+     * @var ThresholdStateSummaryModel[] The per-region threshold statuses for this company.  Empty when no threshold status has been evaluated for the company.
      */
     public $states;
     /**
@@ -8008,6 +8066,54 @@ class EventMessageResponse
     public $receiptHandle;
 }
 /**
+ * A single entry in a company's exemption matrix.
+ *  
+ * The exemption matrix holds, for each combination of exposure zone and exempt
+ * reason that a company has configured, the rule used to work out when a
+ * certificate for that combination expires, and the qualifying statement shown
+ * to the customer.
+ * Swagger Name: AvaTaxClient
+ */
+class ExemptionMatrixModel
+{
+    /**
+     * @var int A unique ID number representing this exemption matrix entry.
+     */
+    public $id;
+    /**
+     * @var int The ID number of the exposure zone this entry applies to.
+     */
+    public $exposureZoneId;
+    /**
+     * @var string The name of the exposure zone this entry applies to, for example "Alabama".
+     */
+    public $exposureZoneName;
+    /**
+     * @var string The Avalara tag of the exposure zone, for example "AV_US_AL".
+     */
+    public $exposureZoneTag;
+    /**
+     * @var int The ID number of the exempt reason this entry applies to.
+     */
+    public $exemptReasonId;
+    /**
+     * @var string The name of the exempt reason this entry applies to, for example "Resale".
+     */
+    public $exemptReasonName;
+    /**
+     * @var string The Avalara tag of the exempt reason, for example "AV_OO_RESL".
+     */
+    public $exemptReasonTag;
+    /**
+     * @var string The encoded rule used to calculate a certificate's expiration date from its  signed date. One of five markers, optionally combined with an interval:     * `IMM` - expires on the signed date.  * `NVR` - never expires; the expiration date is `9999-12-31`.  * `OVR` - no rule configured; an expiration date must be supplied when the   certificate is recorded, otherwise recording it fails.  * `EOM` - end of the signing month, rolling to the next month when that is   within 7 days of the signed date.  * `EOY` - end of the signing year, rolling to the next year when that is   within 31 days of the signed date.     An interval may appear on its own or combined with `EOM` / `EOY`:  `36 months` is added to the signed date; `EOM+2 years` applies the marker and  then adds the interval; `18 months+EOY` adds the interval and then rounds up.  An interval is a whole number followed by a unit, most commonly `days`,  `months` or `years` - for example `30 days`, `36 months`, `2 years`.
+     */
+    public $timeLength;
+    /**
+     * @var string The statement the customer qualifies themselves against when they request a  certificate for this exposure zone and exempt reason, for display to the  customer. Null when none is configured.
+     */
+    public $qualifyingStatement;
+}
+/**
  * An exemption reason defines why a certificate allows a customer to be exempt
  * for purposes of tax calculation. For a full list of defined exemption reasons,
  * please call the `ListCertificateExemptionReasons` API.
@@ -8094,7 +8200,7 @@ class ExportDocumentLineModel
      */
     public $merchantSellerIdentifier;
     /**
-     * @var string DocumentStatus  For documentStatus, accepted values are: Saved, Posted, Committed, Cancelled (See DocumentStatus::* for a list of allowable values)
+     * @var string DocumentStatus  For documentStatus, accepted values are: Saved, Posted, Committed, Cancelled, Uncommitted, All.  Use All to include documents of every supported status. (See DocumentStatus::* for a list of allowable values)
      */
     public $documentStatus;
     /**
@@ -10879,6 +10985,14 @@ class ItemAdditionalHSCodeDutyInputModel
      * @var boolean The country of import.
      */
     public $isAdditionalDuty;
+    /**
+     * @var string The import date to pin the duty snapshot (date-only, yyyy-MM-dd). Optional; the UI "Import date" maps to both startDate and endDate. If omitted, current date is sent downstream.
+     */
+    public $startDate;
+    /**
+     * @var string The import date to pin the duty snapshot (date-only, yyyy-MM-dd). Optional; the UI "Import date" maps to both startDate and endDate. If omitted, current date is sent downstream.
+     */
+    public $endDate;
 }
 /**
  * Represents a bulk upload input model.
@@ -11269,6 +11383,10 @@ class ItemHSCodeCvdAddDetailModel
      */
     public $rate;
     /**
+     * @var string The three-character currency code according to the country of import. For example, if the country is 'US' then the currency is 'USD'.
+     */
+    public $currency;
+    /**
      * @var string The unit of measure.
      */
     public $uom;
@@ -11312,9 +11430,25 @@ class ItemHSCodeDutyDetailModel
      */
     public $mfnRate;
     /**
+     * @var string The three-character currency code according to the country of import. For example, if the country is 'US' then the currency is 'USD'.
+     */
+    public $currency;
+    /**
      * @var string The unit of measure.
      */
     public $uom;
+    /**
+     * @var string The import date the duty snapshot is effective for (date-only, yyyy-MM-dd). Optional; saved as-is on Create / Update and returned as null when no date is available.
+     */
+    public $effectiveDate;
+    /**
+     * @var float The effective duty rate as a decimal number (for example, 7.5).
+     */
+    public $effectiveRate;
+    /**
+     * @var string The effective rate formula passed to the UI as-is (for example, "90 * Count").
+     */
+    public $effectiveRateFormula;
     /**
      * @var string The date when this record was created.
      */
@@ -11323,6 +11457,14 @@ class ItemHSCodeDutyDetailModel
      * @var int The user ID of the user who created this record.
      */
     public $createdUserId;
+    /**
+     * @var string The date when this record was last modified.
+     */
+    public $modifiedDate;
+    /**
+     * @var int The user ID of the user who last modified this record.
+     */
+    public $modifiedUserId;
     /**
      * @var ItemHSCodeFTADetailModel[] List of FTA details.
      */
@@ -11355,6 +11497,10 @@ class ItemHSCodeFTADetailModel
      */
     public $rate;
     /**
+     * @var string The three-character currency code according to the country of import. For example, if the country is 'US' then the currency is 'USD'.
+     */
+    public $currency;
+    /**
      * @var string The unit of measure.
      */
     public $uom;
@@ -11369,6 +11515,10 @@ class ItemHSCodePunitiveRateDetailModel
      * @var string The rate for this punitive duty.
      */
     public $rate;
+    /**
+     * @var string The three-character currency code according to the country of import. For example, if the country is 'US' then the currency is 'USD'.
+     */
+    public $currency;
     /**
      * @var string The unit of measure.
      */
@@ -12240,6 +12390,10 @@ class ItemTaxcodeRecommendationBatchStatusOutputModel
 class ItemTaxcodeRecommendationBatchesInputModel
 {
     /**
+     * @var int The unique ID of the item this recommendation request correlates to.  Optional for most callers; required per item when the request is sent with  the X-Avalara-Client: AVATAXUI header (recommendations are then persisted for that item).
+     */
+    public $itemId;
+    /**
      * @var string A brief description of the item.
      */
     public $description;
@@ -12267,6 +12421,10 @@ class ItemTaxcodeRecommendationBatchesInputModel
 class ItemTaxcodeRecommendationBatchesOutputModel
 {
     /**
+     * @var int The unique ID of the item this recommendation correlates to. Echoed back from the  request when supplied; correlation was previously purely positional.
+     */
+    public $itemId;
+    /**
      * @var string A brief description of the item.
      */
     public $description;
@@ -12286,6 +12444,18 @@ class ItemTaxcodeRecommendationBatchesOutputModel
      * @var string A summary or detailed description of the item.
      */
     public $summary;
+    /**
+     * @var string The overall data quality label for the item (for example: "GOOD", "FAIR"). Populated for all callers.
+     */
+    public $dqLabel;
+    /**
+     * @var DataQualityIssueModel[] The list of data quality issues detected for the item. Populated for all callers.
+     */
+    public $dqIssues;
+    /**
+     * @var string The timestamp when this recommendation response was generated. Populated for all callers.
+     */
+    public $modifiedDate;
     /**
      * @var ItemTaxcodeRecommendationBaseBatchOutputModel[] The list of generated tax code recommendations for this item.
      */
@@ -15473,6 +15643,26 @@ class ParameterUsageModel
      * @var string The unit of measurement type of the parameter
      */
     public $measurementType;
+    /**
+     * @var string The jurisdiction type for the parameter usage item (e.g. Country, State, City), populated only when  the request includes $include=jurisdictionDetail. Sourced live from ParameterUsageMapLocalJuris  (AVT-103797) - it is not cached and is therefore intentionally NOT filterable/sortable.
+     */
+    public $jurisdictionTypeId;
+    /**
+     * @var string The jurisdiction code for the parameter usage item, populated only when the request includes  $include=jurisdictionDetail. Sourced live from ParameterUsageMapLocalJuris (AVT-103797) - it is not  cached and is therefore intentionally NOT filterable/sortable.
+     */
+    public $jurisdictionCode;
+    /**
+     * @var string The jurisdiction name for the parameter usage item (e.g. "Oakland"), populated only when  the request includes $include=jurisdictionDetail. Sourced live from  ParameterUsageMapLocalJuris (AVT-103797) - it is not cached and is therefore intentionally  NOT filterable/sortable.
+     */
+    public $jurisdictionName;
+    /**
+     * @var string The unit of basis for the parameter usage item, populated only when the request includes  $include=jurisdictionDetail. Sourced live from ParameterUsageMapLocalJuris (AVT-103797) - it is not  cached and is therefore intentionally NOT filterable/sortable.
+     */
+    public $unitOfBasis;
+    /**
+     * @var string The tax sub type for the parameter usage item, populated only when the request includes  $include=jurisdictionDetail. Sourced live from ParameterUsageMapLocalJuris (AVT-103797) - it is not  cached and is therefore intentionally NOT filterable/sortable.
+     */
+    public $taxSubTypeId;
 }
 /**
  * Password Change Model
@@ -16391,7 +16581,7 @@ class ReportParametersModel
      */
     public $merchantSellerId;
     /**
-     * @var string The Document status filter used for report  For documentStatus, accepted values are: Temporary, Saved, Posted, Committed, Cancelled, Adjusted, Queued, PendingApproval
+     * @var string The Document status filter used for report  For documentStatus, accepted values are: Temporary, Saved, Posted, Committed, Cancelled, Adjusted, Queued, PendingApproval, Uncommitted, All
      */
     public $documentStatus;
     /**
@@ -16957,6 +17147,86 @@ class TaxAuthorityTypeModel
     public $taxAuthorityGroup;
 }
 /**
+ * Represents an Avalara-supported system tax code as returned by the ListTaxCodes definitions API.
+ * Extends Avalara.AvaTax.AccountServices.Models.v2.TaxCodeModel with fields that are exposed only on `GET /api/definitions/taxcodes`.
+ * Swagger Name: AvaTaxClient
+ */
+class TaxCodeDefinitionModel
+{
+    /**
+     * @var int The unique ID number of this tax code.
+     */
+    public $id;
+    /**
+     * @var int The unique ID number of the company that owns this tax code.
+     */
+    public $companyId;
+    /**
+     * @var string A code string that identifies this tax code.
+     */
+    public $taxCode;
+    /**
+     * @var string The type of this tax code.
+     */
+    public $taxCodeTypeId;
+    /**
+     * @var string A friendly description of this tax code.
+     */
+    public $description;
+    /**
+     * @var string If this tax code is a subset of a different tax code, this identifies the parent code.
+     */
+    public $parentTaxCode;
+    /**
+     * @var boolean True if this tax code type refers to a physical object. Read only field.
+     */
+    public $isPhysical;
+    /**
+     * @var int The Avalara Goods and Service Code represented by this tax code.
+     */
+    public $goodsServiceCode;
+    /**
+     * @var string The Avalara Entity Use Code represented by this tax code.
+     */
+    public $entityUseCode;
+    /**
+     * @var boolean True if this tax code is active and can be used in transactions.
+     */
+    public $isActive;
+    /**
+     * @var boolean True if this tax code has been certified by the Streamlined Sales Tax governing board.  By default, you should leave this value empty.
+     */
+    public $isSSTCertified;
+    /**
+     * @var string The date when this record was created.
+     */
+    public $createdDate;
+    /**
+     * @var int The User ID of the user who created this record.
+     */
+    public $createdUserId;
+    /**
+     * @var string The date/time when this record was last modified.
+     */
+    public $modifiedDate;
+    /**
+     * @var int The user ID of the user who last modified this record.
+     */
+    public $modifiedUserId;
+    /**
+     * @var string The vertical market / category this tax code belongs to, for example "Medical care".  Null when the tax code is not classified in Content Studio.
+     */
+    public $category;
+    /**
+     * @var string The sub-category within Avalara.AvaTax.AccountServices.Models.v2.TaxCodeDefinitionModel.category, for example "Diabetic medical supplies".  Null when the tax code is not classified in Content Studio.
+     */
+    public $subCategory;
+    /**
+     * @var boolean True if this tax code has associated parameters, so a caller knows a follow-up ListParameterUsage  call is worthwhile. Read only field.
+     */
+    public $hasParameters;
+}
+/**
  * Represents a tax code that can be applied to items on a transaction.
  * A tax code can have specific rules for specific jurisdictions that change the tax calculation behavior.
  * Swagger Name: AvaTaxClient
@@ -17038,6 +17308,18 @@ class TaxCodeRecommendationOutputModel
      * @var string Recommended TaxCode Level
      */
     public $level;
+    /**
+     * @var string The overall data quality label for the item (for example: "GOOD", "FAIR").
+     */
+    public $dqLabel;
+    /**
+     * @var DataQualityIssueModel[] The list of data quality issues detected for the item.
+     */
+    public $dqIssues;
+    /**
+     * @var string The timestamp when this recommendation was generated.
+     */
+    public $modifiedDate;
 }
 /**
  * Output model for item tax code recommendation status
@@ -17754,7 +18036,7 @@ class ThresholdStateSummaryModel
      */
     public $id;
     /**
-     * @var string Two-letter US state postal code (e.g. CA, TX, WA).
+     * @var string Two-letter US region postal code (e.g. CA, TX, WA).
      */
     public $region;
     /**
@@ -18428,6 +18710,10 @@ class TransactionLineModel
      * @var float The amount of input VAT/GST that is not recoverable.
      */
     public $nonRecoverableAmount;
+    /**
+     * @var CustomClearanceFeeModel[] Custom clearance fees from Global Compliance landed-cost quoting for this line: the line-level LandedCostFee cost lines,  with any attributeExpression resolved.
+     */
+    public $customClearanceFees;
 }
 /**
  * Represents a transaction parameter.
@@ -18767,6 +19053,10 @@ class TransactionModel
      * @var float The transaction-level variance (the difference between Vendor Charged Tax and AvaTax Calculated Tax) that has been calculated for this AP transaction.
      */
     public $varianceAmount;
+    /**
+     * @var CustomClearanceFeeModel[] Custom clearance fees from Global Compliance landed-cost quoting: the document-level LandedCostFee cost lines,  with any attributeExpression resolved.
+     */
+    public $customClearanceFees;
 }
 /**
  * Represents a transaction parameter.
@@ -19038,6 +19328,17 @@ class UomModel
      * @var boolean True if this measurement is an International System of Units (abbreviated SI) defined standard.
      */
     public $isSiUom;
+}
+/**
+ * Model used to change the account type of an existing account.
+ * Swagger Name: AvaTaxClient
+ */
+class UpdateAccountTypeModel
+{
+    /**
+     * @var string The new account type to assign to this account. (See AccountTypeId::* for a list of allowable values)
+     */
+    public $accountTypeId;
 }
 /**
  * Expire a location without restriction then update with new remittance and dates.
