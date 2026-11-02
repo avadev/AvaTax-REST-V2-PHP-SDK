@@ -2,7 +2,7 @@
 namespace Avalara;
 use GuzzleHttp\Client;
 
-define('AVATAX_SDK_VERSION', '26.10.0');
+define('AVATAX_SDK_VERSION', '26.10.1');
 
 /*****************************************************************************
  *                                                                           *
@@ -1283,6 +1283,31 @@ class ErrorCodeId
      * Input contains unsupported characters which cannot be recognized
      */
     const C_INPUTCONTAINSUNSUPPORTEDCHARACTERS = 4035;
+
+    /**
+     * IncorrectParameterValue code message
+     */
+    const C_INCORRECTPARAMETERVALUE = 4036;
+
+    /**
+     * Value passed for Country field is not supported
+     */
+    const C_COUNTRYNOTSUPPORTED = 4037;
+
+    /**
+     * Value passed for CountryOfExport field is not supported
+     */
+    const C_COUNTRYOFEXPORTNOTSUPPORTED = 4038;
+
+    /**
+     * Operation not allowed
+     */
+    const C_OPERATIONNOTALLOWED = 4039;
+
+    /**
+     * Permission not granted by the user's security role or custom roles
+     */
+    const C_CUSTOMROLEPERMISSIONREQUIRED = 4040;
 
     /**
      * Error string from the service unknown

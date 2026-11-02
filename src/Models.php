@@ -2123,6 +2123,10 @@ class CertificateModel
      */
     public $filename;
     /**
+     * @var string The name of the file as it was originally uploaded by the customer, when available.  This is read-only and is null for certificates that were not uploaded with a captured  original file name.
+     */
+    public $originalFilename;
+    /**
      * @var boolean This value is true if there exists scanned PDF copy of this certificate or the PDF version of the form that the customer filled via the CertCapture wizard on S3 bucket.
      */
     public $documentExists;
@@ -4721,6 +4725,10 @@ class CreateMultiDocumentModel
      */
     public $customerSupplierName;
     /**
+     * @var string Vendor name for accounts payable transactions when no active ECM vendor exists.
+     */
+    public $vendorName;
+    /**
      * @var int The Id of the datasource from which this transaction originated.  This value will be overridden by the system to take the datasource Id from the call header.
      */
     public $dataSourceId;
@@ -5010,6 +5018,10 @@ class CreateTransactionModel
      * @var string The name of the supplier / exporter / seller.  For sales doctype enter the name of your own company for which you are reporting.  For purchases doctype enter the name of the supplier you have purchased from.
      */
     public $customerSupplierName;
+    /**
+     * @var string Vendor name for accounts payable transactions when no active ECM vendor exists.
+     */
+    public $vendorName;
     /**
      * @var int The Id of the datasource from which this transaction originated.  This value will be overridden by the system to take the datasource Id from the call header.
      */
@@ -5368,6 +5380,10 @@ class CustomRuleFieldDefinitionModel
      * @var CustomRuleFieldLevelDefinitionModel 
      */
     public $lineLevel;
+    /**
+     * @var CustomRuleFieldLevelDefinitionModel 
+     */
+    public $detailLevel;
 }
 /**
  * Information about a field at a specific "level" (Document or Line).
@@ -5975,6 +5991,134 @@ class CustomRulesExportModel
      * @var AdvancedRuleExecutionModel[] The advanced rules matched by this export.
      */
     public $advancedRules;
+}
+/**
+ * Request model for creating a custom security role
+ * Swagger Name: AvaTaxClient
+ */
+class CustomSecurityRoleCreateRequestModel
+{
+    /**
+     * @var string Account ID this custom security role belongs to
+     */
+    public $accountId;
+    /**
+     * @var string Name of the custom security role
+     */
+    public $name;
+    /**
+     * @var string Description of the custom security role
+     */
+    public $description;
+    /**
+     * @var CustomSecurityRolePermissionModel[] List of permissions for this custom security role
+     */
+    public $permissions;
+}
+/**
+ * Detailed response DTO for Custom Security Role that includes full permission details
+ * This matches CustomSecurityRoleDetailedResponse from OpenAPI spec
+ * Swagger Name: AvaTaxClient
+ */
+class CustomSecurityRoleDetailedResponseDto
+{
+    /**
+     * @var string The unique identifier for the custom security role (as string for OpenAPI spec)
+     */
+    public $customSecurityRoleId;
+    /**
+     * @var string Name of the custom security role
+     */
+    public $name;
+    /**
+     * @var string Description of the custom security role
+     */
+    public $description;
+    /**
+     * @var string Account ID this custom security role belongs to (as string for OpenAPI spec)
+     */
+    public $accountId;
+    /**
+     * @var CustomSecurityRolePermissionDto[] List of permissions (permissionId, name, description)
+     */
+    public $permissions;
+}
+/**
+ * Represents a permission within a custom security role response (matches OpenAPI spec)
+ * Swagger Name: AvaTaxClient
+ */
+class CustomSecurityRolePermissionDto
+{
+    /**
+     * @var string Permission identifier
+     */
+    public $permissionId;
+    /**
+     * @var string Permission name (dbo.Permission.Name)
+     */
+    public $name;
+    /**
+     * @var string Permission description (dbo.Permission.Description)
+     */
+    public $description;
+}
+/**
+ * Represents a permission within a custom security role
+ * Swagger Name: AvaTaxClient
+ */
+class CustomSecurityRolePermissionModel
+{
+    /**
+     * @var string Permission identifier
+     */
+    public $permissionId;
+}
+/**
+ * Response DTO for Custom Security Role that includes associated permissions
+ * This is used for API responses that need the full custom security role with its permissions
+ * Swagger Name: AvaTaxClient
+ */
+class CustomSecurityRoleResponseDto
+{
+    /**
+     * @var string The unique identifier for the custom security role (as string for OpenAPI spec)
+     */
+    public $customSecurityRoleId;
+    /**
+     * @var string Account ID this custom security role belongs to (as string for OpenAPI spec)
+     */
+    public $accountId;
+    /**
+     * @var string Name of the custom security role
+     */
+    public $name;
+    /**
+     * @var string Description of the custom security role
+     */
+    public $description;
+    /**
+     * @var CustomSecurityRolePermissionDto[] List of permissions associated with this custom security role  NOTE: This property does NOT exist in the database entity (EntityCustomSecurityRole)  It is populated by joining with the PermissionCustomRoleMatrix table
+     */
+    public $permissions;
+}
+/**
+ * Request model for updating a custom security role
+ * Swagger Name: AvaTaxClient
+ */
+class CustomSecurityRoleUpdateRequestModel
+{
+    /**
+     * @var string Name of the custom security role
+     */
+    public $name;
+    /**
+     * @var string Description of the custom security role
+     */
+    public $description;
+    /**
+     * @var CustomSecurityRolePermissionModel[] List of permissions for this custom security role
+     */
+    public $permissions;
 }
 /**
  * Optional additional criteria for when a custom tax should apply. This model is
@@ -8064,6 +8208,137 @@ class EventMessageResponse
      * @var string The receipt handle associated with the message to delete.
      */
     public $receiptHandle;
+}
+/**
+ * Input model for creating or updating a company exchange rate provider configuration.
+ * <br>
+ * Name the feed with Avalara.AvaTax.AccountServices.Models.v2.ExchangeRateProviderConfigInputModel.providerCode and Avalara.AvaTax.AccountServices.Models.v2.ExchangeRateProviderConfigInputModel.frequency; both are resolved
+ * server-side against the catalogue from `ListExchangeRateProviderDefinitions`. The
+ * server derives `currencyCode` from that pair. Do not send
+ * `providerFrequencyMappingId`.
+ * <br>
+ * First release: only Switzerland (`CH`) with provider `SNB` may be written, and
+ * frequency is the only customer choice on that slot. System defaults are read-only.
+ * <br>
+ * On create, Avalara.AvaTax.AccountServices.Models.v2.ExchangeRateProviderConfigInputModel.effDate must be today or later (UTC). On update, restate the
+ * immutable fields and change only Avalara.AvaTax.AccountServices.Models.v2.ExchangeRateProviderConfigInputModel.endDate (today or later).
+ * Swagger Name: AvaTaxClient
+ */
+class ExchangeRateProviderConfigInputModel
+{
+    /**
+     * @var string ISO 3166-1 alpha-2 country code this configuration applies to. Required on a customer  write.
+     */
+    public $countryCode;
+    /**
+     * @var string The provider feed this configuration selects, as reported by the definition endpoint  (for example `SNB` or `ECB`). Matched case-insensitively.
+     */
+    public $providerCode;
+    /**
+     * @var string The refresh frequency this configuration selects, as reported by the definition  endpoint (for example `Daily` or `Monthly`). Matched case-insensitively.
+     */
+    public $frequency;
+    /**
+     * @var string The date from which this configuration takes effect. Required on create; must be today  or a future date (UTC). Immutable after create.
+     */
+    public $effDate;
+    /**
+     * @var string The date on which this configuration expires. Omitting it on create stores  9999-12-31. Required on update; must be today or a future date (UTC).
+     */
+    public $endDate;
+}
+/**
+ * An exchange rate provider configuration: which ERS provider feed and refresh frequency a
+ * company uses when converting a given currency, optionally narrowed to a country.
+ * <br>`currencyCode` is derived from the resolved provider's base currency. The internal
+ * mapping id is not returned. System-default configurations are read-only over this API.
+ * Swagger Name: AvaTaxClient
+ */
+class ExchangeRateProviderConfigOutputModel
+{
+    /**
+     * @var int The unique ID of this exchange rate provider configuration row.
+     */
+    public $id;
+    /**
+     * @var int The ID of the company that owns this configuration. Inherited defaults are system-owned.
+     */
+    public $companyId;
+    /**
+     * @var string ISO 4217 alpha-3 code of the currency this configuration applies to. Derived from the  resolved provider's base currency; not supplied by the caller.
+     */
+    public $currencyCode;
+    /**
+     * @var string ISO 3166-1 alpha-2 country code this configuration applies to. Null appears only on  system default rows.
+     */
+    public $countryCode;
+    /**
+     * @var string The provider feed this configuration selects (for example `SNB` or `ECB`).
+     */
+    public $providerCode;
+    /**
+     * @var string The refresh frequency this configuration selects (for example `Daily` or  `Monthly`).
+     */
+    public $frequency;
+    /**
+     * @var string The date from which this configuration takes effect.
+     */
+    public $effDate;
+    /**
+     * @var string The date on which this configuration expires. A stored open-ended row uses  9999-12-31.
+     */
+    public $endDate;
+    /**
+     * @var boolean Whether this row's country and provider combination is available for customer  configuration. System-default rows return the stored policy value; customer rows return a  value computed from their country and provider. In the first release, this is true only  for Switzerland with SNB. This value is null only when a system-default row has no stored  policy value.
+     */
+    public $isConfigurable;
+    /**
+     * @var string The date when this record was created.
+     */
+    public $createdDate;
+    /**
+     * @var int The user ID of the user who created this record.
+     */
+    public $createdUserId;
+    /**
+     * @var string The date when this record was last modified.
+     */
+    public $modifiedDate;
+    /**
+     * @var int The user ID of the user who last modified this record.
+     */
+    public $modifiedUserId;
+}
+/**
+ * One (provider, frequency) pair that AvaTax offers for exchange rate provider configuration.
+ * <br>
+ * Read this catalogue before writing an `ExchangeRateProviderConfig`: the write contract
+ * carries Avalara.AvaTax.AccountServices.Models.v2.ExchangeRateProviderDefinitionOutputModel.providerCode and Avalara.AvaTax.AccountServices.Models.v2.ExchangeRateProviderDefinitionOutputModel.frequency, and both must name a pair
+ * listed here. The pair also determines the configuration's currency, which is why
+ * Avalara.AvaTax.AccountServices.Models.v2.ExchangeRateProviderDefinitionOutputModel.baseCurrency is returned but never supplied.
+ * <br>
+ * A provider offered at more than one frequency appears as multiple entries sharing the same
+ * Avalara.AvaTax.AccountServices.Models.v2.ExchangeRateProviderDefinitionOutputModel.providerCode (for example SNB Daily and SNB Monthly).
+ * Swagger Name: AvaTaxClient
+ */
+class ExchangeRateProviderDefinitionOutputModel
+{
+    /**
+     * @var string The provider's code, for example `SNB` or `ECB`. Supply this as  `providerCode` when creating a configuration.
+     */
+    public $providerCode;
+    /**
+     * @var string The provider's display name, for example `Swiss National Bank`.
+     */
+    public $providerName;
+    /**
+     * @var string The refresh frequency this provider is offered at, for example `Daily` or  `Monthly`. Supply this as `frequency` when creating a configuration.
+     */
+    public $frequency;
+    /**
+     * @var string The currency this provider publishes rates against. A configuration's  `currencyCode` is derived from this, which is why the write contract does not  accept a currency.
+     */
+    public $baseCurrency;
 }
 /**
  * A single entry in a company's exemption matrix.
@@ -12904,6 +13179,10 @@ class JurisdictionOverrideModel
      */
     public $taxRegionId;
     /**
+     * @var int The radius, in miles, associated with this jurisdiction override. Supported values are 5, 10, 20, 30, and 40. New overrides default to 5 when omitted
+     */
+    public $radius;
+    /**
      * @var string The boundary level of this override (See BoundaryLevel::* for a list of allowable values)
      */
     public $boundaryLevel;
@@ -15699,6 +15978,87 @@ class PatchOperation
     public $value;
 }
 /**
+ * Request model for creating a new Permission Category
+ * Swagger Name: AvaTaxClient
+ */
+class PermissionCategoryCreateRequest
+{
+    /**
+     * @var string Name of the permission category
+     */
+    public $name;
+    /**
+     * @var string Description of the permission category
+     */
+    public $description;
+    /**
+     * @var PermissionCategoryPermissionDto[] List of permissions to associate with this category
+     */
+    public $permissions;
+}
+/**
+ * Represents a permission within a permission category response (matches OpenAPI spec)
+ * Swagger Name: AvaTaxClient
+ */
+class PermissionCategoryPermissionDto
+{
+    /**
+     * @var string Permission identifier
+     */
+    public $permissionId;
+    /**
+     * @var string Permission name (dbo.Permission.Name)
+     */
+    public $name;
+    /**
+     * @var string Permission description (dbo.Permission.Description)
+     */
+    public $description;
+}
+/**
+ * Response DTO for Permission Category that includes associated permissions
+ * This is used for API responses that need the full permission category with its permissions
+ * Swagger Name: AvaTaxClient
+ */
+class PermissionCategoryResponseDto
+{
+    /**
+     * @var string The unique identifier for the permission category (as string for OpenAPI spec)
+     */
+    public $permissionCategoryId;
+    /**
+     * @var string Name of the permission category
+     */
+    public $name;
+    /**
+     * @var string Description of the permission category
+     */
+    public $description;
+    /**
+     * @var PermissionCategoryPermissionDto[] List of permissions associated with this category  NOTE: This property does NOT exist in the database entity (EntityPermissionCategory)  It is populated by joining with the Permission table where Permission.PermissionCategoryId matches this category's ID
+     */
+    public $permissions;
+}
+/**
+ * Request model for updating a Permission Category
+ * Swagger Name: AvaTaxClient
+ */
+class PermissionCategoryUpdateRequest
+{
+    /**
+     * @var string Name of the permission category
+     */
+    public $name;
+    /**
+     * @var string Description of the permission category
+     */
+    public $description;
+    /**
+     * @var PermissionCategoryPermissionDto[] List of permissions to associate with this category
+     */
+    public $permissions;
+}
+/**
  * Ping Result Model
  * Swagger Name: AvaTaxClient
  */
@@ -16800,6 +17160,89 @@ class ReturnsParameterUsageModel
      * @var string The unit of measurement type of the parameter
      */
     public $measurementType;
+}
+/**
+ * Security Role Assignment Response Model
+ * Swagger Name: AvaTaxClient
+ */
+class SecurityRoleAssignment
+{
+    /**
+     * @var string Assignment identifier (dbo.UserRoleMatrix.UserRoleMatrixId).
+     */
+    public $userRoleMatrixId;
+    /**
+     * @var string User Id.
+     */
+    public $userId;
+    /**
+     * @var string Security Role Id - a CustomSecurityRole id (GUID) belonging to this account.  System SecurityRole ids are not supported here as of now.
+     */
+    public $securityRoleId;
+    /**
+     * @var string Account Id.
+     */
+    public $accountId;
+    /**
+     * @var string Company Id. Optional.
+     */
+    public $companyId;
+    /**
+     * @var string The date when this record was created.
+     */
+    public $createdDate;
+    /**
+     * @var string The date/time when this record was last modified.
+     */
+    public $modifiedDate;
+}
+/**
+ * Security Role Assignment Create Request. Assigns exactly one custom security role to one
+ * user for their company - a single object, not an array, since a user is tied to a single
+ * company. To assign multiple roles to a user, call the endpoint once per role.
+ * Swagger Name: AvaTaxClient
+ */
+class SecurityRoleAssignmentCreateRequest
+{
+    /**
+     * @var string User Id.
+     */
+    public $userId;
+    /**
+     * @var string Security Role Id - must be a CustomSecurityRole id (GUID) belonging to this account.  System SecurityRole ids are not supported here as of now.
+     */
+    public $securityRoleId;
+    /**
+     * @var string Account Id.
+     */
+    public $accountId;
+    /**
+     * @var string Company Id. Must match the target user's own CompanyId exactly: omit it for an  account-level user (whose CompanyId is null), or provide the user's own CompanyId for  a company-level user. It cannot be used to assign a different company than the user's own.
+     */
+    public $companyId;
+}
+/**
+ * Security Role Assignment Update Request
+ * Swagger Name: AvaTaxClient
+ */
+class SecurityRoleAssignmentUpdate
+{
+    /**
+     * @var string User Id.
+     */
+    public $userId;
+    /**
+     * @var string Company Id. Must match the target user's own CompanyId exactly: omit it for an  account-level user (whose CompanyId is null), or provide the user's own CompanyId for  a company-level user. It cannot be used to assign a different company than the user's own.
+     */
+    public $companyId;
+    /**
+     * @var string Security Role Id - must be a CustomSecurityRole id (GUID) belonging to this account.  System SecurityRole ids are not supported here as of now.
+     */
+    public $securityRoleId;
+    /**
+     * @var string Account Id.
+     */
+    public $accountId;
 }
 /**
  * Represents a single security role.
@@ -19922,6 +20365,10 @@ class VendorCertificateModel
      */
     public $filename;
     /**
+     * @var string The name of the file as it was originally uploaded by the customer, when available.  This is read-only and is null for certificates that were not uploaded with a captured  original file name.
+     */
+    public $originalFilename;
+    /**
      * @var boolean This value is true if there exists scanned PDF copy of this certificate or the PDF version of the form that the customer filled via the CertCapture wizard on S3 bucket.
      */
     public $documentExists;
@@ -20050,6 +20497,10 @@ class VendorCertificateModel
 class VendorModel
 {
     /**
+     * @var string The unique code identifying this vendor. Must be unique within your company.     This code should be used in the `customerCode` field of any call that creates or adjusts a transaction  in order to ensure that this vendor's tax determination (trusted, auto-accrue, or always-tax) is  correctly applied.
+     */
+    public $customerCode;
+    /**
      * @var boolean Indicates whether this entity is a vendor.  This flag helps distinguish vendors from regular customers in the system.  Note: This field is automatically set to true for vendor endpoints and cannot be overridden by user filters.
      */
     public $isVendor;
@@ -20065,10 +20516,6 @@ class VendorModel
      * @var int The unique ID number of the AvaTax company that recorded this customer.
      */
     public $companyId;
-    /**
-     * @var string The unique code identifying this customer. Must be unique within your company.     This code should be used in the `customerCode` field of any call that creates or adjusts a transaction  in order to ensure that all exemptions that apply to this customer are correctly considered.     Note: This field is case sensitive.
-     */
-    public $customerCode;
     /**
      * @var string A customer-configurable alternate ID number for this customer. You may set this value to match any  other system that would like to reference this customer record.
      */
