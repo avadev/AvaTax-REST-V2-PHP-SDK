@@ -1,0 +1,44 @@
+name: PR Check
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pr-check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+          tools: composer:v2
+          coverage: none
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate --strict
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-interaction
+
+      - name: PHP syntax check
+        run: find src tests -name '*.php' -print0 | xargs -0 -n1 php -l > /dev/null
+
+      # Non-blocking for now: generated src/Methods.php has known pre-existing
+      # findings (literal "$upload"-style path segments being interpolated).
+      # Make this blocking once a release generated with the sdk-generator fix ships.
+      - name: Static analysis (phpstan)
+        continue-on-error: true
+        run: composer run-script phpstan
