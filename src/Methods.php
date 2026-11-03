@@ -3271,7 +3271,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @return \stdClass
      */
     public function bulkUploadCostCenters($companyid, $model=null)    {
-        $path = "/api/v2/companies/{$companyid}/costcenters/$upload";
+        $path = "/api/v2/companies/{$companyid}/costcenters/\$upload";
         $guzzleParams = [
             'query' => [],
             'body' => json_encode($model)
@@ -7966,7 +7966,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @return \stdClass
      */
     public function bulkUploadGLAccounts($companyid, $model=null)    {
-        $path = "/api/v2/companies/{$companyid}/glaccounts/$upload";
+        $path = "/api/v2/companies/{$companyid}/glaccounts/\$upload";
         $guzzleParams = [
             'query' => [],
             'body' => json_encode($model)
@@ -8108,7 +8108,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @return \stdClass
      */
     public function aIsearch($companyId, $model=null)    {
-        $path = "/api/v2/companies/{$companyId}/items/nlq/$parse";
+        $path = "/api/v2/companies/{$companyId}/items/nlq/\$parse";
         $guzzleParams = [
             'query' => [],
             'body' => json_encode($model)
@@ -8761,7 +8761,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @return \stdClass
      */
     public function dismissHSCodeClassificationStatus($companyId, $itemId, $country)    {
-        $path = "/api/v2/companies/{$companyId}/items/{$itemId}/hscode-classifications-status/$dismiss";
+        $path = "/api/v2/companies/{$companyId}/items/{$itemId}/hscode-classifications-status/\$dismiss";
         $guzzleParams = [
             'query' => ['country' => $country],
             'body' => null
@@ -8783,7 +8783,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @return \stdClass
      */
     public function fetchAdditionalHSCodeDutyDetails($companyId, $itemId, $model=null)    {
-        $path = "/api/v2/companies/{$companyId}/items/{$itemId}/hsdutydetails/$fetch-additional-hsdutydetails";
+        $path = "/api/v2/companies/{$companyId}/items/{$itemId}/hsdutydetails/\$fetch-additional-hsdutydetails";
         $guzzleParams = [
             'query' => [],
             'body' => json_encode($model)
@@ -8835,7 +8835,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @return \stdClass
      */
     public function getHSCodeClassificationSLA($companyId)    {
-        $path = "/api/v2/companies/{$companyId}/items/hscode-classification/$get-sla";
+        $path = "/api/v2/companies/{$companyId}/items/hscode-classification/\$get-sla";
         $guzzleParams = [
             'query' => [],
             'body' => null
@@ -9091,7 +9091,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @return \stdClass
      */
     public function getSyncTaxCodeRecommendations($companyId, $x_Avalara_Tax_Mode=null, $model=null)    {
-        $path = "/api/v2/companies/{$companyId}/$taxcode-recommendations";
+        $path = "/api/v2/companies/{$companyId}/\$taxcode-recommendations";
         $guzzleParams = [
             'query' => [],
             'body' => json_encode($model)
@@ -9113,7 +9113,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @return \stdClass
      */
     public function initiateHSCodeClassification($companyId, $model=null)    {
-        $path = "/api/v2/companies/{$companyId}/items/$initiate-hscode-classification";
+        $path = "/api/v2/companies/{$companyId}/items/\$initiate-hscode-classification";
         $guzzleParams = [
             'query' => [],
             'body' => json_encode($model)
@@ -9929,7 +9929,7 @@ class AvaTaxClient extends AvaTaxClientBase
      * @return \stdClass
      */
     public function verifyHSCode($companyId, $model=null)    {
-        $path = "/api/v2/companies/{$companyId}/items/hscodes/$verify";
+        $path = "/api/v2/companies/{$companyId}/items/hscodes/\$verify";
         $guzzleParams = [
             'query' => [],
             'body' => json_encode($model)
