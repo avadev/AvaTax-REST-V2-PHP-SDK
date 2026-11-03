@@ -681,6 +681,22 @@ class TransactionBuilder
     }
 
     /**
+     * Set the shipment type of the transaction (document level)
+     *
+     * @param   string              $shipmentType  "postal", "courier", or empty/null to omit
+     * @return  TransactionBuilder
+     */
+    public function withShipmentType($shipmentType)
+    {
+        if ($shipmentType === null || $shipmentType === '') {
+            unset($this->_model['shipmentType']);
+        } else {
+            $this->_model['shipmentType'] = $shipmentType;
+        }
+        return $this;
+    }
+
+    /**
      * Checks to see if the current model has a line.
      *
      * @return  int
