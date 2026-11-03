@@ -1,0 +1,89 @@
+name: Publish to Packagist
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Existing tag to (re)publish, e.g. 26.10.2"
+        required: true
+
+concurrency:
+  group: packagist-publish
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  PACKAGE: avalara/avataxclient
+  REPO_URL: https://github.com/${{ github.repository }}
+  TAG: ${{ github.event.release.tag_name || inputs.tag }}
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.TAG }}
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+          tools: composer:v2
+          coverage: none
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate --strict
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-interaction
+
+      # Non-blocking for now: generated src/Methods.php has known pre-existing
+      # findings (literal "$upload"-style path segments being interpolated).
+      # Make this blocking once the generator template is fixed.
+      - name: Static analysis (phpstan)
+        continue-on-error: true
+        run: composer run-script phpstan
+
+      - name: Trigger Packagist update
+        env:
+          PACKAGIST_USERNAME: ${{ secrets.PACKAGIST_USERNAME }}
+          PACKAGIST_API_TOKEN: ${{ secrets.PACKAGIST_API_TOKEN }}
+        run: |
+          if [ -z "$PACKAGIST_USERNAME" ] || [ -z "$PACKAGIST_API_TOKEN" ]; then
+            echo "::error::PACKAGIST_USERNAME / PACKAGIST_API_TOKEN secrets are not set on this repository"
+            exit 1
+          fi
+          response=$(curl -sS -f -X POST \
+            -H 'Content-Type: application/json' \
+            "https://packagist.org/api/update-package?username=${PACKAGIST_USERNAME}&apiToken=${PACKAGIST_API_TOKEN}" \
+            -d "{\"repository\":{\"url\":\"${REPO_URL}\"}}")
+          echo "Packagist response: ${response}"
+          if [ "$(echo "$response" | jq -r '.status')" != "success" ]; then
+            echo "::error::Packagist did not accept the update request"
+            exit 1
+          fi
+
+      - name: Verify version is live on Packagist
+        run: |
+          expected_sha=$(git rev-parse HEAD)
+          echo "Waiting for ${PACKAGE} ${TAG} (${expected_sha}) to appear on Packagist..."
+          for attempt in $(seq 1 30); do
+            ref=$(curl -sS "https://repo.packagist.org/p2/${PACKAGE}.json?cb=$(date +%s)" \
+              | jq -r --arg tag "$TAG" '.packages[env.PACKAGE][]? | select(.version == $tag) | .source.reference' \
+              | head -n1)
+            if [ "$ref" = "$expected_sha" ]; then
+              echo "Published: https://packagist.org/packages/${PACKAGE}#${TAG}"
+              echo "### :white_check_mark: ${PACKAGE} ${TAG} is live on [Packagist](https://packagist.org/packages/${PACKAGE}#${TAG})" >> "$GITHUB_STEP_SUMMARY"
+              exit 0
+            fi
+            echo "Attempt ${attempt}/30: not live yet (found reference: '${ref:-none}'); retrying in 20s"
+            sleep 20
+          done
+          echo "::error::${PACKAGE} ${TAG} did not appear on Packagist at ${expected_sha} within 10 minutes"
+          exit 1
